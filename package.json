@@ -13,8 +13,11 @@
   },
   "private": true,
   "dependencies": {
-    "angular2": "2.0.0-beta.15",
+    "angular2": "2.0.0-beta.16",
+    "bootstrap": "^4.0.0-alpha.2",
     "es6-shim": "^0.35.0",
+    "ng2-bootstrap": "^1.0.15",
+    "node-sass": "^3.6.0",
     "reflect-metadata": "0.1.2",
     "rxjs": "5.0.0-beta.2",
     "systemjs": "0.19.20",
