@@ -1,5 +1,6 @@
 import {Component} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {LogInComponent} from './+log-in';
 
 @Component({
   moduleId: __moduleName,
@@ -11,6 +12,7 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
   pipes: []
 })
 @RouteConfig([
+  {path: '/login', name: 'LogIn', component: LogInComponent}
 ])
 export class VentamaticFrontendApp {
   defaultMeaning: number = 42;
