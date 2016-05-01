@@ -1,5 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router';
+import {RouteParams, Router} from 'angular2/router';
+import {NgForm}    from 'angular2/common';
 
 @Component({
   moduleId: __moduleName,
@@ -10,9 +12,25 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from 'angular2/router'
 })
 export class LogInComponent implements OnInit {
 
-  constructor() {}
+  username:string;
+  password:string;
+
+  constructor(
+      private _router:Router,
+      private _routeParams:RouteParams){}
   
   ngOnInit() {
+    console.log("hola");
+  }
+
+  login(username:string , password:string){
+    console.log(username, password);
+    this._router.navigate(['HomePage']);
+  }
+
+  onSubmit() {
+    this.login(this.username, this.password)
+
   }
 
 }
