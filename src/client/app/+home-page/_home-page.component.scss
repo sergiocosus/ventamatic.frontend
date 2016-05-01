@@ -18,6 +18,16 @@ header{
     border-color: black;
     margin: 5px;
   }
+
+
+  picture{
+    display: flex;
+    flex:1;
+    border: 1px solid #082B36;
+    background-image: url(/images/logo.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
 }
 
 
@@ -46,11 +56,6 @@ aside {
   aling-items:stretch;
 }
 
-picture{
-  display: flex;
-  align-items: stretch;
-  border: 1px solid #082B36;
-}
 
 #hidden-bar-div{width: 23%}
 
