@@ -16,7 +16,7 @@ export class LogInComponent implements OnInit {
 
   username:string;
   password:string;
-  token: string;
+
   errorMessage: string;
   constructor(
       private _router:Router,
@@ -30,7 +30,6 @@ export class LogInComponent implements OnInit {
     this._auth.login(username, password)
       .subscribe(
         response  => {
-          this.token = response.token;
           this._router.navigate(['HomePage'])
         },
         error =>  this.errorMessage = <any>error
@@ -39,7 +38,6 @@ export class LogInComponent implements OnInit {
 
   onSubmit() {
     this.login(this.username, this.password)
-
   }
 
 }

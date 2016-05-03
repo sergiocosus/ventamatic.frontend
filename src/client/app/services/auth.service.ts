@@ -1,14 +1,14 @@
 import {Injectable} from 'angular2/core';
 import { Http, Headers,Response } from 'angular2/http';
 import {Observable}     from 'rxjs/Observable';
+import {AuthHttp} from "angular2-jwt/angular2-jwt";
 
 @Injectable()
 export class AuthService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private authHttp:AuthHttp) {}
   private _apiUrl = 'http://local.ventamatic.com/api/v1/'
   private _authUrl = 'auth';  // URL to web api
-
 
   login(username, password) :Observable<any> {
     let body = JSON.stringify({
@@ -24,11 +24,11 @@ export class AuthService {
 
     observable.subscribe(
         response => {
-          localStorage.setItem('jwt', response.token);
+          localStorage.setItem('id_token', response.token);
         },
         error => {
-          alert(error.text());
-          console.log(error.text());
+          alert(error);
+          console.log(error);
         }
     );
 
@@ -36,7 +36,12 @@ export class AuthService {
   }
 
   logout(){
-    localStorage.removeItem('jwt');
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('user');
+  }
+  
+  getLoggedUser() {
+    return JSON.parse(localStorage.getItem('user'));
   }
 
   private extractData(res: Response) {
@@ -44,11 +49,14 @@ export class AuthService {
       throw new Error('Bad response status: ' + res.status);
     }
     let body = res.json();
+    localStorage.setItem('user', JSON.stringify(body.user));
+
     return body || { };
   }
 
   private handleError (error: any) {
     let errMsg = error.message || 'Server error';
+    console.error(error);
     console.error(errMsg); // log to console instead
     return Observable.throw(errMsg);
   }

@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation} from 'angular2/core';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router} from 'angular2/router';
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router, CanActivate} from 'angular2/router';
 import {AuthService} from "../services/auth.service";
+import {tokenNotExpired} from "angular2-jwt/angular2-jwt";
 
 @Component({
   moduleId: __moduleName,
@@ -11,6 +12,7 @@ import {AuthService} from "../services/auth.service";
   directives: [ROUTER_DIRECTIVES],
   providers: [AuthService]
 })
+
 export class HomePageComponent implements OnInit {
 
   options = [
@@ -26,6 +28,9 @@ export class HomePageComponent implements OnInit {
       'Reportes',
   ];
 
+    jwt:string;
+    decodedJwt: string;
+
   username = "Pepe pequitas";
   time = "8:00pm";
     
@@ -37,6 +42,8 @@ export class HomePageComponent implements OnInit {
   }
     
   ngOnInit() {
+      var user = this.auth.getLoggedUser();
+      this.username = user.username;
   }
 
 }
