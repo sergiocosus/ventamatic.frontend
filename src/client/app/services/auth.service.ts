@@ -2,12 +2,14 @@ import {Injectable} from 'angular2/core';
 import { Http, Headers,Response } from 'angular2/http';
 import {Observable}     from 'rxjs/Observable';
 import {AuthHttp} from "angular2-jwt/angular2-jwt";
+import {environment} from '../environment';
+import {User} from "../user/user";
 
 @Injectable()
 export class AuthService {
 
   constructor(private http: Http, private authHttp:AuthHttp) {}
-  private _apiUrl = 'http://local.ventamatic.com/api/v1/'
+  private _apiUrl = environment.apiUrl;
   private _authUrl = 'auth';  // URL to web api
 
   login(username, password) :Observable<any> {
@@ -40,7 +42,7 @@ export class AuthService {
     localStorage.removeItem('user');
   }
   
-  getLoggedUser() {
+  getLoggedUser():User{
     return JSON.parse(localStorage.getItem('user'));
   }
 

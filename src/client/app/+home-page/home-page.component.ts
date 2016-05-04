@@ -1,7 +1,8 @@
 import {Component, OnInit, ViewEncapsulation} from 'angular2/core';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS, Router, CanActivate} from 'angular2/router';
 import {AuthService} from "../services/auth.service";
-import {tokenNotExpired} from "angular2-jwt/angular2-jwt";
+import {UserService} from "../user/user.service";
+import {User} from "../user/user";
 
 @Component({
   moduleId: __moduleName,
@@ -10,12 +11,12 @@ import {tokenNotExpired} from "angular2-jwt/angular2-jwt";
   // styleUrls: ['home-page.component.css'],
   encapsulation: ViewEncapsulation.None,
   directives: [ROUTER_DIRECTIVES],
-  providers: [AuthService]
+  providers: [AuthService, UserService]
 })
 
 export class HomePageComponent implements OnInit {
 
-  options = [
+  public options = [
       'Ventas',
       'Compras',
       'Inventario',
@@ -28,13 +29,12 @@ export class HomePageComponent implements OnInit {
       'Reportes',
   ];
 
-    jwt:string;
-    decodedJwt: string;
-
-  username = "Pepe pequitas";
-  time = "8:00pm";
+  public time = "8:00pm";
     
-  constructor(private auth:AuthService, private router:Router) {}
+  public user:User;
+  public users:User[];
+    
+  constructor(private auth:AuthService, private userService:UserService,private router:Router) {}
   
   logout() {
       this.auth.logout();
@@ -42,8 +42,11 @@ export class HomePageComponent implements OnInit {
   }
     
   ngOnInit() {
-      var user = this.auth.getLoggedUser();
-      this.username = user.username;
+      this.user  = this.auth.getLoggedUser();
+      this.userService.getAll()
+          .subscribe(
+              users => {this.users = users; }
+          )
   }
-
+    
 }
