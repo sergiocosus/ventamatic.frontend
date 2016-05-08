@@ -9,6 +9,6 @@ describe('ventamatic-frontend App', function() {
 
   it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('ventamatic-frontend Works!');
+    expect(page.getParagraphText()).toEqual('ventamatic-frontend works!');
   });
 });

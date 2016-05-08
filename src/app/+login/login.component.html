@@ -1,0 +1,25 @@
+<div class="flex-container">
+  <div class="wrapper">
+    <form class="form-signin" (ngSubmit)="onSubmit()">
+      <!--<h2 class="form-signin-heading">Login</h2>-->
+      <input
+        type="text"
+        class="form-control"
+        name="username"
+        laceholder="Nombre de usuario"
+        required="required" autofocus="autofocus"
+        [(ngModel)]="username"/>
+      <input type="password"
+             class="form-control"
+             name="password"
+             placeholder="Contraseña"
+             required="required"
+             [(ngModel)]="password" />
+      <label class="checkbox">
+        <!--<input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me-->
+      </label>
+      <button class="btn btn-lg btn-primary btn-block"
+              type="submit">Login</button>
+    </form>
+  </div>
+</div>

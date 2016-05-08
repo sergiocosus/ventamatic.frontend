@@ -1,0 +1,96 @@
+
+header{
+  display: flex;
+  position: fixed;
+  width: 100%;
+  height: 50px;
+  min-width: 500px;
+  background-color: #082B36;
+  color: white;
+  margin: 0;
+  align-items: stretch;
+  justify-content: space-between;
+  top: 0;
+
+  .btn{
+    flex-basis: 25px;
+    margin: 5px;
+  }
+
+  picture{
+    display: flex;
+    flex:1;
+    border: 1px solid #082B36;
+    background-image: url(/images/logo.jpg);
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+}
+
+
+aside {
+  display: flex;
+  flex-direction: column;
+  background-color: #082B36;
+  flex: 0 0 150px;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+button {
+  flex: 1;
+  flex-basis: 25px;
+  background-color: #556A70;
+  border-color: black;
+}
+
+#body-content{
+  padding-top: 50px;
+  height: 100%;
+  box-sizing:border-box;
+  display: flex;
+  aling-items:stretch;
+}
+
+
+#hidden-bar-div{width: 23%}
+
+#sesion-menu-bar{
+  display: flex;
+  align-items:center;
+  /*padding: 5px*/;
+
+>div{
+   display: flex;
+   background-color: #556A70;
+   margin-left: 5px;
+   margin-right: 5px;
+   align-self: stretch;
+   align-items: center;
+   padding: 5px;
+   border-left: 1px solid black;
+   border-right: 1px solid black;
+ }
+}
+
+main{
+  flex:1;
+  overflow-y: auto;
+  display: flex;
+  padding: 5px;
+  flex-direction: column;
+}
+
+.searchBar{
+  /*flex-basis: 25px;*/
+  background-color: #556A70;
+  flex: 1;
+  margin: 5px;
+  min-height: 30px;
+}
+
+.mainContent{
+  flex: 10;
+  background-color: #556A70;
+  margin: 5px;
+}
