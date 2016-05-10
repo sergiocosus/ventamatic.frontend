@@ -9,25 +9,25 @@ import {
 import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { HomeComponent } from './home.component';
+import { UsuariosComponent } from './usuarios.component';
 
-describe('Component: Home', () => {
+describe('Component: Usuarios', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [HomeComponent]);
+  beforeEachProviders(() => [UsuariosComponent]);
   beforeEach(inject([TestComponentBuilder], function (tcb: TestComponentBuilder) {
     builder = tcb;
   }));
 
-  it('should inject the component', inject([HomeComponent],
-      (component: HomeComponent) => {
+  it('should inject the component', inject([UsuariosComponent],
+      (component: UsuariosComponent) => {
     expect(component).toBeTruthy();
   }));
 
   it('should create the component', inject([], () => {
-    return builder.createAsync(HomeComponentTestController)
+    return builder.createAsync(UsuariosComponentTestController)
       .then((fixture: ComponentFixture<any>) => {
-        let query = fixture.debugElement.query(By.directive(HomeComponent));
+        let query = fixture.debugElement.query(By.directive(UsuariosComponent));
         expect(query).toBeTruthy();
         expect(query.componentInstance).toBeTruthy();
       });
@@ -37,10 +37,10 @@ describe('Component: Home', () => {
 @Component({
   selector: 'test',
   template: `
-    <app-home></app-home>
+    <app-usuarios></app-usuarios>
   `,
-  directives: [HomeComponent]
+  directives: [UsuariosComponent]
 })
-class HomeComponentTestController {
+class UsuariosComponentTestController {
 }
 

@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     this._auth.login(username, password)
       .subscribe(
         response  => {
-          this._router.navigate(['/'])
+          this._router.navigate(['/app'])
         },
         error =>  this.errorMessage = <any>error
       );
