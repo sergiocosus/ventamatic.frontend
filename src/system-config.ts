@@ -32,6 +32,15 @@ const barrels: string[] = [
   'app/+login',
   'app/+app',
   'app/+app/+usuarios',
+  'app/+app/+venta',
+  'app/+app/+compra',
+  'app/+app/+inventario',
+  'app/+app/+productos',
+  'app/+app/+clientes',
+  'app/+app/+proveedores',
+  'app/+app/+reportes',
+  'app/+app/+roles',
+  'app/+app/+sucursales',
   /** @cli-barrel */
 ];
 

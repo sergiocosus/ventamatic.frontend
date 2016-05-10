@@ -35,14 +35,15 @@ aside {
   flex: 0 0 150px;
   overflow-y: auto;
   padding: 5px;
+  li {
+    flex: 1;
+    flex-basis: 25px;
+    background-color: #556A70;
+    border-color: black;
+  }
 }
 
-button {
-  flex: 1;
-  flex-basis: 25px;
-  background-color: #556A70;
-  border-color: black;
-}
+
 
 #body-content{
   padding-top: 50px;

@@ -21,9 +21,12 @@
 </header>
 <div id="body-content">
   <aside>
-    <button *ngFor="let option of options" type="button" class="btn btn-info">
-      {{option}}
-    </button>
+    <ul>
+      <li *ngFor="let route of routes" type="button" class="btn btn-info">
+        <a [routerLink]="[route.path]">{{route.name}}</a>
+      </li>
+    </ul>
+
   </aside>
   <main>
     <router-outlet></router-outlet>
