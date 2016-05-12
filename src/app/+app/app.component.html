@@ -20,14 +20,7 @@
   </div>
 </header>
 <div id="body-content">
-  <aside>
-    <ul>
-      <li *ngFor="let route of routes" type="button" class="btn btn-info">
-        <a [routerLink]="[route.path]">{{route.name}}</a>
-      </li>
-    </ul>
-
-  </aside>
+  <aside-nav></aside-nav>
   <main>
     <router-outlet></router-outlet>
   </main>

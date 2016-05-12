@@ -13,13 +13,14 @@ import { ProveedoresComponent } from './+proveedores';
 import { ReportesComponent } from './+reportes';
 import { RolesComponent } from './+roles';
 import { SucursalesComponent } from './+sucursales';
+import { AsideNavComponent } from "./shared/aside-nav/aside-nav.component";
 
 @Component({
   moduleId: module.id,
   selector: 'app-app',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  directives: [ROUTER_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, AsideNavComponent],
   providers: [AuthService, UserService]
 
 })
@@ -37,48 +38,7 @@ import { SucursalesComponent } from './+sucursales';
 ])
 export class AppComponent implements OnInit {
 
-  public routes = [
-    {
-      name: 'Venta',
-      path: '/app/venta'
-    },
-    {
-      name: 'Compra',
-      path: '/app/compra'
-    },
-    {
-      name: 'Inventario',
-      path: '/app/inventario'
-    },
-    {
-      name: 'Productos',
-      path: '/app/productos'
-    },
-    {
-      name: 'Clientes',
-      path: '/app/clientes'
-    },
-    {
-      name: 'Proveedores',
-      path: '/app/proveedores'
-    },
-    {
-      name: 'Usuarios',
-      path: '/app/usuarios'
-    },
-    {
-      name: 'Roles',
-      path: '/app/roles'
-    },
-    {
-      name: 'Sucursales',
-      path: '/app/sucursales'
-    },
-    {
-      name: 'Reportes',
-      path: '/app/reportes'
-    }
-  ];
+  
 
   public time = "8:00pm";
 
@@ -93,7 +53,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.user  = this.auth.getLoggedUser();
-   
+
   }
 
 }

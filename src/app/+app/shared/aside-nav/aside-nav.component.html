@@ -1,0 +1,8 @@
+<ul>
+  <li *ngFor="let route of routes" >
+    <a [routerLink]="[route.path]"
+       class="btn btn-default" >
+      <span>{{route.name}}</span>
+    </a>
+  </li>
+</ul>

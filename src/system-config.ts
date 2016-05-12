@@ -41,6 +41,7 @@ const barrels: string[] = [
   'app/+app/+reportes',
   'app/+app/+roles',
   'app/+app/+sucursales',
+  'app/+app/shared/aside-nav',
   /** @cli-barrel */
 ];
 

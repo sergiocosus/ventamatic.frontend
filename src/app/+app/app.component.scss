@@ -28,31 +28,6 @@ header{
 }
 
 
-aside {
-  display: flex;
-  flex-direction: column;
-  background-color: #082B36;
-  flex: 0 0 150px;
-  overflow-y: auto;
-
-
-  ul{
-    display: flex;
-    flex: 1 0 auto;
-    flex-direction: column;
-
-
-    li {
-      flex: 1;
-      flex-basis: 25px;
-      background-color: #556A70;
-      border-color: black;
-      width: 100%;
-
-    }
-  }
-
-}
 
 .btn-default{
   color: #ffffff;
