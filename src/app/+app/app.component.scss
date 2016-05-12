@@ -34,16 +34,35 @@ aside {
   background-color: #082B36;
   flex: 0 0 150px;
   overflow-y: auto;
-  padding: 5px;
-  li {
-    flex: 1;
-    flex-basis: 25px;
-    background-color: #556A70;
-    border-color: black;
+
+
+  ul{
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+
+
+    li {
+      flex: 1;
+      flex-basis: 25px;
+      background-color: #556A70;
+      border-color: black;
+      width: 100%;
+
+    }
   }
+
 }
 
-
+.btn-default{
+  color: #ffffff;
+  background-color: #556A70;
+  border-color: black;
+  &:hover{
+    background-color: #e6e6e6;
+    color: #333;
+  }
+}
 
 #body-content{
   padding-top: 50px;
@@ -53,7 +72,6 @@ aside {
   aling-items:stretch;
 }
 
-
 #hidden-bar-div{width: 23%}
 
 #sesion-menu-bar{
@@ -61,7 +79,19 @@ aside {
   align-items:center;
   /*padding: 5px*/;
 
->div{
+  .header-texts{
+    display: flex;
+    background-color: #556A70;
+    margin-left: 5px;
+    margin-right: 5px;
+    align-self: stretch;
+    align-items: center;
+    padding: 5px;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+  }
+
+/*>div{
    display: flex;
    background-color: #556A70;
    margin-left: 5px;
@@ -71,14 +101,14 @@ aside {
    padding: 5px;
    border-left: 1px solid black;
    border-right: 1px solid black;
- }
+ }*/
 }
 
 main{
   flex:1;
   overflow-y: auto;
   display: flex;
-  padding: 5px;
+  /*padding: 5px;*/
   flex-direction: column;
 }
 
@@ -94,4 +124,24 @@ main{
   flex: 10;
   background-color: #556A70;
   margin: 5px;
+}
+
+.modal-form{
+  margin: 10px;
+  input{
+    margin: 10px;
+  }
+  .btn{
+    display: inline-block;
+  }
+}
+
+.modal-confirm-buttons-div{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+
+button{
+  cursor: pointer;
 }

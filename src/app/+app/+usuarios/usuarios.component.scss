@@ -1,3 +1,9 @@
+:host{
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .searchBar{
   /*flex-basis: 25px;*/
   background-color: #556A70;
@@ -6,6 +12,7 @@
   min-height: 38px;
   min-width: 500px;
   display: flex;
+  border-radius: 4px;
 
   div{
     margin: 5px;
@@ -20,6 +27,8 @@
     color: black;
     z-index: 10;
     padding-right: 23px;
+    border: 1px #F1F0EF solid;
+    border-radius: 4px;
   }
 
   .search-icon{
@@ -34,8 +43,7 @@
 
 #addUserButton{
   background-color: #082B36;
-
-  :hover{
+  &:hover{
     background-color: #06495E;
   }
 
@@ -55,6 +63,7 @@
   min-height: 170px;
   overflow-y: auto;
   overflow-x: inherit;
+  border-radius: 4px;
 
   .user-content{
     width: 150px;
@@ -69,6 +78,7 @@
     display: inline-block;
     position: relative;
     z-index: 1;
+    cursor: pointer;
 
     .user-content-div{
       overflow: hidden;
@@ -113,8 +123,7 @@
       height: 20px;
       border: 2px white solid;
       border-radius: 100%;
-
-      :hover{
+      &:hover{
         background-color: red;
         width: 25px;
         height: 25px;
@@ -133,7 +142,7 @@
 
     }
 
-    :hover{
+    &:hover{
       background-color: #06495E;
     }
 

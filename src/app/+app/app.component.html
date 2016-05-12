@@ -3,20 +3,20 @@
   </picture>
   <div id="hidden-bar-div"> </div>
   <div id="sesion-menu-bar">
-    <div>
-      <span>{{user.username}}</span>
+    <div class="header-texts">
+      <span id="user-menu-bar">{{user.username}}</span>
     </div>
-    <div>
-      <span>
-        Hora de inicio:
-        <span id="turno">
-          {{time}}
+    <div class="header-texts">
+      <span id="time-menu-bar">Hora de inicio:
+        <span id="turno">{{time}}
         </span>
       </span>
     </div>
-    <button type="button" class="btn btn-info" (click)="logout()">
-      Cerrar sesión
-    </button>
+    <div>
+      <button type="button" class="btn btn-default" (click)="logout()">
+        Cerrar sesión
+      </button>
+    </div>
   </div>
 </header>
 <div id="body-content">
