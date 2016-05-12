@@ -1,3 +1,262 @@
-<p>
-  usuarios works!
-</p>
+
+<!--------------------------------MODAL ADD USERS---------------------------------------------------->
+<div class="modal fade" id="addUserModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Añadir Usuario</h4>
+      </div>
+      <div class="modal-body">
+        <form class="modal-form" id="addUserForm">
+          <input class="form-control" type="text" placeholder="Nombre"/>
+          <input class="form-control" type="text" placeholder="Apellido"/>
+          <input class="form-control" type="password" placeholder="Contraseña"/>
+          <input class="form-control" type="password" placeholder="Confirmar contraseña"/>
+          <input type="submit" class="btn btn-primary" value="Aceptar">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!------------------------------------------------------------------------------------>
+<!--------------------------------MODAL DELETE USER---------------------------------------------------->
+<div class="modal fade" id="deleteUserModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">¿Desea eliminar este usuario?</h4>
+      </div>
+      <div class="modal-body">
+        <div class="modal-confirm-buttons-div">
+          <button type="button" class="btn btn-primary" data-dismiss="modal">Eliminar usuario</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal">No eliminar usuario</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!--<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>-->
+      </div>
+    </div>
+  </div>
+</div>
+<!------------------------------------------------------------------------------------>
+
+<!--------------------------------MODAL MODIFY USERS---------------------------------------------------->
+<div class="modal fade" id="modifyUserModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Usuario</h4>
+      </div>
+      <div class="modal-body">
+        <form class="modal-form" id="editUserForm">
+          <input class="form-control" disabled="true"
+                 type="text" placeholder="Nombre"/>
+          <input class="form-control" disabled="true"
+                 type="text" placeholder="Apellido"/>
+          <!--<input class="form-control" disabled="true"
+                 type="password" placeholder="Contraseña"/>
+          <input class="form-control" disabled="true"
+                 type="password" placeholder="Confirmar contraseña"/>-->
+          <input type="submit" class="btn btn-primary" id="submitEditUser" value="Aceptar">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button id="editUser" type="button" class="btn btn-primary" id="editUser" >Editar</button>
+        <button type="button" class="btn btn-primary btn-close-modal" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!------------------------------------------------------------------------------------>
+<div class="searchBar">
+  <div>
+    <!--<span>ID: </span>-->
+    <input type="text" placeholder="ID"/>
+    <img src="images/search-user.svg" class="search-icon" />
+  </div>
+  <div>
+    <!--<span>Nombre: </span>-->
+    <input type="text" placeholder="Nombre"/>
+    <img src="images/search-user.svg" class="search-icon" />
+  </div>
+  <!--<div>-->
+  <button id="addUserButton" class="btn btn-default btn-modal" data-toggle="modal" data-target="#addUserModal">
+    <!--Nuevo--><img src="images/add-user-icon.svg">
+  </button>
+  <!--</div>-->
+</div>
+
+<div class="mainContent">
+  <!-------------------------------------------------------------------------------->
+  <div class="user-content">
+    <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
+      <img src="images/remove.svg">
+    </div>
+    <div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
+      <picture>
+        <img src="images/user.png"/>
+      </picture>
+      <div class="user-data">
+        <div>
+          <!--<span>ID:</span>-->
+          <span>JJLC13</span>
+        </div>
+        <div>
+          <!--<span>Nombre:</span>-->
+          <span>Jose</span>
+          <span>Landeros</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-------------------------------------------------------------------------------->
+  <!-------------------------------------------------------------------------------->
+  <div class="user-content">
+    <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
+      <img src="images/remove.svg">
+    </div>
+    <div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
+      <picture>
+        <img src="images/user.png"/>
+      </picture>
+      <div class="user-data">
+        <div>
+          <!--<span>ID:</span>-->
+          <span>JJLC13</span>
+        </div>
+        <div>
+          <!--<span>Nombre:</span>-->
+          <span>Jose</span>
+          <span>Landeros</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-------------------------------------------------------------------------------->
+  <!-------------------------------------------------------------------------------->
+  <div class="user-content">
+    <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
+      <img src="images/remove.svg">
+    </div>
+    <div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
+      <picture>
+        <img src="images/user.png"/>
+      </picture>
+      <div class="user-data">
+        <div>
+          <!--<span>ID:</span>-->
+          <span>JJLC13</span>
+        </div>
+        <div>
+          <!--<span>Nombre:</span>-->
+          <span>Jose</span>
+          <span>Landeros</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-------------------------------------------------------------------------------->
+  <!-------------------------------------------------------------------------------->
+  <div class="user-content">
+    <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
+      <img src="images/remove.svg">
+    </div>
+    <div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
+      <picture>
+        <img src="images/user.png"/>
+      </picture>
+      <div class="user-data">
+        <div>
+          <!--<span>ID:</span>-->
+          <span>JJLC13</span>
+        </div>
+        <div>
+          <!--<span>Nombre:</span>-->
+          <span>Jose</span>
+          <span>Landeros</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-------------------------------------------------------------------------------->
+  <!-------------------------------------------------------------------------------->
+  <div class="user-content">
+    <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
+      <img src="images/remove.svg">
+    </div>
+    <div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
+      <picture>
+        <img src="images/user.png"/>
+      </picture>
+      <div class="user-data">
+        <div>
+          <!--<span>ID:</span>-->
+          <span>JJLC13</span>
+        </div>
+        <div>
+          <!--<span>Nombre:</span>-->
+          <span>Jose</span>
+          <span>Landeros</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--------------------------------------------------------------------------------><!-------------------------------------------------------------------------------->
+  <div class="user-content">
+    <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
+      <img src="images/remove.svg">
+    </div>
+    <div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
+      <picture>
+        <img src="images/user.png"/>
+      </picture>
+      <div class="user-data">
+        <div>
+          <!--<span>ID:</span>-->
+          <span>JJLC13</span>
+        </div>
+        <div>
+          <!--<span>Nombre:</span>-->
+          <span>Jose</span>
+          <span>Landeros</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--------------------------------------------------------------------------------><!-------------------------------------------------------------------------------->
+  <div class="user-content">
+    <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
+      <img src="images/remove.svg">
+    </div>
+    <div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
+      <picture>
+        <img src="images/user.png"/>
+      </picture>
+      <div class="user-data">
+        <div>
+          <!--<span>ID:</span>-->
+          <span>JJLC13</span>
+        </div>
+        <div>
+          <!--<span>Nombre:</span>-->
+          <span>Jose</span>
+          <span>Landeros</span>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-------------------------------------------------------------------------------->
+</div>

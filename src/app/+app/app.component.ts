@@ -63,6 +63,10 @@ export class AppComponent implements OnInit {
       path: '/app/proveedores'
     },
     {
+      name: 'Usuarios',
+      path: '/app/usuarios'
+    },
+    {
       name: 'Roles',
       path: '/app/roles'
     },

@@ -1,0 +1,146 @@
+.searchBar{
+  /*flex-basis: 25px;*/
+  background-color: #556A70;
+  flex: .5;
+  margin: 5px;
+  min-height: 38px;
+  min-width: 500px;
+  display: flex;
+
+  div{
+    margin: 5px;
+    position: relative;
+  }
+
+  span{
+    color: white;
+  }
+
+  input{
+    color: black;
+    z-index: 10;
+    padding-right: 23px;
+  }
+
+  .search-icon{
+    width: 22px;
+    height: 22px;
+    position: absolute;
+    right: 2px;
+    top:4px;
+    z-index: 20;
+  }
+}
+
+#addUserButton{
+  background-color: #082B36;
+
+  :hover{
+    background-color: #06495E;
+  }
+
+  img{
+    height: 25px;
+    width: 25px;
+  }
+
+}
+
+.mainContent{
+  flex: 10;
+  flex-direction: row;
+  background-color: #556A70;
+  margin: 5px;
+  min-width: 500px;
+  min-height: 170px;
+  overflow-y: auto;
+  overflow-x: inherit;
+
+  .user-content{
+    width: 150px;
+    height: 100px;
+    background-color: #082B36;
+    margin: 10px;
+    border-radius: 4px;
+    border: 1px white dashed;
+    border-radius: 4px;
+    justify-content: space-around;
+    align-content: center;
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+
+    .user-content-div{
+      overflow: hidden;
+      display: flex;
+      height: 100%;
+      width: 100%;
+
+      div{
+        padding: 2px;
+      }
+
+      picture{
+        width: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-right: 1px white dashed;
+
+        img{
+          width: 60px;
+          height: 60px;
+        }
+      }
+
+    }
+
+    .user-data{
+      color: white;
+      width: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+    }
+
+    .button-delete-user{
+      position: absolute;
+      right: -5px;
+      top: -5px;
+      z-index: 2;
+      background-color: #DF0101;
+      width: 20px;
+      height: 20px;
+      border: 2px white solid;
+      border-radius: 100%;
+
+      :hover{
+        background-color: red;
+        width: 25px;
+        height: 25px;
+      }
+
+      img{
+        width: 10px;
+        height: 10px;
+        position: absolute;
+        right: 0;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+      }
+
+    }
+
+    :hover{
+      background-color: #06495E;
+    }
+
+  }
+
+}
+
+#submitEditUser{
+  display: none;
+}
