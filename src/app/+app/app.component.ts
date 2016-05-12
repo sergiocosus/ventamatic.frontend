@@ -83,7 +83,6 @@ export class AppComponent implements OnInit {
   public time = "8:00pm";
 
   public user:User;
-  public users:User[];
 
   constructor(private auth:AuthService, private userService:UserService,private router:Router) {}
 
@@ -94,10 +93,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.user  = this.auth.getLoggedUser();
-    this.userService.getAll()
-      .subscribe(
-        users => {this.users = users; }
-      )
+   
   }
 
 }

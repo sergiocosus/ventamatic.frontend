@@ -10,12 +10,12 @@ export class UserService {
 
   getAll() {
     return this.apiHttp.get(this.basePath)
-        .map((res:any) => {return <User[]>res.users});
+        .map(res => {return <User[]>res.users});
   }
 
   get(userId:number) {
     return this.apiHttp.get(this.basePath + userId)
-      .map((res:any) => {return <User>res.user});
+      .map(res => {return <User>res.user});
   }
 
   delete(userId:number){
@@ -24,6 +24,6 @@ export class UserService {
 
   put(user:User){
     return this.apiHttp.put(this.basePath + user.id, user)
-        .map((res:any) => {return <User>res.user});
+        .map(res => {return <User>res.user});
   }
 }

@@ -6,10 +6,11 @@ import {User} from "../user/user";
 
 @Injectable()
 export class AuthService {
-
-  constructor(private http: Http) {}
   private _apiUrl = environment.apiUrl;
   private _authUrl = 'auth';  // URL to web api
+  
+  constructor(private http: Http) {}
+  
 
   login(username, password) :Observable<any> {
     let body = JSON.stringify({

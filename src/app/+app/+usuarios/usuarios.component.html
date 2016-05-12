@@ -94,7 +94,9 @@
 
 <div class="mainContent">
   <!-------------------------------------------------------------------------------->
-  <div class="user-content">
+  <!-------------------------------------------------------------------------------->
+  <!-------------------------------------------------------------------------------->
+  <div class="user-content" *ngFor="let user of users">
     <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
       <img src="images/remove.svg">
     </div>
@@ -105,154 +107,12 @@
       <div class="user-data">
         <div>
           <!--<span>ID:</span>-->
-          <span>JJLC13</span>
+          <span>{{user.id}}</span>
         </div>
         <div>
           <!--<span>Nombre:</span>-->
-          <span>Jose</span>
-          <span>Landeros</span>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-------------------------------------------------------------------------------->
-  <!-------------------------------------------------------------------------------->
-  <div class="user-content">
-    <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
-      <img src="images/remove.svg">
-    </div>
-    <div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
-      <picture>
-        <img src="images/user.png"/>
-      </picture>
-      <div class="user-data">
-        <div>
-          <!--<span>ID:</span>-->
-          <span>JJLC13</span>
-        </div>
-        <div>
-          <!--<span>Nombre:</span>-->
-          <span>Jose</span>
-          <span>Landeros</span>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-------------------------------------------------------------------------------->
-  <!-------------------------------------------------------------------------------->
-  <div class="user-content">
-    <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
-      <img src="images/remove.svg">
-    </div>
-    <div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
-      <picture>
-        <img src="images/user.png"/>
-      </picture>
-      <div class="user-data">
-        <div>
-          <!--<span>ID:</span>-->
-          <span>JJLC13</span>
-        </div>
-        <div>
-          <!--<span>Nombre:</span>-->
-          <span>Jose</span>
-          <span>Landeros</span>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-------------------------------------------------------------------------------->
-  <!-------------------------------------------------------------------------------->
-  <div class="user-content">
-    <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
-      <img src="images/remove.svg">
-    </div>
-    <div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
-      <picture>
-        <img src="images/user.png"/>
-      </picture>
-      <div class="user-data">
-        <div>
-          <!--<span>ID:</span>-->
-          <span>JJLC13</span>
-        </div>
-        <div>
-          <!--<span>Nombre:</span>-->
-          <span>Jose</span>
-          <span>Landeros</span>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-------------------------------------------------------------------------------->
-  <!-------------------------------------------------------------------------------->
-  <div class="user-content">
-    <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
-      <img src="images/remove.svg">
-    </div>
-    <div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
-      <picture>
-        <img src="images/user.png"/>
-      </picture>
-      <div class="user-data">
-        <div>
-          <!--<span>ID:</span>-->
-          <span>JJLC13</span>
-        </div>
-        <div>
-          <!--<span>Nombre:</span>-->
-          <span>Jose</span>
-          <span>Landeros</span>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--------------------------------------------------------------------------------><!-------------------------------------------------------------------------------->
-  <div class="user-content">
-    <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
-      <img src="images/remove.svg">
-    </div>
-    <div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
-      <picture>
-        <img src="images/user.png"/>
-      </picture>
-      <div class="user-data">
-        <div>
-          <!--<span>ID:</span>-->
-          <span>JJLC13</span>
-        </div>
-        <div>
-          <!--<span>Nombre:</span>-->
-          <span>Jose</span>
-          <span>Landeros</span>
-
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--------------------------------------------------------------------------------><!-------------------------------------------------------------------------------->
-  <div class="user-content">
-    <div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
-      <img src="images/remove.svg">
-    </div>
-    <div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
-      <picture>
-        <img src="images/user.png"/>
-      </picture>
-      <div class="user-data">
-        <div>
-          <!--<span>ID:</span>-->
-          <span>JJLC13</span>
-        </div>
-        <div>
-          <!--<span>Nombre:</span>-->
-          <span>Jose</span>
-          <span>Landeros</span>
+          <span>{{user.name}}</span>
+          <span>{{user.last_name}} {{user.last_name_2}}</span>
 
         </div>
       </div>

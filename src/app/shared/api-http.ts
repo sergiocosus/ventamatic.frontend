@@ -13,37 +13,37 @@ export class ApiHttp {
     this.authHttp.setGlobalHeaders(headers, request);
   }
 
-  get(url:string, options?:RequestOptionsArgs):Observable<Response> {
+  get(url:string, options?:RequestOptionsArgs):Observable<any> {
     return this.authHttp.get(this.apiUrl + url, options)
       .map(this.mapJson);
   }
 
-  post(url:string, body:any, options?:RequestOptionsArgs):Observable<Response> {
+  post(url:string, body:any, options?:RequestOptionsArgs):Observable<any> {
     return this.authHttp.post(this.apiUrl + url, JSON.stringify(body), options)
       .map(this.mapJson);
   }
 
-  put(url:string, body:any, options?:RequestOptionsArgs):Observable<Response> {
+  put(url:string, body:any, options?:RequestOptionsArgs):Observable<any> {
     return this.authHttp.put(this.apiUrl + url, JSON.stringify(body), options)
       .map(this.mapJson);
   }
 
-  delete(url:string, options?:RequestOptionsArgs):Observable<Response> {
+  delete(url:string, options?:RequestOptionsArgs):Observable<any> {
     return this.authHttp.delete(this.apiUrl + url, options)
       .map(this.mapJson);
   }
 
-  patch(url:string, body:any, options?:RequestOptionsArgs):Observable<Response> {
+  patch(url:string, body:any, options?:RequestOptionsArgs):Observable<any> {
     return this.authHttp.patch(this.apiUrl + url, JSON.stringify(body), options)
       .map(this.mapJson);
   }
 
-  head(url:string, options?:RequestOptionsArgs):Observable<Response> {
+  head(url:string, options?:RequestOptionsArgs):Observable<any> {
     return this.authHttp.head(this.apiUrl + url, options)
       .map(this.mapJson);
   }
 
-  private mapJson(res:Response){
+  private mapJson(res:Response):any{
     return res.json();
   }
 
