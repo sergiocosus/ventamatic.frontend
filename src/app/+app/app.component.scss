@@ -4,13 +4,13 @@ header{
   position: fixed;
   width: 100%;
   height: 50px;
-  min-width: 500px;
   background-color: #082B36;
   color: white;
   margin: 0;
   align-items: stretch;
   justify-content: space-between;
   top: 0;
+  line-height: 1em;
 
   .btn{
     flex-basis: 25px;
@@ -19,12 +19,12 @@ header{
 
   picture{
     display: flex;
-    flex:1;
-    border: 1px solid #082B36;
+    flex: 0 0 100px;    border: 1px solid #082B36;
     background-image: url(/images/logo.jpg);
     background-size: contain;
     background-repeat: no-repeat;
   }
+
 }
 
 
@@ -52,7 +52,6 @@ header{
 #sesion-menu-bar{
   display: flex;
   align-items:center;
-  /*padding: 5px*/;
 
   .header-texts{
     display: flex;
@@ -66,33 +65,19 @@ header{
     border-right: 1px solid black;
   }
 
-/*>div{
-   display: flex;
-   background-color: #556A70;
-   margin-left: 5px;
-   margin-right: 5px;
-   align-self: stretch;
-   align-items: center;
-   padding: 5px;
-   border-left: 1px solid black;
-   border-right: 1px solid black;
- }*/
 }
 
 main{
-  flex:1;
+  flex:1 1 120px;
   overflow-y: auto;
   display: flex;
-  /*padding: 5px;*/
   flex-direction: column;
 }
 
 .searchBar{
-  /*flex-basis: 25px;*/
   background-color: #556A70;
   flex: 1;
   margin: 5px;
-  min-height: 30px;
 }
 
 .mainContent{
