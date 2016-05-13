@@ -4,40 +4,7 @@
   flex-direction: column;
 }
 
-.searchBar{
-  background-color: #556A70;
-  flex: 0 0 auto;
-  margin: 5px;
-  display: flex;
-  border-radius: 4px;
-  flex-wrap: wrap;
 
-  div{
-    margin: 5px;
-    position: relative;
-  }
-
-  span{
-    color: white;
-  }
-
-  input{
-    color: black;
-    z-index: 10;
-    padding-right: 23px;
-    border: 1px #F1F0EF solid;
-    border-radius: 4px;
-  }
-
-  .search-icon{
-    width: 22px;
-    height: 22px;
-    position: absolute;
-    right: 2px;
-    top:4px;
-    z-index: 20;
-  }
-}
 
 #addUserButton{
   background-color: #082B36;

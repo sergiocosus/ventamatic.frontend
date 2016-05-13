@@ -1,3 +1,24 @@
+<search-bar>
+  <div>
+    <input type="text" placeholder="ID"/>
+    <img src="images/search-user.svg" class="search-icon" />
+  </div>
+  <div>
+    <input type="text" placeholder="Nombre"/>
+    <img src="images/search-user.svg" class="search-icon" />
+  </div>
+  <button id="addUserButton" class="btn btn-default btn-modal" data-toggle="modal" data-target="#addUserModal">
+    <img src="images/add-user-icon.svg">
+  </button>
+</search-bar>
+
+<div class="mainContent">
+  <user-item *ngFor="let user of users"
+             [user]="user"
+  ></user-item>
+</div>
+
+
 
 <!--------------------------------MODAL ADD USERS---------------------------------------------------->
 <div class="modal fade" id="addUserModal" role="dialog">
@@ -74,26 +95,3 @@
   </div>
 </div>
 <!------------------------------------------------------------------------------------>
-<div class="searchBar">
-  <div>
-    <!--<span>ID: </span>-->
-    <input type="text" placeholder="ID"/>
-    <img src="images/search-user.svg" class="search-icon" />
-  </div>
-  <div>
-    <!--<span>Nombre: </span>-->
-    <input type="text" placeholder="Nombre"/>
-    <img src="images/search-user.svg" class="search-icon" />
-  </div>
-  <!--<div>-->
-  <button id="addUserButton" class="btn btn-default btn-modal" data-toggle="modal" data-target="#addUserModal">
-    <!--Nuevo--><img src="images/add-user-icon.svg">
-  </button>
-  <!--</div>-->
-</div>
-
-<div class="mainContent">
-  <user-item *ngFor="let user of users"
-             [user]="user"
-  ></user-item>
-</div>
