@@ -5,7 +5,7 @@ import { HTTP_PROVIDERS } from '@angular/http';
 import { AUTH_PROVIDERS } from "angular2-jwt/angular2-jwt";
 import 'rxjs/Rx';
 import { API_HTTP_PROVIDERS } from './app/shared/api-http'
-import { VentamaticFrontendAppComponent, environment } from './app/';
+import { VentamaticFrontendAppComponent, environment } from './app';
 
 if (environment.production) {
   enableProdMode();

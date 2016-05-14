@@ -21,7 +21,7 @@ import { AsideNavComponent } from "./shared/aside-nav/aside-nav.component";
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
   directives: [ROUTER_DIRECTIVES, AsideNavComponent],
-  providers: [AuthService, UserService]
+  providers: [UserService]
 
 })
 @Routes([
@@ -38,22 +38,22 @@ import { AsideNavComponent } from "./shared/aside-nav/aside-nav.component";
 ])
 export class AppComponent implements OnInit {
 
-  
-
   public time = "8:00pm";
 
   public user:User;
 
-  constructor(private auth:AuthService, private userService:UserService,private router:Router) {}
+  constructor(private authService:AuthService, private userService:UserService,private router:Router) {}
 
   logout() {
-    this.auth.logout();
+    this.authService.logout();
     this.router.navigate(['/login']);
   }
 
   ngOnInit() {
-    this.user  = this.auth.getLoggedUser();
-
+    if(!this.authService.isTokenValid()){
+      this.router.navigate(['/login']);
+    }
+    this.user  = this.authService.getLoggedUser();
   }
 
 }

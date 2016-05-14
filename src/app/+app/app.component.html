@@ -4,7 +4,7 @@
   <div id="hidden-bar-div"> </div>
   <div id="sesion-menu-bar">
     <div class="header-texts">
-      <span id="user-menu-bar">{{user.username}}</span>
+      <span *ngIf="user" id="user-menu-bar">{{user.username}}</span>
     </div>
     <div class="header-texts">
       <span id="time-menu-bar">Hora de inicio:

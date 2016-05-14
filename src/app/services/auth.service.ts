@@ -3,14 +3,16 @@ import { Http, Headers, Response } from '@angular/http';
 import {environment} from "../environment";
 import {Observable} from "rxjs/Observable";
 import {User} from "../user/user";
+import {JwtHelper} from "angular2-jwt/angular2-jwt";
 
 @Injectable()
 export class AuthService {
-  private _apiUrl = environment.apiUrl;
-  private _authUrl = 'auth';  // URL to web api
-  
+  private apiUrl = environment.apiUrl;
+  private authUrl = 'auth';
+  private jwtHelper: JwtHelper = new JwtHelper();
+
   constructor(private http: Http) {}
-  
+
 
   login(username, password) :Observable<any> {
     let body = JSON.stringify({
@@ -20,7 +22,7 @@ export class AuthService {
     const contentHeaders = new Headers();
     contentHeaders.append('Accept', 'application/json');
     contentHeaders.append('Content-Type', 'application/json');
-    var observable = this.http.post(this._apiUrl + this._authUrl, body, { headers: contentHeaders })
+    var observable = this.http.post(this.apiUrl + this.authUrl, body, { headers: contentHeaders })
       .map(this.extractData)
       .catch(this.handleError);
 
@@ -44,6 +46,18 @@ export class AuthService {
 
   getLoggedUser():User{
     return JSON.parse(localStorage.getItem('user'));
+  }
+
+  isTokenValid(){
+    var token = localStorage.getItem('id_token');
+    if(token){
+      if(this.jwtHelper.isTokenExpired(token)){
+        localStorage.clear();
+      }else{
+        return true;
+      }
+    }
+    return false;
   }
 
   private extractData(res: Response) {
