@@ -4,6 +4,7 @@ import {environment} from "../environment";
 import {Observable} from "rxjs/Observable";
 import {User} from "../user/user";
 import {JwtHelper} from "angular2-jwt/angular2-jwt";
+import { NotificationsService } from 'angular2-notifications/components'
 
 @Injectable()
 export class AuthService {
@@ -11,7 +12,9 @@ export class AuthService {
   private authUrl = 'auth';
   private jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(private http: Http) {}
+  constructor(private http: Http, private notification:NotificationsService) {
+    console.log(notification);
+  }
 
 
   login(username, password) :Observable<any> {
@@ -24,6 +27,10 @@ export class AuthService {
     contentHeaders.append('Content-Type', 'application/json');
     var observable = this.http.post(this.apiUrl + this.authUrl, body, { headers: contentHeaders })
       .map(this.extractData)
+      .map(response => {
+        response.user = new User().parse(response.user);
+        return response;
+      })
       .catch(this.handleError);
 
     observable.subscribe(
@@ -31,8 +38,7 @@ export class AuthService {
         localStorage.setItem('id_token', response.token);
       },
       error => {
-        alert(error);
-        console.log(error);
+        this.notification.error('Error', error);
       }
     );
 
@@ -44,8 +50,8 @@ export class AuthService {
     localStorage.removeItem('user');
   }
 
-  getLoggedUser():User{
-    return JSON.parse(localStorage.getItem('user'));
+  getLoggedUser(){
+    return new User().parse(JSON.parse(localStorage.getItem('user')));
   }
 
   isTokenValid(){
@@ -70,10 +76,9 @@ export class AuthService {
     return body || { };
   }
 
-  private handleError (error: any) {
-    let errMsg = error.message || 'Server error';
-    console.error(error);
-    console.error(errMsg); // log to console instead
-    return Observable.throw(errMsg);
+  private handleError (errorResponse: Response) {
+    let json = errorResponse.json() || 'Error del servidor';
+    console.log(json);
+    return Observable.throw(json.error || json);
   }
 }

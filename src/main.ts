@@ -4,6 +4,7 @@ import { ROUTER_PROVIDERS } from '@angular/router';
 import { HTTP_PROVIDERS, Http } from '@angular/http';
 import { AuthHttp, AuthConfig } from "angular2-jwt/angular2-jwt";
 import 'rxjs/Rx';
+import { NotificationsService } from 'angular2-notifications/components'
 import { API_HTTP_PROVIDERS } from './app/shared/api-http'
 import { VentamaticFrontendAppComponent, environment } from './app';
 
@@ -26,5 +27,6 @@ bootstrap(VentamaticFrontendAppComponent,
       },
       deps: [Http]
     }),
-    API_HTTP_PROVIDERS
+    API_HTTP_PROVIDERS,
+    NotificationsService,
   ]);

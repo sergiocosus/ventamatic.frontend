@@ -51,6 +51,10 @@ const cliSystemConfigPackages: any = {
   'ng2-bs3-modal': {
     defaultExtension: 'js',
     main: 'ng2-bs3-modal.js'
+  },
+  'angular2-notifications': {
+    defaultExtension: 'js',
+    main: 'components.js'
   }
 };
 barrels.forEach((barrelName: string) => {
@@ -67,7 +71,8 @@ System.config({
     'rxjs': 'vendor/rxjs',
     'main': 'main.js',
     'angular2-jwt/angular2-jwt': 'vendor/angular2-jwt/angular2-jwt.js',
-    'ng2-bs3-modal': 'vendor/ng2-bs3-modal'
+    'ng2-bs3-modal': 'vendor/ng2-bs3-modal',
+    'angular2-notifications': 'vendor/angular2-notifications'
   },
   packages: cliSystemConfigPackages
 });

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { NotificationsService } from 'angular2-notifications/components';
+
 import {User} from "../../user/user";
 import {UserService} from "../../user/user.service";
 import {UserItemComponent} from "./user-item/user-item.component";
 import {SearchBarComponent} from "../shared/search-bar/search-bar.component";
-import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+
 
 @Component({
   moduleId: module.id,
@@ -17,7 +20,8 @@ export class UsuariosComponent implements OnInit {
   users:User[];
 
   selectedUser: User;
-  constructor(private userService:UserService) {}
+  constructor(private userService:UserService,
+              private notification:NotificationsService) {}
 
   ngOnInit() {
     this.userService.getAll()
@@ -41,16 +45,21 @@ export class UsuariosComponent implements OnInit {
     modal.open();
   }
 
-  createUser(){
+  createUser(modal){
     this.userService.post(this.selectedUser)
       .subscribe(user=> {
+        modal.close();
         this.users.push(user);
+        this.notification.success('Éxito', 'Usuario creado');
       });
   }
 
-  updateUser(){
+  updateUser(modal){
     this.userService.put(this.selectedUser)
-      .subscribe(user=>console.log(user));
+      .subscribe( user =>{
+        modal.close();
+        this.notification.success('Éxito', 'Usuario modificado');
+      });
   }
 
   deleteUser(modal){
@@ -62,6 +71,7 @@ export class UsuariosComponent implements OnInit {
             this.users.splice(index, 1);
             this.selectedUser = null;
             modal.close();
+            this.notification.success('Éxito', 'Usuario eliminado');
           }
         }
       });

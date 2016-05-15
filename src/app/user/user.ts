@@ -6,6 +6,7 @@ export class User {
   public updated_at:string;
   public username:string;
   public last_name:string;
+  public last_name_2:string;
   public phone:string;
   public cellphone:string;
   public address:string;
@@ -13,4 +14,19 @@ export class User {
   public deleted_at:string;
 
   constructor( ){}
+
+  get fullName(){
+    return `${this.name} ${this.last_name} ${this.last_name_2}`;
+  }
+
+  parse(obj){
+    for (var prop in obj) this[prop] = obj[prop];
+
+    return this;
+  }
+
+  public static parseArray(objs:any){
+    return objs.map(obj => {return new User().parse(obj)})
+  }
+
 }

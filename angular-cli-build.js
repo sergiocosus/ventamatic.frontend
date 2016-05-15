@@ -13,7 +13,8 @@ module.exports = function(defaults) {
       'rxjs/**/*.js',
       '@angular/**/*.js',
       'angular2-jwt/angular2-jwt.js',
-      'ng2-bs3-modal/**/*.js'
+      'ng2-bs3-modal/**/*.js',
+      'angular2-notifications/**/*.js'
     ]
   });
 };

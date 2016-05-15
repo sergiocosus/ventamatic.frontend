@@ -1,6 +1,8 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { LoginComponent } from './+login';
 import { Routes, Router , ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router';
+import { SimpleNotificationsComponent } from 'angular2-notifications/components'
+
 import { AppComponent } from './+app';
 import {AuthService} from "./services/auth.service";
 
@@ -9,7 +11,7 @@ import {AuthService} from "./services/auth.service";
   selector: 'ventamatic-frontend-app',
   templateUrl: 'ventamatic-frontend.component.html',
   styleUrls: ['ventamatic-frontend.component.css'],
-  directives: [ROUTER_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, SimpleNotificationsComponent],
   providers: [ROUTER_PROVIDERS, AuthService],
   encapsulation: ViewEncapsulation.None,
 
@@ -21,6 +23,10 @@ import {AuthService} from "./services/auth.service";
 export class VentamaticFrontendAppComponent implements OnInit {
   title = 'ventamatic-frontend works!';
 
+  public options = {
+    timeOut: 5000,
+    lastOnBottom: true
+  };
   constructor(private router: Router, private authService:AuthService) {
 
   }

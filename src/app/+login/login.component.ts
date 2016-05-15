@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router'
+import { SimpleNotificationsComponent, NotificationsService } from 'angular2-notifications/components'
+
 import { AuthService } from "../services/auth.service";
 @Component({
   moduleId: module.id,
@@ -7,28 +9,30 @@ import { AuthService } from "../services/auth.service";
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.css'],
   directives: [ROUTER_DIRECTIVES],
-  providers: [AuthService]
+  providers: []
 })
 export class LoginComponent implements OnInit {
 
   username:string;
   password:string;
 
-  errorMessage: string;
+
+
   constructor(
-    private _router:Router,
-    private _auth:AuthService){}
+    private router:Router,
+    private authService:AuthService,
+    private notification:NotificationsService ){}
 
   ngOnInit() {
   }
 
   login(username:string , password:string){
-    this._auth.login(username, password)
+    this.authService.login(username, password)
       .subscribe(
         response  => {
-          this._router.navigate(['/app'])
-        },
-        error =>  this.errorMessage = <any>error
+          this.router.navigate(['/app']);
+          this.notification.info('Bienvendido',response.user.fullName);
+        }
       );
   }
 

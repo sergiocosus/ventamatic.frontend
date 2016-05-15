@@ -39,7 +39,7 @@
              [(ngModel)]="selectedUser.password"/>
       <input class="form-control" type="password" placeholder="Confirmar contraseña"
              [(ngModel)]="selectedUser.password"/>
-      <input type="submit" class="btn btn-primary" (click)="createUser()"  value="Aceptar">
+      <input type="submit" class="btn btn-primary" (click)="createUser(addUserModal)"  value="Aceptar">
     </form>
 
   </modal-body>
@@ -85,7 +85,7 @@
     </form>
   </modal-body>
   <modal-footer>
-    <button type="button" class="btn btn-primary" (click)="updateUser()" >Guardar Cambios</button>
+    <button type="button" class="btn btn-primary" (click)="updateUser(updateUserModal)" >Guardar Cambios</button>
     <button type="button" class="btn btn-primary btn-close-modal" >Close</button>
   </modal-footer>
 </modal>
