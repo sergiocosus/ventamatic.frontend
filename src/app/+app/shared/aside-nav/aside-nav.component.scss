@@ -32,6 +32,10 @@
         padding: 5px;
 
         &:hover {
+          background-color: #758A90;
+          border-color: #ADADAD;
+        }
+        &.router-link-active{
           color: #333;
           background-color: #E6E6E6;
           border-color: #ADADAD;
