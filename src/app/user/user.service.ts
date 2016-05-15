@@ -18,6 +18,11 @@ export class UserService {
       .map(res => {return <User>res.user});
   }
 
+  post(user:User){
+    return this.apiHttp.post(this.basePath, user)
+      .map(res => {return <User>res.user});
+  }
+
   delete(userId:number){
     return this.apiHttp.delete(this.basePath + userId);
   }

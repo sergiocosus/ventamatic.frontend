@@ -12,7 +12,8 @@ module.exports = function(defaults) {
       'reflect-metadata/*.js',
       'rxjs/**/*.js',
       '@angular/**/*.js',
-      'angular2-jwt/angular2-jwt.js'
+      'angular2-jwt/angular2-jwt.js',
+      'ng2-bs3-modal/**/*.js'
     ]
   });
 };

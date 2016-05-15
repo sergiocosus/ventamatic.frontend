@@ -1,6 +1,6 @@
 :host {
   display: inline-flex;
-  flex: 0 0 150px;
+  flex: 0 0 200px;
   height: 100px;
   background-color: #082B36;
   margin: 10px;
@@ -11,6 +11,7 @@
   position: relative;
   z-index: 1;
   cursor: pointer;
+  line-height: 1em;
 
   .user-content-div {
     overflow: hidden;
@@ -36,12 +37,18 @@
     }
   }
 
+  >picture{
+    flex: 0 0 auto;
+  }
   .user-data{
-    color: white;
-    width: 70px;
     display: flex;
+    flex: 1 0 0;
+    color: white;
     flex-direction: column;
     justify-content: space-around;
+    >div:first-child{
+      font-weight: bolder;
+    }
   }
 
   .button-delete-user{

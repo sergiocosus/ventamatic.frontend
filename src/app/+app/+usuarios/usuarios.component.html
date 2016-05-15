@@ -7,91 +7,99 @@
     <input type="text" placeholder="Nombre"/>
     <img src="images/search-user.svg" class="search-icon" />
   </div>
-  <button id="addUserButton" class="btn btn-default btn-modal" data-toggle="modal" data-target="#addUserModal">
+  <button id="addUserButton" class="btn btn-default btn-modal"
+          (click)="create(addUserModal)">
     <img src="images/add-user-icon.svg">
   </button>
+
 </search-bar>
 
 <div class="mainContent">
   <user-item *ngFor="let user of users"
              [user]="user"
+             (update)="update($event, updateUserModal)"
+             (delete)="delete($event, deleteUserModal)"
   ></user-item>
 </div>
 
 
+<modal #addUserModal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Añadir Usuario</h4>
+  </modal-header>
+  <modal-body>
+    <form class="modal-form" *ngIf="selectedUser">
+      <input class="form-control" type="text" placeholder="Nombre"
+             [(ngModel)]="selectedUser.name"/>
+      <input class="form-control" type="text" placeholder="Apellido"
+             [(ngModel)]="selectedUser.last_name"/>
+      <input class="form-control" type="text" placeholder="Email"
+             [(ngModel)]="selectedUser.email"/>
+      <input class="form-control" type="password" placeholder="Contraseña"
+             [(ngModel)]="selectedUser.password"/>
+      <input class="form-control" type="password" placeholder="Confirmar contraseña"
+             [(ngModel)]="selectedUser.password"/>
+      <input type="submit" class="btn btn-primary" (click)="createUser()"  value="Aceptar">
+    </form>
 
-<!--------------------------------MODAL ADD USERS---------------------------------------------------->
-<div class="modal fade" id="addUserModal" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Añadir Usuario</h4>
-      </div>
-      <div class="modal-body">
-        <form class="modal-form" id="addUserForm">
-          <input class="form-control" type="text" placeholder="Nombre"/>
-          <input class="form-control" type="text" placeholder="Apellido"/>
-          <input class="form-control" type="password" placeholder="Contraseña"/>
-          <input class="form-control" type="password" placeholder="Confirmar contraseña"/>
-          <input type="submit" class="btn btn-primary" value="Aceptar">
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!------------------------------------------------------------------------------------>
-<!--------------------------------MODAL DELETE USER---------------------------------------------------->
-<div class="modal fade" id="deleteUserModal" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">¿Desea eliminar este usuario?</h4>
-      </div>
-      <div class="modal-body">
-        <div class="modal-confirm-buttons-div">
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Eliminar usuario</button>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">No eliminar usuario</button>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <!--<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>-->
-      </div>
-    </div>
-  </div>
-</div>
-<!------------------------------------------------------------------------------------>
+  </modal-body>
+  <modal-footer [show-default-buttons]="true"></modal-footer>
+</modal>
 
-<!--------------------------------MODAL MODIFY USERS---------------------------------------------------->
-<div class="modal fade" id="modifyUserModal" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Usuario</h4>
-      </div>
-      <div class="modal-body">
-        <form class="modal-form" id="editUserForm">
-          <input class="form-control" disabled="true"
-                 type="text" placeholder="Nombre"/>
-          <input class="form-control" disabled="true"
-                 type="text" placeholder="Apellido"/>
-          <!--<input class="form-control" disabled="true"
-                 type="password" placeholder="Contraseña"/>
-          <input class="form-control" disabled="true"
-                 type="password" placeholder="Confirmar contraseña"/>-->
-          <input type="submit" class="btn btn-primary" id="submitEditUser" value="Aceptar">
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button id="editUser" type="button" class="btn btn-primary" id="editUser" >Editar</button>
-        <button type="button" class="btn btn-primary btn-close-modal" data-dismiss="modal">Close</button>
-      </div>
+
+<modal #updateUserModal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Usuario</h4>
+  </modal-header>
+  <modal-body>
+    <form class="modal-form" id="editUserForm" *ngIf="selectedUser">
+      <input class="form-control"
+             type="text" placeholder="Nombre"
+             [(ngModel)]="selectedUser.name"/>
+      <input class="form-control"
+             type="text" placeholder="Apellido Paterno"
+             [(ngModel)]="selectedUser.last_name"/>
+      <input class="form-control"
+             type="text" placeholder="Apellido Materno"
+             [(ngModel)]="selectedUser.last_name2"/>
+      <input class="form-control"
+             type="email" placeholder="Email"
+             [(ngModel)]="selectedUser.email"/>
+      <input class="form-control"
+             type="text" placeholder="Teléfono"
+             [(ngModel)]="selectedUser.phone"/>
+      <input class="form-control"
+             type="text" placeholder="Celular"
+             [(ngModel)]="selectedUser.cellphone"/>
+      <input class="form-control"
+             type="text" placeholder="Dirección"
+             [(ngModel)]="selectedUser.address"/>
+      <input class="form-control"
+             type="text" placeholder="RFC"
+             [(ngModel)]="selectedUser.rfc"/>
+      <!--<input class="form-control" disabled="true"
+             type="password" placeholder="Contraseña"/>
+      <input class="form-control" disabled="true"
+             type="password" placeholder="Confirmar contraseña"/>-->
+      <input type="submit" class="btn btn-primary" value="Aceptar">
+    </form>
+  </modal-body>
+  <modal-footer>
+    <button type="button" class="btn btn-primary" (click)="updateUser()" >Guardar Cambios</button>
+    <button type="button" class="btn btn-primary btn-close-modal" >Close</button>
+  </modal-footer>
+</modal>
+
+<modal #deleteUserModal>
+  <modal-header [show-close]="true" *ngIf="selectedUser">
+    <h4 class="modal-title">¿Desea eliminar al usuario: {{selectedUser.name}}?</h4>
+  </modal-header>
+  <modal-footer>
+    <div class="modal-confirm-buttons-div">
+      <button type="button" class="btn btn-primary"
+              (click)="deleteUser(deleteUserModal)">Eliminar usuario</button>
+      <button type="button" class="btn btn-primary"
+              data-dismiss="modal">No eliminar usuario</button>
     </div>
-  </div>
-</div>
-<!------------------------------------------------------------------------------------>
+  </modal-footer>
+</modal>

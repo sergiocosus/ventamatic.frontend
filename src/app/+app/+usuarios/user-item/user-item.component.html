@@ -1,17 +1,15 @@
-<div class="button-delete-user" data-toggle="modal" data-target="#deleteUserModal">
+<div class="button-delete-user" (click)="clickDelete()">
   <img src="images/remove.svg">
 </div>
-<div class="user-content-div" data-toggle="modal" data-target="#modifyUserModal">
+<div class="user-content-div" (click)="clickUpdate()">
   <picture>
     <img src="images/user.png"/>
   </picture>
   <div class="user-data">
     <div>
-      <!--<span>ID:</span>-->
-      <span>{{user.id}}</span>
+      <span>{{user.username}}</span>
     </div>
     <div>
-      <!--<span>Nombre:</span>-->
       <span>{{user.name}}</span>
       <span>{{user.last_name}} {{user.last_name_2}}</span>
     </div>
