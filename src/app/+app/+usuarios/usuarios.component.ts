@@ -6,6 +6,8 @@ import {User} from "../../user/user";
 import {UserService} from "../../user/user.service";
 import {UserItemComponent} from "./user-item/user-item.component";
 import {SearchBarComponent} from "../shared/search-bar/search-bar.component";
+import {CreateUserModalComponent} from "./create-user-modal/create-user-modal.component";
+import {UpdateUserModalComponent} from "./update-user-modal/update-user-modal.component";
 
 
 @Component({
@@ -13,7 +15,13 @@ import {SearchBarComponent} from "../shared/search-bar/search-bar.component";
   selector: 'app-usuarios',
   templateUrl: 'usuarios.component.html',
   styleUrls: ['usuarios.component.css'],
-  directives: [MODAL_DIRECTIVES, UserItemComponent, SearchBarComponent]
+  directives: [
+    MODAL_DIRECTIVES,
+    UserItemComponent,
+    SearchBarComponent,
+    CreateUserModalComponent,
+    UpdateUserModalComponent
+  ]
 })
 export class UsuariosComponent implements OnInit {
 
@@ -30,12 +38,7 @@ export class UsuariosComponent implements OnInit {
       )
   }
 
-  create(modal:ModalComponent){
-    this.selectedUser = new User();
-    modal.open();
-  }
-
-  update(user:User, modal:ModalComponent){
+  update(user:User, modal:UpdateUserModalComponent){
     this.selectedUser = user;
     modal.open();
   }
@@ -45,21 +48,8 @@ export class UsuariosComponent implements OnInit {
     modal.open();
   }
 
-  createUser(modal){
-    this.userService.post(this.selectedUser)
-      .subscribe(user=> {
-        modal.close();
-        this.users.push(user);
-        this.notification.success('Éxito', 'Usuario creado');
-      });
-  }
-
-  updateUser(modal){
-    this.userService.put(this.selectedUser)
-      .subscribe( user =>{
-        modal.close();
-        this.notification.success('Éxito', 'Usuario modificado');
-      });
+  createdUser(user){
+    this.users.push(user)
   }
 
   deleteUser(modal){

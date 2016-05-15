@@ -44,6 +44,8 @@ const barrels: string[] = [
   'app/+app/shared/aside-nav',
   'app/+app/+usuarios/user-item',
   'app/+app/shared/search-bar',
+  'app/+app/+usuarios/create-user-modal',
+  'app/+app/+usuarios/update-user-modal',
   /** @cli-barrel */
 ];
 

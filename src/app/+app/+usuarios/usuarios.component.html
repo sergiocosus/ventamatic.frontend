@@ -8,7 +8,7 @@
     <img src="images/search-user.svg" class="search-icon" />
   </div>
   <button id="addUserButton" class="btn btn-default btn-modal"
-          (click)="create(addUserModal)">
+          (click)="addUserModal.open()">
     <img src="images/add-user-icon.svg">
   </button>
 
@@ -22,73 +22,14 @@
   ></user-item>
 </div>
 
+<create-user-modal #addUserModal
+                   (createdUser)="createdUser($event)"
+></create-user-modal>
 
-<modal #addUserModal>
-  <modal-header [show-close]="true">
-    <h4 class="modal-title">Añadir Usuario</h4>
-  </modal-header>
-  <modal-body>
-    <form class="modal-form" *ngIf="selectedUser">
-      <input class="form-control" type="text" placeholder="Nombre"
-             [(ngModel)]="selectedUser.name"/>
-      <input class="form-control" type="text" placeholder="Apellido"
-             [(ngModel)]="selectedUser.last_name"/>
-      <input class="form-control" type="text" placeholder="Email"
-             [(ngModel)]="selectedUser.email"/>
-      <input class="form-control" type="password" placeholder="Contraseña"
-             [(ngModel)]="selectedUser.password"/>
-      <input class="form-control" type="password" placeholder="Confirmar contraseña"
-             [(ngModel)]="selectedUser.password"/>
-      <input type="submit" class="btn btn-primary" (click)="createUser(addUserModal)"  value="Aceptar">
-    </form>
-
-  </modal-body>
-  <modal-footer [show-default-buttons]="true"></modal-footer>
-</modal>
-
-
-<modal #updateUserModal>
-  <modal-header [show-close]="true">
-    <h4 class="modal-title">Usuario</h4>
-  </modal-header>
-  <modal-body>
-    <form class="modal-form" id="editUserForm" *ngIf="selectedUser">
-      <input class="form-control"
-             type="text" placeholder="Nombre"
-             [(ngModel)]="selectedUser.name"/>
-      <input class="form-control"
-             type="text" placeholder="Apellido Paterno"
-             [(ngModel)]="selectedUser.last_name"/>
-      <input class="form-control"
-             type="text" placeholder="Apellido Materno"
-             [(ngModel)]="selectedUser.last_name2"/>
-      <input class="form-control"
-             type="email" placeholder="Email"
-             [(ngModel)]="selectedUser.email"/>
-      <input class="form-control"
-             type="text" placeholder="Teléfono"
-             [(ngModel)]="selectedUser.phone"/>
-      <input class="form-control"
-             type="text" placeholder="Celular"
-             [(ngModel)]="selectedUser.cellphone"/>
-      <input class="form-control"
-             type="text" placeholder="Dirección"
-             [(ngModel)]="selectedUser.address"/>
-      <input class="form-control"
-             type="text" placeholder="RFC"
-             [(ngModel)]="selectedUser.rfc"/>
-      <!--<input class="form-control" disabled="true"
-             type="password" placeholder="Contraseña"/>
-      <input class="form-control" disabled="true"
-             type="password" placeholder="Confirmar contraseña"/>-->
-      <input type="submit" class="btn btn-primary" value="Aceptar">
-    </form>
-  </modal-body>
-  <modal-footer>
-    <button type="button" class="btn btn-primary" (click)="updateUser(updateUserModal)" >Guardar Cambios</button>
-    <button type="button" class="btn btn-primary btn-close-modal" >Close</button>
-  </modal-footer>
-</modal>
+<update-user-modal #updateUserModal
+                   [user]="selectedUser">
+        <!--           (updated)="createdUser($event)"-->
+</update-user-modal>
 
 <modal #deleteUserModal>
   <modal-header [show-close]="true" *ngIf="selectedUser">
@@ -96,10 +37,10 @@
   </modal-header>
   <modal-footer>
     <div class="modal-confirm-buttons-div">
-      <button type="button" class="btn btn-primary"
+      <button type="button" class="btn btn-danger"
               (click)="deleteUser(deleteUserModal)">Eliminar usuario</button>
       <button type="button" class="btn btn-primary"
-              data-dismiss="modal">No eliminar usuario</button>
+              (click)="deleteUserModal.close()">No eliminar usuario</button>
     </div>
   </modal-footer>
 </modal>

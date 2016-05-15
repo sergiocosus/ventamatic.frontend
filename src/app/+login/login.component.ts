@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router'
-import { SimpleNotificationsComponent, NotificationsService } from 'angular2-notifications/components'
+import { NotificationsService } from 'angular2-notifications/components'
 
 import { AuthService } from "../services/auth.service";
 @Component({

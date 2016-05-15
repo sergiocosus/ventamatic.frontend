@@ -1,0 +1,31 @@
+<modal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Añadir Usuario</h4>
+  </modal-header>
+  <modal-body>
+    <form class="modal-form" *ngIf="user">
+      <input class="form-control" type="text" placeholder="Nombre"
+             [(ngModel)]="user.name"/>
+      <input class="form-control" type="text" placeholder="Apellido"
+             [(ngModel)]="user.last_name"/>
+      <input class="form-control" type="text" placeholder="Email"
+             [(ngModel)]="user.email"/>
+      <input class="form-control" type="password" placeholder="Contraseña"
+             [(ngModel)]="user.password"/>
+      <input class="form-control" type="password" placeholder="Confirmar contraseña"
+             [(ngModel)]="user.password"/>
+    </form>
+  </modal-body>
+  <modal-footer>
+    <button type="submit"
+            class="btn btn-success"
+            (click)="create()" >
+      Aceptar
+    </button>
+    <button type="button"
+            class="btn btn-primary btn-close-modal"
+            (click)="close()" >
+      Close
+    </button>
+  </modal-footer>
+</modal>

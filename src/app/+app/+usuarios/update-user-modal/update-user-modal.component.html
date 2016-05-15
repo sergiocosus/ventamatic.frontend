@@ -1,0 +1,45 @@
+<modal>
+  <modal-header [show-close]="true">
+    <h4 class="modal-title">Usuario</h4>
+  </modal-header>
+  <modal-body>
+    <form class="modal-form" id="editUserForm" *ngIf="user">
+      <input class="form-control"
+             type="text" placeholder="Nombre"
+             [(ngModel)]="user.name"/>
+      <input class="form-control"
+             type="text" placeholder="Apellido Paterno"
+             [(ngModel)]="user.last_name"/>
+      <input class="form-control"
+             type="text" placeholder="Apellido Materno"
+             [(ngModel)]="user.last_name2"/>
+      <input class="form-control"
+             type="email" placeholder="Email"
+             [(ngModel)]="user.email"/>
+      <input class="form-control"
+             type="text" placeholder="Teléfono"
+             [(ngModel)]="user.phone"/>
+      <input class="form-control"
+             type="text" placeholder="Celular"
+             [(ngModel)]="user.cellphone"/>
+      <input class="form-control"
+             type="text" placeholder="Dirección"
+             [(ngModel)]="user.address"/>
+      <input class="form-control"
+             type="text" placeholder="RFC"
+             [(ngModel)]="user.rfc"/>
+    </form>
+  </modal-body>
+  <modal-footer>
+    <button type="button"
+            class="btn btn-secondary"
+            (click)="update()" >
+      Guardar Cambios
+    </button>
+    <button type="button"
+            class="btn btn-primary"
+            (click)="close()" >
+      Cancelar
+    </button>
+  </modal-footer>
+</modal>

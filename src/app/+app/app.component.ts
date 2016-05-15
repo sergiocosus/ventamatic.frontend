@@ -42,7 +42,8 @@ export class AppComponent implements OnInit {
 
   public user:User;
 
-  constructor(private authService:AuthService, private userService:UserService,private router:Router) {}
+  constructor(private authService:AuthService, 
+              private router:Router) {}
 
   logout() {
     this.authService.logout();
