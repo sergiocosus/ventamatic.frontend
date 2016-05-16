@@ -5,6 +5,9 @@
   <modal-body>
     <form class="modal-form" id="editUserForm" *ngIf="user">
       <input class="form-control"
+             type="text" placeholder="Código de usuario"
+             [(ngModel)]="user.username" disabled/>
+      <input class="form-control"
              type="text" placeholder="Nombre"
              [(ngModel)]="user.name"/>
       <input class="form-control"
@@ -12,7 +15,7 @@
              [(ngModel)]="user.last_name"/>
       <input class="form-control"
              type="text" placeholder="Apellido Materno"
-             [(ngModel)]="user.last_name2"/>
+             [(ngModel)]="user.last_name_2"/>
       <input class="form-control"
              type="email" placeholder="Email"
              [(ngModel)]="user.email"/>

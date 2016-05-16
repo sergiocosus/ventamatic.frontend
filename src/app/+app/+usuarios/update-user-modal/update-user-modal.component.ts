@@ -15,20 +15,19 @@ export class UpdateUserModalComponent implements OnInit {
   @ViewChild(ModalComponent) private modal:ModalComponent;
   @Output() modifiedUser = new EventEmitter();
   @Input() user:User;
-  
+
   constructor(private userService:UserService,
               private notification:NotificationsService) {}
 
   ngOnInit() {
   }
-  
+
   open(){
     this.modal.open();
   }
 
   close(){
     this.modal.close();
-    this.user = null;
   }
 
   update(){

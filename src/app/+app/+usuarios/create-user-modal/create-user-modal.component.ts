@@ -17,6 +17,7 @@ export class CreateUserModalComponent implements OnInit {
   @ViewChild(ModalComponent) private modal:ModalComponent;
   @Output() createdUser = new EventEmitter();
   user:User;
+  password_confirm:string;
 
   constructor(private userService:UserService,
               private notification:NotificationsService) {}
@@ -35,11 +36,15 @@ export class CreateUserModalComponent implements OnInit {
   }
 
   create(){
-    this.userService.post(this.user).subscribe(user=> {
+    if(this.user.password ==this.password_confirm){
+      this.userService.post(this.user).subscribe(user=> {
         this.close();
         this.notification.success('Éxito', 'Usuario creado');
         this.createdUser.emit(user);
-    });
+      });
+    } else{
+      this.notification.error('Error','Las contraseñas no coinciden');
+    }
   }
 
 }

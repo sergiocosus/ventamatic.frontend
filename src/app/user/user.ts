@@ -12,6 +12,8 @@ export class User {
   public address:string;
   public rfc:string;
   public deleted_at:string;
+  
+  public password;
 
   constructor( ){}
 

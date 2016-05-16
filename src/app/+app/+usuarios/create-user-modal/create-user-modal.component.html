@@ -4,16 +4,18 @@
   </modal-header>
   <modal-body>
     <form class="modal-form" *ngIf="user">
+      <input class="form-control" type="text" placeholder="Código de usuario"
+             [(ngModel)]="user.username"/>
       <input class="form-control" type="text" placeholder="Nombre"
              [(ngModel)]="user.name"/>
-      <input class="form-control" type="text" placeholder="Apellido"
+      <input class="form-control" type="text" placeholder="Apellido Paterno"
              [(ngModel)]="user.last_name"/>
-      <input class="form-control" type="text" placeholder="Email"
-             [(ngModel)]="user.email"/>
+      <input class="form-control" type="text" placeholder="Apellido Materno"
+             [(ngModel)]="user.last_name_2"/>
       <input class="form-control" type="password" placeholder="Contraseña"
              [(ngModel)]="user.password"/>
       <input class="form-control" type="password" placeholder="Confirmar contraseña"
-             [(ngModel)]="user.password"/>
+             [(ngModel)]="password_confirm"/>
     </form>
   </modal-body>
   <modal-footer>
