@@ -42,7 +42,7 @@ export class AppComponent implements OnInit {
 
   public user:User;
 
-  constructor(private authService:AuthService, 
+  constructor(private authService:AuthService,
               private router:Router) {}
 
   logout() {

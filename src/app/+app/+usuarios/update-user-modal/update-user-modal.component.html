@@ -4,33 +4,37 @@
   </modal-header>
   <modal-body>
     <form class="modal-form" id="editUserForm" *ngIf="user">
-      <input class="form-control"
-             type="text" placeholder="Código de usuario"
-             [(ngModel)]="user.username" disabled/>
-      <input class="form-control"
-             type="text" placeholder="Nombre"
-             [(ngModel)]="user.name"/>
-      <input class="form-control"
-             type="text" placeholder="Apellido Paterno"
-             [(ngModel)]="user.last_name"/>
-      <input class="form-control"
-             type="text" placeholder="Apellido Materno"
-             [(ngModel)]="user.last_name_2"/>
-      <input class="form-control"
-             type="email" placeholder="Email"
-             [(ngModel)]="user.email"/>
-      <input class="form-control"
-             type="text" placeholder="Teléfono"
-             [(ngModel)]="user.phone"/>
-      <input class="form-control"
-             type="text" placeholder="Celular"
-             [(ngModel)]="user.cellphone"/>
-      <input class="form-control"
-             type="text" placeholder="Dirección"
-             [(ngModel)]="user.address"/>
-      <input class="form-control"
-             type="text" placeholder="RFC"
-             [(ngModel)]="user.rfc"/>
+      <floating-label [label]="'Código de usuario'">
+        <input type="text"  [(ngModel)]="user.username" disabled/>
+      </floating-label>
+      <floating-label [label]="'Nombre'">
+        <input type="text" [(ngModel)]="user.name"/>
+      </floating-label>
+      <floating-label [label]="'Apellido Paterno'">
+        <input class="form-control"
+        type="text" placeholder=""
+        [(ngModel)]="user.last_name"/>
+      </floating-label>
+      <floating-label [label]="'Apellido Materno'">
+        <input class="form-control"
+               type="text" placeholder=""
+               [(ngModel)]="user.last_name_2"/>
+      </floating-label>
+      <floating-label [label]="'Email'">
+        <input type="email" [(ngModel)]="user.email"/>
+      </floating-label>
+      <floating-label [label]="'Teléfono'">
+        <input type="text" [(ngModel)]="user.phone"/>
+      </floating-label>
+      <floating-label [label]="'Celular'">
+        <input type="text" [(ngModel)]="user.cellphone"/>
+      </floating-label>
+      <floating-label [label]="'Dirección'">
+        <input type="text" [(ngModel)]="user.address"/>
+      </floating-label>
+      <floating-label [label]="'RFC'">
+        <input type="text" [(ngModel)]="user.rfc"/>
+      </floating-label>
     </form>
   </modal-body>
   <modal-footer>

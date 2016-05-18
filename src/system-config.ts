@@ -46,6 +46,8 @@ const barrels: string[] = [
   'app/+app/shared/search-bar',
   'app/+app/+usuarios/create-user-modal',
   'app/+app/+usuarios/update-user-modal',
+  'app/floating-label',
+  'app/components/floating-label',
   /** @cli-barrel */
 ];
 

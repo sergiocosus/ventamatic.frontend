@@ -1,21 +1,27 @@
 <modal>
   <modal-header [show-close]="true">
-    <h4 class="modal-title">Añadir Usuario</h4>
+    <h4> Añadir Usuario</h4>
   </modal-header>
   <modal-body>
-    <form class="modal-form" *ngIf="user">
-      <input class="form-control" type="text" placeholder="Código de usuario"
-             [(ngModel)]="user.username"/>
-      <input class="form-control" type="text" placeholder="Nombre"
-             [(ngModel)]="user.name"/>
-      <input class="form-control" type="text" placeholder="Apellido Paterno"
-             [(ngModel)]="user.last_name"/>
-      <input class="form-control" type="text" placeholder="Apellido Materno"
-             [(ngModel)]="user.last_name_2"/>
-      <input class="form-control" type="password" placeholder="Contraseña"
-             [(ngModel)]="user.password"/>
-      <input class="form-control" type="password" placeholder="Confirmar contraseña"
-             [(ngModel)]="password_confirm"/>
+    <form *ngIf="user">
+      <floating-label [label]="'Código de usuario'">
+        <input type="text"  [(ngModel)]="user.username" required/>
+      </floating-label>
+      <floating-label [label]="'Nombre'">
+        <input type="text" [(ngModel)]="user.name"/>
+      </floating-label>
+      <floating-label [label]="'Apellido Paterno'">
+        <input type="text" [(ngModel)]="user.last_name" required/>
+      </floating-label>
+      <floating-label [label]="'Apellido Materno'">
+        <input type="text" [(ngModel)]="user.last_name_2"/>
+      </floating-label>
+      <floating-label [label]="'Contraseña'">
+        <input type="password" [(ngModel)]="user.password"/>
+      </floating-label>
+      <floating-label [label]="'Confirmar contraseña'">
+        <input  type="password" [(ngModel)]="password_confirm"/>
+      </floating-label>
     </form>
   </modal-body>
   <modal-footer>

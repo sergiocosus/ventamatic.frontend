@@ -3,13 +3,14 @@ import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
 import { NotificationsService } from 'angular2-notifications/components';
 import {UserService} from "../../../user/user.service";
 import {User} from "../../../user/user";
+import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
 
 @Component({
   moduleId: module.id,
   selector: 'update-user-modal',
   templateUrl: 'update-user-modal.component.html',
   styleUrls: ['update-user-modal.component.css'],
-  directives: [MODAL_DIRECTIVES]
+  directives: [MODAL_DIRECTIVES, FloatingLabelComponent]
 })
 export class UpdateUserModalComponent implements OnInit {
   @ViewChild(ModalComponent) private modal:ModalComponent;

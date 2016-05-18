@@ -35,7 +35,7 @@ export class UsuariosComponent implements OnInit {
     this.userService.getAll()
       .subscribe(
         users => {this.users = users}
-      )
+      );
   }
 
   update(user:User, modal:UpdateUserModalComponent){

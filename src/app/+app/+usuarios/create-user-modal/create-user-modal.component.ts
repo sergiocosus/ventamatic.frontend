@@ -4,13 +4,14 @@ import { NotificationsService } from 'angular2-notifications/components';
 
 import {User} from "../../../user/user";
 import {UserService} from "../../../user/user.service";
+import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
 
 @Component({
   moduleId: module.id,
   selector: 'create-user-modal',
   templateUrl: 'create-user-modal.component.html',
   styleUrls: ['create-user-modal.component.css'],
-  directives: [MODAL_DIRECTIVES]
+  directives: [MODAL_DIRECTIVES, FloatingLabelComponent]
 
 })
 export class CreateUserModalComponent implements OnInit {
@@ -26,6 +27,7 @@ export class CreateUserModalComponent implements OnInit {
   }
 
   open(){
+
     this.user = new User();
     this.modal.open();
   }
