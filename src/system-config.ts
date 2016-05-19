@@ -48,6 +48,11 @@ const barrels: string[] = [
   'app/+app/+usuarios/update-user-modal',
   'app/floating-label',
   'app/components/floating-label',
+  'app/+app/+clientes/client-item',
+  'app/components/person-item',
+  'app/shared/main-content',
+  'app/+app/+clientes/create-client-modal',
+  'app/+app/+clientes/update-client-modal',
   /** @cli-barrel */
 ];
 

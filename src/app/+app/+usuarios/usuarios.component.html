@@ -7,20 +7,21 @@
     <input type="text" placeholder="Nombre"/>
     <img src="images/search-user.svg" class="search-icon" />
   </div>
-  <button id="addUserButton" class="btn btn-default btn-modal"
+  <button class="btn btn-default"
           (click)="addUserModal.open()">
-    <img src="images/add-user-icon.svg">
+    <img src="images/add-user-icon.svg"> Agregar Usuario
   </button>
 
 </search-bar>
 
-<div class="mainContent">
+<main-content>
   <user-item *ngFor="let user of users"
              [user]="user"
              (update)="update($event, updateUserModal)"
              (delete)="delete($event, deleteUserModal)"
   ></user-item>
-</div>
+</main-content>
+
 
 <create-user-modal #addUserModal
                    (createdUser)="createdUser($event)"

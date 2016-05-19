@@ -1,0 +1,14 @@
+<person-item (delete)="delete.emit(client)" (update)="update.emit(client)">
+  <picture>
+    <img src="images/user.png"/>
+  </picture>
+  <div class="data">
+    <div>
+      <span>{{client.id}}</span>
+    </div>
+    <div>
+      <span>{{client.name}}</span>
+      <span>{{client.last_name}} {{client.last_name_2}}</span>
+    </div>
+  </div>
+</person-item>

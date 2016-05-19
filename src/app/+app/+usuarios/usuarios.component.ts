@@ -8,6 +8,7 @@ import {UserItemComponent} from "./user-item/user-item.component";
 import {SearchBarComponent} from "../shared/search-bar/search-bar.component";
 import {CreateUserModalComponent} from "./create-user-modal/create-user-modal.component";
 import {UpdateUserModalComponent} from "./update-user-modal/update-user-modal.component";
+import {MainContentComponent} from "../../shared/main-content/main-content.component";
 
 
 @Component({
@@ -17,6 +18,7 @@ import {UpdateUserModalComponent} from "./update-user-modal/update-user-modal.co
   styleUrls: ['usuarios.component.css'],
   directives: [
     MODAL_DIRECTIVES,
+    MainContentComponent,
     UserItemComponent,
     SearchBarComponent,
     CreateUserModalComponent,

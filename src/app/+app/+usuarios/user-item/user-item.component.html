@@ -1,11 +1,8 @@
-<div class="button-delete-user" (click)="clickDelete()">
-  <img src="images/remove.svg">
-</div>
-<div class="user-content-div" (click)="clickUpdate()">
+<person-item (delete)="delete.emit(user)" (update)="update.emit(user)">
   <picture>
     <img src="images/user.png"/>
   </picture>
-  <div class="user-data">
+  <div class="data">
     <div>
       <span>{{user.username}}</span>
     </div>
@@ -14,4 +11,4 @@
       <span>{{user.last_name}} {{user.last_name_2}}</span>
     </div>
   </div>
-</div>
+</person-item>

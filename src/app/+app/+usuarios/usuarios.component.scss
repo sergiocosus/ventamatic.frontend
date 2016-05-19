@@ -4,36 +4,6 @@
   flex-direction: column;
 }
 
-
-
-#addUserButton{
-  background-color: #082B36;
-  &:hover{
-    background-color: #06495E;
-  }
-
-  img{
-    height: 25px;
-    width: 25px;
-  }
-
-}
-
-.mainContent{
-  display: flex;
-  flex-wrap: wrap;
-  flex: 1 0 auto;
-  flex-direction: row;
-  background-color: #556A70;
-  margin: 5px;
-  min-height: 170px;
-  overflow-y: auto;
-  overflow-x: inherit;
-  border-radius: 4px;
-  justify-content: space-around;
-  align-content: flex-start;
-}
-
 #submitEditUser{
   display: none;
 }

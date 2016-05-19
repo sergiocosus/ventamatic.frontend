@@ -1,0 +1,87 @@
+:host {
+  display: inline-flex;
+  flex: 0 0 200px;
+  height: 100px;
+  background-color: #082B36;
+  margin: 10px;
+  border-radius: 4px;
+  border: 1px white dashed;
+  justify-content: space-around;
+  align-content: center;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  line-height: 1em;
+
+  .content-div {
+    overflow: hidden;
+    display: flex;
+    height: 100%;
+    width: 100%;
+
+    div {
+      padding: 2px;
+    }
+
+    picture {
+      width: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-right: 1px white dashed;
+
+      img {
+        width: 60px;
+        height: 60px;
+      }
+    }
+  }
+
+  >picture{
+    flex: 0 0 auto;
+  }
+  .data{
+    display: flex;
+    flex: 1 0 0;
+    color: white;
+    flex-direction: column;
+    justify-content: space-around;
+    >div:first-child{
+      font-weight: bolder;
+    }
+  }
+
+  .button-delete {
+    position: absolute;
+    right: -5px;
+    top: -5px;
+    z-index: 2;
+    background-color: #DF0101;
+    width: 20px;
+    height: 20px;
+    border: 2px white solid;
+    border-radius: 100%;
+
+    &:hover{
+      background-color: red;
+      width: 25px;
+      height: 25px;
+    }
+
+    img{
+      width: 10px;
+      height: 10px;
+      position: absolute;
+      right: 0;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+    }
+
+  }
+
+  &:hover{
+    background-color: #06495E;
+  }
+}

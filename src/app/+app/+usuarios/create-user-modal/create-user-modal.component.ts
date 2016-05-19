@@ -12,7 +12,6 @@ import {FloatingLabelComponent} from "../../../components/floating-label/floatin
   templateUrl: 'create-user-modal.component.html',
   styleUrls: ['create-user-modal.component.css'],
   directives: [MODAL_DIRECTIVES, FloatingLabelComponent]
-
 })
 export class CreateUserModalComponent implements OnInit {
   @ViewChild(ModalComponent) private modal:ModalComponent;

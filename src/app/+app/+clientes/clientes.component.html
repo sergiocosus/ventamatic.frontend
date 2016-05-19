@@ -1,3 +1,20 @@
 <search-bar>
-  clientes works!
+  <button class="btn btn-default"
+          (click)="addClientModal.open()">
+    <img src="images/add-user-icon.svg"> Agregar Cliente
+  </button>
 </search-bar>
+
+<main-content>
+  <client-item *ngFor="let client of clients$ | async"
+               [client]="client"
+               (update)="update($event, updateUserModal)"
+               (delete)="delete($event, deleteUserModal)"
+  ></client-item>
+</main-content>
+
+
+
+<create-client-modal #addClientModal
+                   (created)="createdUser($event)"
+></create-client-modal>
