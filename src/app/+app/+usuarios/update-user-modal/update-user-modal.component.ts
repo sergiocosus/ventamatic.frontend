@@ -16,7 +16,7 @@ export class UpdateUserModalComponent implements OnInit {
   @ViewChild(ModalComponent) private modal:ModalComponent;
   @Output() modifiedUser = new EventEmitter();
   @Input() user:User;
-
+  locked:boolean = true;
   constructor(private userService:UserService,
               private notification:NotificationsService) {}
 
@@ -37,6 +37,14 @@ export class UpdateUserModalComponent implements OnInit {
       this.notification.success('Éxito', 'Usuario modificado');
       this.modifiedUser.emit(user);
     });
+  }
+  
+  lock(){
+    this.locked = true;
+  }
+
+  unlock(){
+    this.locked = false;
   }
 
 }

@@ -1,48 +1,51 @@
-<modal>
+<modal (onClose)="lock()" (onDismiss)="lock()">
   <modal-header [show-close]="true">
     <h4 class="modal-title">Usuario</h4>
   </modal-header>
   <modal-body>
-    <form class="modal-form" id="editUserForm" *ngIf="user">
+    <form class="modal-form" id="editUserForm" *ngIf="user" >
       <floating-label [label]="'Código de usuario'">
         <input type="text"  [(ngModel)]="user.username" disabled/>
       </floating-label>
       <floating-label [label]="'Nombre'">
-        <input type="text" [(ngModel)]="user.name"/>
+        <input type="text" [(ngModel)]="user.name" [disabled]="locked"/>
       </floating-label>
-      <floating-label [label]="'Apellido Paterno'">
-        <input class="form-control"
-        type="text" placeholder=""
-        [(ngModel)]="user.last_name"/>
+      <floating-label [label]="'Apellido Paterno'" >
+        <input type="text" [(ngModel)]="user.last_name" [disabled]="locked"/>
       </floating-label>
       <floating-label [label]="'Apellido Materno'">
-        <input class="form-control"
-               type="text" placeholder=""
-               [(ngModel)]="user.last_name_2"/>
+        <input type="text" [(ngModel)]="user.last_name_2" [disabled]="locked"/>
       </floating-label>
       <floating-label [label]="'Email'">
-        <input type="email" [(ngModel)]="user.email"/>
+        <input type="email" [(ngModel)]="user.email" [disabled]="locked"/>
       </floating-label>
       <floating-label [label]="'Teléfono'">
-        <input type="text" [(ngModel)]="user.phone"/>
+        <input type="text" [(ngModel)]="user.phone" [disabled]="locked"/>
       </floating-label>
       <floating-label [label]="'Celular'">
-        <input type="text" [(ngModel)]="user.cellphone"/>
+        <input type="text" [(ngModel)]="user.cellphone" [disabled]="locked"/>
       </floating-label>
       <floating-label [label]="'Dirección'">
-        <input type="text" [(ngModel)]="user.address"/>
+        <input type="text" [(ngModel)]="user.address" [disabled]="locked"/>
       </floating-label>
       <floating-label [label]="'RFC'">
-        <input type="text" [(ngModel)]="user.rfc"/>
+        <input type="text" [(ngModel)]="user.rfc" [disabled]="locked"/>
       </floating-label>
     </form>
   </modal-body>
   <modal-footer>
-    <button type="button"
-            class="btn btn-secondary"
+
+    <button *ngIf="locked" type="submit"
+            class="btn btn-danger"
+            (click)="unlock()" >
+      Editar
+    </button>
+    <button *ngIf="!locked" type="submit"
+            class="btn btn-success"
             (click)="update()" >
       Guardar Cambios
     </button>
+
     <button type="button"
             class="btn btn-primary"
             (click)="close()" >
