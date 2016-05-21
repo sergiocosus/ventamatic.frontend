@@ -9,25 +9,25 @@ import {
 import { ComponentFixture, TestComponentBuilder } from '@angular/compiler/testing';
 import { Component } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { CreateUserModalComponent } from './create-user-modal.component';
+import { UserModalComponent } from './user-modal.component';
 
-describe('Component: CreateUserModal', () => {
+describe('Component: UserModal', () => {
   let builder: TestComponentBuilder;
 
-  beforeEachProviders(() => [CreateUserModalComponent]);
+  beforeEachProviders(() => [UserModalComponent]);
   beforeEach(inject([TestComponentBuilder], function (tcb: TestComponentBuilder) {
     builder = tcb;
   }));
 
-  it('should inject the component', inject([CreateUserModalComponent],
-      (component: CreateUserModalComponent) => {
+  it('should inject the component', inject([UserModalComponent],
+      (component: UserModalComponent) => {
     expect(component).toBeTruthy();
   }));
 
   it('should create the component', inject([], () => {
-    return builder.createAsync(CreateUserModalComponentTestController)
+    return builder.createAsync(UserModalComponentTestController)
       .then((fixture: ComponentFixture<any>) => {
-        let query = fixture.debugElement.query(By.directive(CreateUserModalComponent));
+        let query = fixture.debugElement.query(By.directive(UserModalComponent));
         expect(query).toBeTruthy();
         expect(query.componentInstance).toBeTruthy();
       });
@@ -37,10 +37,10 @@ describe('Component: CreateUserModal', () => {
 @Component({
   selector: 'test',
   template: `
-    <app-create-user-modal></app-create-user-modal>
+    <app-user-modal></app-user-modal>
   `,
-  directives: [CreateUserModalComponent]
+  directives: [UserModalComponent]
 })
-class CreateUserModalComponentTestController {
+class UserModalComponentTestController {
 }
 

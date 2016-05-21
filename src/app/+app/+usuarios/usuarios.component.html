@@ -8,39 +8,20 @@
     <img src="images/search-user.svg" class="search-icon" />
   </div>
   <button class="btn btn-default"
-          (click)="addUserModal.open()">
+          (click)="create()">
     <img src="images/add-user-icon.svg"> Agregar Usuario
   </button>
-
 </search-bar>
 
 <main-content>
   <user-item *ngFor="let user of users"
              [user]="user"
-             (update)="update($event, updateUserModal)"
-             (delete)="delete($event, deleteUserModal)"
+             (update)="update($event)"
+             (delete)="delete($event)"
   ></user-item>
 </main-content>
 
-
-<create-user-modal #addUserModal
-                   (createdUser)="createdUser($event)"
-></create-user-modal>
-
-<update-user-modal #updateUserModal
-                   [user]="selectedUser">
-</update-user-modal>
-
-<modal #deleteUserModal>
-  <modal-header [show-close]="true" *ngIf="selectedUser">
-    <h4 class="modal-title">¿Desea eliminar al usuario: {{selectedUser.name}}?</h4>
-  </modal-header>
-  <modal-footer>
-    <div class="modal-confirm-buttons-div">
-      <button type="button" class="btn btn-danger"
-              (click)="deleteUser(deleteUserModal)">Eliminar usuario</button>
-      <button type="button" class="btn btn-primary"
-              (click)="deleteUserModal.close()">No eliminar usuario</button>
-    </div>
-  </modal-footer>
-</modal>
+<user-modal (created)="created($event)"
+              (updated)="updated($event)"
+              (deleted)="deleted($event)">
+</user-modal>

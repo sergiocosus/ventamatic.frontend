@@ -44,17 +44,14 @@ const barrels: string[] = [
   'app/+app/shared/aside-nav',
   'app/+app/+usuarios/user-item',
   'app/+app/shared/search-bar',
-  'app/+app/+usuarios/create-user-modal',
-  'app/+app/+usuarios/update-user-modal',
   'app/floating-label',
   'app/components/floating-label',
   'app/+app/+clientes/client-item',
   'app/components/person-item',
   'app/shared/main-content',
-  'app/+app/+clientes/create-client-modal',
-  'app/+app/+clientes/update-client-modal',
   'app/+app/+clientes/client-form',
   'app/+app/+clientes/client-modal',
+  'app/+app/+usuarios/user-modal',
   /** @cli-barrel */
 ];
 

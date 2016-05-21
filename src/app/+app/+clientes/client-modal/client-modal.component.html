@@ -3,43 +3,43 @@
     <h4 *ngIf="createMode"> Añadir Cliente </h4>
     <h4 *ngIf="updateMode"> Editar Cliente </h4>
     <h4 *ngIf="deleteMode"> Eliminar Cliente </h4>
-    <button *ngIf="locked"
-            type="submit" class="btn btn-danger"
-            (click)="unlock()" >
-      Editar Cliente
-    </button>
   </modal-header>
   <form>
     <modal-body *ngIf="!deleteMode && client">
-        <floating-label [label]="'Id'" *ngIf="updateMode" >
-          <input type="text" [(ngModel)]="client.id" disabled="disabled"/>
-        </floating-label>
-        <floating-label [label]="'Nombre'">
-          <input type="text" [(ngModel)]="client.name" [disabled]="locked" />
-        </floating-label>
-        <floating-label [label]="'Apellido Paterno'">
-          <input type="text" [(ngModel)]="client.last_name" [disabled]="locked"/>
-        </floating-label>
-        <floating-label [label]="'Apellido Materno'">
-          <input type="text" [(ngModel)]="client.last_name_2" [disabled]="locked"/>
-        </floating-label>
-        <floating-label [label]="'Email'">
-          <input type="email" [(ngModel)]="client.email" [disabled]="locked"/>
-        </floating-label>
-        <floating-label [label]="'Teléfono'">
-          <input type="text" [(ngModel)]="client.phone" [disabled]="locked"/>
-        </floating-label>
-        <floating-label [label]="'Celular'">
-          <input type="text" [(ngModel)]="client.cellphone" [disabled]="locked"/>
-        </floating-label>
-        <floating-label [label]="'Dirección'">
-          <input type="text" [(ngModel)]="client.address" [disabled]="locked"/>
-        </floating-label>
-        <floating-label [label]="'RFC'">
-          <input type="text" [(ngModel)]="client.rfc" [disabled]="locked"/>
-        </floating-label>
+      <floating-label [label]="'Id'" *ngIf="updateMode" >
+        <input type="text" [(ngModel)]="client.id" disabled="disabled"/>
+      </floating-label>
+      <floating-label [label]="'Nombre'">
+        <input type="text" [(ngModel)]="client.name" [disabled]="locked" required/>
+      </floating-label>
+      <floating-label [label]="'Apellido Paterno'">
+        <input type="text" [(ngModel)]="client.last_name" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Apellido Materno'">
+        <input type="text" [(ngModel)]="client.last_name_2" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Email'">
+        <input type="email" [(ngModel)]="client.email" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Teléfono'">
+        <input type="text" [(ngModel)]="client.phone" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Celular'">
+        <input type="text" [(ngModel)]="client.cellphone" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Dirección'">
+        <input type="text" [(ngModel)]="client.address" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'RFC'">
+        <input type="text" [(ngModel)]="client.rfc" [disabled]="locked"/>
+      </floating-label>
     </modal-body>
     <modal-footer>
+      <button *ngIf="locked"
+              type="submit" class="btn btn-danger pull-xs-left"
+              (click)="unlock()" >
+        Editar Cliente
+      </button>
       <button *ngIf="createMode"
               type="submit"
               class="btn btn-success"
@@ -59,7 +59,7 @@
         Eliminar Cliente
       </button>
       <button type="button"
-              class="btn btn-primary btn-close-modal"
+              class="btn btn-primary"
               (click)="close()" >
         Cerrar
       </button>

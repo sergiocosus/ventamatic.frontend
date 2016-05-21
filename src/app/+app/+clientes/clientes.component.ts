@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {SearchBarComponent} from "../shared/search-bar/search-bar.component";
-import {MainContentComponent} from "../../shared/main-content/main-content.component";
-import {ClientItemComponent} from "./client-item/client-item.component";
+import {SearchBarComponent} from "../shared/search-bar";
+import {MainContentComponent} from "../../shared/main-content";
+import {ClientItemComponent} from "./client-item";
 import {ClientService} from "./shared/client.service";
 import {Client} from "./shared/client";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
-import {ClientModalComponent} from "./client-modal/client-modal.component";
+import {ClientModalComponent} from "./client-modal";
 
 @Component({
   moduleId: module.id,
@@ -50,10 +50,10 @@ export class ClientesComponent implements OnInit {
   }
 
   updated(client:Client){
-    
+
   }
 
-  deleted(client){
+  deleted(client:Client){
       var index = this.clients.indexOf(client);
       if (index > -1) {
         this.clients.splice(index, 1);

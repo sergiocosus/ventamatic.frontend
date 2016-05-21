@@ -1,0 +1,76 @@
+<modal>
+  <modal-header [show-close]="true">
+    <h4 *ngIf="createMode"> Añadir Usuario </h4>
+    <h4 *ngIf="updateMode"> Editar Usuario </h4>
+    <h4 *ngIf="deleteMode"> Eliminar Usuario </h4>
+  </modal-header>
+  <form (ngSubmit)="submit()">
+    <modal-body *ngIf="!deleteMode && user">
+      <floating-label [label]="'Código de usuario'">
+        <input type="text" required
+               [(ngModel)]="user.username"
+               [disabled]="updateMode"/>
+      </floating-label>
+
+      <floating-label [label]="'Nombre'">
+        <input type="text" [(ngModel)]="user.name" required [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Apellido Paterno'" >
+        <input type="text" [(ngModel)]="user.last_name" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Apellido Materno'">
+        <input type="text" [(ngModel)]="user.last_name_2" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Email'">
+        <input type="email" [(ngModel)]="user.email" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Teléfono'">
+        <input type="text" [(ngModel)]="user.phone" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Celular'">
+        <input type="text" [(ngModel)]="user.cellphone" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Dirección'">
+        <input type="text" [(ngModel)]="user.address" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'RFC'">
+        <input type="text" [(ngModel)]="user.rfc" [disabled]="locked"/>
+      </floating-label>
+
+      <floating-label [label]="'Contraseña'" *ngIf="createMode">
+        <input type="password" [(ngModel)]="user.password" required/>
+      </floating-label>
+      <floating-label [label]="'Confirmar contraseña'" *ngIf="createMode">
+        <input  type="password" [(ngModel)]="password_confirm" required/>
+      </floating-label>
+    </modal-body>
+    <modal-footer>
+      <button *ngIf="locked"
+              type="submit" class="btn btn-danger pull-xs-left"
+              (click)="unlock()" >
+        Editar Usuario
+      </button>
+      <button *ngIf="createMode"
+              type="submit"
+              class="btn btn-success">
+        Crear Usuario
+      </button>
+      <button *ngIf="updateMode && !locked"
+              type="submit"
+              class="btn btn-success">
+        Actualizar Usuario
+      </button>
+      <button *ngIf="deleteMode && !locked"
+              type="submit"
+              class="btn btn-danger">
+        Eliminar Usuario
+      </button>
+      <button type="button"
+              class="btn btn-primary"
+              (click)="close()">
+        Cerrar
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+

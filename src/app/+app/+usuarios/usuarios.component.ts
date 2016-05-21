@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { MODAL_DIRECTIVES, ModalComponent } from 'ng2-bs3-modal/ng2-bs3-modal';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { NotificationsService } from 'angular2-notifications/components';
 
 import {User} from "../../user/user";
 import {UserService} from "../../user/user.service";
-import {UserItemComponent} from "./user-item/user-item.component";
-import {SearchBarComponent} from "../shared/search-bar/search-bar.component";
-import {CreateUserModalComponent} from "./create-user-modal/create-user-modal.component";
-import {UpdateUserModalComponent} from "./update-user-modal/update-user-modal.component";
-import {MainContentComponent} from "../../shared/main-content/main-content.component";
+import {UserItemComponent} from "./user-item";
+import {SearchBarComponent} from "../shared/search-bar";
+import {MainContentComponent} from "../../shared/main-content";
+import {UserModalComponent} from "./user-modal";
 
 
 @Component({
@@ -17,55 +15,50 @@ import {MainContentComponent} from "../../shared/main-content/main-content.compo
   templateUrl: 'usuarios.component.html',
   styleUrls: ['usuarios.component.css'],
   directives: [
-    MODAL_DIRECTIVES,
     MainContentComponent,
     UserItemComponent,
     SearchBarComponent,
-    CreateUserModalComponent,
-    UpdateUserModalComponent
+    UserModalComponent
   ]
 })
 export class UsuariosComponent implements OnInit {
+  @ViewChild(UserModalComponent) private userModal:UserModalComponent;
 
   users:User[];
 
-  selectedUser: User;
   constructor(private userService:UserService,
               private notification:NotificationsService) {}
 
   ngOnInit() {
-    this.userService.getAll()
-      .subscribe(
-        users => {this.users = users}
+    this.userService.getAll().subscribe(
+        users => this.users = users
       );
   }
 
-  update(user:User, modal:UpdateUserModalComponent){
-    this.selectedUser = user;
-    modal.open();
+  create(){
+    this.userModal.openCreate();
   }
 
-  delete(user:User, modal:ModalComponent){
-    this.selectedUser = user;
-    modal.open();
+  update(user:User){
+    this.userModal.openUpdate(user);
   }
 
-  createdUser(user){
-    this.users.push(user)
+  delete(user:User){
+    this.userModal.openDelete(user);
   }
 
-  deleteUser(modal){
-    this.userService.delete(this.selectedUser.id)
-      .subscribe( response => {
-        if(response.success){
-          var index = this.users.indexOf(this.selectedUser);
-          if (index > -1) {
-            this.users.splice(index, 1);
-            this.selectedUser = null;
-            modal.close();
-            this.notification.success('Éxito', 'Usuario eliminado');
-          }
-        }
-      });
+  created(user:User){
+    this.users.unshift(user);
+  }
+
+  updated(user:User){
+
+  }
+
+  deleted(user:User){
+    var index = this.users.indexOf(user);
+    if (index > -1) {
+      this.users.splice(index, 1);
+    }
   }
 }
