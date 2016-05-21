@@ -53,6 +53,8 @@ const barrels: string[] = [
   'app/shared/main-content',
   'app/+app/+clientes/create-client-modal',
   'app/+app/+clientes/update-client-modal',
+  'app/+app/+clientes/client-form',
+  'app/+app/+clientes/client-modal',
   /** @cli-barrel */
 ];
 

@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {SearchBarComponent} from "../shared/search-bar/search-bar.component";
 import {MainContentComponent} from "../../shared/main-content/main-content.component";
 import {ClientItemComponent} from "./client-item/client-item.component";
 import {ClientService} from "./shared/client.service";
 import {Client} from "./shared/client";
-import {Observable} from "rxjs/Observable";
-import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {CreateClientModalComponent} from "./create-client-modal/create-client-modal.component";
+import {NotificationsService} from "angular2-notifications/lib/notifications.service";
+import {ClientModalComponent} from "./client-modal/client-modal.component";
 
 @Component({
   moduleId: module.id,
@@ -16,45 +15,49 @@ import {CreateClientModalComponent} from "./create-client-modal/create-client-mo
   directives: [SearchBarComponent,
     MainContentComponent,
     ClientItemComponent,
-    CreateClientModalComponent],
+    ClientModalComponent
+  ],
   providers: [ClientService]
 })
 export class ClientesComponent implements OnInit {
-  clients$:Observable<Client[]>;
-  selectedClient:Client;
-  constructor(private clientService:ClientService) {}
+  @ViewChild(ClientModalComponent) private clientModal:ClientModalComponent;
+
+  clients:Client[];
+
+  constructor(private clientService:ClientService,
+              private notification:NotificationsService) {}
 
   ngOnInit() {
-    this.clients$ = this.clientService.getAll();
+    this.clientService.getAll().subscribe(
+      clients => this.clients = clients
+    );
   }
 
- /* update(client:Client, modal:Upd){
-    this.selectedUser = user;
-    modal.open();
-  }*/
-
-  delete(client:Client, modal:ModalComponent){
-    this.selectedClient = client;
-    modal.open();
+  create(){
+    this.clientModal.openCreate();
   }
 
-  createdUser(user){
-    this.clients$ = this.clientService.getAll();
+  update(client:Client){
+    this.clientModal.openUpdate(client);
   }
 
-/*  deleteUser(modal){
-    this.userService.delete(this.selectedUser.id)
-      .subscribe( response => {
-        if(response.success){
-          var index = this.users.indexOf(this.selectedUser);
-          if (index > -1) {
-            this.users.splice(index, 1);
-            this.selectedUser = null;
-            modal.close();
-            this.notification.success('Éxito', 'Usuario eliminado');
-          }
-        }
-      });
-  }*/
+  delete(client:Client){
+    this.clientModal.openDelete(client);
+  }
+
+  created(client:Client){
+    this.clients.unshift(client);
+  }
+
+  updated(client:Client){
+    
+  }
+
+  deleted(client){
+      var index = this.clients.indexOf(client);
+      if (index > -1) {
+        this.clients.splice(index, 1);
+      }
+  }
 
 }
