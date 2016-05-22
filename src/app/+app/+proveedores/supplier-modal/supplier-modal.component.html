@@ -1,0 +1,71 @@
+<modal>
+  <modal-header [show-close]="true">
+    <h4 *ngIf="createMode"> Añadir Proveedor </h4>
+    <h4 *ngIf="updateMode"> Editar Proveedor </h4>
+    <h4 *ngIf="deleteMode"> Eliminar Proveedor </h4>
+  </modal-header>
+  <form>
+    <modal-body *ngIf="!deleteMode && supplier">
+      <floating-label [label]="'Id'" *ngIf="updateMode" >
+        <input type="text" [(ngModel)]="supplier.id" disabled="disabled"/>
+      </floating-label>
+      <floating-label [label]="'Nombre'">
+        <input type="text" [(ngModel)]="supplier.name" [disabled]="locked" required/>
+      </floating-label>
+      <floating-label [label]="'Apellido Paterno'">
+        <input type="text" [(ngModel)]="supplier.last_name" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Apellido Materno'">
+        <input type="text" [(ngModel)]="supplier.last_name_2" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Email'">
+        <input type="email" [(ngModel)]="supplier.email" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Teléfono'">
+        <input type="text" [(ngModel)]="supplier.phone" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Celular'">
+        <input type="text" [(ngModel)]="supplier.cellphone" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Dirección'">
+        <input type="text" [(ngModel)]="supplier.address" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'RFC'">
+        <input type="text" [(ngModel)]="supplier.rfc" [disabled]="locked"/>
+      </floating-label>
+    </modal-body>
+    <modal-footer>
+      <button *ngIf="locked"
+              type="submit" class="btn btn-danger pull-xs-left"
+              (click)="unlock()" >
+        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+
+        Editar Proveedor
+      </button>
+      <button *ngIf="createMode"
+              type="submit"
+              class="btn btn-success"
+              (click)="create()">
+        Crear Proveedor
+      </button>
+      <button *ngIf="updateMode && !locked"
+              type="submit"
+              class="btn btn-success"
+              (click)="update()" >
+        Actualizar Proveedor
+      </button>
+      <button *ngIf="deleteMode && !locked"
+              type="submit"
+              class="btn btn-danger"
+              (click)="delete()" >
+        Eliminar Proveedor
+      </button>
+      <button type="button"
+              class="btn btn-primary"
+              (click)="close()" >
+        Cerrar
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+

@@ -1,3 +1,20 @@
 <search-bar>
-  Proveedores works!
+  <button class="btn btn-default"
+          (click)="create()">
+    <img src="images/add-user-icon.svg"> Agregar Proveedor
+  </button>
 </search-bar>
+
+<main-content>
+  <supplier-item *ngFor="let supplier of suppliers"
+               [supplier]="supplier"
+               (update)="update($event)"
+               (delete)="delete($event)"
+  ></supplier-item>
+</main-content>
+
+<supplier-modal (created)="created($event)"
+              (updated)="updated($event)"
+              (deleted)="deleted($event)">
+</supplier-modal>
+
