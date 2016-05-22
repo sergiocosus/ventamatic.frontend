@@ -6,8 +6,7 @@
   background-color: #556A70;
   margin: 5px;
   min-height: 170px;
-  overflow-y: auto;
-  overflow-x: inherit;
+  overflow-y: visible;
   border-radius: 4px;
   justify-content: space-around;
   align-content: flex-start;

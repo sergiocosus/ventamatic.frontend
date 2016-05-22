@@ -4,7 +4,7 @@
   height: 100px;
   background-color: #082B36;
   margin: 10px;
-  border-radius: 4px;
+  border-radius: 10px;
   border: 1px white dashed;
   justify-content: space-around;
   align-content: center;
@@ -52,33 +52,30 @@
   }
 
   .button-delete {
+    display: flex;
     position: absolute;
     right: -5px;
     top: -5px;
     z-index: 2;
     background-color: #DF0101;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     border: 2px white solid;
-    border-radius: 100%;
+    border-radius: 50%;
 
-    &:hover{
-      background-color: red;
-      width: 25px;
-      height: 25px;
-    }
+    align-items: center;
+    justify-content: center;
+
+    transition: .25s all;
 
     img{
-      width: 10px;
-      height: 10px;
-      position: absolute;
-      right: 0;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      margin: auto;
+      color:white;
+      width: 65%;
     }
 
+    &:hover{
+      transform: scale(1.5,1.5);
+    }
   }
 
   &:hover{
