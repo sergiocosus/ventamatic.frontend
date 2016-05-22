@@ -14,7 +14,8 @@ module.exports = function(defaults) {
       '@angular/**/*.js',
       'angular2-jwt/angular2-jwt.js',
       'ng2-bs3-modal/**/*.js',
-      'angular2-notifications/**/*.js'
+      'angular2-notifications/**/*.js',
+      'font-awesome/fonts/*'
     ]
   });
 };

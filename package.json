@@ -24,6 +24,7 @@
     "angular2-notifications": "^0.1.52",
     "bootstrap": "^4.0.0-alpha.2",
     "es6-shim": "^0.35.0",
+    "font-awesome": "^4.6.1",
     "ng2-bs3-modal": "^0.6.0",
     "node-sass": "^3.7.0",
     "reflect-metadata": "0.1.3",
