@@ -22,15 +22,19 @@
       max-height: 75px;
 
       a{
+        position:relative;
         display: flex;
         flex: 1 0 auto;
-        justify-content: center;
+        //justify-content: center;
         align-items: center;
         text-decoration: none;
         color: white;
         background-color: #556A70;
         border-color: black;
-        padding: 5px;
+        padding: 10px;
+        font-weight: bolder;
+
+        transition: .25s all;
 
         &:hover {
           background-color: #758A90;
@@ -40,6 +44,15 @@
           color: #333;
           background-color: #E6E6E6;
           border-color: #ADADAD;
+        }
+
+        span{
+          padding-left: 5%;
+        }
+
+        i{
+          font-size: 1.5em;
+
         }
       }
     }
