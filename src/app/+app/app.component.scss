@@ -1,4 +1,3 @@
-
 header{
   display: flex;
   position: fixed;
@@ -15,14 +14,24 @@ header{
   .btn{
     flex-basis: 25px;
     margin: 5px;
+
+    line-height: 1em;
+    i{
+      float: left;
+    }
   }
 
   picture{
     display: flex;
-    flex: 0 0 100px;    border: 1px solid #082B36;
+    flex: 0 0 100px;
+    border: 1px solid #082B36;
     background-image: url(/images/logo.jpg);
     background-size: contain;
     background-repeat: no-repeat;
+  }
+
+  i{
+    margin-right:.25em;
   }
 
 }
@@ -44,10 +53,8 @@ header{
   height: 100%;
   box-sizing:border-box;
   display: flex;
-  aling-items:stretch;
+  align-items:stretch;
 }
-
-#hidden-bar-div{width: 23%}
 
 #sesion-menu-bar{
   display: flex;
@@ -56,13 +63,13 @@ header{
   .header-texts{
     display: flex;
     background-color: #556A70;
-    margin-left: 5px;
-    margin-right: 5px;
     align-self: stretch;
     align-items: center;
+    margin: 5px;
     padding: 5px;
     border-left: 1px solid black;
     border-right: 1px solid black;
+    border-radius: 5px;
   }
 
 }

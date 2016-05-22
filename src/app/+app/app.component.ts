@@ -54,7 +54,7 @@ export class AppComponent implements OnInit {
     if(!this.authService.isTokenValid()){
       this.router.navigate(['/login']);
     }
-    this.user  = this.authService.getLoggedUser();
+    this.user = this.authService.getLoggedUser();
   }
 
 }

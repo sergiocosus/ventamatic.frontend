@@ -29,7 +29,7 @@
     transition: .25s all;
 
     &[disabled]{
-      background-color: lightgray;
+      background-color: #CCD0DD;
     }
 
     &:not([disabled]){
