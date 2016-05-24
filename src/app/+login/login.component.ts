@@ -3,20 +3,19 @@ import { ROUTER_DIRECTIVES, Router } from '@angular/router'
 import { NotificationsService } from 'angular2-notifications/components'
 
 import { AuthService } from "../services/auth.service";
+import {FloatingLabelComponent} from "../components/floating-label/floating-label.component";
 @Component({
   moduleId: module.id,
   selector: 'app-login',
   templateUrl: 'login.component.html',
   styleUrls: ['login.component.css'],
-  directives: [ROUTER_DIRECTIVES],
+  directives: [ROUTER_DIRECTIVES, FloatingLabelComponent],
   providers: []
 })
 export class LoginComponent implements OnInit {
 
   username:string;
   password:string;
-
-
 
   constructor(
     private router:Router,

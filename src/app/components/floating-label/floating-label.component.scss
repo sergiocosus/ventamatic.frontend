@@ -32,7 +32,7 @@
       background-color: #CCD0DD;
     }
 
-    &:not([disabled]){
+    &:not([disabled]):not(.no-check){
       &.ng-valid[required] {
         border-left: 5px solid #42A948; /* green */
       }
