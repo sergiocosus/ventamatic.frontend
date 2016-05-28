@@ -8,8 +8,8 @@ export class ProductService {
 
   constructor(private apiHttp:ApiHttp) {}
 
-  getAll(){
-    return this.apiHttp.get(this.basePath)
+  getAll(params?:any){
+    return this.apiHttp.get(this.basePath, params)
       .map(this.mapProducts)
       .map(this.parseProducts);
   }
@@ -18,6 +18,12 @@ export class ProductService {
     return this.apiHttp.get(this.basePath + product_id)
       .map(this.mapProduct)
       .map(this.parseProduct);
+  }
+
+  search(words: string){
+    return this.apiHttp.get(this.basePath + 'search',{search:words})
+      .map(this.mapProducts)
+      .map(this.parseProducts);
   }
 
   post(product:Product) {

@@ -13,8 +13,9 @@ export class ApiHttp {
     this.authHttp.setGlobalHeaders(headers, request);
   }
 
-  get(url:string, options?:RequestOptionsArgs):Observable<any> {
-    return this.authHttp.get(this.apiUrl + url, options)
+  get(url:string, data?:any, options?:RequestOptionsArgs):Observable<any> {
+    var params = this.serializeGetParams(data);
+    return this.authHttp.get(this.apiUrl + url + params, options)
       .map(this.mapJson);
   }
 
@@ -44,9 +45,23 @@ export class ApiHttp {
   }
 
   private mapJson(res:Response):any{
-    return res.json();
+    return res.json().data;
   }
 
+  private serializeGetParams(object:any):string {
+    if (!object) {
+      return "";
+    }
+
+    var str = "?";
+    for (var key in object) {
+      if (str != "") {
+        str += "&";
+      }
+      str += key + "=" + encodeURIComponent(object[key]);
+    }
+    return str;
+  }
 }
 
 

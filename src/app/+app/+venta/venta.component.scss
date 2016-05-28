@@ -1,0 +1,48 @@
+main-content{
+  display: flex;
+}
+
+$tableBackgroundColor : #3498DB;
+$tableHeaderBackgroundColor : #3498DB;
+
+.control{
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+
+  background-color: #2ECC71;
+  margin: 1em;
+  padding: 1em;
+  border-radius: 1em;
+
+  .product{
+    color: white;
+  }
+}
+
+.products{
+  flex: 1 0 0;
+  background-color: $tableBackgroundColor;
+  color: white;
+  padding: 1em;
+  margin: 1em;
+  border-radius: 1em;
+  table{
+    width: 100%;
+    thead{
+      background-color: $tableHeaderBackgroundColor
+
+    }
+
+    td,th{
+      padding: .5em;
+      border: 1px solid lighten($tableBackgroundColor, 10%)
+    }
+  }
+}
+
+
+
+input{
+  color: #2b2d2f;
+}

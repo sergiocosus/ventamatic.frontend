@@ -9,8 +9,11 @@ export class Product{
   created_at:string;
   updated_at:string;
   deleted_at:string;
-
-
+  
+  get price(){
+    return this.global_price;
+  }
+  
   parse(obj){
     for (var prop in obj) this[prop] = obj[prop];
     

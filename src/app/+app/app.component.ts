@@ -14,6 +14,7 @@ import { ReportesComponent } from './+reportes';
 import { RolesComponent } from './+roles';
 import { SucursalesComponent } from './+sucursales';
 import { AsideNavComponent } from "./shared/aside-nav/aside-nav.component";
+import {ProductService} from "../shared/product/product.service";
 
 @Component({
   moduleId: module.id,
@@ -21,7 +22,7 @@ import { AsideNavComponent } from "./shared/aside-nav/aside-nav.component";
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
   directives: [ROUTER_DIRECTIVES, AsideNavComponent],
-  providers: [UserService]
+  providers: [UserService, ProductService]
 
 })
 @Routes([
@@ -53,8 +54,9 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     if(!this.authService.isTokenValid()){
       this.router.navigate(['/login']);
+    }else{
+      this.user = this.authService.getLoggedUser();
     }
-    this.user = this.authService.getLoggedUser();
   }
 
 }

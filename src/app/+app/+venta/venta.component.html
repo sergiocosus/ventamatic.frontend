@@ -1,3 +1,95 @@
-<p>
-  venta works!
-</p>
+<main-content>
+  <div class="control">
+    <div class="client">
+      <floating-label [label]="'ID de cliente'">
+        <input type="number" [(ngModel)]="client_id"/>
+      </floating-label>
+    </div>
+
+    <div class="search">
+      <floating-label [label]="'Código de barras'">
+        <input type="text" [(ngModel)]="bar_code" (keyup)="barCodeEntered($event)"/>
+      </floating-label>
+      <floating-label [label]="'Busqueda'">
+        <input type="text" [(ngModel)]="search_words" (keyup)="searchEntered(search_words)"/>
+      </floating-label>
+      <floating-label [label]="'ID'">
+        <input type="number" min="1" step="1"
+               [(ngModel)]="product_id"
+               (keyup)="idEntered($event)" />
+      </floating-label>
+    </div>
+
+    <div class="product">
+      <picture></picture>
+      <div class="product-data">
+          <div>{{product && product.description}}</div>
+          <div>{{product && product.global_price | currency:'USD':true:'1.2-2'}}</div>
+          <input type="number" [(ngModel)]="quantity"/>
+          <div>{{subtotal}}</div>
+        <button
+          class="btn btn-primary"
+          (click)="addProduct()">Agregar Producto</button>
+      </div>
+    </div>
+
+    <div class="finish">
+      <floating-label [label]="'Pago:'">
+        <input type="number" [(ngModel)]="client_payment"/>
+      </floating-label>
+      <button
+        class="btn btn-success">Finalizar Venta</button>
+      <button
+        class="btn btn-danger">Cancelar Venta</button>
+    </div>
+  </div>
+
+
+  <div class="products">
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>Precio</th>
+        <th>Cantidad</th>
+        <th>Subtotal</th>
+        <th>Modificar</th>
+        <th>Eliminar</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let productSale of addedProducts">
+        <td>{{productSale.product.id}}</td>
+        <td>{{productSale.product.description}}</td>
+        <td>{{productSale.product.price | currency:'USD':true:'1.2-2'}}</td>
+        <td>
+          <input type="number" [(ngModel)]="productSale.quantity"/>
+        </td>
+        <td>{{productSale.quantity * productSale.product.price | currency:'USD':true:'1.2-2'}}</td>
+        <td>M</td>
+        <td>E</td>
+      </tr>
+      </tbody>
+
+      <tfoot>
+      <tr>
+        <td colspan="3"></td>
+        <td>Total</td>
+        <td>{{total | currency:'USD':true:'1.2-2'}}</td>
+      </tr>
+      <tr>
+        <td colspan="3"></td>
+        <td>Pago</td>
+        <td>{{client_payment | currency:'USD':true:'1.2-2'}}</td>
+      </tr>
+      <tr>
+        <td colspan="3"></td>
+        <td>Cambio</td>
+        <td>{{client_payment - total | currency:'USD':true:'1.2-2'}}</td>
+      </tr>
+      </tfoot>
+
+    </table>
+  </div>
+</main-content>
