@@ -4,7 +4,7 @@ import {ModalComponent, MODAL_DIRECTIVES} from "ng2-bs3-modal/ng2-bs3-modal";
 import {SupplierService} from "../shared/supplier.service";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {FloatingLabelComponent} from "../../../components/floating-label";
-import {CrudModalComponent} from "../../../components/crud-modal/crud-modal.component";
+import {CrudModalComponent} from "../../../components/crud-modal";
 
 @Component({
   moduleId: module.id,

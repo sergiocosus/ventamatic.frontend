@@ -73,5 +73,16 @@ export abstract class CrudModalComponent {
     this.close();
     this.notification.success('Éxito', `${this.name} eliminado`);
   }
+
+  submit(){
+    if(this.createMode) this.create();
+    if(this.updateMode) this.update();
+    if(this.deleteMode) this.delete();
+  }
+
+  abstract create();
+  abstract update();
+  abstract delete();
+
 }
 

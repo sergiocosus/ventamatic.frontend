@@ -46,12 +46,13 @@ const barrels: string[] = [
   'app/+app/+usuarios/user-item',
   'app/+app/+usuarios/user-modal',
   'app/+app/+venta',
-  'app/shared',
   'app/+app/shared/aside-nav',
   'app/+app/shared/search-bar',
-  'app/components/person-item',
   'app/components/floating-label',
+  'app/components/person-item',
+  'app/components/crud-modal',
   'app/floating-label',
+  'app/shared',
   'app/shared/main-content',
   /** @cli-barrel */
 ];

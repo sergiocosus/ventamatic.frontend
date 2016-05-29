@@ -4,6 +4,7 @@ import {NotificationsService} from "angular2-notifications/lib/notifications.ser
 import {FloatingLabelComponent} from "../../../components/floating-label";
 import {UserService} from "../../../user/user.service";
 import {User} from "../../../user/user";
+import {CrudModalComponent} from "../../../components/crud-modal";
 
 
 @Component({
@@ -13,76 +14,48 @@ import {User} from "../../../user/user";
   styleUrls: ['user-modal.component.css'],
   directives: [MODAL_DIRECTIVES, FloatingLabelComponent]
 })
-export class UserModalComponent implements OnInit {
-  @ViewChild(ModalComponent) private modal:ModalComponent;
+export class UserModalComponent extends CrudModalComponent {
+  @ViewChild(ModalComponent) protected modal:ModalComponent;
 
-  @Output() created = new EventEmitter();
-  @Output() updated = new EventEmitter();
-  @Output() deleted = new EventEmitter();
+  @Output() created;
+  @Output() updated;
+  @Output() deleted;
 
-  updateMode:boolean = false;
-  createMode:boolean = false;
-  deleteMode:boolean = false;
-  locked: boolean = false;
+  name = 'Usuario';
+
   user: User;
 
-  
   password_confirm:string;
 
-  constructor(private userService:UserService,
-              private notification:NotificationsService) {}
+  constructor(protected userService:UserService,
+              protected notification:NotificationsService) {
+    super(notification);
+  }
 
   ngOnInit() {
   }
 
   openCreate(){
     this.user = new User();
-    this.createMode = true;
-    this.updateMode = false;
-    this.deleteMode = false;
-    this.unlock();
-    this.modal.open();
+    super.openCreate();
   }
 
   openUpdate(user:User){
     this.user = user;
-    this.createMode = false;
-    this.updateMode = true;
-    this.deleteMode = false;
-    this.lock();
-    this.modal.open();
+    super.openUpdate(user);
   }
 
   openDelete(user:User){
     this.user = user;
-    this.createMode = false;
-    this.updateMode = false;
-    this.deleteMode = true;
-    this.unlock();
-    this.modal.open();
+    super.openDelete(user)
   }
 
-  lock(){
-    this.locked = true;
-  }
-
-  unlock(){
-    this.locked = false;
-  }
-  
-  submit(){
-    if(this.createMode) this.create();
-    if(this.updateMode) this.update();
-    if(this.deleteMode) this.delete();
-  }
 
   create(){
     if(this.user.password ==this.password_confirm){
-      this.userService.post(this.user).subscribe(user => {
-        this.created.emit(user);
-        this.close();
-        this.notification.success('Éxito', 'Usuario creado');
-      });
+      this.userService.post(this.user).subscribe(
+        user => this.createdSuccess(user)
+      );
     } else{
       this.notification.error('Error','Las contraseñas no coinciden');
     }
@@ -90,25 +63,16 @@ export class UserModalComponent implements OnInit {
 
   update(){
     this.userService.put(this.user).subscribe(user=> {
-      this.updated.emit(user);
-      this.close();
-      this.notification.success('Éxito', 'Usuario modificado');
+      this.updatedSuccess(user);
     });
   }
 
   delete(){
     this.userService.delete(this.user.id).subscribe( response => {
       if(response.success){
-        this.deleted.emit(this.user);
-        this.close();
-        this.notification.success('Éxito', 'Usuario eliminado');
+        this.deletedSuccess(this.user);
       }
     });
   }
-
-  close(){
-    this.modal.close();
-  }
-
 
 }

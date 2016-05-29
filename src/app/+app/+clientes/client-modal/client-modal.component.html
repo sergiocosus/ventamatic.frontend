@@ -4,7 +4,7 @@
     <h4 *ngIf="updateMode"> Editar Cliente </h4>
     <h4 *ngIf="deleteMode"> Eliminar Cliente </h4>
   </modal-header>
-  <form>
+  <form (ngSubmit)="submit()">
     <modal-body *ngIf="!deleteMode && client">
       <floating-label [label]="'Id'" *ngIf="updateMode" >
         <input type="text" [(ngModel)]="client.id" disabled="disabled"/>
@@ -39,25 +39,21 @@
               type="submit" class="btn btn-danger pull-xs-left"
               (click)="unlock()" >
         <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-
         Editar Cliente
       </button>
       <button *ngIf="createMode"
               type="submit"
-              class="btn btn-success"
-              (click)="create()">
+              class="btn btn-success" >
         Crear Cliente
       </button>
       <button *ngIf="updateMode && !locked"
               type="submit"
-              class="btn btn-success"
-              (click)="update()" >
+              class="btn btn-success" >
         Actualizar Cliente
       </button>
       <button *ngIf="deleteMode && !locked"
               type="submit"
-              class="btn btn-danger"
-              (click)="delete()" >
+              class="btn btn-danger" >
         Eliminar Cliente
       </button>
       <button type="button"
