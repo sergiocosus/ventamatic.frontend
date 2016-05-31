@@ -26,6 +26,12 @@ export class ProductService {
       .map(this.parseProducts);
   }
 
+  getByBarCode(bar_code: string){
+    return this.apiHttp.get(this.basePath + 'bar-code',{bar_code:bar_code})
+      .map(this.mapProduct).map(this.parseProduct)
+      ;
+  }
+
   post(product:Product) {
     return this.apiHttp.post(this.basePath,product)
       .map(this.mapProduct)
