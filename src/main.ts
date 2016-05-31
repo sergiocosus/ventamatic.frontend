@@ -19,10 +19,10 @@ bootstrap(VentamaticFrontendAppComponent,
     provide(AuthHttp, {
       useFactory: (http) => {
         return new AuthHttp(new AuthConfig({
-          globalHeaders: [{
-            'Content-Type':'application/json',
-            'Accept':'application/json'
-          }],
+          globalHeaders: [
+            { 'Content-Type':'application/json' },
+            { 'Accept':'application/json' }
+          ],
         }), http);
       },
       deps: [Http]
