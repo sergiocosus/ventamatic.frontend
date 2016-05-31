@@ -15,7 +15,7 @@ export class ClientService {
 
   get(client_id:number) {
     return this.apiHttp.get(this.basePath + client_id)
-      .map(res => {return <Client>res.client});
+      .map(res => {return new Client().parse(res.client)});
   }
 
   post(clie:Client){
