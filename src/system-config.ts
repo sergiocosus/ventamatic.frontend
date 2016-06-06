@@ -54,6 +54,8 @@ const barrels: string[] = [
   'app/floating-label',
   'app/shared',
   'app/shared/main-content',
+  'app/+app/+venta/select-branch',
+  'app/+app/+venta/sale',
   /** @cli-barrel */
 ];
 

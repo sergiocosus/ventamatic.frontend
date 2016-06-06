@@ -13,8 +13,10 @@ module.exports = function(defaults) {
       'rxjs/**/*.js',
       '@angular/**/*.js',
       'angular2-jwt/angular2-jwt.js',
-      'ng2-bs3-modal/**/*.js',
       'angular2-notifications/**/*.js',
+      'jquery/dist/jquery.min.js',
+      'bootstrap/dist/js/bootstrap.min.js',
+      'ng2-bs3-modal/**/*.js',
       'font-awesome/fonts/*'
     ]
   });
