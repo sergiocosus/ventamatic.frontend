@@ -1,0 +1,193 @@
+@import "src/app/colors";
+:host{
+  display: flex;
+  floating-label{
+    input{
+      background-color: $darkBlue;
+      color: white;
+
+    }
+    label{
+      color: white !important;
+    }
+  }
+}
+
+.control{
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  color: white;
+  margin: 1em;
+  padding: 1em;
+
+  border-right: white 2px dashed;
+  line-height: 1em;
+  text-align: center;
+  h4, h6{
+    text-align: center;
+  }
+
+  h5{
+    margin: 0;
+    font-size: 1em;
+    text-align: center;
+  }
+
+  hr{
+    border-color: lighten($mainContentBackgroundColor, 10%);
+  }
+
+  .branch{
+    flex: 0 0 auto;
+  }
+
+  .client{
+  }
+  .product{
+    color: white;
+  }
+  .search{
+    .search-list{
+      position: absolute;
+      top: 100%;
+      left: 0;
+      max-height: 50vh;
+      border-radius: 1em;
+      list-style: none;
+      margin: 0;
+      overflow-y: auto;
+      z-index: 10;
+      background-color: $darkBlue;
+      tr{
+        border-bottom: 1px solid steelblue;
+
+        &:hover{
+          background-color: $hoverBlue;;
+          cursor: pointer;
+        }
+
+        td{
+          padding: .2em;
+        }
+      }
+
+    }
+  }
+}
+
+
+
+
+
+.products{
+  flex: 2 0 0;
+
+  color: white;
+  padding: 1em;
+  margin: 1em;
+  border-radius: 1em;
+
+
+  table{
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+
+    td,th{
+      padding: .5em;
+      &.align-right{
+        text-align: right;
+      }
+    }
+
+    tr{
+      td{
+        background-color: #082B36;
+      }
+      :hover td{
+        background-color: #06495E ;
+      }
+    }
+
+    tr:hover td{
+      background-color: #06495E ;
+    }
+
+    thead{
+      tr{
+        color: #fff;
+        td{
+          border: 2px #082B36 solid;
+          text-align: center;
+        }
+      }
+    }
+
+    tbody{
+      color: white;
+
+      tr{
+        border-radius: 5px;
+        position: relative;
+
+        td:first-child{
+          border-top-left-radius: .5em;
+          border-bottom-left-radius: .5em;
+        }
+
+        td:last-child{
+          border-top-right-radius: .5em;
+          border-bottom-right-radius: .5em;
+          position: relative;
+        }
+
+        td{
+          border: 1px white solid;
+          padding-left: 3px;
+          input{
+            width: 5em;
+          }
+        }
+      }
+
+
+      .button-delete {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: absolute;
+        right: -.5em;
+        top: -.5em;
+
+        height: 1.3em;
+        width: 1.3em;
+
+        border: 2px white solid;
+        border-radius: 50%;
+        transition: all .25s;
+        background-color: #DF0101;
+        &:hover{
+          transform: scale(1.75, 1.75);
+          background-color: red;
+        }
+
+        i{
+          margin-bottom: 0.1em;
+        }
+      }
+    }
+  }
+
+}
+
+
+
+input{
+  color: #2b2d2f;
+}
+
+.error{
+  color: #d9534f;
+}

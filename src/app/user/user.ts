@@ -1,4 +1,5 @@
-export class User {
+import {Model} from "../shared/model";
+export class User extends Model{
   public id:number;
   public name:string;
   public email:string;
@@ -12,19 +13,11 @@ export class User {
   public address:string;
   public rfc:string;
   public deleted_at:string;
-  
+
   public password;
-
-  constructor( ){}
-
+  
   get fullName(){
     return `${this.name} ${this.last_name} ${this.last_name_2}`;
-  }
-
-  parse(obj){
-    for (var prop in obj) this[prop] = obj[prop];
-
-    return this;
   }
 
   public static parseArray(objs:any){

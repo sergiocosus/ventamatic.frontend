@@ -1,0 +1,134 @@
+<div class="control">
+  <div *ngIf="branch">
+    <h6>Sucursal</h6>
+    <h4>
+       {{branch.name}}
+    </h4>
+    <hr/>
+  </div>
+  <div class="client">
+    <h5>Cliente</h5>
+    <floating-label [label]="'ID de cliente'">
+      <input type="number" [(ngModel)]="client_id"
+             (change)="updateClient()"
+             (keyup)="updateClient()"/>
+      <table class="search-list">
+        <tr *ngFor="let client of clientSuggestions" (click)="selectClient(client)">
+          <td>{{client.id}}</td>
+          <td>{{client.name}}</td>
+        </tr>
+      </table>
+    </floating-label>
+    <div>
+      <span class="error" *ngIf="client_status">{{client_status}}</span>
+      <span *ngIf="!client_status">{{client && client.fullName}}</span>
+    </div>
+    <hr/>
+  </div>
+
+
+
+  <div class="search">
+    <h5>Producto</h5>
+    <floating-label [label]="'Por Código de barras'">
+      <input type="text" [(ngModel)]="bar_code" (keyup)="barCodeEntered($event)"/>
+    </floating-label>
+    <floating-label [label]="'Buscar por descripción'">
+      <input type="text" [(ngModel)]="search_words" (keyup)="searchEntered($event)"/>
+      <table class="search-list">
+        <tr *ngFor="let product of productSuggestions" (click)="addProduct(product)">
+          <td>{{product.description}}</td>
+          <td>{{product.price}}</td>
+        </tr>
+        <li *ngIf=""></li>
+      </table>
+    </floating-label>
+
+    <floating-label [label]="'Por ID'">
+      <input type="number" min="1" step="1"
+             [(ngModel)]="product_id"
+             (keyup)="idEntered($event)" />
+    </floating-label>
+    <hr/>
+  </div>
+
+  <div class="finish">
+    <h5>Tipo de pago:</h5>
+    <br>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-primary active">
+        <input type="radio" [(ngModel)]="payment_type_cash" checked>
+        Efectivo
+      </label>
+      <label class="btn btn-primary">
+        <input type="radio" [(ngModel)]="payment_type_card">
+        Tarjeta
+      </label>
+    </div>
+
+    <floating-label [label]="'Pago:'">
+      <input type="number" [(ngModel)]="clientPayment"/>
+    </floating-label>
+    <button
+      class="btn btn-success btn-block"
+      (click)="finish()">Finalizar Venta</button>
+    <button
+      class="btn btn-danger btn-block"
+      (click)="clear()">Cancelar Venta</button>
+  </div>
+</div>
+
+
+<div class="products">
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Descripción</th>
+      <th>Precio</th>
+      <th>Cantidad</th>
+      <th>Subtotal</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let productSale of addedProducts">
+      <td>{{productSale.product.id}}</td>
+      <td>{{productSale.product.description}}</td>
+      <td class="align-right">{{productSale.product.price | currency:'USD':true:'1.2-2'}}</td>
+      <td>
+        <input type="number" [(ngModel)]="productSale.quantity"/>
+      </td>
+      <td class="align-right">
+        {{productSale.quantity * productSale.product.price
+          | currency:'USD':true:'1.2-2'}}
+        <span class="button-delete"
+              (click)="removeProduct(productSale)">
+            <i class="fa fa-times" ></i>
+        </span>
+
+      </td>
+    </tr>
+    </tbody>
+
+    <tfoot>
+    <tr>
+      <td colspan="3"></td>
+      <td>Total</td>
+      <td class="align-right">
+        {{total | currency:'USD':true:'1.2-2'}}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+      <td>Pago</td>
+      <td class="align-right">{{clientPayment | currency:'USD':true:'1.2-2'}}</td>
+    </tr>
+    <tr>
+      <td colspan="3"></td>
+      <td>Cambio</td>
+      <td class="align-right">{{clientPayment - total | currency:'USD':true:'1.2-2'}}</td>
+    </tr>
+    </tfoot>
+
+  </table>
+</div>

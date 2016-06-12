@@ -1,0 +1,7 @@
+<ul>
+  <li *ngFor="let branch of branches">
+    <a [routerLink]="['/app/venta/'+branch.id]">
+      {{branch.name}}
+    </a>
+  </li>
+</ul>

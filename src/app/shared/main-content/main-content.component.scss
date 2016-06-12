@@ -1,9 +1,11 @@
+@import "src/app/colors";
+
 :host{
   display: flex;
   flex-wrap: wrap;
   flex: 1 0 auto;
   flex-direction: row;
-  background-color: #556A70;
+  background-color: $mainContentBackgroundColor;
   margin: 5px;
   min-height: 170px;
   overflow-y: visible;

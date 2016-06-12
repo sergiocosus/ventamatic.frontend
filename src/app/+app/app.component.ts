@@ -16,6 +16,7 @@ import { SucursalesComponent } from './+sucursales';
 import { AsideNavComponent } from "./shared/aside-nav/aside-nav.component";
 import {ProductService} from "../shared/product/product.service";
 import {ClientService} from "./+clientes/shared/client.service";
+import {BranchService} from "./+sucursales/shared/branch.service";
 
 @Component({
   moduleId: module.id,
@@ -23,7 +24,12 @@ import {ClientService} from "./+clientes/shared/client.service";
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
   directives: [ROUTER_DIRECTIVES, AsideNavComponent],
-  providers: [UserService, ProductService, ClientService]
+  providers: [
+    UserService,
+    ProductService,
+    ClientService,
+    BranchService,
+  ]
 
 })
 @Routes([
