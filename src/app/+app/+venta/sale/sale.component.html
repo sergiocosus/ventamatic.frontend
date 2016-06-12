@@ -13,7 +13,8 @@
              (change)="updateClient()"
              (keyup)="updateClient()"/>
       <table class="search-list">
-        <tr *ngFor="let client of clientSuggestions" (click)="selectClient(client)">
+        <tr *ngFor="let client of clientSuggestions"
+            (click)="selectClient(client)">
           <td>{{client.id}}</td>
           <td>{{client.name}}</td>
         </tr>
@@ -34,13 +35,27 @@
       <input type="text" [(ngModel)]="bar_code" (keyup)="barCodeEntered($event)"/>
     </floating-label>
     <floating-label [label]="'Buscar por descripción'">
-      <input type="text" [(ngModel)]="search_words" (keyup)="searchEntered($event)"/>
-      <table class="search-list">
-        <tr *ngFor="let product of productSuggestions" (click)="addProduct(product)">
+      <input type="text"
+             [(ngModel)]="search_words"
+             [ngFormControl]="barCodeControl"
+             (keyup)="searchEntered($event)"
+             (focus)="showSearch()"
+             (blur)="hideSearch()"
+      />
+      <table class="search-list" [hidden]="searchHidden || !search_words.length">
+        <tr *ngFor="let product of productSuggestions; let i=index"
+            (click)="addProduct(product)"
+            [ngClass]="{selected:searchIndexSelection == i}"
+        >
           <td>{{product.description}}</td>
           <td>{{product.price}}</td>
         </tr>
-        <li *ngIf=""></li>
+        <tr class="empty" *ngIf="!productSuggestions.length && !searching">
+          <td>No hay resultados</td>
+        </tr>
+        <tr class="searching" *ngIf="searching">
+          <td><i class="fa fa-spinner fa-spin"></i> Buscando</td>
+        </tr>
       </table>
     </floating-label>
 
@@ -67,7 +82,7 @@
     </div>
 
     <floating-label [label]="'Pago:'">
-      <input type="number" [(ngModel)]="clientPayment"/>
+      <input type="number" min="0" [(ngModel)]="clientPayment"/>
     </floating-label>
     <button
       class="btn btn-success btn-block"
@@ -96,7 +111,7 @@
       <td>{{productSale.product.description}}</td>
       <td class="align-right">{{productSale.product.price | currency:'USD':true:'1.2-2'}}</td>
       <td>
-        <input type="number" [(ngModel)]="productSale.quantity"/>
+        <input type="number" min="1" [(ngModel)]="productSale.quantity"/>
       </td>
       <td class="align-right">
         {{productSale.quantity * productSale.product.price

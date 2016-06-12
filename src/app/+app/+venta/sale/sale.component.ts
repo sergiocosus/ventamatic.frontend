@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {OnActivate, RouteSegment, RouteTree} from "@angular/router";
+import { Control } from "@angular/common";
+import { OnActivate, RouteSegment, RouteTree } from "@angular/router";
+
 import {BranchService} from "../../+sucursales/shared/branch.service";
 import {Branch} from "../../+sucursales/shared/branch";
 import {Product} from "../../../shared/product/product";
@@ -31,7 +33,11 @@ export class SaleComponent implements OnActivate {
   client:Client;
   client_status:string;
   bar_code:string;
-  search_words:string;
+  barCodeControl:Control = new Control();
+  search_words:string = "";
+  searchIndexSelection:number = 0;
+  searchHidden:boolean = true;
+  searching:boolean = false;
 
   product_id:number;
   clientPayment:number = 0;
@@ -43,7 +49,12 @@ export class SaleComponent implements OnActivate {
               private clientService:ClientService,
               private notificationService:NotificationsService,
               private saleService:SaleService,
-              private branchService:BranchService) {}
+              private branchService:BranchService) {
+    this.barCodeControl.valueChanges.debounceTime(250).distinctUntilChanged()
+      .subscribe(value => {
+        this.search(value)
+      });
+  }
 
   routerOnActivate(curr:RouteSegment,RouteSegment, currTree?: RouteTree, prevTree?: RouteTree):void {
     this.branch_id = +curr.getParam('branch_id');
@@ -76,27 +87,50 @@ export class SaleComponent implements OnActivate {
         error => this.client_status = 'El cliente no existe'
       );
     } else {
-      
+
     }
 
   }
 
   search(words){
-    this.productService.search(words)
-      .subscribe(products => this.productSuggestions = products)
+    if(words.length){
+      this.productService.search(words)
+        .subscribe(products => {
+          this.productSuggestions = products;
+          this.searchIndexSelection = 0;
+          this.searching = false;
+        })
+    } else {
+      this.clearSearch();
+    }
+  }
+
+  clearSearch(){
+    this.productSuggestions = [];
+    this.searchIndexSelection = 0;
+    this.searching = false;
+  }
+
+  showSearch(){
+    this.searchHidden = false;
+  }
+
+  hideSearch(){
+    setTimeout(()=> this.searchHidden = true, 100)
   }
 
   barCodeEntered($event){
     if($event.keyIdentifier=='Enter'){
       if(this.bar_code && this.bar_code.length){
-        this.productService.getByBarCode(this.bar_code).subscribe(product => {
-          if(product){
+        this.productService.getByBarCode(this.bar_code).subscribe(
+          product => {
             this.addProduct(product);
-          } else {
-            this.notificationService.alert(
-              'Alerta','El producto no se encuentra registrado');
+          },
+          error => {
+            this.notificationService.error(
+              'Error', error.message);
           }
-        });
+        );
       } else {
         this.notificationService.alert('Alerta','El código de barras se encuentra vacío');
       }
@@ -119,11 +153,25 @@ export class SaleComponent implements OnActivate {
   searchEntered($event) {
     if ($event.code == 'Enter') {
       if(this.productSuggestions.length){
-        this.addProduct(this.productSuggestions[0]);
+        this.addProduct(this.productSuggestions[this.searchIndexSelection]);
       }
+    } else if($event.code == 'ArrowUp'){
+      if(this.searchIndexSelection > 0){
+        this.searchIndexSelection--;
+      }
+    } else if($event.code == 'ArrowDown'){
+      if(this.searchIndexSelection <= this.productSuggestions.length){
+        this.searchIndexSelection++;
+      }
+    } else if($event.code == 'Escape'){
+      this.clearSearch();
     } else {
-      this.search(this.search_words);
+      this.searching = true;
+      this.productSuggestions = [];
     }
+
+    console.log($event.code);
+
   }
 
   addProduct(product:Product){
@@ -159,6 +207,12 @@ export class SaleComponent implements OnActivate {
   }
 
   finish(){
+    if(!this.client){
+      this.notificationService.error(
+        'Error', 'No se ha seleccionado un cliente válido'
+      );
+      return
+    }
     if(!this.addedProducts.length){
       this.notificationService.error(
         'Error','No se han agregado productos');
@@ -169,6 +223,7 @@ export class SaleComponent implements OnActivate {
         'Error','El pago es inferior al monto Total');
       return;
     }
+
 
     var payment_type_id;
 
