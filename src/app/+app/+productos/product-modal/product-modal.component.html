@@ -1,0 +1,60 @@
+<modal>
+  <modal-header [show-close]="true">
+    <h4 *ngIf="createMode"> Añadir Producto </h4>
+    <h4 *ngIf="updateMode"> Editar Producto </h4>
+    <h4 *ngIf="deleteMode"> Eliminar Producto </h4>
+  </modal-header>
+  <form (ngSubmit)="submit()">
+    <modal-body *ngIf="!deleteMode && product">
+      <!--<floating-label [label]="'ID'">
+        <input type="text" required
+               [(ngModel)]="product.id"
+               [disabled]="updateMode"/>
+      </floating-label>-->
+      <floating-label [label]="'Description'" required>
+        <input type="text" [(ngModel)]="product.description" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Marca'">
+        <input type="text" [(ngModel)]="product.brand" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Precio Global'">
+        <input type="text" [(ngModel)]="product.global_price" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Mínimo global'">
+        <input type="text" [(ngModel)]="product.global_minimum" [disabled]="locked"/>
+      </floating-label>
+      <floating-label ngif="product.unit" [label]="'Unidad'">
+        <input type="text" [(ngModel)]="product.unit" [disabled]="locked"/>
+      </floating-label>
+    </modal-body>
+    <modal-footer>
+      <button *ngIf="locked"
+              type="submit" class="btn btn-danger pull-xs-left"
+              (click)="unlock()" >
+        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+        Editar Usuario
+      </button>
+      <button *ngIf="createMode"
+              type="submit"
+              class="btn btn-success">
+        Crear Usuario
+      </button>
+      <button *ngIf="updateMode && !locked"
+              type="submit"
+              class="btn btn-success">
+        Actualizar Usuario
+      </button>
+      <button *ngIf="deleteMode && !locked"
+              type="submit"
+              class="btn btn-danger">
+        Eliminar Usuario
+      </button>
+      <button type="button"
+              class="btn btn-primary"
+              (click)="close()">
+        Cerrar
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+

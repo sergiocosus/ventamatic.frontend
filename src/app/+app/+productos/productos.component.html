@@ -1,3 +1,59 @@
 <search-bar>
-  Productos works!
+  <div>
+    <input type="text" placeholder="ID"/>
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </div>
+  <div>
+    <input type="text" placeholder="Descripción"/>
+    <i class="fa fa-search" aria-hidden="true"></i>
+  </div>
+  <button class="btn btn-default" (click)="clickCreate(product)">
+    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+    Agregar Producto
+  </button>
 </search-bar>
+<main-content>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Descripción</th>
+      <th>Categoría</th>
+      <th>Marca</th>
+      <th>Mínimo Global</th>
+      <th>Precio Global</th>
+      <th>Unidad</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let product of products">
+      <td (click)="clickUpdate(product)">{{product.id}}</td>
+      <td (click)="clickUpdate(product)">{{product.description}}</td>
+      <td (click)="clickUpdate(product)">
+        <span *ngIf="product.category">
+          {{product.category.name}}
+        </span>
+      </td>
+      <td (click)="clickUpdate(product)">
+        <span *ngIf="product.brand">
+          {{product.brand.name}}
+        </span>
+      </td>
+      <td (click)="clickUpdate(product)">{{product.global_minimum}}</td>
+      <td (click)="clickUpdate(product)">{{product.global_price}}</td>
+      <td (click)="clickUpdate(product)">
+        <span *ngIf="product.unit">
+          {{product.unit.name}}
+        </span>
+      </td>
+      <td>
+        <div class="button-delete" (click)="clickDelete(product)">
+          <img src="images/remove.svg">
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</main-content>
+<product-modal></product-modal>

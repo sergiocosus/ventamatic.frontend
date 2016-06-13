@@ -35,6 +35,7 @@ export class AutocompleteInputComponent implements OnInit {
   }
 
   searchEntered($event) {
+    console.log($event);
     if ($event.code == 'Enter') {
       if(this.elementSuggestions.length){
         this.emitElement(this.elementSuggestions[this.searchIndexSelection]);
