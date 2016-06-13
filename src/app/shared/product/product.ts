@@ -20,6 +20,13 @@ export class Product{
     return this;
   }
   
+  get searchFields(){
+    return [
+      this.description,
+      this.price,
+    ]
+  }
+  
   public static parseArray(objs:any){
     return objs.map(obj => {return new Product().parse(obj)})
   } 

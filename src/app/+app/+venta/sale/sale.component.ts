@@ -12,18 +12,21 @@ import {ProductService} from "../../../shared/product/product.service";
 import {Client} from "../../+clientes/shared/client";
 import {MainContentComponent} from "../../../shared/main-content/main-content.component";
 import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
+import {AutocompleteInputComponent} from "../../../components/autocomplete-input/autocomplete-input.component";
 
 @Component({
   moduleId: module.id,
   selector: 'app-sale',
   templateUrl: 'sale.component.html',
   styleUrls: ['sale.component.css'],
-  directives: [FloatingLabelComponent,
-    MainContentComponent],
+  directives: [
+    FloatingLabelComponent,
+    MainContentComponent,
+    AutocompleteInputComponent,
+  ],
   providers: [SaleService]
 })
 export class SaleComponent implements OnActivate {
-  productSuggestions:Product[] = [];
   addedProducts:ProductSale[] = [];
 
   branch:Branch;
@@ -33,11 +36,7 @@ export class SaleComponent implements OnActivate {
   client:Client;
   client_status:string;
   bar_code:string;
-  barCodeControl:Control = new Control();
-  search_words:string = "";
-  searchIndexSelection:number = 0;
-  searchHidden:boolean = true;
-  searching:boolean = false;
+
 
   product_id:number;
   clientPayment:number = 0;
@@ -45,15 +44,13 @@ export class SaleComponent implements OnActivate {
   payment_type_card:boolean;
   payment_type:number;
 
+  searchMethod;
   constructor(private productService:ProductService,
               private clientService:ClientService,
               private notificationService:NotificationsService,
               private saleService:SaleService,
               private branchService:BranchService) {
-    this.barCodeControl.valueChanges.debounceTime(250).distinctUntilChanged()
-      .subscribe(value => {
-        this.search(value)
-      });
+    this.searchMethod = (words) => this.productService.search(words);
   }
 
   routerOnActivate(curr:RouteSegment,RouteSegment, currTree?: RouteTree, prevTree?: RouteTree):void {
@@ -92,32 +89,6 @@ export class SaleComponent implements OnActivate {
 
   }
 
-  search(words){
-    if(words.length){
-      this.productService.search(words)
-        .subscribe(products => {
-          this.productSuggestions = products;
-          this.searchIndexSelection = 0;
-          this.searching = false;
-        })
-    } else {
-      this.clearSearch();
-    }
-  }
-
-  clearSearch(){
-    this.productSuggestions = [];
-    this.searchIndexSelection = 0;
-    this.searching = false;
-  }
-
-  showSearch(){
-    this.searchHidden = false;
-  }
-
-  hideSearch(){
-    setTimeout(()=> this.searchHidden = true, 100)
-  }
 
   barCodeEntered($event){
     if($event.keyIdentifier=='Enter'){
@@ -150,29 +121,6 @@ export class SaleComponent implements OnActivate {
     }
   }
 
-  searchEntered($event) {
-    if ($event.code == 'Enter') {
-      if(this.productSuggestions.length){
-        this.addProduct(this.productSuggestions[this.searchIndexSelection]);
-      }
-    } else if($event.code == 'ArrowUp'){
-      if(this.searchIndexSelection > 0){
-        this.searchIndexSelection--;
-      }
-    } else if($event.code == 'ArrowDown'){
-      if(this.searchIndexSelection <= this.productSuggestions.length){
-        this.searchIndexSelection++;
-      }
-    } else if($event.code == 'Escape'){
-      this.clearSearch();
-    } else {
-      this.searching = true;
-      this.productSuggestions = [];
-    }
-
-    console.log($event.code);
-
-  }
 
   addProduct(product:Product){
     var exist = this.addedProducts.filter(productSale =>{
@@ -187,7 +135,7 @@ export class SaleComponent implements OnActivate {
         quantity: 1
       });
     }
-    this.productSuggestions = [];
+    // this.productSuggestions = [];
 
     this.clearSearchInputs();
   }
@@ -201,7 +149,7 @@ export class SaleComponent implements OnActivate {
   }
 
   private clearSearchInputs(){
-    this.search_words = "";
+    // this.search_words = "";
     this.product_id = null;
     this.bar_code = "";
   }
@@ -257,7 +205,7 @@ export class SaleComponent implements OnActivate {
 
   clear(){
     this.clearSearchInputs();
-    this.productSuggestions = [];
+    // this.productSuggestions = [];
     this.addedProducts = [];
     this.clientPayment = 0;
   }

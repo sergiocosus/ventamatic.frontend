@@ -48,45 +48,6 @@
     color: white;
   }
   .search{
-    .search-list{
-      display: inline-block;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      max-height: 50vh;
-      width: 100%;
-      border-radius: 1em;
-      list-style: none;
-      margin: 0;
-      overflow-y: auto;
-      z-index: 10;
-      background-color: $darkBlue;
-      border: 2px solid white;
-      box-shadow: black 10px 10px 50px;
-
-      tbody{
-        max-height: 40vh;
-        display: inline-block;
-        overflow-y: auto;
-      }
-      tr{
-        border-bottom: 1px solid steelblue;
-
-        &:hover, &.selected{
-          background-color: $hoverBlue;;
-          cursor: pointer;
-        }
-
-
-        &.searching, &.empty{
-          text-align: center;
-        }
-        td{
-          padding: .2em;
-        }
-      }
-
-    }
   }
 }
 

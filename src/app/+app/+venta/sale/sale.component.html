@@ -34,30 +34,12 @@
     <floating-label [label]="'Por Código de barras'">
       <input type="text" [(ngModel)]="bar_code" (keyup)="barCodeEntered($event)"/>
     </floating-label>
-    <floating-label [label]="'Buscar por descripción'">
-      <input type="text"
-             [(ngModel)]="search_words"
-             [ngFormControl]="barCodeControl"
-             (keyup)="searchEntered($event)"
-             (focus)="showSearch()"
-             (blur)="hideSearch()"
-      />
-      <table class="search-list" [hidden]="searchHidden || !search_words.length">
-        <tr *ngFor="let product of productSuggestions; let i=index"
-            (click)="addProduct(product)"
-            [ngClass]="{selected:searchIndexSelection == i}"
-        >
-          <td>{{product.description}}</td>
-          <td>{{product.price}}</td>
-        </tr>
-        <tr class="empty" *ngIf="!productSuggestions.length && !searching">
-          <td>No hay resultados</td>
-        </tr>
-        <tr class="searching" *ngIf="searching">
-          <td><i class="fa fa-spinner fa-spin"></i> Buscando</td>
-        </tr>
-      </table>
-    </floating-label>
+    <autocomplete-input
+      (selected)="addProduct($event)"
+      [searchMethod]="searchMethod"
+    >
+    </autocomplete-input>
+
 
     <floating-label [label]="'Por ID'">
       <input type="number" min="1" step="1"

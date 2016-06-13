@@ -56,6 +56,8 @@ const barrels: string[] = [
   'app/shared/main-content',
   'app/+app/+venta/select-branch',
   'app/+app/+venta/sale',
+  'app/autocomplete-input',
+  'app/components/autocomplete-input',
   /** @cli-barrel */
 ];
 

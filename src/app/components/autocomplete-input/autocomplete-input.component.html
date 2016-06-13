@@ -1,0 +1,23 @@
+<floating-label [label]="'Buscar por descripción'">
+  <input type="text"
+         [(ngModel)]="search_words"
+         [ngFormControl]="searchControl"
+         (keyup)="searchEntered($event)"
+         (focus)="showSearch()"
+         (blur)="hideSearch()"
+  />
+  <table class="search-list" [hidden]="searchHidden || !search_words.length">
+    <tr *ngFor="let element of elementSuggestions; let i=index"
+        (mousedown)="emitElement(element)"
+        [ngClass]="{selected:searchIndexSelection == i}"
+    >
+      <td *ngFor="let field of element.searchFields">{{field}}</td>
+    </tr>
+    <tr class="empty" *ngIf="!elementSuggestions.length && !searching">
+      <td>No hay resultados</td>
+    </tr>
+    <tr class="searching" *ngIf="searching">
+      <td><i class="fa fa-spinner fa-spin"></i> Buscando</td>
+    </tr>
+  </table>
+</floating-label>
