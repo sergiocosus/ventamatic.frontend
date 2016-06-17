@@ -189,7 +189,7 @@ export class SaleComponent implements OnActivate {
       })
     });
 
-    this.saleService.post({
+    this.saleService.post(this.branch_id, {
       client_id: this.client_id,
       payment_type_id: payment_type_id,
       card_payment_id: null,

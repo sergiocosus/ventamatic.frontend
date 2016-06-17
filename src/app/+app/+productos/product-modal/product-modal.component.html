@@ -14,6 +14,15 @@
       <floating-label [label]="'Description'" required>
         <input type="text" [(ngModel)]="product.description" [disabled]="locked"/>
       </floating-label>
+      <p-multiSelect [options]="categorySelectItems" [(ngModel)]="product.categories"></p-multiSelect>
+
+     
+
+      <p-dropdown [options]="brands"
+                  [(ngModel)]="product.brand_id"
+                  [autoWidth]="false"
+      ></p-dropdown>
+
       <floating-label [label]="'Marca'">
         <input type="text" [(ngModel)]="product.brand" [disabled]="locked"/>
       </floating-label>

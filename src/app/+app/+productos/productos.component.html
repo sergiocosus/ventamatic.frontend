@@ -18,7 +18,7 @@
     <tr>
       <th>ID</th>
       <th>Descripción</th>
-      <th>Categoría</th>
+      <th>Categorías</th>
       <th>Marca</th>
       <th>Mínimo Global</th>
       <th>Precio Global</th>
@@ -31,9 +31,11 @@
       <td (click)="clickUpdate(product)">{{product.id}}</td>
       <td (click)="clickUpdate(product)">{{product.description}}</td>
       <td (click)="clickUpdate(product)">
-        <span *ngIf="product.category">
-          {{product.category.name}}
-        </span>
+        <ul>
+          <li *ngFor="let category of product.categories; let last=last">
+            {{category.name}}<span *ngIf="!last">, </span>
+          </li>
+        </ul>
       </td>
       <td (click)="clickUpdate(product)">
         <span *ngIf="product.brand">

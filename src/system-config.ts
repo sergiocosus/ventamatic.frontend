@@ -69,6 +69,10 @@ const cliSystemConfigPackages: any = {
   'angular2-notifications': {
     defaultExtension: 'js',
     main: 'components.js'
+  },
+  'primeng': {
+    defaultExtension: 'js',
+    main: 'primeng.js'
   }
 };
 barrels.forEach((barrelName: string) => {
@@ -86,7 +90,8 @@ System.config({
     'main': 'main.js',
     'angular2-jwt/angular2-jwt': 'vendor/angular2-jwt/angular2-jwt.js',
     'ng2-bs3-modal': 'vendor/ng2-bs3-modal',
-    'angular2-notifications': 'vendor/angular2-notifications'
+    'angular2-notifications': 'vendor/angular2-notifications',
+    'primeng': 'vendor/primeng'
   },
   packages: cliSystemConfigPackages
 });

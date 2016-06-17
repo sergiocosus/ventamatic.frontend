@@ -17,7 +17,9 @@ module.exports = function(defaults) {
       'jquery/dist/jquery.min.js',
       'bootstrap/dist/js/bootstrap.min.js',
       'ng2-bs3-modal/**/*.js',
-      'font-awesome/fonts/*'
+      'font-awesome/fonts/*',
+      'primeng/**/**/*',
+      'primeui/**/**/*'
     ]
   });
 };

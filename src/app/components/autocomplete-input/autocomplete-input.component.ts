@@ -81,7 +81,14 @@ export class AutocompleteInputComponent implements OnInit {
     this.searchHidden = false;
   }
 
-  hideSearch(){
+  hideSearch($event){
+    var element = $event.srcElement;
+    do{
+      if(element.tagName == 'AUTOCOMPLETE-INPUT'){
+        return;
+      }
+    }while(element = element.parentElement);
+
     this.searchHidden = true;
   }
 

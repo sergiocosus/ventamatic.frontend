@@ -1,8 +1,10 @@
+@import 'src/app/colors';
+
 :host {
   display: inline-flex;
   flex: 0 0 200px;
   height: 100px;
-  background-color: #082B36;
+  background-color: $darkBlue;
   margin: 10px;
   border-radius: 10px;
   border: 1px white dashed;

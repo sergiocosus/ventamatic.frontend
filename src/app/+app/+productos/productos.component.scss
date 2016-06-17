@@ -67,6 +67,15 @@
           td{
             border: 1px white solid;
             padding-left: 3px;
+            ul{
+              list-style: none;
+              line-height: 1em;
+              margin: 0px;
+              padding: 0px;
+              li{
+                display: inline-block;
+              }
+            }
           }
         }
 
