@@ -1,4 +1,5 @@
-export class Product{
+import {Model} from "../model";
+export class Product extends Model{
   id:number;
   unit_id:number;
   brand_id:number;
@@ -12,12 +13,6 @@ export class Product{
   
   get price(){
     return this.global_price;
-  }
-  
-  parse(obj){
-    for (var prop in obj) this[prop] = obj[prop];
-    
-    return this;
   }
   
   get searchFields(){

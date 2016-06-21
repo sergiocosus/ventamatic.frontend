@@ -58,6 +58,8 @@ const barrels: string[] = [
   'app/+app/+venta/sale',
   'app/autocomplete-input',
   'app/components/autocomplete-input',
+  'app/product-inventario',
+  'app/+app/+inventario/modal-inventario',
   /** @cli-barrel */
 ];
 

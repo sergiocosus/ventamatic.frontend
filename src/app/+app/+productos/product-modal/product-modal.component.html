@@ -18,13 +18,13 @@
         <input type="text" [(ngModel)]="product.brand" [disabled]="locked"/>
       </floating-label>
       <floating-label [label]="'Precio Global'">
-        <input type="text" [(ngModel)]="product.global_price" [disabled]="locked"/>
+        <input type="number" [(ngModel)]="product.global_price" [disabled]="locked"/>
       </floating-label>
       <floating-label [label]="'Mínimo global'">
-        <input type="text" [(ngModel)]="product.global_minimum" [disabled]="locked"/>
+        <input type="number" [(ngModel)]="product.global_minimum" [disabled]="locked"/>
       </floating-label>
       <floating-label ngif="product.unit" [label]="'Unidad'">
-        <input type="text" [(ngModel)]="product.unit" [disabled]="locked"/>
+        <input type="text" [(ngModel)]="product.unit.name" [disabled]="locked"/>
       </floating-label>
     </modal-body>
     <modal-footer>
