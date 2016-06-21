@@ -5,35 +5,35 @@
     <h4 *ngIf="deleteMode"> Eliminar Producto </h4>
   </modal-header>
   <form (ngSubmit)="submit()">
-    <modal-body *ngIf="!deleteMode && product">
+    <modal-body *ngIf="!deleteMode && inventory">
       <!--<floating-label [label]="'ID'">
         <input type="text" required
-               [(ngModel)]="product.id"
+               [(ngModel)]="inventory.id"
                [disabled]="updateMode"/>
       </floating-label>-->
       <floating-label [label]="'Description'" required>
-        <input type="text" [(ngModel)]="product.description" [disabled]="locked"/>
+        <input type="text" [(ngModel)]="inventory.description" [disabled]="locked"/>
       </floating-label>
-      <p-multiSelect [options]="categorySelectItems" [(ngModel)]="product.categories"></p-multiSelect>
+      <p-multiSelect [options]="categorySelectItems" [(ngModel)]="inventory.categories"></p-multiSelect>
 
-     
+
 
       <p-dropdown [options]="brands"
-                  [(ngModel)]="product.brand_id"
+                  [(ngModel)]="inventory.brand_id"
                   [autoWidth]="false"
       ></p-dropdown>
 
       <floating-label [label]="'Marca'">
-        <input type="text" [(ngModel)]="product.brand" [disabled]="locked"/>
+        <input type="text" [(ngModel)]="inventory.brand" [disabled]="locked"/>
       </floating-label>
       <floating-label [label]="'Precio Global'">
-        <input type="text" [(ngModel)]="product.global_price" [disabled]="locked"/>
+        <input type="text" [(ngModel)]="inventory.global_price" [disabled]="locked"/>
       </floating-label>
       <floating-label [label]="'Mínimo global'">
-        <input type="text" [(ngModel)]="product.global_minimum" [disabled]="locked"/>
+        <input type="text" [(ngModel)]="inventory.global_minimum" [disabled]="locked"/>
       </floating-label>
       <floating-label ngif="product.unit" [label]="'Unidad'">
-        <input type="text" [(ngModel)]="product.unit" [disabled]="locked"/>
+        <input type="text" [(ngModel)]="inventory.unit" [disabled]="locked"/>
       </floating-label>
     </modal-body>
     <modal-footer>

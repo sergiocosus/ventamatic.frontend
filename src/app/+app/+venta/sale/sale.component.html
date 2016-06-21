@@ -2,7 +2,7 @@
   <div *ngIf="branch">
     <h6>Sucursal</h6>
     <h4>
-       {{branch.name}}
+      {{branch.name}}
     </h4>
     <hr/>
   </div>
@@ -28,7 +28,6 @@
   </div>
 
 
-
   <div class="search">
     <h5>Producto</h5>
     <floating-label [label]="'Por Código de barras'">
@@ -44,7 +43,7 @@
     <floating-label [label]="'Por ID'">
       <input type="number" min="1" step="1"
              [(ngModel)]="product_id"
-             (keyup)="idEntered($event)" />
+             (keyup)="idEntered($event)"/>
     </floating-label>
     <hr/>
   </div>
@@ -68,10 +67,12 @@
     </floating-label>
     <button
       class="btn btn-success btn-block"
-      (click)="finish()">Finalizar Venta</button>
+      (click)="finish()">Finalizar Venta
+    </button>
     <button
       class="btn btn-danger btn-block"
-      (click)="clear()">Cancelar Venta</button>
+      (click)="clear()">Cancelar Venta
+    </button>
   </div>
 </div>
 
@@ -89,18 +90,19 @@
     </thead>
     <tbody>
     <tr *ngFor="let productSale of addedProducts">
-      <td>{{productSale.product.id}}</td>
-      <td>{{productSale.product.description}}</td>
-      <td class="align-right">{{productSale.product.price | currency:'USD':true:'1.2-2'}}</td>
+      <td>{{productSale.inventory.product.id}}</td>
+      <td>{{productSale.inventory.product.description}}</td>
+      <td class="align-right">{{productSale.inventory.correctPrice | currency:'USD':true:'1.2-2'}}</td>
       <td>
-        <input type="number" min="1" [(ngModel)]="productSale.quantity"/>
+        <input type="number" min="1" [max]="productSale.inventory.quantity"
+               [(ngModel)]="productSale.quantity"/>
       </td>
       <td class="align-right">
-        {{productSale.quantity * productSale.product.price
-          | currency:'USD':true:'1.2-2'}}
+        {{productSale.quantity * productSale.inventory.correctPrice
+        | currency:'USD':true:'1.2-2'}}
         <span class="button-delete"
               (click)="removeProduct(productSale)">
-            <i class="fa fa-times" ></i>
+            <i class="fa fa-times"></i>
         </span>
 
       </td>

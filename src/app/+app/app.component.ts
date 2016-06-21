@@ -18,6 +18,7 @@ import {ProductService} from "../shared/product/product.service";
 import {ClientService} from "./+clientes/shared/client.service";
 import {BranchService} from "./+sucursales/shared/branch.service";
 import {CategoryService} from "../shared/product/category/category.service";
+import {InventoryService} from "../shared/inventory/inventory.service";
 
 @Component({
   moduleId: module.id,
@@ -31,6 +32,7 @@ import {CategoryService} from "../shared/product/category/category.service";
     ClientService,
     BranchService,
     CategoryService,
+    InventoryService
   ]
 
 })
