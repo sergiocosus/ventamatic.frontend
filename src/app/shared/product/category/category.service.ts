@@ -4,7 +4,7 @@ import {Category} from "./category";
 
 @Injectable()
 export class CategoryService {
-  private basePath= 'product/category/';
+  private basePath= 'inventory/category/';
   
   constructor(private apiHttp:ApiHttp) {}
 
@@ -41,7 +41,7 @@ export class CategoryService {
   }
 
   private mapCategory(json:any){
-    return json.product;
+    return json.inventory;
   }
 
   private parseCategory(product:any){

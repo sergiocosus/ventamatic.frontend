@@ -16,7 +16,6 @@ import {ROUTER_DIRECTIVES} from "@angular/router";
 export class SelectBranchComponent implements OnInit {
   branches:Branch[] = [];
 
-
   constructor(private branchService:BranchService) {}
 
   ngOnInit() {

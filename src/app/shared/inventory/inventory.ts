@@ -18,13 +18,21 @@ export class Inventory extends Model {
   product:Product;
   branch:Branch;
 
-  parse(obj){
+  get correctPrice(){
+    return this.price || this.product.global_price;
+  }
+  
+  parse(obj) {
     super.parse(obj);
     this.product = new Product().parse(this.product);
     this.branch = new Branch().parse(this.branch);
   }
 
-  public static parseArray(objs:any){
-    return objs.map(obj => {return new Inventory().parse(obj)})
+  get searchFields(){
+    return [
+      this.product.description,
+      this.correctPrice,
+      this.quantity,
+    ];
   }
 }

@@ -10,11 +10,18 @@ export class Product extends Model{
   created_at:string;
   updated_at:string;
   deleted_at:string;
-  
+
+  inventories:any[];
   get price(){
     return this.global_price;
   }
-  
+
+  parse(obj){
+    for (var prop in obj) this[prop] = obj[prop];
+
+    return this;
+  }
+
   get searchFields(){
     return [
       this.description,

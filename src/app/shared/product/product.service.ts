@@ -4,7 +4,7 @@ import {Product} from "./product";
 
 @Injectable()
 export class ProductService {
-  private basePath= 'product/';
+  private basePath= 'inventory/';
 
   constructor(private apiHttp:ApiHttp) {}
 
@@ -20,8 +20,10 @@ export class ProductService {
       .map(this.parseProduct);
   }
 
-  search(words: string){
-    return this.apiHttp.get(this.basePath + 'search',{search:words})
+
+
+  search(search: string){
+    return this.apiHttp.get(this.basePath + 'search',{search:search})
       .map(this.mapProducts)
       .map(this.parseProducts);
   }
@@ -53,7 +55,7 @@ export class ProductService {
   }
 
   private mapProduct(json:any){
-    return json.product;
+    return json.inventory;
   }
 
   private parseProduct(product:any){

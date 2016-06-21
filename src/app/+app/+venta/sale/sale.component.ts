@@ -13,6 +13,8 @@ import {Client} from "../../+clientes/shared/client";
 import {MainContentComponent} from "../../../shared/main-content/main-content.component";
 import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
 import {AutocompleteInputComponent} from "../../../components/autocomplete-input/autocomplete-input.component";
+import {InventoryService} from "../../../shared/inventory/inventory.service";
+import {Inventory} from "../../../shared/inventory/inventory";
 
 @Component({
   moduleId: module.id,
@@ -45,25 +47,28 @@ export class SaleComponent implements OnActivate {
   payment_type:number;
 
   searchMethod;
-  constructor(private productService:ProductService,
-              private clientService:ClientService,
+  constructor(private clientService:ClientService,
               private notificationService:NotificationsService,
               private saleService:SaleService,
-              private branchService:BranchService) {
-    this.searchMethod = (words) => this.productService.search(words);
+              private branchService:BranchService,
+              private inventoryService:InventoryService) {
+    this.searchMethod = (words) => this.inventoryService.search(this.branch_id, words);
   }
 
   routerOnActivate(curr:RouteSegment,RouteSegment, currTree?: RouteTree, prevTree?: RouteTree):void {
     this.branch_id = +curr.getParam('branch_id');
 
     this.branchService.get(this.branch_id )
-      .subscribe(branch => this.branch = branch);
+      .subscribe(
+        branch => this.branch = branch,
+        error => this.notifyError(error)
+      );
   }
 
   get total(){
     var total = 0;
     this.addedProducts.forEach(addedProduct => {
-      total += addedProduct.product.price *  addedProduct.quantity;
+      total += addedProduct.inventory.correctPrice * addedProduct.quantity;
     });
     return total;
   }
@@ -91,16 +96,13 @@ export class SaleComponent implements OnActivate {
 
 
   barCodeEntered($event){
-    if($event.keyIdentifier=='Enter'){
+   if($event.keyIdentifier=='Enter'){
       if(this.bar_code && this.bar_code.length){
-        this.productService.getByBarCode(this.bar_code).subscribe(
-          product => {
-            this.addProduct(product);
+        this.inventoryService.getByBarCode(this.branch_id, this.bar_code).subscribe(
+          inventory => {
+            this.addProduct(inventory);
           },
-          error => {
-            this.notificationService.error(
-              'Error', error.message);
-          }
+          error => this.notifyError(error)
         );
       } else {
         this.notificationService.alert('Alerta','El código de barras se encuentra vacío');
@@ -110,10 +112,10 @@ export class SaleComponent implements OnActivate {
 
   idEntered($event) {
     if ($event.code == 'Enter') {
-      console.log(this.product_id);
       if(!isNaN(this.product_id)){
-        this.productService.get(+this.product_id).subscribe(
-          product => this.addProduct(product)
+        this.inventoryService.get(this.branch_id, this.product_id).subscribe(
+          inventory => this.addProduct(inventory),
+          error => this.notifyError(error)
         );
       } else {
         this.notificationService.alert('Alerta','El ID se encuentra vacío');
@@ -122,20 +124,31 @@ export class SaleComponent implements OnActivate {
   }
 
 
-  addProduct(product:Product){
+  addProduct(inventory:Inventory){
     var exist = this.addedProducts.filter(productSale =>{
-      return productSale.product.id == product.id
+      return productSale.inventory.product.id == inventory.product.id
     });
 
     if(exist.length){
-      exist[0].quantity++;
+      if(inventory.quantity > exist[0].quantity){
+        exist[0].quantity++;
+      } else {
+        this.notificationService.error(
+          'Error', 'Insuficiente producto en inventario'
+        );
+      }
     } else{
-      this.addedProducts.push({
-        product: product,
-        quantity: 1
-      });
+      if(inventory.quantity > 0){
+        this.addedProducts.push({
+          inventory: inventory,
+          quantity: 1
+        });
+      }else{
+        this.notificationService.error(
+          'Error', 'Insuficiente producto en inventario'
+        );
+      }
     }
-    // this.productSuggestions = [];
 
     this.clearSearchInputs();
   }
@@ -184,21 +197,26 @@ export class SaleComponent implements OnActivate {
     var products = [];
     this.addedProducts.forEach(productSale => {
       products.push({
-        product_id: productSale.product.id,
+        product_id: productSale.inventory.product.id,
         quantity: productSale.quantity
       })
     });
 
-    this.saleService.post({
+    this.saleService.post(this.branch_id, {
       client_id: this.client_id,
       payment_type_id: payment_type_id,
       card_payment_id: null,
       total: this.total,
       client_payment: this.clientPayment,
       products: products
-    }).subscribe(response => console.log(response));
+    }).subscribe(
+      response => {
+        console.log(response)
+        this.notificationService.success('Éxito', 'Venta completada!');
+      },
+      error => this.notifyError(error)
+    );
 
-    this.notificationService.success('Éxito', 'Venta completada!');
     this.clear();
 
   }
@@ -210,9 +228,17 @@ export class SaleComponent implements OnActivate {
     this.clientPayment = 0;
   }
 
+  notifyError(error){
+    if(error.code == 10){
+      this.notificationService.alert('Alerta',error.message);
+    }else{
+      this.notificationService.error('Error', error.message);
+    }
+  }
+
 }
 
 interface ProductSale {
-  product:Product,
+  inventory:Inventory,
   quantity:number;
 }

@@ -4,7 +4,7 @@ import {Brand} from "./brand";
 
 @Injectable()
 export class BrandService {
-  private basePath= 'product/brand/';
+  private basePath= 'inventory/brand/';
 
   constructor(private apiHttp:ApiHttp) {}
 

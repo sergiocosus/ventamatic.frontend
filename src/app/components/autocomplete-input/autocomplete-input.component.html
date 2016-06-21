@@ -1,11 +1,13 @@
-<floating-label [label]="'Buscar por descripción'">
+<floating-label
+  [label]="'Buscar por descripción'"
+  (window:click)="hideSearch($event)"
+>
   <input type="text"
          [(ngModel)]="search_words"
          [ngFormControl]="searchControl"
-         (keypress)="searchEntered($event)"
+         (keyup)="searchEntered($event)"
          (focus)="showSearch()"
-         (blur)="hideSearch()"
-  />
+  >
   <table class="search-list" [hidden]="searchHidden || !search_words.length">
     <tr *ngFor="let element of elementSuggestions; let i=index"
         (mousedown)="emitElement(element)"
