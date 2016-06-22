@@ -4,8 +4,8 @@ import {Category} from "./category";
 
 @Injectable()
 export class CategoryService {
-  private basePath= 'inventory/category/';
-  
+  private basePath= 'product/category/';
+
   constructor(private apiHttp:ApiHttp) {}
 
   getAll(){

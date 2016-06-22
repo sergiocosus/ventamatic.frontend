@@ -1,9 +1,10 @@
-import {Component, OnInit, Output, ViewChild, Output} from '@angular/core';
+import {Component, OnInit, Output, ViewChild} from '@angular/core';
 import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
 import {MODAL_DIRECTIVES, ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {ProductService} from "../../../shared/product/product.service";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {Inventory} from "../../../shared/inventory/inventory";
+import {InventoryService} from "../../../shared/inventory/inventory.service";
 
 @Component({
   moduleId: module.id,
@@ -20,22 +21,20 @@ export class ModalInventarioComponent implements OnInit {
 
   inventory: Inventory;
 
-  constructor(protected productService:ProductService,
+  constructor(protected inventoryService:InventoryService,
               protected notification: NotificationsService) {
-    super(notification);
   }
 
   ngOnInit() {
   }
   openUpdate(inventory:Inventory){
     this.inventory = inventory;
-    super.inventory(inventory);
   }
 
   update(){
-    this.productService.put(this.inventory).subscribe(product=> {
+/*    this.inventoryService.put(this.inventory).subscribe(product=> {
       this.updatedSuccess(product);
-    });
+    });*/
   }
 
 }

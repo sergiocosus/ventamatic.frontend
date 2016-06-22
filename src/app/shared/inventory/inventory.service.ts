@@ -10,7 +10,7 @@ export class InventoryService {
     return this.apiHttp.get(`branch/${branch_id}/inventory`)
       .map(json => Inventory.parseArray(json.inventories))
   }
-  
+
   get(branch_id:number, product_id:number){
     return this.apiHttp.get(`branch/${branch_id}/inventory/${product_id}`)
       .map(json => new Inventory().parse(json.inventory));

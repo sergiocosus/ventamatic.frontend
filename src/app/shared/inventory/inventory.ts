@@ -5,7 +5,7 @@ import {Branch} from "../../+app/+sucursales/shared/branch";
  * Created by alx on 16/06/16.
  */
 export class Inventory extends Model {
-  
+
   id: number;
   branch_id: number;
   product_id: number;
@@ -14,18 +14,22 @@ export class Inventory extends Model {
   minimum: number;
   created_at: string;
   updated_at: string;
-  
+
   product:Product;
   branch:Branch;
 
   get correctPrice(){
     return this.price || this.product.global_price;
   }
-  
+
   parse(obj) {
     super.parse(obj);
     this.product = new Product().parse(this.product);
     this.branch = new Branch().parse(this.branch);
+  }
+  
+  public static parseArray(objs:any){
+    return objs.map(obj => {return new Product().parse(obj)})
   }
 
   get searchFields(){
