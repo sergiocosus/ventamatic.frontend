@@ -1,2 +1,2 @@
-export {environment} from './environment';
-export {VentamaticFrontendAppComponent} from './ventamatic-frontend.component';
+export * from './environment';
+export * from './ventamatic-frontend.component';

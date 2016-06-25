@@ -4,6 +4,6 @@ export class VentamaticFrontendPage {
   }
 
   getParagraphText() {
-    return element(by.css('ventamatic-frontend-app h1')).getText();
+    return element(by.css('app-root h1')).getText();
   }
 }

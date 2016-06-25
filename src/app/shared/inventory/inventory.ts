@@ -26,10 +26,11 @@ export class Inventory extends Model {
     super.parse(obj);
     this.product = new Product().parse(this.product);
     this.branch = new Branch().parse(this.branch);
+    return this;
   }
-  
+
   public static parseArray(objs:any){
-    return objs.map(obj => {return new Product().parse(obj)})
+    return objs.map(obj => {return new Inventory().parse(obj)})
   }
 
   get searchFields(){

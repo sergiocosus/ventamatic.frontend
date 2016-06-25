@@ -8,7 +8,7 @@ import {AuthService} from "./services/auth.service";
 
 @Component({
   moduleId: module.id,
-  selector: 'ventamatic-frontend-app',
+  selector: 'app-root',
   templateUrl: 'ventamatic-frontend.component.html',
   styleUrls: ['ventamatic-frontend.component.css'],
   directives: [ROUTER_DIRECTIVES, SimpleNotificationsComponent],
