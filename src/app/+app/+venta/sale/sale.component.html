@@ -1,17 +1,12 @@
 <div class="control">
-  <div *ngIf="branch">
-    <h6>Sucursal</h6>
-    <h4>
-      {{branch.name}}
-    </h4>
-    <hr/>
-  </div>
   <div class="client">
     <h5>Cliente</h5>
     <floating-label [label]="'ID de cliente'">
-      <input type="number" [(ngModel)]="client_id"
-             (change)="updateClient()"
-             (keyup)="updateClient()"/>
+      <input type="number"
+             min="1"
+             [(ngModel)]="client_id"
+             [ngFormControl]="clientIdControl"
+      />
       <table class="search-list">
         <tr *ngFor="let client of clientSuggestions"
             (click)="selectClient(client)">
@@ -20,10 +15,6 @@
         </tr>
       </table>
     </floating-label>
-    <div>
-      <span class="error" *ngIf="client_status">{{client_status}}</span>
-      <span *ngIf="!client_status">{{client && client.fullName}}</span>
-    </div>
     <hr/>
   </div>
 
@@ -33,12 +24,13 @@
     <floating-label [label]="'Por Código de barras'">
       <input type="text" [(ngModel)]="bar_code" (keyup)="barCodeEntered($event)"/>
     </floating-label>
+
     <autocomplete-input
       (selected)="addProduct($event)"
       [searchMethod]="searchMethod"
+      [(search_words)]="search_words"
     >
     </autocomplete-input>
-
 
     <floating-label [label]="'Por ID'">
       <input type="number" min="1" step="1"
@@ -49,26 +41,34 @@
   </div>
 
   <div class="finish">
-    <h5>Tipo de pago:</h5>
-    <br>
-    <div class="btn-group" data-toggle="buttons">
-      <label class="btn btn-primary active">
-        <input type="radio" [(ngModel)]="payment_type_cash" checked>
-        Efectivo
-      </label>
-      <label class="btn btn-primary">
-        <input type="radio" [(ngModel)]="payment_type_card">
-        Tarjeta
-      </label>
-    </div>
-
     <floating-label [label]="'Pago:'">
       <input type="number" min="0" [(ngModel)]="clientPayment"/>
     </floating-label>
+
+    <hr>
+
+    <h5>Tipo de pago:</h5>
+    <br>
+    <div class="btn-group" data-toggle="buttons">
+      <p-selectButton [options]="paymentTypes"
+                      [(ngModel)]="payment_type_id"
+      >
+      </p-selectButton>
+
+      <floating-label *ngIf="payment_type_id == 2"
+                      [label]="'Folio de la transacción electrónica'">
+        <input type="text"
+               [(ngModel)]="card_payment_id"/>
+      </floating-label>
+    </div>
+
+    <hr>
+
     <button
       class="btn btn-success btn-block"
       (click)="finish()">Finalizar Venta
     </button>
+
     <button
       class="btn btn-danger btn-block"
       (click)="clear()">Cancelar Venta
@@ -78,6 +78,23 @@
 
 
 <div class="products">
+
+  <div class="branch-view" *ngIf="branch">
+    <h6>Sucursal</h6>
+    <h4>
+      {{branch.name}}
+    </h4>
+  </div>
+
+  <hr>
+
+  <div class="client-view">
+    Cliente: <span class="error" *ngIf="client_status">{{client_status}}</span>
+    <span *ngIf="!client_status">{{client && client.fullName}}</span>
+  </div>
+
+  <hr>
+
   <table>
     <thead>
     <tr>
@@ -104,7 +121,6 @@
               (click)="removeProduct(productSale)">
             <i class="fa fa-times"></i>
         </span>
-
       </td>
     </tr>
     </tbody>
@@ -117,12 +133,12 @@
         {{total | currency:'USD':true:'1.2-2'}}
       </td>
     </tr>
-    <tr>
+    <tr [ngClass]="{ error: clientPayment - total < 0 }">
       <td colspan="3"></td>
       <td>Pago</td>
       <td class="align-right">{{clientPayment | currency:'USD':true:'1.2-2'}}</td>
     </tr>
-    <tr>
+    <tr [ngClass]="{ error: clientPayment - total < 0 }">
       <td colspan="3"></td>
       <td>Cambio</td>
       <td class="align-right">{{clientPayment - total | currency:'USD':true:'1.2-2'}}</td>

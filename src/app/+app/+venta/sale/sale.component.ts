@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Control } from "@angular/common";
 import { OnActivate, RouteSegment, RouteTree } from "@angular/router";
+import { SelectItem, SelectButton } from "primeng/primeng";
 
 import {BranchService} from "../../+sucursales/shared/branch.service";
 import {Branch} from "../../+sucursales/shared/branch";
-import {Product} from "../../../shared/product/product";
 import {SaleService} from "../shared/sale.service";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {ClientService} from "../../+clientes/shared/client.service";
-import {ProductService} from "../../../shared/product/product.service";
 import {Client} from "../../+clientes/shared/client";
 import {MainContentComponent} from "../../../shared/main-content/main-content.component";
 import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
@@ -25,6 +24,7 @@ import {Inventory} from "../../../shared/inventory/inventory";
     FloatingLabelComponent,
     MainContentComponent,
     AutocompleteInputComponent,
+    SelectButton,
   ],
   providers: [SaleService]
 })
@@ -34,25 +34,37 @@ export class SaleComponent implements OnActivate {
   branch:Branch;
 
   branch_id:number;
-  client_id:number;
+  client_id:number = 1;
+  clientIdControl:Control = new Control();
+
   client:Client;
   client_status:string;
   bar_code:string;
 
-
   product_id:number;
   clientPayment:number = 0;
-  payment_type_cash:boolean = true;
-  payment_type_card:boolean;
-  payment_type:number;
+  paymentTypes: SelectItem[] =[
+    {
+      label: 'Efectivo',
+      value: 1
+    },
+    {
+      label: 'Tarjeta',
+      value: 2
+    }
+  ];
+  payment_type_id:number = 1;
+  card_payment_id:string = null;
 
   searchMethod;
+  search_words:string = "";
   constructor(private clientService:ClientService,
               private notificationService:NotificationsService,
               private saleService:SaleService,
               private branchService:BranchService,
               private inventoryService:InventoryService) {
-    this.searchMethod = (words) => this.inventoryService.search(this.branch_id, words);
+    this.initSearchMetode();
+    this.initClientIdControl();
   }
 
   routerOnActivate(curr:RouteSegment,RouteSegment, currTree?: RouteTree, prevTree?: RouteTree):void {
@@ -63,6 +75,29 @@ export class SaleComponent implements OnActivate {
         branch => this.branch = branch,
         error => this.notifyError(error)
       );
+  }
+
+  private initSearchMetode(){
+    this.searchMethod = (words) => this.inventoryService.search(this.branch_id, words);
+  }
+
+  private initClientIdControl(){
+    this.clientIdControl.valueChanges.distinctUntilChanged()
+      .subscribe(value => {
+        this.client = null;
+        this.client_status = "Buscando...";
+      });
+
+    this.clientIdControl.valueChanges.debounceTime(250).distinctUntilChanged()
+      .subscribe(value => {
+        this.clientService.get(value).subscribe(
+          client => {
+            this.client = client;
+            this.client_status = null;
+          },
+          error => this.client_status = 'El cliente no existe'
+        );
+      });
   }
 
   get total(){
@@ -76,24 +111,6 @@ export class SaleComponent implements OnActivate {
   get paymentChange(){
     return this.clientPayment - this.total;
   }
-
-  updateClient(){
-    this.client = null;
-    this.client_status = "Buscando...";
-    if(this.client_id != null){
-      this.clientService.get(this.client_id).subscribe(
-        client => {
-          this.client = client;
-          this.client_status = null;
-        },
-        error => this.client_status = 'El cliente no existe'
-      );
-    } else {
-
-    }
-
-  }
-
 
   barCodeEntered($event){
    if($event.keyIdentifier=='Enter'){
@@ -186,14 +203,6 @@ export class SaleComponent implements OnActivate {
     }
 
 
-    var payment_type_id;
-
-    if(this.payment_type_cash){
-      payment_type_id = 1;
-    } else if (this.payment_type_card){
-      payment_type_id = 2;
-    }
-
     var products = [];
     this.addedProducts.forEach(productSale => {
       products.push({
@@ -202,16 +211,20 @@ export class SaleComponent implements OnActivate {
       })
     });
 
+    if(this.payment_type_id == 1){
+      this.card_payment_id = null;
+    }
+
     this.saleService.post(this.branch_id, {
       client_id: this.client_id,
-      payment_type_id: payment_type_id,
-      card_payment_id: null,
+      payment_type_id: this.payment_type_id,
+      card_payment_id: this.card_payment_id,
       total: this.total,
       client_payment: this.clientPayment,
       products: products
     }).subscribe(
       response => {
-        console.log(response)
+        console.log(response);
         this.notificationService.success('Éxito', 'Venta completada!');
       },
       error => this.notifyError(error)
@@ -223,9 +236,14 @@ export class SaleComponent implements OnActivate {
 
   clear(){
     this.clearSearchInputs();
-    // this.productSuggestions = [];
     this.addedProducts = [];
+    this.bar_code = "";
+    this.search_words = "";
     this.clientPayment = 0;
+    this.product_id = null;
+    this.client_id = 1;
+    this.payment_type_id = 1;
+    this.card_payment_id = null;
   }
 
   notifyError(error){
@@ -239,6 +257,6 @@ export class SaleComponent implements OnActivate {
 }
 
 interface ProductSale {
-  inventory:Inventory,
+  inventory:Inventory;
   quantity:number;
 }

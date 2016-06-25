@@ -15,11 +15,11 @@ import {FloatingLabelComponent} from "../floating-label/floating-label.component
 export class AutocompleteInputComponent implements OnInit {
   @Output() selected = new EventEmitter();
   @Input() searchMethod;
+  @Input() search_words:string = "";
   elementSuggestions:any[] = [];
 
   searchControl:Control = new Control();
 
-  search_words:string = "";
   searchIndexSelection:number = 0;
   searchHidden:boolean = true;
   searching:boolean = false;

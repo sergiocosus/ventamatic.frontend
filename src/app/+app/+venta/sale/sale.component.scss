@@ -1,16 +1,20 @@
 @import "src/app/colors";
+
+
 :host{
   display: flex;
   floating-label{
     input{
       background-color: $darkBlue;
       color: white;
-
     }
     label{
       color: white !important;
     }
   }
+
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .control{
@@ -24,18 +28,12 @@
   border-right: white 2px dashed;
   line-height: 1em;
   text-align: center;
-  h4, h6{
-    text-align: center;
-  }
+
 
   h5{
     margin: 0;
     font-size: 1em;
     text-align: center;
-  }
-
-  hr{
-    border-color: lighten($mainContentBackgroundColor, 10%);
   }
 
   .branch{
@@ -52,17 +50,12 @@
 }
 
 
-
-
-
 .products{
   flex: 2 0 0;
 
   color: white;
   padding: 1em;
-  margin: 1em;
   border-radius: 1em;
-
 
   table{
     width: 100%;
@@ -80,13 +73,9 @@
       td{
         background-color: #082B36;
       }
-      :hover td{
+      &:hover td{
         background-color: #06495E ;
       }
-    }
-
-    tr:hover td{
-      background-color: #06495E ;
     }
 
     thead{
@@ -154,7 +143,6 @@
       }
     }
   }
-
 }
 
 
@@ -165,4 +153,24 @@ input{
 
 .error{
   color: #d9534f;
+  font-weight: bolder;
+}
+
+.client-view{
+  background-color: $darkBlue;
+  font-weight: bolder;
+  border-radius: .5em;
+  padding: .5em;
+}
+
+.branch-view{
+  text-align: center;
+
+  h4, h6{
+    margin: 0;
+  }
+}
+
+hr{
+  border-color: lighten($mainContentBackgroundColor, 10%);
 }
