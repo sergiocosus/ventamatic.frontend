@@ -64,6 +64,7 @@ const barrels: string[] = [
   'app/components/autocomplete-input',
   'app/product-inventario',
   'app/+app/+inventario/modal-inventario',
+  'app/+app/+venta/sale-confirm-modal',
   /** @cli-barrel */
 ];
 

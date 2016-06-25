@@ -66,12 +66,12 @@
 
     <button
       class="btn btn-success btn-block"
-      (click)="finish()">Finalizar Venta
+      (click)="confirm()">Finalizar Venta
     </button>
 
     <button
       class="btn btn-danger btn-block"
-      (click)="clear()">Cancelar Venta
+      (click)="cancel()">Cancelar Venta
     </button>
   </div>
 </div>
@@ -147,3 +147,6 @@
 
   </table>
 </div>
+
+
+<sale-confirm-modal (confirmed)="finish()"></sale-confirm-modal>

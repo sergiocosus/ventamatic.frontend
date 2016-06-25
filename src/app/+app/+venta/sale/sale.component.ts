@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Control } from "@angular/common";
 import { OnActivate, RouteSegment, RouteTree } from "@angular/router";
 import { SelectItem, SelectButton } from "primeng/primeng";
@@ -14,6 +14,7 @@ import {FloatingLabelComponent} from "../../../components/floating-label/floatin
 import {AutocompleteInputComponent} from "../../../components/autocomplete-input/autocomplete-input.component";
 import {InventoryService} from "../../../shared/inventory/inventory.service";
 import {Inventory} from "../../../shared/inventory/inventory";
+import {SaleConfirmModalComponent} from "../sale-confirm-modal/sale-confirm-modal.component";
 
 @Component({
   moduleId: module.id,
@@ -25,10 +26,13 @@ import {Inventory} from "../../../shared/inventory/inventory";
     MainContentComponent,
     AutocompleteInputComponent,
     SelectButton,
+    SaleConfirmModalComponent
   ],
   providers: [SaleService]
 })
 export class SaleComponent implements OnActivate {
+  @ViewChild(SaleConfirmModalComponent) protected saleConfirmModal:SaleConfirmModalComponent;
+
   addedProducts:ProductSale[] = [];
 
   branch:Branch;
@@ -117,9 +121,6 @@ export class SaleComponent implements OnActivate {
       if(this.bar_code && this.bar_code.length){
         this.inventoryService.getByBarCode(this.branch_id, this.bar_code).subscribe(
           inventory => {
-
-
-            
             this.addProduct(inventory);
           },
           error => this.notifyError(error)
@@ -187,7 +188,7 @@ export class SaleComponent implements OnActivate {
     this.bar_code = "";
   }
 
-  finish(){
+  confirm(){
     if(!this.client){
       this.notificationService.error(
         'Error', 'No se ha seleccionado un cliente válido'
@@ -205,7 +206,10 @@ export class SaleComponent implements OnActivate {
       return;
     }
 
+    this.saleConfirmModal.open();
+  }
 
+  finish(){
     var products = [];
     this.addedProducts.forEach(productSale => {
       products.push({
@@ -230,10 +234,9 @@ export class SaleComponent implements OnActivate {
         console.log(response);
         this.notificationService.success('Éxito', 'Venta completada!');
       },
-      error => this.notifyError(error)
+      error => this.notifyError(error),
+      () => this.clear()
     );
-
-    this.clear();
 
   }
 
@@ -247,6 +250,12 @@ export class SaleComponent implements OnActivate {
     this.client_id = 1;
     this.payment_type_id = 1;
     this.card_payment_id = null;
+  }
+
+  cancel(){
+    if(confirm("¿Está seguro de cancelar la venta? Los datos de la venta actual serán borrados")){
+      this.clear();
+    }
   }
 
   notifyError(error){
