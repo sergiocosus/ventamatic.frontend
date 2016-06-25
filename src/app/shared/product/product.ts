@@ -1,4 +1,5 @@
-export class Product{
+import {Model} from "../model";
+export class Product extends Model{
   id:number;
   unit_id:number;
   brand_id:number;
@@ -25,11 +26,10 @@ export class Product{
     return [
       this.description,
       this.price,
-      this.inventories[0].quantity,
     ]
   }
-
+  
   public static parseArray(objs:any){
     return objs.map(obj => {return new Product().parse(obj)})
-  }
+  } 
 }

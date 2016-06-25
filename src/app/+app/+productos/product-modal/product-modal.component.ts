@@ -13,7 +13,7 @@ import {Category} from "../../../shared/product/category/category";
   moduleId: module.id,
   selector: 'product-modal',
   templateUrl: 'product-modal.component.html',
-  styleUrls: ['inventory-modal.component.css'],
+  styleUrls: ['product-modal.component.css'],
   directives: [
     MODAL_DIRECTIVES,
     FloatingLabelComponent,

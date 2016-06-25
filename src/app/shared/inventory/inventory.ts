@@ -1,13 +1,22 @@
 import {Model} from "../model";
 import {Product} from "../product/product";
+import {Branch} from "../../+app/+sucursales/shared/branch";
+/**
+ * Created by alx on 16/06/16.
+ */
+export class Inventory extends Model {
 
-export class Inventory extends Model{
-
-  description:string;
-  price:number;
-  quantity:number;
+  id: number;
+  branch_id: number;
+  product_id: number;
+  quantity: number;
+  price: number;
+  minimum: number;
+  created_at: string;
+  updated_at: string;
 
   product:Product;
+  branch:Branch;
 
   get correctPrice(){
     return this.price || this.product.global_price;
@@ -16,11 +25,11 @@ export class Inventory extends Model{
   parse(obj) {
     super.parse(obj);
     this.product = new Product().parse(this.product);
-    return this;
+    this.branch = new Branch().parse(this.branch);
   }
-
+  
   public static parseArray(objs:any){
-    return objs.map(obj => {return new Inventory().parse(obj)})
+    return objs.map(obj => {return new Product().parse(obj)})
   }
 
   get searchFields(){

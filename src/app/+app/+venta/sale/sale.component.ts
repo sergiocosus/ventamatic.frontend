@@ -117,6 +117,9 @@ export class SaleComponent implements OnActivate {
       if(this.bar_code && this.bar_code.length){
         this.inventoryService.getByBarCode(this.branch_id, this.bar_code).subscribe(
           inventory => {
+
+
+            
             this.addProduct(inventory);
           },
           error => this.notifyError(error)
@@ -141,7 +144,7 @@ export class SaleComponent implements OnActivate {
   }
 
 
-  addProduct(inventory:Inventory){
+  addProduct(inventory){
     var exist = this.addedProducts.filter(productSale =>{
       return productSale.inventory.product.id == inventory.product.id
     });
