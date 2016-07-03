@@ -41,5 +41,6 @@ export class SucursalesComponent implements OnInit {
       this.branches.splice(index, 1);
     }
   }
-  
+
+
 }

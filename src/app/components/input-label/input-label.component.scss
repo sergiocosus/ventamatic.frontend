@@ -1,0 +1,62 @@
+:host{
+  display: inline-block;
+  width: 100%;
+  position: relative;
+
+  input:focus ~ label,
+  input:not(.empty)~ label
+  {
+    top: -2em;
+    left: 1em;
+    font-size: .7em;
+    opacity: 1;
+    color: steelblue;
+    font-weight: bolder;
+  }
+
+  input {
+    display: block;
+    width: 100%;
+    font-size: 1em;
+    background-color: white;
+    border-radius: 0.25rem;
+    margin: 3px;
+    padding: 1em .5em .1em .5em;
+    line-height: 1em;
+    border: none;
+    border-bottom: solid 2px steelblue;
+    border-left: 5px solid transparent;
+    transition: .25s all;
+
+    &[disabled]{
+      background-color: #CCD0DD;
+    }
+
+    &:not([disabled]):not(.no-check){
+      &.ng-valid[required] {
+        border-left: 5px solid #42A948; /* green */
+      }
+
+      &.ng-invalid {
+        border-left: 5px solid #d9534f; /* red */
+      }
+    }
+
+  }
+
+  label {
+    position: absolute;
+    pointer-events: none;
+    left: 1em;
+    height: 1em;
+    line-height: 1em;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    transition: 0.2s ease all;
+    color: gray;
+  }
+
+
+}
+

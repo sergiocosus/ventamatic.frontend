@@ -7,27 +7,26 @@
       <floating-label [label]="'Id'" *ngIf="updateMode" >
         <input type="number" [(ngModel)]="branch.id" disabled="disabled"/>
       </floating-label>
-      <floating-label [label]="'Nombre'">
-        <input type="text" [(ngModel)]="branch.name" [disabled]="locked" required/>
-      </floating-label>
-      <floating-label [label]="'Descripción'">
-        <input type="text" [(ngModel)]="branch.description" [disabled]="locked"/>
-      </floating-label>
-      <floating-label [label]="'Dirección'">
-        <input type="text" [(ngModel)]="branch.address" [disabled]="locked"/>
-      </floating-label>
-      <floating-label [label]="'Email'">
-        <input type="text" [(ngModel)]="branch.title_ticket" [disabled]="locked"/>
-      </floating-label>
-      <floating-label [label]="'Teléfono'">
-        <input type="text" [(ngModel)]="branch.header_ticket" [disabled]="locked"/>
-      </floating-label>
-      <floating-label [label]="'Celular'">
-        <input type="text" [(ngModel)]="branch.footer_ticket" [disabled]="locked"/>
-      </floating-label>
-      <floating-label [label]="'Imagen'">
-        <input type="file" [(ngModel)]="branch.image_hash" [disabled]="locked"/>
-      </floating-label>
+      <input-label [(ngModel)]="branch.name" [disabled]="locked" [required]="true">
+        Nombre</input-label>
+      <input-label [(ngModel)]="branch.description" [disabled]="locked">
+        Descripción
+      </input-label>
+      <input-label [(ngModel)]="branch.address" [disabled]="locked">
+        Dirección
+      </input-label>
+      <input-label [(ngModel)]="branch.title_ticket" [disabled]="locked">
+        Título del ticket
+      </input-label>
+      <input-label [(ngModel)]="branch.header_ticket" [disabled]="locked">
+        Encabezado de ticket
+      </input-label>
+      <input-label [(ngModel)]="branch.footer_ticket" [disabled]="locked">
+        Pie de ticket
+      </input-label>
+      <input-label [(ngModel)]="branch.image_hash" [type]="'file'" [disabled]="locked">
+        Imagen
+      </input-label>
     </modal-body>
     <modal-footer>
       <button *ngIf="locked"

@@ -1,0 +1,16 @@
+<input [(ngModel)]="value"
+       [type]="type"
+       [disabled]="disabled"
+       [class]="class"
+       [id]="id"
+       [required]="required"
+       [ngClass]="{
+         empty: isInputVoid,
+         'no-check': !required
+       }"
+
+       (blur)="onTouched()"
+
+
+/>
+<label><ng-content></ng-content></label>
