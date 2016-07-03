@@ -22,6 +22,7 @@ module.exports = function(defaults) {
       'bootstrap/dist/js/bootstrap.min.js',
       'ng2-bs3-modal/**/*.js',
       'font-awesome/fonts/*',
+      'moment/moment.js',
       'primeng/**/**/*',
       'primeui/**/**/*'
     ]

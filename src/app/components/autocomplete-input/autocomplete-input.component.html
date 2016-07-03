@@ -5,7 +5,7 @@
   <input type="text"
          [(ngModel)]="search_words"
          [ngFormControl]="searchControl"
-         (keyup)="searchEntered($event)"
+         (keydown)="searchEntered($event)"
          (focus)="showSearch()"
   >
   <table class="search-list" [hidden]="searchHidden || !search_words.length">

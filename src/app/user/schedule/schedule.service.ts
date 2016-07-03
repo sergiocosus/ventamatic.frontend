@@ -2,27 +2,54 @@ import { Injectable } from '@angular/core';
 import {ApiHttp} from "../../shared/api-http";
 import {Observable} from "rxjs/Observable";
 import {Schedule} from "./schedule";
+import {ReplaySubject} from "rxjs/Rx";
 
 @Injectable()
 export class ScheduleService {
 
   private basePath = 'user/me/schedule/';
 
-  constructor(private apiHttp:ApiHttp) {}
+  private currentScheduleReplaySubject: ReplaySubject<Schedule>;
+  private currentShedule:Schedule = null;
 
+  constructor(private apiHttp:ApiHttp) {
+    this.currentScheduleReplaySubject = new ReplaySubject<Schedule>(1);
+  }
 
   getCurrent():Observable<Schedule> {
     return this.apiHttp.get(this.basePath + 'current')
-      .map( res => {return res.users});
+      .map( json => {return new Schedule().parse(json.schedule)});
   }
 
-  post(schedule:Schedule) {
-    return this.apiHttp.post(this.basePath , schedule)
-      .map(res => {return res.user});
+  post(branch_id, initial_amount) {
+    return this.apiHttp.post(this.basePath + branch_id , {initial_amount:initial_amount})
+      .map(json => new Schedule().parse(json.schedule));
   }
 
-  patch(schedule_id:number){
-    return this.apiHttp.delete(this.basePath + schedule_id);
+  finish(final_amount:number){
+    return this.apiHttp.put(this.basePath, {final_amount:final_amount})
+      .map(json => new Schedule().parse(json.schedule));
+  }
+  
+  getCurrentSchedule(){
+    return this.currentScheduleReplaySubject;
+  }
+
+  updateCurrentSchedule(schedule?:Schedule){
+    if(schedule){
+      this.currentShedule = schedule;
+      this.currentScheduleReplaySubject.next(this.currentShedule);
+    }else{
+      this.getCurrent()
+        .subscribe(schedule => {
+            this.currentShedule = schedule;
+            this.currentScheduleReplaySubject.next(this.currentShedule);
+          },
+          error =>{
+            this.currentShedule = null;
+            this.currentScheduleReplaySubject.next(this.currentShedule);
+          });
+    }
   }
 
 }

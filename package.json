@@ -27,6 +27,7 @@
     "es6-shim": "0.35.1",
     "font-awesome": "^4.6.1",
     "jquery": "^2.2.4",
+    "moment": "^2.13.0",
     "ng2-bs3-modal": "^0.6.0",
     "node-sass": "^3.7.0",
     "primeng": "^1.0.0-beta.8",

@@ -1,31 +1,4 @@
-<header>
-  <picture>
-  </picture>
-  <div id="hidden-bar-div"> </div>
-  <div id="sesion-menu-bar">
-    <div class="header-texts">
-      <i class="fa fa-user fa-2x" aria-hidden="true"></i>
-      <div>
-        <span *ngIf="user" id="user-menu-bar">{{user.username}}</span>
-        <br>
-        <span *ngIf="user" >{{user.fullName}}</span>
-      </div>
-    </div>
-    <div class="header-texts">
-      <i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
-      <span id="time-menu-bar">Inicio:
-        <span id="turno">{{time}}
-        </span>
-      </span>
-    </div>
-    <div>
-
-      <button type="button" class="btn btn-default" (click)="logout()">
-        <i class="fa fa-sign-out fa-2x"  aria-hidden="true"></i>Cerrar <br> Sesión
-      </button>
-    </div>
-  </div>
-</header>
+<top-bar></top-bar>
 <div id="body-content">
   <aside-nav></aside-nav>
   <main>

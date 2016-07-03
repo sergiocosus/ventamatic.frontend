@@ -14,25 +14,32 @@ import { ReportesComponent } from './+reportes';
 import { RolesComponent } from './+roles';
 import { SucursalesComponent } from './+sucursales';
 import { AsideNavComponent } from "./shared/aside-nav/aside-nav.component";
-import {ProductService} from "../shared/product/product.service";
-import {ClientService} from "./+clientes/shared/client.service";
-import {BranchService} from "./+sucursales/shared/branch.service";
-import {CategoryService} from "../shared/product/category/category.service";
-import {InventoryService} from "../shared/inventory/inventory.service";
+import { ProductService } from "../shared/product/product.service";
+import { ClientService } from "./+clientes/shared/client.service";
+import { BranchService } from "./+sucursales/shared/branch.service";
+import { CategoryService } from "../shared/product/category/category.service";
+import { InventoryService } from "../shared/inventory/inventory.service";
+import { ScheduleService } from "../user/schedule/schedule.service";
+import { TopBarComponent } from "./shared/top-bar/top-bar.component";
 
 @Component({
   moduleId: module.id,
   selector: 'app-app',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
-  directives: [ROUTER_DIRECTIVES, AsideNavComponent],
+  directives: [
+    ROUTER_DIRECTIVES, 
+    AsideNavComponent,
+    TopBarComponent
+  ],
   providers: [
     UserService,
     ProductService,
     ClientService,
     BranchService,
     CategoryService,
-    InventoryService
+    InventoryService,
+    ScheduleService
   ]
 
 })
@@ -56,12 +63,7 @@ export class AppComponent implements OnInit {
 
   constructor(private authService:AuthService,
               private router:Router) {}
-
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
-
+  
   ngOnInit() {
     if(!this.authService.isTokenValid()){
       this.router.navigate(['/login']);

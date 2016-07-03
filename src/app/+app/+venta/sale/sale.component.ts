@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
 import { Control } from "@angular/common";
-import { OnActivate, RouteSegment, RouteTree } from "@angular/router";
+import {OnActivate, RouteSegment, RouteTree, Router} from "@angular/router";
 import { SelectItem, SelectButton } from "primeng/primeng";
 
 import {BranchService} from "../../+sucursales/shared/branch.service";
@@ -15,6 +15,7 @@ import {AutocompleteInputComponent} from "../../../components/autocomplete-input
 import {InventoryService} from "../../../shared/inventory/inventory.service";
 import {Inventory} from "../../../shared/inventory/inventory";
 import {SaleConfirmModalComponent} from "../sale-confirm-modal/sale-confirm-modal.component";
+import {ScheduleService} from "../../../user/schedule/schedule.service";
 
 @Component({
   moduleId: module.id,
@@ -30,8 +31,10 @@ import {SaleConfirmModalComponent} from "../sale-confirm-modal/sale-confirm-moda
   ],
   providers: [SaleService]
 })
-export class SaleComponent implements OnActivate {
+export class SaleComponent implements OnActivate, OnDestroy {
   @ViewChild(SaleConfirmModalComponent) protected saleConfirmModal:SaleConfirmModalComponent;
+
+  private scheduleSubscription;
 
   addedProducts:ProductSale[] = [];
 
@@ -65,8 +68,9 @@ export class SaleComponent implements OnActivate {
   constructor(private clientService:ClientService,
               private notificationService:NotificationsService,
               private saleService:SaleService,
-              private branchService:BranchService,
-              private inventoryService:InventoryService) {
+              private inventoryService:InventoryService,
+              private router:Router,
+              private scheduleService:ScheduleService) {
     this.initSearchMetode();
     this.initClientIdControl();
   }
@@ -74,12 +78,27 @@ export class SaleComponent implements OnActivate {
   routerOnActivate(curr:RouteSegment,RouteSegment, currTree?: RouteTree, prevTree?: RouteTree):void {
     this.branch_id = +curr.getParam('branch_id');
 
-    this.branchService.get(this.branch_id )
-      .subscribe(
-        branch => this.branch = branch,
-        error => this.notifyError(error)
-      );
+    this.scheduleSubscription = this.scheduleService.getCurrentSchedule().subscribe(
+      schedule => {
+        if(schedule){
+          if(schedule.branch_id == this.branch_id){
+            this.branch = schedule.branch;
+          }else{
+            this.router.navigate(['/app/venta', schedule.branch_id]);
+          }
+        }else {
+          this.router.navigate(['/app/venta']);
+        }
+      }
+    );
+
   }
+
+  ngOnDestroy():any {
+    this.scheduleSubscription.unsubscribe();
+  }
+
+
 
   private initSearchMetode(){
     this.searchMethod = (words) => this.inventoryService.search(this.branch_id, words);

@@ -5,13 +5,14 @@
   align-items: center;
   display: flex;
   justify-content: center;
+
+  .ui-dropdown{
+    width: 100% !important;
+  }
 }
 
 h2{
   color: white;
-  border-right: 1px solid white;
-  padding-right: 2em;
-  margin-right: 2em;
   text-align: center;
 }
 
@@ -42,4 +43,11 @@ ul{
       font-size: 1.5em;
     }
   }
+}
+
+
+form{
+  display:flex;
+  flex-direction:column;
+
 }

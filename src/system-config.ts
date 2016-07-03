@@ -11,6 +11,9 @@ const map: any = {
 
 /** User packages configuration. */
 const packages: any = {
+  moment:{
+    format: 'cjs'
+  }
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -65,6 +68,9 @@ const barrels: string[] = [
   'app/product-inventario',
   'app/+app/+inventario/modal-inventario',
   'app/+app/+venta/sale-confirm-modal',
+  'app/+app/shared/top-bar',
+  'app/user/schedule/schedule-modal',
+  'app/user/schedule/end-schedule-modal',
   /** @cli-barrel */
 ];
 
@@ -80,7 +86,7 @@ const cliSystemConfigPackages: any = {
   'primeng': {
     defaultExtension: 'js',
     main: 'primeng.js'
-  }
+  },
 };
 barrels.forEach((barrelName: string) => {
   cliSystemConfigPackages[barrelName] = { main: 'index' };
@@ -98,6 +104,7 @@ System.config({
     'angular2-jwt/angular2-jwt': 'vendor/angular2-jwt/angular2-jwt.js',
     'ng2-bs3-modal': 'vendor/ng2-bs3-modal',
     'angular2-notifications': 'vendor/angular2-notifications',
+    'moment': 'vendor/moment/moment.js',
     'primeng': 'vendor/primeng'
   },
   packages: cliSystemConfigPackages
