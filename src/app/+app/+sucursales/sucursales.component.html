@@ -1,3 +1,12 @@
-<p>
-  sucursales works!
-</p>
+<main-content>
+  <div  *ngFor="let branch of branches">
+    <div class="content-div" (click)="update(branch)">
+      {{branch.name}}
+    </div>
+  </div>
+</main-content>
+
+<branch-modal (created)="created($event)"
+            (updated)="updated($event)"
+            (deleted)="deleted($event)">
+</branch-modal>

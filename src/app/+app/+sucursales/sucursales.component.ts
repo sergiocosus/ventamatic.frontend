@@ -1,16 +1,45 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
+import {NotificationsService} from "angular2-notifications/components";
+import {BranchService} from "./shared/branch.service";
+import {Branch} from "./shared/branch";
+import {BranchModalComponent} from "./branch-modal/branch-modal.component";
 
 @Component({
   moduleId: module.id,
   selector: 'app-sucursales',
   templateUrl: 'sucursales.component.html',
-  styleUrls: ['sucursales.component.css']
+  styleUrls: ['sucursales.component.css'],
+  directives: [
+    BranchModalComponent,
+  ]
 })
 export class SucursalesComponent implements OnInit {
+  @ViewChild(BranchModalComponent) private branchModal:BranchModalComponent;
 
-  constructor() {}
+  branches:Branch[];
 
-  ngOnInit() {
+  constructor(private branchService:BranchService,
+              private notification:NotificationsService) {}
+
+  ngOnInit():any {
+    this.branchService.getAll().subscribe(
+      branches => this.branches = branches
+    )
   }
 
+  update(branch:Branch){
+    this.branchModal.openUpdate(branch);
+  }
+
+  created(branch:Branch){
+    this.branches.unshift(branch);
+  }
+
+  deleted(branch:Branch){
+    var index = this.branches.indexOf(branch);
+    if (index > -1) {
+      this.branches.splice(index, 1);
+    }
+  }
+  
 }

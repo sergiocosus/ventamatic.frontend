@@ -18,4 +18,9 @@ export class BranchService {
     return this.apiHttp.get(this.basePath + branch_id)
       .map(res => new Branch().parse(res.branch));
   }
+  
+  put(branch:Branch){
+    return this.apiHttp.put(this.basePath + branch.id, branch)
+      .map(res => new Branch().parse(res.branch));
+  }
 }

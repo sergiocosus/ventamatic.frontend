@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output,EventEmitter } from '@angular/core';
+import { Component, ViewChild, Output } from '@angular/core';
 import {Client} from "../shared/client";
 import {ModalComponent, MODAL_DIRECTIVES} from "ng2-bs3-modal/ng2-bs3-modal";
 import {ClientService} from "../shared/client.service";
@@ -28,9 +28,6 @@ export class ClientModalComponent extends CrudModalComponent{
   constructor(protected clientService:ClientService,
               protected notification:NotificationsService) {
     super(notification);
-  }
-
-  ngOnInit() {
   }
 
   openCreate(){

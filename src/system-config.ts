@@ -71,6 +71,7 @@ const barrels: string[] = [
   'app/+app/shared/top-bar',
   'app/user/schedule/schedule-modal',
   'app/user/schedule/end-schedule-modal',
+  'app/+app/+sucursales/branch-modal',
   /** @cli-barrel */
 ];
 

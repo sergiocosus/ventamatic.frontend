@@ -1,0 +1,52 @@
+<modal>
+  <modal-header [show-close]="true">
+    <h4 *ngIf="updateMode"> Editar Sucursal </h4>
+  </modal-header>
+  <form (ngSubmit)="submit()">
+    <modal-body *ngIf="branch">
+      <floating-label [label]="'Id'" *ngIf="updateMode" >
+        <input type="number" [(ngModel)]="branch.id" disabled="disabled"/>
+      </floating-label>
+      <floating-label [label]="'Nombre'">
+        <input type="text" [(ngModel)]="branch.name" [disabled]="locked" required/>
+      </floating-label>
+      <floating-label [label]="'Descripción'">
+        <input type="text" [(ngModel)]="branch.description" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Dirección'">
+        <input type="text" [(ngModel)]="branch.address" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Email'">
+        <input type="text" [(ngModel)]="branch.title_ticket" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Teléfono'">
+        <input type="text" [(ngModel)]="branch.header_ticket" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Celular'">
+        <input type="text" [(ngModel)]="branch.footer_ticket" [disabled]="locked"/>
+      </floating-label>
+      <floating-label [label]="'Imagen'">
+        <input type="file" [(ngModel)]="branch.image_hash" [disabled]="locked"/>
+      </floating-label>
+    </modal-body>
+    <modal-footer>
+      <button *ngIf="locked"
+              type="submit" class="btn btn-danger pull-xs-left"
+              (click)="unlock()" >
+        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+        Editar Sucursal
+      </button>
+      <button *ngIf="updateMode && !locked"
+              type="submit"
+              class="btn btn-success" >
+        Actualizar Sucursal
+      </button>
+      <button type="button"
+              class="btn btn-primary"
+              (click)="close()" >
+        Cerrar
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+

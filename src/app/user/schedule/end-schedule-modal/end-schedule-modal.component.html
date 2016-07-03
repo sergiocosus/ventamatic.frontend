@@ -1,0 +1,62 @@
+<modal (onClose)="clear()" (onDismiss)="clear()">
+  <modal-header [show-close]="true">
+    <h4 *ngIf="!finished_schedule">Terminar Turno </h4>
+    <h4 *ngIf="finished_schedule">Turno terminado </h4>
+  </modal-header>
+  <form (ngSubmit)="submit()">
+    <modal-body>
+      <floating-label *ngIf="!finished_schedule" [label]="'Cantidad Final'">
+        <input type="text" [(ngModel)]="final_amount" [disabled]="locked"/>
+      </floating-label>
+      <table *ngIf="finished_schedule">
+        <tr>
+          <td>Inicio de turno</td>
+          <td>{{finished_schedule.created_at | date:'medium'}}</td>
+        </tr>
+        <tr>
+          <td>Fin de turno</td>
+          <td>{{finished_schedule.updated_at | date:'medium'}}</td>
+        </tr>
+        <tr>
+          <td>Cantidad inicial</td>
+          <td>{{finished_schedule.initial_amount  | currency:'USD':true:'.2-2'}} </td>
+        </tr>
+        <tr>
+          <td>Venta calculada</td>
+          <td>{{finished_schedule.system_amount  | currency:'USD':true:'.2-2'}}</td>
+        </tr>
+        <tr>
+          <td>Venta registrada</td>
+          <td>{{finished_schedule.final_amount | currency:'USD':true:'.2-2'}}</td>
+        </tr>
+        <tr>
+          <td>Diferencia</td>
+          <td>{{finished_schedule.system_amount -
+            finished_schedule.final_amount  | currency:'USD':true:'.2-2'}}</td>
+        </tr>
+        <tr>
+          <td>Estado</td>
+          <td>{{finished_schedule.schedule_status.name }}</td>
+        </tr>
+        <tr>
+          <td>Nota</td>
+          <td></td>
+        </tr>
+      </table>
+    </modal-body>
+    <modal-footer>
+      <button
+              *ngIf="!finished_schedule"
+              type="submit"
+              class="btn btn-success">
+        Terminar turno
+      </button>
+      <button type="button"
+              class="btn btn-primary"
+              (click)="close()">
+        Cerrar
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
