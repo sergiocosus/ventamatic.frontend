@@ -7,13 +7,12 @@
     </div>
 
     <form class="form-signin" (ngSubmit)="onSubmit()">
-      <floating-label [label]="'Usuario'">
-        <input class="no-check" type="text" required="required" autofocus="autofocus"
-          [(ngModel)]="username"/>
-      </floating-label>
-      <floating-label [label]="'Contraseña'">
-        <input class="no-check" type="password" required="required" [(ngModel)]="password" />
-      </floating-label>
+      <input-label [(ngModel)]="username" [autofocus]="true" [required]="true">
+        Usuario
+      </input-label>
+      <input-label [(ngModel)]="password" [required]="true" [type]="'password'">
+        Contraseña
+      </input-label>
       <button class="btn btn-primary btn-block"
               type="submit">Iniciar Sesión</button>
     </form>

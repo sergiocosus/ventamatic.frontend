@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ViewChild, ElementRef, forwardRef, Provider} from '@angular/core';
+import {Component, Input, forwardRef, Provider, EventEmitter, Output} from '@angular/core';
 import {CORE_DIRECTIVES, NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/common";
 
 const noop = (_?) => {};
@@ -24,8 +24,15 @@ export class InputLabelComponent  implements ControlValueAccessor {
   @Input() type:string = 'text';
   @Input() disabled:boolean = null;
   @Input() required:boolean = null;
+  @Input() autofocus:boolean = null;
+  @Input() min:number = null;
+  @Input() max:number = null;
+  @Input() step:number = null;
   @Input() class:string = null;
   @Input() id:string = null;
+
+  @Output() focus:EventEmitter<any> = new EventEmitter();
+
   constructor() {}
 
 

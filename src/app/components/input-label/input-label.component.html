@@ -1,16 +1,19 @@
 <input [(ngModel)]="value"
-       [type]="type"
+       [attr.type]="type"
        [disabled]="disabled"
        [class]="class"
        [id]="id"
        [required]="required"
+       [autofocus]="autofocus"
+       [min]="min"
+       [max]="max"
+       [step]="step"
        [ngClass]="{
          empty: isInputVoid,
          'no-check': !required
        }"
-
+       [autocomplete]="'off'"
        (blur)="onTouched()"
-
-
+       (focus)="focus.emit($event)"
 />
 <label><ng-content></ng-content></label>

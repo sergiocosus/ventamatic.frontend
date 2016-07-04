@@ -16,6 +16,7 @@ import {InventoryService} from "../../../shared/inventory/inventory.service";
 import {Inventory} from "../../../shared/inventory/inventory";
 import {SaleConfirmModalComponent} from "../sale-confirm-modal/sale-confirm-modal.component";
 import {ScheduleService} from "../../../user/schedule/schedule.service";
+import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 @Component({
   moduleId: module.id,
@@ -27,7 +28,8 @@ import {ScheduleService} from "../../../user/schedule/schedule.service";
     MainContentComponent,
     AutocompleteInputComponent,
     SelectButton,
-    SaleConfirmModalComponent
+    SaleConfirmModalComponent,
+    InputLabelComponent
   ],
   providers: [SaleService]
 })
@@ -49,7 +51,7 @@ export class SaleComponent implements OnActivate, OnDestroy {
   bar_code:string;
 
   product_id:number;
-  clientPayment:number = 0;
+  clientPayment:number = null;
   paymentTypes: SelectItem[] =[
     {
       label: 'Efectivo',
@@ -264,7 +266,7 @@ export class SaleComponent implements OnActivate, OnDestroy {
     this.addedProducts = [];
     this.bar_code = "";
     this.search_words = "";
-    this.clientPayment = 0;
+    this.clientPayment = null;
     this.product_id = null;
     this.client_id = 1;
     this.payment_type_id = 1;

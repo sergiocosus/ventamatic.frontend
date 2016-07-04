@@ -1,29 +1,19 @@
 <div class="control">
   <div class="client">
     <h5>Cliente</h5>
-    <floating-label [label]="'ID de cliente'">
-      <input type="number"
-             min="1"
-             [(ngModel)]="client_id"
-             [ngFormControl]="clientIdControl"
-      />
-      <table class="search-list">
-        <tr *ngFor="let client of clientSuggestions"
-            (click)="selectClient(client)">
-          <td>{{client.id}}</td>
-          <td>{{client.name}}</td>
-        </tr>
-      </table>
-    </floating-label>
+    <input-label [(ngModel)]="client_id" [type]="'number'" [min]="1"
+                 [ngFormControl]="clientIdControl">
+      ID de cliente
+    </input-label>
     <hr/>
   </div>
 
 
   <div class="search">
     <h5>Producto</h5>
-    <floating-label [label]="'Por Código de barras'">
-      <input type="text" [(ngModel)]="bar_code" (keyup)="barCodeEntered($event)"/>
-    </floating-label>
+    <input-label [(ngModel)]="bar_code" (keyup)="barCodeEntered($event)">
+      Código de barras
+    </input-label>
 
     <autocomplete-input
       (selected)="addProduct($event)"
@@ -32,18 +22,18 @@
     >
     </autocomplete-input>
 
-    <floating-label [label]="'Por ID'">
-      <input type="number" min="1" step="1"
-             [(ngModel)]="product_id"
-             (keyup)="idEntered($event)"/>
-    </floating-label>
+    <input-label [(ngModel)]="product_id" [type]="'number'" [min]="1" [step]="1"
+                 (keyup)="idEntered($event)">
+      ID
+    </input-label>
     <hr/>
   </div>
 
   <div class="finish">
-    <floating-label [label]="'Pago:'">
-      <input type="number" min="0" [(ngModel)]="clientPayment"/>
-    </floating-label>
+    <input-label [(ngModel)]="clientPayment"
+                 [type]="'number'" [min]="0" [required]="true">
+      Pago
+    </input-label>
 
     <hr>
 
@@ -55,11 +45,10 @@
       >
       </p-selectButton>
 
-      <floating-label *ngIf="payment_type_id == 2"
-                      [label]="'Folio de la transacción electrónica'">
-        <input type="text"
-               [(ngModel)]="card_payment_id"/>
-      </floating-label>
+      <input-label *ngIf="payment_type_id == 2"
+                   [(ngModel)]="card_payment_id" [required]="true">
+        Folio de la transacción electrónica
+      </input-label>
     </div>
 
     <hr>
@@ -136,7 +125,7 @@
     <tr [ngClass]="{ error: clientPayment - total < 0 }">
       <td colspan="3"></td>
       <td>Pago</td>
-      <td class="align-right">{{clientPayment | currency:'USD':true:'1.2-2'}}</td>
+      <td class="align-right">{{ clientPayment-0 | currency:'USD':true:'1.2-2'}}</td>
     </tr>
     <tr [ngClass]="{ error: clientPayment - total < 0 }">
       <td colspan="3"></td>

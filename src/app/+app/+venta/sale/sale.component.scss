@@ -3,7 +3,7 @@
 
 :host{
   display: flex;
-  floating-label{
+  floating-label, input-label{
     input{
       background-color: $darkBlue;
       color: white;

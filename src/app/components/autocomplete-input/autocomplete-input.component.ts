@@ -2,6 +2,7 @@ import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
 import { Control } from "@angular/common";
 
 import {FloatingLabelComponent} from "../floating-label/floating-label.component";
+import {InputLabelComponent} from "../input-label/input-label.component";
 
 @Component({
   moduleId: module.id,
@@ -10,6 +11,7 @@ import {FloatingLabelComponent} from "../floating-label/floating-label.component
   styleUrls: ['autocomplete-input.component.css'],
   directives: [
     FloatingLabelComponent,
+    InputLabelComponent
   ],
 })
 export class AutocompleteInputComponent implements OnInit {
