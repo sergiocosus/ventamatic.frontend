@@ -2,7 +2,8 @@
   <div class="client">
     <h5>Cliente</h5>
     <input-label [(ngModel)]="client_id" [type]="'number'" [min]="1"
-                 [ngFormControl]="clientIdControl">
+                 [ngFormControl]="clientIdControl"
+                 [required]="true">
       ID de cliente
     </input-label>
     <hr/>

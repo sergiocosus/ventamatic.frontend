@@ -6,10 +6,15 @@
   floating-label, input-label{
     input{
       background-color: $darkBlue;
+      border-bottom: solid 2px steelblue;
+
       color: white;
     }
-    label{
-      color: white !important;
+
+    input:focus ~ label,
+    input:not(.empty)~ label
+    {
+      color:  lighten(steelblue, 50%);
     }
   }
 
@@ -40,13 +45,10 @@
     flex: 0 0 auto;
   }
 
-  .client{
-  }
   .product{
     color: white;
   }
-  .search{
-  }
+
 }
 
 
