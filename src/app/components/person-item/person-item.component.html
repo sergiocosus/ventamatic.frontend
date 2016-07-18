@@ -1,4 +1,4 @@
-<div class="button-delete" (click)="clickDelete()">
+<div *ngIf="canDelete" class="button-delete" (click)="clickDelete()">
   <img src="images/remove.svg">
 </div>
 <div class="content-div" (click)="clickUpdate()">

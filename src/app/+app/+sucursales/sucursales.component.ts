@@ -3,6 +3,8 @@ import {NotificationsService} from "angular2-notifications/components";
 import {BranchService} from "./shared/branch.service";
 import {Branch} from "./shared/branch";
 import {BranchModalComponent} from "./branch-modal/branch-modal.component";
+import {BranchItemComponent} from "./branch-item/branch-item.component";
+import {MainContentComponent} from "../../shared/main-content/main-content.component";
 
 @Component({
   moduleId: module.id,
@@ -10,7 +12,9 @@ import {BranchModalComponent} from "./branch-modal/branch-modal.component";
   templateUrl: 'sucursales.component.html',
   styleUrls: ['sucursales.component.css'],
   directives: [
+    MainContentComponent,
     BranchModalComponent,
+    BranchItemComponent
   ]
 })
 export class SucursalesComponent implements OnInit {

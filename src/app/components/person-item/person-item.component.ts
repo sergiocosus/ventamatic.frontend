@@ -7,6 +7,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['person-item.component.css']
 })
 export class PersonItemComponent implements OnInit {
+  @Input('can-delete') can_delete:boolean = true;
+  
   @Output() delete = new EventEmitter();
   @Output() update = new EventEmitter();
 

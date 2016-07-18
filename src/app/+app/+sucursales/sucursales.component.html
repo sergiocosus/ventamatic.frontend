@@ -1,11 +1,10 @@
 <main-content>
-  <div  *ngFor="let branch of branches">
-    <div class="content-div" (click)="update(branch)">
-      {{branch.name}}
-    </div>
-  </div>
+    <branch-item  *ngFor="let branch of branches"
+                  [branch]="branch"
+                  (update)="update($event)"
+                  (delete)="delete($event)">
+    </branch-item>
 </main-content>
 
-<branch-modal
-           >
+<branch-modal>
 </branch-modal>

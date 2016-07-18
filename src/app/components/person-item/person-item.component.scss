@@ -3,6 +3,7 @@
 :host {
   display: inline-flex;
   flex: 0 0 200px;
+  max-width: 200px;
   height: 100px;
   background-color: $darkBlue;
   margin: 10px;
