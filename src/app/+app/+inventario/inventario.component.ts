@@ -1,6 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {MainContentComponent} from "../../shared/main-content/main-content.component";
-import {SearchBarComponent} from "../shared/search-bar/search-bar.component";
+import {Component, OnInit, ViewChild} from "@angular/core";
+
+import {SelectBranchComponent} from "./select-branch/select-branch.component";
+import {InventoryComponent} from "./inventory/inventory.component";
+import {Routes, ROUTER_DIRECTIVES} from "@angular/router";
+import {InventoryService} from "../../shared/inventory/inventory.service";
+import {Inventory} from "../../shared/inventory/inventory";
 import {ModalInventarioComponent} from "./modal-inventario/modal-inventario.component";
 
 @Component({
@@ -8,13 +12,23 @@ import {ModalInventarioComponent} from "./modal-inventario/modal-inventario.comp
   selector: 'app-inventario',
   templateUrl: 'inventario.component.html',
   styleUrls: ['inventario.component.css'],
-  directives: [SearchBarComponent,MainContentComponent,ModalInventarioComponent]
+  directives: [
+    ROUTER_DIRECTIVES
+  ]
 })
-export class InventarioComponent implements OnInit {
 
+@Routes([
+  {path: '', component: SelectBranchComponent},
+  {path: '/:branch_id', component: InventoryComponent}
+])
+
+export class InventarioComponent implements OnInit {
+ 
   constructor() {}
 
   ngOnInit() {
   }
+
+ 
 
 }
