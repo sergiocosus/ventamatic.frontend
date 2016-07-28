@@ -6,7 +6,9 @@ import {PersonItemComponent} from "../../../components/person-item";
   selector: 'supplier-item',
   templateUrl: 'supplier-item.component.html',
   styleUrls: ['supplier-item.component.css'],
-  directives: [PersonItemComponent]
+  directives: [
+    PersonItemComponent,
+  ]
 })
 export class SupplierItemComponent implements OnInit {
   @Input() supplier:any;

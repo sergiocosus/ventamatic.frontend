@@ -6,33 +6,42 @@
   </modal-header>
   <form (ngSubmit)="submit()">
     <modal-body *ngIf="!deleteMode && client">
-      <floating-label [label]="'Id'" *ngIf="updateMode" >
-        <input type="text" [(ngModel)]="client.id" disabled="disabled"/>
-      </floating-label>
-      <floating-label [label]="'Nombre'">
-        <input type="text" [(ngModel)]="client.name" [disabled]="locked" required/>
-      </floating-label>
-      <floating-label [label]="'Apellido Paterno'">
-        <input type="text" [(ngModel)]="client.last_name" [disabled]="locked"/>
-      </floating-label>
-      <floating-label [label]="'Apellido Materno'">
-        <input type="text" [(ngModel)]="client.last_name_2" [disabled]="locked"/>
-      </floating-label>
-      <floating-label [label]="'Email'">
-        <input type="email" [(ngModel)]="client.email" [disabled]="locked"/>
-      </floating-label>
-      <floating-label [label]="'Teléfono'">
-        <input type="text" [(ngModel)]="client.phone" [disabled]="locked"/>
-      </floating-label>
-      <floating-label [label]="'Celular'">
-        <input type="text" [(ngModel)]="client.cellphone" [disabled]="locked"/>
-      </floating-label>
-      <floating-label [label]="'Dirección'">
-        <input type="text" [(ngModel)]="client.address" [disabled]="locked"/>
-      </floating-label>
-      <floating-label [label]="'RFC'">
-        <input type="text" [(ngModel)]="client.rfc" [disabled]="locked"/>
-      </floating-label>
+      <input-label *ngIf="updateMode" name="id"
+                   type="text" [(ngModel)]="client.id" disabled="disabled">
+        Id
+      </input-label>
+      <input-label type="text" [(ngModel)]="client.name" name="name"
+                   [disabled]="locked" required>
+        Nombre
+      </input-label>
+      <input-label  type="text" [(ngModel)]="client.last_name" name="last_name"
+                    [disabled]="locked">
+        Apellido Paterno
+      </input-label>
+      <input-label type="text" [(ngModel)]="client.last_name_2" name="last_name_2"
+                   [disabled]="locked">
+        Apellido Materno
+      </input-label>
+      <input-label type="email" [(ngModel)]="client.email" name="email"
+                   [disabled]="locked">
+        Email
+      </input-label>
+      <input-label type="text" [(ngModel)]="client.phone" name="phone"
+                   [disabled]="locked">
+        Teléfono
+      </input-label>
+      <input-label type="text" [(ngModel)]="client.cellphone" name="cellphone"
+                   [disabled]="locked">
+        Celular
+      </input-label>
+      <input-label type="text" [(ngModel)]="client.address" name="address"
+                   [disabled]="locked">
+        Dirección
+      </input-label>
+      <input-label type="text" [(ngModel)]="client.rfc" name="rfc"
+                   [disabled]="locked">
+         RFC
+      </input-label>
     </modal-body>
     <modal-footer>
       <button *ngIf="locked"

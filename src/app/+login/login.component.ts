@@ -43,4 +43,7 @@ export class LoginComponent implements OnInit {
     this.login(this.username, this.password)
   }
 
+  type(){
+    console.log("lsdjflskdj");
+  }
 }

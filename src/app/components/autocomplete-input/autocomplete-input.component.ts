@@ -3,6 +3,7 @@ import { Control } from "@angular/common";
 
 import {FloatingLabelComponent} from "../floating-label/floating-label.component";
 import {InputLabelComponent} from "../input-label/input-label.component";
+import {REACTIVE_FORM_DIRECTIVES} from "@angular/forms";
 
 @Component({
   moduleId: module.id,
@@ -11,7 +12,8 @@ import {InputLabelComponent} from "../input-label/input-label.component";
   styleUrls: ['autocomplete-input.component.css'],
   directives: [
     FloatingLabelComponent,
-    InputLabelComponent
+    InputLabelComponent,
+    REACTIVE_FORM_DIRECTIVES,
   ],
 })
 export class AutocompleteInputComponent implements OnInit {

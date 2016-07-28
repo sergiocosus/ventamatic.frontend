@@ -5,13 +5,17 @@ import {ClientService} from "../shared/client.service";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {FloatingLabelComponent} from "../../../components/floating-label";
 import {CrudModalComponent} from "../../../components/crud-modal";
+import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 @Component({
   moduleId: module.id,
   selector: 'client-modal',
   templateUrl: 'client-modal.component.html',
   styleUrls: ['client-modal.component.css'],
-  directives: [MODAL_DIRECTIVES, FloatingLabelComponent]
+  directives: [
+    MODAL_DIRECTIVES,
+    InputLabelComponent
+  ]
 
 })
 export class ClientModalComponent extends CrudModalComponent{
@@ -20,7 +24,7 @@ export class ClientModalComponent extends CrudModalComponent{
   @Output() created;
   @Output() updated;
   @Output() deleted;
-  
+
   client: Client;
 
   name = 'Cliente';
@@ -39,14 +43,14 @@ export class ClientModalComponent extends CrudModalComponent{
     this.client = client;
     super.openUpdate(client);
   }
-  
+
   openDelete(client:Client){
     this.client = client;
     super.openDelete(client);
   }
 
   create(){
-    this.clientService.post(this.client).subscribe(client => {  
+    this.clientService.post(this.client).subscribe(client => {
       this.createdSuccess(client);
     });
   }

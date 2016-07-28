@@ -28,6 +28,7 @@
     border-left: 5px solid transparent;
     transition: .25s all;
 
+
     &[disabled]{
       background-color: #CCD0DD;
     }
@@ -40,6 +41,11 @@
       &.ng-invalid {
         border-left: 5px solid #d9534f; /* red */
       }
+    }
+
+    &:not(:focus).empty
+    {
+      color: transparent;
     }
 
   }

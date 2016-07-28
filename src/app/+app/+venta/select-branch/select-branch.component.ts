@@ -6,6 +6,7 @@ import {ScheduleService} from "../../../user/schedule/schedule.service";
 import {Dropdown, SelectItem} from 'primeng/primeng';
 import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
 import {Subscription} from "rxjs/Rx";
+import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 @Component({
   moduleId: module.id,
@@ -16,7 +17,7 @@ import {Subscription} from "rxjs/Rx";
     SelectBranchComponent,
     ROUTER_DIRECTIVES,
     Dropdown,
-    FloatingLabelComponent,
+    InputLabelComponent
   ]
 })
 export class SelectBranchComponent implements OnInit, OnDestroy {

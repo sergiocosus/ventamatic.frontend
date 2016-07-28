@@ -3,6 +3,7 @@ import {ModalComponent, MODAL_DIRECTIVES} from "ng2-bs3-modal/ng2-bs3-modal";
 import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
 import {ScheduleService} from "../schedule.service";
 import {Schedule} from "../schedule";
+import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 @Component({
   moduleId: module.id,
@@ -12,6 +13,7 @@ import {Schedule} from "../schedule";
   directives: [
     MODAL_DIRECTIVES,
     FloatingLabelComponent,
+    InputLabelComponent
   ]
 })
 export class EndScheduleModalComponent implements OnInit {

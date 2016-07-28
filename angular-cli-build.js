@@ -18,11 +18,12 @@ module.exports = function(defaults) {
       '@angular/**/*.+(js|js.map)',
       'angular2-jwt/angular2-jwt.js',
       'angular2-notifications/**/*.js',
-      'jquery/dist/jquery.min.js',
       'bootstrap/dist/js/bootstrap.min.js',
-      'ng2-bs3-modal/**/*.js',
       'font-awesome/fonts/*',
+      'jquery/dist/jquery.min.js',
       'moment/moment.js',
+      'ng2-bs3-modal/**/*.js',
+      'ng2-bootstrap/**/*.js',
       'primeng/**/**/*',
       'primeui/**/**/*'
     ]

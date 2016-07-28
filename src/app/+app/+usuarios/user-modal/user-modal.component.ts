@@ -5,6 +5,7 @@ import {FloatingLabelComponent} from "../../../components/floating-label";
 import {UserService} from "../../../user/user.service";
 import {User} from "../../../user/user";
 import {CrudModalComponent} from "../../../components/crud-modal";
+import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 
 @Component({
@@ -12,7 +13,10 @@ import {CrudModalComponent} from "../../../components/crud-modal";
   selector: 'user-modal',
   templateUrl: 'user-modal.component.html',
   styleUrls: ['user-modal.component.css'],
-  directives: [MODAL_DIRECTIVES, FloatingLabelComponent]
+  directives: [
+    MODAL_DIRECTIVES,
+    InputLabelComponent
+  ]
 })
 export class UserModalComponent extends CrudModalComponent {
   @ViewChild(ModalComponent) protected modal:ModalComponent;

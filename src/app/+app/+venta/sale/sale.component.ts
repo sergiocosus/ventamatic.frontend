@@ -1,7 +1,9 @@
 import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
-import { Control } from "@angular/common";
+import {Control, CORE_DIRECTIVES} from "@angular/common";
 import {OnActivate, RouteSegment, RouteTree, Router} from "@angular/router";
+import { REACTIVE_FORM_DIRECTIVES } from "@angular/forms";
 import { SelectItem, SelectButton } from "primeng/primeng";
+import {BUTTON_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap";
 
 import {BranchService} from "../../+sucursales/shared/branch.service";
 import {Branch} from "../../+sucursales/shared/branch";
@@ -29,9 +31,10 @@ import {InputLabelComponent} from "../../../components/input-label/input-label.c
     AutocompleteInputComponent,
     SelectButton,
     SaleConfirmModalComponent,
-    InputLabelComponent
-  ],
-  providers: [SaleService]
+    InputLabelComponent,
+    BUTTON_DIRECTIVES,
+    REACTIVE_FORM_DIRECTIVES,
+  ]
 })
 export class SaleComponent implements OnActivate, OnDestroy {
   @ViewChild(SaleConfirmModalComponent) protected saleConfirmModal:SaleConfirmModalComponent;
@@ -52,7 +55,7 @@ export class SaleComponent implements OnActivate, OnDestroy {
 
   product_id:number;
   clientPayment:number = null;
-  paymentTypes: SelectItem[] =[
+  paymentTypes:SelectItem[] = [
     {
       label: 'Efectivo',
       value: 1
@@ -67,6 +70,7 @@ export class SaleComponent implements OnActivate, OnDestroy {
 
   searchMethod;
   search_words:string = "";
+
   constructor(private clientService:ClientService,
               private notificationService:NotificationsService,
               private saleService:SaleService,

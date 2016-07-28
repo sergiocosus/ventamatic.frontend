@@ -5,13 +5,17 @@ import {SupplierService} from "../shared/supplier.service";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {FloatingLabelComponent} from "../../../components/floating-label";
 import {CrudModalComponent} from "../../../components/crud-modal";
+import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 @Component({
   moduleId: module.id,
   selector: 'supplier-modal',
   templateUrl: 'supplier-modal.component.html',
   styleUrls: ['supplier-modal.component.css'],
-  directives: [MODAL_DIRECTIVES, FloatingLabelComponent]
+  directives: [
+    MODAL_DIRECTIVES,
+    InputLabelComponent
+  ]
 
 })
 export class SupplierModalComponent extends CrudModalComponent {

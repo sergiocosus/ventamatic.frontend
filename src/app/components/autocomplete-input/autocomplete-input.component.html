@@ -1,7 +1,7 @@
 <input-label
   (window:click)="hideSearch($event)"
   [(ngModel)]="search_words"
-  [ngFormControl]="searchControl"
+  [formControl]="searchControl"
   (keydown)="searchEntered($event)"
   (focus)="showSearch()">
   Buscar por descripción

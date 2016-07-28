@@ -8,6 +8,7 @@ import {ProductService} from "../../../shared/product/product.service";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {CategoryService} from "../../../shared/product/category/category.service";
 import {Category} from "../../../shared/product/category/category";
+import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 @Component({
   moduleId: module.id,
@@ -16,7 +17,7 @@ import {Category} from "../../../shared/product/category/category";
   styleUrls: ['product-modal.component.css'],
   directives: [
     MODAL_DIRECTIVES,
-    FloatingLabelComponent,
+    InputLabelComponent,
     Dropdown,
     MultiSelect,
   ]

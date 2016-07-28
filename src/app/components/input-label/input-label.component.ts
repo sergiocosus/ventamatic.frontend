@@ -1,5 +1,6 @@
 import {Component, Input, forwardRef, Provider, EventEmitter, Output} from '@angular/core';
-import {CORE_DIRECTIVES, NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/common";
+import { CORE_DIRECTIVES } from "@angular/common";
+import { NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
 
 const noop = (_?) => {};
 
@@ -30,6 +31,7 @@ export class InputLabelComponent  implements ControlValueAccessor {
   @Input() step:number = null;
   @Input() class:string = null;
   @Input() id:string = null;
+  @Input() ngControl:string = null;
 
   @Output() focus:EventEmitter<any> = new EventEmitter();
 

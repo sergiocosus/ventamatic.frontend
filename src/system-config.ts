@@ -7,13 +7,35 @@
  **********************************************************************************************/
 /** Map relative paths to URLs. */
 const map: any = {
+  'angular2-jwt/angular2-jwt': 'vendor/angular2-jwt/angular2-jwt.js',
+  'angular2-notifications': 'vendor/angular2-notifications',
+  'ng2-bootstrap':'vendor/ng2-bootstrap',
+  'ng2-bs3-modal': 'vendor/ng2-bs3-modal',
+  'moment': 'vendor/moment/moment.js',
+  'primeng': 'vendor/primeng'
 };
 
 /** User packages configuration. */
 const packages: any = {
   moment:{
     format: 'cjs'
-  }
+  },
+  'angular2-notifications': {
+    defaultExtension: 'js',
+    main: 'components.js'
+  },
+  'ng2-bs3-modal': {
+    defaultExtension: 'js',
+    main: 'ng2-bs3-modal.js'
+  },
+  'ng2-bootstrap': {
+    defaultExtension: 'js',
+    main: 'ng2-bootstrap.js'
+  },
+  'primeng': {
+    defaultExtension: 'js',
+    main: 'primeng.js'
+  },
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -25,6 +47,7 @@ const barrels: string[] = [
   '@angular/core',
   '@angular/common',
   '@angular/compiler',
+  '@angular/forms',
   '@angular/http',
   '@angular/router',
   '@angular/platform-browser',
@@ -78,18 +101,7 @@ const barrels: string[] = [
 ];
 
 const cliSystemConfigPackages: any = {
-  'ng2-bs3-modal': {
-    defaultExtension: 'js',
-    main: 'ng2-bs3-modal.js'
-  },
-  'angular2-notifications': {
-    defaultExtension: 'js',
-    main: 'components.js'
-  },
-  'primeng': {
-    defaultExtension: 'js',
-    main: 'primeng.js'
-  },
+
 };
 barrels.forEach((barrelName: string) => {
   cliSystemConfigPackages[barrelName] = { main: 'index' };
@@ -104,11 +116,6 @@ System.config({
     '@angular': 'vendor/@angular',
     'rxjs': 'vendor/rxjs',
     'main': 'main.js',
-    'angular2-jwt/angular2-jwt': 'vendor/angular2-jwt/angular2-jwt.js',
-    'ng2-bs3-modal': 'vendor/ng2-bs3-modal',
-    'angular2-notifications': 'vendor/angular2-notifications',
-    'moment': 'vendor/moment/moment.js',
-    'primeng': 'vendor/primeng'
   },
   packages: cliSystemConfigPackages
 });

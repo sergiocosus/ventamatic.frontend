@@ -5,9 +5,10 @@
   </modal-header>
   <form (ngSubmit)="submit()">
     <modal-body>
-      <floating-label *ngIf="!finished_schedule" [label]="'Cantidad Final'">
-        <input type="text" [(ngModel)]="final_amount" [disabled]="locked"/>
-      </floating-label>
+      <input-label *ngIf="!finished_schedule"
+                   [(ngModel)]="final_amount" name="final_amount" [disabled]="locked" type="number">
+        Cantidad Final
+      </input-label>
       <table *ngIf="finished_schedule">
         <tr>
           <td>Inicio de turno</td>

@@ -1,8 +1,12 @@
 <form (ngSubmit)="submit()">
   <h2>Seleccione<br/>Sucursal</h2>
-  <p-dropdown [options]="branchesSelect" [(ngModel)]="branch_id"></p-dropdown>
-  <floating-label [label]="'Monto inicial'">
-    <input type="number" [(ngModel)]="initial_amount" />
-  </floating-label>
-  <button class="btn btn-primary" type="submit">Iniciar turno</button>
+  <p-dropdown [options]="branchesSelect"
+              [(ngModel)]="branch_id" name="branch_id"></p-dropdown>
+  <input-label type="number" name="initial_amount"
+               [(ngModel)]="initial_amount">
+    Monto inicial
+  </input-label>
+  <button class="btn btn-primary" type="submit">
+    Iniciar turno
+  </button>
 </form>

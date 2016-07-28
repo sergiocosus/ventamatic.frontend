@@ -7,6 +7,7 @@ import 'rxjs/Rx';
 import { NotificationsService } from 'angular2-notifications/components'
 import { API_HTTP_PROVIDERS } from './app/shared/api-http'
 import { VentamaticFrontendAppComponent, environment } from './app';
+import {disableDeprecatedForms, provideForms} from "@angular/forms";
 
 if (environment.production) {
   enableProdMode();
@@ -14,6 +15,8 @@ if (environment.production) {
 
 bootstrap(VentamaticFrontendAppComponent,
   [
+    disableDeprecatedForms(),
+    provideForms(),
     ROUTER_PROVIDERS,
     HTTP_PROVIDERS,
     provide(AuthHttp, {

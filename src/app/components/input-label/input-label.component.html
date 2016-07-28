@@ -15,5 +15,7 @@
        [autocomplete]="'off'"
        (blur)="onTouched()"
        (focus)="focus.emit($event)"
+       [ngModelOptions]="{standalone: true}"
+
 />
 <label><ng-content></ng-content></label>
