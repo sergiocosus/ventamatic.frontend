@@ -5,30 +5,35 @@ import {ProductService} from "../../../shared/product/product.service";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {Inventory} from "../../../shared/inventory/inventory";
 import {InventoryService} from "../../../shared/inventory/inventory.service";
+import {CrudModalComponent} from "../../../components/crud-modal/crud-modal.component";
 
 @Component({
   moduleId: module.id,
-  selector: 'app-modal-inventario',
+  selector: 'modal-inventario',
   templateUrl: 'modal-inventario.component.html',
   styleUrls: ['modal-inventario.component.css'],
   directives: [MODAL_DIRECTIVES, FloatingLabelComponent]
 })
-export class ModalInventarioComponent implements OnInit {
+export class ModalInventarioComponent extends CrudModalComponent {
+  create() {
+  }
+
+  delete() {
+  }
   @ViewChild(ModalComponent) protected modal:ModalComponent;
   @Output() updated;
 
-  name = 'Producto';
+  name = 'Inventario';
 
   inventory: Inventory;
 
-  constructor(protected inventoryService:InventoryService,
-              protected notification: NotificationsService) {
+  constructor( protected notification: NotificationsService,
+               protected inventoryService:InventoryService
+             ) {
+    super(notification);
   }
 
   ngOnInit() {
-  }
-  openUpdate(inventory:Inventory){
-    this.inventory = inventory;
   }
 
   update(){
@@ -36,5 +41,11 @@ export class ModalInventarioComponent implements OnInit {
       this.updatedSuccess(product);
     });*/
   }
+
+
+   openUpdate(inventory:Inventory){
+    this.inventory = inventory;
+    super.openUpdate(Inventory);
+   }
 
 }

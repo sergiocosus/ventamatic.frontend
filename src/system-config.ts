@@ -65,6 +65,8 @@ const barrels: string[] = [
   'app/product-inventario',
   'app/+app/+inventario/modal-inventario',
   'app/+app/+venta/sale-confirm-modal',
+  'app/+app/+inventario/inventory',
+  'app/+app/+inventario/select-branch',
   /** @cli-barrel */
 ];
 
