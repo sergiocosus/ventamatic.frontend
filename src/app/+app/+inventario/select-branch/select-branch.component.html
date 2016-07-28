@@ -1,9 +1,10 @@
-<h2>Seleccione<br/>Sucursal</h2>
-
-<ul>
-  <li *ngFor="let branch of branches">
-    <a [routerLink]="['/app/inventario/'+branch.id]">
-      {{branch.name}}
-    </a>
-  </li>
-</ul>
+<main-content>
+  <h2>Seleccione<br/>Sucursal</h2>
+  <ul>
+    <li *ngFor="let branch of branches">
+      <a [routerLink]="['/app/inventario/'+branch.id]">
+        {{branch.name}}
+      </a>
+    </li>
+  </ul>
+</main-content>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {BranchService} from "../../+sucursales/shared/branch.service";
 import {Branch} from "../../+sucursales/shared/branch";
 import {ROUTER_DIRECTIVES} from "@angular/router";
+import {ModalInventarioComponent} from "../modal-inventario/modal-inventario.component";
+import {MainContentComponent} from "../../../shared/main-content/main-content.component";
 
 @Component({
   moduleId: module.id,
@@ -10,6 +12,7 @@ import {ROUTER_DIRECTIVES} from "@angular/router";
   styleUrls: ['select-branch.component.css'],
   directives: [
     ROUTER_DIRECTIVES,
+    MainContentComponent
   ],
   providers: [
     BranchService
