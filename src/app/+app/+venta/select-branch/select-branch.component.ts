@@ -24,9 +24,8 @@ export class SelectBranchComponent implements OnInit, OnDestroy {
   private scheduleSubscription:Subscription;
 
   branches:Branch[] = [];
-  branchesSelect:SelectItem[];
   initial_amount:number;
-  branch_id: number;
+  selectedBranch: Branch;
   constructor(private router:Router,
               private branchService:BranchService,
               private scheduleService:ScheduleService
@@ -40,9 +39,9 @@ export class SelectBranchComponent implements OnInit, OnDestroy {
         }else {
           this.branchService.getAll().subscribe( branches => {
             this.branches = branches;
-            this.branchesSelect = branches.map(branch => {
+           /* this.branchesSelect = branches.map(branch => {
               return {label:branch.name, value:branch.id};
-            });
+            });*/
           })
         }
       }
@@ -54,7 +53,8 @@ export class SelectBranchComponent implements OnInit, OnDestroy {
   }
 
   submit(){
-    this.scheduleService.post(this.branch_id, this.initial_amount).subscribe(
+    console.log(this.selectedBranch);
+    this.scheduleService.post(this.selectedBranch.id, this.initial_amount).subscribe(
       schedule => {
         this.scheduleService.updateCurrentSchedule(schedule);
       }

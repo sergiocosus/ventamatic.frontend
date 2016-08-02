@@ -1,7 +1,12 @@
 <form (ngSubmit)="submit()">
   <h2>Seleccione<br/>Sucursal</h2>
-  <p-dropdown [options]="branchesSelect"
-              [(ngModel)]="branch_id" name="branch_id"></p-dropdown>
+  <select [(ngModel)]="selectedBranch" name="branch">
+    <option *ngFor="let branch of branches" [ngValue]="branch" >
+      {{branch.name}}
+    </option>
+  </select>
+<!--  <p-dropdown [options]="selectedBranch"
+              [(ngModel)]="branch_id" name="branch_id"></p-dropdown>-->
   <input-label type="number" name="initial_amount"
                [(ngModel)]="initial_amount">
     Monto inicial
