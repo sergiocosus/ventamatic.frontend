@@ -19,6 +19,9 @@ import {Inventory} from "../../../shared/inventory/inventory";
 import {SaleConfirmModalComponent} from "../sale-confirm-modal/sale-confirm-modal.component";
 import {ScheduleService} from "../../../user/schedule/schedule.service";
 import {InputLabelComponent} from "../../../components/input-label/input-label.component";
+import {TicketComponent} from "../ticket/ticket.component";
+import {Sale} from "../shared/sale";
+import {TicketService} from "../ticket/ticket.service";
 
 @Component({
   moduleId: module.id,
@@ -55,7 +58,7 @@ export class SaleComponent implements OnActivate, OnDestroy {
 
   product_id:number;
   clientPayment:number = null;
-  paymentTypes:SelectItem[] = [
+  paymentTypes = [
     {
       label: 'Efectivo',
       value: 1
@@ -70,13 +73,29 @@ export class SaleComponent implements OnActivate, OnDestroy {
 
   searchMethod;
   search_words:string = "";
+  print = true;
+
+  private messages = {
+    cancelSale: "¿Está seguro de cancelar la venta?\nLos datos de la venta actual serán borrados",
+    clientNotExists: 'El cliente no existe',
+    clientInvalid: 'No se ha seleccionado un cliente válido',
+    emptyBarCode: 'El código de barras se encuentra vacío',
+    emptyId: 'El ID se encuentra vacío',
+    noProductsAdded: 'No se han agregado productos',
+    lowInventory: 'Insuficiente producto en inventario',
+    paymentInvalid: 'El pago es inferior al monto Total',
+    saleSuccess: '¡Venta completada satisfactoriamente!',
+    searching: "Buscando..."
+  };
 
   constructor(private clientService:ClientService,
               private notificationService:NotificationsService,
               private saleService:SaleService,
               private inventoryService:InventoryService,
               private router:Router,
-              private scheduleService:ScheduleService) {
+              private scheduleService:ScheduleService,
+              private ticketService:TicketService
+  ) {
     this.initSearchMetode();
     this.initClientIdControl();
   }
@@ -97,14 +116,11 @@ export class SaleComponent implements OnActivate, OnDestroy {
         }
       }
     );
-
   }
 
   ngOnDestroy():any {
     this.scheduleSubscription.unsubscribe();
   }
-
-
 
   private initSearchMetode(){
     this.searchMethod = (words) => this.inventoryService.search(this.branch_id, words);
@@ -114,7 +130,7 @@ export class SaleComponent implements OnActivate, OnDestroy {
     this.clientIdControl.valueChanges.distinctUntilChanged()
       .subscribe(value => {
         this.client = null;
-        this.client_status = "Buscando...";
+        this.client_status = this.messages.searching;
       });
 
     this.clientIdControl.valueChanges.debounceTime(250).distinctUntilChanged()
@@ -124,7 +140,7 @@ export class SaleComponent implements OnActivate, OnDestroy {
             this.client = client;
             this.client_status = null;
           },
-          error => this.client_status = 'El cliente no existe'
+          error => this.client_status = this.messages.clientNotExists
         );
       });
   }
@@ -151,7 +167,7 @@ export class SaleComponent implements OnActivate, OnDestroy {
           error => this.notifyError(error)
         );
       } else {
-        this.notificationService.alert('Alerta','El código de barras se encuentra vacío');
+        this.notificationService.alert('Alerta', this.messages.emptyBarCode);
       }
     }
   }
@@ -164,7 +180,7 @@ export class SaleComponent implements OnActivate, OnDestroy {
           error => this.notifyError(error)
         );
       } else {
-        this.notificationService.alert('Alerta','El ID se encuentra vacío');
+        this.notificationService.alert('Alerta', this.messages.emptyId);
       }
     }
   }
@@ -180,7 +196,7 @@ export class SaleComponent implements OnActivate, OnDestroy {
         exist[0].quantity++;
       } else {
         this.notificationService.error(
-          'Error', 'Insuficiente producto en inventario'
+          'Error', this.messages.lowInventory
         );
       }
     } else{
@@ -191,14 +207,13 @@ export class SaleComponent implements OnActivate, OnDestroy {
         });
       }else{
         this.notificationService.error(
-          'Error', 'Insuficiente producto en inventario'
+          'Error', this.messages.lowInventory
         );
       }
     }
 
     this.clearSearchInputs();
   }
-
 
   removeProduct(productSale){
     var index = this.addedProducts.indexOf(productSale);
@@ -216,18 +231,18 @@ export class SaleComponent implements OnActivate, OnDestroy {
   confirm(){
     if(!this.client){
       this.notificationService.error(
-        'Error', 'No se ha seleccionado un cliente válido'
+        'Error', this.messages.clientInvalid
       );
       return
     }
     if(!this.addedProducts.length){
       this.notificationService.error(
-        'Error','No se han agregado productos');
+        'Error', this.messages.noProductsAdded);
       return;
     }
     if(this.paymentChange < 0){
       this.notificationService.error(
-        'Error','El pago es inferior al monto Total');
+        'Error', this.messages.paymentInvalid);
       return;
     }
 
@@ -255,9 +270,11 @@ export class SaleComponent implements OnActivate, OnDestroy {
       client_payment: this.clientPayment,
       products: products
     }).subscribe(
-      response => {
-        console.log(response);
-        this.notificationService.success('Éxito', 'Venta completada!');
+      sale => {
+        if(this.print){
+          this.ticketService.putSale(sale);
+        }
+        this.notificationService.success('Éxito', this.messages.saleSuccess);
       },
       error => this.notifyError(error),
       () => this.clear()
@@ -278,7 +295,7 @@ export class SaleComponent implements OnActivate, OnDestroy {
   }
 
   cancel(){
-    if(confirm("¿Está seguro de cancelar la venta? Los datos de la venta actual serán borrados")){
+    if(confirm(this.messages.saleSuccess)){
       this.clear();
     }
   }
@@ -290,7 +307,6 @@ export class SaleComponent implements OnActivate, OnDestroy {
       this.notificationService.error('Error', error.message);
     }
   }
-
 }
 
 interface ProductSale {

@@ -39,9 +39,6 @@ export class SelectBranchComponent implements OnInit, OnDestroy {
         }else {
           this.branchService.getAll().subscribe( branches => {
             this.branches = branches;
-           /* this.branchesSelect = branches.map(branch => {
-              return {label:branch.name, value:branch.id};
-            });*/
           })
         }
       }

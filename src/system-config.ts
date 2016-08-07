@@ -99,6 +99,7 @@ const barrels: string[] = [
   'app/user/schedule/schedule-modal',
   'app/user/schedule/end-schedule-modal',
   'app/components/input-label',
+  'app/+app/+venta/ticket',
   /** @cli-barrel */
 ];
 

@@ -9,7 +9,6 @@
     <hr/>
   </div>
 
-
   <div class="search">
     <h5>Producto</h5>
     <input-label [(ngModel)]="bar_code" name="bar_code" (keyup)="barCodeEntered($event)">
@@ -32,12 +31,11 @@
 
   <div class="finish">
     <input-label [(ngModel)]="clientPayment" name="clientPayment"
-                 [type]="'number'" [min]="0" [max]="99999999999" [required]="true">
+                 [type]="'number'" [min]="total" [max]="99999999999" [required]="true">
       Pago
     </input-label>
 
     <hr>
-
     <h5>Tipo de pago:</h5>
     <br>
     <div class="btn-group">
@@ -48,22 +46,37 @@
       </label>
     </div>
 
+    <hr>
+    <h5>Imprimir ticket</h5>
+    <div class="btn-group">
+      <label class="btn btn-primary" [(ngModel)]="print"  name="payment_type_id"
+             [btnRadio]="true">
+        Si
+      </label>
+      <label class="btn btn-primary" [(ngModel)]="print"  name="payment_type_id"
+             [btnRadio]="false">
+        No
+      </label>
+    </div>
+
     <input-label *ngIf="payment_type_id == 2"
                  [(ngModel)]="card_payment_id" name="card_payment_id" [required]="true">
       Folio de la transacción electrónica
     </input-label>
 
     <hr>
+    <div class="btn-group">
+      <button
+        class="btn btn-success btn-block"
+        (click)="confirm()">Finalizar Venta
+      </button>
 
-    <button
-      class="btn btn-success btn-block"
-      (click)="confirm()">Finalizar Venta
-    </button>
+      <button
+        class="btn btn-danger btn-block"
+        (click)="cancel()">Cancelar Venta
+      </button>
+    </div>
 
-    <button
-      class="btn btn-danger btn-block"
-      (click)="cancel()">Cancelar Venta
-    </button>
   </div>
 </div>
 

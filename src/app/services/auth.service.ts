@@ -12,7 +12,8 @@ export class AuthService {
   private authUrl = 'auth';
   private jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(private http: Http, private notification:NotificationsService) {
+  constructor(private http: Http,
+              private notification:NotificationsService) {
     console.log(notification);
   }
 

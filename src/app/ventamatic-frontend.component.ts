@@ -5,14 +5,24 @@ import { SimpleNotificationsComponent } from 'angular2-notifications/components'
 
 import { AppComponent } from './+app';
 import {AuthService} from "./services/auth.service";
+import {TicketComponent} from "./+app/+venta/ticket/ticket.component";
+import {TicketService} from "./+app/+venta/ticket/ticket.service";
 
 @Component({
   moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'ventamatic-frontend.component.html',
   styleUrls: ['ventamatic-frontend.component.css'],
-  directives: [ROUTER_DIRECTIVES, SimpleNotificationsComponent],
-  providers: [ROUTER_PROVIDERS, AuthService],
+  directives: [
+    ROUTER_DIRECTIVES,
+    SimpleNotificationsComponent,
+    TicketComponent
+  ],
+  providers: [
+    ROUTER_PROVIDERS,
+    AuthService,
+    TicketService
+  ],
   encapsulation: ViewEncapsulation.None,
 
 })
@@ -27,7 +37,8 @@ export class VentamaticFrontendAppComponent implements OnInit {
     timeOut: 5000,
     lastOnBottom: true
   };
-  constructor(private router: Router, private authService:AuthService) {
+  constructor(private router: Router,
+              private authService:AuthService) {
 
   }
 

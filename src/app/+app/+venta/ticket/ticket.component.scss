@@ -1,0 +1,24 @@
+header{
+  width: 100%;
+  text-align: center;
+
+  table{
+    text-align: left;
+  }
+}
+
+table{
+  width: 100%;
+  td, th{
+    padding-left: .3em;
+    padding-right: .3em;
+  }
+}
+
+.right{
+  text-align: right;
+}
+
+footer{
+  text-align: center;
+}

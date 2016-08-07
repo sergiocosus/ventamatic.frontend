@@ -21,6 +21,7 @@ import { CategoryService } from "../shared/product/category/category.service";
 import { InventoryService } from "../shared/inventory/inventory.service";
 import { ScheduleService } from "../user/schedule/schedule.service";
 import { TopBarComponent } from "./shared/top-bar/top-bar.component";
+import {TicketService} from "./+venta/ticket/ticket.service";
 
 @Component({
   moduleId: module.id,
@@ -28,7 +29,7 @@ import { TopBarComponent } from "./shared/top-bar/top-bar.component";
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
   directives: [
-    ROUTER_DIRECTIVES, 
+    ROUTER_DIRECTIVES,
     AsideNavComponent,
     TopBarComponent
   ],
@@ -39,7 +40,7 @@ import { TopBarComponent } from "./shared/top-bar/top-bar.component";
     BranchService,
     CategoryService,
     InventoryService,
-    ScheduleService
+    ScheduleService,
   ]
 
 })
@@ -63,7 +64,7 @@ export class AppComponent implements OnInit {
 
   constructor(private authService:AuthService,
               private router:Router) {}
-  
+
   ngOnInit() {
     if(!this.authService.isTokenValid()){
       this.router.navigate(['/login']);

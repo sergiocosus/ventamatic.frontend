@@ -1,3 +1,4 @@
+
 html{
   width: 100%;
   max-width: 100%;
@@ -13,8 +14,11 @@ body {
   width: 100%;
 }
 
-/* --- material floating label --- */
-:host{
-
-
+@media print {
+  app-root{
+    background-color: black;
+    >:not(.printable){
+      display: none;
+    }
+  }
 }
