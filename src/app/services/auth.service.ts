@@ -14,7 +14,6 @@ export class AuthService {
 
   constructor(private http: Http,
               private notification:NotificationsService) {
-    console.log(notification);
   }
 
 

@@ -10,32 +10,19 @@
   </div>
 
   <div class="search">
-    <h5>Producto</h5>
-    <input-label [(ngModel)]="bar_code" name="bar_code" (keyup)="barCodeEntered($event)">
-      Código de barras
-    </input-label>
-
-    <autocomplete-input
-      (selected)="addProduct($event)"
-      [searchMethod]="searchMethod"
-      [(search_words)]="search_words"
-    >
-    </autocomplete-input>
-
-    <input-label [(ngModel)]="product_id" name="product_id" [type]="'number'" [min]="1" [step]="1"
-                 (keyup)="idEntered($event)">
-      ID
-    </input-label>
+    <app-find-product (selected-product)="addProduct($event)"
+                      [branch_id]="branch_id">
+    </app-find-product>
     <hr/>
   </div>
 
   <div class="finish">
-    <input-label [(ngModel)]="clientPayment" name="clientPayment"
+    <input-label [(ngModel)]="payment" name="clientPayment"
                  [type]="'number'" [min]="total" [max]="99999999999" [required]="true">
       Pago
     </input-label>
-
     <hr>
+
     <h5>Tipo de pago:</h5>
     <br>
     <div class="btn-group">
@@ -45,8 +32,12 @@
         {{paymentType.label}}
       </label>
     </div>
-
+    <input-label *ngIf="payment_type_id == 2"
+                 [(ngModel)]="card_payment_id" name="card_payment_id" [required]="true">
+      Folio de la transacción electrónica
+    </input-label>
     <hr>
+
     <h5>Imprimir ticket</h5>
     <div class="btn-group">
       <label class="btn btn-primary" [(ngModel)]="print"  name="payment_type_id"
@@ -58,13 +49,8 @@
         No
       </label>
     </div>
-
-    <input-label *ngIf="payment_type_id == 2"
-                 [(ngModel)]="card_payment_id" name="card_payment_id" [required]="true">
-      Folio de la transacción electrónica
-    </input-label>
-
     <hr>
+
     <div class="btn-group">
       <button
         class="btn btn-success btn-block"
@@ -76,80 +62,27 @@
         (click)="cancel()">Cancelar Venta
       </button>
     </div>
-
   </div>
 </div>
 
 
 <div class="products">
-
   <div class="branch-view" *ngIf="branch">
     <h6>Sucursal</h6>
     <h4>
       {{branch.name}}
     </h4>
   </div>
-
   <hr>
-
   <div class="client-view">
     Cliente: <span class="error" *ngIf="client_status">{{client_status}}</span>
     <span *ngIf="!client_status">{{client && client.fullName}}</span>
   </div>
-
-  <hr>
-
-  <table>
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Descripción</th>
-      <th>Precio</th>
-      <th>Cantidad</th>
-      <th>Subtotal</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let productSale of addedProducts">
-      <td>{{productSale.inventory.product.id}}</td>
-      <td>{{productSale.inventory.product.description}}</td>
-      <td class="align-right">{{productSale.inventory.correctPrice | currency:'USD':true:'1.2-2'}}</td>
-      <td>
-        <input type="number" min="1" [max]="productSale.inventory.quantity"
-               [(ngModel)]="productSale.quantity"/>
-      </td>
-      <td class="align-right">
-        {{productSale.quantity * productSale.inventory.correctPrice
-        | currency:'USD':true:'1.2-2'}}
-        <span class="button-delete"
-              (click)="removeProduct(productSale)">
-            <i class="fa fa-times"></i>
-        </span>
-      </td>
-    </tr>
-    </tbody>
-
-    <tfoot>
-    <tr>
-      <td colspan="3"></td>
-      <td>Total</td>
-      <td class="align-right">
-        {{total | currency:'USD':true:'1.2-2'}}
-      </td>
-    </tr>
-    <tr [ngClass]="{ error: clientPayment - total < 0 }">
-      <td colspan="3"></td>
-      <td>Pago</td>
-      <td class="align-right">{{ clientPayment-0 | currency:'USD':true:'1.2-2'}}</td>
-    </tr>
-    <tr [ngClass]="{ error: clientPayment - total < 0 }">
-      <td colspan="3"></td>
-      <td>Cambio</td>
-      <td class="align-right">{{clientPayment - total | currency:'USD':true:'1.2-2'}}</td>
-    </tr>
-    </tfoot>
-
-  </table>
+  <hr/>
+  <app-product-cart
+    [(addedProducts)]="addedProducts"
+    [(payment)]="payment"
+  ></app-product-cart>
 </div>
 
 

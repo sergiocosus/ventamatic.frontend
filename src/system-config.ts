@@ -100,6 +100,9 @@ const barrels: string[] = [
   'app/user/schedule/end-schedule-modal',
   'app/components/input-label',
   'app/+app/+venta/ticket',
+  'app/shared/product/product-cart',
+  'app/shared/product/find-product',
+  'app/shared/client/find-client',
   /** @cli-barrel */
 ];
 

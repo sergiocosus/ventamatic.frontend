@@ -22,6 +22,8 @@ import {InputLabelComponent} from "../../../components/input-label/input-label.c
 import {TicketComponent} from "../ticket/ticket.component";
 import {Sale} from "../shared/sale";
 import {TicketService} from "../ticket/ticket.service";
+import {ProductCartComponent} from "../../../shared/product/product-cart/product-cart.component";
+import {FindProductComponent} from "../../../shared/product/find-product/find-product.component";
 
 @Component({
   moduleId: module.id,
@@ -29,35 +31,33 @@ import {TicketService} from "../ticket/ticket.service";
   templateUrl: 'sale.component.html',
   styleUrls: ['sale.component.css'],
   directives: [
-    FloatingLabelComponent,
     MainContentComponent,
-    AutocompleteInputComponent,
+    FindProductComponent,
     SelectButton,
     SaleConfirmModalComponent,
     InputLabelComponent,
+    ProductCartComponent,
     BUTTON_DIRECTIVES,
     REACTIVE_FORM_DIRECTIVES,
   ]
 })
 export class SaleComponent implements OnActivate, OnDestroy {
   @ViewChild(SaleConfirmModalComponent) protected saleConfirmModal:SaleConfirmModalComponent;
+  @ViewChild(FindProductComponent) protected findProduct:FindProductComponent;
 
   private scheduleSubscription;
 
   addedProducts:ProductSale[] = [];
 
   branch:Branch;
-
   branch_id:number;
+
   client_id:number = 1;
   clientIdControl:Control = new Control();
-
   client:Client;
   client_status:string;
-  bar_code:string;
 
-  product_id:number;
-  clientPayment:number = null;
+  payment:number = null;
   paymentTypes = [
     {
       label: 'Efectivo',
@@ -71,16 +71,12 @@ export class SaleComponent implements OnActivate, OnDestroy {
   payment_type_id:number = 1;
   card_payment_id:string = null;
 
-  searchMethod;
-  search_words:string = "";
   print = true;
 
   private messages = {
     cancelSale: "¿Está seguro de cancelar la venta?\nLos datos de la venta actual serán borrados",
     clientNotExists: 'El cliente no existe',
     clientInvalid: 'No se ha seleccionado un cliente válido',
-    emptyBarCode: 'El código de barras se encuentra vacío',
-    emptyId: 'El ID se encuentra vacío',
     noProductsAdded: 'No se han agregado productos',
     lowInventory: 'Insuficiente producto en inventario',
     paymentInvalid: 'El pago es inferior al monto Total',
@@ -91,12 +87,10 @@ export class SaleComponent implements OnActivate, OnDestroy {
   constructor(private clientService:ClientService,
               private notificationService:NotificationsService,
               private saleService:SaleService,
-              private inventoryService:InventoryService,
               private router:Router,
               private scheduleService:ScheduleService,
               private ticketService:TicketService
   ) {
-    this.initSearchMetode();
     this.initClientIdControl();
   }
 
@@ -122,9 +116,7 @@ export class SaleComponent implements OnActivate, OnDestroy {
     this.scheduleSubscription.unsubscribe();
   }
 
-  private initSearchMetode(){
-    this.searchMethod = (words) => this.inventoryService.search(this.branch_id, words);
-  }
+
 
   private initClientIdControl(){
     this.clientIdControl.valueChanges.distinctUntilChanged()
@@ -145,45 +137,8 @@ export class SaleComponent implements OnActivate, OnDestroy {
       });
   }
 
-  get total(){
-    var total = 0;
-    this.addedProducts.forEach(addedProduct => {
-      total += addedProduct.inventory.correctPrice * addedProduct.quantity;
-    });
-    return total;
-  }
 
-  get paymentChange(){
-    return this.clientPayment - this.total;
-  }
 
-  barCodeEntered($event){
-   if($event.keyIdentifier=='Enter'){
-      if(this.bar_code && this.bar_code.length){
-        this.inventoryService.getByBarCode(this.branch_id, this.bar_code).subscribe(
-          inventory => {
-            this.addProduct(inventory);
-          },
-          error => this.notifyError(error)
-        );
-      } else {
-        this.notificationService.alert('Alerta', this.messages.emptyBarCode);
-      }
-    }
-  }
-
-  idEntered($event) {
-    if ($event.code == 'Enter') {
-      if(!isNaN(this.product_id)){
-        this.inventoryService.get(this.branch_id, this.product_id).subscribe(
-          inventory => this.addProduct(inventory),
-          error => this.notifyError(error)
-        );
-      } else {
-        this.notificationService.alert('Alerta', this.messages.emptyId);
-      }
-    }
-  }
 
 
   addProduct(inventory){
@@ -215,17 +170,10 @@ export class SaleComponent implements OnActivate, OnDestroy {
     this.clearSearchInputs();
   }
 
-  removeProduct(productSale){
-    var index = this.addedProducts.indexOf(productSale);
-    if (index > -1) {
-      this.addedProducts.splice(index, 1);
-    }
-  }
+
 
   private clearSearchInputs(){
-    // this.search_words = "";
-    this.product_id = null;
-    this.bar_code = "";
+    this.findProduct.clear();
   }
 
   confirm(){
@@ -240,14 +188,24 @@ export class SaleComponent implements OnActivate, OnDestroy {
         'Error', this.messages.noProductsAdded);
       return;
     }
-    if(this.paymentChange < 0){
+   /* if(this.paymentChange < 0){
       this.notificationService.error(
         'Error', this.messages.paymentInvalid);
       return;
-    }
+    }*/
 
     this.saleConfirmModal.open();
   }
+
+
+  get total(){
+    var total = 0;
+    this.addedProducts.forEach(addedProduct => {
+      total += addedProduct.inventory.correctPrice * addedProduct.quantity;
+    });
+    return total;
+  }
+
 
   finish(){
     var products = [];
@@ -267,7 +225,7 @@ export class SaleComponent implements OnActivate, OnDestroy {
       payment_type_id: this.payment_type_id,
       card_payment_id: this.card_payment_id,
       total: this.total,
-      client_payment: this.clientPayment,
+      client_payment: this.payment,
       products: products
     }).subscribe(
       sale => {
@@ -285,13 +243,11 @@ export class SaleComponent implements OnActivate, OnDestroy {
   clear(){
     this.clearSearchInputs();
     this.addedProducts = [];
-    this.bar_code = "";
-    this.search_words = "";
-    this.clientPayment = null;
-    this.product_id = null;
+    this.payment = null;
     this.client_id = 1;
     this.payment_type_id = 1;
     this.card_payment_id = null;
+    this.findProduct.clear();
   }
 
   cancel(){

@@ -1,0 +1,16 @@
+<h5>Producto</h5>
+<input-label [(ngModel)]="bar_code" name="bar_code" (keyup)="barCodeEntered($event)">
+  Código de barras
+</input-label>
+
+<autocomplete-input
+  (selected)="selectedProduct.emit($event)"
+  [searchMethod]="searchMethod"
+  [(search_words)]="search_words"
+>
+</autocomplete-input>
+
+<input-label [(ngModel)]="product_id" name="product_id" [type]="'number'" [min]="1" [step]="1"
+             (keyup)="idEntered($event)">
+  ID
+</input-label>

@@ -1,0 +1,51 @@
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Descripción</th>
+    <th>Precio</th>
+    <th>Cantidad</th>
+    <th>Subtotal</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let productSale of addedProducts">
+    <td>{{productSale.inventory.product.id}}</td>
+    <td>{{productSale.inventory.product.description}}</td>
+    <td class="align-right">{{productSale.inventory.correctPrice | currency:'USD':true:'1.2-2'}}</td>
+    <td>
+      <input type="number" min="1" [max]="productSale.inventory.quantity"
+             [(ngModel)]="productSale.quantity"/>
+    </td>
+    <td class="align-right">
+      {{productSale.quantity * productSale.inventory.correctPrice
+      | currency:'USD':true:'1.2-2'}}
+      <span class="button-delete"
+            (click)="removeProduct(productSale)">
+            <i class="fa fa-times"></i>
+        </span>
+    </td>
+  </tr>
+  </tbody>
+
+  <tfoot>
+  <tr>
+    <td colspan="3"></td>
+    <td>Total</td>
+    <td class="align-right">
+      {{total | currency:'USD':true:'1.2-2'}}
+    </td>
+  </tr>
+  <tr [ngClass]="{ error: payment - total < 0 }">
+    <td colspan="3"></td>
+    <td>Pago</td>
+    <td class="align-right">{{ payment-0 | currency:'USD':true:'1.2-2'}}</td>
+  </tr>
+  <tr [ngClass]="{ error: payment - total < 0 }">
+    <td colspan="3"></td>
+    <td>Cambio</td>
+    <td class="align-right">{{payment - total | currency:'USD':true:'1.2-2'}}</td>
+  </tr>
+  </tfoot>
+
+</table>
