@@ -1,26 +1,19 @@
-import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
-import {Control, CORE_DIRECTIVES} from "@angular/common";
-import {OnActivate, RouteSegment, RouteTree, Router} from "@angular/router";
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Control,  } from "@angular/common";
+import { ActivatedRoute, Router} from "@angular/router";
 import { REACTIVE_FORM_DIRECTIVES } from "@angular/forms";
-import { SelectItem, SelectButton } from "primeng/primeng";
 import {BUTTON_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap";
 
-import {BranchService} from "../../+sucursales/shared/branch.service";
 import {Branch} from "../../+sucursales/shared/branch";
 import {SaleService} from "../shared/sale.service";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {ClientService} from "../../+clientes/shared/client.service";
 import {Client} from "../../+clientes/shared/client";
 import {MainContentComponent} from "../../../shared/main-content/main-content.component";
-import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
-import {AutocompleteInputComponent} from "../../../components/autocomplete-input/autocomplete-input.component";
-import {InventoryService} from "../../../shared/inventory/inventory.service";
 import {Inventory} from "../../../shared/inventory/inventory";
 import {SaleConfirmModalComponent} from "../sale-confirm-modal/sale-confirm-modal.component";
 import {ScheduleService} from "../../../user/schedule/schedule.service";
 import {InputLabelComponent} from "../../../components/input-label/input-label.component";
-import {TicketComponent} from "../ticket/ticket.component";
-import {Sale} from "../shared/sale";
 import {TicketService} from "../ticket/ticket.service";
 import {ProductCartComponent} from "../../../shared/product/product-cart/product-cart.component";
 import {FindProductComponent} from "../../../shared/product/find-product/find-product.component";
@@ -33,7 +26,6 @@ import {FindProductComponent} from "../../../shared/product/find-product/find-pr
   directives: [
     MainContentComponent,
     FindProductComponent,
-    SelectButton,
     SaleConfirmModalComponent,
     InputLabelComponent,
     ProductCartComponent,
@@ -41,7 +33,7 @@ import {FindProductComponent} from "../../../shared/product/find-product/find-pr
     REACTIVE_FORM_DIRECTIVES,
   ]
 })
-export class SaleComponent implements OnActivate, OnDestroy {
+export class SaleComponent implements OnInit, OnDestroy {
   @ViewChild(SaleConfirmModalComponent) protected saleConfirmModal:SaleConfirmModalComponent;
   @ViewChild(FindProductComponent) protected findProduct:FindProductComponent;
 
@@ -84,7 +76,10 @@ export class SaleComponent implements OnActivate, OnDestroy {
     searching: "Buscando..."
   };
 
-  constructor(private clientService:ClientService,
+  private sub;
+
+  constructor(private route:ActivatedRoute,
+              private clientService:ClientService,
               private notificationService:NotificationsService,
               private saleService:SaleService,
               private router:Router,
@@ -94,29 +89,30 @@ export class SaleComponent implements OnActivate, OnDestroy {
     this.initClientIdControl();
   }
 
-  routerOnActivate(curr:RouteSegment,RouteSegment, currTree?: RouteTree, prevTree?: RouteTree):void {
-    this.branch_id = +curr.getParam('branch_id');
+  ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.branch_id = params['branch_id'];
 
-    this.scheduleSubscription = this.scheduleService.getCurrentSchedule().subscribe(
-      schedule => {
-        if(schedule){
-          if(schedule.branch_id == this.branch_id){
-            this.branch = schedule.branch;
-          }else{
-            this.router.navigate(['/app/venta', schedule.branch_id]);
+      this.scheduleSubscription = this.scheduleService.getCurrentSchedule().subscribe(
+        schedule => {
+          if(schedule){
+            if(schedule.branch_id == this.branch_id){
+              this.branch = schedule.branch;
+            }else{
+              this.router.navigate(['/app/venta', schedule.branch_id]);
+            }
+          }else {
+            this.router.navigate(['/app/venta']);
           }
-        }else {
-          this.router.navigate(['/app/venta']);
         }
-      }
-    );
+      );
+    });
   }
 
-  ngOnDestroy():any {
+  ngOnDestroy(): any {
+    this.sub.unsubscribe();
     this.scheduleSubscription.unsubscribe();
   }
-
-
 
   private initClientIdControl(){
     this.clientIdControl.valueChanges.distinctUntilChanged()

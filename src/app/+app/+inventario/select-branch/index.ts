@@ -1,1 +1,1 @@
-export { SelectBranchComponent } from './select-branch.component';
+export { InventorySelectBranch } from './select-branch.component';

@@ -1,11 +1,6 @@
 import {Component, OnInit, ViewChild} from "@angular/core";
 
-import {SelectBranchComponent} from "./select-branch/select-branch.component";
-import {InventoryComponent} from "./inventory/inventory.component";
-import {Routes, ROUTER_DIRECTIVES} from "@angular/router";
-import {InventoryService} from "../../shared/inventory/inventory.service";
-import {Inventory} from "../../shared/inventory/inventory";
-import {ModalInventarioComponent} from "./modal-inventario/modal-inventario.component";
+import { ROUTER_DIRECTIVES} from "@angular/router";
 
 @Component({
   moduleId: module.id,
@@ -17,18 +12,10 @@ import {ModalInventarioComponent} from "./modal-inventario/modal-inventario.comp
   ]
 })
 
-@Routes([
-  {path: '', component: SelectBranchComponent},
-  {path: '/:branch_id', component: InventoryComponent}
-])
-
 export class InventarioComponent implements OnInit {
- 
+
   constructor() {}
 
   ngOnInit() {
   }
-
- 
-
 }

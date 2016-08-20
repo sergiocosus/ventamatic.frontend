@@ -1,6 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {SelectBranchComponent} from "../select-branch/select-branch.component";
-import {Routes, ROUTER_DIRECTIVES, OnActivate, RouteSegment, RouteTree} from "@angular/router";
+import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 import {MainContentComponent} from "../../../shared/main-content/main-content.component";
 import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
 import {InventoryService} from "../../../shared/inventory/inventory.service";
@@ -23,25 +22,31 @@ import {ModalInventarioComponent} from "../modal-inventario/modal-inventario.com
 
 
 
-export class InventoryComponent implements  OnActivate {
+export class InventoryComponent implements OnInit, OnDestroy {
   @ViewChild(ModalInventarioComponent) private modalInventario:ModalInventarioComponent;
   branch_id:number;
   inventories:Inventory[];
 
-  constructor(private inventoryService:InventoryService) {}
+  private sub;
+  constructor(private route:ActivatedRoute,
+              private inventoryService:InventoryService) {}
 
-
-  routerOnActivate(curr:RouteSegment, prev?:RouteSegment, currTree?:RouteTree, prevTree?:RouteTree):void {
-    this.branch_id = +curr.getParam('branch_id');
-    this.inventoryService.getAll(this.branch_id).subscribe(
-      inventories => {
-        this.inventories = inventories;
-        console.log(inventories);
-      }
-    );
-
-
+  ngOnInit() {
+    this.sub = this.route.params.subscribe(params => {
+      this.branch_id = params['branch_id'];
+      this.inventoryService.getAll(this.branch_id).subscribe(
+        inventories => {
+          this.inventories = inventories;
+          console.log(inventories);
+        }
+      );
+    });
   }
+
+  ngOnDestroy(): any {
+    this.sub.unsubscribe();
+  }
+
 
   clickUpdate(inventory:Inventory){
     this.modalInventario.openUpdate(inventory);

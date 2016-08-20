@@ -1,9 +1,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { LoginComponent } from './+login';
-import { Routes, Router , ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router';
+import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 import { SimpleNotificationsComponent } from 'angular2-notifications/components'
 
-import { AppComponent } from './+app';
 import {AuthService} from "./services/auth.service";
 import {TicketComponent} from "./+app/+venta/ticket/ticket.component";
 import {TicketService} from "./+app/+venta/ticket/ticket.service";
@@ -19,17 +17,12 @@ import {TicketService} from "./+app/+venta/ticket/ticket.service";
     TicketComponent
   ],
   providers: [
-    ROUTER_PROVIDERS,
     AuthService,
     TicketService
   ],
   encapsulation: ViewEncapsulation.None,
-
 })
-@Routes([
-  {path: '/app', component: AppComponent},
-  {path: '/login', component: LoginComponent}
-])
+
 export class VentamaticFrontendAppComponent implements OnInit {
   title = 'ventamatic-frontend works!';
 

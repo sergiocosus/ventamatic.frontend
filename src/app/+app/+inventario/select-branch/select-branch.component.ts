@@ -18,7 +18,7 @@ import {MainContentComponent} from "../../../shared/main-content/main-content.co
     BranchService
   ]
 })
-export class SelectBranchComponent implements OnInit {
+export class InventorySelectBranch implements OnInit {
   branches:Branch[] = [];
 
   constructor(private branchService:BranchService) {}
