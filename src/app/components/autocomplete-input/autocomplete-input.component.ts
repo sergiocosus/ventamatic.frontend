@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { Control } from "@angular/common";
+import { FormControl } from "@angular/forms";
 
 
 @Component({
@@ -13,7 +13,7 @@ export class AutocompleteInputComponent implements OnInit {
   @Input() search_words:string = "";
   elementSuggestions:any[] = [];
 
-  searchControl:Control = new Control();
+  searchControl:FormControl = new FormControl();
 
   searchIndexSelection:number = 0;
   searchHidden:boolean = true;

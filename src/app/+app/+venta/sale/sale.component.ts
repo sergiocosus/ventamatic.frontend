@@ -1,8 +1,7 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { Control,  } from "@angular/common";
 import { ActivatedRoute, Router} from "@angular/router";
-import { REACTIVE_FORM_DIRECTIVES } from "@angular/forms";
-import {BUTTON_DIRECTIVES} from "ng2-bootstrap/ng2-bootstrap";
+import { FormControl} from "@angular/forms";
 
 import {Branch} from "../../+sucursales/shared/branch";
 import {SaleService} from "../shared/sale.service";
@@ -16,6 +15,7 @@ import {ScheduleService} from "../../../user/schedule/schedule.service";
 import {TicketService} from "../ticket/ticket.service";
 import {ProductCartComponent} from "../../../shared/product/product-cart/product-cart.component";
 import {FindProductComponent} from "../../../shared/product/find-product/find-product.component";
+import {BUTTON_DIRECTIVES} from "ng2-bootstrap";
 
 @Component({
   selector: 'app-sale',
@@ -27,7 +27,6 @@ import {FindProductComponent} from "../../../shared/product/find-product/find-pr
     SaleConfirmModalComponent,
     ProductCartComponent,
     BUTTON_DIRECTIVES,
-    REACTIVE_FORM_DIRECTIVES,
   ],
   providers:[
     SaleService
@@ -45,7 +44,7 @@ export class SaleComponent implements OnInit, OnDestroy {
   branch_id:number;
 
   client_id:number = 1;
-  clientIdControl:Control = new Control();
+  clientIdControl:FormControl = new FormControl();
   client:Client;
   client_status:string;
 
