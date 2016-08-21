@@ -7,10 +7,9 @@ import {TicketComponent} from "./+app/+venta/ticket/ticket.component";
 import {TicketService} from "./+app/+venta/ticket/ticket.service";
 
 @Component({
-  moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'ventamatic-frontend.component.html',
-  styleUrls: ['ventamatic-frontend.component.css'],
+  styleUrls: ['ventamatic-frontend.component.scss'],
   directives: [
     ROUTER_DIRECTIVES,
     SimpleNotificationsComponent,

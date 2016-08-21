@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-compra',
   templateUrl: 'compra.component.html',
-  styleUrls: ['compra.component.css']
+  styleUrls: ['compra.component.scss']
 })
 export class CompraComponent implements OnInit {
 

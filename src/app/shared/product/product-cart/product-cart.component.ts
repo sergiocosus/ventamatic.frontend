@@ -2,10 +2,9 @@ import { Component, OnInit, Input } from '@angular/core';
 import {Inventory} from "../../inventory/inventory";
 
 @Component({
-  moduleId: module.id,
   selector: 'app-product-cart',
   templateUrl: 'product-cart.component.html',
-  styleUrls: ['product-cart.component.css']
+  styleUrls: ['product-cart.component.scss']
 })
 export class ProductCartComponent implements OnInit {
   @Input() addedProducts:ProductSale[] = [];

@@ -1,3 +1,17 @@
+
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode } from '@angular/core';
+import { AppModule, environment } from './app/';
+
+if (environment.production) {
+  enableProdMode();
+}
+
+platformBrowserDynamic().bootstrapModule(AppModule);
+
+
+/*
+
 import { bootstrap } from '@angular/platform-browser-dynamic';
 import { enableProdMode, provide } from '@angular/core';
 import { HTTP_PROVIDERS, Http } from '@angular/http';
@@ -33,3 +47,4 @@ bootstrap(VentamaticFrontendAppComponent,
     API_HTTP_PROVIDERS,
     NotificationsService,
   ]);
+*/

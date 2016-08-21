@@ -6,10 +6,9 @@ import {AuthService} from "../../../services/auth.service";
 import {User} from "../../../user/user";
 import {EndScheduleModalComponent} from "../../../user/schedule/end-schedule-modal/end-schedule-modal.component";
 @Component({
-  moduleId: module.id,
   selector: 'top-bar',
   templateUrl: 'top-bar.component.html',
-  styleUrls: ['top-bar.component.css'],
+  styleUrls: ['top-bar.component.scss'],
   directives: [
     EndScheduleModalComponent
   ]
@@ -42,7 +41,7 @@ export class TopBarComponent implements OnInit {
   openEndScheduleModal(){
     if(this.schedule){
       this.endScheduleModal.open();
-    } 
+    }
   }
 
 }

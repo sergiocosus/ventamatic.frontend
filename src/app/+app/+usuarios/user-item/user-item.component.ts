@@ -3,10 +3,9 @@ import {User} from "../../../user/user";
 import {PersonItemComponent} from "../../../components/person-item/person-item.component";
 
 @Component({
-  moduleId: module.id,
   selector: 'user-item',
   templateUrl: 'user-item.component.html',
-  styleUrls: ['user-item.component.css'],
+  styleUrls: ['user-item.component.scss'],
   directives: [PersonItemComponent]
 })
 export class UserItemComponent implements OnInit {

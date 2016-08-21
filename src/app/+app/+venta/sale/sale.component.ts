@@ -13,24 +13,24 @@ import {MainContentComponent} from "../../../shared/main-content/main-content.co
 import {Inventory} from "../../../shared/inventory/inventory";
 import {SaleConfirmModalComponent} from "../sale-confirm-modal/sale-confirm-modal.component";
 import {ScheduleService} from "../../../user/schedule/schedule.service";
-import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 import {TicketService} from "../ticket/ticket.service";
 import {ProductCartComponent} from "../../../shared/product/product-cart/product-cart.component";
 import {FindProductComponent} from "../../../shared/product/find-product/find-product.component";
 
 @Component({
-  moduleId: module.id,
   selector: 'app-sale',
   templateUrl: 'sale.component.html',
-  styleUrls: ['sale.component.css'],
+  styleUrls: ['sale.component.scss'],
   directives: [
     MainContentComponent,
     FindProductComponent,
     SaleConfirmModalComponent,
-    InputLabelComponent,
     ProductCartComponent,
     BUTTON_DIRECTIVES,
     REACTIVE_FORM_DIRECTIVES,
+  ],
+  providers:[
+    SaleService
   ]
 })
 export class SaleComponent implements OnInit, OnDestroy {

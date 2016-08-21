@@ -10,10 +10,9 @@ import {UserModalComponent} from "./user-modal";
 
 
 @Component({
-  moduleId: module.id,
   selector: 'app-usuarios',
   templateUrl: 'usuarios.component.html',
-  styleUrls: ['usuarios.component.css'],
+  styleUrls: ['usuarios.component.scss'],
   directives: [
     MainContentComponent,
     UserItemComponent,

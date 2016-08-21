@@ -1,22 +1,14 @@
 import { Component, ViewChild, Output } from '@angular/core';
 import {Client} from "../shared/client";
-import {ModalComponent, MODAL_DIRECTIVES} from "ng2-bs3-modal/ng2-bs3-modal";
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {ClientService} from "../shared/client.service";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
-import {FloatingLabelComponent} from "../../../components/floating-label";
 import {CrudModalComponent} from "../../../components/crud-modal";
-import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 @Component({
-  moduleId: module.id,
   selector: 'client-modal',
   templateUrl: 'client-modal.component.html',
-  styleUrls: ['client-modal.component.css'],
-  directives: [
-    MODAL_DIRECTIVES,
-    InputLabelComponent
-  ]
-
+  styleUrls: ['client-modal.component.scss'],
 })
 export class ClientModalComponent extends CrudModalComponent{
   @ViewChild(ModalComponent) protected modal:ModalComponent;

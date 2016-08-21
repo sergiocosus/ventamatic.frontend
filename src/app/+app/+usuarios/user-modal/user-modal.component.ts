@@ -1,22 +1,15 @@
 import { Component, OnInit, ViewChild, Output,EventEmitter } from '@angular/core';
-import {ModalComponent, MODAL_DIRECTIVES} from "ng2-bs3-modal/ng2-bs3-modal";
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
-import {FloatingLabelComponent} from "../../../components/floating-label";
 import {UserService} from "../../../user/user.service";
 import {User} from "../../../user/user";
 import {CrudModalComponent} from "../../../components/crud-modal";
-import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 
 @Component({
-  moduleId: module.id,
   selector: 'user-modal',
   templateUrl: 'user-modal.component.html',
-  styleUrls: ['user-modal.component.css'],
-  directives: [
-    MODAL_DIRECTIVES,
-    InputLabelComponent
-  ]
+  styleUrls: ['user-modal.component.scss'],
 })
 export class UserModalComponent extends CrudModalComponent {
   @ViewChild(ModalComponent) protected modal:ModalComponent;

@@ -1,22 +1,14 @@
 import { Component, OnInit, ViewChild, Output,EventEmitter } from '@angular/core';
 import {Supplier} from "../shared/supplier";
-import {ModalComponent, MODAL_DIRECTIVES} from "ng2-bs3-modal/ng2-bs3-modal";
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {SupplierService} from "../shared/supplier.service";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
-import {FloatingLabelComponent} from "../../../components/floating-label";
 import {CrudModalComponent} from "../../../components/crud-modal";
-import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 @Component({
-  moduleId: module.id,
   selector: 'supplier-modal',
   templateUrl: 'supplier-modal.component.html',
-  styleUrls: ['supplier-modal.component.css'],
-  directives: [
-    MODAL_DIRECTIVES,
-    InputLabelComponent
-  ]
-
+  styleUrls: ['supplier-modal.component.scss'],
 })
 export class SupplierModalComponent extends CrudModalComponent {
   @ViewChild(ModalComponent) protected modal:ModalComponent;

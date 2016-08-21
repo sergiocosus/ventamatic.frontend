@@ -1,20 +1,12 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import {ModalComponent, MODAL_DIRECTIVES} from "ng2-bs3-modal/ng2-bs3-modal";
-import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {ScheduleService} from "../schedule.service";
 import {Schedule} from "../schedule";
-import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 @Component({
-  moduleId: module.id,
   selector: 'end-schedule-modal',
   templateUrl: 'end-schedule-modal.component.html',
-  styleUrls: ['end-schedule-modal.component.css'],
-  directives: [
-    MODAL_DIRECTIVES,
-    FloatingLabelComponent,
-    InputLabelComponent
-  ]
+  styleUrls: ['end-schedule-modal.component.scss'],
 })
 export class EndScheduleModalComponent implements OnInit {
   @ViewChild(ModalComponent) protected modal:ModalComponent;

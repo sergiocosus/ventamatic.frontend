@@ -8,10 +8,9 @@ import {NotificationsService} from "angular2-notifications/lib/notifications.ser
 import {SupplierModalComponent} from "./supplier-modal";
 
 @Component({
-  moduleId: module.id,
   selector: 'app-proveedores',
   templateUrl: 'proveedores.component.html',
-  styleUrls: ['proveedores.component.css'],
+  styleUrls: ['proveedores.component.scss'],
   directives: [SearchBarComponent,
     MainContentComponent,
     SupplierItemComponent,

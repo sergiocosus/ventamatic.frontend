@@ -1,18 +1,14 @@
 import {Component, OnInit, Output, ViewChild} from '@angular/core';
-import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
-import {MODAL_DIRECTIVES, ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {ProductService} from "../../../shared/product/product.service";
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {Inventory} from "../../../shared/inventory/inventory";
 import {InventoryService} from "../../../shared/inventory/inventory.service";
 import {CrudModalComponent} from "../../../components/crud-modal/crud-modal.component";
 
 @Component({
-  moduleId: module.id,
   selector: 'modal-inventario',
   templateUrl: 'modal-inventario.component.html',
-  styleUrls: ['modal-inventario.component.css'],
-  directives: [MODAL_DIRECTIVES, FloatingLabelComponent]
+  styleUrls: ['modal-inventario.component.scss'],
 })
 export class ModalInventarioComponent extends CrudModalComponent {
   create() {

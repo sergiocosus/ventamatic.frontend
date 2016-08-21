@@ -1,4 +1,4 @@
-import {provideRouter, RouterConfig} from "@angular/router";
+import { Routes, RouterModule } from "@angular/router";
 import {AppComponent} from "./+app/app.component";
 import {LoginComponent} from "./+login/login.component";
 import {UsuariosComponent} from "./+app/+usuarios/usuarios.component";
@@ -18,7 +18,7 @@ import {InventoryComponent} from "./+app/+inventario/inventory/inventory.compone
 import {SaleComponent} from "./+app/+venta/sale/sale.component";
 
 
-export const appRoutes: RouterConfig = [
+export const appRoutes: Routes = [
   {
     path: '',
     redirectTo: 'login',
@@ -101,4 +101,8 @@ export const appRoutes: RouterConfig = [
   //{ path: '**', component: PageNotFoundComponent },
 ];
 
-export const APP_ROUTER_PROVIDER = provideRouter(appRoutes);
+export const appRoutingProviders: any[] = [
+
+];
+
+export const routing = RouterModule.forRoot(appRoutes);

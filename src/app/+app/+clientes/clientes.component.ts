@@ -8,11 +8,11 @@ import {NotificationsService} from "angular2-notifications/lib/notifications.ser
 import {ClientModalComponent} from "./client-modal";
 
 @Component({
-  moduleId: module.id,
   selector: 'app-clientes',
   templateUrl: 'clientes.component.html',
-  styleUrls: ['clientes.component.css'],
-  directives: [SearchBarComponent,
+  styleUrls: ['clientes.component.scss'],
+  directives: [
+    SearchBarComponent,
     MainContentComponent,
     ClientItemComponent,
     ClientModalComponent

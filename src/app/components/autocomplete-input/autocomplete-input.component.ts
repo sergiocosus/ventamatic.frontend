@@ -1,20 +1,11 @@
-import {Component, OnInit, Output, EventEmitter, Input} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { Control } from "@angular/common";
 
-import {FloatingLabelComponent} from "../floating-label/floating-label.component";
-import {InputLabelComponent} from "../input-label/input-label.component";
-import {REACTIVE_FORM_DIRECTIVES} from "@angular/forms";
 
 @Component({
-  moduleId: module.id,
   selector: 'autocomplete-input',
   templateUrl: 'autocomplete-input.component.html',
-  styleUrls: ['autocomplete-input.component.css'],
-  directives: [
-    FloatingLabelComponent,
-    InputLabelComponent,
-    REACTIVE_FORM_DIRECTIVES,
-  ],
+  styleUrls: ['autocomplete-input.component.scss'],
 })
 export class AutocompleteInputComponent implements OnInit {
   @Output() selected = new EventEmitter();

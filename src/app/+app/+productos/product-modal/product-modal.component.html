@@ -14,13 +14,13 @@
                    [disabled]="locked" required>
         Description
       </input-label>
-      <p-multiSelect [options]="categorySelectItems" [(ngModel)]="product.categories"
+   <!--   <p-multiSelect [options]="categorySelectItems" [(ngModel)]="product.categories"
                      name="categories"
-      ></p-multiSelect>
+      ></p-multiSelect>-->
 
-      <p-dropdown [options]="brands" [(ngModel)]="product.brand_id" name="brand_id"
+<!--      <p-dropdown [options]="brands" [(ngModel)]="product.brand_id" name="brand_id"
                   [autoWidth]="false"
-      ></p-dropdown>
+      ></p-dropdown>-->
 
       <input-label type="text" [(ngModel)]="product.brand" name="brand"
                    [disabled]="locked">

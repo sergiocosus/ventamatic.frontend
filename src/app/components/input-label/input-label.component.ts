@@ -12,10 +12,9 @@ const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = new Provider(
 
 
 @Component({
-  moduleId: module.id,
   selector: 'input-label',
   templateUrl: 'input-label.component.html',
-  styleUrls: ['input-label.component.css'],
+  styleUrls: ['input-label.component.scss'],
   directives: [CORE_DIRECTIVES],
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
 })

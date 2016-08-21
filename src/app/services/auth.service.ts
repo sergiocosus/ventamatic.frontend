@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
-import {environment} from "../environment";
 import {Observable} from "rxjs/Observable";
 import {User} from "../user/user";
 import {JwtHelper} from "angular2-jwt/angular2-jwt";
 import { NotificationsService } from 'angular2-notifications/components'
+import {environment} from "../";
 
 @Injectable()
 export class AuthService {

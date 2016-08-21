@@ -1,20 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router'
+import { Router } from '@angular/router'
 import { NotificationsService } from 'angular2-notifications/components'
 
 import { AuthService } from "../services/auth.service";
-import {FloatingLabelComponent} from "../components/floating-label/floating-label.component";
-import {InputLabelComponent} from "../components/input-label/input-label.component";
 @Component({
-  moduleId: module.id,
   selector: 'app-login',
   templateUrl: 'login.component.html',
-  styleUrls: ['login.component.css'],
-  directives: [
-    ROUTER_DIRECTIVES, 
-    InputLabelComponent
-  ],
-  providers: []
+  styleUrls: ['login.component.scss'],
 })
 export class LoginComponent implements OnInit {
 

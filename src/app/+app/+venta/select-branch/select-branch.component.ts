@@ -1,24 +1,14 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {BranchService} from "../../+sucursales/shared/branch.service";
 import {Branch} from "../../+sucursales/shared/branch";
-import {ROUTER_DIRECTIVES, Router} from "@angular/router";
+import { Router} from "@angular/router";
 import {ScheduleService} from "../../../user/schedule/schedule.service";
-import {Dropdown, SelectItem} from 'primeng/primeng';
-import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
 import {Subscription} from "rxjs/Rx";
-import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 @Component({
-  moduleId: module.id,
   selector: 'select-branch',
   templateUrl: 'select-branch.component.html',
-  styleUrls: ['select-branch.component.css'],
-  directives: [
-    SelectBranchComponent,
-    ROUTER_DIRECTIVES,
-    Dropdown,
-    InputLabelComponent
-  ]
+  styleUrls: ['select-branch.component.scss'],
 })
 export class SelectBranchComponent implements OnInit, OnDestroy {
   private scheduleSubscription:Subscription;

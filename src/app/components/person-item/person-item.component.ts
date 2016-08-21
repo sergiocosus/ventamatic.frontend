@@ -1,14 +1,13 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  moduleId: module.id,
   selector: 'person-item',
   templateUrl: 'person-item.component.html',
-  styleUrls: ['person-item.component.css']
+  styleUrls: ['person-item.component.scss']
 })
 export class PersonItemComponent implements OnInit {
   @Input('can-delete') can_delete:boolean = true;
-  
+
   @Output() delete = new EventEmitter();
   @Output() update = new EventEmitter();
 

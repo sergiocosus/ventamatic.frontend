@@ -2,10 +2,9 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {PersonItemComponent} from "../../../components/person-item/person-item.component";
 
 @Component({
-  moduleId: module.id,
   selector: 'client-item',
   templateUrl: 'client-item.component.html',
-  styleUrls: ['client-item.component.css'],
+  styleUrls: ['client-item.component.scss'],
   directives: [PersonItemComponent]
 })
 export class ClientItemComponent implements OnInit {
@@ -13,7 +12,7 @@ export class ClientItemComponent implements OnInit {
 
   @Output() delete = new EventEmitter();
   @Output() update = new EventEmitter();
-  
+
   constructor() {}
 
   ngOnInit() {

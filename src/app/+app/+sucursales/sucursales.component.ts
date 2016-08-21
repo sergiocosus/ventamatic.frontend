@@ -7,10 +7,9 @@ import {BranchItemComponent} from "./branch-item/branch-item.component";
 import {MainContentComponent} from "../../shared/main-content/main-content.component";
 
 @Component({
-  moduleId: module.id,
   selector: 'app-sucursales',
   templateUrl: 'sucursales.component.html',
-  styleUrls: ['sucursales.component.css'],
+  styleUrls: ['sucursales.component.scss'],
   directives: [
     MainContentComponent,
     BranchModalComponent,

@@ -3,10 +3,9 @@ import {Sale} from "../shared/sale";
 import {TicketService} from "./ticket.service";
 
 @Component({
-  moduleId: module.id,
   selector: 'app-ticket',
   templateUrl: 'ticket.component.html',
-  styleUrls: ['ticket.component.css']
+  styleUrls: ['ticket.component.scss']
 })
 export class TicketComponent implements OnInit {
   sale:Sale;

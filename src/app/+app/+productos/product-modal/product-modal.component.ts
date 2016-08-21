@@ -1,26 +1,16 @@
 import { Component, OnInit, ViewChild, Output } from '@angular/core';
-import {MODAL_DIRECTIVES, ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import { SelectItem, Dropdown, MultiSelect} from "primeng/primeng";
-import {FloatingLabelComponent} from "../../../components/floating-label/floating-label.component";
+import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import {CrudModalComponent} from "../../../components/crud-modal/crud-modal.component";
 import {Product} from "../../../shared/product/product";
 import {ProductService} from "../../../shared/product/product.service";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {CategoryService} from "../../../shared/product/category/category.service";
 import {Category} from "../../../shared/product/category/category";
-import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 @Component({
-  moduleId: module.id,
   selector: 'product-modal',
   templateUrl: 'product-modal.component.html',
-  styleUrls: ['product-modal.component.css'],
-  directives: [
-    MODAL_DIRECTIVES,
-    InputLabelComponent,
-    Dropdown,
-    MultiSelect,
-  ]
+  styleUrls: ['product-modal.component.scss'],
 })
 export class ProductModalComponent extends CrudModalComponent {
   @ViewChild(ModalComponent) protected modal:ModalComponent;
@@ -34,9 +24,9 @@ export class ProductModalComponent extends CrudModalComponent {
   product: Product;
 
   categories:Category[] = [];
-  categorySelectItems:SelectItem[] = [];
+  categorySelectItems:any[] = [];
 
-  brands:SelectItem[] = [];
+  brands:any[] = [];
   constructor(protected productService:ProductService,
               protected notification:NotificationsService,
               protected categoryService:CategoryService) {

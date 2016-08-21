@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  moduleId: module.id,
   selector: 'app-reportes',
   templateUrl: 'reportes.component.html',
-  styleUrls: ['reportes.component.css']
+  styleUrls: ['reportes.component.scss']
 })
 export class ReportesComponent implements OnInit {
 

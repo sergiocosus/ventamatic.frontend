@@ -2,10 +2,9 @@ import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
 import {PersonItemComponent} from "../../../components/person-item/person-item.component";
 
 @Component({
-  moduleId: module.id,
   selector: 'branch-item',
   templateUrl: 'branch-item.component.html',
-  styleUrls: ['branch-item.component.css'],
+  styleUrls: ['branch-item.component.scss'],
   directives: [
     PersonItemComponent
   ]

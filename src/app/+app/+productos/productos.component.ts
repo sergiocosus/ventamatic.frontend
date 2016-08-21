@@ -7,10 +7,9 @@ import {ProductModalComponent} from "./product-modal/product-modal.component";
 
 
 @Component({
-  moduleId: module.id,
   selector: 'app-productos',
   templateUrl: 'productos.component.html',
-  styleUrls: ['productos.component.css'],
+  styleUrls: ['productos.component.scss'],
   directives: [SearchBarComponent,MainContentComponent,ProductModalComponent]
 })
 export class ProductosComponent implements OnInit {
@@ -21,7 +20,7 @@ export class ProductosComponent implements OnInit {
 
   ngOnInit() {
     this.productService.getAll().subscribe(products => {
-      console.log(products);    
+      console.log(products);
       this.products = products;
     });
   }
@@ -55,7 +54,7 @@ export class ProductosComponent implements OnInit {
   }
 
   updated(product:Product){
-    
+
   }
 
   deleted(product:Product){

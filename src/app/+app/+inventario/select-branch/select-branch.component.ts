@@ -6,10 +6,9 @@ import {ModalInventarioComponent} from "../modal-inventario/modal-inventario.com
 import {MainContentComponent} from "../../../shared/main-content/main-content.component";
 
 @Component({
-  moduleId: module.id,
   selector: 'select-branch',
   templateUrl: 'select-branch.component.html',
-  styleUrls: ['select-branch.component.css'],
+  styleUrls: ['select-branch.component.scss'],
   directives: [
     ROUTER_DIRECTIVES,
     MainContentComponent
