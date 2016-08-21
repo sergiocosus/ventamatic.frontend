@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, ApplicationRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, CORE_DIRECTIVES} from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { enableProdMode, provide } from '@angular/core';
@@ -12,7 +12,7 @@ import { ModalComponent,
   ModalBodyComponent,
   ModalFooterComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 
-import { NotificationsService } from 'angular2-notifications/components'
+import {NotificationsService, SimpleNotificationsComponent} from 'angular2-notifications/components'
 import {API_HTTP_PROVIDERS} from "./shared/api-http";
 import {VentamaticFrontendAppComponent} from "./ventamatic-frontend.component";
 import {LoginComponent} from "./+login/login.component";
@@ -36,6 +36,26 @@ import {AsideNavComponent} from "./+app/shared/aside-nav/aside-nav.component";
 import {TopBarComponent} from "./+app/shared/top-bar/top-bar.component";
 import {routing, appRoutingProviders} from "./ventamatic-frontend.routing";
 import {AppComponent} from "./+app/app.component";
+import {TicketComponent} from "./+app/+venta/ticket/ticket.component";
+import {SearchBarComponent} from "./+app/shared/search-bar/search-bar.component";
+import {MainContentComponent} from "./shared/main-content/main-content.component";
+import {ClientItemComponent} from "./+app/+clientes/client-item/client-item.component";
+import {ClientModalComponent} from "./+app/+clientes/client-modal/client-modal.component";
+import {PersonItemComponent} from "./components/person-item/person-item.component";
+import {ModalInventarioComponent} from "./+app/+inventario/modal-inventario/modal-inventario.component";
+import {ProductModalComponent} from "./+app/+productos/product-modal/product-modal.component";
+import {SupplierItemComponent} from "./+app/+proveedores/supplier-item/supplier-item.component";
+import {SupplierModalComponent} from "./+app/+proveedores/supplier-modal/supplier-modal.component";
+import {BranchModalComponent} from "./+app/+sucursales/branch-modal/branch-modal.component";
+import {BranchItemComponent} from "./+app/+sucursales/branch-item/branch-item.component";
+import {BUTTON_DIRECTIVES} from "ng2-bootstrap";
+import {UserModalComponent} from "./+app/+usuarios/user-modal/user-modal.component";
+import {UserItemComponent} from "./+app/+usuarios/user-item/user-item.component";
+import {AutocompleteInputComponent} from "./components/autocomplete-input/autocomplete-input.component";
+import {EndScheduleModalComponent} from "./user/schedule/end-schedule-modal/end-schedule-modal.component";
+import {FindProductComponent} from "./shared/product/find-product/find-product.component";
+import {SaleConfirmModalComponent} from "./+app/+venta/sale-confirm-modal/sale-confirm-modal.component";
+import {ProductCartComponent} from "./shared/product/product-cart/product-cart.component";
 
 const CUSTOM_MODAL_DIRECTIVES = [
   ModalComponent,
@@ -47,7 +67,10 @@ const CUSTOM_MODAL_DIRECTIVES = [
 @NgModule({
   declarations: [
     CUSTOM_MODAL_DIRECTIVES,
-    InputLabelComponent,
+    SimpleNotificationsComponent,
+    BUTTON_DIRECTIVES,
+    // Main routes directives
+
     VentamaticFrontendAppComponent,
     AppComponent,
     LoginComponent,
@@ -66,9 +89,29 @@ const CUSTOM_MODAL_DIRECTIVES = [
     RolesComponent,
     SucursalesComponent,
 
-
+    TicketComponent,
+    InputLabelComponent,
+    SearchBarComponent,
+    MainContentComponent,
+    ClientItemComponent,
+    ClientModalComponent,
+    PersonItemComponent,
     AsideNavComponent,
     TopBarComponent,
+    ProductModalComponent,
+    ModalInventarioComponent,
+    SupplierItemComponent,
+    SupplierModalComponent,
+    BranchModalComponent,
+    BranchItemComponent,
+    UserModalComponent,
+    UserItemComponent,
+    ProductCartComponent,
+    SaleConfirmModalComponent,
+    FindProductComponent,
+    EndScheduleModalComponent,
+    AutocompleteInputComponent,
+
   ],
   imports: [
     BrowserModule,

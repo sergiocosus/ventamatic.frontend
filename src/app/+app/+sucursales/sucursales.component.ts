@@ -3,18 +3,11 @@ import {NotificationsService} from "angular2-notifications/components";
 import {BranchService} from "./shared/branch.service";
 import {Branch} from "./shared/branch";
 import {BranchModalComponent} from "./branch-modal/branch-modal.component";
-import {BranchItemComponent} from "./branch-item/branch-item.component";
-import {MainContentComponent} from "../../shared/main-content/main-content.component";
 
 @Component({
   selector: 'app-sucursales',
   templateUrl: 'sucursales.component.html',
-  styleUrls: ['sucursales.component.scss'],
-  directives: [
-    MainContentComponent,
-    BranchModalComponent,
-    BranchItemComponent
-  ]
+  styleUrls: ['sucursales.component.scss']
 })
 export class SucursalesComponent implements OnInit {
   @ViewChild(BranchModalComponent) private branchModal:BranchModalComponent;

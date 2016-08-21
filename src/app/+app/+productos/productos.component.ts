@@ -9,8 +9,7 @@ import {ProductModalComponent} from "./product-modal/product-modal.component";
 @Component({
   selector: 'app-productos',
   templateUrl: 'productos.component.html',
-  styleUrls: ['productos.component.scss'],
-  directives: [SearchBarComponent,MainContentComponent,ProductModalComponent]
+  styleUrls: ['productos.component.scss']
 })
 export class ProductosComponent implements OnInit {
   @ViewChild(ProductModalComponent) private productModal:ProductModalComponent;

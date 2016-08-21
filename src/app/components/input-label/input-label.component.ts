@@ -1,5 +1,4 @@
 import {Component, Input, forwardRef, Provider, EventEmitter, Output} from '@angular/core';
-import { CORE_DIRECTIVES } from "@angular/common";
 import { NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
 
 const noop = (_?) => {};
@@ -15,7 +14,6 @@ const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = new Provider(
   selector: 'input-label',
   templateUrl: 'input-label.component.html',
   styleUrls: ['input-label.component.scss'],
-  directives: [CORE_DIRECTIVES],
   providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
 })
 

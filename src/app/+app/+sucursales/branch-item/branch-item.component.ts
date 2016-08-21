@@ -1,13 +1,9 @@
 import {Component, OnInit, EventEmitter, Output, Input} from '@angular/core';
-import {PersonItemComponent} from "../../../components/person-item/person-item.component";
 
 @Component({
   selector: 'branch-item',
   templateUrl: 'branch-item.component.html',
-  styleUrls: ['branch-item.component.scss'],
-  directives: [
-    PersonItemComponent
-  ]
+  styleUrls: ['branch-item.component.scss']
 })
 export class BranchItemComponent implements OnInit {
   @Input() branch:any;

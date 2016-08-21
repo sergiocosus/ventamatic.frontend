@@ -10,11 +10,7 @@ import {ModalInventarioComponent} from "../modal-inventario/modal-inventario.com
   selector: 'app-inventory',
   templateUrl: 'inventory.component.html',
   styleUrls: ['inventory.component.scss'],
-  directives: [
-    MainContentComponent,
-    SearchBarComponent,
-    ModalInventarioComponent
-  ],providers: [InventoryService]
+  providers: [InventoryService]
 })
 
 

@@ -1,12 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import {User} from "../../../user/user";
-import {PersonItemComponent} from "../../../components/person-item/person-item.component";
 
 @Component({
   selector: 'user-item',
   templateUrl: 'user-item.component.html',
-  styleUrls: ['user-item.component.scss'],
-  directives: [PersonItemComponent]
+  styleUrls: ['user-item.component.scss']
 })
 export class UserItemComponent implements OnInit {
   @Input() user:User;

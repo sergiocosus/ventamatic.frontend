@@ -24,7 +24,7 @@ describe('Component: ClientModal', () => {
     expect(component).toBeTruthy();
   }));
 
-  it('should create the component', inject([], () => {
+  it('should create the |component', inject([], () => {
     return builder.createAsync(ClientModalComponentTestController)
       .then((fixture: ComponentFixture<any>) => {
         let query = fixture.debugElement.query(By.directive(ClientModalComponent));
@@ -38,9 +38,7 @@ describe('Component: ClientModal', () => {
   selector: 'test',
   template: `
     <app-client-modal></app-client-modal>
-  `,
-  directives: [ClientModalComponent]
-})
+  `})
 class ClientModalComponentTestController {
 }
 

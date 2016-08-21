@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ROUTER_DIRECTIVES } from '@angular/router'
 
 @Component({
   selector: 'aside-nav',
   templateUrl: 'aside-nav.component.html',
   styleUrls: ['aside-nav.component.scss'],
-  directives: [ROUTER_DIRECTIVES]
 })
 export class AsideNavComponent implements OnInit {
   public routes = [

@@ -3,9 +3,6 @@ import { NotificationsService } from 'angular2-notifications/components';
 
 import {User} from "../../user/user";
 import {UserService} from "../../user/user.service";
-import {UserItemComponent} from "./user-item";
-import {SearchBarComponent} from "../shared/search-bar";
-import {MainContentComponent} from "../../shared/main-content";
 import {UserModalComponent} from "./user-modal";
 
 
@@ -13,12 +10,6 @@ import {UserModalComponent} from "./user-modal";
   selector: 'app-usuarios',
   templateUrl: 'usuarios.component.html',
   styleUrls: ['usuarios.component.scss'],
-  directives: [
-    MainContentComponent,
-    UserItemComponent,
-    SearchBarComponent,
-    UserModalComponent
-  ]
 })
 export class UsuariosComponent implements OnInit {
   @ViewChild(UserModalComponent) private userModal:UserModalComponent;

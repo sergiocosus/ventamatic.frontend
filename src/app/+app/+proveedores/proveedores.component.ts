@@ -11,11 +11,6 @@ import {SupplierModalComponent} from "./supplier-modal";
   selector: 'app-proveedores',
   templateUrl: 'proveedores.component.html',
   styleUrls: ['proveedores.component.scss'],
-  directives: [SearchBarComponent,
-    MainContentComponent,
-    SupplierItemComponent,
-    SupplierModalComponent
-  ],
   providers: [SupplierService]
 })
 export class ProveedoresComponent implements OnInit {

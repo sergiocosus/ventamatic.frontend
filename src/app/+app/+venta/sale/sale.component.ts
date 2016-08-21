@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { Control,  } from "@angular/common";
 import { ActivatedRoute, Router} from "@angular/router";
 import { FormControl} from "@angular/forms";
 
@@ -8,26 +7,16 @@ import {SaleService} from "../shared/sale.service";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {ClientService} from "../../+clientes/shared/client.service";
 import {Client} from "../../+clientes/shared/client";
-import {MainContentComponent} from "../../../shared/main-content/main-content.component";
 import {Inventory} from "../../../shared/inventory/inventory";
 import {SaleConfirmModalComponent} from "../sale-confirm-modal/sale-confirm-modal.component";
 import {ScheduleService} from "../../../user/schedule/schedule.service";
 import {TicketService} from "../ticket/ticket.service";
-import {ProductCartComponent} from "../../../shared/product/product-cart/product-cart.component";
 import {FindProductComponent} from "../../../shared/product/find-product/find-product.component";
-import {BUTTON_DIRECTIVES} from "ng2-bootstrap";
 
 @Component({
   selector: 'app-sale',
   templateUrl: 'sale.component.html',
   styleUrls: ['sale.component.scss'],
-  directives: [
-    MainContentComponent,
-    FindProductComponent,
-    SaleConfirmModalComponent,
-    ProductCartComponent,
-    BUTTON_DIRECTIVES,
-  ],
   providers:[
     SaleService
   ]

@@ -1,15 +1,11 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import {AutocompleteInputComponent} from "../../../components/autocomplete-input/autocomplete-input.component";
-import {InventoryService} from "../../inventory/inventory.service";
-import {NotificationsService} from "angular2-notifications/lib/notifications.service";
+import { InventoryService } from "../../inventory/inventory.service";
+import { NotificationsService } from "angular2-notifications/lib/notifications.service";
 
 @Component({
   selector: 'app-find-product',
   templateUrl: 'find-product.component.html',
-  styleUrls: ['find-product.component.scss'],
-  directives: [
-    AutocompleteInputComponent,
-  ]
+  styleUrls: ['find-product.component.scss']
 })
 export class FindProductComponent implements OnInit {
   @Output('selected-product') selectedProduct = new EventEmitter();

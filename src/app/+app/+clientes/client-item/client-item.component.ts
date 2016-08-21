@@ -4,8 +4,7 @@ import {PersonItemComponent} from "../../../components/person-item/person-item.c
 @Component({
   selector: 'client-item',
   templateUrl: 'client-item.component.html',
-  styleUrls: ['client-item.component.scss'],
-  directives: [PersonItemComponent]
+  styleUrls: ['client-item.component.scss']
 })
 export class ClientItemComponent implements OnInit {
   @Input() client:any;

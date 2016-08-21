@@ -1,20 +1,12 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES } from '@angular/router';
-import { SimpleNotificationsComponent } from 'angular2-notifications/components'
-
+import { Router} from '@angular/router';
 import {AuthService} from "./services/auth.service";
-import {TicketComponent} from "./+app/+venta/ticket/ticket.component";
 import {TicketService} from "./+app/+venta/ticket/ticket.service";
 
 @Component({
   selector: 'app-root',
   templateUrl: 'ventamatic-frontend.component.html',
   styleUrls: ['ventamatic-frontend.component.scss'],
-  directives: [
-    ROUTER_DIRECTIVES,
-    SimpleNotificationsComponent,
-    TicketComponent
-  ],
   providers: [
     AuthService,
     TicketService

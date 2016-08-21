@@ -11,12 +11,6 @@ import {ClientModalComponent} from "./client-modal";
   selector: 'app-clientes',
   templateUrl: 'clientes.component.html',
   styleUrls: ['clientes.component.scss'],
-  directives: [
-    SearchBarComponent,
-    MainContentComponent,
-    ClientItemComponent,
-    ClientModalComponent
-  ],
   providers: [ClientService]
 })
 export class ClientesComponent implements OnInit {
