@@ -1,5 +1,6 @@
 <h5>Producto</h5>
-<input-label [(ngModel)]="bar_code" name="bar_code" (keyup)="barCodeEntered($event)">
+<input-label [(ngModel)]="bar_code" name="bar_code" class="dark"
+             (keyup)="barCodeEntered($event)" #barCodeInput >
   Código de barras
 </input-label>
 
@@ -10,7 +11,8 @@
 >
 </autocomplete-input>
 
-<input-label [(ngModel)]="product_id" name="product_id" [type]="'number'" [min]="1" [step]="1"
+<input-label [(ngModel)]="product_id" name="product_id" class="dark"
+             [type]="'number'" [min]="1" [step]="1"
              (keyup)="idEntered($event)">
   ID
 </input-label>

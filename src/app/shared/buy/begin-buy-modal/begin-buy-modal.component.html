@@ -1,0 +1,42 @@
+<modal>
+  <modal-header [show-close]="true">
+    <h2> Iniciar Compra </h2>
+  </modal-header>
+  <form (submit)="start()">
+    <modal-body>
+      <span>Sucursal</span>
+      <select [(ngModel)]="formData.branch" name="branch"
+              #selectBranch required>
+        <option *ngFor="let branch of branches" [ngValue]="branch">
+          {{branch.name}}
+        </option>
+      </select>
+      <br/>
+      <span>Proveedor</span>
+      <select [(ngModel)]="formData.supplier" name="supplier"
+              required>
+        <option *ngFor="let supplier of suppliers" [ngValue]="supplier">
+          {{supplier.name}}
+        </option>
+      </select>
+
+      <input-label [(ngModel)]="formData.introducedAmount" name="amount"
+                   type="number" min="0" [step]="0.01"  required="required" >
+        Total
+      </input-label>
+
+      <input-label [(ngModel)]="formData.supplierBillID" name="supplierBillID"
+                   required="required">
+        Número de factura
+      </input-label>
+    </modal-body>
+    <modal-footer>
+      <button type="submit"
+              class="btn btn-primary">
+        Iniciar Compra
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+
+

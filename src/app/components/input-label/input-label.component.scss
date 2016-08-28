@@ -1,3 +1,5 @@
+@import "src/app/colors";
+
 :host{
   display: inline-block;
   width: 100%;
@@ -61,6 +63,22 @@
     margin: auto;
     transition: 0.2s ease all;
     color: gray;
+  }
+
+
+  &.dark{
+    input{
+      background-color: $darkBlue;
+      border-bottom: solid 2px steelblue;
+
+      color: white;
+    }
+
+    input:focus ~ label,
+    input:not(.empty)~ label
+    {
+      color:  lighten(steelblue, 50%);
+    }
   }
 }
 

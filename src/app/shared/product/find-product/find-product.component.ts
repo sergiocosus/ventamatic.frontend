@@ -1,6 +1,11 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { InventoryService } from "../../inventory/inventory.service";
-import { NotificationsService } from "angular2-notifications/lib/notifications.service";
+import {Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef} from '@angular/core';
+import {InventoryService} from "../../inventory/inventory.service";
+import {NotificationsService} from "angular2-notifications/lib/notifications.service";
+import {ProductService} from "../product.service";
+import { Observable } from "rxjs";
+import {Product} from "../product";
+import {Inventory} from "../../inventory/inventory";
+import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 @Component({
   selector: 'app-find-product',
@@ -8,38 +13,57 @@ import { NotificationsService } from "angular2-notifications/lib/notifications.s
   styleUrls: ['find-product.component.scss']
 })
 export class FindProductComponent implements OnInit {
+  @ViewChild('barCodeInput') barCodeInput:InputLabelComponent;
   @Output('selected-product') selectedProduct = new EventEmitter();
 
-  @Input() branch_id:number;
+  @Input() branch_id: number;
+  @Input() mode: string = 'inventory';
 
-  bar_code:string;
-  product_id:number;
-  searchMethod;
+  bar_code: string;
+  product_id: number;
+  searchMethod: (string) => Observable<Product|Inventory>;
+  barCodeMethod: (string) => Observable<Product|Inventory>;
+  productIdMethod: (number) => Observable<Product|Inventory>;
 
-  search_words:string = "";
+  search_words: string = "";
 
   private messages = {
     emptyBarCode: 'El código de barras se encuentra vacío',
     emptyId: 'El ID se encuentra vacío',
   };
 
-  constructor(private inventoryService:InventoryService,
-              private notificationService:NotificationsService
-  ) {
-    this.initSearchMethod();
+  constructor(private inventoryService: InventoryService,
+              private productService: ProductService,
+              private notificationService: NotificationsService) {
   }
 
   ngOnInit() {
+    switch (this.mode) {
+      case 'inventory':
+        this.initInventoryMethods();
+        break;
+      case 'product':
+        this.initProductMethods();
+        break;
+    }
   }
 
-  private initSearchMethod(){
+  private initInventoryMethods() {
     this.searchMethod = (words) => this.inventoryService.search(this.branch_id, words);
+    this.barCodeMethod = (barCode) => this.inventoryService.getByBarCode(this.branch_id, barCode);
+    this.productIdMethod = (product_id) => this.inventoryService.get(this.branch_id, product_id);
   }
 
-  barCodeEntered($event){
-    if($event.keyIdentifier=='Enter'){
-      if(this.bar_code && this.bar_code.length){
-        this.inventoryService.getByBarCode(this.branch_id, this.bar_code).subscribe(
+  private initProductMethods(){
+    this.searchMethod = (words) => this.productService.search(words);
+    this.barCodeMethod = (barCode) => this.productService.getByBarCode(barCode);
+    this.productIdMethod = (product_id) => this.productService.get(product_id);
+  }
+
+  barCodeEntered($event) {
+    if ($event.keyIdentifier == 'Enter') {
+      if (this.bar_code && this.bar_code.length) {
+        this.barCodeMethod(this.bar_code).subscribe(
           inventory => {
             this.selectedProduct.emit(inventory)
           },
@@ -53,9 +77,12 @@ export class FindProductComponent implements OnInit {
 
   idEntered($event) {
     if ($event.code == 'Enter') {
-      if(!isNaN(this.product_id)){
-        this.inventoryService.get(this.branch_id, this.product_id).subscribe(
-          inventory => this.selectedProduct.emit(inventory),
+      if (!isNaN(this.product_id)) {
+        this.productIdMethod(this.product_id).subscribe(
+          inventory => {
+            console.log(inventory);
+            this.selectedProduct.emit(inventory)
+          },
           error => this.notifyError(error)
         );
       } else {
@@ -64,17 +91,21 @@ export class FindProductComponent implements OnInit {
     }
   }
 
-  notifyError(error){
-    if(error.code == 10){
-      this.notificationService.alert('Alerta',error.message);
-    }else{
+  notifyError(error) {
+    if (error.code == 10) {
+      this.notificationService.alert('Alerta', error.message);
+    } else {
       this.notificationService.error('Error', error.message);
     }
   }
 
-  clear(){
+  clear() {
     this.bar_code = "";
     this.search_words = "";
     this.product_id = null;
+  }
+
+  setFocus(){
+    this.barCodeInput.setFocus();
   }
 }

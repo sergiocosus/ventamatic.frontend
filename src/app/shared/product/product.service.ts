@@ -55,7 +55,7 @@ export class ProductService {
   }
 
   private mapProduct(json:any){
-    return json.inventory;
+    return json.product;
   }
 
   private parseProduct(product:any){

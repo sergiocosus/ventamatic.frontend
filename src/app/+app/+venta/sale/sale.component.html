@@ -1,8 +1,8 @@
-<div class="control">
+<div class="left">
   <div class="client">
     <h5>Cliente</h5>
-    <input-label [(ngModel)]="client_id" name="cliend_id" [type]="'number'" [min]="1"
-                 [formControl]="clientIdControl"
+    <input-label [(ngModel)]="client_id" name="cliend_id" type="number" [min]="1"
+                 [formControl]="clientIdControl" class="dark"
                  [required]="true">
       ID de cliente
     </input-label>
@@ -17,25 +17,15 @@
   </div>
 
   <div class="finish">
-    <input-label [(ngModel)]="payment" name="clientPayment"
+    <input-label [(ngModel)]="payment" name="clientPayment" class="dark"
                  [type]="'number'" [min]="total" [max]="99999999999" [required]="true">
       Pago
     </input-label>
     <hr>
 
-    <h5>Tipo de pago:</h5>
-    <br>
-    <div class="btn-group">
-      <label *ngFor="let paymentType of paymentTypes"
-             class="btn btn-primary" [(ngModel)]="payment_type_id"  name="payment_type_id"
-             [btnRadio]="paymentType.value">
-        {{paymentType.label}}
-      </label>
-    </div>
-    <input-label *ngIf="payment_type_id == 2"
-                 [(ngModel)]="card_payment_id" name="card_payment_id" [required]="true">
-      Folio de la transacción electrónica
-    </input-label>
+    <app-payment-type
+      [selectedPaymentType]="selectedPaymentType"
+    ></app-payment-type>
     <hr>
 
     <h5>Imprimir ticket</h5>
@@ -66,7 +56,7 @@
 </div>
 
 
-<div class="products">
+<div class="right">
   <div class="branch-view" *ngIf="branch">
     <h6>Sucursal</h6>
     <h4>
@@ -79,10 +69,10 @@
     <span *ngIf="!client_status">{{client && client.fullName}}</span>
   </div>
   <hr/>
-  <app-product-cart
+  <app-inventory-cart
     [(addedProducts)]="addedProducts"
     [(payment)]="payment"
-  ></app-product-cart>
+  ></app-inventory-cart>
 </div>
 
 

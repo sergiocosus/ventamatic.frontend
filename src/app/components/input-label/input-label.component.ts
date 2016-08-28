@@ -1,4 +1,4 @@
-import {Component, Input, forwardRef, Provider, EventEmitter, Output} from '@angular/core';
+import {Component, Input, forwardRef, Provider, EventEmitter, Output, ElementRef, ViewChild} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
 
 const noop = (_?) => {};
@@ -19,6 +19,7 @@ const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = new Provider(
 
 
 export class InputLabelComponent  implements ControlValueAccessor {
+  @ViewChild('input') input:ElementRef;
   @Input() type:string = 'text';
   @Input() disabled:boolean = null;
   @Input() required:boolean = null;
@@ -86,4 +87,9 @@ export class InputLabelComponent  implements ControlValueAccessor {
     this._onTouchedCallback = fn;
   }
 
+  setFocus(){
+    setTimeout(() => {
+      this.input.nativeElement.focus();
+    }, 500);
+  }
 }

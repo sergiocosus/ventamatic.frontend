@@ -55,7 +55,12 @@ import {AutocompleteInputComponent} from "./components/autocomplete-input/autoco
 import {EndScheduleModalComponent} from "./user/schedule/end-schedule-modal/end-schedule-modal.component";
 import {FindProductComponent} from "./shared/product/find-product/find-product.component";
 import {SaleConfirmModalComponent} from "./+app/+venta/sale-confirm-modal/sale-confirm-modal.component";
-import {ProductCartComponent} from "./shared/product/product-cart/product-cart.component";
+import {BeginBuyModalComponent} from "./shared/buy/begin-buy-modal/begin-buy-modal.component";
+import {InventoryCartComponent} from "./shared/product/inventory-cart/inventory-cart.component";
+import { ProductCartComponent } from './shared/product/product-cart/product-cart.component';
+import { AddProductModalComponent } from './+app/+compra/add-product-modal/add-product-modal.component';
+import {BuyService} from "./shared/buy/buy.service";
+import { PaymentTypeComponent } from './shared/payment-type/payment-type/payment-type.component';
 
 const CUSTOM_MODAL_DIRECTIVES = [
   ModalComponent,
@@ -106,11 +111,16 @@ const CUSTOM_MODAL_DIRECTIVES = [
     BranchItemComponent,
     UserModalComponent,
     UserItemComponent,
+    InventoryCartComponent,
     ProductCartComponent,
     SaleConfirmModalComponent,
     FindProductComponent,
     EndScheduleModalComponent,
     AutocompleteInputComponent,
+    BeginBuyModalComponent,
+    ProductCartComponent,
+    AddProductModalComponent,
+    PaymentTypeComponent,
 
   ],
   imports: [
@@ -123,6 +133,7 @@ const CUSTOM_MODAL_DIRECTIVES = [
   ],
   providers: [
     appRoutingProviders,
+    BuyService,
     provide(AuthHttp, {
       useFactory: (http) => {
         return new AuthHttp(new AuthConfig({

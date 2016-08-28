@@ -22,34 +22,29 @@ import {FindProductComponent} from "../../../shared/product/find-product/find-pr
   ]
 })
 export class SaleComponent implements OnInit, OnDestroy {
-  @ViewChild(SaleConfirmModalComponent) protected saleConfirmModal:SaleConfirmModalComponent;
-  @ViewChild(FindProductComponent) protected findProduct:FindProductComponent;
+  @ViewChild(SaleConfirmModalComponent) protected saleConfirmModal: SaleConfirmModalComponent;
+  @ViewChild(FindProductComponent) protected findProduct: FindProductComponent;
 
   private scheduleSubscription;
 
-  addedProducts:ProductSale[] = [];
+  addedProducts: ProductSale[] = [];
 
-  branch:Branch;
-  branch_id:number;
+  branch: Branch;
+  branch_id: number;
 
-  client_id:number = 1;
-  clientIdControl:FormControl = new FormControl();
-  client:Client;
-  client_status:string;
+  client_id: number = 1;
+  clientIdControl: FormControl = new FormControl();
+  client: Client;
+  client_status: string;
 
-  payment:number = null;
-  paymentTypes = [
-    {
-      label: 'Efectivo',
-      value: 1
-    },
-    {
-      label: 'Tarjeta',
-      value: 2
-    }
-  ];
-  payment_type_id:number = 1;
-  card_payment_id:string = null;
+  payment: number = null;
+
+  selectedPaymentType = {
+    payment_type_id: 1,
+    card_payment_id: null,
+  };
+
+
 
   print = true;
 
@@ -172,11 +167,11 @@ export class SaleComponent implements OnInit, OnDestroy {
         'Error', this.messages.noProductsAdded);
       return;
     }
-   /* if(this.paymentChange < 0){
+    if(this.payment - this.total < 0){
       this.notificationService.error(
         'Error', this.messages.paymentInvalid);
       return;
-    }*/
+    }
 
     this.saleConfirmModal.open();
   }
@@ -200,14 +195,14 @@ export class SaleComponent implements OnInit, OnDestroy {
       })
     });
 
-    if(this.payment_type_id == 1){
-      this.card_payment_id = null;
+    if(this.selectedPaymentType.payment_type_id == 1){
+      this.selectedPaymentType.card_payment_id = null;
     }
 
     this.saleService.post(this.branch_id, {
       client_id: this.client_id,
-      payment_type_id: this.payment_type_id,
-      card_payment_id: this.card_payment_id,
+      payment_type_id: this.selectedPaymentType.payment_type_id,
+      card_payment_id: this.selectedPaymentType.card_payment_id,
       total: this.total,
       client_payment: this.payment,
       products: products
@@ -229,13 +224,13 @@ export class SaleComponent implements OnInit, OnDestroy {
     this.addedProducts = [];
     this.payment = null;
     this.client_id = 1;
-    this.payment_type_id = 1;
-    this.card_payment_id = null;
+    this.selectedPaymentType.payment_type_id = 1;
+    this.selectedPaymentType.card_payment_id = null;
     this.findProduct.clear();
   }
 
   cancel(){
-    if(confirm(this.messages.saleSuccess)){
+    if(confirm(this.messages.cancelSale)){
       this.clear();
     }
   }

@@ -1,3 +1,89 @@
-<p>
-  compra works!
-</p>
+<main-content>
+  <div class="left" *ngIf="initialData">
+    <div class="search">
+      <app-find-product (selected-product)="addProduct($event)"
+                        mode="product">
+      </app-find-product>
+      <hr/>
+    </div>
+
+    <app-payment-type [selectedPaymentType]="selectedPaymentType">
+    </app-payment-type>
+
+    <div class="finish">
+      <input-label [(ngModel)]="iva" name="iva" class="dark"
+                   [type]="'number'"  [max]="99999999999" [required]="true">
+        IVA
+      </input-label>
+      <input-label [(ngModel)]="ieps" name="ieps" class="dark"
+                   [type]="'number'"  [max]="99999999999" [required]="true">
+        IEPS
+      </input-label>
+      <div class="btn-group">
+        <button class="btn btn-success btn-block"
+                (click)="openBuyConfirm()">
+          Finalizar Compra
+        </button>
+
+        <button class="btn btn-danger btn-block"
+                (click)="confirmCancelModal.open()">
+          Cancelar Compra
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="right" *ngIf="initialData">
+    <div class="branch-view" *ngIf="initialData.branch">
+      <h6>Sucursal</h6>
+      <h4>
+        {{initialData.branch.name}}
+      </h4>
+    </div>
+    <div class="branch-view" *ngIf="initialData.supplier">
+      <h6>Proveedor</h6>
+      <h4>
+        {{initialData.supplier.fullName}}
+      </h4>
+    </div>
+    <div class="branch-view" *ngIf="initialData.supplier">
+      <h6>Id de factura</h6>
+      <h4>
+        {{initialData.supplierBillID}}
+      </h4>
+    </div>
+    <hr/>
+    <app-product-cart
+      [(addedProducts)]="addedProducts"
+      [introducedAmount]="initialData.introducedAmount"
+    ></app-product-cart>
+  </div>
+
+</main-content>
+
+<app-begin-buy-modal (buy-started)="startBuy($event)">
+</app-begin-buy-modal >
+
+<app-add-product-modal (completed)="addProductToCart($event)">
+</app-add-product-modal>
+
+<modal #confirmCancelModal (onClose)="cancel()">
+  <modal-header>
+    <h4 class="modal-title">{{messages.cancel}}</h4>
+  </modal-header>
+  <modal-footer [show-default-buttons]="true"
+                close-button-label="Cancelar Compra"
+                dismiss-button-label="No cancelar compra">
+  </modal-footer>
+</modal>
+
+<modal #confirmBuyModal (onClose)="buy()">
+  <modal-header>
+    <h4 class="modal-title">{{messages.confirm}}</h4>
+  </modal-header>
+  <modal-footer [show-default-buttons]="true"
+                close-button-label="Completar Compra"
+                dismiss-button-label="Cerrar">
+  </modal-footer>
+</modal>

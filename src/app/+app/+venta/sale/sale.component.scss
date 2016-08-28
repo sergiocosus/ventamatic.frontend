@@ -3,26 +3,11 @@
 
 :host{
   display: flex;
-  floating-label, input-label{
-    input{
-      background-color: $darkBlue;
-      border-bottom: solid 2px steelblue;
-
-      color: white;
-    }
-
-    input:focus ~ label,
-    input:not(.empty)~ label
-    {
-      color:  lighten(steelblue, 50%);
-    }
-  }
-
   max-width: 100%;
   overflow: hidden;
 }
 
-.control{
+.left{
   display: flex;
   flex-direction: column;
   flex: 1 0 0;
@@ -49,7 +34,7 @@
   }
 }
 
-.products{
+.right{
   flex: 2 0 0;
 
   color: white;

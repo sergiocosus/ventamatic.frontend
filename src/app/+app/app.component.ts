@@ -9,6 +9,7 @@ import { BranchService } from "./+sucursales/shared/branch.service";
 import { CategoryService } from "../shared/product/category/category.service";
 import { InventoryService } from "../shared/inventory/inventory.service";
 import { ScheduleService } from "../user/schedule/schedule.service";
+import { SupplierService } from "./+proveedores/shared/supplier.service";
 
 @Component({
   selector: 'app-app',
@@ -22,6 +23,7 @@ import { ScheduleService } from "../user/schedule/schedule.service";
     CategoryService,
     InventoryService,
     ScheduleService,
+    SupplierService,
   ]
 
 })

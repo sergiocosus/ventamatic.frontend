@@ -41,8 +41,8 @@
       <td>{{product.pivot.quantity}}</td>
       <td>{{product.id}}</td>
       <td>{{product.description}}</td>
-      <td class="right">{{product.pivot.price | currency:'USD':true:'1.2-2'}}</td>
-      <td class="right">{{product.pivot.price * product.pivot.quantity | currency:'USD':true:'1.2-2'}}</td>
+      <td class="right">{{product.pivot.cost | currency:'USD':true:'1.2-2'}}</td>
+      <td class="right">{{product.pivot.cost * product.pivot.quantity | currency:'USD':true:'1.2-2'}}</td>
     </tr>
     <tr>
       <td colspan="3"></td>

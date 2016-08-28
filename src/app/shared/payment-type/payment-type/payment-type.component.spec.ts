@@ -3,11 +3,11 @@
 import { By }           from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 import { addProviders, async, inject } from '@angular/core/testing';
-import { ProductCartComponent } from './product-cart.component';
+import { PaymentTypeComponent } from './payment-type.component';
 
-describe('Component: ProductCart', () => {
+describe('Component: PaymentType', () => {
   it('should create an instance', () => {
-    let component = new ProductCartComponent();
+    let component = new PaymentTypeComponent();
     expect(component).toBeTruthy();
   });
 });

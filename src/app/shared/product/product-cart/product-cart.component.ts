@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {Inventory} from "../../inventory/inventory";
+import {Component, OnInit, Input} from '@angular/core';
+import {Product} from "../product";
+import {ProductBuy} from "../../buy/product-buy";
 
 @Component({
   selector: 'app-product-cart',
@@ -7,8 +8,8 @@ import {Inventory} from "../../inventory/inventory";
   styleUrls: ['product-cart.component.scss']
 })
 export class ProductCartComponent implements OnInit {
-  @Input() addedProducts:ProductSale[] = [];
-  @Input() payment:number = null;
+  @Input() addedProducts:ProductBuy[] = [];
+  @Input() introducedAmount:number = null;
 
 
   constructor() {}
@@ -20,25 +21,22 @@ export class ProductCartComponent implements OnInit {
   get total(){
     var total = 0;
     this.addedProducts.forEach(addedProduct => {
-      total += addedProduct.inventory.correctPrice * addedProduct.quantity;
+      total += addedProduct.cost * addedProduct.quantity;
     });
     return total;
   }
 
-  get paymentChange(){
-    return this.payment - this.total;
+  get amountDiference(){
+    return this.introducedAmount - this.total;
   }
 
-  removeProduct(productSale){
-    var index = this.addedProducts.indexOf(productSale);
+  removeProduct(producBuy){
+    var index = this.addedProducts.indexOf(producBuy);
     if (index > -1) {
       this.addedProducts.splice(index, 1);
     }
   }
 
+
 }
 
-interface ProductSale {
-  inventory:Inventory;
-  quantity:number;
-}

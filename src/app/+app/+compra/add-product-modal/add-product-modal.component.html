@@ -1,0 +1,28 @@
+<script src="../compra.component.ts"></script>
+<modal>
+  <modal-header [show-close]="true">
+    <h2>Ingrese precio y cantidad</h2>
+  </modal-header>
+  <form (ngSubmit)="submit()" >
+    <modal-body>
+      <h3 *ngIf="productBuy.product">
+        Producto: {{productBuy.product.description}}
+      </h3>
+
+      <input-label name="price" [(ngModel)]="productBuy.cost"
+                   required="required" type="number" [min]="0.01" [step]="0.01"
+                   #inputPrice>
+        Precio
+      </input-label>
+      <input-label name="quantity" [(ngModel)]="productBuy.quantity"
+                   required="required" type="number" [min]="0.001" [step]="0.001">
+        Cantidad
+      </input-label>
+    </modal-body>
+    <modal-footer>
+      <button type="submit" class="btn btn-primary">
+        Agregar Producto
+      </button>
+    </modal-footer>
+  </form>
+</modal>

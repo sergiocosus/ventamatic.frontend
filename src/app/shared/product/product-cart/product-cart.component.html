@@ -9,19 +9,21 @@
   </tr>
   </thead>
   <tbody>
-  <tr *ngFor="let productSale of addedProducts">
-    <td>{{productSale.inventory.product.id}}</td>
-    <td>{{productSale.inventory.product.description}}</td>
-    <td class="align-right">{{productSale.inventory.correctPrice | currency:'USD':true:'1.2-2'}}</td>
+  <tr *ngFor="let productBuy of addedProducts">
+    <td>{{productBuy.product.id}}</td>
+    <td>{{productBuy.product.description}}</td>
+    <td class="align-right">
+      <input type="number" min="0" max="9999999999" step=".01"
+             [(ngModel)]="productBuy.cost"/>
+    </td>
     <td>
-      <input type="number" min="1" [max]="productSale.inventory.quantity"
-             [(ngModel)]="productSale.quantity"/>
+      <input type="number" min="1"
+             [(ngModel)]="productBuy.quantity"/>
     </td>
     <td class="align-right">
-      {{productSale.quantity * productSale.inventory.correctPrice
-      | currency:'USD':true:'1.2-2'}}
+      {{productBuy.quantity * productBuy.cost | currency:'USD':true:'1.2-2'}}
       <span class="button-delete"
-            (click)="removeProduct(productSale)">
+            (click)="removeProduct(productBuy)">
             <i class="fa fa-times"></i>
         </span>
     </td>
@@ -31,20 +33,16 @@
   <tfoot>
   <tr>
     <td colspan="3"></td>
-    <td>Total</td>
+    <td>Total Calculado</td>
     <td class="align-right">
       {{total | currency:'USD':true:'1.2-2'}}
     </td>
   </tr>
+
   <tr [ngClass]="{ error: payment - total < 0 }">
     <td colspan="3"></td>
-    <td>Pago</td>
-    <td class="align-right">{{ payment-0 | currency:'USD':true:'1.2-2'}}</td>
-  </tr>
-  <tr [ngClass]="{ error: payment - total < 0 }">
-    <td colspan="3"></td>
-    <td>Cambio</td>
-    <td class="align-right">{{payment - total | currency:'USD':true:'1.2-2'}}</td>
+    <td>Total Introducido</td>
+    <td class="align-right">{{ introducedAmount-0 | currency:'USD':true:'1.2-2'}}</td>
   </tr>
   </tfoot>
 
