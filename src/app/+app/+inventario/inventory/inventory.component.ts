@@ -17,6 +17,7 @@ import {ModalInventarioComponent} from "../modal-inventario/modal-inventario.com
 
 export class InventoryComponent implements OnInit, OnDestroy {
   @ViewChild(ModalInventarioComponent) private modalInventario:ModalInventarioComponent;
+
   branch_id:number;
   inventories:Inventory[];
 
@@ -44,5 +45,16 @@ export class InventoryComponent implements OnInit, OnDestroy {
   clickUpdate(inventory:Inventory){
     this.modalInventario.openUpdate(inventory);
   }
+
+  updated(inventory:Inventory) {
+    for ( var index in this.inventories ) {
+      if(this.inventories[index].product_id == inventory.product_id) {
+        this.inventories[index] = inventory;
+        return;
+      }
+    }
+  }
+
+
 
 }

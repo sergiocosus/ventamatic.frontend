@@ -1,62 +1,73 @@
 <modal>
   <modal-header [show-close]="true">
-    <h4 *ngIf="createMode"> Añadir Producto </h4>
-    <h4 *ngIf="updateMode"> Editar Producto </h4>
-    <h4 *ngIf="deleteMode"> Eliminar Producto </h4>
+    <h4 *ngIf="updateMode"> Modificar Inventario </h4>
   </modal-header>
   <form (ngSubmit)="submit()">
-    <modal-body *ngIf="!deleteMode && product">
-      <input-label type="text" [(ngModel)]="product.description"
-                   [disabled]="locked" required>
-        Description
-      </input-label>
+    <modal-body *ngIf="!deleteMode && inventory">
+      Tipo de movimiento:
+      <select [(ngModel)]="inventoryMovementType" name="inventoryMovementType"
+              #inventoryMovementTypeSelect required>
+        <option *ngFor="let inventoryMovementType of inventoryMovementTypes" [ngValue]="inventoryMovementType">
+          {{inventoryMovementType.name}}
+        </option>
+      </select>
 
-   <!--   <p-multiSelect [options]="categorySelectItems"
-                     [(ngModel)]="product.categories">
-      </p-multiSelect>
--->
-<!--      <p-dropdown [options]="brands"
-                  [(ngModel)]="product.brand_id"
-                  [autoWidth]="false">
-      </p-dropdown>-->
+      <hr/>
 
-      <input-label [(ngModel)]="product.brand" [disabled]="locked" >
-        Marca
-      </input-label>
-      <input-label [(ngModel)]="product.global_price" [disabled]="locked">
-        Precio Global
-      </input-label>
-      <input-label [(ngModel)]="product.global_minimum" [disabled]="locked">
-        Mínimo global
-      </input-label>
-      <input-label ngif="product.unit" [(ngModel)]="product.unit" [disabled]="locked">
-        Unidad
-      </input-label>
+      <div *ngIf="inventoryMovementType.id != 0">
+        <div *ngIf="willIncrease()" >
+          Este tipo de movimiento aumentará el inventario,
+          introduzca la cantidad que desea incrementar
+        </div>
+        <div *ngIf="willDecrease()" >
+          Este tipo de movimiento disminuirá el inventario,
+          introduzca la cantidad que desea disminuir
+        </div>
+        <div *ngIf="willAdjust()" >
+          Este tipo de movimiento disminuirá o aumentará el inventario,
+          introduzca la cantidad que desea disminuir o aumentar.
+        </div>
+        <div *ngIf="willTranslate()" >
+          Este tipo de movimiento disminuirá la cantidad del inventario de la
+          surcursal actual y lo agregará a la sucursal seleccionada
+          Introduzca la cantidad que desea disminuir.
+        </div>
+
+        <input-label type="number" [(ngModel)]="quantity" name="quantity"
+                     [min]="min()"
+                     [max]="max()">
+          Cantidad a
+          <span *ngIf="willDecrease() || willTranslate()">diminuir</span>
+          <span *ngIf="willIncrease()">aumentar</span>
+          <span *ngIf="willAdjust()">disminuir o aumentar</span>
+        </input-label>
+
+        <select *ngIf="willTranslate()" [(ngModel)]="branch_id" name="branch_id"
+               required>
+          <option *ngFor="let branch of branches" [ngValue]="branch.id">
+            {{branch.name}}
+          </option>
+        </select>
+        <hr/>
+        Cantidad de producto actual: {{inventory.quantity}}
+        <br/>
+        Cantidad de producto despúés del movimiento:
+        <span *ngIf="willDecrease() || willTranslate()">
+          {{ (inventory.quantity) - (quantity-0)}}
+        </span>
+        <span *ngIf="willIncrease() || willAdjust()">
+          {{ (inventory.quantity) + (quantity-0)}}
+        </span>
+      </div>
+
     </modal-body>
     <modal-footer>
-      <button *ngIf="locked"
-              type="submit" class="btn btn-danger pull-xs-left"
-              (click)="unlock()" >
-        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-        Editar Usuario
-      </button>
-      <button *ngIf="createMode"
-              type="submit"
+      <button *ngIf="updateMode" type="submit"
               class="btn btn-success">
-        Crear Usuario
+        Actualizar Inventario
       </button>
-      <button *ngIf="updateMode && !locked"
-              type="submit"
-              class="btn btn-success">
-        Actualizar Usuario
-      </button>
-      <button *ngIf="deleteMode && !locked"
-              type="submit"
-              class="btn btn-danger">
-        Eliminar Usuario
-      </button>
-      <button type="button"
-              class="btn btn-primary"
+
+      <button type="button" class="btn btn-primary"
               (click)="close()">
         Cerrar
       </button>

@@ -25,4 +25,8 @@ export class InventoryService {
     return this.apiHttp.get(`branch/${branch_id}/inventory/bar-code`,{bar_code:bar_code})
       .map(json => new Inventory().parse(json.inventory));
   }
+
+  put(branch_id:number, product_id:number, data){
+    return this.apiHttp.put(`branch/${branch_id}/inventory/${product_id}`, data).map(json => new Inventory().parse(json.inventory));
+  }
 }
