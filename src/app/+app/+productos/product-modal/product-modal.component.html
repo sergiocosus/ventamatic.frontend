@@ -1,4 +1,4 @@
-<modal>
+<modal (onClose)="closed()" (onDismiss)="closed()">
   <modal-header [show-close]="true">
     <h4 *ngIf="createMode"> Añadir Producto </h4>
     <h4 *ngIf="updateMode"> Editar Producto </h4>
@@ -14,6 +14,14 @@
                    [disabled]="locked" required>
         Description
       </input-label>
+
+      <ng-select [items]="categoryItems"
+                 [initData]="selectedCategoryItems"
+                 (data)="selectedCategoryItems = $event"
+                 [multiple]="true"
+                 [disabled]="locked"
+                 placeholder="Categorias">
+      </ng-select>
    <!--   <p-multiSelect [options]="categorySelectItems" [(ngModel)]="product.categories"
                      name="categories"
       ></p-multiSelect>-->

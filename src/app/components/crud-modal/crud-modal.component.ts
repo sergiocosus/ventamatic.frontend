@@ -52,7 +52,7 @@ export abstract class CrudModalComponent {
   }
 
   close(){
-    this.modal.close();
+    return this.modal.close();
   }
 
   protected createdSuccess(data) {

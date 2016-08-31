@@ -11,6 +11,8 @@ export class Product extends Model{
   updated_at:string;
   deleted_at:string;
 
+  categories:any[];
+
   inventories:any[];
   get price(){
     return this.global_price;
@@ -28,8 +30,8 @@ export class Product extends Model{
       this.price,
     ]
   }
-  
+
   public static parseArray(objs:any){
     return objs.map(obj => {return new Product().parse(obj)})
-  } 
+  }
 }

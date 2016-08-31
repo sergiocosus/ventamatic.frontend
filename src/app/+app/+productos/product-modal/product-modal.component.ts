@@ -6,6 +6,7 @@ import {ProductService} from "../../../shared/product/product.service";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {CategoryService} from "../../../shared/product/category/category.service";
 import {Category} from "../../../shared/product/category/category";
+import {SelectComponent} from "ng2-select";
 
 @Component({
   selector: 'product-modal',
@@ -14,6 +15,7 @@ import {Category} from "../../../shared/product/category/category";
 })
 export class ProductModalComponent extends CrudModalComponent {
   @ViewChild(ModalComponent) protected modal:ModalComponent;
+  @ViewChild(SelectComponent) protected select:SelectComponent;
 
   @Output() created;
   @Output() updated;
@@ -24,7 +26,9 @@ export class ProductModalComponent extends CrudModalComponent {
   product: Product;
 
   categories:Category[] = [];
-  categorySelectItems:any[] = [];
+  categoryItems:any[] = [];
+  selectedCategoryItems:any[] = [];
+
 
   brands:any[] = [];
   constructor(protected productService:ProductService,
@@ -37,9 +41,9 @@ export class ProductModalComponent extends CrudModalComponent {
     this.categoryService.getAll().subscribe(
       categories => {
         this.categories = categories;
-        this.categorySelectItems = this.categories.map(
+        this.categoryItems = this.categories.map(
           (category:Category) => {
-            return {label:category.name, value:category.id}
+            return {text:category.name, id:category.id};
           }
         )
       }
@@ -56,6 +60,12 @@ export class ProductModalComponent extends CrudModalComponent {
 
   openUpdate(product:Product){
     this.product = product;
+    this.selectedCategoryItems = this.product.categories.map(
+      category => {
+        return {id:category.id, text:category.name};
+      }
+    );
+    console.log(this.selectedCategoryItems);
     super.openUpdate(product);
   }
 
@@ -66,14 +76,15 @@ export class ProductModalComponent extends CrudModalComponent {
 
 
   create(){
-
       this.productService.post(this.product).subscribe(
         product => this.createdSuccess(product)
       );
-
   }
 
   update(){
+    this.product.categories = this.selectedCategoryItems.map(
+      item => item.id
+    );
     this.productService.put(this.product).subscribe(product=> {
       this.updatedSuccess(product);
     });
@@ -85,6 +96,10 @@ export class ProductModalComponent extends CrudModalComponent {
         this.deletedSuccess(this.product);
       }
     });
+  }
+
+  closed(){
+    this.product = null;
   }
 
 }

@@ -5,9 +5,7 @@
   <form (ngSubmit)="submit()">
     <modal-body *ngIf="!deleteMode && inventory">
       Tipo de movimiento:
-      <ng-select [allowClear]="true"
-                 [items]="inventoryMovementTypes"
-                 [disabled]="disabled"
+      <ng-select [items]="inventoryMovementTypes"
                  (data)="inventoryMovementType = $event"
                  placeholder="Seleccione tipo de movimiento">
       </ng-select>
@@ -42,9 +40,8 @@
           <span *ngIf="willAdjust()">disminuir o aumentar</span>
         </input-label>
         <br/>
-        <ng-select *ngIf="willTranslate()" [allowClear]="true"
+        <ng-select *ngIf="willTranslate()"
                    [items]="branchesMapped"
-                   [disabled]="disabled"
                    (data)="destiny_branch_id = $event.id"
                    placeholder="Seleccione la sucursal de destino">
         </ng-select>
