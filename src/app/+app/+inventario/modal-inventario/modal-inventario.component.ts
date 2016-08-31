@@ -19,24 +19,26 @@ export class ModalInventarioComponent extends CrudModalComponent {
   name = 'Inventario';
 
   inventoryMovementTypes = [
-    { id:InventoryMovementTypeId.Promocion, name: 'Promoción' },
-    { id:InventoryMovementTypeId.Traslado, name: 'Traslado' },
-   // { id:InventoryMovementTypeId.Conversion, name: 'Conversión' },
-    { id:InventoryMovementTypeId.Consesion, name: 'Concesión' },
-    { id:InventoryMovementTypeId.Caducado, name: 'Caducado' },
-    { id:InventoryMovementTypeId.Ajuste, name: 'Ajuste' },
-   /* { id:InventoryMovementTypeId.Compra, name: 'Compra' },
-    { id:InventoryMovementTypeId.Venta, name: 'Venta' },*/
+    { id:InventoryMovementTypeId.Promocion, text: 'Promoción' },
+    { id:InventoryMovementTypeId.Traslado, text: 'Traslado' },
+   // { id:InventoryMovementTypeId.Conversion, text: 'Conversión' },
+    { id:InventoryMovementTypeId.Consesion, text: 'Concesión' },
+    { id:InventoryMovementTypeId.Caducado, text: 'Caducado' },
+    { id:InventoryMovementTypeId.Ajuste, text: 'Ajuste' },
+   /* { id:InventoryMovementTypeId.Compra, text: 'Compra' },
+    { id:InventoryMovementTypeId.Venta, text: 'Venta' },*/
   ];
 
-  inventoryMovementType = {id: 0, name: 'No seleccionado'};
+  inventoryMovementType = {id: 0, text: 'No seleccionado'};
 
   inventory: Inventory;
   branches: Branch[];
+  branchesMapped:any[];
+
 
   branch_id:number;
-
   quantity:number;
+  destiny_branch_id:number;
 
   constructor( protected notification: NotificationsService,
                protected inventoryService:InventoryService,
@@ -47,7 +49,18 @@ export class ModalInventarioComponent extends CrudModalComponent {
 
   ngOnInit() {
     this.branchService.getAll().subscribe(
-      branches => this.branches = branches
+      branches => {
+        for(var i in branches) {
+          if(branches[i].id == branches[i].id) {
+            branches.splice(<any>i, 1);
+          }
+        }
+        this.branchesMapped = branches.map(
+          branch => {
+            return {id: branch.id, text: branch.name};
+          }
+        )
+      }
     )
   }
 
@@ -102,23 +115,37 @@ export class ModalInventarioComponent extends CrudModalComponent {
       this.inventory.product_id,
       {
         quantity: this.quantity,
-        inventory_movement_type_id: this.inventoryMovementType.id
+        inventory_movement_type_id: this.inventoryMovementType.id,
+        destiny_branch_id: this.destiny_branch_id
       }
     ).subscribe(
       inventory => {
         this.notification.success('Éxito', 'Inventario del producto actualizado');
         this.inventory = inventory;
         this.updated.emit(inventory);
+        this.close();
       }
     );
   }
-
 
    openUpdate(inventory:Inventory){
     this.inventory = inventory;
     super.openUpdate(Inventory);
    }
 
+   clear(){
+     this.inventoryMovementType = {id: 0, text: 'No seleccionado'};
+
+     this.inventory = null;
+     this.branches = [];
+     this.branchesMapped = [];
+
+
+     this.branch_id = null;
+     this.quantity = null;
+     this.destiny_branch_id = null;
+
+   }
 }
 enum InventoryMovementTypeId {
   Promocion = 1,

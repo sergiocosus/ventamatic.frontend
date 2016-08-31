@@ -61,6 +61,7 @@ import { ProductCartComponent } from './shared/product/product-cart/product-cart
 import { AddProductModalComponent } from './+app/+compra/add-product-modal/add-product-modal.component';
 import {BuyService} from "./shared/buy/buy.service";
 import { PaymentTypeComponent } from './shared/payment-type/payment-type/payment-type.component';
+import {SELECT_DIRECTIVES} from "ng2-select";
 
 const CUSTOM_MODAL_DIRECTIVES = [
   ModalComponent,
@@ -74,6 +75,7 @@ const CUSTOM_MODAL_DIRECTIVES = [
     CUSTOM_MODAL_DIRECTIVES,
     SimpleNotificationsComponent,
     BUTTON_DIRECTIVES,
+    SELECT_DIRECTIVES,
     // Main routes directives
 
     VentamaticFrontendAppComponent,
