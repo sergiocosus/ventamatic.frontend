@@ -2,7 +2,7 @@ import { provide } from "@angular/core";
 import { AuthHttp } from 'angular2-jwt/angular2-jwt';
 import { Request, RequestOptionsArgs, Response } from '@angular/http';
 import { Observable } from "rxjs/Observable";
-import { environment } from "../environments/environment";
+import {environment} from "../../environments/environment";
 
 export class ApiHttp {
   private apiUrl = environment.apiUrl;

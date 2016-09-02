@@ -153,6 +153,4 @@ const CUSTOM_MODAL_DIRECTIVES = [
   entryComponents: [VentamaticFrontendAppComponent],
   bootstrap: [VentamaticFrontendAppComponent]
 })
-export class AppModule {
-
-}
+export class AppModule { }

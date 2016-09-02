@@ -4,7 +4,7 @@ import {Observable} from "rxjs/Observable";
 import {User} from "../user/user";
 import {JwtHelper} from "angular2-jwt/angular2-jwt";
 import { NotificationsService } from 'angular2-notifications/components'
-import {environment} from "../";
+import {environment} from "../../environments/environment";
 
 @Injectable()
 export class AuthService {
