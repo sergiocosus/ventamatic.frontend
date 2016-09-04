@@ -48,7 +48,7 @@ import {SupplierItemComponent} from "./+app/+proveedores/supplier-item/supplier-
 import {SupplierModalComponent} from "./+app/+proveedores/supplier-modal/supplier-modal.component";
 import {BranchModalComponent} from "./+app/+sucursales/branch-modal/branch-modal.component";
 import {BranchItemComponent} from "./+app/+sucursales/branch-item/branch-item.component";
-import {BUTTON_DIRECTIVES} from "ng2-bootstrap";
+import { ButtonsModule } from "ng2-bootstrap";
 import {UserModalComponent} from "./+app/+usuarios/user-modal/user-modal.component";
 import {UserItemComponent} from "./+app/+usuarios/user-item/user-item.component";
 import {AutocompleteInputComponent} from "./components/autocomplete-input/autocomplete-input.component";
@@ -62,6 +62,7 @@ import { AddProductModalComponent } from './+app/+compra/add-product-modal/add-p
 import {BuyService} from "./shared/buy/buy.service";
 import { PaymentTypeComponent } from './shared/payment-type/payment-type/payment-type.component';
 import {SELECT_DIRECTIVES} from "ng2-select";
+import {BrandService} from "./shared/product/brand/brand.service";
 
 const CUSTOM_MODAL_DIRECTIVES = [
   ModalComponent,
@@ -74,7 +75,6 @@ const CUSTOM_MODAL_DIRECTIVES = [
   declarations: [
     CUSTOM_MODAL_DIRECTIVES,
     SimpleNotificationsComponent,
-    BUTTON_DIRECTIVES,
     SELECT_DIRECTIVES,
     // Main routes directives
 
@@ -131,11 +131,13 @@ const CUSTOM_MODAL_DIRECTIVES = [
     FormsModule,
     ReactiveFormsModule,
     HttpModule,
+    ButtonsModule,
     routing
   ],
   providers: [
     appRoutingProviders,
     BuyService,
+    BrandService,
     provide(AuthHttp, {
       useFactory: (http) => {
         return new AuthHttp(new AuthConfig({

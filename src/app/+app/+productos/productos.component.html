@@ -27,30 +27,30 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let product of products">
-      <td (click)="clickUpdate(product)">{{product.id}}</td>
-      <td (click)="clickUpdate(product)">{{product.description}}</td>
-      <td (click)="clickUpdate(product)">
+    <tr *ngFor="let product of products" (click)="clickUpdate(product)">
+      <td>{{product.id}}</td>
+      <td>{{product.description}}</td>
+      <td>
         <ul>
           <li *ngFor="let category of product.categories; let last=last">
             {{category.name}}<span *ngIf="!last">, </span>
           </li>
         </ul>
       </td>
-      <td (click)="clickUpdate(product)">
+      <td>
         <span *ngIf="product.brand">
           {{product.brand.name}}
         </span>
       </td>
-      <td (click)="clickUpdate(product)">{{product.global_minimum}}</td>
-      <td (click)="clickUpdate(product)">{{product.global_price}}</td>
-      <td (click)="clickUpdate(product)">
+      <td>{{product.global_minimum}}</td>
+      <td>{{product.global_price}}</td>
+      <td >
         <span *ngIf="product.unit">
           {{product.unit.name}}
         </span>
       </td>
       <td>
-        <div class="button-delete" (click)="clickDelete(product)">
+        <div class="button-delete" (click)="clickDelete($event, product)">
           <img src="assets/images/remove.svg">
         </div>
       </td>
@@ -58,4 +58,6 @@
     </tbody>
   </table>
 </main-content>
-<product-modal></product-modal>
+<product-modal (updated)="updated($event)"
+               (created)="created($event)"
+                (deleted)="deleted($event)"></product-modal>

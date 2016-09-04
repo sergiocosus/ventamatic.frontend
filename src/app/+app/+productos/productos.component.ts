@@ -28,7 +28,9 @@ export class ProductosComponent implements OnInit {
     this.update(product);
   }
 
-  clickDelete(product:Product){
+  clickDelete($event, product:Product){
+    $event.preventDefault();
+    $event.stopPropagation();
     this.delete(product);
   }
 
@@ -49,11 +51,16 @@ export class ProductosComponent implements OnInit {
   }
 
   created(product:Product){
-    this.products.unshift(product);
+    this.products.push(product);
   }
 
   updated(product:Product){
-
+    for(var i=0; i<this.products.length; i++) {
+      if(product.id == this.products[i].id) {
+        console.log("holi");
+        this.products[i] = product;
+      }
+    }
   }
 
   deleted(product:Product){

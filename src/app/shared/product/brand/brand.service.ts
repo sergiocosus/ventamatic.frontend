@@ -4,7 +4,7 @@ import {Brand} from "./brand";
 
 @Injectable()
 export class BrandService {
-  private basePath= 'inventory/brand/';
+  private basePath= 'product/brand/';
 
   constructor(private apiHttp:ApiHttp) {}
 
@@ -37,18 +37,18 @@ export class BrandService {
   }
 
   private mapBrands(json:any){
-    return json.categories;
+    return json.brands;
   }
 
   private mapBrand(json:any){
-    return json.category;
+    return json.brand;
   }
 
-  private parseBrand(product:any){
-    return new Brand().parse(product);
+  private parseBrand(brand:any){
+    return new Brand().parse(brand);
   }
 
-  private parseBrands(products:any){
-    return Brand.parseArray(products);
+  private parseBrands(brand:any){
+    return Brand.parseArray(brand);
   }
 }

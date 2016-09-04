@@ -11,9 +11,22 @@
         ID
       </input-label>
       <input-label type="text" [(ngModel)]="product.description" name="descripcion"
-                   [disabled]="locked" required>
+                   [disabled]="locked" required maxlength="255">
         Description
       </input-label>
+
+      <input-label type="text" [(ngModel)]="product.bar_code" name="bar_code"
+                   [disabled]="locked" required>
+        Código de barras
+      </input-label>
+
+
+      <ng-select [items]="unitItems"
+                 [initData]="selectedUnitItem"
+                 (data)="selectedUnitItem = $event"
+                 [disabled]="locked"
+                 placeholder="Unidad">
+      </ng-select>
 
       <ng-select [items]="categoryItems"
                  [initData]="selectedCategoryItems"
@@ -22,18 +35,14 @@
                  [disabled]="locked"
                  placeholder="Categorias">
       </ng-select>
-   <!--   <p-multiSelect [options]="categorySelectItems" [(ngModel)]="product.categories"
-                     name="categories"
-      ></p-multiSelect>-->
 
-<!--      <p-dropdown [options]="brands" [(ngModel)]="product.brand_id" name="brand_id"
-                  [autoWidth]="false"
-      ></p-dropdown>-->
+      <ng-select [items]="brandItems"
+                 [initData]="selectedBrandItem"
+                 (data)="selectedBrandItem = $event"
+                 [disabled]="locked"
+                 placeholder="Marca">
+      </ng-select>
 
-      <input-label type="text" [(ngModel)]="product.brand" name="brand"
-                   [disabled]="locked">
-        Marca
-      </input-label>
       <input-label type="text" [(ngModel)]="product.global_price" name="global_price"
                    [disabled]="locked">
         Precio Global
@@ -41,11 +50,6 @@
       <input-label type="text" [(ngModel)]="product.global_minimum" name="global_minimum"
                    [disabled]="locked">
         Mínimo global
-      </input-label>
-      <input-label *ngIf="product.unit"
-                   type="text" [(ngModel)]="product.unit" name="unit"
-                   [disabled]="locked">
-        Unidad
       </input-label>
     </modal-body>
     <modal-footer>

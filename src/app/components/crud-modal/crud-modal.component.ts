@@ -27,7 +27,7 @@ export abstract class CrudModalComponent {
     this.modal.open();
   }
 
-  openUpdate(any){
+  openUpdate(any?){
     this.createMode = false;
     this.updateMode = true;
     this.deleteMode = false;

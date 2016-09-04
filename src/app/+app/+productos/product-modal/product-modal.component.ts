@@ -7,6 +7,8 @@ import {NotificationsService} from "angular2-notifications/lib/notifications.ser
 import {CategoryService} from "../../../shared/product/category/category.service";
 import {Category} from "../../../shared/product/category/category";
 import {SelectComponent} from "ng2-select";
+import {BrandService} from "../../../shared/product/brand/brand.service";
+import {Brand} from "../../../shared/product/brand/brand";
 
 @Component({
   selector: 'product-modal',
@@ -29,12 +31,33 @@ export class ProductModalComponent extends CrudModalComponent {
   categoryItems:any[] = [];
   selectedCategoryItems:any[] = [];
 
+  brands:Brand[] = [];
+  brandItems:any[] = [];
+  selectedBrandItem:any;
 
-  brands:any[] = [];
+  unitItems:any[] = []
+  selectedUnitItem:any;
+
   constructor(protected productService:ProductService,
               protected notification:NotificationsService,
-              protected categoryService:CategoryService) {
+              protected categoryService:CategoryService,
+              protected brandService:BrandService) {
     super(notification);
+
+    this.unitItems = [
+      {
+        'id' : 1,
+        'text' : 'Pieza'
+      },
+      {
+        'id' : 2,
+        'text' : 'Kilogramo'
+      },
+      {
+        'id' : 3,
+        'text' : 'Litro'
+      }
+    ];
   }
 
   ngOnInit() {
@@ -49,8 +72,16 @@ export class ProductModalComponent extends CrudModalComponent {
       }
     );
 
-    this.brands.push({label:'cero', value:1})
-    this.brands.push({label:'Dos', value:2  })
+    this.brandService.getAll().subscribe(
+      brands => {
+        this.brands = brands;
+        this.brandItems = this.brands.map(
+          brand => {
+            return {text:brand.name, id:brand.id};
+          }
+        )
+      }
+    );
   }
 
   openCreate(){
@@ -59,14 +90,30 @@ export class ProductModalComponent extends CrudModalComponent {
   }
 
   openUpdate(product:Product){
-    this.product = product;
-    this.selectedCategoryItems = this.product.categories.map(
-      category => {
-        return {id:category.id, text:category.name};
+    this.productService.get(product.id).subscribe(
+      product => {
+        this.product = product;
+        this.selectedCategoryItems = product.categories.map(
+          category => {
+            return {id:category.id, text:category.name};
+          }
+        );
+
+        if(product.brand) {
+          this.selectedBrandItem = [{
+            text:product.brand.name,
+            id:product.brand.id
+          }];
+        }
+
+        this.selectedUnitItem = [{
+          text:product.unit.name,
+          id:product.unit.id
+        }];
       }
     );
-    console.log(this.selectedCategoryItems);
-    super.openUpdate(product);
+
+    super.openUpdate();
   }
 
   openDelete(product:Product){
@@ -76,15 +123,16 @@ export class ProductModalComponent extends CrudModalComponent {
 
 
   create(){
-      this.productService.post(this.product).subscribe(
-        product => this.createdSuccess(product)
-      );
+    this.appendData();
+
+    this.productService.post(this.product).subscribe(
+      product => this.createdSuccess(product)
+    );
   }
 
   update(){
-    this.product.categories = this.selectedCategoryItems.map(
-      item => item.id
-    );
+    this.appendData();
+
     this.productService.put(this.product).subscribe(product=> {
       this.updatedSuccess(product);
     });
@@ -92,14 +140,25 @@ export class ProductModalComponent extends CrudModalComponent {
 
   delete(){
     this.productService.delete(this.product.id).subscribe( response => {
-      if(response.success){
-        this.deletedSuccess(this.product);
-      }
+      this.deletedSuccess(this.product);
     });
+  }
+
+  appendData() {
+    this.product.categories = this.selectedCategoryItems.map(
+      item => item.id
+    );
+    this.product.brand_id = this.selectedBrandItem ?
+      this.selectedBrandItem.id : null;
+    this.product.unit_id = this.selectedUnitItem ?
+      this.selectedUnitItem.id : null;
   }
 
   closed(){
     this.product = null;
+    this.selectedBrandItem = null;
+    this.selectedUnitItem = null;
+    this.selectedCategoryItems = [];
   }
 
 }

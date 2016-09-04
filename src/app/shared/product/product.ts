@@ -1,4 +1,7 @@
 import {Model} from "../model";
+import {Category} from "./category/category";
+import {Brand} from "./brand/brand";
+
 export class Product extends Model{
   id:number;
   unit_id:number;
@@ -11,8 +14,9 @@ export class Product extends Model{
   updated_at:string;
   deleted_at:string;
 
-  categories:any[];
-
+  categories:Category[];
+  brand:Brand;
+  unit:any;
   inventories:any[];
   get price(){
     return this.global_price;

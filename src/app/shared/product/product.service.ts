@@ -16,11 +16,8 @@ export class ProductService {
 
   get(product_id: number){
     return this.apiHttp.get(this.basePath + product_id)
-      .map(this.mapProduct)
-      .map(this.parseProduct);
+      .map(data => new Product().parse(data.product));
   }
-
-
 
   search(search: string){
     return this.apiHttp.get(this.basePath + 'search',{search:search})
