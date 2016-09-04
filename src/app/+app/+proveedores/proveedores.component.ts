@@ -40,11 +40,15 @@ export class ProveedoresComponent implements OnInit {
   }
 
   created(supplier:Supplier){
-    this.suppliers.unshift(supplier);
+    this.suppliers.push(supplier);
   }
 
   updated(supplier:Supplier){
-
+    for(var i=0; i<this.suppliers.length; i++) {
+      if (supplier.id == this.suppliers[i].id) {
+        this.suppliers[i] = supplier;
+      }
+    }
   }
 
   deleted(supplier:Supplier){

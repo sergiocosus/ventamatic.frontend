@@ -57,7 +57,6 @@ export class ProductosComponent implements OnInit {
   updated(product:Product){
     for(var i=0; i<this.products.length; i++) {
       if(product.id == this.products[i].id) {
-        console.log("holi");
         this.products[i] = product;
       }
     }

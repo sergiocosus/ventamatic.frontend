@@ -1,3 +1,4 @@
+import {SupplierCategory} from "../category/supplier-category";
 export class Supplier {
   public id:number;
   public name:string;
@@ -11,9 +12,9 @@ export class Supplier {
   public address:string;
   public rfc:string;
   public deleted_at:string;
-  
+
   public supplier_category_id:string;
-  public supplier_category:any;
+  public supplier_category:SupplierCategory;
 
 
   get fullName(){

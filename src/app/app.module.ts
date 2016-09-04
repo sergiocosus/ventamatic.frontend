@@ -63,6 +63,7 @@ import {BuyService} from "./shared/buy/buy.service";
 import { PaymentTypeComponent } from './shared/payment-type/payment-type/payment-type.component';
 import {SELECT_DIRECTIVES} from "ng2-select";
 import {BrandService} from "./shared/product/brand/brand.service";
+import {SupplierCategoryService} from "./+app/+proveedores/category/supplier-category.service";
 
 const CUSTOM_MODAL_DIRECTIVES = [
   ModalComponent,
@@ -138,6 +139,7 @@ const CUSTOM_MODAL_DIRECTIVES = [
     appRoutingProviders,
     BuyService,
     BrandService,
+    SupplierCategoryService,
     provide(AuthHttp, {
       useFactory: (http) => {
         return new AuthHttp(new AuthConfig({
