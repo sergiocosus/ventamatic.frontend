@@ -6,6 +6,8 @@ import {NotificationsService} from "angular2-notifications/lib/notifications.ser
 import {CrudModalComponent} from "../../../components/crud-modal";
 import {SupplierCategoryService} from "../category/supplier-category.service";
 import {SupplierCategory} from "../category/supplier-category";
+import {BrandService} from "../../../shared/product/brand/brand.service";
+import {Brand} from "../../../shared/product/brand/brand";
 
 @Component({
   selector: 'supplier-modal',
@@ -26,14 +28,21 @@ export class SupplierModalComponent extends CrudModalComponent {
   supplierCategories:SupplierCategory[] = [];
   supplierCategoryItems:any[] = [];
   selectedSupplierCategoryItem:any;
+
+  brands:Brand[] = [];
+  brandItems:any[] = [];
+  selectedBrandItems:any[] = [];
+
   constructor(protected supplierService:SupplierService,
               protected notification:NotificationsService,
-              protected supplierCategoryService:SupplierCategoryService) {
+              protected supplierCategoryService:SupplierCategoryService,
+              protected brandService:BrandService) {
     super(notification);
   }
 
   ngOnInit() {
     this.loadSupplierCategories();
+    this.loadBrands();
   }
 
   loadSupplierCategories() {
@@ -49,6 +58,17 @@ export class SupplierModalComponent extends CrudModalComponent {
     );
   }
 
+  private loadBrands() {
+    this.brandService.getAll().subscribe(
+      brands => {
+        this.brands = brands;
+        this.brandItems = this.brands.map(
+          brand => { return {text:brand.name, id:brand.id} }
+        )
+      }
+    );
+  }
+
   openCreate(){
     this.supplier = new Supplier();
     super.openCreate();
@@ -58,6 +78,11 @@ export class SupplierModalComponent extends CrudModalComponent {
     this.supplierService.get(supplier.id).subscribe(
       supplier => {
         this.supplier = supplier;
+
+        this.selectedBrandItems = supplier.brands.map(
+          brand => { return { id:brand.id, text:brand.name } }
+        );
+
         if(supplier.supplier_category) {
           this.selectedSupplierCategoryItem = [{
             text:supplier.supplier_category.name,
@@ -95,9 +120,12 @@ export class SupplierModalComponent extends CrudModalComponent {
   }
 
   closed(){
-    console.log('closed');
     this.supplier = null;
     this.selectedSupplierCategoryItem = null;
   }
 
+
+  mapBrands(items){
+    this.supplier.brands = items.map( item => item.id );
+  }
 }

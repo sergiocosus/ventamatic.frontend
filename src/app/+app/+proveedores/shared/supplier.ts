@@ -1,4 +1,6 @@
 import {SupplierCategory} from "../category/supplier-category";
+import {Brand} from "../../../shared/product/brand/brand";
+
 export class Supplier {
   public id:number;
   public name:string;
@@ -15,7 +17,7 @@ export class Supplier {
 
   public supplier_category_id:string;
   public supplier_category:SupplierCategory;
-
+  public brands:any[]|Brand[];
 
   get fullName(){
     return `${this.name} ${this.last_name} ${this.last_name_2}`;

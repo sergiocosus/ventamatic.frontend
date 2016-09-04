@@ -49,6 +49,14 @@
                  [disabled]="locked"
                  placeholder="Categoría del proveedor">
       </ng-select>
+
+      <ng-select [items]="brandItems"
+                 [initData]="selectedBrandItems"
+                 (data)="mapBrands($event)"
+                 [multiple]="true"
+                 [disabled]="locked"
+                 placeholder="Marcas">
+      </ng-select>
     </modal-body>
     <modal-footer>
       <button *ngIf="locked"
