@@ -11,6 +11,14 @@
     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
     Agregar Producto
   </button>
+  <button class="btn btn-default"
+          (click)="categoryModal.open()">
+    Categorias de produtos
+  </button>
+  <button class="btn btn-default"
+          (click)="brandModal.open()">
+    Marcas
+  </button>
 </search-bar>
 <main-content>
   <table>
@@ -61,3 +69,5 @@
 <product-modal (updated)="updated($event)"
                (created)="created($event)"
                 (deleted)="deleted($event)"></product-modal>
+<app-basic-entity-modal mode="brand" #brandModal></app-basic-entity-modal>
+<app-basic-entity-modal mode="category" #categoryModal></app-basic-entity-modal>

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {ApiHttp} from "../../api-http";
 import {Brand} from "./brand";
+import {BasicEntityService} from "../../../components/basic-entity-modal/basic-entity-service";
 
 @Injectable()
-export class BrandService {
+export class BrandService implements BasicEntityService{
   private basePath= 'product/brand/';
 
   constructor(private apiHttp:ApiHttp) {}

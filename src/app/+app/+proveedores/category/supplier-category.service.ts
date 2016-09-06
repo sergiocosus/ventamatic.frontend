@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {ApiHttp} from "../../../shared/api-http";
 import {SupplierCategory} from "./supplier-category";
+import {BasicEntityService} from "../../../components/basic-entity-modal/basic-entity-service";
 
 @Injectable()
-export class SupplierCategoryService {
+export class SupplierCategoryService implements BasicEntityService{
 
   private basePath= 'supplier/category/';
 

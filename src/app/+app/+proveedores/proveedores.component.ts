@@ -6,6 +6,7 @@ import {SupplierService} from "./shared/supplier.service";
 import {Supplier} from "./shared/supplier";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {SupplierModalComponent} from "./supplier-modal";
+import {BasicEntityModalComponent} from "../../components/basic-entity-modal/basic-entity-modal.component";
 
 @Component({
   selector: 'app-proveedores',

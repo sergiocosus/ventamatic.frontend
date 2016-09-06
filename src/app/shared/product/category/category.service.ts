@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import {ApiHttp} from "../../api-http";
 import {Category} from "./category";
+import {BasicEntityService} from "../../../components/basic-entity-modal/basic-entity-service";
 
 @Injectable()
-export class CategoryService {
+export class CategoryService implements BasicEntityService{
   private basePath= 'product/category/';
 
   constructor(private apiHttp:ApiHttp) {}
@@ -41,7 +42,7 @@ export class CategoryService {
   }
 
   private mapCategory(json:any){
-    return json.inventory;
+    return json.category;
   }
 
   private parseCategory(product:any){

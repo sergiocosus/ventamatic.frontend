@@ -12,7 +12,10 @@ import { ModalComponent,
   ModalBodyComponent,
   ModalFooterComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 
-import {NotificationsService, SimpleNotificationsComponent} from 'angular2-notifications/components'
+import {
+  NotificationsService, SimpleNotificationsComponent,
+  SimpleNotificationsModule
+} from 'angular2-notifications/components'
 import {API_HTTP_PROVIDERS} from "./shared/api-http";
 import {VentamaticFrontendAppComponent} from "./ventamatic-frontend.component";
 import {LoginComponent} from "./+login/login.component";
@@ -64,6 +67,8 @@ import { PaymentTypeComponent } from './shared/payment-type/payment-type/payment
 import {SELECT_DIRECTIVES} from "ng2-select";
 import {BrandService} from "./shared/product/brand/brand.service";
 import {SupplierCategoryService} from "./+app/+proveedores/category/supplier-category.service";
+import { BasicEntityModalComponent } from './components/basic-entity-modal/basic-entity-modal.component';
+import {NotifyService} from "./services/notify.service";
 
 const CUSTOM_MODAL_DIRECTIVES = [
   ModalComponent,
@@ -75,7 +80,6 @@ const CUSTOM_MODAL_DIRECTIVES = [
 @NgModule({
   declarations: [
     CUSTOM_MODAL_DIRECTIVES,
-    SimpleNotificationsComponent,
     SELECT_DIRECTIVES,
     // Main routes directives
 
@@ -124,6 +128,7 @@ const CUSTOM_MODAL_DIRECTIVES = [
     ProductCartComponent,
     AddProductModalComponent,
     PaymentTypeComponent,
+    BasicEntityModalComponent,
 
   ],
   imports: [
@@ -133,6 +138,7 @@ const CUSTOM_MODAL_DIRECTIVES = [
     ReactiveFormsModule,
     HttpModule,
     ButtonsModule,
+    SimpleNotificationsModule,
     routing
   ],
   providers: [
@@ -140,6 +146,7 @@ const CUSTOM_MODAL_DIRECTIVES = [
     BuyService,
     BrandService,
     SupplierCategoryService,
+    NotifyService,
     provide(AuthHttp, {
       useFactory: (http) => {
         return new AuthHttp(new AuthConfig({

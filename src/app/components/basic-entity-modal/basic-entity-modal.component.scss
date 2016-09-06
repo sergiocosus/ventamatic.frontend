@@ -1,0 +1,31 @@
+form{
+  display: flex;
+  margin-bottom: 1em;
+  input-label{
+    flex: 1 0 0;
+  }
+
+  div{
+    flex: 0 0 auto;
+    padding: .25em;
+  }
+}
+
+ul{
+  padding: 0;
+  margin: 0;
+  li{
+    display: flex;
+
+    input-label{
+      flex: 1 0 0;
+    }
+    div{
+      padding: .25em;
+      button{
+        flex: 0 0 auto;
+      }
+    }
+
+  }
+}
