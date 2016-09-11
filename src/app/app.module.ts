@@ -69,6 +69,9 @@ import {BrandService} from "./shared/product/brand/brand.service";
 import {SupplierCategoryService} from "./+app/+proveedores/category/supplier-category.service";
 import { BasicEntityModalComponent } from './components/basic-entity-modal/basic-entity-modal.component';
 import {NotifyService} from "./services/notify.service";
+import {RoleService} from "./+app/+roles/services/role.service";
+import { RoleModalComponent } from './+app/+roles/components/role-modal/role-modal.component';
+import {PermissionService} from "./shared/security/permission.service";
 
 const CUSTOM_MODAL_DIRECTIVES = [
   ModalComponent,
@@ -129,6 +132,7 @@ const CUSTOM_MODAL_DIRECTIVES = [
     AddProductModalComponent,
     PaymentTypeComponent,
     BasicEntityModalComponent,
+    RoleModalComponent,
 
   ],
   imports: [
@@ -147,6 +151,8 @@ const CUSTOM_MODAL_DIRECTIVES = [
     BrandService,
     SupplierCategoryService,
     NotifyService,
+    RoleService,
+    PermissionService,
     provide(AuthHttp, {
       useFactory: (http) => {
         return new AuthHttp(new AuthConfig({

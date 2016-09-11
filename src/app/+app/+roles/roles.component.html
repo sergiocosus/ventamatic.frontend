@@ -1,3 +1,34 @@
-<p>
-  roles works!
-</p>
+<search-bar>
+  <h2>Roles del sistema</h2>
+  <button class="btn btn-default"
+          (click)="create()">
+    Agregar rol de sistema
+  </button>
+</search-bar>
+
+<main-content>
+  <ul>
+    <li *ngFor="let role of roles" (click)="clickUpdate(role)">
+      {{role.display_name}}
+    </li>
+  </ul>
+</main-content>
+
+<search-bar>
+  <h2>Roles de sucursal</h2>
+  <button class="btn btn-default"
+          (click)="brandModal.open()">
+    Agregar rol de sucursal
+  </button>
+</search-bar>
+
+<main-content>
+  <ul>
+    <li *ngFor="let role of roles">
+      {{role.display_name}}
+    </li>
+  </ul>
+</main-content>
+<app-role-modal (updated)="updated($event)"
+                (deleted)="deleted($event)"
+                (created)="created($event)"></app-role-modal>

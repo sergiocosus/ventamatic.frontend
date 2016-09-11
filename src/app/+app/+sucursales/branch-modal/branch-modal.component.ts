@@ -1,9 +1,9 @@
 import { Component, ViewChild, Output } from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {BranchService} from "../shared/branch.service";
-import {NotificationsService} from "angular2-notifications/components";
 import {Branch} from "../shared/branch";
 import {CrudModalComponent} from "../../../components/crud-modal/crud-modal.component";
+import {NotifyService} from "../../../services/notify.service";
 
 @Component({
   selector: 'branch-modal',
@@ -19,9 +19,9 @@ export class BranchModalComponent extends CrudModalComponent {
 
   name = 'Sucursal';
 
-  constructor(protected notificationService:NotificationsService,
+  constructor(protected notify:NotifyService,
               protected branchService:BranchService) {
-    super(notificationService);
+    super(notify);
   }
 
   openUpdate(branch:Branch){

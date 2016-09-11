@@ -2,6 +2,7 @@
 import { EventEmitter } from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {NotificationsService} from "angular2-notifications/components";
+import {NotifyService} from "../../services/notify.service";
 
 export abstract class CrudModalComponent {
   protected modal:ModalComponent;
@@ -17,7 +18,7 @@ export abstract class CrudModalComponent {
   deleteMode:boolean = false;
   locked: boolean = false;
 
-  constructor(protected notification:NotificationsService) {}
+  constructor(protected notfiy:NotifyService) {}
 
   openCreate(){
     this.createMode = true;
@@ -58,20 +59,20 @@ export abstract class CrudModalComponent {
   protected createdSuccess(data) {
     this.created.emit(data);
     this.close();
-    this.notification.success('Éxito', `${this.name} creado`);
+    this.notfiy.success(`${this.name} creado`);
 
   }
 
   protected updatedSuccess(data) {
     this.updated.emit(data);
     this.close();
-    this.notification.success('Éxito', `${this.name} modificado`);
+    this.notfiy.success(`${this.name} modificado`);
   }
 
   protected deletedSuccess(data) {
     this.deleted.emit(data);
     this.close();
-    this.notification.success('Éxito', `${this.name} eliminado`);
+    this.notfiy.success(`${this.name} eliminado`);
   }
 
   submit(){

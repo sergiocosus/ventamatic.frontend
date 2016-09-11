@@ -2,8 +2,8 @@ import { Component, ViewChild, Output } from '@angular/core';
 import {Client} from "../shared/client";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {ClientService} from "../shared/client.service";
-import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {CrudModalComponent} from "../../../components/crud-modal";
+import {NotifyService} from "../../../services/notify.service";
 
 @Component({
   selector: 'client-modal',
@@ -22,8 +22,8 @@ export class ClientModalComponent extends CrudModalComponent{
   name = 'Cliente';
 
   constructor(protected clientService:ClientService,
-              protected notification:NotificationsService) {
-    super(notification);
+              protected notify:NotifyService) {
+    super(notify);
   }
 
   openCreate(){

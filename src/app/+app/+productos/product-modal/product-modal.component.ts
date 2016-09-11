@@ -3,12 +3,12 @@ import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import {CrudModalComponent} from "../../../components/crud-modal/crud-modal.component";
 import {Product} from "../../../shared/product/product";
 import {ProductService} from "../../../shared/product/product.service";
-import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {CategoryService} from "../../../shared/product/category/category.service";
 import {Category} from "../../../shared/product/category/category";
 import {SelectComponent} from "ng2-select";
 import {BrandService} from "../../../shared/product/brand/brand.service";
 import {Brand} from "../../../shared/product/brand/brand";
+import {NotifyService} from "../../../services/notify.service";
 
 @Component({
   selector: 'product-modal',
@@ -35,14 +35,14 @@ export class ProductModalComponent extends CrudModalComponent {
   brandItems:any[] = [];
   selectedBrandItem:any;
 
-  unitItems:any[] = []
+  unitItems:any[] = [];
   selectedUnitItem:any;
 
   constructor(protected productService:ProductService,
-              protected notification:NotificationsService,
+              protected notify:NotifyService,
               protected categoryService:CategoryService,
               protected brandService:BrandService) {
-    super(notification);
+    super(notify);
 
     this.unitItems = [
       {

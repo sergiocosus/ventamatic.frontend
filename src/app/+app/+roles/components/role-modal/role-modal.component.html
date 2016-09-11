@@ -1,0 +1,61 @@
+<modal (onClose)="closed()" (onDismiss)="closed()">
+  <modal-header [show-close]="true">
+    <h4 *ngIf="createMode"> Añadir rol </h4>
+    <h4 *ngIf="updateMode"> Editar rol </h4>
+    <h4 *ngIf="deleteMode"> Eliminar rol </h4>
+  </modal-header>
+  <form (ngSubmit)="submit()">
+    <modal-body *ngIf="!deleteMode && role">
+      <input-label type="text" required [(ngModel)]="role.id"  name="id"
+                   [disabled]="updateMode">
+        ID
+      </input-label>
+      <input-label type="text" [(ngModel)]="role.display_name" name="display_name"
+                   [disabled]="locked" required maxlength="255">
+        Nombre
+      </input-label>
+
+      <input-label type="text" [(ngModel)]="role.description" name="description"
+                   [disabled]="locked" required>
+        Descripción
+      </input-label>
+
+      <ng-select [items]="permissionItems"
+                 [initData]="selectedPermissionItems"
+                 (data)="selectedPermissionItems = $event"
+                 [multiple]="true"
+                 [disabled]="locked"
+                 placeholder="Permisos">
+      </ng-select>
+    </modal-body>
+    <modal-footer>
+      <button *ngIf="locked"
+              type="submit" class="btn btn-danger pull-xs-left"
+              (click)="unlock()" >
+        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+        Editar Producto
+      </button>
+      <button *ngIf="createMode"
+              type="submit"
+              class="btn btn-success">
+        Crear Usuario
+      </button>
+      <button *ngIf="updateMode && !locked"
+              type="submit"
+              class="btn btn-success">
+        Actualizar Usuario
+      </button>
+      <button *ngIf="deleteMode && !locked"
+              type="submit"
+              class="btn btn-danger">
+        Eliminar Usuario
+      </button>
+      <button type="button"
+              class="btn btn-primary"
+              (click)="close()">
+        Cerrar
+      </button>
+    </modal-footer>
+  </form>
+</modal>
+

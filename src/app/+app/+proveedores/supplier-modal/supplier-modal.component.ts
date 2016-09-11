@@ -2,12 +2,12 @@ import { Component, OnInit, ViewChild, Output,EventEmitter } from '@angular/core
 import {Supplier} from "../shared/supplier";
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {SupplierService} from "../shared/supplier.service";
-import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {CrudModalComponent} from "../../../components/crud-modal";
 import {SupplierCategoryService} from "../category/supplier-category.service";
 import {SupplierCategory} from "../category/supplier-category";
 import {BrandService} from "../../../shared/product/brand/brand.service";
 import {Brand} from "../../../shared/product/brand/brand";
+import {NotifyService} from "../../../services/notify.service";
 
 @Component({
   selector: 'supplier-modal',
@@ -34,10 +34,10 @@ export class SupplierModalComponent extends CrudModalComponent {
   selectedBrandItems:any[] = [];
 
   constructor(protected supplierService:SupplierService,
-              protected notification:NotificationsService,
+              protected notify:NotifyService,
               protected supplierCategoryService:SupplierCategoryService,
               protected brandService:BrandService) {
-    super(notification);
+    super(notify);
   }
 
   ngOnInit() {

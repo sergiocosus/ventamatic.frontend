@@ -1,11 +1,11 @@
 import {Component, OnInit, Output, ViewChild} from '@angular/core';
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
-import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {Inventory} from "../../../shared/inventory/inventory";
 import {InventoryService} from "../../../shared/inventory/inventory.service";
 import {CrudModalComponent} from "../../../components/crud-modal/crud-modal.component";
 import {Branch} from "../../+sucursales/shared/branch";
 import {BranchService} from "../../+sucursales/shared/branch.service";
+import {NotifyService} from "../../../services/notify.service";
 
 @Component({
   selector: 'modal-inventario',
@@ -40,11 +40,11 @@ export class ModalInventarioComponent extends CrudModalComponent {
   quantity:number;
   destiny_branch_id:number;
 
-  constructor( protected notification: NotificationsService,
+  constructor( protected notify: NotifyService,
                protected inventoryService:InventoryService,
                protected branchService:BranchService
              ) {
-    super(notification);
+    super(notify);
   }
 
   ngOnInit() {
@@ -120,7 +120,7 @@ export class ModalInventarioComponent extends CrudModalComponent {
       }
     ).subscribe(
       inventory => {
-        this.notification.success('Éxito', 'Inventario del producto actualizado');
+        this.notify.success('Inventario del producto actualizado');
         this.inventory = inventory;
         this.updated.emit(inventory);
         this.close();

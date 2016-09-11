@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, Output,EventEmitter } from '@angular/core';
+import { Component, ViewChild, Output } from '@angular/core';
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
-import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {UserService} from "../../../user/user.service";
 import {User} from "../../../user/user";
 import {CrudModalComponent} from "../../../components/crud-modal";
+import {NotifyService} from "../../../services/notify.service";
 
 
 @Component({
@@ -25,8 +25,8 @@ export class UserModalComponent extends CrudModalComponent {
   password_confirm:string;
 
   constructor(protected userService:UserService,
-              protected notification:NotificationsService) {
-    super(notification);
+              protected notify:NotifyService) {
+    super(notify);
   }
 
   ngOnInit() {
@@ -54,7 +54,7 @@ export class UserModalComponent extends CrudModalComponent {
         user => this.createdSuccess(user)
       );
     } else{
-      this.notification.error('Error','Las contraseñas no coinciden');
+      this.notify.error('Las contraseñas no coinciden');
     }
   }
 
