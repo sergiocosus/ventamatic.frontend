@@ -22,8 +22,7 @@ export class RoleModalComponent extends CrudModalComponent {
   role: Role;
 
   permissions:Permission[] = [];
-  permissionItems:any[] = [];
-  selectedPermissionItems:any[] = [];
+  permissionList:{id:number; name:string, checked:boolean}[] = [];
 
   constructor(protected notify:NotifyService,
               private roleService:RoleService,
@@ -33,14 +32,7 @@ export class RoleModalComponent extends CrudModalComponent {
 
   ngOnInit() {
     this.permissionService.getAll().subscribe(
-      permissions => {
-        this.permissions = permissions;
-        this.permissionItems = this.permissions.map(
-          (permission:Permission) => {
-            return {text:permission.display_name, id:permission.id};
-          }
-        )
-      }
+      permissions =>  this.permissions = permissions
     )
   }
 
@@ -53,11 +45,20 @@ export class RoleModalComponent extends CrudModalComponent {
     this.roleService.get(role.id).subscribe(
       role => {
         this.role = role;
-        this.selectedPermissionItems = role.permissions.map(
+        this.permissionList = this.permissions.map(
           permission => {
-            return {id:permission.id, text:permission.display_name};
+            return {
+              id:permission.id,
+              name:permission.display_name,
+              checked: role.permissions.find(
+                rolePermission => permission.id == rolePermission.id
+              ) ? true : false
+            };
+
           }
         );
+        console.log(this.permissionList);
+
       }
     );
 
@@ -92,14 +93,19 @@ export class RoleModalComponent extends CrudModalComponent {
   }
 
   appendData() {
-    this.role.permissions = this.selectedPermissionItems.map(
-      item => item.id
+    this.role.permissions = [];
+    this.permissionList.forEach(
+      item => {
+        if(item.checked){
+          this.role.permissions.push(item.id);
+        }
+      }
     );
   }
 
   closed(){
     this.role = null;
-    this.selectedPermissionItems = [];
+    this.permissionList = null;
   }
 
 }

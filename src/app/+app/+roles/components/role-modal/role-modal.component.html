@@ -19,36 +19,37 @@
                    [disabled]="locked" required>
         Descripción
       </input-label>
-
-      <ng-select [items]="permissionItems"
-                 [initData]="selectedPermissionItems"
-                 (data)="selectedPermissionItems = $event"
-                 [multiple]="true"
-                 [disabled]="locked"
-                 placeholder="Permisos">
-      </ng-select>
+      <div class="permissions" *ngIf="permissionList">
+        <div *ngFor="let permission of permissionList"  class="checkbox abc-checkbox">
+          <input type="checkbox" [(ngModel)]="permission.checked" [disabled]="locked"
+                 [ngModelOptions]="{standalone: true}" [id]="'checked'+permission.id"/>
+          <label [attr.for]="'checked'+permission.id">
+            {{permission.name}}
+          </label>
+        </div>
+      </div>
     </modal-body>
     <modal-footer>
       <button *ngIf="locked"
               type="submit" class="btn btn-danger pull-xs-left"
               (click)="unlock()" >
         <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-        Editar Producto
+        Editar rol
       </button>
       <button *ngIf="createMode"
               type="submit"
               class="btn btn-success">
-        Crear Usuario
+        Crear rol
       </button>
       <button *ngIf="updateMode && !locked"
               type="submit"
               class="btn btn-success">
-        Actualizar Usuario
+        Actualizar rol
       </button>
       <button *ngIf="deleteMode && !locked"
               type="submit"
               class="btn btn-danger">
-        Eliminar Usuario
+        Eliminar rol
       </button>
       <button type="button"
               class="btn btn-primary"
