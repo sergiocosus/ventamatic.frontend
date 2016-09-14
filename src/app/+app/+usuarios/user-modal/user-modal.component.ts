@@ -4,6 +4,8 @@ import {UserService} from "../../../user/user.service";
 import {User} from "../../../user/user";
 import {CrudModalComponent} from "../../../components/crud-modal";
 import {NotifyService} from "../../../services/notify.service";
+import {RoleService} from "../../+roles/services/role.service";
+import {Role} from "../../+roles/classes/role";
 
 
 @Component({
@@ -24,12 +26,26 @@ export class UserModalComponent extends CrudModalComponent {
 
   password_confirm:string;
 
+  roles:Role[] = [];
+  roleItems:any[] = [];
+  selectedRoleItems:any[] = [];
+
+
   constructor(protected userService:UserService,
-              protected notify:NotifyService) {
+              protected notify:NotifyService,
+              protected roleService:RoleService) {
     super(notify);
   }
 
   ngOnInit() {
+    this.roleService.getAll().subscribe(
+        roles => {
+          this.roles = roles;
+          this.roleItems = this.roles.map(
+            (role:Role) => ({text:role.display_name, id:role.id})
+          )
+        }
+    )
   }
 
   openCreate(){
@@ -38,8 +54,16 @@ export class UserModalComponent extends CrudModalComponent {
   }
 
   openUpdate(user:User){
-    this.user = user;
-    super.openUpdate(user);
+    this.userService.get(user.id).subscribe(
+      user => {
+        this.user = user;
+
+        this.selectedRoleItems = user.roles.map(
+          (role:Role) => ({text:role.display_name, id:role.id})
+        );
+      }
+    );
+    super.openUpdate();
   }
 
   openDelete(user:User){
@@ -49,6 +73,7 @@ export class UserModalComponent extends CrudModalComponent {
 
 
   create(){
+    this.appendData();
     if(this.user.password ==this.password_confirm){
       this.userService.post(this.user).subscribe(
         user => this.createdSuccess(user)
@@ -59,6 +84,7 @@ export class UserModalComponent extends CrudModalComponent {
   }
 
   update(){
+    this.appendData();
     this.userService.put(this.user).subscribe(user=> {
       this.updatedSuccess(user);
     });
@@ -71,5 +97,17 @@ export class UserModalComponent extends CrudModalComponent {
       }
     });
   }
+
+  appendData() {
+    this.user.roles = this.selectedRoleItems.map(
+      item => item.id
+    );
+  }
+
+  closed(){
+    this.user = null;
+    this.selectedRoleItems = [];
+  }
+
 
 }

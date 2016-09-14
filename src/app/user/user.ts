@@ -1,4 +1,5 @@
 import {Model} from "../shared/model";
+import {Role} from "../+app/+roles/classes/role";
 export class User extends Model{
   public id:number;
   public name:string;
@@ -15,9 +16,21 @@ export class User extends Model{
   public deleted_at:string;
 
   public password;
-  
+
+  roles:Role[];
+
   get fullName(){
     return `${this.name} ${this.last_name} ${this.last_name_2}`;
+  }
+
+  parse(obj): any {
+    super.parse(obj);
+
+    if(this.roles) {
+      this.roles = Role.parseArray(this.roles);
+    }
+
+    return obj;
   }
 
   public static parseArray(objs:any){
