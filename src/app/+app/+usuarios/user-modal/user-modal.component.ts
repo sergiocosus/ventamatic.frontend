@@ -39,12 +39,12 @@ export class UserModalComponent extends CrudModalComponent {
 
   ngOnInit() {
     this.roleService.getAll().subscribe(
-        roles => {
-          this.roles = roles;
-          this.roleItems = this.roles.map(
-            (role:Role) => ({text:role.display_name, id:role.id})
-          )
-        }
+      roles => {
+        this.roles = roles;
+        this.roleItems = this.roles.map(
+          (role:Role) => ({text:role.display_name, id:role.id})
+        )
+      }
     )
   }
 
@@ -61,6 +61,10 @@ export class UserModalComponent extends CrudModalComponent {
         this.selectedRoleItems = user.roles.map(
           (role:Role) => ({text:role.display_name, id:role.id})
         );
+      },
+      error => {
+        this.notify.serviceError(error);
+        this.delayClose();
       }
     );
     super.openUpdate();
@@ -76,7 +80,8 @@ export class UserModalComponent extends CrudModalComponent {
     this.appendData();
     if(this.user.password ==this.password_confirm){
       this.userService.post(this.user).subscribe(
-        user => this.createdSuccess(user)
+        user => this.createdSuccess(user),
+        error => this.notify.serviceError(error)
       );
     } else{
       this.notify.error('Las contraseñas no coinciden');
@@ -85,17 +90,21 @@ export class UserModalComponent extends CrudModalComponent {
 
   update(){
     this.appendData();
-    this.userService.put(this.user).subscribe(user=> {
-      this.updatedSuccess(user);
-    });
+    this.userService.put(this.user).subscribe(
+      user => this.updatedSuccess(user),
+      error => this.notify.serviceError(error)
+    );
   }
 
   delete(){
-    this.userService.delete(this.user.id).subscribe( response => {
-      if(response.success){
-        this.deletedSuccess(this.user);
-      }
-    });
+    this.userService.delete(this.user.id).subscribe(
+      response => {
+        if(response.success){
+          this.deletedSuccess(this.user);
+        }
+      },
+      error => this.notify.serviceError(error)
+    );
   }
 
   appendData() {

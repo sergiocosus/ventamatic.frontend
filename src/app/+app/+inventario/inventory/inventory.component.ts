@@ -5,6 +5,7 @@ import {InventoryService} from "../../../shared/inventory/inventory.service";
 import {Inventory} from "../../../shared/inventory/inventory";
 import {SearchBarComponent} from "../../shared/search-bar/search-bar.component";
 import {ModalInventarioComponent} from "../modal-inventario/modal-inventario.component";
+import {NotifyService} from "../../../services/notify.service";
 
 @Component({
   selector: 'app-inventory',
@@ -23,7 +24,8 @@ export class InventoryComponent implements OnInit, OnDestroy {
 
   private sub;
   constructor(private route:ActivatedRoute,
-              private inventoryService:InventoryService) {}
+              private inventoryService:InventoryService,
+              private notify:NotifyService) {}
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -32,7 +34,8 @@ export class InventoryComponent implements OnInit, OnDestroy {
         inventories => {
           this.inventories = inventories;
           console.log(inventories);
-        }
+        },
+        error => this.notify.serviceError(error)
       );
     });
   }

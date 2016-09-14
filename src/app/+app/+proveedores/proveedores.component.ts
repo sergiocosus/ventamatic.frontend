@@ -1,12 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {SearchBarComponent} from "../shared/search-bar";
-import {MainContentComponent} from "../../shared/main-content";
-import {SupplierItemComponent} from "./supplier-item";
 import {SupplierService} from "./shared/supplier.service";
 import {Supplier} from "./shared/supplier";
-import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {SupplierModalComponent} from "./supplier-modal";
-import {BasicEntityModalComponent} from "../../components/basic-entity-modal/basic-entity-modal.component";
+import {NotifyService} from "../../services/notify.service";
 
 @Component({
   selector: 'app-proveedores',
@@ -20,11 +16,12 @@ export class ProveedoresComponent implements OnInit {
   suppliers:Supplier[];
 
   constructor(private supplierService:SupplierService,
-              private notification:NotificationsService) {}
+              private notify:NotifyService) {}
 
   ngOnInit() {
     this.supplierService.getAll().subscribe(
-      suppliers => this.suppliers = suppliers
+      suppliers => this.suppliers = suppliers,
+      error => this.notify.serviceError(error)
     );
   }
 

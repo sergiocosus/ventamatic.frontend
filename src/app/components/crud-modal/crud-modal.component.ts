@@ -56,6 +56,10 @@ export abstract class CrudModalComponent {
     return this.modal.close();
   }
 
+  delayClose(){
+    setTimeout(() => this.close(), 500);
+  }
+
   protected createdSuccess(data) {
     this.created.emit(data);
     this.close();

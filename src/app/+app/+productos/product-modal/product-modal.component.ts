@@ -69,7 +69,8 @@ export class ProductModalComponent extends CrudModalComponent {
             return {text:category.name, id:category.id};
           }
         )
-      }
+      },
+      error => this.notify.serviceError(error)
     );
 
     this.brandService.getAll().subscribe(
@@ -80,7 +81,8 @@ export class ProductModalComponent extends CrudModalComponent {
             return {text:brand.name, id:brand.id};
           }
         )
-      }
+      },
+      error => this.notify.serviceError(error)
     );
   }
 
@@ -110,6 +112,10 @@ export class ProductModalComponent extends CrudModalComponent {
           text:product.unit.name,
           id:product.unit.id
         }];
+      },
+      error => {
+        this.notify.serviceError(error);
+        this.delayClose();
       }
     );
 
@@ -126,22 +132,26 @@ export class ProductModalComponent extends CrudModalComponent {
     this.appendData();
 
     this.productService.post(this.product).subscribe(
-      product => this.createdSuccess(product)
+      product => this.createdSuccess(product),
+      error => this.notify.serviceError(error)
     );
   }
 
-  update(){
+  update() {
     this.appendData();
 
-    this.productService.put(this.product).subscribe(product=> {
-      this.updatedSuccess(product);
-    });
+    this.productService.put(this.product).subscribe(
+      product => this.updatedSuccess(product),
+      error => this.notify.serviceError(error)
+    );
   }
 
+
   delete(){
-    this.productService.delete(this.product.id).subscribe( response => {
-      this.deletedSuccess(this.product);
-    });
+    this.productService.delete(this.product.id).subscribe(
+      response => this.deletedSuccess(this.product),
+      error => this.notify.serviceError(error)
+    );
   }
 
   appendData() {

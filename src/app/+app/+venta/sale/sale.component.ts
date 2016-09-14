@@ -116,10 +116,6 @@ export class SaleComponent implements OnInit, OnDestroy {
       });
   }
 
-
-
-
-
   addProduct(inventory){
     var exist = this.addedProducts.filter(productSale =>{
       return productSale.inventory.product.id == inventory.product.id

@@ -6,6 +6,7 @@ import {ClientService} from "./shared/client.service";
 import {Client} from "./shared/client";
 import {NotificationsService} from "angular2-notifications/lib/notifications.service";
 import {ClientModalComponent} from "./client-modal";
+import {NotifyService} from "../../services/notify.service";
 
 @Component({
   selector: 'app-clientes',
@@ -19,11 +20,12 @@ export class ClientesComponent implements OnInit {
   clients:Client[];
 
   constructor(private clientService:ClientService,
-              private notification:NotificationsService) {}
+              private notify:NotifyService) {}
 
   ngOnInit() {
     this.clientService.getAll().subscribe(
-      clients => this.clients = clients
+      clients => this.clients = clients,
+      error => this.notify.serviceError(error)
     );
   }
 

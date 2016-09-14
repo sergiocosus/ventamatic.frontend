@@ -54,7 +54,8 @@ export class SupplierModalComponent extends CrudModalComponent {
             return {text:supplierCategories.name, id:supplierCategories.id};
           }
         );
-      }
+      },
+      error => this.notify.serviceError(error)
     );
   }
 
@@ -65,7 +66,8 @@ export class SupplierModalComponent extends CrudModalComponent {
         this.brandItems = this.brands.map(
           brand => { return {text:brand.name, id:brand.id} }
         )
-      }
+      },
+      error => this.notify.serviceError(error)
     );
   }
 
@@ -89,6 +91,10 @@ export class SupplierModalComponent extends CrudModalComponent {
             id:supplier.supplier_category.id
           }];
         }
+      },
+      error => {
+        this.notify.serviceError(error)
+        this.delayClose();
       }
     );
     super.openUpdate();
@@ -101,21 +107,22 @@ export class SupplierModalComponent extends CrudModalComponent {
 
   create(){
     this.supplierService.post(this.supplier).subscribe(
-      supplier => this.createdSuccess(supplier)
+      supplier => this.createdSuccess(supplier),
+      error => this.notify.serviceError(error)
     );
   }
 
   update(){
     this.supplierService.put(this.supplier).subscribe(
-      supplier => this.updatedSuccess(supplier)
+      supplier => this.updatedSuccess(supplier),
+      error => this.notify.serviceError(error)
     );
   }
 
   delete(){
     this.supplierService.delete(this.supplier.id).subscribe(
-      response => {
-        this.deletedSuccess(this.supplier);
-      }
+      response => this.deletedSuccess(this.supplier),
+      error => this.notify.serviceError(error)
     );
   }
 

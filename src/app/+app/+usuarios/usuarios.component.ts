@@ -4,6 +4,7 @@ import { NotificationsService } from 'angular2-notifications/components';
 import {User} from "../../user/user";
 import {UserService} from "../../user/user.service";
 import {UserModalComponent} from "./user-modal";
+import {NotifyService} from "../../services/notify.service";
 
 
 @Component({
@@ -17,12 +18,13 @@ export class UsuariosComponent implements OnInit {
   users:User[];
 
   constructor(private userService:UserService,
-              private notification:NotificationsService) {}
+              private noty:NotifyService) {}
 
   ngOnInit() {
     this.userService.getAll().subscribe(
-        users => this.users = users
-      );
+      users => this.users = users,
+      error => this.noty.serviceError(error)
+    );
   }
 
   create(){

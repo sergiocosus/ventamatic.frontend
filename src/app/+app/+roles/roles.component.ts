@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {RoleService} from "./services/role.service";
 import {Role} from "./classes/role";
 import {RoleModalComponent} from "./components/role-modal/role-modal.component";
+import {NotifyService} from "../../services/notify.service";
 
 @Component({
   selector: 'app-roles',
@@ -13,13 +14,15 @@ export class RolesComponent implements OnInit {
 
   private roles:Role[];
 
-  constructor(private roleService:RoleService) {}
+  constructor(private roleService:RoleService,
+              private notify:NotifyService) {}
 
   ngOnInit() {
     this.roleService.getAll().subscribe(
       roles => {
         this.roles = roles;
-      }
+      },
+      error => this.notify.serviceError(error)
     );
   }
 

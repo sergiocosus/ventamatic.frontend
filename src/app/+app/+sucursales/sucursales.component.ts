@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import {NotificationsService} from "angular2-notifications/components";
 import {BranchService} from "./shared/branch.service";
 import {Branch} from "./shared/branch";
 import {BranchModalComponent} from "./branch-modal/branch-modal.component";
+import {NotifyService} from "../../services/notify.service";
 
 @Component({
   selector: 'app-sucursales',
@@ -15,11 +15,12 @@ export class SucursalesComponent implements OnInit {
   branches:Branch[];
 
   constructor(private branchService:BranchService,
-              private notification:NotificationsService) {}
+              private notify:NotifyService) {}
 
   ngOnInit():any {
     this.branchService.getAll().subscribe(
-      branches => this.branches = branches
+      branches => this.branches = branches,
+      error => this.notify.serviceError(error)
     )
   }
 

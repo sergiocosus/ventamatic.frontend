@@ -32,7 +32,14 @@ export class ClientModalComponent extends CrudModalComponent{
   }
 
   openUpdate(client:Client){
-    this.client = client;
+    this.clientService.get(client.id).subscribe(
+      client => this.client = client,
+      error => {
+        this.notify.serviceError(error)
+        this.delayClose();
+      }
+    );
+
     super.openUpdate(client);
   }
 
@@ -42,21 +49,24 @@ export class ClientModalComponent extends CrudModalComponent{
   }
 
   create(){
-    this.clientService.post(this.client).subscribe(client => {
-      this.createdSuccess(client);
-    });
+    this.clientService.post(this.client).subscribe(
+      client => this.createdSuccess(client),
+      error => this.notify.serviceError(error)
+    );
   }
 
   update(){
-    this.clientService.put(this.client).subscribe( user=> {
-      this.updatedSuccess(user);
-    });
+    this.clientService.put(this.client).subscribe(
+      user => this.updatedSuccess(user),
+      error => this.notify.serviceError(error)
+    );
   }
 
   delete(){
-    this.clientService.delete(this.client.id).subscribe( response => {
-        this.deletedSuccess(this.client);
-      });
+    this.clientService.delete(this.client.id).subscribe(
+      response => this.deletedSuccess(this.client),
+      error => this.notify.serviceError(error)
+    );
   }
 
 }

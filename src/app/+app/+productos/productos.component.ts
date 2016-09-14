@@ -4,6 +4,7 @@ import {MainContentComponent} from "../../shared/main-content/main-content.compo
 import {ProductService} from "../../shared/product/product.service";
 import {Product} from "../../shared/product/product";
 import {ProductModalComponent} from "./product-modal/product-modal.component";
+import {NotifyService} from "../../services/notify.service";
 
 
 @Component({
@@ -15,13 +16,17 @@ export class ProductosComponent implements OnInit {
   @ViewChild(ProductModalComponent) private productModal:ProductModalComponent;
   public products:Product[];
 
-  constructor(private productService:ProductService) {}
+  constructor(private productService:ProductService,
+              private notify:NotifyService) {}
 
   ngOnInit() {
-    this.productService.getAll().subscribe(products => {
-      console.log(products);
-      this.products = products;
-    });
+    this.productService.getAll().subscribe(
+      products => {
+        console.log(products);
+        this.products = products;
+      },
+      error => this.notify.serviceError(error)
+    );
   }
 
   clickUpdate(product:Product){
