@@ -1,5 +1,5 @@
 import { Injectable, SecurityContext } from '@angular/core';
-import { DomSanitizationService } from '@angular/platform-browser';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { NotificationsService } from 'angular2-notifications';
 import {Notification} from "angular2-notifications/lib/notification";
@@ -8,7 +8,7 @@ import {Notification} from "angular2-notifications/lib/notification";
 export class NotifyService {
 
   constructor(private notification:NotificationsService,
-              private satinizer:DomSanitizationService) {
+              private satinizer:DomSanitizer) {
   }
 
   success(content: string, title: string = 'Éxito', override?: any): Notification {

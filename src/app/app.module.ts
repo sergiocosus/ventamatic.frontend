@@ -1,9 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, ApplicationRef } from '@angular/core';
-import {CommonModule, CORE_DIRECTIVES} from '@angular/common';
+import { NgModule } from '@angular/core';
+import {CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { enableProdMode, provide } from '@angular/core';
 import { HttpModule, Http } from '@angular/http';
 import { AuthHttp, AuthConfig } from "angular2-jwt/angular2-jwt";
 import 'rxjs/Rx';
@@ -13,10 +12,10 @@ import { ModalComponent,
   ModalFooterComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 
 import {
-  NotificationsService, SimpleNotificationsComponent,
+  NotificationsService,
   SimpleNotificationsModule
 } from 'angular2-notifications/components'
-import {API_HTTP_PROVIDERS} from "./shared/api-http";
+import { apiHttpServiceProvider } from "./shared/api-http";
 import {VentamaticFrontendAppComponent} from "./ventamatic-frontend.component";
 import {LoginComponent} from "./+login/login.component";
 import {UsuariosComponent} from "./+app/+usuarios/usuarios.component";
@@ -79,6 +78,23 @@ const CUSTOM_MODAL_DIRECTIVES = [
   ModalBodyComponent,
   ModalFooterComponent,
 ];
+
+let authHttpServiceFactory = (http: Http) => {
+  return new AuthHttp(new AuthConfig({
+    globalHeaders: [
+      { 'Content-Type':'application/json' },
+      { 'Accept':'application/json' }
+    ],
+  }), http);
+};
+
+
+export let authHttpServiceProvider =
+{
+  provide: AuthHttp,
+  useFactory: authHttpServiceFactory,
+  deps: [Http]
+};
 
 @NgModule({
   declarations: [
@@ -153,21 +169,14 @@ const CUSTOM_MODAL_DIRECTIVES = [
     NotifyService,
     RoleService,
     PermissionService,
-    provide(AuthHttp, {
-      useFactory: (http) => {
-        return new AuthHttp(new AuthConfig({
-          globalHeaders: [
-            { 'Content-Type':'application/json' },
-            { 'Accept':'application/json' }
-          ],
-        }), http);
-      },
-      deps: [Http]
-    }),
-    API_HTTP_PROVIDERS,
+    authHttpServiceProvider,
+    apiHttpServiceProvider,
     NotificationsService,
   ],
   entryComponents: [VentamaticFrontendAppComponent],
   bootstrap: [VentamaticFrontendAppComponent]
 })
 export class AppModule { }
+
+
+

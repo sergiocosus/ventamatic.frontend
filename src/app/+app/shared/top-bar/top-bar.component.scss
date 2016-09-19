@@ -10,7 +10,9 @@
   justify-content: space-between;
   top: 0;
   line-height: 1em;
+}
 
+:host /deep/ {
   .btn{
     flex-basis: 25px;
     margin: 5px;
@@ -34,7 +36,6 @@
   i{
     margin-right:.25em;
   }
-
 }
 
 #sesion-menu-bar{
@@ -52,5 +53,4 @@
     border-right: 1px solid black;
     border-radius: 5px;
   }
-
 }

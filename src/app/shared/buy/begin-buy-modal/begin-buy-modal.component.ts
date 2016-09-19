@@ -3,9 +3,7 @@ import {SupplierService} from "../../../+app/+proveedores/shared/supplier.servic
 import {BranchService} from "../../../+app/+sucursales/shared/branch.service";
 import {Branch} from "../../../+app/+sucursales/shared/branch";
 import {Supplier} from "../../../+app/+proveedores/shared/supplier";
-import {MODAL_DIRECTIVES} from "ng2-bs3-modal/ng2-bs3-modal";
 import {ModalComponent} from "ng2-bs3-modal/components/modal";
-import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 
 @Component({
   selector: 'app-begin-buy-modal',

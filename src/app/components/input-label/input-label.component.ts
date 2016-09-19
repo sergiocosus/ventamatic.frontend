@@ -1,20 +1,19 @@
-import {Component, Input, forwardRef, Provider, EventEmitter, Output, ElementRef, ViewChild} from '@angular/core';
+import {Component, Input, forwardRef, EventEmitter, Output, ElementRef, ViewChild, Provider} from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
 
 const noop = (_?) => {};
-
-const CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR = new Provider(
-  NG_VALUE_ACCESSOR, {
-    useExisting: forwardRef(() => InputLabelComponent),
-    multi: true
-  });
-
 
 @Component({
   selector: 'input-label',
   templateUrl: 'input-label.component.html',
   styleUrls: ['input-label.component.scss'],
-  providers: [CUSTOM_INPUT_CONTROL_VALUE_ACCESSOR]
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => InputLabelComponent),
+      multi: true
+    }
+  ]
 })
 
 

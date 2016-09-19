@@ -5,7 +5,9 @@
   flex: 0 1 160px;
   overflow-y: auto;
   padding: 5px 0 5px 5px;
+}
 
+:host /deep/{
   ul{
     display: flex;
     flex: 1 0 auto;

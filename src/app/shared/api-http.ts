@@ -1,4 +1,3 @@
-import { provide } from "@angular/core";
 import { AuthHttp } from 'angular2-jwt/angular2-jwt';
 import { Request, RequestOptionsArgs, Response } from '@angular/http';
 import { Observable } from "rxjs/Observable";
@@ -83,11 +82,14 @@ export class ApiHttp {
   }
 }
 
+let apiHttpServiceFactory = (authHttp: AuthHttp) => {
+  return new ApiHttp(authHttp);
+};
 
-export const API_HTTP_PROVIDERS =
-  provide(ApiHttp, {
-    useFactory: (http) => {
-      return new ApiHttp(http);
-    },
-    deps: [AuthHttp]
-  });
+export let apiHttpServiceProvider =
+{
+  provide: ApiHttp,
+  useFactory: apiHttpServiceFactory,
+  deps: [AuthHttp]
+};
+

@@ -6,7 +6,9 @@
   border-radius: 4px;
   flex-wrap: wrap;
   color: white;
+}
 
+:host /deep/{
   div{
     margin: 5px;
     position: relative;
@@ -40,5 +42,4 @@
       width: 25px;
     }
   }
-
 }

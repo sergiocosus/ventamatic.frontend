@@ -5,7 +5,9 @@
   align-items: center;
   display: flex;
   justify-content: center;
+}
 
+:host /deep/{
   .ui-dropdown{
     width: 100% !important;
   }
