@@ -22,14 +22,14 @@
 
 
       <ng-select [items]="unitItems"
-                 [initData]="selectedUnitItem"
-                 (data)="selectedUnitItem = $event"
+                 [active]="selectedUnitItem"
+                 (data)="selectedUnitItem = [$event]"
                  [disabled]="locked"
                  placeholder="Unidad">
       </ng-select>
 
       <ng-select [items]="categoryItems"
-                 [initData]="selectedCategoryItems"
+                 [active]="selectedCategoryItems"
                  (data)="selectedCategoryItems = $event"
                  [multiple]="true"
                  [disabled]="locked"
@@ -37,8 +37,8 @@
       </ng-select>
 
       <ng-select [items]="brandItems"
-                 [initData]="selectedBrandItem"
-                 (data)="selectedBrandItem = $event"
+                 [active]="selectedBrandItem"
+                 (data)="selectedBrandItem = [$event]"
                  [disabled]="locked"
                  placeholder="Marca">
       </ng-select>

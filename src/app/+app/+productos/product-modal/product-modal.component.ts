@@ -36,7 +36,7 @@ export class ProductModalComponent extends CrudModalComponent {
   selectedBrandItem:any;
 
   unitItems:any[] = [];
-  selectedUnitItem:any;
+  selectedUnitItem:any = [];
 
   constructor(protected productService:ProductService,
               protected notify:NotifyService,
@@ -158,10 +158,11 @@ export class ProductModalComponent extends CrudModalComponent {
     this.product.categories = this.selectedCategoryItems.map(
       item => item.id
     );
+
     this.product.brand_id = this.selectedBrandItem ?
-      this.selectedBrandItem.id : null;
+      this.selectedBrandItem[0].id : null;
     this.product.unit_id = this.selectedUnitItem ?
-      this.selectedUnitItem.id : null;
+      this.selectedUnitItem[0].id : null;
   }
 
   closed(){

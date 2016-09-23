@@ -1,8 +1,7 @@
 import { Injectable, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 
-import { NotificationsService } from 'angular2-notifications';
-import {Notification} from "angular2-notifications/lib/notification";
+import { NotificationsService, Notification } from 'angular2-notifications';
 
 @Injectable()
 export class NotifyService {

@@ -44,14 +44,14 @@
       </input-label>
 
       <ng-select [items]="supplierCategoryItems"
-                 [initData]="selectedSupplierCategoryItem"
+                 [active]="selectedSupplierCategoryItem"
                  (data)="supplier.supplier_category_id = $event.id"
                  [disabled]="locked"
                  placeholder="Categoría del proveedor">
       </ng-select>
 
       <ng-select [items]="brandItems"
-                 [initData]="selectedBrandItems"
+                 [active]="selectedBrandItems"
                  (data)="mapBrands($event)"
                  [multiple]="true"
                  [disabled]="locked"

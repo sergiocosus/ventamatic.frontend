@@ -52,7 +52,7 @@
 
 
       <ng-select [items]="roleItems"
-                 [initData]="selectedRoleItems"
+                 [active]="selectedRoleItems"
                  (data)="selectedRoleItems = $event"
                  [multiple]="true"
                  [disabled]="locked"

@@ -6,10 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule, Http } from '@angular/http';
 import { AuthHttp, AuthConfig } from "angular2-jwt/angular2-jwt";
 import 'rxjs/Rx';
-import { ModalComponent,
-  ModalHeaderComponent,
-  ModalBodyComponent,
-  ModalFooterComponent } from "ng2-bs3-modal/ng2-bs3-modal";
+import { Ng2Bs3ModalModule } from "ng2-bs3-modal/ng2-bs3-modal";
 
 import {
   NotificationsService,
@@ -63,7 +60,6 @@ import { ProductCartComponent } from './shared/product/product-cart/product-cart
 import { AddProductModalComponent } from './+app/+compra/add-product-modal/add-product-modal.component';
 import {BuyService} from "./shared/buy/buy.service";
 import { PaymentTypeComponent } from './shared/payment-type/payment-type/payment-type.component';
-import {SELECT_DIRECTIVES} from "ng2-select";
 import {BrandService} from "./shared/product/brand/brand.service";
 import {SupplierCategoryService} from "./+app/+proveedores/category/supplier-category.service";
 import { BasicEntityModalComponent } from './components/basic-entity-modal/basic-entity-modal.component';
@@ -71,13 +67,8 @@ import {NotifyService} from "./services/notify.service";
 import {RoleService} from "./+app/+roles/services/role.service";
 import { RoleModalComponent } from './+app/+roles/components/role-modal/role-modal.component';
 import {PermissionService} from "./shared/security/permission.service";
+import {SelectModule} from "ng2-select";
 
-const CUSTOM_MODAL_DIRECTIVES = [
-  ModalComponent,
-  ModalHeaderComponent,
-  ModalBodyComponent,
-  ModalFooterComponent,
-];
 
 let authHttpServiceFactory = (http: Http) => {
   return new AuthHttp(new AuthConfig({
@@ -98,8 +89,6 @@ export let authHttpServiceProvider =
 
 @NgModule({
   declarations: [
-    CUSTOM_MODAL_DIRECTIVES,
-    SELECT_DIRECTIVES,
     // Main routes directives
 
     VentamaticFrontendAppComponent,
@@ -149,7 +138,6 @@ export let authHttpServiceProvider =
     PaymentTypeComponent,
     BasicEntityModalComponent,
     RoleModalComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -159,6 +147,8 @@ export let authHttpServiceProvider =
     HttpModule,
     ButtonsModule,
     SimpleNotificationsModule,
+    SelectModule,
+    Ng2Bs3ModalModule,
     routing
   ],
   providers: [
