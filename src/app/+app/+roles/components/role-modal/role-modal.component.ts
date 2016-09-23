@@ -19,6 +19,8 @@ export class RoleModalComponent extends CrudModalComponent {
   @Output() updated;
   @Output() deleted;
 
+  name = 'Rol';
+
   role: Role;
 
   permissions:Permission[] = [];
@@ -38,6 +40,14 @@ export class RoleModalComponent extends CrudModalComponent {
 
   openCreate(){
     this.role = new Role();
+    this.permissionList = this.permissions.map(
+      permission => ({
+        id:permission.id,
+        name:permission.display_name,
+        checked: false
+      })
+    );
+
     super.openCreate();
   }
 
@@ -57,8 +67,6 @@ export class RoleModalComponent extends CrudModalComponent {
 
           }
         );
-        console.log(this.permissionList);
-
       }
     );
 

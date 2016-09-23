@@ -8,9 +8,16 @@
 
 <main-content>
   <ul>
-    <li *ngFor="let role of roles" (click)="clickUpdate(role)">
-      {{role.display_name}}
-    </li>
+    <person-item *ngFor="let role of roles" (click)="clickUpdate(role)">
+      <picture>
+        <i class="fa fa-lock"></i>
+      </picture>
+      <div class="data">
+        <div>
+          <span>  {{role.display_name}}</span>
+        </div>
+      </div>
+    </person-item>
   </ul>
 </main-content>
 
