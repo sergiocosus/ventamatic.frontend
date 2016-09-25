@@ -3,6 +3,9 @@ import {RoleService} from "./services/role.service";
 import {Role} from "./classes/role";
 import {RoleModalComponent} from "./components/role-modal/role-modal.component";
 import {NotifyService} from "../../services/notify.service";
+import {BranchRoleService} from "./services/branch-role.service";
+import {BranchRole} from "./classes/branch-role";
+import {BranchRoleModalComponent} from "./components/branch-role-modal/branch-role-modal.component";
 
 @Component({
   selector: 'app-roles',
@@ -11,10 +14,13 @@ import {NotifyService} from "../../services/notify.service";
 })
 export class RolesComponent implements OnInit {
   @ViewChild(RoleModalComponent) roleModal:RoleModalComponent;
+  @ViewChild(BranchRoleModalComponent) branchRoleModal:BranchRoleModalComponent;
 
   private roles:Role[];
+  private branchRoles:BranchRole[];
 
   constructor(private roleService:RoleService,
+              private branchRoleService:BranchRoleService,
               private notify:NotifyService) {}
 
   ngOnInit() {
@@ -22,6 +28,11 @@ export class RolesComponent implements OnInit {
       roles => {
         this.roles = roles;
       },
+      error => this.notify.serviceError(error)
+    );
+
+    this.branchRoleService.getAll().subscribe(
+      branchRoles => this.branchRoles = branchRoles,
       error => this.notify.serviceError(error)
     );
   }
@@ -49,6 +60,19 @@ export class RolesComponent implements OnInit {
     this.roleModal.openDelete(role);
   }
 
+
+  updateBranchPermission(branchRole:BranchRole) {
+    this.branchRoleModal.openUpdate(branchRole);
+  }
+
+  createBranchPermission(){
+    this.branchRoleModal.openCreate();
+  }
+
+  deleteBranchPermission(branchRole:BranchRole){
+    this.branchRoleModal.openDelete(branchRole);
+  }
+
   created(role:Role){
     this.roles.push(role);
   }
@@ -65,6 +89,25 @@ export class RolesComponent implements OnInit {
     var index = this.roles.indexOf(role);
     if (index > -1) {
       this.roles.splice(index, 1);
+    }
+  }
+
+  createdBranchRole(branchRole:BranchRole){
+    this.branchRoles.push(branchRole);
+  }
+
+  updatedBranchRole(branchRole:BranchRole){
+    for(var i=0; i<this.branchRoles.length; i++) {
+      if(branchRole.id == this.branchRoles[i].id) {
+        this.branchRoles[i] = branchRole;
+      }
+    }
+  }
+
+  deletedBranchRole(branchRole:BranchRole){
+    var index = this.branchRoles.indexOf(branchRole);
+    if (index > -1) {
+      this.branchRoles.splice(index, 1);
     }
   }
 

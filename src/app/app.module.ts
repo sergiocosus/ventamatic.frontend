@@ -68,6 +68,10 @@ import {RoleService} from "./+app/+roles/services/role.service";
 import { RoleModalComponent } from './+app/+roles/components/role-modal/role-modal.component';
 import {PermissionService} from "./shared/security/permission.service";
 import {SelectModule} from "ng2-select";
+import {BranchService} from "./+app/+sucursales/shared/branch.service";
+import {BranchPermissionService} from "./shared/security/branch-permission.service";
+import {BranchRoleService} from "./+app/+roles/services/branch-role.service";
+import { BranchRoleModalComponent } from './+app/+roles/components/branch-role-modal/branch-role-modal.component';
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -138,6 +142,7 @@ export let authHttpServiceProvider =
     PaymentTypeComponent,
     BasicEntityModalComponent,
     RoleModalComponent,
+    BranchRoleModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -162,6 +167,8 @@ export let authHttpServiceProvider =
     authHttpServiceProvider,
     apiHttpServiceProvider,
     NotificationsService,
+    BranchPermissionService,
+    BranchRoleService,
   ],
   entryComponents: [VentamaticFrontendAppComponent],
   bootstrap: [VentamaticFrontendAppComponent]

@@ -1,30 +1,30 @@
 <modal (onClose)="closed()" (onDismiss)="closed()">
   <modal-header [show-close]="true">
-    <h4 *ngIf="createMode"> Añadir rol </h4>
-    <h4 *ngIf="updateMode"> Editar rol </h4>
-    <h4 *ngIf="deleteMode"> Eliminar rol </h4>
+    <h4 *ngIf="createMode"> Añadir rol de sucursal </h4>
+    <h4 *ngIf="updateMode"> Editar rol de sucursal </h4>
+    <h4 *ngIf="deleteMode"> Eliminar rol de sucursal </h4>
   </modal-header>
   <form (ngSubmit)="submit()">
-    <modal-body *ngIf="!deleteMode && role">
-      <input-label type="text" [(ngModel)]="role.name" name="name"
+    <modal-body *ngIf="!deleteMode && branchRole">
+      <input-label type="text" [(ngModel)]="branchRole.name" name="name"
                    [disabled]="locked" required maxlength="255">
         Código
       </input-label>
-      <input-label type="text" [(ngModel)]="role.display_name" name="display_name"
+      <input-label type="text" [(ngModel)]="branchRole.display_name" name="display_name"
                    [disabled]="locked" required maxlength="255">
         Nombre
       </input-label>
 
-      <input-label type="text" [(ngModel)]="role.description" name="description"
+      <input-label type="text" [(ngModel)]="branchRole.description" name="description"
                    [disabled]="locked" required>
         Descripción
       </input-label>
       <div class="permissions" *ngIf="branchPermissionList">
-        <div *ngFor="let permission of branchPermissionList"  class="checkbox abc-checkbox">
-          <input type="checkbox" [(ngModel)]="permission.checked" [disabled]="locked"
-                 [ngModelOptions]="{standalone: true}" [id]="'checked'+permission.id"/>
-          <label [attr.for]="'checked'+permission.id">
-            {{permission.name}}
+        <div *ngFor="let branchPermission of branchPermissionList" class="checkbox abc-checkbox">
+          <input type="checkbox" [(ngModel)]="branchPermission.checked" [disabled]="locked"
+                 [ngModelOptions]="{standalone: true}" [id]="'checked'+branchPermission.id"/>
+          <label [attr.for]="'checked'+branchPermission.id">
+            {{branchPermission.name}}
           </label>
         </div>
       </div>
@@ -34,12 +34,12 @@
               type="submit" class="btn btn-danger pull-xs-left"
               (click)="unlock()" >
         <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-        Editar rol
+        Editar rol de sucursal
       </button>
       <button *ngIf="createMode"
               type="submit"
               class="btn btn-success">
-        Crear rol
+        Crear rol de sucursal
       </button>
       <button *ngIf="updateMode && !locked"
               type="submit"
@@ -49,7 +49,7 @@
       <button *ngIf="deleteMode && !locked"
               type="submit"
               class="btn btn-danger">
-        Eliminar rol
+        Eliminar rol de sucursal
       </button>
       <button type="button"
               class="btn btn-primary"

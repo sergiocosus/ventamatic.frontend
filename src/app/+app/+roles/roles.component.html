@@ -14,7 +14,7 @@
       </picture>
       <div class="data">
         <div>
-          <span>  {{role.display_name}}</span>
+          <span>{{role.display_name}}</span>
         </div>
       </div>
     </person-item>
@@ -24,18 +24,30 @@
 <search-bar>
   <h2>Roles de sucursal</h2>
   <button class="btn btn-default"
-          (click)="brandModal.open()">
+          (click)="createBranchPermission()">
     Agregar rol de sucursal
   </button>
 </search-bar>
 
 <main-content>
   <ul>
-    <li *ngFor="let role of roles">
-      {{role.display_name}}
-    </li>
+    <person-item *ngFor="let branchRole of branchRoles"
+                 (click)="updateBranchPermission(branchRole)">
+      <picture>
+        <i class="fa fa-lock"></i>
+      </picture>
+      <div class="data">
+        <div>
+          <span>{{branchRole.display_name}}</span>
+        </div>
+      </div>
+    </person-item>
   </ul>
 </main-content>
 <app-role-modal (updated)="updated($event)"
                 (deleted)="deleted($event)"
                 (created)="created($event)"></app-role-modal>
+
+<app-branch-role-modal (updated)="updatedBranchRole($event)"
+                (deleted)="deletedBranchRole($event)"
+                (created)="createdBranchRole($event)"></app-branch-role-modal>

@@ -82,7 +82,8 @@ export class RoleModalComponent extends CrudModalComponent {
     this.appendData();
 
     this.roleService.post(this.role).subscribe(
-      role => this.createdSuccess(role)
+      role => this.createdSuccess(role),
+      error => this.notify.serviceError(error)
     );
   }
 
@@ -90,13 +91,15 @@ export class RoleModalComponent extends CrudModalComponent {
     this.appendData();
 
     this.roleService.put(this.role).subscribe(
-      role => this.updatedSuccess(role)
+      role => this.updatedSuccess(role),
+      error => this.notify.serviceError(error)
     );
   }
 
   delete() {
     this.roleService.delete(this.role.id).subscribe(
-      response => this.deletedSuccess(this.role)
+      response => this.deletedSuccess(this.role),
+      error => this.notify.serviceError(error)
     );
   }
 
