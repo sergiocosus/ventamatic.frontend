@@ -1,4 +1,4 @@
-<modal (onClose)="closed()" (onDismiss)="closed()">
+<modal (onClose)="clear()" (onDismiss)="clear()">
   <modal-header [show-close]="true">
     <h4 *ngIf="createMode"> Añadir Usuario </h4>
     <h4 *ngIf="updateMode"> Editar Usuario </h4>
@@ -49,17 +49,6 @@
                    [(ngModel)]="password_confirm" required>
         Confirmar contraseña
       </input-label>
-
-
-      <ng-select [items]="roleItems"
-                 [active]="selectedRoleItems"
-                 (data)="selectedRoleItems = $event"
-                 [multiple]="true"
-                 [disabled]="locked"
-                 placeholder="Roles">
-      </ng-select>
-
-
     </modal-body>
     <modal-footer>
       <button *ngIf="locked"

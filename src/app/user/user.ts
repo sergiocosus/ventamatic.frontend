@@ -1,5 +1,6 @@
 import {Model} from "../shared/model";
 import {Role} from "../+app/+roles/classes/role";
+import {BranchRole} from "../+app/+roles/classes/branch-role";
 export class User extends Model{
   public id:number;
   public name:string;
@@ -18,6 +19,7 @@ export class User extends Model{
   public password;
 
   roles:Role[];
+  branch_roles:BranchRole[];
 
   get fullName(){
     return `${this.name} ${this.last_name} ${this.last_name_2}`;

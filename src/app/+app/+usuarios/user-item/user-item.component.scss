@@ -3,3 +3,31 @@
   flex: 0 0 200px;
   margin: 10px;
 }
+
+.roles{
+  display: flex;
+  position: absolute;
+  right: -5px;
+  bottom: -5px;
+  z-index: 2;
+  background-color: #EB0;
+  width: 25px;
+  height: 25px;
+  border: 2px white solid;
+  border-radius: 50%;
+
+  align-items: center;
+  justify-content: center;
+
+  transition: .25s all;
+
+  i{
+    color:white;
+    line-height: 1em;
+    font-size: 1.2em;
+  }
+
+  &:hover{
+    transform: scale(1.5,1.5);
+  }
+}

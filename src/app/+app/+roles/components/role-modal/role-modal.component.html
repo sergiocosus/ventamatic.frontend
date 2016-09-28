@@ -19,8 +19,8 @@
                    [disabled]="locked" required>
         Descripción
       </input-label>
-      <div class="permissions" *ngIf="branchPermissionList">
-        <div *ngFor="let permission of branchPermissionList"  class="checkbox abc-checkbox">
+      <div class="permissions" *ngIf="permissionList">
+        <div *ngFor="let permission of permissionList"  class="checkbox abc-checkbox">
           <input type="checkbox" [(ngModel)]="permission.checked" [disabled]="locked"
                  [ngModelOptions]="{standalone: true}" [id]="'checked'+permission.id"/>
           <label [attr.for]="'checked'+permission.id">

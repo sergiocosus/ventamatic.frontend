@@ -11,9 +11,15 @@ export class UserItemComponent implements OnInit {
 
   @Output() delete = new EventEmitter();
   @Output() update = new EventEmitter();
+  @Output() roles = new EventEmitter();
 
   constructor() {}
 
   ngOnInit() {
+  }
+
+  clickRole($event){
+    $event.stopPropagation();
+    this.roles.emit(this.user);
   }
 }

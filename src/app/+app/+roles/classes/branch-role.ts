@@ -10,6 +10,8 @@ export class BranchRole extends Model{
   updated_at:string;
   branch_permissions:BranchPermission[]|number[];
 
+  pivot?:any;
+
   public static parseArray(objs:any){
     return objs.map(obj => {return new BranchRole().parse(obj)})
   }

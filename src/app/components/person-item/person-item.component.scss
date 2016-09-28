@@ -77,9 +77,10 @@
 
     transition: .25s all;
 
-    img{
+    i{
       color:white;
-      width: 65%;
+      line-height: 1em;
+      font-size: 1.2em;
     }
 
     &:hover{

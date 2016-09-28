@@ -4,6 +4,7 @@ import {Branch} from "../../+sucursales/shared/branch";
 import { Router} from "@angular/router";
 import {ScheduleService} from "../../../user/schedule/schedule.service";
 import {Subscription} from "rxjs/Rx";
+import {NotifyService} from "../../../services/notify.service";
 
 @Component({
   selector: 'select-branch',
@@ -18,7 +19,8 @@ export class SelectBranchComponent implements OnInit, OnDestroy {
   selectedBranch: Branch;
   constructor(private router:Router,
               private branchService:BranchService,
-              private scheduleService:ScheduleService
+              private scheduleService:ScheduleService,
+              private notify:NotifyService
   ) {}
 
   ngOnInit() {
@@ -44,7 +46,8 @@ export class SelectBranchComponent implements OnInit, OnDestroy {
     this.scheduleService.post(this.selectedBranch.id, this.initial_amount).subscribe(
       schedule => {
         this.scheduleService.updateCurrentSchedule(schedule);
-      }
+      },
+      error => this.notify.serviceError(error)
     )
   }
 }

@@ -72,6 +72,7 @@ import {BranchService} from "./+app/+sucursales/shared/branch.service";
 import {BranchPermissionService} from "./shared/security/branch-permission.service";
 import {BranchRoleService} from "./+app/+roles/services/branch-role.service";
 import { BranchRoleModalComponent } from './+app/+roles/components/branch-role-modal/branch-role-modal.component';
+import { UserRoleModalComponent } from './+app/+usuarios/user-role-modal/user-role-modal.component';
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -143,6 +144,7 @@ export let authHttpServiceProvider =
     BasicEntityModalComponent,
     RoleModalComponent,
     BranchRoleModalComponent,
+    UserRoleModalComponent,
   ],
   imports: [
     BrowserModule,

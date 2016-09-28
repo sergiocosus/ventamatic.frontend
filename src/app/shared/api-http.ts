@@ -69,7 +69,10 @@ export class ApiHttp {
   }
 
   private handleError(error:any, observable:Observable<any>) {
-    var json = error.json();
+    var json;
+    if(error.json){
+      json = error.json();
+    }
 
     if(json){
       console.error(json);

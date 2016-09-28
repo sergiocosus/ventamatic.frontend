@@ -56,18 +56,16 @@ export class RoleModalComponent extends CrudModalComponent {
       role => {
         this.role = role;
         this.permissionList = this.permissions.map(
-          permission => {
-            return {
-              id:permission.id,
-              name:permission.display_name,
-              checked: role.permissions.find(
-                rolePermission => permission.id == rolePermission.id
-              ) ? true : false
-            };
-
-          }
+          permission => ({
+            id:permission.id,
+            name:permission.display_name,
+            checked: role.permissions.find(
+              rolePermission => permission.id == rolePermission.id
+            ) ? true : false
+          })
         );
-      }
+      },
+      error => this.notify.serviceError(error)
     );
 
     super.openUpdate();

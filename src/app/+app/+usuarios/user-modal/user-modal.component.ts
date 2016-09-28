@@ -4,9 +4,6 @@ import {UserService} from "../../../user/user.service";
 import {User} from "../../../user/user";
 import {CrudModalComponent} from "../../../components/crud-modal";
 import {NotifyService} from "../../../services/notify.service";
-import {RoleService} from "../../+roles/services/role.service";
-import {Role} from "../../+roles/classes/role";
-
 
 @Component({
   selector: 'user-modal',
@@ -26,26 +23,13 @@ export class UserModalComponent extends CrudModalComponent {
 
   password_confirm:string;
 
-  roles:Role[] = [];
-  roleItems:any[] = [];
-  selectedRoleItems:any[] = [];
-
-
   constructor(protected userService:UserService,
-              protected notify:NotifyService,
-              protected roleService:RoleService) {
+              protected notify:NotifyService) {
     super(notify);
   }
 
   ngOnInit() {
-    this.roleService.getAll().subscribe(
-      roles => {
-        this.roles = roles;
-        this.roleItems = this.roles.map(
-          (role:Role) => ({text:role.display_name, id:role.id})
-        )
-      }
-    )
+
   }
 
   openCreate(){
@@ -55,13 +39,7 @@ export class UserModalComponent extends CrudModalComponent {
 
   openUpdate(user:User){
     this.userService.get(user.id).subscribe(
-      user => {
-        this.user = user;
-
-        this.selectedRoleItems = user.roles.map(
-          (role:Role) => ({text:role.display_name, id:role.id})
-        );
-      },
+      user => this.user = user,
       error => {
         this.notify.serviceError(error);
         this.delayClose();
@@ -77,8 +55,7 @@ export class UserModalComponent extends CrudModalComponent {
 
 
   create(){
-    this.appendData();
-    if(this.user.password ==this.password_confirm){
+    if(this.user.password == this.password_confirm){
       this.userService.post(this.user).subscribe(
         user => this.createdSuccess(user),
         error => this.notify.serviceError(error)
@@ -89,7 +66,8 @@ export class UserModalComponent extends CrudModalComponent {
   }
 
   update(){
-    this.appendData();
+    this.user.roles = null;
+    this.user.branch_roles = null;
     this.userService.put(this.user).subscribe(
       user => this.updatedSuccess(user),
       error => this.notify.serviceError(error)
@@ -99,24 +77,13 @@ export class UserModalComponent extends CrudModalComponent {
   delete(){
     this.userService.delete(this.user.id).subscribe(
       response => {
-        if(response.success){
-          this.deletedSuccess(this.user);
-        }
+        this.deletedSuccess(this.user);
       },
       error => this.notify.serviceError(error)
     );
   }
 
-  appendData() {
-    this.user.roles = this.selectedRoleItems.map(
-      item => item.id
-    );
-  }
-
-  closed(){
+  clear(){
     this.user = null;
-    this.selectedRoleItems = [];
   }
-
-
 }

@@ -18,6 +18,7 @@
              [user]="user"
              (update)="update($event)"
              (delete)="delete($event)"
+             (roles)="userRoleModal.open($event.id)"
   ></user-item>
 </main-content>
 
@@ -25,3 +26,4 @@
               (updated)="updated($event)"
               (deleted)="deleted($event)">
 </user-modal>
+<app-user-role-modal #userRoleModal></app-user-role-modal>
