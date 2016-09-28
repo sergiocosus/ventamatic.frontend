@@ -85,6 +85,8 @@ export class SupplierModalComponent extends CrudModalComponent {
           brand => { return { id:brand.id, text:brand.name } }
         );
 
+        this.mapBrands(this.selectedBrandItems);
+
         if(supplier.supplier_category) {
           this.selectedSupplierCategoryItem = [{
             text:supplier.supplier_category.name,

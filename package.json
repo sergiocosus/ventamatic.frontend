@@ -24,6 +24,7 @@
     "@types/jquery": "^1.10.30",
     "angular2-jwt": "^0.1.23",
     "angular2-notifications": "^0.4.0",
+    "angular2-select": "^1.0.0-alpha.6",
     "awesome-bootstrap-checkbox": "^1.0.0-alpha.4",
     "bootstrap": "^4.0.0-alpha.3",
     "core-js": "^2.4.1",

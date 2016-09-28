@@ -1,4 +1,11 @@
 <main-content>
+
+  <app-begin-buy-modal
+    [hidden]="initialData"
+    (buy-started)="startBuy($event)">
+  </app-begin-buy-modal >
+
+
   <div class="left" *ngIf="initialData">
     <div class="search">
       <app-find-product (selected-product)="addProduct($event)"
@@ -62,8 +69,6 @@
 
 </main-content>
 
-<app-begin-buy-modal (buy-started)="startBuy($event)">
-</app-begin-buy-modal >
 
 <app-add-product-modal (completed)="addProductToCart($event)">
 </app-add-product-modal>

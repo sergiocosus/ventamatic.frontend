@@ -40,15 +40,13 @@ export class CompraComponent implements OnInit {
               private notificationService:NotificationsService) {}
 
   ngOnInit() {
-    this.beginBuyModal.open();
   }
 
   startBuy(initialData:BeginBuyDataInterface){
+    console.log(initialData);
     if (initialData && initialData.branch && initialData.supplier
         && initialData.introducedAmount && initialData.supplierBillID) {
       this.initialData = initialData;
-    } else {
-      setTimeout(() => this.beginBuyModal.open(), 500 );
     }
   }
 
@@ -142,7 +140,7 @@ export class CompraComponent implements OnInit {
     this.ieps = null;
     this.addedProducts = [];
     this.beginBuyModal.clear();
-    this.beginBuyModal.open();
+    this.initialData = null;
     this.selectedPaymentType.card_payment_id = null;
     this.selectedPaymentType.payment_type_id = 1;
   }

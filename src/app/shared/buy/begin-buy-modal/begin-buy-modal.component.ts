@@ -11,13 +11,12 @@ import {ModalComponent} from "ng2-bs3-modal/components/modal";
   styleUrls: ['begin-buy-modal.component.scss'],
 })
 export class BeginBuyModalComponent implements OnInit {
-  @ViewChild(ModalComponent) protected modal:ModalComponent;
-  @ViewChild('selectBranch') selectBranch:ElementRef;
   @Output('buy-started') buyStarted = new EventEmitter<BeginBuyDataInterface>();
 
   branches:Branch[];
+  branchesItems:any[];
   suppliers:Supplier[];
-
+  suppliersItems:any[];
   formData:BeginBuyDataInterface;
 
   constructor(private supplierService:SupplierService,
@@ -28,29 +27,30 @@ export class BeginBuyModalComponent implements OnInit {
 
   ngOnInit() {
     this.supplierService.getAll().subscribe(
-      suppliers => this.suppliers = suppliers
+      suppliers => {
+        this.suppliers = suppliers;
+        this.suppliersItems = this.suppliers.map(
+          (supplier:Supplier) => ({text:supplier.name, id:supplier, model:supplier})
+        )
+      }
     );
 
     this.branchService.getAll().subscribe(
-      branches => this.branches = branches
+      branches => {
+        this.branches = branches;
+        this.branchesItems = this.branches.map(
+          (branch:Branch) => ({text:branch.name, id:branch, model:branch})
+        )
+      }
     );
+
   }
 
   start(){
     this.buyStarted.emit(this.formData);
-    this.close();
   }
 
-  open(){
-    this.modal.open();
-    setTimeout(() => {
-      this.selectBranch.nativeElement.focus();
-    });
-  }
 
-  close(){
-    this.modal.close();
-  }
 
   clear() {
     this.formData = {
@@ -59,6 +59,9 @@ export class BeginBuyModalComponent implements OnInit {
       supplierBillID:null,
       introducedAmount:null
     };
+  }
+  log(data){
+    console.log(data);
   }
 }
 
