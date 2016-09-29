@@ -17,6 +17,7 @@ export class SelectBranchComponent implements OnInit, OnDestroy {
   branches:Branch[] = [];
   initial_amount:number;
   selectedBranch: Branch;
+  branchesItems:any[] = [];
   constructor(private router:Router,
               private branchService:BranchService,
               private scheduleService:ScheduleService,
@@ -31,6 +32,9 @@ export class SelectBranchComponent implements OnInit, OnDestroy {
         }else {
           this.branchService.getAll().subscribe( branches => {
             this.branches = branches;
+            this.branchesItems = this.branches.map(
+              (branch:Branch) => ({text:branch.name, id:branch, model:branch})
+            )
           })
         }
       }

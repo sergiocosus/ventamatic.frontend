@@ -1,15 +1,19 @@
 <h2> Iniciar Compra </h2>
 
 <form (submit)="start()">
-  <span>Sucursal</span>
-  <ng-select [items]="branchesItems"
+  <label>
+    Sucursal
+  </label>
+  <ng-select class="dark"
+             [items]="branchesItems"
              (data)="formData.branch = $event.id"
              placeholder="Sucursal">
   </ng-select>
-
-  <br/>
-  <span>Proveedor</span>
-  <ng-select [items]="suppliersItems"
+  <label>
+    Proveedor
+  </label>
+  <ng-select class="dark"
+             [items]="suppliersItems"
              (data)="formData.supplier = $event.id"
              placeholder="Proveedor">
   </ng-select>

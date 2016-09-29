@@ -7,15 +7,23 @@
   justify-content: center;
 }
 
+main-content{
+  flex-direction: column;
+}
+
 h2{
   color: white;
-  border-right: 1px solid white;
-  padding-right: 2em;
-  margin-right: 2em;
+  border-bottom: 1px solid white;
+  padding-bottom: .5em;
+  margin-bottom: .5em;
   text-align: center;
 }
 
 ul{
+  display:flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -29,7 +37,7 @@ ul{
     text-align: center;
     margin: .5em;
     transition: all .25s;
-
+    max-width: 480px;
     &:hover{
       background-color: $hoverBlue;
       cursor: pointer;
