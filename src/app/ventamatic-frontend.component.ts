@@ -8,7 +8,6 @@ import {TicketService} from "./+app/+venta/ticket/ticket.service";
   templateUrl: 'ventamatic-frontend.component.html',
   styleUrls: ['ventamatic-frontend.component.scss'],
   providers: [
-    AuthService,
     TicketService
   ],
   encapsulation: ViewEncapsulation.None,

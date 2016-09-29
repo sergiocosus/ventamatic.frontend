@@ -16,21 +16,26 @@ import {InventorySelectBranch} from "./+app/+inventario/select-branch/select-bra
 
 import {InventoryComponent} from "./+app/+inventario/inventory/inventory.component";
 import {SaleComponent} from "./+app/+venta/sale/sale.component";
+import {AuthGuardService} from "./services/auth-guard.service";
+import {NoAuthGuardService} from "./services/no-auth-guard.service";
 
 
 export const appRoutes: Routes = [
   {
     path: '',
     redirectTo: 'login',
-    pathMatch: 'full'
+    pathMatch: 'full',
+    canActivate : [NoAuthGuardService]
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate : [NoAuthGuardService]
   },
   {
     path: 'app',
     component: AppComponent,
+    canActivate : [AuthGuardService],
     children: [
       {
         path: '',

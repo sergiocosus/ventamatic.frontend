@@ -3,6 +3,7 @@ import { Router } from '@angular/router'
 import { NotificationsService } from 'angular2-notifications/components'
 
 import { AuthService } from "../services/auth.service";
+import {NotifyService} from "../services/notify.service";
 @Component({
   selector: 'app-login',
   templateUrl: 'login.component.html',
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private router:Router,
     private authService:AuthService,
-    private notification:NotificationsService ){}
+    private notify:NotifyService ){}
 
   ngOnInit() {
   }
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
       .subscribe(
         response  => {
           this.router.navigate(['/app']);
-          this.notification.info('Bienvendido',response.user.fullName);
+
+          this.notify.info('Bienvendido',response.user.fullName);
         }
       );
   }

@@ -73,6 +73,9 @@ import {BranchPermissionService} from "./shared/security/branch-permission.servi
 import {BranchRoleService} from "./+app/+roles/services/branch-role.service";
 import { BranchRoleModalComponent } from './+app/+roles/components/branch-role-modal/branch-role-modal.component';
 import { UserRoleModalComponent } from './+app/+usuarios/user-role-modal/user-role-modal.component';
+import {AuthGuardService} from "./services/auth-guard.service";
+import {AuthService} from "./services/auth.service";
+import {NoAuthGuardService} from "./services/no-auth-guard.service";
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -171,6 +174,9 @@ export let authHttpServiceProvider =
     NotificationsService,
     BranchPermissionService,
     BranchRoleService,
+    AuthGuardService,
+    NoAuthGuardService,
+    AuthService,
   ],
   entryComponents: [VentamaticFrontendAppComponent],
   bootstrap: [VentamaticFrontendAppComponent]

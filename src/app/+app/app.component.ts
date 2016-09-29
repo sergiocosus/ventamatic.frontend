@@ -38,11 +38,7 @@ export class AppComponent implements OnInit {
               private router:Router) {}
 
   ngOnInit() {
-    if(!this.authService.isTokenValid()){
-      this.router.navigate(['/login']);
-    }else{
-      this.user = this.authService.getLoggedUser();
-    }
+    this.user = this.authService.getLoggedUser();
   }
 
 }
