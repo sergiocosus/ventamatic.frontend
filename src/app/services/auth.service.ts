@@ -12,37 +12,25 @@ export class AuthService {
   private authUrl = 'auth';
   private jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(private http: Http,
-              private notification:NotificationsService) {
-  }
-
+  constructor(private http: Http) { }
 
   login(username, password) :Observable<any> {
     let body = JSON.stringify({
       username : username,
       password : password
     });
+
     const contentHeaders = new Headers();
     contentHeaders.append('Accept', 'application/json');
     contentHeaders.append('Content-Type', 'application/json');
-    var observable = this.http.post(this.apiUrl + this.authUrl, body, { headers: contentHeaders })
+    return this.http.post(this.apiUrl + this.authUrl, body, {headers: contentHeaders})
       .map(this.extractData)
       .map(response => {
         response.user = new User().parse(response.user);
+        localStorage.setItem('id_token', response.token);
         return response;
       })
       .catch(this.handleError);
-
-    observable.subscribe(
-      response => {
-        localStorage.setItem('id_token', response.token);
-      },
-      error => {
-        this.notification.error('Error', error);
-      }
-    );
-
-    return observable;
   }
 
   logout(){

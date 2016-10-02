@@ -10,7 +10,6 @@ import {NotifyService} from "../services/notify.service";
   styleUrls: ['login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   username:string;
   password:string;
 
@@ -27,8 +26,10 @@ export class LoginComponent implements OnInit {
       .subscribe(
         response  => {
           this.router.navigate(['/app']);
-
-          this.notify.info('Bienvendido',response.user.fullName);
+          this.notify.info('Bienvenido',response.user.fullName);
+        },
+        error => {
+          this.notify.error('Error', error)
         }
       );
   }
@@ -37,7 +38,4 @@ export class LoginComponent implements OnInit {
     this.login(this.username, this.password)
   }
 
-  type(){
-    console.log("lsdjflskdj");
-  }
 }
