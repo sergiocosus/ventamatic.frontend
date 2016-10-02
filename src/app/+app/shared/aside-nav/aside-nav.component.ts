@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'aside-nav',
@@ -59,7 +60,7 @@ export class AsideNavComponent implements OnInit {
     }
   ];
 
-  constructor() {}
+  constructor(private authService:AuthService) {}
 
   ngOnInit() {
   }

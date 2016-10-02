@@ -76,6 +76,14 @@ import { UserRoleModalComponent } from './+app/+usuarios/user-role-modal/user-ro
 import {AuthGuardService} from "./services/auth-guard.service";
 import {AuthService} from "./services/auth.service";
 import {NoAuthGuardService} from "./services/no-auth-guard.service";
+import {UserService} from "./user/user.service";
+import {TicketService} from "./+app/+venta/ticket/ticket.service";
+import {ProductService} from "./shared/product/product.service";
+import {ClientService} from "./+app/+clientes/shared/client.service";
+import {CategoryService} from "./shared/product/category/category.service";
+import {InventoryService} from "./shared/inventory/inventory.service";
+import {ScheduleService} from "./user/schedule/schedule.service";
+import {SupplierService} from "./+app/+proveedores/shared/supplier.service";
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -177,6 +185,15 @@ export let authHttpServiceProvider =
     AuthGuardService,
     NoAuthGuardService,
     AuthService,
+    UserService,
+    TicketService,
+    ProductService,
+    ClientService,
+    CategoryService,
+    InventoryService,
+    ScheduleService,
+    SupplierService,
+    BranchService
   ],
   entryComponents: [VentamaticFrontendAppComponent],
   bootstrap: [VentamaticFrontendAppComponent]

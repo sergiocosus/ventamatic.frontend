@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 import { User } from "../user/user";
 import { AuthService } from "../services/auth.service";
 import { UserService } from "../user/user.service";
@@ -10,35 +10,32 @@ import { CategoryService } from "../shared/product/category/category.service";
 import { InventoryService } from "../shared/inventory/inventory.service";
 import { ScheduleService } from "../user/schedule/schedule.service";
 import { SupplierService } from "./+proveedores/shared/supplier.service";
+import {SubscriptionManager} from "../classes/subscription-manager";
 
 @Component({
   selector: 'app-app',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
-  providers: [
-    UserService,
-    ProductService,
-    ClientService,
-    BranchService,
-    CategoryService,
-    InventoryService,
-    ScheduleService,
-    SupplierService,
-  ]
-
 })
 
-export class AppComponent implements OnInit {
-
-  public time = "8:00pm";
-
+export class AppComponent implements OnInit, OnDestroy {
   public user:User;
+  private sub = new SubscriptionManager();
 
   constructor(private authService:AuthService,
               private router:Router) {}
 
   ngOnInit() {
-    this.user = this.authService.getLoggedUser();
+    var subUser = this.authService.getLoggedUser().subscribe(
+      user => this.user = user
+    );
+    this.authService.updateLoggedUserObservable();
+
+    this.sub.push(subUser);
+  }
+
+  ngOnDestroy(){
+    this.sub.clear();
   }
 
 }

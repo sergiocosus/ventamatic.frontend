@@ -3,8 +3,9 @@ import { Http, Headers, Response } from '@angular/http';
 import {Observable} from "rxjs/Observable";
 import {User} from "../user/user";
 import {JwtHelper} from "angular2-jwt/angular2-jwt";
-import { NotificationsService } from 'angular2-notifications/components'
 import {environment} from "../../environments/environment";
+import {ReplaySubject} from "rxjs";
+import {UserService} from "../user/user.service";
 
 @Injectable()
 export class AuthService {
@@ -12,7 +13,12 @@ export class AuthService {
   private authUrl = 'auth';
   private jwtHelper: JwtHelper = new JwtHelper();
 
-  constructor(private http: Http) { }
+  private loggedUserReplaySubject = new ReplaySubject<User>(1);
+  private loggedUser:User = null;
+
+
+  constructor(private http: Http,
+              private userService:UserService) { }
 
   login(username, password) :Observable<any> {
     let body = JSON.stringify({
@@ -25,8 +31,11 @@ export class AuthService {
     contentHeaders.append('Content-Type', 'application/json');
     return this.http.post(this.apiUrl + this.authUrl, body, {headers: contentHeaders})
       .map(this.extractData)
-      .map(response => {
+      .map((response:any) => {
         response.user = new User().parse(response.user);
+
+        this.updateLoggedUserObservable(response.user);
+
         localStorage.setItem('id_token', response.token);
         return response;
       })
@@ -39,7 +48,20 @@ export class AuthService {
   }
 
   getLoggedUser(){
-    return new User().parse(JSON.parse(localStorage.getItem('user')));
+    return this.loggedUserReplaySubject;
+  }
+
+  updateLoggedUserObservable(user?:User) {
+    if (user) {
+      this.loggedUserReplaySubject.next(user);
+    } else {
+      this.userService.getMe().subscribe(
+        account => {
+          this.loggedUser = account;
+          this.loggedUserReplaySubject.next(this.loggedUser);
+        }
+      );
+    }
   }
 
   isTokenValid(){

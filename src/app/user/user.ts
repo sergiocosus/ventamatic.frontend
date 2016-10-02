@@ -32,7 +32,7 @@ export class User extends Model{
       this.roles = Role.parseArray(this.roles);
     }
 
-    return obj;
+    return this;
   }
 
   public static parseArray(objs:any){
