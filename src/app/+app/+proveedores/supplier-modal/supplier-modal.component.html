@@ -59,12 +59,14 @@
       </ng-select>
     </modal-body>
     <modal-footer>
-      <button *ngIf="locked"
-              type="submit" class="btn btn-danger pull-xs-left"
-              (click)="unlock()" >
-        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-        Editar Proveedor
-      </button>
+      <template [appUserCan]="'supplier-edit'">
+        <button *ngIf="locked"
+                type="submit" class="btn btn-danger pull-xs-left"
+                (click)="unlock()" >
+          <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+          Editar Proveedor
+        </button>
+      </template>
       <button *ngIf="createMode"
               type="submit"
               class="btn btn-success">

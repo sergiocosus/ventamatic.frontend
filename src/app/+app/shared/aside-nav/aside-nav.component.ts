@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from "../../../services/auth.service";
 
 @Component({
   selector: 'aside-nav',
@@ -26,43 +25,49 @@ export class AsideNavComponent implements OnInit {
     {
       name: 'Productos',
       path: '/app/productos',
-      icon: 'fa-shopping-bag'
+      icon: 'fa-shopping-bag',
+      permission: 'product-get'
     },
     {
       name: 'Clientes',
       path: '/app/clientes',
-      icon: 'fa-user'
+      icon: 'fa-user',
+      permission: 'client-get'
     },
     {
       name: 'Proveedores',
       path: '/app/proveedores',
-      icon: 'fa-user-secret'
+      icon: 'fa-user-secret',
+      permission: 'supplier-get'
     },
     {
       name: 'Usuarios',
       path: '/app/usuarios',
-      icon: 'fa-users'
+      icon: 'fa-users',
+      permission: 'user-get'
     },
     {
       name: 'Roles',
       path: '/app/roles',
-      icon: 'fa-lock'
+      icon: 'fa-lock',
+      permission: 'role-get'
     },
     {
       name: 'Sucursales',
       path: '/app/sucursales',
-      icon: 'fa-industry'
+      icon: 'fa-industry',
+      permission: 'brand-get'
     },
     {
       name: 'Reportes',
       path: '/app/reportes',
-      icon: 'fa-line-chart'
+      icon: 'fa-line-chart',
+      permission: ''
     }
   ];
 
-  constructor(private authService:AuthService) {}
+  constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() { }
 
 }

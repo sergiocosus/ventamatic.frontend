@@ -18,7 +18,7 @@ export class BasicEntityModalComponent implements OnInit {
   service:BasicEntityService;
 
 
-  entities:any[];
+  entities:any[] = [];
   title:string = 'Marcas';
 
   entity:any = {
@@ -30,9 +30,6 @@ export class BasicEntityModalComponent implements OnInit {
     successUpdate: 'Actualizado exitosamente',
     successDelete: 'Eliminado exitosamente'
   }
-
-
-
 
   constructor(private brandService:BrandService,
               protected categoryService: CategoryService,
@@ -49,7 +46,7 @@ export class BasicEntityModalComponent implements OnInit {
         this.service = this.categoryService;
         this.title = 'Categoría'
         break;
-      case 'supplierCategory':
+      case 'supplier-category':
         this.service = this.supplierCategoryService;
         this.title = 'Categoría de proveedor';
         break;

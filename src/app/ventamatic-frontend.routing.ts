@@ -18,6 +18,7 @@ import {InventoryComponent} from "./+app/+inventario/inventory/inventory.compone
 import {SaleComponent} from "./+app/+venta/sale/sale.component";
 import {AuthGuardService} from "./services/auth-guard.service";
 import {NoAuthGuardService} from "./services/no-auth-guard.service";
+import {MainComponent} from "./+app/main/main.component";
 
 
 export const appRoutes: Routes = [
@@ -39,7 +40,7 @@ export const appRoutes: Routes = [
     children: [
       {
         path: '',
-        component: AppComponent
+        component: MainComponent
       },
       {
         path: 'usuarios',

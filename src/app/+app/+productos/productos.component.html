@@ -7,15 +7,19 @@
     <input type="text" placeholder="Descripción"/>
     <i class="fa fa-search" aria-hidden="true"></i>
   </div>
-  <button class="btn btn-default" (click)="clickCreate(inventory)">
+  <button *appUserCan="'product-create'"
+          class="btn"
+          (click)="clickCreate(inventory)">
     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
     Agregar Producto
   </button>
-  <button class="btn btn-default"
+  <button *appUserCan="'category-create'"
+          class="btn"
           (click)="categoryModal.open()">
     Categorias de produtos
   </button>
-  <button class="btn btn-default"
+  <button *appUserCan="'brand-create'"
+           class="btn"
           (click)="brandModal.open()">
     Marcas
   </button>
@@ -56,7 +60,9 @@
         <span *ngIf="product.unit">
           {{product.unit.name}}
         </span>
-        <div class="button-delete" (click)="clickDelete($event, product)">
+        <div *appUserCan="'product-delete'"
+             class="button-delete"
+             (click)="clickDelete($event, product)">
           <i class="fa fa-trash" ></i>
         </div>
       </td>

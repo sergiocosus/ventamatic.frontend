@@ -13,6 +13,7 @@
   </modal-body>
   <modal-footer>
     <button (click)="updateSystemRoles()"
+            *appUserCan="'user-role-assign'"
             class="btn btn-success">
       Guardar cambios
     </button>

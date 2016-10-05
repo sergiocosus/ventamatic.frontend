@@ -7,7 +7,8 @@
     <input type="text" placeholder="Nombre"/>
     <img src="assets/images/search-user.svg" class="search-icon" />
   </div>
-  <button class="btn btn-default"
+  <button class="btn"
+          *appUserCan="'user-create'"
           (click)="create()">
     <img src="assets/images/add-user-icon.svg"> Agregar Usuario
   </button>

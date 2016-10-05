@@ -1,9 +1,11 @@
 <ul>
-  <li *ngFor="let route of routes" >
-    <a [routerLink]="[route.path]"
-       class="btn btn-default" >
-      <i class="fa {{route.icon}}"></i>
-      <span>{{route.name}}</span>
-    </a>
-  </li>
+  <template ngFor let-route [ngForOf]="routes">
+    <li *appUserCan="route.permission">
+      <a [routerLink]="[route.path]"
+         class="btn btn-default" >
+        <i class="fa {{route.icon}}"></i>
+        <span>{{route.name}}</span>
+      </a>
+    </li>
+  </template>
 </ul>

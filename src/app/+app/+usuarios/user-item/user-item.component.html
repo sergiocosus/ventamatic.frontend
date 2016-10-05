@@ -1,4 +1,5 @@
 <person-item [canDelete]="!user.protected"
+             deletePermission="user-delete"
              (delete)="delete.emit(user)" (update)="update.emit(user)">
   <picture>
     <img src="assets/images/user.png"/>

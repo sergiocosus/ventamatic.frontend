@@ -1,6 +1,7 @@
 import {Model} from "../shared/model";
 import {Role} from "../+app/+roles/classes/role";
 import {BranchRole} from "../+app/+roles/classes/branch-role";
+import {Permission} from "../shared/security/permission";
 export class User extends Model{
   public id:number;
   public name:string;
@@ -21,8 +22,23 @@ export class User extends Model{
   roles:Role[];
   branch_roles:BranchRole[];
 
+  permissions:Permission[];
+
   get fullName(){
     return `${this.name} ${this.last_name} ${this.last_name_2}`;
+  }
+
+  can(permission_name) {
+    var foundPermission;
+    this.permissions.forEach(
+      permission => {
+        if (permission.name == permission_name) {
+          foundPermission = permission;
+        }
+      }
+    );
+
+    return foundPermission;
   }
 
   parse(obj): any {
@@ -30,6 +46,10 @@ export class User extends Model{
 
     if(this.roles) {
       this.roles = Role.parseArray(this.roles);
+    }
+
+    if (this.permissions) {
+      this.permissions = Permission.parseArray(this.permissions);
     }
 
     return this;

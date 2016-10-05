@@ -51,12 +51,14 @@
       </input-label>
     </modal-body>
     <modal-footer>
-      <button *ngIf="locked"
-              type="submit" class="btn btn-danger pull-xs-left"
-              (click)="unlock()" >
-        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-        Editar Usuario
-      </button>
+      <template [appUserCan]="'user-edit'">
+        <button *ngIf="locked"
+                type="submit" class="btn btn-danger pull-xs-left"
+                (click)="unlock()" >
+          <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+          Editar Usuario
+        </button>
+      </template>
       <button *ngIf="createMode"
               type="submit"
               class="btn btn-success">

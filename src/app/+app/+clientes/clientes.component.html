@@ -1,5 +1,5 @@
 <search-bar>
-  <button class="btn btn-default"
+  <button *appUserCan="'client-create'" class="btn"
           (click)="create()">
     <img src="assets/images/add-user-icon.svg"> Agregar Cliente
   </button>

@@ -29,7 +29,6 @@ export class AppComponent implements OnInit, OnDestroy {
     var subUser = this.authService.getLoggedUser().subscribe(
       user => this.user = user
     );
-    this.authService.updateLoggedUserObservable();
 
     this.sub.push(subUser);
   }

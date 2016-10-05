@@ -1,13 +1,13 @@
 <search-bar>
-  <button class="btn btn-default"
+  <button *appUserCan="'supplier-create'" class="btn"
           (click)="create()">
     <img src="assets/images/add-user-icon.svg"> Agregar Proveedor
   </button>
-  <button class="btn btn-default"
+  <button class="btn"
           (click)="supplierCategoryModal.open()">
     Categorias de proveedores
   </button>
-  <button class="btn btn-default"
+  <button class="btn"
           (click)="brandModal.open()">
     Marcas
   </button>
@@ -27,4 +27,4 @@
 </supplier-modal>
 
 <app-basic-entity-modal mode="brand" #brandModal></app-basic-entity-modal>
-<app-basic-entity-modal mode="supplierCategory" #supplierCategoryModal></app-basic-entity-modal>
+<app-basic-entity-modal mode="supplier-category" #supplierCategoryModal></app-basic-entity-modal>

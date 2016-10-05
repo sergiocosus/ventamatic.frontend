@@ -28,7 +28,6 @@ export class TopBarComponent implements OnInit, OnDestroy {
     var subUser = this.authService.getLoggedUser().subscribe(
       user => {
         this.user = user
-        console.log(user);
       }
     );
 

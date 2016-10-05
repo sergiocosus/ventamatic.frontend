@@ -8,8 +8,7 @@
         Ingrese una nueva {{title}}
       </input-label>
       <div>
-        <button type="submit"
-                class="btn btn-success">
+        <button type="submit" class="btn btn-success">
           Agregar
         </button>
       </div>
@@ -20,7 +19,7 @@
           <input-label name="id" type="text" [(ngModel)]="entity.name">
             {{title}}
           </input-label>
-          <div >
+          <div *appUserCan="mode+'-edit'">
             <button type="submit"
                     class="btn btn-success"
                     (click)="update(entity)">
@@ -28,7 +27,7 @@
             </button>
 
           </div>
-          <div>
+          <div *appUserCan="mode+'-delete'">
             <button type="button"
                     class="btn btn-danger"
                     (click)="delete(entity)">

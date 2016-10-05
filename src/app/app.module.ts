@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule, TemplateRef} from '@angular/core';
 import {CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -84,6 +84,8 @@ import {CategoryService} from "./shared/product/category/category.service";
 import {InventoryService} from "./shared/inventory/inventory.service";
 import {ScheduleService} from "./user/schedule/schedule.service";
 import {SupplierService} from "./+app/+proveedores/shared/supplier.service";
+import { UserCanDirective } from './directives/user-can.directive';
+import { MainComponent } from './+app/main/main.component';
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -156,6 +158,8 @@ export let authHttpServiceProvider =
     RoleModalComponent,
     BranchRoleModalComponent,
     UserRoleModalComponent,
+    UserCanDirective,
+    MainComponent,
   ],
   imports: [
     BrowserModule,
@@ -171,6 +175,7 @@ export let authHttpServiceProvider =
   ],
   providers: [
     appRoutingProviders,
+
     BuyService,
     BrandService,
     SupplierCategoryService,

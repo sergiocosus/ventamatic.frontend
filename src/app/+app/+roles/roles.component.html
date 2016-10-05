@@ -1,6 +1,7 @@
 <search-bar>
   <h2>Roles del sistema</h2>
-  <button class="btn btn-default"
+  <button class="btn"
+          *appUserCan="'role-edit'"
           (click)="create()">
     Agregar rol de sistema
   </button>
@@ -8,7 +9,9 @@
 
 <main-content>
   <ul>
-    <person-item *ngFor="let role of roles" (click)="clickUpdate(role)">
+    <person-item *ngFor="let role of roles"
+                 deletePermission="role-delete"
+                 (click)="clickUpdate(role)">
       <picture>
         <i class="fa fa-lock"></i>
       </picture>
@@ -23,7 +26,8 @@
 
 <search-bar>
   <h2>Roles de sucursal</h2>
-  <button class="btn btn-default"
+  <button class="btn"
+          *appUserCan="'branch-role-edit'"
           (click)="createBranchPermission()">
     Agregar rol de sucursal
   </button>
@@ -32,6 +36,7 @@
 <main-content>
   <ul>
     <person-item *ngFor="let branchRole of branchRoles"
+                 deletePermission="branch-role-delete"
                  (click)="updateBranchPermission(branchRole)">
       <picture>
         <i class="fa fa-lock"></i>

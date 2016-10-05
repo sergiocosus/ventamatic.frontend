@@ -7,6 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 })
 export class PersonItemComponent implements OnInit {
   @Input() canDelete:boolean = true;
+  @Input() deletePermission:string;
 
   @Output() delete = new EventEmitter();
   @Output() update = new EventEmitter();

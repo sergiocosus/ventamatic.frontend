@@ -1,4 +1,6 @@
-<person-item (delete)="delete.emit(supplier)" (update)="update.emit(supplier)">
+<person-item deletePermission="supplier-delete"
+             (delete)="delete.emit(supplier)"
+             (update)="update.emit(supplier)">
   <picture>
     <img src="assets/images/user.png"/>
   </picture>

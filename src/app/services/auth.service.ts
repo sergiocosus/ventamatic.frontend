@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, Response } from '@angular/http';
 import {Observable} from "rxjs/Observable";
-import {User} from "../user/user";
 import {JwtHelper} from "angular2-jwt/angular2-jwt";
 import {environment} from "../../environments/environment";
 import {ReplaySubject} from "rxjs";
 import {UserService} from "../user/user.service";
+import {User} from "../user/user";
 
 @Injectable()
 export class AuthService {
@@ -15,7 +15,6 @@ export class AuthService {
 
   private loggedUserReplaySubject = new ReplaySubject<User>(1);
   private loggedUser:User = null;
-
 
   constructor(private http: Http,
               private userService:UserService) { }
@@ -48,6 +47,10 @@ export class AuthService {
   }
 
   getLoggedUser(){
+    if (!this.loggedUser) {
+      this.loggedUser = new User();
+      this.updateLoggedUserObservable();
+    }
     return this.loggedUserReplaySubject;
   }
 
@@ -56,8 +59,9 @@ export class AuthService {
       this.loggedUserReplaySubject.next(user);
     } else {
       this.userService.getMe().subscribe(
-        account => {
-          this.loggedUser = account;
+        user => {
+          console.log(user);
+          this.loggedUser = user;
           this.loggedUserReplaySubject.next(this.loggedUser);
         }
       );
