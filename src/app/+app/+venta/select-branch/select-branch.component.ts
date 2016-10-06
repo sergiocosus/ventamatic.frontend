@@ -5,6 +5,8 @@ import { Router} from "@angular/router";
 import {ScheduleService} from "../../../user/schedule/schedule.service";
 import {Subscription} from "rxjs/Rx";
 import {NotifyService} from "../../../services/notify.service";
+import {AuthService} from "../../../services/auth.service";
+import {User} from "../../../user/user";
 
 @Component({
   selector: 'select-branch',
@@ -18,24 +20,22 @@ export class SelectBranchComponent implements OnInit, OnDestroy {
   initial_amount:number;
   selectedBranch: Branch;
   branchesItems:any[] = [];
+  private user:User;
   constructor(private router:Router,
               private branchService:BranchService,
               private scheduleService:ScheduleService,
-              private notify:NotifyService
+              private notify:NotifyService,
+              private authService:AuthService
   ) {}
 
   ngOnInit() {
+
     this.scheduleSubscription = this.scheduleService.getCurrentSchedule().subscribe(
       schedule => {
         if(schedule){
           this.router.navigate(['/app/venta', schedule.branch_id]);
         }else {
-          this.branchService.getAll().subscribe( branches => {
-            this.branches = branches;
-            this.branchesItems = this.branches.map(
-              (branch:Branch) => ({text:branch.name, id:branch, model:branch})
-            )
-          })
+          this.loadBranches();;
         }
       }
     );
@@ -43,6 +43,18 @@ export class SelectBranchComponent implements OnInit, OnDestroy {
 
   ngOnDestroy():any {
     this.scheduleSubscription.unsubscribe();
+  }
+
+  loadBranches() {
+    this.authService.getLoggedUser().subscribe(
+      user => {
+        this.user = user;
+        this.branches = user.getBranchesWithPermission('sale');
+        this.branchesItems = this.branches.map(
+          (branch:Branch) => ({text:branch.name, id:branch, model:branch})
+        )
+      }
+    );
   }
 
   submit(){

@@ -66,8 +66,6 @@ export class UserModalComponent extends CrudModalComponent {
   }
 
   update(){
-    this.user.roles = null;
-    this.user.branch_roles = null;
     this.userService.put(this.user).subscribe(
       user => this.updatedSuccess(user),
       error => this.notify.serviceError(error)

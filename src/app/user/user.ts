@@ -2,6 +2,7 @@ import {Model} from "../shared/model";
 import {Role} from "../+app/+roles/classes/role";
 import {BranchRole} from "../+app/+roles/classes/branch-role";
 import {Permission} from "../shared/security/permission";
+import {Branch} from "../+app/+sucursales/shared/branch";
 export class User extends Model{
   public id:number;
   public name:string;
@@ -22,6 +23,8 @@ export class User extends Model{
   roles:Role[];
   branch_roles:BranchRole[];
 
+  branches:Branch[];
+
   permissions:Permission[];
 
   get fullName(){
@@ -41,6 +44,26 @@ export class User extends Model{
     return foundPermission;
   }
 
+  getBranchesWithPermission(branch_permission_name) {
+    return this.branches.filter(
+      branch => {
+        var found = false;
+        branch.branch_roles.forEach(
+          branchRole => {
+            found = branchRole.branch_permissions.filter(
+              branchPermission => {
+                if(branchPermission.name == branch_permission_name){
+                  return true;
+                }
+              }
+            ).length;
+          }
+        );
+        return found;
+      }
+    )
+  }
+
   parse(obj): any {
     super.parse(obj);
 
@@ -50,6 +73,10 @@ export class User extends Model{
 
     if (this.permissions) {
       this.permissions = Permission.parseArray(this.permissions);
+    }
+
+    if (this.branches) {
+      this.branches = Branch.parseArray(this.branches);
     }
 
     return this;
