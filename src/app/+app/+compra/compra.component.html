@@ -16,28 +16,29 @@
 
     <app-payment-type [selectedPaymentType]="selectedPaymentType">
     </app-payment-type>
+    <form (submit)="openBuyConfirm()">
+      <div class="finish">
+        <input-label [(ngModel)]="iva" name="iva" class="dark"
+                     [type]="'number'"  [max]="99999999999" [required]="true">
+          IVA
+        </input-label>
+        <input-label [(ngModel)]="ieps" name="ieps" class="dark"
+                     [type]="'number'"  [max]="99999999999" [required]="true">
+          IEPS
+        </input-label>
+        <div class="btn-group">
+          <button type="submit" class="btn btn-success btn-block">
+            Finalizar Compra
+          </button>
 
-    <div class="finish">
-      <input-label [(ngModel)]="iva" name="iva" class="dark"
-                   [type]="'number'"  [max]="99999999999" [required]="true">
-        IVA
-      </input-label>
-      <input-label [(ngModel)]="ieps" name="ieps" class="dark"
-                   [type]="'number'"  [max]="99999999999" [required]="true">
-        IEPS
-      </input-label>
-      <div class="btn-group">
-        <button class="btn btn-success btn-block"
-                (click)="openBuyConfirm()">
-          Finalizar Compra
-        </button>
-
-        <button class="btn btn-danger btn-block"
-                (click)="confirmCancelModal.open()">
-          Cancelar Compra
-        </button>
+          <button type="button"
+                  class="btn btn-danger btn-block"
+                  (click)="confirmCancelModal.open()">
+            Cancelar Compra
+          </button>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
 
 

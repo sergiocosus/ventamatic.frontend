@@ -7,6 +7,7 @@ import {BuyService, BuyRequest} from "../../shared/buy/buy.service";
 import {BeginBuyDataInterface, BeginBuyModalComponent} from "../../shared/buy/begin-buy-modal/begin-buy-modal.component";
 import {NotificationsService} from "angular2-notifications";
 import {ModalComponent} from "ng2-bs3-modal/components/modal";
+import {NotifyService} from "../../services/notify.service";
 
 @Component({
   selector: 'app-compra',
@@ -37,7 +38,7 @@ export class CompraComponent implements OnInit {
   };
 
   constructor(private buyService:BuyService,
-              private notificationService:NotificationsService) {}
+              private notify:NotifyService) {}
 
   ngOnInit() {
   }
@@ -81,7 +82,7 @@ export class CompraComponent implements OnInit {
 
   openBuyConfirm(){
     if(this.initialData.introducedAmount != this.getTotal()) {
-      this.notificationService.error('Error', this.messages.totalMismatch);
+      this.notify.error(this.messages.totalMismatch);
     } else {
       this.confirmBuyModal.open();
     }
@@ -99,9 +100,10 @@ export class CompraComponent implements OnInit {
       products: this.getProductsForRequest()
     }).subscribe(
       buy => {
-        this.notificationService.success('Éxito', this.messages.success);
+        this.notify.success(this.messages.success);
         this.cancel();
-      }
+      },
+      error => this.notify.serviceError(error)
     )
   }
 
