@@ -1,7 +1,7 @@
 <ul>
   <template ngFor let-route [ngForOf]="routes">
     <li *appUserCan="route.permission">
-      <a [routerLink]="[route.path]"
+      <a [routerLink]="[route.path]" routerLinkActive="active"
          class="btn btn-default" >
         <i class="fa {{route.icon}}"></i>
         <span>{{route.name}}</span>
