@@ -86,6 +86,7 @@ import {ScheduleService} from "./user/schedule/schedule.service";
 import {SupplierService} from "./+app/+proveedores/shared/supplier.service";
 import { UserCanDirective } from './directives/user-can.directive';
 import { MainComponent } from './+app/main/main.component';
+import { UserCanInBranchDirective } from './directives/user-can-in-branch.directive';
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -160,6 +161,7 @@ export let authHttpServiceProvider =
     UserRoleModalComponent,
     UserCanDirective,
     MainComponent,
+    UserCanInBranchDirective,
   ],
   imports: [
     BrowserModule,

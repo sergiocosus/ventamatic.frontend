@@ -64,6 +64,14 @@ export class User extends Model{
     )
   }
 
+  canInAnyBranch(branch_permission_name) {
+    if (this.getBranchesWithPermission(branch_permission_name).length) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   parse(obj): any {
     super.parse(obj);
 
