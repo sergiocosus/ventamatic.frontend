@@ -1,25 +1,29 @@
 import { Component, OnInit } from '@angular/core';
-import {BranchService} from "../../+sucursales/shared/branch.service";
-import {Branch} from "../../+sucursales/shared/branch";
-import {MainContentComponent} from "../../../shared/main-content/main-content.component";
+import { Branch } from "../../+sucursales/shared/branch";
+import { AuthService } from "../../../services/auth.service";
 
 @Component({
   selector: 'select-branch',
   templateUrl: 'select-branch.component.html',
   styleUrls: ['select-branch.component.scss'],
-  providers: [
-    BranchService
-  ]
 })
 export class InventorySelectBranch implements OnInit {
   branches:Branch[] = [];
+  private user;
 
-  constructor(private branchService:BranchService) {}
+  constructor(private authService:AuthService) {}
 
   ngOnInit() {
-    this.branchService.getAll().subscribe( branches => {
-      this.branches = branches;
-    })
+    this.loadBranches();
+  }
+
+  loadBranches() {
+    this.authService.getLoggedUser().subscribe(
+      user => {
+        this.user = user;
+        this.branches = user.getBranchesWithPermission('inventory-get');
+      }
+    );
   }
 
 }

@@ -4,6 +4,8 @@ import {BranchService} from "../../../+app/+sucursales/shared/branch.service";
 import {Branch} from "../../../+app/+sucursales/shared/branch";
 import {Supplier} from "../../../+app/+proveedores/shared/supplier";
 import {ModalComponent} from "ng2-bs3-modal/components/modal";
+import {AuthService} from "../../../services/auth.service";
+import {User} from "../../../user/user";
 
 @Component({
   selector: 'app-begin-buy-modal',
@@ -18,9 +20,11 @@ export class BeginBuyModalComponent implements OnInit {
   suppliers:Supplier[];
   suppliersItems:any[];
   formData:BeginBuyDataInterface;
+  private user:User;
 
   constructor(private supplierService:SupplierService,
-              private branchService:BranchService) {
+              private branchService:BranchService,
+              private authService:AuthService) {
     this.clear();
   }
 
@@ -35,15 +39,19 @@ export class BeginBuyModalComponent implements OnInit {
       }
     );
 
-    this.branchService.getAll().subscribe(
-      branches => {
-        this.branches = branches;
+    this.loadBranches();
+  }
+
+  loadBranches() {
+    this.authService.getLoggedUser().subscribe(
+      user => {
+        this.user = user;
+        this.branches = user.getBranchesWithPermission('buy');
         this.branchesItems = this.branches.map(
           (branch:Branch) => ({text:branch.name, id:branch, model:branch})
         )
       }
     );
-
   }
 
   start(){

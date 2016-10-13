@@ -22,7 +22,6 @@ export class SelectBranchComponent implements OnInit, OnDestroy {
   branchesItems:any[] = [];
   private user:User;
   constructor(private router:Router,
-              private branchService:BranchService,
               private scheduleService:ScheduleService,
               private notify:NotifyService,
               private authService:AuthService
