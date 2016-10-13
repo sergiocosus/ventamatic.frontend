@@ -47,7 +47,7 @@ export class User extends Model{
   getBranchesWithPermission(branch_permission_name) {
     return this.branches.filter(
       branch => {
-        var found = false;
+        var found:any = false;
         branch.branch_roles.forEach(
           branchRole => {
             found = branchRole.branch_permissions.filter(

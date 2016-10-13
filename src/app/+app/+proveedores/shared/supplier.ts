@@ -17,7 +17,7 @@ export class Supplier {
 
   public supplier_category_id:string;
   public supplier_category:SupplierCategory;
-  public brands:any[]|Brand[];
+  public brands:Brand[];
 
   get fullName(){
     return `${this.name} ${this.last_name} ${this.last_name_2}`;

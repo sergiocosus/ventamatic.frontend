@@ -8,7 +8,7 @@ export class BranchRole extends Model{
   description: string;
   created_at:string;
   updated_at:string;
-  branch_permissions:BranchPermission[]|number[];
+  branch_permissions:(BranchPermission|any)[];
 
   pivot?:any;
 

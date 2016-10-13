@@ -8,7 +8,7 @@ export class Role extends Model{
   description: string;
   created_at:string;
   updated_at:string;
-  permissions:Permission[]|number[];
+  permissions:(Permission|number)[];
 
   public static parseArray(objs:any){
     return objs.map(obj => {return new Role().parse(obj)})
