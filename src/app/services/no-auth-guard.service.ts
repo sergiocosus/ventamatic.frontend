@@ -11,7 +11,7 @@ export class NoAuthGuardService {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean {
     if (this.authService.isTokenValid()) {
-      this.router.navigateByUrl('/app');
+      this.router.navigateByUrl('/');
       return false;
     } else {
       return true;

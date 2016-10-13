@@ -82,10 +82,10 @@ export class SaleComponent implements OnInit, OnDestroy {
             if(schedule.branch_id == this.branch_id){
               this.branch = schedule.branch;
             }else{
-              this.router.navigate(['/app/venta', schedule.branch_id]);
+              this.router.navigate(['/venta', schedule.branch_id]);
             }
           }else {
-            this.router.navigate(['/app/venta']);
+            this.router.navigate(['/venta']);
           }
         }
       );

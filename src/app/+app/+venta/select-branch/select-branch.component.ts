@@ -32,9 +32,9 @@ export class SelectBranchComponent implements OnInit, OnDestroy {
     this.scheduleSubscription = this.scheduleService.getCurrentSchedule().subscribe(
       schedule => {
         if(schedule){
-          this.router.navigate(['/app/venta', schedule.branch_id]);
+          this.router.navigate(['/venta', schedule.branch_id]);
         }else {
-          this.loadBranches();;
+          this.loadBranches();
         }
       }
     );

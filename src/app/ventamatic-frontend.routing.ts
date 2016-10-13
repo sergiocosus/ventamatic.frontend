@@ -23,18 +23,12 @@ import {MainComponent} from "./+app/main/main.component";
 
 export const appRoutes: Routes = [
   {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full',
-    canActivate : [NoAuthGuardService]
-  },
-  {
     path: 'login',
     component: LoginComponent,
     canActivate : [NoAuthGuardService]
   },
   {
-    path: 'app',
+    path: '',
     component: AppComponent,
     canActivate : [AuthGuardService],
     children: [

@@ -87,6 +87,7 @@ import {SupplierService} from "./+app/+proveedores/shared/supplier.service";
 import { UserCanDirective } from './directives/user-can.directive';
 import { MainComponent } from './+app/main/main.component';
 import { UserCanInBranchDirective } from './directives/user-can-in-branch.directive';
+import {ReportService} from "./shared/report/report.service";
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -200,7 +201,8 @@ export let authHttpServiceProvider =
     InventoryService,
     ScheduleService,
     SupplierService,
-    BranchService
+    BranchService,
+    ReportService,
   ],
   entryComponents: [VentamaticFrontendAppComponent],
   bootstrap: [VentamaticFrontendAppComponent]
