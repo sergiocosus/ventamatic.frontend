@@ -18,6 +18,7 @@
         "../node_modules/bootstrap/scss/bootstrap-flex.scss",
         "../node_modules/font-awesome/css/font-awesome.css",
         "../node_modules/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css",
+        "../node_modules/ionicons/dist/scss/ionicons.scss",
         "styles.css"
       ],
       "scripts": [

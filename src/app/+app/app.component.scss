@@ -1,6 +1,7 @@
 @import "src/app/colors";
 
 :host /deep/{
+  font-size: 14px;
   .btn-default{
     color: #ffffff;
     background-color: #556A70;
@@ -40,7 +41,6 @@
 
 main{
   flex:1 1 120px;
-  overflow-y: auto;
   display: flex;
   flex-direction: column;
 }

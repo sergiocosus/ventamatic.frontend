@@ -53,6 +53,7 @@ export class ApiHttp {
     return res.json().data;
   }
 
+
   private serializeGetParams(object:any):string {
     if (!object) {
       return "";
@@ -63,7 +64,14 @@ export class ApiHttp {
       if (str != "") {
         str += "&";
       }
-      str += key + "=" + encodeURIComponent(object[key]);
+      if(Array.isArray(object[key])){
+        object[key].forEach(value => {
+          str += key + encodeURIComponent('[]') + "="
+            + (value ? encodeURIComponent(value) : '') + '&';
+        });
+      } else {
+        str += key + "=" + (object[key] ? encodeURIComponent(object[key]) : '');
+      }
     }
     return str;
   }

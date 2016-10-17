@@ -7,6 +7,10 @@ export class Model{
   }
 
   public parseDateTime(fieldName){
-    this[fieldName] = moment.utc(this[fieldName]).toDate()
+    this[fieldName] = Model.parseDateTime(this[fieldName]);
+  }
+
+  public static parseDateTime(date) {
+    return moment.utc(date).toDate();
   }
 }

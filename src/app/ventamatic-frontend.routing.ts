@@ -19,6 +19,8 @@ import {SaleComponent} from "./+app/+venta/sale/sale.component";
 import {AuthGuardService} from "./services/auth-guard.service";
 import {NoAuthGuardService} from "./services/no-auth-guard.service";
 import {MainComponent} from "./+app/main/main.component";
+import {SaleReportComponent} from "./+app/+reportes/sale-report/sale-report.component";
+import {MenuReportComponent} from "./+app/+reportes/menu-report/menu-report.component";
 
 
 export const appRoutes: Routes = [
@@ -86,7 +88,17 @@ export const appRoutes: Routes = [
       },
       {
         path: 'reportes',
-        component: ReportesComponent
+        component: ReportesComponent,
+        children: [
+          {
+            path: '',
+            component: MenuReportComponent
+          },
+          {
+            path: 'venta',
+            component: SaleReportComponent
+          }
+        ]
       },
       {
         path: 'roles',

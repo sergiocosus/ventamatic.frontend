@@ -1,0 +1,81 @@
+<search-bar>
+  <form (submit)="submit()">
+    <input-label [(ngModel)]="sale_id"  class="dark id-field"
+                 name="sale_id" type="number">
+      ID de venta
+    </input-label>
+    <input-label [(ngModel)]="branch_id" class="dark id-field"
+                 name="branch_id" type="number">
+      ID de sucursal
+    </input-label>
+    <input-label [(ngModel)]="user_id" class="dark id-field"
+                 name="user_id" type="number">
+      ID de usuario
+    </input-label>
+    <input-label [(ngModel)]="client_id" class="dark id-field"
+                 name="client_id" type="number">
+      ID de cliente
+    </input-label>
+    <time>
+      De
+      <datepicker [(ngModel)]="begin_at" name="begin_at"
+                  [expanded]="true"></datepicker>
+      hasta
+      <datepicker [(ngModel)]="end_at" name="end_at"
+                  [expanded]="true"></datepicker>
+    </time>
+
+    <button type="submit">
+      <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+      Consultar
+    </button>
+  </form>
+</search-bar>
+<main-content>
+  <h2>Reporte de venta</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>ID de Venta</th>
+      <th>Fecha</th>
+      <th>Sucursal</th>
+      <th>Usuario</th>
+      <th>Cliente</th>
+      <th>Total</th>
+    </tr>
+    </thead>
+    <template ngFor let-sale [ngForOf]="sales">
+      <tr>
+        <td>{{sale.id}}</td>
+        <td>{{sale.created_at | date:'short'}}</td>
+        <td>{{sale.branch.name}}</td>
+        <td>{{sale.user.name}}</td>
+        <td>{{sale.client.name}}</td>
+        <td>{{sale.total}}</td>
+      </tr>
+      <tr>
+        <td class="no-border"></td>
+        <td class="no-border" colspan="5">
+        <table>
+          <thead>
+          <tr>
+            <th>ID de Producto</th>
+            <th>Descripción</th>
+            <th>Cantidad</th>
+            <th>Precio</th>
+            <th>Subtotal</th>
+          </tr>
+          </thead>
+          <tr *ngFor="let product of sale.products">
+            <td>{{product.id}}</td>
+            <td>{{product.description}}</td>
+            <td>{{product.pivot.quantity}}</td>
+            <td>{{product.pivot.price | currency:'USD':true:'1.2-2'}}</td>
+            <td>{{product.pivot.price * product.pivot.quantity | currency:'USD':true:'1.2-2'}}</td>
+          </tr>
+        </table>
+        </td>
+      </tr>
+    </template>
+  </table>
+</main-content>

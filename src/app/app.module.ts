@@ -88,6 +88,9 @@ import { UserCanDirective } from './directives/user-can.directive';
 import { MainComponent } from './+app/main/main.component';
 import { UserCanInBranchDirective } from './directives/user-can-in-branch.directive';
 import {ReportService} from "./shared/report/report.service";
+import { SaleReportComponent } from './+app/+reportes/sale-report/sale-report.component';
+import { MenuReportComponent } from './+app/+reportes/menu-report/menu-report.component';
+import {DatePicker} from "ng2-datepicker/ng2-datepicker";
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -109,6 +112,9 @@ export let authHttpServiceProvider =
 
 @NgModule({
   declarations: [
+
+    DatePicker,
+
     // Main routes directives
 
     VentamaticFrontendAppComponent,
@@ -163,6 +169,8 @@ export let authHttpServiceProvider =
     UserCanDirective,
     MainComponent,
     UserCanInBranchDirective,
+    SaleReportComponent,
+    MenuReportComponent,
   ],
   imports: [
     BrowserModule,
