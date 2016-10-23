@@ -2,7 +2,7 @@
   <form (submit)="submit()">
     <input-label [(ngModel)]="request.sale_id"  class="dark id-field"
                  name="sale_id" type="number">
-      ID de venta
+      ID de compra
     </input-label>
     <input-label [(ngModel)]="request.branch_id" class="dark id-field"
                  name="branch_id" type="number">
@@ -12,9 +12,9 @@
                  name="user_id" type="number">
       ID de usuario
     </input-label>
-    <input-label [(ngModel)]="request.client_id" class="dark id-field"
+    <input-label [(ngModel)]="request.supplier_id" class="dark id-field"
                  name="client_id" type="number">
-      ID de cliente
+      ID de proveedor
     </input-label>
     <time>
       De
@@ -32,7 +32,7 @@
   </form>
 </search-bar>
 <main-content>
-  <h2>Reporte de venta</h2>
+  <h2>Reporte de compra</h2>
   <table>
     <thead>
     <tr>
@@ -40,18 +40,18 @@
       <th>Fecha</th>
       <th>Sucursal</th>
       <th>Usuario</th>
-      <th>Cliente</th>
+      <th>Proveedor</th>
       <th>Total</th>
     </tr>
     </thead>
-    <template ngFor let-sale [ngForOf]="sales">
+    <template ngFor let-buy [ngForOf]="buys">
       <tr>
-        <td>{{sale.id}}</td>
-        <td>{{sale.created_at | date:'short'}}</td>
-        <td>{{sale.branch.name}}</td>
-        <td>{{sale.user.name}}</td>
-        <td>{{sale.client.name}}</td>
-        <td>{{sale.total}}</td>
+        <td>{{buy.id}}</td>
+        <td>{{buy.created_at | date:'short'}}</td>
+        <td>{{buy.branch.name}}</td>
+        <td>{{buy.user.name}}</td>
+        <td>{{buy.supplier.name}}</td>
+        <td>{{buy.total}}</td>
       </tr>
       <tr>
         <td class="no-border"></td>
@@ -66,12 +66,12 @@
             <th>Subtotal</th>
           </tr>
           </thead>
-          <tr *ngFor="let product of sale.products">
+          <tr *ngFor="let product of buy.products">
             <td>{{product.id}}</td>
             <td>{{product.description}}</td>
             <td>{{product.pivot.quantity}}</td>
-            <td>{{product.pivot.price | currency:'USD':true:'1.2-2'}}</td>
-            <td>{{product.pivot.price * product.pivot.quantity | currency:'USD':true:'1.2-2'}}</td>
+            <td>{{product.pivot.cost | currency:'USD':true:'1.2-2'}}</td>
+            <td>{{product.pivot.cost * product.pivot.quantity | currency:'USD':true:'1.2-2'}}</td>
           </tr>
         </table>
         </td>

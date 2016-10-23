@@ -21,4 +21,16 @@ export class ReportService {
       });
   }
 
+  getBuy(params?:any){
+    return this.apiHttp.get(this.basePath + 'buy', params)
+      .map(res => {
+        res.buys.forEach(
+          buy => {
+            buy.created_at = Model.parseDateTime(buy.created_at);
+          }
+        );
+        return res.buys;
+      });
+  }
+
 }

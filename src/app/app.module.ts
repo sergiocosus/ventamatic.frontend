@@ -91,6 +91,7 @@ import {ReportService} from "./shared/report/report.service";
 import { SaleReportComponent } from './+app/+reportes/sale-report/sale-report.component';
 import { MenuReportComponent } from './+app/+reportes/menu-report/menu-report.component';
 import {DatePicker} from "ng2-datepicker/ng2-datepicker";
+import {BuyReportComponent} from "./+app/+reportes/buy-report/buy-report.component";
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -170,6 +171,7 @@ export let authHttpServiceProvider =
     MainComponent,
     UserCanInBranchDirective,
     SaleReportComponent,
+    BuyReportComponent,
     MenuReportComponent,
   ],
   imports: [

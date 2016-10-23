@@ -2,19 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import {ReportService} from "../../../shared/report/report.service";
 
 @Component({
-  selector: 'app-sale-report',
-  templateUrl: './sale-report.component.html',
-  styleUrls: ['./sale-report.component.scss']
+  selector: 'app-buy-report',
+  templateUrl: './buy-report.component.html',
+  styleUrls: ['./buy-report.component.scss']
 })
-export class SaleReportComponent implements OnInit {
+export class BuyReportComponent implements OnInit {
 
-  private sales;
+  private buys;
 
   request:{
     sale_id:number,
     branch_id:number,
     user_id:number,
-    client_id:number,
+    supplier_id:number,
     begin_at:string,
     end_at:string
   };
@@ -30,15 +30,15 @@ export class SaleReportComponent implements OnInit {
       sale_id:null,
       branch_id:null,
       user_id:null,
-      client_id:null,
+      supplier_id:null,
       begin_at:null,
       end_at:null
     };
   }
 
   submit(){
-    this.reportService.getSale(this.request).subscribe(
-      sales => this.sales = sales
+    this.reportService.getBuy(this.request).subscribe(
+      buys => this.buys = buys
     )
   }
 }
