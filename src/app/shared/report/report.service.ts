@@ -33,4 +33,16 @@ export class ReportService {
       });
   }
 
+  getInventoryMovements(params?:any){
+    return this.apiHttp.get(this.basePath + 'inventory-movements', params)
+      .map(res => {
+        res.inventory_movements.forEach(
+          inventory_movement => {
+            inventory_movement.created_at = Model.parseDateTime(inventory_movement.created_at);
+          }
+        );
+        return res.inventory_movements;
+      });
+  }
+
 }

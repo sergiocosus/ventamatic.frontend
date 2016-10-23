@@ -1,0 +1,60 @@
+<search-bar>
+  <form (submit)="submit()">
+    <input-label [(ngModel)]="request.product_id"  class="dark id-field"
+                 name="product_id" type="number">
+      ID de producto
+    </input-label>
+    <input-label [(ngModel)]="request.branch_id" class="dark id-field"
+                 name="branch_id" type="number">
+      ID de sucursal
+    </input-label>
+    <input-label [(ngModel)]="request.user_id" class="dark id-field"
+                 name="user_id" type="number">
+      ID de usuario
+    </input-label>
+    <input-label [(ngModel)]="request.inventory_movement_type_id" class="dark id-field"
+                 name="inventory_movement_type" type="number">
+      Tipo de movimiento
+    </input-label>
+    <time>
+      De
+      <datepicker [(ngModel)]="request.begin_at" name="begin_at"
+                  [expanded]="true"></datepicker>
+      hasta
+      <datepicker [(ngModel)]="request.end_at" name="end_at"
+                  [expanded]="true"></datepicker>
+    </time>
+
+    <button type="submit">
+      <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+      Consultar
+    </button>
+  </form>
+</search-bar>
+<main-content>
+  <h2>Reporte de entradas/salidas</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Fecha</th>
+      <th>Sucursal</th>
+      <th>Usuario</th>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Tipo de movimiento</th>
+    </tr>
+    </thead>
+    <template ngFor let-inventoryMovement [ngForOf]="inventory_movements">
+      <tr>
+        <td>{{inventoryMovement.id}}</td>
+        <td>{{inventoryMovement.created_at | date:'short'}}</td>
+        <td>{{inventoryMovement.branch.name}}</td>
+        <td>{{inventoryMovement.user.name}}</td>
+        <td>{{inventoryMovement.product.description}}</td>
+        <td>{{inventoryMovement.quantity}}</td>
+        <td>{{inventoryMovement.inventory_movement_type.name}}</td>
+      </tr>
+    </template>
+  </table>
+</main-content>

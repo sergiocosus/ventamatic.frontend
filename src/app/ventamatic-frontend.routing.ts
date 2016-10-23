@@ -22,6 +22,7 @@ import {MainComponent} from "./+app/main/main.component";
 import {SaleReportComponent} from "./+app/+reportes/sale-report/sale-report.component";
 import {MenuReportComponent} from "./+app/+reportes/menu-report/menu-report.component";
 import {BuyReportComponent} from "./+app/+reportes/buy-report/buy-report.component";
+import {InventoryMovementReportComponent} from "./+app/+reportes/inventory-movement-report/inventory-movement-report.component";
 
 
 export const appRoutes: Routes = [
@@ -102,6 +103,10 @@ export const appRoutes: Routes = [
           {
             path: 'compra',
             component: BuyReportComponent
+          },
+          {
+            path: 'entradas-salidas',
+            component: InventoryMovementReportComponent
           }
         ]
       },
