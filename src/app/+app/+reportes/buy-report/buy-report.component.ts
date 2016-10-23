@@ -11,7 +11,7 @@ export class BuyReportComponent implements OnInit {
   private buys;
 
   request:{
-    sale_id:number,
+    id:number,
     branch_id:number,
     user_id:number,
     supplier_id:number,
@@ -27,7 +27,7 @@ export class BuyReportComponent implements OnInit {
 
   resetRequest(){
     this.request = {
-      sale_id:null,
+      id:null,
       branch_id:null,
       user_id:null,
       supplier_id:null,

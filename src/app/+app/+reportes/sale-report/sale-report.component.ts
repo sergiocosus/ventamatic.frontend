@@ -11,7 +11,7 @@ export class SaleReportComponent implements OnInit {
   private sales;
 
   request:{
-    sale_id:number,
+    id:number,
     branch_id:number,
     user_id:number,
     client_id:number,
@@ -27,7 +27,7 @@ export class SaleReportComponent implements OnInit {
 
   resetRequest(){
     this.request = {
-      sale_id:null,
+      id:null,
       branch_id:null,
       user_id:null,
       client_id:null,
