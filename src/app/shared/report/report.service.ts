@@ -50,4 +50,9 @@ export class ReportService {
       .map(res => res.inventories);
   }
 
+  getHistoricInventory(params?:any){
+    return this.apiHttp.get(this.basePath + 'historic-inventory', params)
+      .map(res => res.inventories);
+  }
+
 }
