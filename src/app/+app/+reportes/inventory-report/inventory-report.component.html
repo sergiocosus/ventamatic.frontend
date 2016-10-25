@@ -1,0 +1,53 @@
+<search-bar>
+  <form (submit)="submit()">
+    <input-label [(ngModel)]="request.branch_id"  class="dark id-field"
+                 name="branch_id" type="number">
+      ID de sucursal
+    </input-label>
+    <input-label [(ngModel)]="request.product_id  " class="dark id-field"
+                 name="product_id" type="number">
+      ID de producto
+    </input-label>
+    <input-label [(ngModel)]="request.quantity" class="dark id-field"
+                 name="quantity" type="number">
+      Cantidad
+    </input-label>
+    <input-label [(ngModel)]="request.price" class="dark id-field"
+                 name="price" type="number">
+      Precio
+    </input-label>
+    <input-label [(ngModel)]="request.minimum" class="dark id-field"
+                 name="minimum" type="number">
+      Mínimo
+    </input-label>
+    <button type="submit">
+      <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+      Consultar
+    </button>
+  </form>
+</search-bar>
+<main-content>
+  <h2>Reporte de inventario</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Sucursal</th>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Precio</th>
+      <th>Minimo</th>
+    </tr>
+    </thead>
+    <template ngFor let-inventory [ngForOf]="inventories">
+      <tr>
+        <td>{{inventory.id}}</td>
+        <td>{{inventory.branch.name}}</td>
+        <td>{{inventory.product.description}}</td>
+        <td>{{inventory.quantity}}</td>
+        <td>{{inventory.price}}</td>
+        <td>{{inventory.minimum}}</td>
+      </tr>
+    </template>
+  </table>
+</main-content>

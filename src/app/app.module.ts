@@ -93,6 +93,7 @@ import { MenuReportComponent } from './+app/+reportes/menu-report/menu-report.co
 import {DatePicker} from "ng2-datepicker/ng2-datepicker";
 import {BuyReportComponent} from "./+app/+reportes/buy-report/buy-report.component";
 import { InventoryMovementReportComponent } from './+app/+reportes/inventory-movement-report/inventory-movement-report.component';
+import { InventoryReportComponent } from './+app/+reportes/inventory-report/inventory-report.component';
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -175,6 +176,7 @@ export let authHttpServiceProvider =
     BuyReportComponent,
     MenuReportComponent,
     InventoryMovementReportComponent,
+    InventoryReportComponent,
   ],
   imports: [
     BrowserModule,

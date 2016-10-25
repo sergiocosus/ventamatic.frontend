@@ -45,4 +45,9 @@ export class ReportService {
       });
   }
 
+  getInventory(params?:any){
+    return this.apiHttp.get(this.basePath + 'inventory', params)
+      .map(res => res.inventories);
+  }
+
 }
