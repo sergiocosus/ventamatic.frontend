@@ -95,6 +95,7 @@ import {BuyReportComponent} from "./+app/+reportes/buy-report/buy-report.compone
 import { InventoryMovementReportComponent } from './+app/+reportes/inventory-movement-report/inventory-movement-report.component';
 import { InventoryReportComponent } from './+app/+reportes/inventory-report/inventory-report.component';
 import { HistoricInventoryReportComponent } from './+app/+reportes/historic-inventory-report/historic-inventory-report.component';
+import { ScheduleReportComponent } from './+app/+reportes/schedule-report/schedule-report.component';
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -179,6 +180,7 @@ export let authHttpServiceProvider =
     InventoryMovementReportComponent,
     InventoryReportComponent,
     HistoricInventoryReportComponent,
+    ScheduleReportComponent,
   ],
   imports: [
     BrowserModule,

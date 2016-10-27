@@ -9,6 +9,18 @@ export class ReportService {
 
   constructor(private apiHttp:ApiHttp) {}
 
+  getSchedule(params?:any){
+    return this.apiHttp.get(this.basePath + 'schedule', params)
+      .map(res => {
+        res.schedules.forEach(
+          schedule => {
+            schedule.created_at = Model.parseDateTime(schedule.created_at);
+            schedule.updated_at = Model.parseDateTime(schedule.updated_at);
+          }
+        );
+        return res.schedules;
+      });
+  }
   getSale(params?:any){
     return this.apiHttp.get(this.basePath + 'sale', params)
       .map(res => {

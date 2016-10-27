@@ -25,6 +25,7 @@ import {BuyReportComponent} from "./+app/+reportes/buy-report/buy-report.compone
 import {InventoryMovementReportComponent} from "./+app/+reportes/inventory-movement-report/inventory-movement-report.component";
 import {InventoryReportComponent} from "./+app/+reportes/inventory-report/inventory-report.component";
 import {HistoricInventoryReportComponent} from "./+app/+reportes/historic-inventory-report/historic-inventory-report.component";
+import {ScheduleReportComponent} from "./+app/+reportes/schedule-report/schedule-report.component";
 
 
 export const appRoutes: Routes = [
@@ -97,6 +98,10 @@ export const appRoutes: Routes = [
           {
             path: '',
             component: MenuReportComponent
+          },
+          {
+            path: 'turno',
+            component: ScheduleReportComponent
           },
           {
             path: 'venta',

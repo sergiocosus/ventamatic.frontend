@@ -1,0 +1,60 @@
+<search-bar>
+  <form (submit)="submit()">
+    <input-label [(ngModel)]="request.id"  class="dark id-field"
+                 name="id" type="number">
+      ID de compra
+    </input-label>
+    <input-label [(ngModel)]="request.branch_id" class="dark id-field"
+                 name="branch_id" type="number">
+      ID de sucursal
+    </input-label>
+    <input-label [(ngModel)]="request.user_id" class="dark id-field"
+                 name="user_id" type="number">
+      ID de usuario
+    </input-label>
+    <time>
+      De
+      <datepicker [(ngModel)]="request.begin_at" name="begin_at"
+                  [expanded]="true"></datepicker>
+      hasta
+      <datepicker [(ngModel)]="request.end_at" name="end_at"
+                  [expanded]="true"></datepicker>
+    </time>
+
+    <button type="submit">
+      <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+      Consultar
+    </button>
+  </form>
+</search-bar>
+<main-content>
+  <h2>Reporte de turnos</h2>
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Inicio</th>
+      <th>Fin</th>
+      <th>Sucursal</th>
+      <th>Usuario</th>
+      <th>Estatus</th>
+      <th>Cantidad inicial</th>
+      <th>Total en ventas</th>
+      <th>Cantidad final</th>
+    </tr>
+    </thead>
+    <template ngFor let-schedule [ngForOf]="schedules">
+      <tr>
+        <td>{{schedule.id}}</td>
+        <td>{{schedule.created_at | date:'short'}}</td>
+        <td>{{schedule.updated_at | date:'short'}}</td>
+        <td>{{schedule.branch.name}}</td>
+        <td>{{schedule.user.name}}</td>
+        <td>{{schedule.schedule_status.name}}</td>
+        <td>{{schedule.initial_amount}}</td>
+        <td>{{schedule.system_amount}}</td>
+        <td>{{schedule.final_amount}}</td>
+      </tr>
+    </template>
+  </table>
+</main-content>
