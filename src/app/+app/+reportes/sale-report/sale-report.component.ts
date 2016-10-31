@@ -7,8 +7,7 @@ import {ReportService} from "../../../shared/report/report.service";
   styleUrls: ['./sale-report.component.scss']
 })
 export class SaleReportComponent implements OnInit {
-
-  private sales;
+  private sales = [];
 
   request:{
     id:number,
@@ -41,4 +40,18 @@ export class SaleReportComponent implements OnInit {
       sales => this.sales = sales
     )
   }
+
+    downloadCSV(){
+      this.reportService.downloadCSV(this.sales.map(
+        sale => ({
+          id: sale.id,
+          tipo_de_pago_id: sale.payment_type_id,
+          pago_de_tarjeta_id: sale.card_payment_id,
+          total: sale.total,
+          creado: this.reportService.formatDate(sale.created_at),
+          actualizado: this.reportService.formatDate(sale.updated_at),
+          borrado: this.reportService.formatDate(sale.deleted_at)
+        })
+      ), `ventas-${new Date().toISOString()}`);
+    }
 }

@@ -7,8 +7,7 @@ import {ReportService} from "../../../shared/report/report.service";
   styleUrls: ['./inventory-movement-report.component.scss']
 })
 export class InventoryMovementReportComponent implements OnInit {
-
-  private inventory_movements;
+  private inventory_movements = [];
 
   request:{
     product_id:number,
@@ -40,6 +39,24 @@ export class InventoryMovementReportComponent implements OnInit {
     this.reportService.getInventoryMovements(this.request).subscribe(
       inventory_movements => this.inventory_movements = inventory_movements
     )
+  }
+
+
+  downloadCSV(){
+    this.reportService.downloadCSV(this.inventory_movements.map(
+      inventoryMovement => ({
+        id: inventoryMovement.id,
+        usuario_id: inventoryMovement.user_id,
+        sucursal_id: inventoryMovement.branch_id,
+        producto_id: inventoryMovement.product_id,
+        tipo_de_movimiento_de_inventario_id: inventoryMovement.inventory_movement_type_id,
+        lote: inventoryMovement.batch,
+        cantidad: inventoryMovement.quantity,
+        creado: this.reportService.formatDate(inventoryMovement.created_at),
+        actualizado: this.reportService.formatDate(inventoryMovement.updated_at),
+        borrado: this.reportService.formatDate(inventoryMovement.deleted_at)
+      })
+    ), `entradas-salidas-${new Date().toISOString()}`);
   }
 
 }

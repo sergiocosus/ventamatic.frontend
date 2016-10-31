@@ -7,8 +7,7 @@ import {ReportService} from "../../../shared/report/report.service";
   styleUrls: ['./historic-inventory-report.component.scss']
 })
 export class HistoricInventoryReportComponent implements OnInit {
-
-  private inventories;
+  private inventories = [];
 
   request: {
     branch_id:number,
@@ -40,6 +39,22 @@ export class HistoricInventoryReportComponent implements OnInit {
     this.reportService.getHistoricInventory(this.request).subscribe(
       inventories => this.inventories = inventories
     )
+  }
+
+
+  downloadCSV(){
+    this.reportService.downloadCSV(this.inventories.map(
+        inventory => ({
+          id: inventory.id,
+          sucursal_id: inventory.branch_id,
+          producto_id: inventory.product_id,
+          cantidad: inventory.quantity,
+          precio: inventory.price,
+          minimo: inventory.minimum,
+          creado: this.reportService.formatDate(inventory.created_at),
+          actualizado: this.reportService.formatDate(inventory.updated_at)
+        })
+    ), `inventario-histórico-${this.request.date}`);
   }
 
 }

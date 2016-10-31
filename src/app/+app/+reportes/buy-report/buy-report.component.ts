@@ -7,8 +7,7 @@ import {ReportService} from "../../../shared/report/report.service";
   styleUrls: ['./buy-report.component.scss']
 })
 export class BuyReportComponent implements OnInit {
-
-  private buys;
+  private buys = [];
 
   request:{
     id:number,
@@ -40,5 +39,22 @@ export class BuyReportComponent implements OnInit {
     this.reportService.getBuy(this.request).subscribe(
       buys => this.buys = buys
     )
+  }
+
+
+  downloadCSV(){
+    this.reportService.downloadCSV(this.buys.map(
+      buy => ({
+        id: buy.id,
+        tipo_de_pago_id: buy.payment_type_id,
+        pago_de_tarjeta_id: buy.card_payment_id,
+        iva: buy.iva,
+        ieps: buy.ieps,
+        total: buy.total,
+        creado: this.reportService.formatDate(buy.created_at),
+        actualizado: this.reportService.formatDate(buy.updated_at),
+        borrado: this.reportService.formatDate(buy.deleted_at)
+      })
+    ), `compras-${new Date().toISOString()}`);
   }
 }

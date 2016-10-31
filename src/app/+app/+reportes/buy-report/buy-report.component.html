@@ -24,10 +24,13 @@
       <datepicker [(ngModel)]="request.end_at" name="end_at"
                   [expanded]="true"></datepicker>
     </time>
-
     <button type="submit">
       <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
       Consultar
+    </button>
+    <button type="button" (click)="downloadCSV()">
+      <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+      CSV
     </button>
   </form>
 </search-bar>

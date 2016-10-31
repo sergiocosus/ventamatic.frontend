@@ -7,7 +7,7 @@ import {ReportService} from "../../../shared/report/report.service";
   styleUrls: ['./schedule-report.component.scss']
 })
 export class ScheduleReportComponent implements OnInit {
-  private schedules;
+  private schedules = [];
 
   request:{
     id:number,
@@ -36,6 +36,21 @@ export class ScheduleReportComponent implements OnInit {
   submit(){
     this.reportService.getSchedule(this.request).subscribe(
       buys => this.schedules = buys
-    )
+    );
+  }
+
+  downloadCSV(){
+    this.reportService.downloadCSV(this.schedules.map(
+      schedule => ({
+        id: schedule.id,
+        sucursal_id: schedule.branch_id,
+        usuario_id: schedule.user_id,
+        monto_inicial: schedule.initial_amount,
+        monto_del_sistema: schedule.system_amount,
+        monto_final: schedule.final_amount,
+        creado: this.reportService.formatDate(schedule.created_at),
+        terminado: this.reportService.formatDate(schedule.updated_at)
+      })
+    ), `turnos-${new Date().toISOString()}`);
   }
 }

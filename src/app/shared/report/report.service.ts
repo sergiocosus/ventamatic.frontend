@@ -1,13 +1,17 @@
 import { Injectable } from '@angular/core';
 import {ApiHttp} from "../api-http";
 import {Model} from "../model";
+import { CsvService } from 'angular2-json2csv';
+import {NotifyService} from '../../services/notify.service';
 
 @Injectable()
 export class ReportService {
 
   private basePath= 'report/';
 
-  constructor(private apiHttp:ApiHttp) {}
+  constructor(private apiHttp:ApiHttp,
+              private csvService:CsvService,
+              private noty:NotifyService) {}
 
   getSchedule(params?:any){
     return this.apiHttp.get(this.basePath + 'schedule', params)
@@ -67,4 +71,19 @@ export class ReportService {
       .map(res => res.inventories);
   }
 
+  downloadCSV(data, filename) {
+    if(data && data.length){
+      this.csvService.download(data, filename);
+    } else {
+      this.noty.error("Reporte vacío, realice otra consulta para poder exportar a CSV");
+    }
+  }
+
+  formatDate(date) {
+    if (date) {
+      return Model.parseDateTime(date).toISOString()
+    } else {
+      return '';
+    }
+  }
 }
