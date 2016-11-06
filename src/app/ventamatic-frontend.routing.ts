@@ -26,6 +26,7 @@ import {InventoryMovementReportComponent} from "./+app/+reportes/inventory-movem
 import {InventoryReportComponent} from "./+app/+reportes/inventory-report/inventory-report.component";
 import {HistoricInventoryReportComponent} from "./+app/+reportes/historic-inventory-report/historic-inventory-report.component";
 import {ScheduleReportComponent} from "./+app/+reportes/schedule-report/schedule-report.component";
+import {MyAccountComponent} from "./+app/+my-account/my-account.component";
 
 
 export const appRoutes: Routes = [
@@ -42,6 +43,10 @@ export const appRoutes: Routes = [
       {
         path: '',
         component: MainComponent
+      },
+      {
+        path: 'mi-cuenta',
+        component: MyAccountComponent
       },
       {
         path: 'usuarios',

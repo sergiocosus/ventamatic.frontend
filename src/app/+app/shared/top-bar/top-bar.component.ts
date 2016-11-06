@@ -26,9 +26,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     var subUser = this.authService.getLoggedUser().subscribe(
-      user => {
-        this.user = user
-      }
+      user => this.user = user
     );
 
     var subSchedule = this.scheduleService.getCurrentSchedule().subscribe(

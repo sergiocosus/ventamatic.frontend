@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
+import {Injectable} from '@angular/core';
+import {Http, Headers, Response} from '@angular/http';
 import {Observable} from "rxjs/Observable";
 import {JwtHelper} from "angular2-jwt/angular2-jwt";
 import {environment} from "../../environments/environment";
@@ -14,15 +14,16 @@ export class AuthService {
   private jwtHelper: JwtHelper = new JwtHelper();
 
   private loggedUserReplaySubject = new ReplaySubject<User>(1);
-  private loggedUser:User = null;
+  private loggedUser: User = null;
 
   constructor(private http: Http,
-              private userService:UserService) { }
+              private userService: UserService) {
+  }
 
-  login(username, password) :Observable<any> {
+  login(username, password): Observable<any> {
     let body = JSON.stringify({
-      username : username,
-      password : password
+      username: username,
+      password: password
     });
 
     const contentHeaders = new Headers();
@@ -30,7 +31,7 @@ export class AuthService {
     contentHeaders.append('Content-Type', 'application/json');
     return this.http.post(this.apiUrl + this.authUrl, body, {headers: contentHeaders})
       .map(this.extractData)
-      .map((response:any) => {
+      .map((response: any) => {
         response.user = new User().parse(response.user);
 
         this.updateLoggedUserObservable(response.user);
@@ -41,12 +42,12 @@ export class AuthService {
       .catch(this.handleError);
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('id_token');
     localStorage.removeItem('user');
   }
 
-  getLoggedUser(){
+  getLoggedUser() {
     if (!this.loggedUser) {
       this.loggedUser = new User();
       this.updateLoggedUserObservable();
@@ -54,7 +55,7 @@ export class AuthService {
     return this.loggedUserReplaySubject;
   }
 
-  updateLoggedUserObservable(user?:User) {
+  updateLoggedUserObservable(user?: User) {
     if (user) {
       this.loggedUserReplaySubject.next(user);
     } else {
@@ -68,13 +69,19 @@ export class AuthService {
     }
   }
 
-  isTokenValid(){
+
+  isTokenValid() {
     var token = localStorage.getItem('id_token');
-    if(token){
-      if(this.jwtHelper.isTokenExpired(token)){
+    if (token) {
+      try {
+        if (this.jwtHelper.isTokenExpired(token)) {
+          this.logout();
+        } else {
+          return true;
+        }
+      } catch (err) {
+        console.error(err);
         this.logout();
-      }else{
-        return true;
       }
     }
     return false;
@@ -87,10 +94,10 @@ export class AuthService {
     let body = res.json();
     localStorage.setItem('user', JSON.stringify(body.user));
 
-    return body || { };
+    return body || {};
   }
 
-  private handleError (errorResponse: Response) {
+  private handleError(errorResponse: Response) {
     let json = errorResponse.json() || 'Error del servidor';
     console.log(json);
     return Observable.throw(json.error || json);

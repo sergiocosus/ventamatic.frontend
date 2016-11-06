@@ -97,6 +97,7 @@ import { InventoryReportComponent } from './+app/+reportes/inventory-report/inve
 import { HistoricInventoryReportComponent } from './+app/+reportes/historic-inventory-report/historic-inventory-report.component';
 import { ScheduleReportComponent } from './+app/+reportes/schedule-report/schedule-report.component';
 import { CsvService } from 'angular2-json2csv';
+import { MyAccountComponent } from './+app/+my-account/my-account.component';
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -182,6 +183,7 @@ export let authHttpServiceProvider =
     InventoryReportComponent,
     HistoricInventoryReportComponent,
     ScheduleReportComponent,
+    MyAccountComponent,
   ],
   imports: [
     BrowserModule,

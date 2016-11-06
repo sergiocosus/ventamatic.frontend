@@ -2,14 +2,14 @@
 </picture>
 <div id="hidden-bar-div"> </div>
 <div id="sesion-menu-bar">
-  <div class="header-texts">
+  <a class="header-texts my-account" routerLink="/mi-cuenta" routerLinkActive="active">
     <i class="fa fa-user fa-2x" aria-hidden="true"></i>
     <div>
       <span *ngIf="user" id="user-menu-bar">{{user.username}}</span>
       <br>
       <span *ngIf="user" >{{user.fullName}}</span>
     </div>
-  </div>
+  </a>
   <div>
     <button type="button" class="btn btn-default" (click)="openEndScheduleModal()">
       <i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
