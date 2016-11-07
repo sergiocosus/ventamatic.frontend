@@ -35,9 +35,11 @@
   <table>
     <thead>
     <tr>
-      <th>ID</th>
       <th>Sucursal</th>
+      <th>ID</th>
       <th>Producto</th>
+      <th>Marca</th>
+      <th>Categorias</th>
       <th>Cantidad</th>
       <th>Precio</th>
       <th>Minimo</th>
@@ -45,9 +47,15 @@
     </thead>
     <template ngFor let-inventory [ngForOf]="inventories">
       <tr>
-        <td>{{inventory.id}}</td>
         <td>{{inventory.branch.name}}</td>
+        <td>{{inventory.id}}</td>
         <td>{{inventory.product.description}}</td>
+        <td>{{inventory.product.brand ? inventory.product.brand.name : ''}}</td>
+        <td>
+          <span *ngFor="let category of inventory.product.categories">
+            {{category.name}},
+          </span>
+        </td>
         <td>{{inventory.quantity}}</td>
         <td>{{inventory.price}}</td>
         <td>{{inventory.minimum}}</td>
