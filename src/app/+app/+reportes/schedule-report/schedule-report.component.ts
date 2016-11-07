@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ReportService} from "../../../shared/report/report.service";
+import {NotifyService} from "../../../services/notify.service";
 
 @Component({
   selector: 'app-schedule-report',
@@ -17,7 +18,8 @@ export class ScheduleReportComponent implements OnInit {
     end_at:string
   };
 
-  constructor(private reportService:ReportService) { }
+  constructor(private reportService:ReportService,
+              private notify:NotifyService) { }
 
   ngOnInit() {
     this.resetRequest();
@@ -35,7 +37,8 @@ export class ScheduleReportComponent implements OnInit {
 
   submit(){
     this.reportService.getSchedule(this.request).subscribe(
-      buys => this.schedules = buys
+      buys => this.schedules = buys,
+      error => this.notify.serviceError(error)
     );
   }
 

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ReportService} from "../../../shared/report/report.service";
+import {NotifyService} from "../../../services/notify.service";
 
 @Component({
   selector: 'app-historic-inventory-report',
@@ -18,7 +19,8 @@ export class HistoricInventoryReportComponent implements OnInit {
     date:string
   };
 
-  constructor(private reportService:ReportService) { }
+  constructor(private reportService:ReportService,
+              private notify:NotifyService) { }
 
   ngOnInit() {
     this.resetRequest();
@@ -37,7 +39,8 @@ export class HistoricInventoryReportComponent implements OnInit {
 
   submit(){
     this.reportService.getHistoricInventory(this.request).subscribe(
-      inventories => this.inventories = inventories
+      inventories => this.inventories = inventories,
+      error => this.notify.serviceError(error)
     )
   }
 

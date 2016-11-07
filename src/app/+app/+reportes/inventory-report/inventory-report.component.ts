@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../../shared/report/report.service';
+import {NotifyService} from "../../../services/notify.service";
 
 @Component({
   selector: 'app-inventory-report',
@@ -17,7 +18,8 @@ export class InventoryReportComponent implements OnInit {
     minimum:string,
   };
 
-  constructor(private reportService:ReportService) { }
+  constructor(private reportService:ReportService,
+              private notify:NotifyService) { }
 
   ngOnInit() {
     this.resetRequest();
@@ -35,7 +37,8 @@ export class InventoryReportComponent implements OnInit {
 
   submit(){
     this.reportService.getInventory(this.request).subscribe(
-      inventories => this.inventories = inventories
+      inventories => this.inventories = inventories,
+      error => this.notify.serviceError(error)
     )
   }
 
