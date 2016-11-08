@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ReportService} from "../../../shared/report/report.service";
 import {NotifyService} from "../../../services/notify.service";
+import {messages} from "../../../shared/messages";
 
 @Component({
   selector: 'app-schedule-report',
@@ -37,7 +38,12 @@ export class ScheduleReportComponent implements OnInit {
 
   submit(){
     this.reportService.getSchedule(this.request).subscribe(
-      buys => this.schedules = buys,
+      schedules => {
+        this.schedules = schedules;
+        if (!this.schedules.length) {
+          this.notify.alert(messages.report.voidBody, messages.report.voidTitle)
+        }
+      },
       error => this.notify.serviceError(error)
     );
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../../shared/report/report.service';
 import {NotifyService} from "../../../services/notify.service";
+import {messages} from "../../../shared/messages";
 
 @Component({
   selector: 'app-inventory-report',
@@ -37,7 +38,12 @@ export class InventoryReportComponent implements OnInit {
 
   submit(){
     this.reportService.getInventory(this.request).subscribe(
-      inventories => this.inventories = inventories,
+      inventories => {
+        this.inventories = inventories;
+        if (!this.inventories.length) {
+          this.notify.alert(messages.report.voidBody, messages.report.voidTitle)
+        }
+      },
       error => this.notify.serviceError(error)
     )
   }

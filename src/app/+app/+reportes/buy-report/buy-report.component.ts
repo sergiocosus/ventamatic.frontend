@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ReportService} from "../../../shared/report/report.service";
 import {NotifyService} from "../../../services/notify.service";
+import {messages} from "../../../shared/messages";
 
 @Component({
   selector: 'app-buy-report',
@@ -39,7 +40,12 @@ export class BuyReportComponent implements OnInit {
 
   submit(){
     this.reportService.getBuy(this.request).subscribe(
-      buys => this.buys = buys,
+      buys => {
+        this.buys = buys;
+        if (!this.buys.length) {
+          this.notify.alert(messages.report.voidBody, messages.report.voidTitle)
+        }
+      },
       error => this.notify.serviceError(error)
     )
   }
