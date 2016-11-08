@@ -56,10 +56,13 @@
         <td>{{sale.user.name}}</td>
         <td>{{sale.client.name}}</td>
         <td>{{sale.total}}</td>
+        <td>
+          <button (click)="print(sale)">Imprimir Ticket</button>
+        </td>
       </tr>
       <tr>
         <td class="no-border"></td>
-        <td class="no-border" colspan="5">
+        <td class="no-border" colspan="6">
         <table>
           <thead>
           <tr>

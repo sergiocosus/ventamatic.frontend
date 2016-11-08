@@ -204,7 +204,7 @@ export class SaleComponent implements OnInit, OnDestroy {
       products: products
     }).subscribe(
       sale => {
-        if(this.print){
+        if (this.print) {
           this.ticketService.putSale(sale);
         }
         this.notificationService.success('Éxito', this.messages.saleSuccess);

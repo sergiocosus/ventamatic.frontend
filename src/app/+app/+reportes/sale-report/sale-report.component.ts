@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ReportService} from "../../../shared/report/report.service";
 import {NotifyService} from "../../../services/notify.service";
+import {TicketService} from "../../+venta/ticket/ticket.service";
 
 @Component({
   selector: 'app-sale-report',
@@ -20,7 +21,8 @@ export class SaleReportComponent implements OnInit {
   };
 
   constructor(private reportService:ReportService,
-              private notify:NotifyService) { }
+              private notify:NotifyService,
+              private ticketService:TicketService) { }
 
   ngOnInit() {
     this.resetRequest();
@@ -44,17 +46,21 @@ export class SaleReportComponent implements OnInit {
     )
   }
 
-    downloadCSV(){
-      this.reportService.downloadCSV(this.sales.map(
-        sale => ({
-          id: sale.id,
-          tipo_de_pago_id: sale.payment_type_id,
-          pago_de_tarjeta_id: sale.card_payment_id,
-          total: sale.total,
-          creado: this.reportService.formatDate(sale.created_at),
-          actualizado: this.reportService.formatDate(sale.updated_at),
-          borrado: this.reportService.formatDate(sale.deleted_at)
-        })
-      ), `ventas-${new Date().toISOString()}`);
-    }
+  print(sale){
+    this.ticketService.putSale(sale);
+  }
+
+  downloadCSV(){
+    this.reportService.downloadCSV(this.sales.map(
+      sale => ({
+        id: sale.id,
+        tipo_de_pago_id: sale.payment_type_id,
+        pago_de_tarjeta_id: sale.card_payment_id,
+        total: sale.total,
+        creado: this.reportService.formatDate(sale.created_at),
+        actualizado: this.reportService.formatDate(sale.updated_at),
+        borrado: this.reportService.formatDate(sale.deleted_at)
+      })
+    ), `ventas-${new Date().toISOString()}`);
+  }
 }
