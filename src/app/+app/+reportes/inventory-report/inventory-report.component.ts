@@ -22,6 +22,9 @@ export class InventoryReportComponent implements OnInit {
   constructor(private reportService:ReportService,
               private notify:NotifyService) { }
 
+  registeredProducts = null;
+  productsWithExistences = null;
+
   ngOnInit() {
     this.resetRequest();
   }
@@ -43,6 +46,20 @@ export class InventoryReportComponent implements OnInit {
         if (!this.inventories.length) {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle)
         }
+
+        let inventoryIds = [];
+        this.productsWithExistences = 0;
+        inventories.forEach( inventory => {
+          if (inventoryIds.indexOf(inventory.product_id) === -1) {
+            inventoryIds.push(inventory.product_id);
+          }
+
+          if (inventory.quantity > 0) {
+            this.productsWithExistences++;
+          }
+        });
+
+        this.registeredProducts = inventoryIds.length;
       },
       error => this.notify.serviceError(error)
     )

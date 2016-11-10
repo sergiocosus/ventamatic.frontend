@@ -20,6 +20,8 @@ export class BuyReportComponent implements OnInit {
     end_at:string
   };
 
+  totalCostBuy = 0;
+
   constructor(private reportService:ReportService,
               private notify:NotifyService) { }
 
@@ -42,6 +44,11 @@ export class BuyReportComponent implements OnInit {
     this.reportService.getBuy(this.request).subscribe(
       buys => {
         this.buys = buys;
+
+        this.totalCostBuy = 0;
+        buys.forEach(buy => {
+          this.totalCostBuy += buy.total;
+        })
         if (!this.buys.length) {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle)
         }

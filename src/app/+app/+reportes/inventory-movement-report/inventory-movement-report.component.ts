@@ -20,6 +20,9 @@ export class InventoryMovementReportComponent implements OnInit {
     end_at:string
   };
 
+  totalUp = 0;
+  totalDown = 0;
+
   constructor(private reportService:ReportService,
               private notify:NotifyService) { }
 
@@ -40,8 +43,19 @@ export class InventoryMovementReportComponent implements OnInit {
 
   submit(){
     this.reportService.getInventoryMovements(this.request).subscribe(
-      inventory_movements => {
-        this.inventory_movements = inventory_movements;
+      inventoryMovements => {
+        this.inventory_movements = inventoryMovements;
+
+        this.totalUp = 0;
+        this.totalDown = 0;
+        inventoryMovements.forEach(inventoryMovement => {
+          if (inventoryMovement.quantity > 0) {
+            this.totalUp += inventoryMovement.quantity;
+          } else {
+            this.totalDown -= inventoryMovement.quantity;
+          }
+        });
+
         if (!this.inventory_movements.length) {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle)
         }

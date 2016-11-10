@@ -37,6 +37,11 @@
 </search-bar>
 <main-content>
   <h2>Reporte de entradas/salidas</h2>
+  <ul>
+    <li *ngIf="inventory_movements">Cantidad de movimientos total: {{inventory_movements.length}}</li>
+    <li>Total de entradas: {{totalUp}}</li>
+    <li>Total de salidas: {{totalDown}}</li>
+  </ul>
   <table>
     <thead>
     <tr>

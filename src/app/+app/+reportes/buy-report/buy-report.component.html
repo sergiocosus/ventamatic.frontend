@@ -36,6 +36,12 @@
 </search-bar>
 <main-content>
   <h2>Reporte de compra</h2>
+
+  <ul *ngIf="buys">
+    <li>Número de compras: {{buys.length}}</li>
+    <li>Total de compras: {{totalCostBuy | myCurrency}}</li>
+  </ul>
+
   <table>
     <thead>
     <tr>

@@ -21,6 +21,8 @@ export class SaleReportComponent implements OnInit {
     end_at:string
   };
 
+  totalPriceSale;
+
   constructor(private reportService:ReportService,
               private notify:NotifyService,
               private ticketService:TicketService) { }
@@ -44,6 +46,12 @@ export class SaleReportComponent implements OnInit {
     this.reportService.getSale(this.request).subscribe(
       sales => {
         this.sales = sales;
+
+        this.totalPriceSale = 0;
+        sales.forEach(sale => {
+          this.totalPriceSale += sale.total;
+        })
+
         if (!this.sales.length) {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle)
         }

@@ -37,6 +37,10 @@
 </search-bar>
 <main-content>
   <h2>Reporte de venta</h2>
+  <ul *ngIf="sales">
+    <li>Número de ventas: {{sales.length}}</li>
+    <li>Total de ventas: {{totalPriceSale | myCurrency}}</li>
+  </ul>
   <table>
     <thead>
     <tr>
