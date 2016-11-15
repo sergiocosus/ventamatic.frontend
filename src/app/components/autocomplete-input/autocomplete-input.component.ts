@@ -1,5 +1,6 @@
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import {Component, OnInit, Output, EventEmitter, Input, ViewChild, ElementRef} from '@angular/core';
 import { FormControl } from "@angular/forms";
+import {InputLabelComponent} from '../input-label/input-label.component';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class AutocompleteInputComponent implements OnInit {
   searchHidden:boolean = true;
   searching:boolean = false;
 
-  constructor() {
+  constructor(private elementRef: ElementRef) {
     this.searchControl.valueChanges.debounceTime(250).distinctUntilChanged()
       .subscribe(value => {
         this.search(value)
@@ -76,14 +77,10 @@ export class AutocompleteInputComponent implements OnInit {
   }
 
   hideSearch($event){
-    var element = $event.srcElement;
-    do{
-      if(element.tagName == 'AUTOCOMPLETE-INPUT'){
-        return;
-      }
-    }while(element = element.parentElement);
-
-    this.searchHidden = true;
+    let element = $event.srcElement;
+    if (!this.elementRef.nativeElement.contains(element)) {
+      this.searchHidden = true;
+    }
   }
 
   emitElement(element){

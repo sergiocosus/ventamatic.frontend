@@ -1,0 +1,7 @@
+<button class="btn" (click)="toggle()" type="button">
+  <i class="fa fa-search" aria-hidden="true"></i>
+</button>
+<div *ngIf="!hidden" [@flyInOut]="hidden">
+  <h3>Búsqueda</h3>
+ <ng-content></ng-content>
+</div>

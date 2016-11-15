@@ -1,0 +1,18 @@
+<ul *ngIf="items">
+  <li *ngFor="let item of items; let i=index"
+      [class.selected]="selectedIndex == i"
+      (click)="selected.emit(item)">
+    <template
+      [ngTemplateOutlet]="template"
+      [ngOutletContext]="{
+        item: item
+      }">
+    </template>
+  </li>
+</ul>
+<div *ngIf="items && !items.length && !loading">
+  No hay resultados
+</div>
+<div class="searching" *ngIf="searching">
+  <i class="fa fa-spinner fa-spin"></i> Buscando
+</div>

@@ -18,6 +18,11 @@ export class ClientService {
       .map(res => {return new Client().parse(res.client)});
   }
 
+  getSearch(search:string) {
+    return this.apiHttp.get(this.basePath + 'search', {search: search})
+      .map(res => Client.parseArray(res.clients));
+  }
+
   post(clie:Client){
     return this.apiHttp.post(this.basePath, clie)
       .map(res => {return <Client>res.client});

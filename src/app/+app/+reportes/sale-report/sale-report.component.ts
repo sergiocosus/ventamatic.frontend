@@ -50,7 +50,7 @@ export class SaleReportComponent implements OnInit {
         this.totalPriceSale = 0;
         sales.forEach(sale => {
           this.totalPriceSale += sale.total;
-        })
+        });
 
         if (!this.sales.length) {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle)

@@ -1,0 +1,53 @@
+@import "src/app/colors";
+
+:host{
+  position: relative;
+
+  >div{
+    position: absolute;
+    top: 200%;
+    width: 100%;
+    min-width: 14em;
+    right: -1em;
+    margin: auto;
+    min-height: 10em;
+    z-index: 10;
+    border: 2px solid white;
+    box-shadow: black 10px 10px 50px;
+    background-color: $mainContentBackgroundColor;
+    border-radius: 1em;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    h3{
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-color: $darkBlue;
+      font-size: 1em;
+    }
+    &:before {
+      content: '';
+      position: absolute;
+      font-size: .8em;
+      top: -1em;
+      right: 2.5em;
+      margin: auto;
+      width: 0;
+      height: 0;
+      border-left: 1em solid transparent;
+      border-right: 1em solid transparent;
+      border-bottom: 1em solid white;
+    }
+  }
+
+  .btn{
+    color: white;
+    background-color: #0275d8;
+    &:hover{
+      background-color: #025aa5;
+    }
+  }
+}
+
+

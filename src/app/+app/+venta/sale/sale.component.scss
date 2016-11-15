@@ -25,6 +25,20 @@
     text-align: center;
   }
 
+  .client {
+    position: relative;
+    .searchable-input{
+      display: flex;
+      input-label{
+        flex: 1 0 0;
+      }
+      app-client-search{
+        flex: 0 0 auto;
+      }
+    }
+
+  }
+
   .branch{
     flex: 0 0 auto;
   }

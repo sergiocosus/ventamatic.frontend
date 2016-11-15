@@ -29,7 +29,6 @@ import {ProveedoresComponent} from "./+app/+proveedores/proveedores.component";
 import {ReportesComponent} from "./+app/+reportes/reportes.component";
 import {RolesComponent} from "./+app/+roles/roles.component";
 import {SucursalesComponent} from "./+app/+sucursales/sucursales.component";
-import {InputLabelComponent} from "./components/input-label/input-label.component";
 
 import {AsideNavComponent} from "./+app/shared/aside-nav/aside-nav.component";
 import {TopBarComponent} from "./+app/shared/top-bar/top-bar.component";
@@ -63,7 +62,6 @@ import { PaymentTypeComponent } from './shared/payment-type/payment-type/payment
 import {BrandService} from "./shared/product/brand/brand.service";
 import {SupplierCategoryService} from "./+app/+proveedores/category/supplier-category.service";
 import { BasicEntityModalComponent } from './components/basic-entity-modal/basic-entity-modal.component';
-import {NotifyService} from "./services/notify.service";
 import {RoleService} from "./+app/+roles/services/role.service";
 import { RoleModalComponent } from './+app/+roles/components/role-modal/role-modal.component';
 import {PermissionService} from "./shared/security/permission.service";
@@ -99,6 +97,10 @@ import { ScheduleReportComponent } from './+app/+reportes/schedule-report/schedu
 import { CsvService } from 'angular2-json2csv';
 import { MyAccountComponent } from './+app/+my-account/my-account.component';
 import { MyCurrencyPipe } from './pipes/my-currency.pipe';
+import {PopoverModule} from "ng2-popover";
+import {ProductModule} from "./product/product.module";
+import {ClientModule} from "./client/client.module";
+import {SharedModule} from './shared/shared.module';
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -144,7 +146,6 @@ export let authHttpServiceProvider =
     SucursalesComponent,
 
     TicketComponent,
-    InputLabelComponent,
     SearchBarComponent,
     MainContentComponent,
     ClientItemComponent,
@@ -188,6 +189,8 @@ export let authHttpServiceProvider =
     MyCurrencyPipe,
   ],
   imports: [
+    SharedModule,
+    routing,
     BrowserModule,
     CommonModule,
     FormsModule,
@@ -197,7 +200,9 @@ export let authHttpServiceProvider =
     SimpleNotificationsModule,
     SelectModule,
     Ng2Bs3ModalModule,
-    routing
+    PopoverModule,
+    ProductModule,
+    ClientModule,
   ],
   providers: [
     appRoutingProviders,
@@ -206,7 +211,6 @@ export let authHttpServiceProvider =
     BuyService,
     BrandService,
     SupplierCategoryService,
-    NotifyService,
     RoleService,
     PermissionService,
     authHttpServiceProvider,

@@ -1,12 +1,15 @@
 <div class="left">
   <div class="client">
     <h5>Cliente</h5>
-    <input-label [(ngModel)]="client_id" name="cliend_id" type="number" [min]="1"
-                 [formControl]="clientIdControl" class="dark"
-                 [required]="true">
-      ID de cliente
-    </input-label>
-    <hr/>
+    <div class="searchable-input">
+      <input-label [(ngModel)]="client_id" name="client_id" type="number" [min]="1"
+                   [formControl]="clientIdControl" class="dark"
+                   [required]="true">
+        ID de cliente
+      </input-label>
+      <app-client-search (selected)="client_id = $event.id"></app-client-search>
+    </div>
+   <hr/>
   </div>
 
   <div class="search">

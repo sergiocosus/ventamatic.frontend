@@ -16,6 +16,7 @@
                  name="client_id" type="number">
       ID de cliente
     </input-label>
+    <app-client-search (selected)="request.client_id = $event.id"></app-client-search>
     <time>
       De
       <datepicker [(ngModel)]="request.begin_at" name="begin_at"

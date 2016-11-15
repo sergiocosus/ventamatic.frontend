@@ -1,0 +1,34 @@
+@import "src/app/colors";
+
+:host{
+  position:relative;
+  display: inline-block;
+  width: 100%;
+}
+
+ul{
+  width: 100%;
+  list-style: none;
+  background-color: $darkBlue;
+  border-radius: 1em;
+  margin: 0;
+  padding: 0;
+  color: white;
+  li{
+    padding: 0 1em;
+    border-bottom: 1px solid steelblue;
+
+    &:hover, &.selected{
+      background-color: $hoverBlue;;
+      cursor: pointer;
+    }
+
+    &.searching, &.empty{
+      text-align: center;
+    }
+
+  }
+
+}
+
+

@@ -44,8 +44,6 @@ export class SaleComponent implements OnInit, OnDestroy {
     card_payment_id: null,
   };
 
-
-
   print = true;
 
   private messages = {
