@@ -10,7 +10,7 @@ export class ClientService {
 
   getAll() {
     return this.apiHttp.get(this.basePath)
-      .map(res => {console.log(res);return <Client[]>res.suppliers});
+      .map(res =>  <Client[]>res.clients;
   }
 
   get(client_id:number) {

@@ -24,6 +24,7 @@ export class ClientesComponent implements OnInit {
 
   ngOnInit() {
     this.clientService.getAll().subscribe(
+
       clients => this.clients = clients,
       error => this.notify.serviceError(error)
     );

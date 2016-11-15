@@ -1,74 +1,82 @@
-<table *ngIf="user">
-  <tr>
-    <th>ID</th>
-    <td>{{user.id}}</td>
-  </tr>
-  <tr>
-    <th>Nombre de usuario</th>
-    <td>{{user.username}}</td>
-  </tr>
-  <tr>
-    <th>Nombre</th>
-    <td>{{user.name}}</td>
-  </tr>
-  <tr>
-    <th>Apellido Paterno</th>
-    <td>{{user.last_name}}</td>
-  </tr>
-  <tr>
-    <th>Apellido Materno</th>
-    <td>{{user.last_name_2}}</td>
-  </tr>
-  <tr>
-    <th>E-mail</th>
-    <td>{{user.email}}</td>
-  </tr>
-  <tr>
-    <th>Teléfono</th>
-    <td>{{user.phone}}</td>
-  </tr>
-  <tr>
-    <th>Celular</th>
-    <td>{{user.cellphone}}</td>
-  </tr>
-  <tr>
-    <th>Dirección</th>
-    <td>{{user.address}}</td>
-  </tr>
-  <tr>
-    <th>RFC</th>
-    <td>{{user.rfc}}</td>
-  </tr>
-  <tr>
-    <th>Creado en</th>
-    <td>{{user.created_at}}</td>
-  </tr>
-  <tr>
-    <th>Actualizado en</th>
-    <td>{{user.updated_at}}</td>
-  </tr>
-</table>
+<main-content>
 
-<h3>Permisos del sistema</h3>
-<ul *ngIf="user">
-  <li *ngFor="let permission of user.permissions">
-    {{permission.display_name}}
-  </li>
-</ul>
+  <table *ngIf="user">
+    <tr>
+      <th>ID</th>
+      <td>{{user.id}}</td>
+    </tr>
+    <tr>
+      <th>Nombre de usuario</th>
+      <td>{{user.username}}</td>
+    </tr>
+    <tr>
+      <th>Nombre</th>
+      <td>{{user.name}}</td>
+    </tr>
+    <tr>
+      <th>Apellido Paterno</th>
+      <td>{{user.last_name}}</td>
+    </tr>
+    <tr>
+      <th>Apellido Materno</th>
+      <td>{{user.last_name_2}}</td>
+    </tr>
+    <tr>
+      <th>E-mail</th>
+      <td>{{user.email}}</td>
+    </tr>
+    <tr>
+      <th>Teléfono</th>
+      <td>{{user.phone}}</td>
+    </tr>
+    <tr>
+      <th>Celular</th>
+      <td>{{user.cellphone}}</td>
+    </tr>
+    <tr>
+      <th>Dirección</th>
+      <td>{{user.address}}</td>
+    </tr>
+    <tr>
+      <th>RFC</th>
+      <td>{{user.rfc}}</td>
+    </tr>
+    <tr>
+      <th>Creado en</th>
+      <td>{{user.created_at}}</td>
+    </tr>
+    <tr>
+      <th>Actualizado en</th>
+      <td>{{user.updated_at}}</td>
+    </tr>
+  </table>
 
-<h3>Permisos por sucursal</h3>
-<ul *ngIf="user">
-  <li *ngFor="let branch of user.branches">
-    {{branch.name}}
-    <ul>
-      <li *ngFor="let branchRole of branch.branch_roles">
-        {{branchRole.display_name}}
-        <ul>
-          <li *ngFor="let branchPermission of branchRole.branch_permissions">
-            {{branchPermission.display_name}}
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-</ul>
+  <hr>
+
+  <h3>Permisos del sistema</h3>
+  <ul *ngIf="user">
+    <li *ngFor="let permission of user.permissions">
+      {{permission.display_name}}
+    </li>
+  </ul>
+
+  <hr>
+
+  <h3>Permisos por sucursal</h3>
+  <ul *ngIf="user">
+    <li *ngFor="let branch of user.branches">
+      {{branch.name}}
+      <ul>
+        <li *ngFor="let branchRole of branch.branch_roles">
+          {{branchRole.display_name}}
+          <ul>
+            <li *ngFor="let branchPermission of branchRole.branch_permissions">
+              {{branchPermission.display_name}}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+</main-content>
