@@ -12,6 +12,8 @@
                  name="user_id" type="number">
       ID de usuario
     </input-label>
+    <app-user-search (selected)="request.user_id = $event.id"></app-user-search>
+
     <input-label [(ngModel)]="request.client_id" class="dark id-field"
                  name="client_id" type="number">
       ID de cliente

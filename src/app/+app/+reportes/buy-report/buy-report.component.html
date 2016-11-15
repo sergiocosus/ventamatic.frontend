@@ -12,10 +12,12 @@
                  name="user_id" type="number">
       ID de usuario
     </input-label>
+    <app-user-search (selected)="request.user_id = $event.id"></app-user-search>
     <input-label [(ngModel)]="request.supplier_id" class="dark id-field"
                  name="client_id" type="number">
       ID de proveedor
     </input-label>
+    <app-supplier-search (selected)="request.supplier_id = $event.id"></app-supplier-search>
     <time>
       De
       <datepicker [(ngModel)]="request.begin_at" name="begin_at"

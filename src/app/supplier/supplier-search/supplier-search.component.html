@@ -1,0 +1,17 @@
+<app-popover>
+  <form>
+    <input-label [(ngModel)]="name" class="dark" type="text"
+                 [formControl]="nameControl">
+      Nombre
+    </input-label>
+  </form>
+
+  <app-selectable [items]="suppliers"
+                  [loading]="loading"
+                  (selected)="select($event)"
+                  (keydown)="selectable.keydown($event)">
+    <template let-item="item">
+      {{item.id}} - {{item.name}} {{item.last_name}} {{item.last_name_2}}
+    </template>
+  </app-selectable>
+</app-popover>

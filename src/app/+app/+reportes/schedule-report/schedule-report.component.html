@@ -12,6 +12,8 @@
                  name="user_id" type="number">
       ID de usuario
     </input-label>
+    <app-user-search (selected)="request.user_id = $event.id"></app-user-search>
+
     <time>
       De
       <datepicker [(ngModel)]="request.begin_at" name="begin_at"

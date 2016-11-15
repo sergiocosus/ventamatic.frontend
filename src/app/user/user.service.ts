@@ -24,6 +24,11 @@ export class UserService {
       .map(res => new User().parse(res.user));
   }
 
+  getSearch(search:string) {
+    return this.apiHttp.get(this.basePath + 'search', {search: search})
+      .map(res => User.parseArray(res.users));
+  }
+
   post(user:User){
     return this.apiHttp.post(this.basePath, user)
       .map(res => new User().parse(res.user));

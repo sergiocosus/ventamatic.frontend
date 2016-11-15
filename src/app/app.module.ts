@@ -101,6 +101,8 @@ import {PopoverModule} from "ng2-popover";
 import {ProductModule} from "./product/product.module";
 import {ClientModule} from "./client/client.module";
 import {SharedModule} from './shared/shared.module';
+import {SupplierModule} from './supplier/supplier.module';
+import {UserModule} from './user/user.module';
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -203,6 +205,8 @@ export let authHttpServiceProvider =
     PopoverModule,
     ProductModule,
     ClientModule,
+    SupplierModule,
+    UserModule,
   ],
   providers: [
     appRoutingProviders,
@@ -221,14 +225,12 @@ export let authHttpServiceProvider =
     AuthGuardService,
     NoAuthGuardService,
     AuthService,
-    UserService,
     TicketService,
     ProductService,
     ClientService,
     CategoryService,
     InventoryService,
     ScheduleService,
-    SupplierService,
     BranchService,
     ReportService,
   ],

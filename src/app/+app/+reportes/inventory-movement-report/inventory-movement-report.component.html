@@ -12,6 +12,7 @@
                  name="user_id" type="number">
       ID de usuario
     </input-label>
+    <app-user-search (selected)="request.user_id = $event.id"></app-user-search>
     <input-label [(ngModel)]="request.inventory_movement_type_id" class="dark id-field"
                  name="inventory_movement_type" type="number">
       Tipo de movimiento

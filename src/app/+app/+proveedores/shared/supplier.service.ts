@@ -18,6 +18,11 @@ export class SupplierService {
       .map(res => {return <Supplier>res.supplier});
   }
 
+  getSearch(search:string) {
+    return this.apiHttp.get(this.basePath + 'search', {search: search})
+      .map(res => Supplier.parseArray(res.suppliers));
+  }
+
   post(supplier:Supplier){
     return this.apiHttp.post(this.basePath, supplier)
       .map(res => {return <Supplier>res.supplier});
