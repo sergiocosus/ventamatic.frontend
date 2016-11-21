@@ -4,6 +4,8 @@
                  name="product_id" type="number">
       ID de producto
     </input-label>
+    <app-product-search (selected)="request.product_id = $event.id"></app-product-search>
+
     <input-label [(ngModel)]="request.branch_id" class="dark id-field"
                  name="branch_id" type="number">
       ID de sucursal

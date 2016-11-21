@@ -57,7 +57,6 @@ export class ClientSearchComponent implements OnInit {
       });
   }
 
-
   startLoading() {
     this.clients = null;
     this.loading = true;

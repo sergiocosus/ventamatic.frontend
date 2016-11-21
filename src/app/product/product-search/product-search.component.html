@@ -1,3 +1,17 @@
-<p>
-  product-search works!
-</p>
+<app-popover [focusable]="focusable">
+  <form>
+    <input-label [(ngModel)]="name" class="dark" type="text"
+                 [formControl]="nameControl" #focusable>
+      Nombre
+    </input-label>
+  </form>
+
+  <app-selectable [items]="products"
+                  [loading]="loading"
+                  (selected)="select($event)"
+                  (keydown)="selectable.keydown($event)">
+    <template let-item="item">
+      {{item.id}} - {{item.description}}
+    </template>
+  </app-selectable>
+</app-popover>

@@ -6,10 +6,12 @@
     </input-label>
     <app-branch-search (selected)="request.branch_id = $event.id"></app-branch-search>
 
-    <input-label [(ngModel)]="request.product_id  " class="dark id-field"
+    <input-label [(ngModel)]="request.product_id"  class="dark id-field"
                  name="product_id" type="number">
       ID de producto
     </input-label>
+    <app-product-search (selected)="request.product_id = $event.id"></app-product-search>
+
     <input-label [(ngModel)]="request.quantity" class="dark id-field"
                  name="quantity" type="number">
       Cantidad
