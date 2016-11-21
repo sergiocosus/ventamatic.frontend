@@ -1,11 +1,7 @@
-<app-popover>
+<app-popover [focusable]="focusable">
   <form>
-    <!--<input-label [(ngModel)]="id" class="dark" type="text"
-                 [formControl]="idControl">
-      ID
-    </input-label>-->
     <input-label [(ngModel)]="name" class="dark" type="text"
-                 [formControl]="nameControl">
+                 [formControl]="nameControl" #focusable>
       Nombre
     </input-label>
   </form>

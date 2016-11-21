@@ -86,9 +86,9 @@ export class InputLabelComponent  implements ControlValueAccessor {
     this._onTouchedCallback = fn;
   }
 
-  setFocus(){
+  setFocus(time = 500){
     setTimeout(() => {
       this.input.nativeElement.focus();
-    }, 500);
+    }, time);
   }
 }

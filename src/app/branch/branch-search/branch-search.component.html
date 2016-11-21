@@ -5,13 +5,12 @@
       Nombre
     </input-label>
   </form>
-
-  <app-selectable [items]="users"
+  <app-selectable [items]="branches"
                   [loading]="loading"
                   (selected)="select($event)"
                   (keydown)="selectable.keydown($event)">
     <template let-item="item">
-      {{item.id}} - {{item.name}} {{item.last_name}} {{item.last_name_2}}
+      {{item.id}} - {{item.name}}
     </template>
   </app-selectable>
 </app-popover>

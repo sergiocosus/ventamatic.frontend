@@ -103,6 +103,7 @@ import {ClientModule} from "./client/client.module";
 import {SharedModule} from './shared/shared.module';
 import {SupplierModule} from './supplier/supplier.module';
 import {UserModule} from './user/user.module';
+import {BranchModule} from './branch/branch.module';
 
 
 let authHttpServiceFactory = (http: Http) => {
@@ -207,6 +208,7 @@ export let authHttpServiceProvider =
     ClientModule,
     SupplierModule,
     UserModule,
+    BranchModule
   ],
   providers: [
     appRoutingProviders,

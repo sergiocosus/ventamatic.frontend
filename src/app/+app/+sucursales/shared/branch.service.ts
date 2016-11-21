@@ -18,9 +18,14 @@ export class BranchService {
     return this.apiHttp.get(this.basePath + branch_id)
       .map(res => new Branch().parse(res.branch));
   }
-  
+
   put(branch:Branch){
     return this.apiHttp.put(this.basePath + branch.id, branch)
       .map(res => new Branch().parse(res.branch));
+  }
+
+  getSearch(search:string) {
+    return this.apiHttp.get(this.basePath + 'search', {search: search})
+      .map(res => Branch.parseArray(res.branches));
   }
 }

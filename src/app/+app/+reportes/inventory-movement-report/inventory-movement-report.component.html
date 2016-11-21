@@ -8,6 +8,8 @@
                  name="branch_id" type="number">
       ID de sucursal
     </input-label>
+    <app-branch-search (selected)="request.branch_id = $event.id"></app-branch-search>
+
     <input-label [(ngModel)]="request.user_id" class="dark id-field"
                  name="user_id" type="number">
       ID de usuario

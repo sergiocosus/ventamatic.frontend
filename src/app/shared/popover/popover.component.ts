@@ -1,4 +1,8 @@
-import {Component, OnInit, HostListener, ElementRef, style, animate, transition, trigger, state} from '@angular/core';
+import {
+  Component, OnInit, HostListener, ElementRef, style, animate, transition, trigger, state,
+  Input
+} from '@angular/core';
+import {InputLabelComponent} from '../../components/input-label/input-label.component';
 
 @Component({
   selector: 'app-popover',
@@ -29,6 +33,8 @@ export class PopoverComponent implements OnInit {
     }
   }
 
+  @Input() focusable:InputLabelComponent;
+
   hidden = true;
 
   constructor(private elementRef: ElementRef) {
@@ -36,6 +42,12 @@ export class PopoverComponent implements OnInit {
 
   toggle(){
     this.hidden = !this.hidden;
+
+    if (!this.hidden) {
+      if (this.focusable) {
+        this.focusable.setFocus(0);
+      }
+    }
   }
 
   ngOnInit() {
