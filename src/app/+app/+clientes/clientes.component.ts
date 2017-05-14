@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import {SearchBarComponent} from "../shared/search-bar";
-import {MainContentComponent} from "../../shared/main-content";
-import {ClientItemComponent} from "./client-item";
+
 import {ClientService} from "./shared/client.service";
 import {Client} from "./shared/client";
-import {NotificationsService} from "angular2-notifications/lib/notifications.service";
+import {NotificationsService} from "angular2-notifications";
 import {ClientModalComponent} from "./client-modal";
 import {NotifyService} from "../../services/notify.service";
 

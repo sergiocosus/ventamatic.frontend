@@ -1,7 +1,7 @@
 import { Injectable, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import {NotificationsService} from 'angular2-notifications';
 
-import { NotificationsService, Notification } from 'angular2-notifications';
 
 @Injectable()
 export class NotifyService {
@@ -10,31 +10,31 @@ export class NotifyService {
               private satinizer:DomSanitizer) {
   }
 
-  success(content: string, title: string = 'Éxito', override?: any): Notification {
+  success(content: string, title: string = 'Éxito', override?: any) {
     return this.notification.success(title, content, override);
   }
 
-  error(content: string, title: string = 'Error', override?: any ): Notification {
+  error(content: string, title: string = 'Error', override?: any ) {
     return this.notification.error(title, content, override);
   }
 
-  alert(content: string, title: string = 'Alerta', override?: any): Notification {
+  alert(content: string, title: string = 'Alerta', override?: any) {
     return this.notification.alert(title, content, override);
   }
 
-  info(content: string, title: string = 'Información', override?: any): Notification {
+  info(content: string, title: string = 'Información', override?: any) {
     return this.notification.info(title, content, override);
   }
 
-  bare(content: string, title: string = 'Bare', override?: any): Notification {
+  bare(content: string, title: string = 'Bare', override?: any) {
     return this.notification.bare(title, content, override);
   }
 
-  create(title: string, content: string, type: string, override?: any): Notification {
+  create(title: string, content: string, type: string, override?: any) {
     return this.notification.create(title, content, type, override);
   }
 
-  html(html: any, type: string, override?: any): Notification {
+  html(html: any, type: string, override?: any) {
     return this.notification.html(html, type, override);
   }
 

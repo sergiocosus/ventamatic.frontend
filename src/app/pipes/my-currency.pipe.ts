@@ -1,19 +1,15 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import {NumberFormatter, NumberFormatStyle} from "@angular/common/src/facade/intl";
+import {NumberFormatStyle, NumberFormatter} from '@angular/common/src/pipes/intl';
+import {CurrencyPipe, DecimalPipe} from '@angular/common';
 
 @Pipe({
   name: 'myCurrency'
 })
 export class MyCurrencyPipe implements PipeTransform {
+  constructor(private decimalPipe: DecimalPipe) {}
 
   transform(value: any, args?: any): any {
-    return NumberFormatter.format(value, 'USD', NumberFormatStyle.Currency, {
-      minimumIntegerDigits: 1,
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-      currency: 'usd',
-      currencyAsSymbol: true
-    });
+    return '$' + this.decimalPipe.transform(value, '1.2-2');
   }
-
 }
+

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {NgModule, TemplateRef} from '@angular/core';
-import {CommonModule } from '@angular/common';
+import {CommonModule, CurrencyPipe, DecimalPipe} from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpModule, Http } from '@angular/http';
@@ -11,10 +11,10 @@ import { Ng2Bs3ModalModule } from "ng2-bs3-modal/ng2-bs3-modal";
 import {
   NotificationsService,
   SimpleNotificationsModule
-} from 'angular2-notifications/components'
+} from 'angular2-notifications'
 import { apiHttpServiceProvider } from "./shared/api-http";
 import {VentamaticFrontendAppComponent} from "./ventamatic-frontend.component";
-import {LoginComponent} from "./+login/login.component";
+import {LoginComponent} from "./login/login.component";
 import {UsuariosComponent} from "./+app/+usuarios/usuarios.component";
 import {VentaComponent} from "./+app/+venta/venta.component";
 import {SelectBranchComponent} from "./+app/+venta/select-branch/select-branch.component";
@@ -88,7 +88,6 @@ import { UserCanInBranchDirective } from './directives/user-can-in-branch.direct
 import {ReportService} from "./shared/report/report.service";
 import { SaleReportComponent } from './+app/+reportes/sale-report/sale-report.component';
 import { MenuReportComponent } from './+app/+reportes/menu-report/menu-report.component';
-import {DatePicker} from "ng2-datepicker/ng2-datepicker";
 import {BuyReportComponent} from "./+app/+reportes/buy-report/buy-report.component";
 import { InventoryMovementReportComponent } from './+app/+reportes/inventory-movement-report/inventory-movement-report.component';
 import { InventoryReportComponent } from './+app/+reportes/inventory-report/inventory-report.component';
@@ -104,9 +103,12 @@ import {SharedModule} from './shared/shared.module';
 import {SupplierModule} from './supplier/supplier.module';
 import {UserModule} from './user/user.module';
 import {BranchModule} from './branch/branch.module';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MyDatePickerModule} from 'mydatepicker';
+import {MyDateRangePickerModule} from 'mydaterangepicker';
 
 
-let authHttpServiceFactory = (http: Http) => {
+export let  authHttpServiceFactory =  function(http: Http) {
   return new AuthHttp(new AuthConfig({
     globalHeaders: [
       { 'Content-Type':'application/json' },
@@ -125,10 +127,6 @@ export let authHttpServiceProvider =
 
 @NgModule({
   declarations: [
-
-    DatePicker,
-
-    // Main routes directives
 
     VentamaticFrontendAppComponent,
     AppComponent,
@@ -195,6 +193,7 @@ export let authHttpServiceProvider =
     SharedModule,
     routing,
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
@@ -204,6 +203,7 @@ export let authHttpServiceProvider =
     SelectModule,
     Ng2Bs3ModalModule,
     PopoverModule,
+    MyDateRangePickerModule,
     ProductModule,
     ClientModule,
     SupplierModule,
@@ -213,7 +213,7 @@ export let authHttpServiceProvider =
   providers: [
     appRoutingProviders,
     CsvService,
-
+    DecimalPipe,
     BuyService,
     BrandService,
     SupplierCategoryService,

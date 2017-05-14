@@ -1,7 +1,6 @@
 
 import { EventEmitter } from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
-import {NotificationsService} from "angular2-notifications/components";
 import {NotifyService} from "../../services/notify.service";
 
 export abstract class CrudModalComponent {

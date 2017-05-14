@@ -1,6 +1,4 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import { NotificationsService } from 'angular2-notifications/components';
-
 import {User} from "../../user/user";
 import {UserService} from "../../user/user.service";
 import {UserModalComponent} from "./user-modal";

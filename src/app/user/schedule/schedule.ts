@@ -18,7 +18,10 @@ export class Schedule extends Model{
   public branch:Branch;
   public schedule_status:any;
 
-
+  /**
+   * TODO put correct data type
+   */
+  public inventory: any;
     parse(obj):Schedule {
       super.parse(obj);
 

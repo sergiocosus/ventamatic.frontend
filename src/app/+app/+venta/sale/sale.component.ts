@@ -4,7 +4,7 @@ import { FormControl} from "@angular/forms";
 
 import {Branch} from "../../+sucursales/shared/branch";
 import {SaleService} from "../shared/sale.service";
-import {NotificationsService} from "angular2-notifications/lib/notifications.service";
+import {NotificationsService} from "angular2-notifications";
 import {ClientService} from "../../+clientes/shared/client.service";
 import {Client} from "../../+clientes/shared/client";
 import {Inventory} from "../../../shared/inventory/inventory";
@@ -78,7 +78,7 @@ export class SaleComponent implements OnInit, OnDestroy {
         schedule => {
           if(schedule){
             if(schedule.branch_id == this.branch_id){
-              this.branch = schedule.branch;
+              this.branch = schedule.inventory;
             }else{
               this.router.navigate(['/venta', schedule.branch_id]);
             }

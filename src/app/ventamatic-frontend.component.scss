@@ -1,3 +1,5 @@
+@import './colors';
+
 html{
   width: 100%;
   max-width: 100%;
@@ -22,3 +24,10 @@ body {
   }
 }
 
+:host /deep/ my-date-range-picker {
+  height: 500px;
+  input{
+    z-index: 0 !important;
+    background-color: $darkBlue;
+  }
+}

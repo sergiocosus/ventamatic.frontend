@@ -110,7 +110,7 @@ export class ModalInventarioComponent extends CrudModalComponent {
   }
 
   update(){
-    this.inventoryService.put(
+    this.inventoryService.post(
       this.inventory.branch_id,
       this.inventory.product_id,
       {

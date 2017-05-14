@@ -23,7 +23,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let inventory of inventories" (click)="clickUpdate(inventory)" >
+    <tr *ngFor="let inventory of inventories"  >
       <td>{{inventory.id}}</td>
       <td>{{inventory.product.description}}</td>
       <td>
@@ -37,7 +37,14 @@
       <td>{{inventory.minimum}}</td>
       <td>{{inventory.quantity}}</td>
       <td>{{inventory.cost}}</td>
-      <td>{{inventory.product.unit.name}}</td>
+      <td>
+        {{inventory.product.unit.name}}
+        <div *appUserCanInBranch="'inventory-edit'"
+             class="button-modify"
+             (click)="clickUpdate($event, product)">
+          <i class="fa fa-exchange" ></i>
+        </div>
+      </td>
     </tr>
     </tbody>
   </table>

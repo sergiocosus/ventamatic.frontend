@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ReportService} from "../../../shared/report/report.service";
 import {NotifyService} from "../../../services/notify.service";
 import {messages} from "../../../shared/messages";
+import {IMyDateRangeModel} from "mydaterangepicker";
 
 @Component({
   selector: 'app-schedule-report',
@@ -19,6 +20,10 @@ export class ScheduleReportComponent implements OnInit {
     end_at:string
   };
 
+  rangeOptions = {
+    editableDateRangeField: true
+  };
+
   constructor(private reportService:ReportService,
               private notify:NotifyService) { }
 
@@ -32,11 +37,17 @@ export class ScheduleReportComponent implements OnInit {
       branch_id:null,
       user_id:null,
       begin_at:null,
-      end_at:null
+      end_at:null,
     };
   }
 
+  onDateRangeChanged($event: IMyDateRangeModel) {
+    this.reportService.formatRange(this.request, $event);
+  }
+
   submit(){
+    console.log(this.request);
+    //this.request.begin_at = (<any>this.request.range).beginJsDate;
     this.reportService.getSchedule(this.request).subscribe(
       schedules => {
         this.schedules = schedules;

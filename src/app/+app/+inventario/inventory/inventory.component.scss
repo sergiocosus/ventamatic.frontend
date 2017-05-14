@@ -72,3 +72,29 @@
     }
   }
 }
+
+.button-modify{
+  display: flex;
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  z-index: 2;
+  background-color: #EB0;
+  width: 25px;
+  height: 25px;
+  border: 2px white solid;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  transition: .25s all;
+
+  &:hover{
+    background-color: darken(#EB0, .5);
+    transform: scale(1.5,1.5);
+  }
+
+  i{
+    font-size: 1.2em;
+  }
+
+}

@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../../../user/user.service";
 import {NotifyService} from "../../../services/notify.service";
 import {RoleService} from "../../+roles/services/role.service";
 import {Role} from "../../+roles/classes/role";
 import {User} from "../../../user/user";
 import {ModalComponent} from "ng2-bs3-modal/components/modal";
-import {ViewChild} from "@angular/core/src/metadata/di";
 import {BranchRoleService} from "../../+roles/services/branch-role.service";
 import {BranchRole} from "../../+roles/classes/branch-role";
 import {Branch} from "../../+sucursales/shared/branch";

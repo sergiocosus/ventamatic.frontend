@@ -21,14 +21,9 @@
                  name="inventory_movement_type" type="number">
       Tipo de movimiento
     </input-label>
-    <time>
-      De
-      <datepicker [(ngModel)]="request.begin_at" name="begin_at"
-                  [expanded]="true"></datepicker>
-      hasta
-      <datepicker [(ngModel)]="request.end_at" name="end_at"
-                  [expanded]="true"></datepicker>
-    </time>
+    <my-date-range-picker placeholder="Rango de fechas"
+                          (dateRangeChanged)="onDateRangeChanged($event)"
+                          [options]="rangeOptions" ></my-date-range-picker>
 
     <button type="submit">
       <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
@@ -63,7 +58,7 @@
       <tr>
         <td>{{inventoryMovement.id}}</td>
         <td>{{inventoryMovement.created_at | date:'short'}}</td>
-        <td>{{inventoryMovement.branch.name}}</td>
+        <td>{{inventoryMovement.inventory.name}}</td>
         <td>{{inventoryMovement.user.name}}</td>
         <td>{{inventoryMovement.product.description}}</td>
         <td>{{inventoryMovement.quantity}}</td>

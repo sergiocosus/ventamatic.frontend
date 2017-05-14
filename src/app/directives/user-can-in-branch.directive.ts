@@ -1,8 +1,7 @@
-import {Directive, TemplateRef, ViewContainerRef} from '@angular/core';
+import {Directive, Input, TemplateRef, ViewContainerRef} from '@angular/core';
 import {AuthService} from "../services/auth.service";
 import {User} from "../user/user";
 import {SubscriptionManager} from "../classes/subscription-manager";
-import {Input} from "@angular/core/src/metadata/directives";
 
 @Directive({
   selector: '[appUserCanInBranch]'

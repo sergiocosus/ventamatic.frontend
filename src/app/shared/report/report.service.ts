@@ -3,6 +3,8 @@ import {ApiHttp} from "../api-http";
 import {Model} from "../model";
 import { CsvService } from 'angular2-json2csv';
 import {NotifyService} from '../../services/notify.service';
+import {IMyDateRangeModel} from 'mydaterangepicker';
+import * as moment from 'moment';
 
 @Injectable()
 export class ReportService {
@@ -85,5 +87,10 @@ export class ReportService {
     } else {
       return '';
     }
+  }
+
+  formatRange(request: any, $event: IMyDateRangeModel){
+    request.begin_at = moment.utc($event.beginJsDate).format('YYYY-MM-DD');
+    request.end_at = moment.utc($event.endJsDate).format('YYYY-MM-DD');
   }
 }

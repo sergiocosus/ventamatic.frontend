@@ -3,6 +3,7 @@ import {ReportService} from "../../../shared/report/report.service";
 import {NotifyService} from "../../../services/notify.service";
 import {TicketService} from "../../+venta/ticket/ticket.service";
 import {messages} from "../../../shared/messages";
+import {IMyDateRangeModel} from 'mydaterangepicker';
 
 @Component({
   selector: 'app-sale-report',
@@ -19,6 +20,10 @@ export class SaleReportComponent implements OnInit {
     client_id:number,
     begin_at:string,
     end_at:string
+  };
+
+  rangeOptions = {
+    editableDateRangeField: true
   };
 
   totalPriceSale;
@@ -40,6 +45,10 @@ export class SaleReportComponent implements OnInit {
       begin_at:null,
       end_at:null
     };
+  }
+
+  onDateRangeChanged($event: IMyDateRangeModel) {
+    this.reportService.formatRange(this.request, $event);
   }
 
   submit(){

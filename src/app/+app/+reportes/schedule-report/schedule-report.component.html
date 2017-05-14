@@ -16,14 +16,9 @@
     </input-label>
     <app-user-search (selected)="request.user_id = $event.id"></app-user-search>
 
-    <time>
-      De
-      <datepicker [(ngModel)]="request.begin_at" name="begin_at"
-                  [expanded]="true"></datepicker>
-      hasta
-      <datepicker [(ngModel)]="request.end_at" name="end_at"
-                  [expanded]="true"></datepicker>
-    </time>
+    <my-date-range-picker placeholder="Rango de fechas"
+                          (dateRangeChanged)="onDateRangeChanged($event)"
+                          [options]="rangeOptions" ></my-date-range-picker>
 
     <button type="submit">
       <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>

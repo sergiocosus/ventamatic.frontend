@@ -20,14 +20,10 @@
       ID de proveedor
     </input-label>
     <app-supplier-search (selected)="request.supplier_id = $event.id"></app-supplier-search>
-    <time>
-      De
-      <datepicker [(ngModel)]="request.begin_at" name="begin_at"
-                  [expanded]="true"></datepicker>
-      hasta
-      <datepicker [(ngModel)]="request.end_at" name="end_at"
-                  [expanded]="true"></datepicker>
-    </time>
+    <my-date-range-picker placeholder="Rango de fechas"
+                          (dateRangeChanged)="onDateRangeChanged($event)"
+                          [options]="rangeOptions" ></my-date-range-picker>
+
     <button type="submit">
       <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
       Consultar

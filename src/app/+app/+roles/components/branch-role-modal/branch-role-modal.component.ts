@@ -1,8 +1,6 @@
-import { Component } from '@angular/core';
+import {Component, Output, ViewChild} from '@angular/core';
 import {CrudModalComponent} from "../../../../components/crud-modal/crud-modal.component";
 import {ModalComponent} from "ng2-bs3-modal/components/modal";
-import {Output} from "@angular/core/src/metadata/directives";
-import {ViewChild} from "@angular/core/src/metadata/di";
 import {BranchRole} from "../../classes/branch-role";
 import {BranchPermission} from "../../../../shared/security/branch-permission";
 import {NotifyService} from "../../../../services/notify.service";

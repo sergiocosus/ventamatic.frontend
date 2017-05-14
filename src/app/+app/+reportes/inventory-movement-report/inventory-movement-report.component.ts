@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ReportService} from "../../../shared/report/report.service";
 import {NotifyService} from "../../../services/notify.service";
 import {messages} from "../../../shared/messages";
+import {IMyDateRangeModel} from 'mydaterangepicker';
 
 @Component({
   selector: 'app-inventory-movement-report',
@@ -18,6 +19,10 @@ export class InventoryMovementReportComponent implements OnInit {
     inventory_movement_type_id:number,
     begin_at:string,
     end_at:string
+  };
+
+  rangeOptions = {
+    editableDateRangeField: true
   };
 
   totalUp = 0;
@@ -39,6 +44,10 @@ export class InventoryMovementReportComponent implements OnInit {
       begin_at:null,
       end_at:null
     };
+  }
+
+  onDateRangeChanged($event: IMyDateRangeModel) {
+    this.reportService.formatRange(this.request, $event);
   }
 
   submit(){

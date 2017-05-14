@@ -26,7 +26,13 @@ export class InventoryService {
       .map(json => new Inventory().parse(json.inventory));
   }
 
-  put(branch_id:number, product_id:number, data){
-    return this.apiHttp.put(`branch/${branch_id}/inventory/${product_id}`, data).map(json => new Inventory().parse(json.inventory));
+  post(branch_id:number, product_id:number, data){
+    return this.apiHttp.post(`branch/${branch_id}/inventory/${product_id}`, data)
+      .map(json => new Inventory().parse(json.inventory));
+  }
+
+  put(inventory:Inventory){
+    return this.apiHttp.put(`branch/${inventory.branch_id}/inventory/${inventory.product_id}`, inventory)
+      .map(res => new Inventory().parse(res.inventory));
   }
 }

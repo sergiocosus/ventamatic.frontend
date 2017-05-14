@@ -5,7 +5,7 @@ import {Observable} from "rxjs/Rx";
 
 @Injectable()
 export class BranchService {
-  private basePath = 'branch/';
+  private basePath = 'inventory/';
 
   constructor(private apiHttp:ApiHttp) {}
 
@@ -16,12 +16,12 @@ export class BranchService {
 
   get(branch_id:number):Observable<Branch>  {
     return this.apiHttp.get(this.basePath + branch_id)
-      .map(res => new Branch().parse(res.branch));
+      .map(res => new Branch().parse(res.inventory));
   }
 
   put(branch:Branch){
     return this.apiHttp.put(this.basePath + branch.id, branch)
-      .map(res => new Branch().parse(res.branch));
+      .map(res => new Branch().parse(res.inventory));
   }
 
   getSearch(search:string) {
