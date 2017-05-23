@@ -1,50 +1,66 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, Response} from '@angular/http';
+import {Headers, Http, Response} from '@angular/http';
 import {Observable} from "rxjs/Observable";
-import {JwtHelper} from "angular2-jwt/angular2-jwt";
 import {environment} from "../../environments/environment";
 import {ReplaySubject} from "rxjs";
 import {UserService} from "../user/user.service";
 import {User} from "../user/user";
+import {ApiHttp} from '../shared/api-http';
+import {LocalStorageService} from '../shared/services/local-storage.service';
+import {Router} from '@angular/router';
 
 @Injectable()
 export class AuthService {
-  private apiUrl = environment.apiUrl;
-  private authUrl = 'auth';
-  private jwtHelper: JwtHelper = new JwtHelper();
-
   private loggedUserReplaySubject = new ReplaySubject<User>(1);
   private loggedUser: User = null;
 
-  constructor(private http: Http,
-              private userService: UserService) {
+  constructor(private apiHttp: ApiHttp,
+              private http: Http,
+              private userService: UserService,
+              private localStorage: LocalStorageService,
+              private router: Router) {
   }
 
   login(username, password): Observable<any> {
-    let body = JSON.stringify({
-      username: username,
-      password: password
+    return new Observable((subscriber) => {
+      var headers = new Headers();
+      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+      let urlSearchParams = new URLSearchParams();
+      urlSearchParams.append('grant_type', 'password');
+      urlSearchParams.append('client_id', environment.apiClientID);
+      urlSearchParams.append('client_secret', environment.apiClientSecret);
+      urlSearchParams.append('username', username);
+      urlSearchParams.append('password', password);
+      let body = urlSearchParams.toString();
+
+      this.http.post(environment.apiUrl + environment.apiAuthPath, body, {headers: headers}).subscribe(
+        data => {
+          let json = data.json();
+          this.localStorage.set('access_token', json.access_token);
+
+          this.updateLoggedUserObservable().subscribe(
+            user => {
+              subscriber.next(user);
+              subscriber.complete();
+            }
+          );
+
+          // this.router.navigate(['/myaccount', {'first-login': true}]);
+
+        },
+        error => {
+          //    this.noty.serviceError(error);
+          subscriber.error(error);
+        }
+      );
     });
 
-    const contentHeaders = new Headers();
-    contentHeaders.append('Accept', 'application/json');
-    contentHeaders.append('Content-Type', 'application/json');
-    return this.http.post(this.apiUrl + this.authUrl, body, {headers: contentHeaders})
-      .map(this.extractData)
-      .map((response: any) => {
-        response.user = new User().parse(response.user);
-
-        this.updateLoggedUserObservable(response.user);
-
-        localStorage.setItem('id_token', response.token);
-        return response;
-      })
-      .catch(this.handleError);
   }
 
   logout() {
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('user');
+    this.localStorage.remove('access_token');
+    this.updateLoggedUserObservable({logout: true}).subscribe(() => {});
   }
 
   getLoggedUser() {
@@ -55,51 +71,38 @@ export class AuthService {
     return this.loggedUserReplaySubject;
   }
 
-  updateLoggedUserObservable(user?: User) {
-    if (user) {
-      this.loggedUserReplaySubject.next(user);
-    } else {
-      this.userService.getMe().subscribe(
-        user => {
-          console.log(user);
-          this.loggedUser = user;
-          this.loggedUserReplaySubject.next(this.loggedUser);
-        }
-      );
-    }
-  }
+  updateLoggedUserObservable(data = {logout: false}) {
+    return new Observable<User>((obs) => {
+      if (data.logout) {
+        this.loggedUser = null;
+        this.loggedUserReplaySubject.next(this.loggedUser);
+      } else {
+        this.userService.getMe().subscribe(
+          user => {
+            this.loggedUser = user;
+            this.loggedUserReplaySubject.next(this.loggedUser);
 
-
-  isTokenValid() {
-    var token = localStorage.getItem('id_token');
-    if (token) {
-      try {
-        if (this.jwtHelper.isTokenExpired(token)) {
-          this.logout();
-        } else {
-          return true;
-        }
-      } catch (err) {
-        console.error(err);
-        this.logout();
+            obs.next(user);
+            obs.complete();
+          },
+          error => {
+            console.error(error);
+            if (error.code === 401) {
+              this.loggedUser = null;
+              this.loggedUserReplaySubject.next(this.loggedUser);
+            }
+            // Token expired
+            //if (error.code === 1106 || error.code === 1107) {
+            //  this.noty.alert(this.messages.sessionExpired);
+            //  this.logout();
+            //}
+            obs.error(error);
+            obs.complete();
+          }
+        );
       }
-    }
-    return false;
+    });
   }
 
-  private extractData(res: Response) {
-    if (res.status < 200 || res.status >= 300) {
-      throw new Error('Bad response status: ' + res.status);
-    }
-    let body = res.json();
-    localStorage.setItem('user', JSON.stringify(body.user));
 
-    return body || {};
-  }
-
-  private handleError(errorResponse: Response) {
-    let json = errorResponse.json() || 'Error del servidor';
-    console.log(json);
-    return Observable.throw(json.error || json);
-  }
 }

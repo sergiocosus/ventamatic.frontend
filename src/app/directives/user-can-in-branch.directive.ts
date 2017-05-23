@@ -35,6 +35,11 @@ export class UserCanInBranchDirective {
 
   checkPermission(permission){
     this.viewContainer.clear();
+
+    if (!this.user) {
+      return;
+    }
+
     if(!permission || this.user.canInAnyBranch(permission)){
       this.viewContainer.createEmbeddedView(this.templateRef);
     }

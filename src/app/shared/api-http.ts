@@ -1,50 +1,51 @@
-import { AuthHttp } from 'angular2-jwt/angular2-jwt';
-import { Request, RequestOptionsArgs, Response } from '@angular/http';
+import {Http, Request, RequestOptionsArgs, Response, Headers} from '@angular/http';
 import { Observable } from "rxjs/Observable";
 import {environment} from "../../environments/environment";
+import {LocalStorageService} from './services/local-storage.service';
 
 export class ApiHttp {
-  private apiUrl = environment.apiUrl;
+  private apiUrl = environment.apiUrl + environment.apiVersionPath;
 
-  constructor(private authHttp:AuthHttp){}
+  constructor(private http:Http,
+              private localStorage:LocalStorageService){}
 
   setGlobalHeaders(headers:Array<Object>, request:Request|RequestOptionsArgs):void {
-    this.authHttp.setGlobalHeaders(headers, request);
+    //this.http.setGlobalHeaders(headers, request);
   }
 
   get(url:string, data?:any, options?:RequestOptionsArgs):Observable<any> {
     var params = this.serializeGetParams(data);
-    return this.authHttp.get(this.apiUrl + url + params, options)
+    return this.http.get(this.apiUrl + url + params, this.appendHeaders(options))
       .map(this.mapJson)
       .catch(this.handleError);
   }
 
   post(url:string, body:any, options?:RequestOptionsArgs):Observable<any> {
-    return this.authHttp.post(this.apiUrl + url, JSON.stringify(body), options)
+    return this.http.post(this.apiUrl + url, JSON.stringify(body), this.appendHeaders(options))
       .map(this.mapJson)
       .catch(this.handleError);
   }
 
   put(url:string, body:any, options?:RequestOptionsArgs):Observable<any> {
-    return this.authHttp.put(this.apiUrl + url, JSON.stringify(body), options)
+    return this.http.put(this.apiUrl + url, JSON.stringify(body), this.appendHeaders(options))
       .map(this.mapJson)
       .catch(this.handleError);
   }
 
   delete(url:string, options?:RequestOptionsArgs):Observable<any> {
-    return this.authHttp.delete(this.apiUrl + url, options)
+    return this.http.delete(this.apiUrl + url, this.appendHeaders(options))
       .map(this.mapJson)
       .catch(this.handleError);
   }
 
   patch(url:string, body:any, options?:RequestOptionsArgs):Observable<any> {
-    return this.authHttp.patch(this.apiUrl + url, JSON.stringify(body), options)
+    return this.http.patch(this.apiUrl + url, JSON.stringify(body), this.appendHeaders(options))
       .map(this.mapJson)
       .catch(this.handleError);
   }
 
   head(url:string, options?:RequestOptionsArgs):Observable<any> {
-    return this.authHttp.head(this.apiUrl + url, options)
+    return this.http.head(this.apiUrl + url, this.appendHeaders(options))
       .map(this.mapJson)
       .catch(this.handleError);
   }
@@ -76,6 +77,21 @@ export class ApiHttp {
     return str;
   }
 
+  private appendHeaders(options?:RequestOptionsArgs):RequestOptionsArgs {
+    if (!options) {
+      options = {};
+    }
+
+    if (!options.headers) {
+      options.headers = new Headers();
+    }
+    let headers = options.headers;
+    headers.append('Authorization', 'Bearer ' + this.localStorage.get('access_token'));
+    headers.append('Content-Type', 'application/json');
+    headers.append('Accept', 'application/json');
+    return options;
+  }
+
   private handleError(error:any, observable:Observable<any>) {
     var json;
     if(error.json){
@@ -93,14 +109,14 @@ export class ApiHttp {
   }
 }
 
-let apiHttpServiceFactory = (authHttp: AuthHttp) => {
-  return new ApiHttp(authHttp);
+export function apiHttpServiceFactory (http: Http, localStorage: LocalStorageService) {
+  return new ApiHttp(http, localStorage);
 };
 
 export let apiHttpServiceProvider =
 {
   provide: ApiHttp,
   useFactory: apiHttpServiceFactory,
-  deps: [AuthHttp]
+  deps: [Http, LocalStorageService]
 };
 

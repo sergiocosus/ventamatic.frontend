@@ -35,6 +35,9 @@ export class UserCanDirective implements OnInit, OnDestroy{
 
   checkPermission(permission){
     this.viewContainer.clear();
+    if (!this.user) {
+      return;
+    }
     if(!permission || this.user.can(permission)){
       this.viewContainer.createEmbeddedView(this.templateRef);
     }

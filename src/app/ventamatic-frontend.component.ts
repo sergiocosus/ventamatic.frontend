@@ -23,8 +23,6 @@ export class VentamaticFrontendAppComponent implements OnInit {
   }
 
   ngOnInit():any {
-    if(!this.authService.isTokenValid()){
-      this.router.navigate(['/login']);
-    }
+    this.authService.updateLoggedUserObservable().subscribe();
   }
 }

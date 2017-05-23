@@ -70,7 +70,6 @@ export class UserRoleModalComponent implements OnInit {
     this.userService.get(user_id).subscribe(
       user => {
         this.user = user;
-        console.log(user);
 
         this.selectedRoleItems = user.roles.map(
           (role:Role) => ({text:role.display_name, id:role.id})

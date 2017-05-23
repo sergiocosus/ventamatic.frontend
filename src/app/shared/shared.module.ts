@@ -5,6 +5,7 @@ import { InputLabelComponent } from '../components/input-label/input-label.compo
 import { NotifyService } from '../services/notify.service';
 import { SelectableComponent } from './selectable/selectable.component';
 import { PopoverComponent } from './popover/popover.component';
+import {LocalStorageService} from './services/local-storage.service';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { PopoverComponent } from './popover/popover.component';
   ],
   providers: [
     NotifyService,
+    LocalStorageService,
   ],
   exports: [
     CommonModule,

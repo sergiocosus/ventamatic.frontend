@@ -224,10 +224,6 @@ angular2-json2csv@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/angular2-json2csv/-/angular2-json2csv-1.1.2.tgz#113456ca76c4c9988b538e230141c2c13e03c692"
 
-angular2-jwt@^0.2.3:
-  version "0.2.3"
-  resolved "https://registry.yarnpkg.com/angular2-jwt/-/angular2-jwt-0.2.3.tgz#54efdda3ceedba85f6a37b165f22ac22b8adf021"
-
 angular2-notifications@^0.7.3:
   version "0.7.3"
   resolved "https://registry.yarnpkg.com/angular2-notifications/-/angular2-notifications-0.7.3.tgz#c448253fe750c3f5904cbaecd52073e615a9f0cb"

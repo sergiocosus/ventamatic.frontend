@@ -4,7 +4,6 @@ import {CommonModule, CurrencyPipe, DecimalPipe} from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpModule, Http } from '@angular/http';
-import { AuthHttp, AuthConfig } from "angular2-jwt/angular2-jwt";
 import 'rxjs/Rx';
 import { Ng2Bs3ModalModule } from "ng2-bs3-modal/ng2-bs3-modal";
 
@@ -74,14 +73,12 @@ import { UserRoleModalComponent } from './+app/+usuarios/user-role-modal/user-ro
 import {AuthGuardService} from "./services/auth-guard.service";
 import {AuthService} from "./services/auth.service";
 import {NoAuthGuardService} from "./services/no-auth-guard.service";
-import {UserService} from "./user/user.service";
 import {TicketService} from "./+app/+venta/ticket/ticket.service";
 import {ProductService} from "./shared/product/product.service";
 import {ClientService} from "./+app/+clientes/shared/client.service";
 import {CategoryService} from "./shared/product/category/category.service";
 import {InventoryService} from "./shared/inventory/inventory.service";
 import {ScheduleService} from "./user/schedule/schedule.service";
-import {SupplierService} from "./+app/+proveedores/shared/supplier.service";
 import { UserCanDirective } from './directives/user-can.directive';
 import { MainComponent } from './+app/main/main.component';
 import { UserCanInBranchDirective } from './directives/user-can-in-branch.directive';
@@ -104,26 +101,8 @@ import {SupplierModule} from './supplier/supplier.module';
 import {UserModule} from './user/user.module';
 import {BranchModule} from './branch/branch.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MyDatePickerModule} from 'mydatepicker';
 import {MyDateRangePickerModule} from 'mydaterangepicker';
 
-
-export let  authHttpServiceFactory =  function(http: Http) {
-  return new AuthHttp(new AuthConfig({
-    globalHeaders: [
-      { 'Content-Type':'application/json' },
-      { 'Accept':'application/json' }
-    ],
-  }), http);
-};
-
-
-export let authHttpServiceProvider =
-{
-  provide: AuthHttp,
-  useFactory: authHttpServiceFactory,
-  deps: [Http]
-};
 
 @NgModule({
   declarations: [
@@ -219,7 +198,6 @@ export let authHttpServiceProvider =
     SupplierCategoryService,
     RoleService,
     PermissionService,
-    authHttpServiceProvider,
     apiHttpServiceProvider,
     NotificationsService,
     BranchPermissionService,

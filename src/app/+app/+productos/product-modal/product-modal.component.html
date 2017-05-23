@@ -6,7 +6,8 @@
   </modal-header>
   <form (ngSubmit)="submit()">
     <modal-body *ngIf="!deleteMode && product">
-      <input-label type="text" required [(ngModel)]="product.id"  name="id"
+      <input-label type="text" *ngIf="createMode"
+                   required [(ngModel)]="product.id"  name="id"
                    [disabled]="updateMode">
         ID
       </input-label>

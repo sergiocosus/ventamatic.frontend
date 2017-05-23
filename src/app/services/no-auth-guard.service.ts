@@ -5,16 +5,25 @@ import {Observable} from "rxjs";
 
 @Injectable()
 export class NoAuthGuardService {
-  constructor(private authService:AuthService,
-              private router:Router) {
+  isLogged = false;
+
+  constructor(private authService: AuthService,
+              private router: Router) {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean {
-    if (this.authService.isTokenValid()) {
-      this.router.navigateByUrl('/');
-      return false;
-    } else {
-      return true;
-    }
+    return this.authService.getLoggedUser().map(
+      account => {
+        console.log(account);
+        if (account) {
+          this.router.navigate(['/']);
+          this.isLogged = true;
+        } else {
+          this.isLogged = false;
+        }
+
+        return !this.isLogged;
+      }
+    ).take(1);
   }
 }
