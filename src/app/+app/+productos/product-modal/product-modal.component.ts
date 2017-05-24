@@ -94,6 +94,7 @@ export class ProductModalComponent extends CrudModalComponent {
   openUpdate(product:Product){
     this.productService.get(product.id).subscribe(
       product => {
+        console.log(product);
         this.product = product;
         this.selectedCategoryItems = product.categories.map(
           category => {

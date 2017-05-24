@@ -6,7 +6,7 @@
   </modal-header>
   <form (ngSubmit)="submit()">
     <modal-body *ngIf="!deleteMode && product">
-      <input-label type="text" *ngIf="createMode"
+      <input-label type="text" *ngIf="updateMode"
                    required [(ngModel)]="product.id"  name="id"
                    [disabled]="updateMode">
         ID
@@ -65,17 +65,17 @@
       <button *ngIf="createMode"
               type="submit"
               class="btn btn-success">
-        Crear Usuario
+        Crear Producto
       </button>
       <button *ngIf="updateMode && !locked"
               type="submit"
               class="btn btn-success">
-        Actualizar Usuario
+        Actualizar Producto
       </button>
       <button *ngIf="deleteMode && !locked"
               type="submit"
               class="btn btn-danger">
-        Eliminar Usuario
+        Eliminar Producto
       </button>
       <button type="button"
               class="btn btn-primary"

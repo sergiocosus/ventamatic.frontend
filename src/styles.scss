@@ -1,0 +1,9 @@
+/* You can add global styles to this file, and also import other style files */
+.open {
+  > .dropdown-menu {
+      display: block;
+    }
+  > a {
+      outline: 0;
+    }
+}
