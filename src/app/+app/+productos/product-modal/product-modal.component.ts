@@ -38,6 +38,8 @@ export class ProductModalComponent extends CrudModalComponent {
   unitItems:any[] = [];
   selectedUnitItem:any = [];
 
+  haveBarCode = true;
+
   constructor(protected productService:ProductService,
               protected notify:NotifyService,
               protected categoryService:CategoryService,
@@ -56,6 +58,10 @@ export class ProductModalComponent extends CrudModalComponent {
       {
         'id' : 3,
         'text' : 'Litro'
+      },
+      {
+        'id' : 4,
+        'text' : 'Metro'
       }
     ];
   }
@@ -159,6 +165,10 @@ export class ProductModalComponent extends CrudModalComponent {
     this.product.categories = this.selectedCategoryItems.map(
       item => item.id
     );
+
+    if (!this.haveBarCode) {
+      this.product.bar_code = null;
+    }
 
     this.product.brand_id = this.selectedBrandItem ?
       this.selectedBrandItem[0].id : null;

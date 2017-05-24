@@ -1,0 +1,13 @@
+.barcode{
+  display: flex;
+  align-items: center;
+
+  md-checkbox{
+    flex: 0 0 auto;
+    margin: .5em;
+  }
+
+  input-label{
+    flex: 1 0 0;
+  }
+}

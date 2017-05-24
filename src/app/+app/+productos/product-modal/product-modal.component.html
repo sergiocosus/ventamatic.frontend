@@ -16,10 +16,15 @@
         Description
       </input-label>
 
-      <input-label type="text" [(ngModel)]="product.bar_code" name="bar_code"
-                   [disabled]="locked" required>
-        Código de barras
-      </input-label>
+      <div class="barcode">
+        <md-checkbox [(ngModel)]="haveBarCode"
+                     name="haverBarCode"></md-checkbox>
+        <input-label type="text" [(ngModel)]="product.bar_code" name="bar_code"
+                     [disabled]="locked || !haveBarCode" required>
+          Código de barras
+        </input-label>
+      </div>
+
 
 
       <ng-select [items]="unitItems"
