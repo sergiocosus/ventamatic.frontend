@@ -5,7 +5,7 @@ import {Observable} from "rxjs/Rx";
 
 @Injectable()
 export class BranchService {
-  private basePath = 'inventory/';
+  private basePath = 'branch/';
 
   constructor(private apiHttp:ApiHttp) {}
 
