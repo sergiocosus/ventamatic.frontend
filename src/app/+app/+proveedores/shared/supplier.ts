@@ -7,8 +7,6 @@ export class Supplier {
   public email:string;
   public created_at:string;
   public updated_at:string;
-  public last_name:string;
-  public last_name_2:string;
   public phone:string;
   public cellphone:string;
   public address:string;
@@ -18,10 +16,6 @@ export class Supplier {
   public supplier_category_id:string;
   public supplier_category:SupplierCategory;
   public brands:Brand[];
-
-  get fullName(){
-    return `${this.name} ${this.last_name} ${this.last_name_2}`;
-  }
 
   parse(obj){
     for (var prop in obj) this[prop] = obj[prop];
