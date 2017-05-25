@@ -1,13 +1,15 @@
 <search-bar>
-  <button *appUserCan="'supplier-create'" class="btn"
+  <button *appUserCan="'supplier-create'"
+          md-raised-button color="accent"
           (click)="create()">
-    <img src="assets/images/add-user-icon.svg"> Agregar Proveedor
+    <i class="fa fa-user-secret"></i>
+    Agregar Proveedor
   </button>
-  <button class="btn"
+  <button md-raised-button color="accent"
           (click)="supplierCategoryModal.open()">
     Categorias de proveedores
   </button>
-  <button class="btn"
+  <button md-raised-button color="accent"
           (click)="brandModal.open()">
     Marcas
   </button>

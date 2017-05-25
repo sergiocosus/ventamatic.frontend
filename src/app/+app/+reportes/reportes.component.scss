@@ -25,23 +25,8 @@
     time{
       display: inline-block;
     }
-    datepicker{
-      display: inline-block;
-      font-size: 1em;
-      /deep/ {
-        .ui-kit-calendar-container{
-          font-size: 1em;
-          .ui-kit-calendar-input.opened{
-            margin-top: 0;
-            margin-bottom: 0;
-            height: 1.5em;
-            font-size: 1em;
-          }
-        }
-      }
-    }
 
-    button{
+    button.sb{
       text-align: center;
       white-space: nowrap;
       vertical-align: middle;

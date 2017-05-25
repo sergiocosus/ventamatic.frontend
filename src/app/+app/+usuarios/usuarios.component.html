@@ -1,16 +1,17 @@
 <search-bar>
   <div>
     <input type="text" placeholder="ID"/>
-    <img src="assets/images/search-user.svg" class="search-icon" />
+    <i class="fa fa-search" aria-hidden="true"></i>
   </div>
   <div>
     <input type="text" placeholder="Nombre"/>
-    <img src="assets/images/search-user.svg" class="search-icon" />
+    <i class="fa fa-search" aria-hidden="true"></i>
   </div>
-  <button class="btn"
+  <button md-raised-button color="accent"
           *appUserCan="'user-create'"
           (click)="create()">
-    <img src="assets/images/add-user-icon.svg"> Agregar Usuario
+    <i class="fa fa-user-plus" aria-hidden="true"></i>
+    Agregar Usuario
   </button>
 </search-bar>
 

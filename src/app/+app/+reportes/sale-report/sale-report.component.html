@@ -24,11 +24,11 @@
     <my-date-range-picker placeholder="Rango de fechas"
                           (dateRangeChanged)="onDateRangeChanged($event)"
                           [options]="rangeOptions" ></my-date-range-picker>
-    <button type="submit">
+    <button type="submit" md-raised-button	color="accent" >
       <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
       Consultar
     </button>
-    <button type="button" (click)="downloadCSV()">
+    <button type="button" md-raised-button	color="accent" (click)="downloadCSV()">
       <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
       CSV
     </button>

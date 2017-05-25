@@ -8,18 +8,18 @@
     <i class="fa fa-search" aria-hidden="true"></i>
   </div>
   <button *appUserCan="'product-create'"
-          class="btn"
+          md-raised-button color="accent"
           (click)="clickCreate(inventory)">
     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
     Agregar Producto
   </button>
   <button *appUserCan="'category-create'"
-          class="btn"
+          md-raised-button color="accent"
           (click)="categoryModal.open()">
     Categorias de produtos
   </button>
   <button *appUserCan="'brand-create'"
-           class="btn"
+          md-raised-button color="accent"
           (click)="brandModal.open()">
     Marcas
   </button>
@@ -73,5 +73,9 @@
 <product-modal (updated)="updated($event)"
                (created)="created($event)"
                 (deleted)="deleted($event)"></product-modal>
-<app-basic-entity-modal mode="brand" #brandModal></app-basic-entity-modal>
-<app-basic-entity-modal mode="category" #categoryModal></app-basic-entity-modal>
+<app-basic-entity-modal mode="brand"
+                        (closed)="productModal.initBrandsData()"
+                        #brandModal></app-basic-entity-modal>
+<app-basic-entity-modal mode="category"
+                        (closed)="productModal.initCategoriesData()"
+                        #categoryModal></app-basic-entity-modal>

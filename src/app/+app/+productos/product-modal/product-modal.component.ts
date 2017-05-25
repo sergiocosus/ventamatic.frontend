@@ -67,6 +67,11 @@ export class ProductModalComponent extends CrudModalComponent {
   }
 
   ngOnInit() {
+    this.initCategoriesData();
+    this.initBrandsData()
+  }
+
+  initCategoriesData() {
     this.categoryService.getAll().subscribe(
       categories => {
         this.categories = categories;
@@ -78,7 +83,9 @@ export class ProductModalComponent extends CrudModalComponent {
       },
       error => this.notify.serviceError(error)
     );
+  }
 
+  initBrandsData() {
     this.brandService.getAll().subscribe(
       brands => {
         this.brands = brands;

@@ -11,12 +11,23 @@
 }
 
 :host /deep/{
+  .titleareatxt{
+    color: black;
+  }
+
+  [md-raised-button]{
+    margin: 0 .5em;
+    i{
+      font-size: 1.75em;
+      margin-top: -.05em;
+    }
+  }
   h2{
     font-size: 2em;
     margin: 0;
     margin-right: 1em;
   }
-  div{
+  section{
     margin: 5px;
     position: relative;
 
@@ -38,7 +49,7 @@
     }
   }
 
-  button{
+  button.sb{
     margin: 2.5px;
     color: white;
     background-color: #082B36;
@@ -51,4 +62,5 @@
       width: 25px;
     }
   }
+
 }

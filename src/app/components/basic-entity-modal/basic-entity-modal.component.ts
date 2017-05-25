@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, Input} from '@angular/core';
+import {Component, OnInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import {BrandService} from "../../shared/product/brand/brand.service";
 import {ModalComponent} from "ng2-bs3-modal/components/modal";
 import {NotifyService} from "../../services/notify.service";
@@ -14,9 +14,8 @@ import {CategoryService} from "../../shared/product/category/category.service";
 export class BasicEntityModalComponent implements OnInit {
   @ViewChild(ModalComponent) protected modal:ModalComponent;
   @Input() mode;
-
-  service:BasicEntityService;
-
+  @Output() closed = new EventEmitter();
+  service: BasicEntityService;
 
   entities:any[] = [];
   title:string = 'Marcas';
@@ -29,7 +28,7 @@ export class BasicEntityModalComponent implements OnInit {
     successCreate: 'Creado exitosamente',
     successUpdate: 'Actualizado exitosamente',
     successDelete: 'Eliminado exitosamente'
-  }
+  };
 
   constructor(private brandService:BrandService,
               protected categoryService: CategoryService,
@@ -44,7 +43,7 @@ export class BasicEntityModalComponent implements OnInit {
         break;
       case 'category':
         this.service = this.categoryService;
-        this.title = 'Categoría'
+        this.title = 'Categoría';
         break;
       case 'supplier-category':
         this.service = this.supplierCategoryService;
@@ -53,8 +52,8 @@ export class BasicEntityModalComponent implements OnInit {
     }
 
     this.service.getAll().subscribe(
-      brands => {
-        this.entities = brands;
+      entities => {
+        this.entities = entities;
       }
     )
   }
@@ -64,7 +63,7 @@ export class BasicEntityModalComponent implements OnInit {
       entity => {
         this.entities.push(entity);
         this.entity = { name : null };
-        this.noty.success(this.messages.successCreate)
+        this.noty.success(this.messages.successCreate);
       },
       error => {
         this.noty.serviceError(error)
@@ -107,7 +106,7 @@ export class BasicEntityModalComponent implements OnInit {
     this.modal.open();
   }
 
-  closed(){
-
+  onClose() {
+    this.closed.emit();
   }
 }

@@ -13,7 +13,7 @@ import {NotifyService} from "../../services/notify.service";
   styleUrls: ['productos.component.scss']
 })
 export class ProductosComponent implements OnInit {
-  @ViewChild(ProductModalComponent) private productModal:ProductModalComponent;
+  @ViewChild(ProductModalComponent) public productModal:ProductModalComponent;
   public products:Product[];
 
   constructor(private productService:ProductService,
