@@ -1,4 +1,4 @@
-import {Component, OnInit, Output, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
 import {Inventory} from "../../../shared/inventory/inventory";
 import {InventoryService} from "../../../shared/inventory/inventory.service";
@@ -13,9 +13,6 @@ import {NotifyService} from "../../../services/notify.service";
   styleUrls: ['modal-inventario.component.scss'],
 })
 export class ModalInventarioComponent extends CrudModalComponent {
-  @ViewChild(ModalComponent) protected modal:ModalComponent;
-  @Output() updated;
-
   name = 'Inventario';
 
   inventoryMovementTypes = [

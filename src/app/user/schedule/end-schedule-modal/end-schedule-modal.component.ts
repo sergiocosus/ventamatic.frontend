@@ -11,8 +11,8 @@ import {Schedule} from "../schedule";
 export class EndScheduleModalComponent implements OnInit {
   @ViewChild(ModalComponent) protected modal:ModalComponent;
 
-  final_amount:number = 0;
-  finished_schedule:Schedule = null;;
+  final_amount: number = 0;
+  finished_schedule: Schedule = null;
 
   constructor(private scheduleService:ScheduleService) {}
 

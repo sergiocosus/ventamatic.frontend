@@ -16,12 +16,7 @@ import {NotifyService} from "../../../services/notify.service";
   styleUrls: ['product-modal.component.scss'],
 })
 export class ProductModalComponent extends CrudModalComponent {
-  @ViewChild(ModalComponent) protected modal:ModalComponent;
   @ViewChild(SelectComponent) protected select:SelectComponent;
-
-  @Output() created;
-  @Output() updated;
-  @Output() deleted;
 
   name = 'Producto';
 

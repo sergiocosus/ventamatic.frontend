@@ -1,5 +1,4 @@
-import { Component, ViewChild, Output } from '@angular/core';
-import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
+import { Component } from '@angular/core';
 import {UserService} from "../../../user/user.service";
 import {User} from "../../../user/user";
 import {CrudModalComponent} from "../../../components/crud-modal";
@@ -11,16 +10,8 @@ import {NotifyService} from "../../../services/notify.service";
   styleUrls: ['user-modal.component.scss'],
 })
 export class UserModalComponent extends CrudModalComponent {
-  @ViewChild(ModalComponent) protected modal:ModalComponent;
-
-  @Output() created;
-  @Output() updated;
-  @Output() deleted;
-
   name = 'Usuario';
-
   user: User;
-
   password_confirm:string;
 
   constructor(protected userService:UserService,

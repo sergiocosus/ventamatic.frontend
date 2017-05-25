@@ -1,5 +1,4 @@
-import { Component, ViewChild, Output } from '@angular/core';
-import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
+import { Component } from '@angular/core';
 import {BranchService} from "../shared/branch.service";
 import {Branch} from "../shared/branch";
 import {CrudModalComponent} from "../../../components/crud-modal/crud-modal.component";
@@ -11,10 +10,6 @@ import {NotifyService} from "../../../services/notify.service";
   styleUrls: ['branch-modal.component.scss'],
 })
 export class BranchModalComponent extends CrudModalComponent {
-  @ViewChild(ModalComponent) protected modal:ModalComponent;
-
-  @Output() updated;
-
   branch: Branch;
 
   name = 'Sucursal';

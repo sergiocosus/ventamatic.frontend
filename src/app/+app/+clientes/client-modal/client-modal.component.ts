@@ -1,6 +1,5 @@
-import { Component, ViewChild, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import {Client} from "../shared/client";
-import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {ClientService} from "../shared/client.service";
 import {CrudModalComponent} from "../../../components/crud-modal";
 import {NotifyService} from "../../../services/notify.service";
@@ -11,12 +10,6 @@ import {NotifyService} from "../../../services/notify.service";
   styleUrls: ['client-modal.component.scss'],
 })
 export class ClientModalComponent extends CrudModalComponent{
-  @ViewChild(ModalComponent) protected modal:ModalComponent;
-
-  @Output() created;
-  @Output() updated;
-  @Output() deleted;
-
   client: Client;
 
   name = 'Cliente';

@@ -1,14 +1,14 @@
 
-import { EventEmitter } from '@angular/core';
+import {EventEmitter, Output, ViewChild} from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {NotifyService} from "../../services/notify.service";
 
 export abstract class CrudModalComponent {
-  protected modal:ModalComponent;
+  @ViewChild(ModalComponent) protected modal:ModalComponent;
 
-  created = new EventEmitter();
-  updated = new EventEmitter();
-  deleted = new EventEmitter();
+  @Output() created = new EventEmitter();
+  @Output() updated = new EventEmitter();
+  @Output() deleted = new EventEmitter();
 
   name:String;
 

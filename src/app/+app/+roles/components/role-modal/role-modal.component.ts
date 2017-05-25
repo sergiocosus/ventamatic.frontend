@@ -1,7 +1,6 @@
-import {Component, OnInit, ViewChild, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {RoleService} from "../../services/role.service";
 import {PermissionService} from "../../../../shared/security/permission.service";
-import {ModalComponent} from "ng2-bs3-modal/components/modal";
 import {CrudModalComponent} from "../../../../components/crud-modal/crud-modal.component";
 import { Role } from "../../classes/role";
 import { Permission } from "../../../../shared/security/permission";
@@ -13,12 +12,6 @@ import {NotifyService} from "../../../../services/notify.service";
   styleUrls: ['./role-modal.component.scss']
 })
 export class RoleModalComponent extends CrudModalComponent {
-  @ViewChild(ModalComponent) protected modal:ModalComponent;
-
-  @Output() created;
-  @Output() updated;
-  @Output() deleted;
-
   name = 'Rol';
 
   role: Role;
@@ -59,9 +52,9 @@ export class RoleModalComponent extends CrudModalComponent {
           permission => ({
             id:permission.id,
             name:permission.display_name,
-            checked: role.permissions.find(
+            checked: !!role.permissions.find(
               rolePermission => permission.id == rolePermission.id
-            ) ? true : false
+            )
           })
         );
       },

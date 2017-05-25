@@ -1,6 +1,5 @@
-import {Component, Output, ViewChild} from '@angular/core';
+import {Component} from '@angular/core';
 import {CrudModalComponent} from "../../../../components/crud-modal/crud-modal.component";
-import {ModalComponent} from "ng2-bs3-modal/components/modal";
 import {BranchRole} from "../../classes/branch-role";
 import {BranchPermission} from "../../../../shared/security/branch-permission";
 import {NotifyService} from "../../../../services/notify.service";
@@ -13,12 +12,6 @@ import {BranchRoleService} from "../../services/branch-role.service";
   styleUrls: ['./branch-role-modal.component.scss']
 })
 export class BranchRoleModalComponent extends CrudModalComponent {
-  @ViewChild(ModalComponent) protected modal:ModalComponent;
-
-  @Output() created;
-  @Output() updated;
-  @Output() deleted;
-
   name = 'Rol de sucursal';
 
   branchRole: BranchRole;
@@ -119,6 +112,4 @@ export class BranchRoleModalComponent extends CrudModalComponent {
     this.branchRole = null;
     this.branchPermissionList = null;
   }
-
-
 }

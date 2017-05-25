@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild, Output,EventEmitter } from '@angular/core';
+import { Component } from '@angular/core';
 import {Supplier} from "../shared/supplier";
-import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {SupplierService} from "../shared/supplier.service";
 import {CrudModalComponent} from "../../../components/crud-modal";
 import {SupplierCategoryService} from "../category/supplier-category.service";
@@ -15,14 +14,7 @@ import {NotifyService} from "../../../services/notify.service";
   styleUrls: ['supplier-modal.component.scss'],
 })
 export class SupplierModalComponent extends CrudModalComponent {
-  @ViewChild(ModalComponent) protected modal:ModalComponent;
-
-  @Output() created;
-  @Output() updated;
-  @Output() deleted;
-
   name = 'Proveedor';
-
   supplier: Supplier;
 
   supplierCategories:SupplierCategory[] = [];
