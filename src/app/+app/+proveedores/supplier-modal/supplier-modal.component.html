@@ -4,7 +4,7 @@
     <h4 *ngIf="updateMode"> Editar Proveedor </h4>
     <h4 *ngIf="deleteMode"> Eliminar Proveedor </h4>
   </modal-header>
-  <form (ngSubmit)="submit()">
+  <form (ngSubmit)="submit()" ngNativeValidate>
     <modal-body *ngIf="!deleteMode && supplier">
       <input-label *ngIf="updateMode" name="id"
                    type="text" [(ngModel)]="supplier.id" disabled="disabled">

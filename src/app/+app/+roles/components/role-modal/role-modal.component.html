@@ -4,7 +4,7 @@
     <h4 *ngIf="updateMode"> Editar rol </h4>
     <h4 *ngIf="deleteMode"> Eliminar rol </h4>
   </modal-header>
-  <form (ngSubmit)="submit()">
+  <form (ngSubmit)="submit()" ngNativeValidate>
     <modal-body *ngIf="!deleteMode && role">
       <input-label type="text" [(ngModel)]="role.name" name="name"
                    [disabled]="locked" required maxlength="255">

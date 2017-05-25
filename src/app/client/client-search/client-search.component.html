@@ -1,5 +1,5 @@
 <app-popover [focusable]="focusable">
-  <form>
+  <form ngNativeValidate>
     <input-label [(ngModel)]="name" class="dark" type="text"
                  [formControl]="nameControl" #focusable>
       Nombre

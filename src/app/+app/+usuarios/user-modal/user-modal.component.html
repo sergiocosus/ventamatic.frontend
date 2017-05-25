@@ -4,7 +4,7 @@
     <h4 *ngIf="updateMode"> Editar Usuario </h4>
     <h4 *ngIf="deleteMode"> Eliminar Usuario </h4>
   </modal-header>
-  <form (ngSubmit)="submit()">
+  <form (ngSubmit)="submit()" ngNativeValidate>
     <modal-body *ngIf="!deleteMode && user">
       <input-label type="text" required="required"  name="username"
                    [(ngModel)]="user.username" [disabled]="updateMode">

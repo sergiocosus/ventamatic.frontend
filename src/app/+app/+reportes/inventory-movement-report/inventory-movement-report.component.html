@@ -1,5 +1,5 @@
 <search-bar>
-  <form (submit)="submit()">
+  <form (submit)="submit()" ngNativeValidate>
     <input-label [(ngModel)]="request.product_id"  class="dark id-field"
                  name="product_id" type="number">
       ID de producto

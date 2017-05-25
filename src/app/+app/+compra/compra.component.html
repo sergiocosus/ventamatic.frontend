@@ -16,7 +16,7 @@
 
     <app-payment-type [selectedPaymentType]="selectedPaymentType">
     </app-payment-type>
-    <form (submit)="openBuyConfirm()">
+    <form (submit)="openBuyConfirm()" ngNativeValidate>
       <div class="finish">
         <input-label [(ngModel)]="iva" name="iva" class="dark"
                      [type]="'number'"  [max]="99999999999" [required]="true">

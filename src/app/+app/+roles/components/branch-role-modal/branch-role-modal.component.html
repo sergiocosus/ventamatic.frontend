@@ -4,7 +4,7 @@
     <h4 *ngIf="updateMode"> Editar rol de sucursal </h4>
     <h4 *ngIf="deleteMode"> Eliminar rol de sucursal </h4>
   </modal-header>
-  <form (ngSubmit)="submit()">
+  <form (ngSubmit)="submit()" ngNativeValidate>
     <modal-body *ngIf="!deleteMode && branchRole">
       <input-label type="text" [(ngModel)]="branchRole.name" name="name"
                    [disabled]="locked" required maxlength="255">

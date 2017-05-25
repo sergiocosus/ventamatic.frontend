@@ -6,7 +6,7 @@ import { NotifyService } from '../services/notify.service';
 import { SelectableComponent } from './selectable/selectable.component';
 import { PopoverComponent } from './popover/popover.component';
 import {LocalStorageService} from './services/local-storage.service';
-import {MdButtonModule, MdCheckboxModule} from '@angular/material';
+import {MdButtonModule, MdCheckboxModule, MdInputModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -15,6 +15,7 @@ import {MdButtonModule, MdCheckboxModule} from '@angular/material';
     ReactiveFormsModule,
     MdCheckboxModule,
     MdButtonModule,
+    MdInputModule,
   ],
   declarations: [
     InputLabelComponent,
@@ -35,6 +36,7 @@ import {MdButtonModule, MdCheckboxModule} from '@angular/material';
     PopoverComponent,
     MdCheckboxModule,
     MdButtonModule,
+    MdInputModule,
   ]
 })
 export class SharedModule { }

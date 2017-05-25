@@ -3,7 +3,7 @@
   <modal-header [show-close]="true">
     <h2>Ingrese precio y cantidad</h2>
   </modal-header>
-  <form (ngSubmit)="submit()" >
+  <form (ngSubmit)="submit()" ngNativeValidate>
     <modal-body>
       <h3 *ngIf="productBuy.product">
         Producto: {{productBuy.product.description}}

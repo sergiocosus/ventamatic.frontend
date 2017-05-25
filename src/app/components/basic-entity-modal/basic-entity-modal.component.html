@@ -3,7 +3,7 @@
     <h4>{{title}}</h4>
   </modal-header>
   <modal-body>
-    <form (ngSubmit)="create()">
+    <form (ngSubmit)="create()" ngNativeValidate>
       <input-label name="id" type="text" [(ngModel)]="entity.name">
         Ingrese una nueva {{title}}
       </input-label>

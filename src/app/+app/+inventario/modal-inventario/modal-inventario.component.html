@@ -2,7 +2,7 @@
   <modal-header [show-close]="true">
     <h4 *ngIf="updateMode"> Modificar Inventario </h4>
   </modal-header>
-  <form (ngSubmit)="submit()">
+  <form (ngSubmit)="submit()" ngNativeValidate>
     <modal-body *ngIf="!deleteMode && inventory">
       Tipo de movimiento:
       <ng-select [items]="inventoryMovementTypes"

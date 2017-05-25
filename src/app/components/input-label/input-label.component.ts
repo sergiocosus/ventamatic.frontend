@@ -24,6 +24,7 @@ export class InputLabelComponent  implements ControlValueAccessor {
   @Input() required:boolean = null;
   @Input() autofocus:boolean = null;
   @Input() min:number = null;
+  @Input() minlength:number = null;
   @Input() max:number = null;
   @Input() step:number = null;
   @Input() class:string = null;

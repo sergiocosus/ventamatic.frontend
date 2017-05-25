@@ -1,5 +1,5 @@
 <search-bar>
-  <form (submit)="submit()">
+  <form (submit)="submit()" ngNativeValidate>
     <input-label [(ngModel)]="request.branch_id" class="dark id-field"
                  name="branch_id" type="number">
       ID de sucursal

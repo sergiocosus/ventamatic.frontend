@@ -6,7 +6,7 @@
       </span>
     </div>
 
-    <form class="form-signin" (ngSubmit)="onSubmit()">
+    <form class="form-signin" (ngSubmit)="onSubmit()" ngNativeValidate>
       <input-label [(ngModel)]="username" name="username"
                    [autofocus]="true" required="required">
         Usuario

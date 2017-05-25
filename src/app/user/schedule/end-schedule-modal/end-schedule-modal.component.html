@@ -3,7 +3,7 @@
     <h4 *ngIf="!finished_schedule">Terminar Turno </h4>
     <h4 *ngIf="finished_schedule">Turno terminado </h4>
   </modal-header>
-  <form (ngSubmit)="submit()">
+  <form (ngSubmit)="submit()" ngNativeValidate>
     <modal-body>
       <input-label *ngIf="!finished_schedule"
                    [(ngModel)]="final_amount" name="final_amount" [disabled]="locked" type="number">
