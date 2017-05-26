@@ -1,13 +1,26 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { InventoryDataModalComponent } from './inventory-data-modal/inventory-data-modal.component';
+import {SharedModule} from '../shared/shared.module';
+import {MdCardModule, MdDialogModule} from '@angular/material';
+import {InventoryService} from './services/inventory.service';
+import {InventoryEditDialogComponent} from './components/inventory-edit-dialog/inventory-edit-dialog.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    SharedModule,
+    MdDialogModule,
+    MdCardModule,
   ],
   declarations: [
-    InventoryDataModalComponent
+    InventoryEditDialogComponent
+  ],
+  entryComponents: [
+    InventoryEditDialogComponent
+  ],
+  providers: [
+    InventoryService,
+  ],
+  exports: [
+    InventoryEditDialogComponent
   ]
 })
 export class InventoryModule { }

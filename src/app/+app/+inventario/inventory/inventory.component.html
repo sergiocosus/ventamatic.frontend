@@ -19,11 +19,12 @@
       <th>Mínimo de unidades</th>
       <th>Cantidad actual</th>
       <th>Precio de sucursal</th>
+      <th>Precio Global</th>
       <th>Tipo de unidad</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let inventory of inventories"  >
+    <tr *ngFor="let inventory of inventories"  (click)="openUpdateDialog(inventory)">
       <td>{{inventory.id}}</td>
       <td>{{inventory.product.description}}</td>
       <td>
@@ -36,12 +37,13 @@
       <td>{{inventory.product.brand ? inventory.product.brand.name  : '' }}</td>
       <td>{{inventory.minimum}}</td>
       <td>{{inventory.quantity}}</td>
-      <td>{{inventory.cost}}</td>
+      <td>{{inventory.price | myCurrency}}</td>
+      <td>{{inventory.product.price | myCurrency}}</td>
       <td>
         {{inventory.product.unit.name}}
         <div *appUserCanInBranch="'inventory-edit'"
              class="button-modify"
-             (click)="clickUpdate($event, product)">
+             (click)="clickUpdate($event, inventory)">
           <i class="fa fa-exchange" ></i>
         </div>
       </td>

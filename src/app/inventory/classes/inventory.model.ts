@@ -1,6 +1,6 @@
-import {Model} from "../model";
-import {Product} from "../product/product";
 import {Branch} from "../../+app/+sucursales/shared/branch";
+import {Model} from '../../shared/model';
+import {Product} from '../../shared/product/product';
 /**
  * Created by alx on 16/06/16.
  */

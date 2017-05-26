@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Inventory} from "../../inventory/inventory";
+import {Inventory} from '../../../inventory/classes/inventory.model';
 
 @Component({
   selector: 'app-inventory-cart',
@@ -39,6 +39,6 @@ export class InventoryCartComponent implements OnInit {
 }
 
 interface ProductSale {
-  inventory:Inventory;
-  quantity:number;
+  inventory: Inventory;
+  quantity: number;
 }

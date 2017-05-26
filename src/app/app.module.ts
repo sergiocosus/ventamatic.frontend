@@ -77,7 +77,6 @@ import {TicketService} from "./+app/+venta/ticket/ticket.service";
 import {ProductService} from "./shared/product/product.service";
 import {ClientService} from "./+app/+clientes/shared/client.service";
 import {CategoryService} from "./shared/product/category/category.service";
-import {InventoryService} from "./shared/inventory/inventory.service";
 import {ScheduleService} from "./user/schedule/schedule.service";
 import { UserCanDirective } from './directives/user-can.directive';
 import { MainComponent } from './+app/main/main.component';
@@ -102,6 +101,7 @@ import {UserModule} from './user/user.module';
 import {BranchModule} from './branch/branch.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MyDateRangePickerModule} from 'mydaterangepicker';
+import {InventoryModule} from './inventory/inventory.module';
 
 
 @NgModule({
@@ -187,7 +187,8 @@ import {MyDateRangePickerModule} from 'mydaterangepicker';
     ClientModule,
     SupplierModule,
     UserModule,
-    BranchModule
+    BranchModule,
+    InventoryModule,
   ],
   providers: [
     appRoutingProviders,
@@ -209,7 +210,6 @@ import {MyDateRangePickerModule} from 'mydaterangepicker';
     ProductService,
     ClientService,
     CategoryService,
-    InventoryService,
     ScheduleService,
     BranchService,
     ReportService,

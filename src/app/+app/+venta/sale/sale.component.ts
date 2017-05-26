@@ -7,11 +7,11 @@ import {SaleService} from "../shared/sale.service";
 import {NotificationsService} from "angular2-notifications";
 import {ClientService} from "../../+clientes/shared/client.service";
 import {Client} from "../../+clientes/shared/client";
-import {Inventory} from "../../../shared/inventory/inventory";
 import {SaleConfirmModalComponent} from "../sale-confirm-modal/sale-confirm-modal.component";
 import {ScheduleService} from "../../../user/schedule/schedule.service";
 import {TicketService} from "../ticket/ticket.service";
 import {FindProductComponent} from "../../../shared/product/find-product/find-product.component";
+import {Inventory} from '../../../inventory/classes/inventory.model';
 
 @Component({
   selector: 'app-sale',

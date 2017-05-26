@@ -1,11 +1,11 @@
 import {Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef} from '@angular/core';
-import {InventoryService} from "../../inventory/inventory.service";
 import {ProductService} from "../product.service";
 import { Observable } from "rxjs";
 import {Product} from "../product";
-import {Inventory} from "../../inventory/inventory";
 import {InputLabelComponent} from "../../../components/input-label/input-label.component";
 import {NotificationsService} from 'angular2-notifications';
+import {Inventory} from '../../../inventory/classes/inventory.model';
+import {InventoryService} from '../../../inventory/services/inventory.service';
 
 @Component({
   selector: 'app-find-product',

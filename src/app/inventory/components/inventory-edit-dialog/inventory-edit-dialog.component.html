@@ -1,0 +1,36 @@
+<h4 md-dialog-title>
+  Editar datos de producto por sucursal
+</h4>
+
+<md-dialog-content>
+  <form (ngSubmit)="submit()" [formGroup]="form">
+    <md-card>
+      <md-input-container>
+        <input mdInput formControlName="price" placeholder="Precio en esta sucursal">
+        <md-hint>
+          Precio Global {{inventory.product.price}}
+        </md-hint>
+      </md-input-container>
+      <button md-raised-button color="primary" (click)="setGlobalPrice()" type="button">
+        Usar precio global
+      </button>
+    </md-card>
+
+    <md-card>
+      <md-input-container>
+        <input mdInput formControlName="minimum"
+               placeholder="Mínimo en esta sucursal">
+        <md-hint>
+          Mínimo Global {{inventory.product.global_minimum}}
+        </md-hint>
+      </md-input-container>
+      <button md-raised-button color="primary" (click)="setGlobalMinimum()" type="button">
+        Usar precio global
+      </button>
+    </md-card>
+
+    <button md-raised-button color="accent">
+      Actualzar
+    </button>
+  </form>
+</md-dialog-content>

@@ -1,11 +1,10 @@
 import {Component} from '@angular/core';
-import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
-import {Inventory} from "../../../shared/inventory/inventory";
-import {InventoryService} from "../../../shared/inventory/inventory.service";
 import {CrudModalComponent} from "../../../components/crud-modal/crud-modal.component";
 import {Branch} from "../../+sucursales/shared/branch";
 import {BranchService} from "../../+sucursales/shared/branch.service";
 import {NotifyService} from "../../../services/notify.service";
+import {Inventory} from '../../../inventory/classes/inventory.model';
+import {InventoryService} from '../../../inventory/services/inventory.service';
 
 @Component({
   selector: 'modal-inventario',
@@ -38,8 +37,8 @@ export class ModalInventarioComponent extends CrudModalComponent {
   destiny_branch_id:number;
 
   constructor( protected notify: NotifyService,
-               protected inventoryService:InventoryService,
-               protected branchService:BranchService
+               protected inventoryService: InventoryService,
+               protected branchService: BranchService
              ) {
     super(notify);
   }
