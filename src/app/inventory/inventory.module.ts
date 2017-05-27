@@ -3,6 +3,7 @@ import {SharedModule} from '../shared/shared.module';
 import {MdCardModule, MdDialogModule} from '@angular/material';
 import {InventoryService} from './services/inventory.service';
 import {InventoryEditDialogComponent} from './components/inventory-edit-dialog/inventory-edit-dialog.component';
+import {InventoryQuantityDialogComponent} from './components/inventory-quantity-dialog/inventory-quantity-dialog.component';
 
 @NgModule({
   imports: [
@@ -11,16 +12,19 @@ import {InventoryEditDialogComponent} from './components/inventory-edit-dialog/i
     MdCardModule,
   ],
   declarations: [
-    InventoryEditDialogComponent
+    InventoryEditDialogComponent,
+    InventoryQuantityDialogComponent,
   ],
   entryComponents: [
-    InventoryEditDialogComponent
+    InventoryEditDialogComponent,
+    InventoryQuantityDialogComponent,
   ],
   providers: [
     InventoryService,
   ],
   exports: [
-    InventoryEditDialogComponent
+    InventoryEditDialogComponent,
+    InventoryQuantityDialogComponent,
   ]
 })
 export class InventoryModule { }

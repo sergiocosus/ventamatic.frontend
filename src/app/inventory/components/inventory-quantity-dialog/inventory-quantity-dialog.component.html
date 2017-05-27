@@ -1,0 +1,94 @@
+<h4 md-dialog-title> Modificar Inventario </h4>
+
+<md-dialog-content>
+  <form (ngSubmit)="submit()" ngNativeValidate *ngIf="inventory">
+
+    <md-select [(ngModel)]="inventoryMovementType"
+               name="inventoryMovementType"
+               placeholder="Tipo de movimiento">
+      <md-option *ngFor="let inventoryMovementType of inventoryMovementTypes" [value]="inventoryMovementType">
+        {{inventoryMovementType.text}}
+      </md-option>
+    </md-select>
+
+    <div *ngIf="willIncrease()" >
+      Este tipo de movimiento aumentará el inventario,
+      introduzca la cantidad que desea incrementar
+    </div>
+    <div *ngIf="willDecrease()" >
+      Este tipo de movimiento disminuirá el inventario,
+      introduzca la cantidad que desea disminuir
+    </div>
+    <div *ngIf="willAdjust()" >
+      Este tipo de movimiento disminuirá o aumentará el inventario,
+      introduzca la cantidad que desea disminuir o aumentar.
+    </div>
+    <div *ngIf="willTranslate()" >
+      Este tipo de movimiento disminuirá la cantidad del inventario de la
+      surcursal actual y lo agregará a la sucursal seleccionada
+      Introduzca la cantidad que desea disminuir.
+    </div>
+    <div *ngIf="willConvert()" >
+      Este tipo de movimiento disminuirá la cantidad del inventario de un producto
+      y aumentará la cantidad en otro producto del inventario
+      de la misma sucursal. <br>
+      Introduzca la cantidad a disminuir en el producto acual y
+      seleccione el producto y cantidad que desea aumentar
+    </div>
+
+    <md-card *ngIf="inventoryMovementType">
+      <md-input-container>
+        <input mdInput type="number" [(ngModel)]="quantity"
+               name="quantity" [required]="true"
+               [min]="min()" [max]="max()"
+               [placeholder]="placeholderText"
+        />
+        <md-hint>
+          Cantidad antes: {{inventory.quantity}},
+          después: {{afterMovementQuantity}}
+        </md-hint>
+      </md-input-container>
+      <br/>
+
+      <md-select *ngIf="willTranslate()"
+                 [(ngModel)]="destiny_branch_id" required
+                 name="inventoryConverted"
+                 placeholder="Seleccione la sucursal de destino">
+        <md-option *ngFor="let branch of branches" [value]="branch.id">
+          {{branch.name}}
+        </md-option>
+      </md-select>
+
+      <ng-container *ngIf="willConvert()">
+        <md-select [(ngModel)]="inventoryConverted" required
+                   name="inventoryConverted"
+                   placeholder="Producto a convertir">
+          <md-option *ngFor="let inventory of inventories" [value]="inventory">
+            {{inventory.product.description}}
+          </md-option>
+
+        </md-select>
+
+        <md-input-container>
+          <input mdInput type="number" [(ngModel)]="quantity_converted"
+                 name="quantity_converted" required
+                 [min]="1"
+                 placeholder="Cantidad convertida"
+          />
+          <md-hint *ngIf="inventoryConverted">
+            Cantidad antes {{inventoryConverted.quantity }}
+            después {{inventoryConverted.quantity + (quantity_converted-0)}}
+          </md-hint>
+        </md-input-container>
+      </ng-container>
+    </md-card>
+
+    <div class="options" *ngIf="inventoryMovementType">
+      <button *ngIf="inventoryMovementType" type="submit"
+              md-raised-button color="accent">
+        Actualizar Inventario
+      </button>
+    </div>
+  </form>
+</md-dialog-content>
+

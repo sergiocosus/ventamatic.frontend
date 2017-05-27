@@ -1,11 +1,11 @@
 import {Component, OnInit, ViewChild, OnDestroy} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ModalInventarioComponent} from "../modal-inventario/modal-inventario.component";
 import {NotifyService} from "../../../services/notify.service";
 import {Inventory} from '../../../inventory/classes/inventory.model';
 import {InventoryService} from '../../../inventory/services/inventory.service';
 import {MdDialog} from '@angular/material';
 import {InventoryEditDialogComponent} from '../../../inventory/components/inventory-edit-dialog/inventory-edit-dialog.component';
+import {InventoryQuantityDialogComponent} from '../../../inventory/components/inventory-quantity-dialog/inventory-quantity-dialog.component';
 
 @Component({
   selector: 'app-inventory',
@@ -14,8 +14,6 @@ import {InventoryEditDialogComponent} from '../../../inventory/components/invent
   providers: [InventoryService]
 })
 export class InventoryComponent implements OnInit, OnDestroy {
-  @ViewChild(ModalInventarioComponent) private modalInventario:ModalInventarioComponent;
-
   branch_id:number;
   inventories:Inventory[];
 
@@ -31,7 +29,6 @@ export class InventoryComponent implements OnInit, OnDestroy {
       this.inventoryService.getAll(this.branch_id).subscribe(
         inventories => {
           this.inventories = inventories;
-          console.log(inventories);
         },
         error => this.notify.serviceError(error)
       );
@@ -45,7 +42,13 @@ export class InventoryComponent implements OnInit, OnDestroy {
 
   clickUpdate($event, inventory:Inventory){
     $event.stopPropagation();
-    this.modalInventario.openUpdate(inventory);
+    let inventoryQuantityDialog = this.dialog.open(InventoryQuantityDialogComponent);
+    inventoryQuantityDialog.componentInstance.init(inventory);
+    inventoryQuantityDialog.componentInstance.updated.subscribe(
+      inventories => inventories.forEach(
+        inventory => this.updated(inventory)
+      )
+    );
   }
 
   updated(inventory: Inventory) {
@@ -61,7 +64,7 @@ export class InventoryComponent implements OnInit, OnDestroy {
     const dialog = this.dialog.open(InventoryEditDialogComponent);
     dialog.componentInstance.init(inventory);
     dialog.componentInstance.updated.subscribe(
-      inventoryUpdated => this.updated(inventoryUpdated)
-    )
+      inventory => this.updated(inventory)
+    );
   }
 }

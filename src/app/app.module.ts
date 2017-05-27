@@ -39,7 +39,6 @@ import {MainContentComponent} from "./shared/main-content/main-content.component
 import {ClientItemComponent} from "./+app/+clientes/client-item/client-item.component";
 import {ClientModalComponent} from "./+app/+clientes/client-modal/client-modal.component";
 import {PersonItemComponent} from "./components/person-item/person-item.component";
-import {ModalInventarioComponent} from "./+app/+inventario/modal-inventario/modal-inventario.component";
 import {ProductModalComponent} from "./+app/+productos/product-modal/product-modal.component";
 import {SupplierItemComponent} from "./+app/+proveedores/supplier-item/supplier-item.component";
 import {SupplierModalComponent} from "./+app/+proveedores/supplier-modal/supplier-modal.component";
@@ -134,7 +133,6 @@ import {InventoryModule} from './inventory/inventory.module';
     AsideNavComponent,
     TopBarComponent,
     ProductModalComponent,
-    ModalInventarioComponent,
     SupplierItemComponent,
     SupplierModalComponent,
     BranchModalComponent,

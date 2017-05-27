@@ -28,7 +28,7 @@ export class InventoryService {
 
   post(branch_id:number, product_id:number, data){
     return this.apiHttp.post(`branch/${branch_id}/inventory/${product_id}`, data)
-      .map(json => new Inventory().parse(json.inventory));
+      .map(json => Inventory.parseArray(json.inventories));
   }
 
   put(inventory:Inventory){
