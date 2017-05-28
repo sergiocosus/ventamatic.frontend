@@ -1,3 +1,5 @@
+@import 'src/app/vars';
+
 /* You can add global styles to this file, and also import other style files */
 .open {
   > .dropdown-menu {
@@ -37,3 +39,6 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
   @include angular-material-theme($dark-theme);
 }
 
+.simple-notification-wrapper{
+  z-index: 1000000 !important;
+}

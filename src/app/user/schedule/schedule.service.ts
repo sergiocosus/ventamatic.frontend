@@ -26,11 +26,16 @@ export class ScheduleService {
       .map(json => new Schedule().parse(json.schedule));
   }
 
+  putNote(schedule_id, note) {
+    return this.apiHttp.put(this.basePath + 'note/' + schedule_id, {note: note})
+      .map(json => new Schedule().parse(json.schedule));
+  }
+
   finish(final_amount:number){
     return this.apiHttp.put(this.basePath, {final_amount:final_amount})
       .map(json => new Schedule().parse(json.schedule));
   }
-  
+
   getCurrentSchedule(){
     return this.currentScheduleReplaySubject;
   }

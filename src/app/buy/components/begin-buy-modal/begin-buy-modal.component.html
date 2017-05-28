@@ -1,6 +1,6 @@
 <h3> Iniciar Compra </h3>
 
-<form (submit)="start()" ngNativeValidate class="dark-theme">
+<form (submit)="start()" ngNativeValidate class="dark-theme dark-background" >
   <md-select [(ngModel)]="formData.branch" required
              placeholder="Sucursal" name="branch">
     <md-option *ngFor="let branch of branches" [value]="branch">

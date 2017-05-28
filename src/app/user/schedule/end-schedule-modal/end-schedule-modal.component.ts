@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {ScheduleService} from "../schedule.service";
 import {Schedule} from "../schedule";
+import {NotifyService} from '../../../services/notify.service';
 
 @Component({
   selector: 'end-schedule-modal',
@@ -14,7 +15,8 @@ export class EndScheduleModalComponent implements OnInit {
   final_amount: number = 0;
   finished_schedule: Schedule = null;
 
-  constructor(private scheduleService:ScheduleService) {}
+  constructor(private scheduleService:ScheduleService,
+              private notify: NotifyService) {}
 
   ngOnInit() {
   }
@@ -35,11 +37,19 @@ export class EndScheduleModalComponent implements OnInit {
   submit(){
     this.scheduleService.finish(this.final_amount).subscribe(
       schedule => {
-        console.log(schedule);
         this.finished_schedule = schedule;
         this.scheduleService.updateCurrentSchedule(null);
-      }
+      },
+      error => this.notify.serviceError(error)
     )
+  }
+
+  submitNote() {
+    this.scheduleService.putNote(this.finished_schedule.id, this.finished_schedule.note)
+      .subscribe(
+        schedule => this.notify.success('Nota guardada'),
+        error => this.notify.serviceError(error)
+      );
   }
 
 }

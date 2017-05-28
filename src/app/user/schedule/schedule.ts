@@ -10,6 +10,7 @@ export class Schedule extends Model{
   public initial_amount:number;
   public system_amount:number;
   public final_amount:number;
+  public note: string;
   public created_at:Date;
   public updated_at:Date;
   public deleted_at:string;

@@ -1,6 +1,9 @@
+@import '~app/vars';
+
 :host{
-  background-color: rgba(black, .5);
+  background-color: $backgroundDark;
   padding: 1em;
+  border-radius: 1em;
 }
 
 h3{

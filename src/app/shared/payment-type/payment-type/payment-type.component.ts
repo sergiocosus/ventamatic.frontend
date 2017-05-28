@@ -14,11 +14,11 @@ export class PaymentTypeComponent implements OnInit {
   paymentTypes = [
     {
       label: 'Efectivo',
-      value: 1
+      id: 1
     },
     {
       label: 'Tarjeta',
-      value: 2
+      id: 2
     }
   ];
 

@@ -41,20 +41,28 @@
         </tr>
         <tr>
           <td>Nota</td>
-          <td></td>
+          <td class="note">
+            <md-input-container>
+              <textarea mdInput placeholder="Nota de aclaración"
+                        [(ngModel)]="finished_schedule.note" name="note"></textarea>
+            </md-input-container>
+            <button md-raised-button color="accent"
+                    type="button" (click)="submitNote()">
+              Guardar Nota
+            </button>
+          </td>
         </tr>
       </table>
     </modal-body>
     <modal-footer>
+
       <button
               *ngIf="!finished_schedule"
               type="submit"
               class="btn btn-success">
         Terminar turno
       </button>
-      <button type="button"
-              class="btn btn-primary"
-              (click)="close()">
+      <button md-raised-button type="button" (click)="close()">
         Cerrar
       </button>
     </modal-footer>

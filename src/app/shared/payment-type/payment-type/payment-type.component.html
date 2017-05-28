@@ -1,5 +1,5 @@
 <h5>Tipo de pago:</h5>
-<md-radio-group [(ngModel)]="selectedPaymentType.payment_type_id" required=""
+<md-radio-group [(ngModel)]="selectedPaymentType.payment_type_id" required
                 name="payment_type_id" placeholder="Tipo de Pago">
   <md-radio-button *ngFor="let paymentType of paymentTypes" [value]="paymentType.id">
     {{paymentType.label}}
