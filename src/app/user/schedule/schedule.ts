@@ -1,6 +1,6 @@
 import {Model} from "../../shared/model";
 import {User} from "../user";
-import {Branch} from "../../+app/+sucursales/shared/branch";
+import {Branch} from "../../app/+sucursales/shared/branch";
 
 export class Schedule extends Model{
   public id:number;

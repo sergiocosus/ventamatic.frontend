@@ -1,0 +1,38 @@
+<h2 md-dialog-title>
+  Ingrese precio y cantidad
+</h2>
+
+<md-dialog-content>
+  <form (ngSubmit)="submit()" ngNativeValidate>
+    <h3 *ngIf="productBuy.product">
+      Producto: {{productBuy.product.description}}
+    </h3>
+    <section>
+      <md-input-container>
+        <input name="price" mdInput [(ngModel)]="productBuy.cost" placeholder="Costo"
+               required="required" type="number"
+               [min]="0.01" [step]="0.01"/>
+      </md-input-container>
+
+      <md-input-container>
+        <input name="quantity" mdInput [(ngModel)]="productBuy.quantity"
+               placeholder="Cantidad"
+               required="required" type="number"
+               [min]="0.001" [step]="0.001"/>
+      </md-input-container>
+    </section>
+
+    <md-select [(ngModel)]="productBuy.inventoryMovementType"
+               name="inventoryMovementType" required
+               placeholder="Tipo de movimiento">
+      <md-option *ngFor="let inventoryMovementType of inventoryMovementTypes"
+                 [value]="inventoryMovementType">
+        {{inventoryMovementType.text}}
+      </md-option>
+    </md-select>
+
+    <button type="submit" md-raised-button color="accent">
+      Agregar Producto
+    </button>
+  </form>
+</md-dialog-content>

@@ -1,0 +1,19 @@
+:host{
+  background-color: rgba(black, .5);
+  padding: 1em;
+}
+
+h3{
+  text-align: center;
+  color: white;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  color: white;
+
+  md-select{
+    margin: 1em 0;
+  }
+}

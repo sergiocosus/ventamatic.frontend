@@ -1,0 +1,12 @@
+h2, h3{
+  text-align: center;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+
+  section, md-select{
+    margin: 1em 0;
+  }
+}

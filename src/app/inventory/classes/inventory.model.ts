@@ -1,4 +1,4 @@
-import {Branch} from "../../+app/+sucursales/shared/branch";
+import {Branch} from "../../app/+sucursales/shared/branch";
 import {Model} from '../../shared/model';
 import {Product} from '../../shared/product/product';
 /**

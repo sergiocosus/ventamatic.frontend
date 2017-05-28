@@ -1,11 +1,12 @@
 <h5>Tipo de pago:</h5>
-<div class="btn-group">
-  <label *ngFor="let paymentType of paymentTypes"
-         class="btn btn-primary" [(ngModel)]="selectedPaymentType.payment_type_id"
-         name="payment_type_id" [btnRadio]="paymentType.value">
+<md-radio-group [(ngModel)]="selectedPaymentType.payment_type_id" required=""
+                name="payment_type_id" placeholder="Tipo de Pago">
+  <md-radio-button *ngFor="let paymentType of paymentTypes" [value]="paymentType.id">
     {{paymentType.label}}
-  </label>
-</div>
+  </md-radio-button>
+</md-radio-group>
+
+
 <input-label *ngIf="selectedPaymentType.payment_type_id == 2" class="dark"
              [(ngModel)]="selectedPaymentType.card_payment_id" name="card_payment_id" [required]="true">
   Folio de la transacción electrónica

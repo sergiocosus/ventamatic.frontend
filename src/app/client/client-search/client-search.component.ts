@@ -1,7 +1,7 @@
 import {Component, OnInit, Output, EventEmitter, HostListener, ElementRef, ViewChild} from '@angular/core';
-import {ClientService} from "../../+app/+clientes/shared/client.service";
+import {ClientService} from "../../app/+clientes/shared/client.service";
 import {FormControl} from "@angular/forms";
-import {Client} from "../../+app/+clientes/shared/client";
+import {Client} from "../../app/+clientes/shared/client";
 import {NotifyService} from '../../services/notify.service';
 import {SelectableComponent} from '../../shared/selectable/selectable.component';
 import {PopoverComponent} from '../../shared/popover/popover.component';

@@ -1,32 +1,32 @@
 import { Routes, RouterModule } from "@angular/router";
-import {AppComponent} from "./+app/app.component";
+import {AppComponent} from "./app/app.component";
 import {LoginComponent} from "./login/login.component";
-import {UsuariosComponent} from "./+app/+usuarios/usuarios.component";
-import {VentaComponent} from "./+app/+venta/venta.component";
-import {CompraComponent} from "./+app/+compra/compra.component";
-import {InventarioComponent} from "./+app/+inventario/inventario.component";
-import {ProductosComponent} from "./+app/+productos/productos.component";
-import {ClientesComponent} from "./+app/+clientes/clientes.component";
-import {ProveedoresComponent} from "./+app/+proveedores/proveedores.component";
-import {ReportesComponent} from "./+app/+reportes/reportes.component";
-import {RolesComponent} from "./+app/+roles/roles.component";
-import {SucursalesComponent} from "./+app/+sucursales/sucursales.component";
-import {SelectBranchComponent} from "./+app/+venta/select-branch/select-branch.component";
-import {InventorySelectBranch} from "./+app/+inventario/select-branch/select-branch.component";
+import {UsuariosComponent} from "./app/+usuarios/usuarios.component";
+import {VentaComponent} from "./app/+venta/venta.component";
+import {BuyComponent} from "./app/buy/buy.component";
+import {InventarioComponent} from "./app/+inventario/inventario.component";
+import {ProductosComponent} from "./app/+productos/productos.component";
+import {ClientesComponent} from "./app/+clientes/clientes.component";
+import {ProveedoresComponent} from "./app/+proveedores/proveedores.component";
+import {ReportesComponent} from "./app/+reportes/reportes.component";
+import {RolesComponent} from "./app/+roles/roles.component";
+import {SucursalesComponent} from "./app/+sucursales/sucursales.component";
+import {SelectBranchComponent} from "./app/+venta/select-branch/select-branch.component";
+import {InventorySelectBranch} from "./app/+inventario/select-branch/select-branch.component";
 
-import {InventoryComponent} from "./+app/+inventario/inventory/inventory.component";
-import {SaleComponent} from "./+app/+venta/sale/sale.component";
+import {InventoryComponent} from "./app/+inventario/inventory/inventory.component";
+import {SaleComponent} from "./app/+venta/sale/sale.component";
 import {AuthGuardService} from "./services/auth-guard.service";
 import {NoAuthGuardService} from "./services/no-auth-guard.service";
-import {MainComponent} from "./+app/main/main.component";
-import {SaleReportComponent} from "./+app/+reportes/sale-report/sale-report.component";
-import {MenuReportComponent} from "./+app/+reportes/menu-report/menu-report.component";
-import {BuyReportComponent} from "./+app/+reportes/buy-report/buy-report.component";
-import {InventoryMovementReportComponent} from "./+app/+reportes/inventory-movement-report/inventory-movement-report.component";
-import {InventoryReportComponent} from "./+app/+reportes/inventory-report/inventory-report.component";
-import {HistoricInventoryReportComponent} from "./+app/+reportes/historic-inventory-report/historic-inventory-report.component";
-import {ScheduleReportComponent} from "./+app/+reportes/schedule-report/schedule-report.component";
-import {MyAccountComponent} from "./+app/+my-account/my-account.component";
+import {MainComponent} from "./app/main/main.component";
+import {SaleReportComponent} from "./app/+reportes/sale-report/sale-report.component";
+import {MenuReportComponent} from "./app/+reportes/menu-report/menu-report.component";
+import {BuyReportComponent} from "./app/+reportes/buy-report/buy-report.component";
+import {InventoryMovementReportComponent} from "./app/+reportes/inventory-movement-report/inventory-movement-report.component";
+import {InventoryReportComponent} from "./app/+reportes/inventory-report/inventory-report.component";
+import {HistoricInventoryReportComponent} from "./app/+reportes/historic-inventory-report/historic-inventory-report.component";
+import {ScheduleReportComponent} from "./app/+reportes/schedule-report/schedule-report.component";
+import {MyAccountComponent} from "./app/+my-account/my-account.component";
 
 
 export const appRoutes: Routes = [
@@ -68,7 +68,7 @@ export const appRoutes: Routes = [
       },
       {
         path: 'compra',
-        component: CompraComponent
+        loadChildren: 'app/app/buy/buy.module#BuyModule'
       },
       {
         path: 'inventario',

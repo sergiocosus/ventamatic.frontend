@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ApiHttp} from "../shared/api-http";
 import {User} from "./user";
-import {Role} from "../+app/+roles/classes/role";
+import {Role} from "../app/+roles/classes/role";
 
 @Injectable()
 export class UserService {

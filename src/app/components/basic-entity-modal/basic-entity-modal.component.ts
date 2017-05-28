@@ -3,7 +3,7 @@ import {BrandService} from "../../shared/product/brand/brand.service";
 import {ModalComponent} from "ng2-bs3-modal/components/modal";
 import {NotifyService} from "../../services/notify.service";
 import {BasicEntityService} from "./basic-entity-service";
-import {SupplierCategoryService} from "../../+app/+proveedores/category/supplier-category.service";
+import {SupplierCategoryService} from "../../app/+proveedores/category/supplier-category.service";
 import {CategoryService} from "../../shared/product/category/category.service";
 
 @Component({

@@ -2,9 +2,9 @@ import {Component, OnInit, ViewChild, Output, EventEmitter, HostListener} from '
 import {SelectableComponent} from '../../shared/selectable/selectable.component';
 import {PopoverComponent} from '../../shared/popover/popover.component';
 import {FormControl} from '@angular/forms';
-import {SupplierService} from '../../+app/+proveedores/shared/supplier.service';
+import {SupplierService} from '../../app/+proveedores/shared/supplier.service';
 import {NotifyService} from '../../services/notify.service';
-import {Supplier} from '../../+app/+proveedores/shared/supplier';
+import {Supplier} from '../../app/+proveedores/shared/supplier';
 
 @Component({
   selector: 'app-supplier-search',

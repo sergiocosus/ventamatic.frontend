@@ -2,9 +2,10 @@ import {Component, EventEmitter, Output} from '@angular/core';
 import {NotifyService} from "../../../services/notify.service";
 import {MdDialogRef} from '@angular/material';
 import {Inventory} from '../../classes/inventory.model';
-import {Branch} from '../../../+app/+sucursales/shared/branch';
+import {Branch} from '../../../app/+sucursales/shared/branch';
 import {InventoryService} from '../../services/inventory.service';
-import {BranchService} from '../../../+app/+sucursales/shared/branch.service';
+import {BranchService} from '../../../app/+sucursales/shared/branch.service';
+import {InventoryMovementTypeId} from '../../classes/inventory-movement-type-id.enum';
 
 @Component({
   selector: 'inventory-quantity-dialog',
@@ -171,13 +172,3 @@ export class InventoryQuantityDialogComponent  {
   }
 }
 
-enum InventoryMovementTypeId {
-  Promocion = 1,
-  Traslado,
-  Conversion,
-  Consesion,
-  Caducado,
-  Ajuste,
-  Compra,
-  Venta
-}

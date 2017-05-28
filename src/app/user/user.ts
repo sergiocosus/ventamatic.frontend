@@ -1,8 +1,8 @@
 import {Model} from "../shared/model";
-import {Role} from "../+app/+roles/classes/role";
-import {BranchRole} from "../+app/+roles/classes/branch-role";
+import {Role} from "../app/+roles/classes/role";
+import {BranchRole} from "../app/+roles/classes/branch-role";
 import {Permission} from "../shared/security/permission";
-import {Branch} from "../+app/+sucursales/shared/branch";
+import {Branch} from "../app/+sucursales/shared/branch";
 export class User extends Model{
   public id:number;
   public name:string;

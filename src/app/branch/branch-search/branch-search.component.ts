@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild, HostListener, Output, EventEmitter} from '
 import {SelectableComponent} from '../../shared/selectable/selectable.component';
 import {PopoverComponent} from '../../shared/popover/popover.component';
 import {FormControl} from '@angular/forms';
-import {BranchService} from '../../+app/+sucursales/shared/branch.service';
-import {Branch} from '../../+app/+sucursales/shared/branch';
+import {BranchService} from '../../app/+sucursales/shared/branch.service';
+import {Branch} from '../../app/+sucursales/shared/branch';
 import {NotifyService} from '../../services/notify.service';
 
 @Component({

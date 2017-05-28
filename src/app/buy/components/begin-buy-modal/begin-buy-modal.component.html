@@ -1,0 +1,40 @@
+<h3> Iniciar Compra </h3>
+
+<form (submit)="start()" ngNativeValidate class="dark-theme">
+  <md-select [(ngModel)]="formData.branch" required
+             placeholder="Sucursal" name="branch">
+    <md-option *ngFor="let branch of branches" [value]="branch">
+      {{branch.name}}
+    </md-option>
+  </md-select>
+
+  <md-select [(ngModel)]="formData.supplier" required
+             placeholder="Proveedor" name="supplier">
+    <md-option *ngFor="let supplier of suppliers" [value]="supplier">
+      {{supplier.name}}
+    </md-option>
+  </md-select>
+
+  <md-input-container>
+    <input [(ngModel)]="formData.introducedAmount" name="amount"
+           mdInput
+           placeholder="Total"
+           class="dark" type="number" min="0"
+           [step]="0.01"  required="required" />
+  </md-input-container>
+
+  <md-input-container>
+    <input [(ngModel)]="formData.supplierBillID" name="supplierBillID"
+           mdInput
+           placeholder="Número de factura"
+           required="required" />
+  </md-input-container>
+
+
+
+  <button type="submit"  md-raised-button color="accent">
+    Iniciar Compra
+  </button>
+</form>
+
+

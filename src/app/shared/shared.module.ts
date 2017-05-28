@@ -6,7 +6,16 @@ import { NotifyService } from '../services/notify.service';
 import { SelectableComponent } from './selectable/selectable.component';
 import { PopoverComponent } from './popover/popover.component';
 import {LocalStorageService} from './services/local-storage.service';
-import {MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule} from '@angular/material';
+import {
+  MdButtonModule, MdCheckboxModule, MdDialogModule, MdInputModule, MdRadioModule,
+  MdSelectModule
+} from '@angular/material';
+import {FindProductComponent} from './product/find-product/find-product.component';
+import {AutocompleteInputComponent} from '../components/autocomplete-input/autocomplete-input.component';
+import {PaymentTypeComponent} from './payment-type/payment-type/payment-type.component';
+import {MainContentComponent} from './main-content/main-content.component';
+import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
+import {MyCurrencyPipe} from '../pipes/my-currency.pipe';
 
 @NgModule({
   imports: [
@@ -17,15 +26,26 @@ import {MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule} from '@
     MdButtonModule,
     MdInputModule,
     MdSelectModule,
+    MdRadioModule,
+    MdDialogModule,
   ],
   declarations: [
     InputLabelComponent,
     SelectableComponent,
     PopoverComponent,
+    FindProductComponent,
+    AutocompleteInputComponent,
+    PaymentTypeComponent,
+    MainContentComponent,
+    ConfirmDialogComponent,
+    MyCurrencyPipe,
   ],
   providers: [
     NotifyService,
     LocalStorageService,
+  ],
+  entryComponents: [
+    ConfirmDialogComponent,
   ],
   exports: [
     CommonModule,
@@ -39,6 +59,15 @@ import {MdButtonModule, MdCheckboxModule, MdInputModule, MdSelectModule} from '@
     MdButtonModule,
     MdInputModule,
     MdSelectModule,
+    MdRadioModule,
+    MdDialogModule,
+
+    FindProductComponent,
+    AutocompleteInputComponent,
+    PaymentTypeComponent,
+    MainContentComponent,
+    ConfirmDialogComponent,
+    MyCurrencyPipe,
   ]
 })
 export class SharedModule { }

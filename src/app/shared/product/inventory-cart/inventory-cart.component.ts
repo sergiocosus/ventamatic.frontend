@@ -10,15 +10,13 @@ export class InventoryCartComponent implements OnInit {
   @Input() addedProducts:ProductSale[] = [];
   @Input() payment:number = null;
 
-
   constructor() {}
 
   ngOnInit() {
   }
 
-
   get total(){
-    var total = 0;
+    let total = 0;
     this.addedProducts.forEach(addedProduct => {
       total += addedProduct.inventory.correctPrice * addedProduct.quantity;
     });
@@ -30,7 +28,7 @@ export class InventoryCartComponent implements OnInit {
   }
 
   removeProduct(productSale){
-    var index = this.addedProducts.indexOf(productSale);
+    let index = this.addedProducts.indexOf(productSale);
     if (index > -1) {
       this.addedProducts.splice(index, 1);
     }

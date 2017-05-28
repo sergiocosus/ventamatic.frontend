@@ -1,0 +1,69 @@
+<main-content>
+  <app-begin-buy-modal
+    [hidden]="initialData"
+    (buy-started)="startBuy($event)">
+  </app-begin-buy-modal>
+
+
+  <div class="left" *ngIf="initialData">
+    <div class="search">
+      <app-find-product (selected-product)="addProduct($event)"
+                        mode="product">
+      </app-find-product>
+      <hr/>
+    </div>
+
+    <app-payment-type [(selectedPaymentType)]="selectedPaymentType">
+    </app-payment-type>
+    <form (submit)="openBuyConfirm()" ngNativeValidate>
+      <div class="finish">
+        <input-label [(ngModel)]="iva" name="iva" class="dark"
+                     [type]="'number'"  [max]="99999999999" [required]="true">
+          IVA
+        </input-label>
+        <input-label [(ngModel)]="ieps" name="ieps" class="dark"
+                     [type]="'number'"  [max]="99999999999" [required]="true">
+          IEPS
+        </input-label>
+        <div class="btn-group">
+          <button type="submit" class="btn btn-success btn-block">
+            Finalizar Compra
+          </button>
+
+          <button type="button"
+                  class="btn btn-danger btn-block"
+                  (click)="confirmCancelModal.open()">
+            Cancelar Compra
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="right" *ngIf="initialData">
+    <div class="branch-view" *ngIf="initialData.branch">
+      <h6>Sucursal</h6>
+      <h4>
+        {{initialData.branch.name}}
+      </h4>
+    </div>
+    <div class="branch-view" *ngIf="initialData.supplier">
+      <h6>Proveedor</h6>
+      <h4>
+        {{initialData.supplier.name}}
+      </h4>
+    </div>
+    <div class="branch-view" *ngIf="initialData.supplier">
+      <h6>Id de factura</h6>
+      <h4>
+        {{initialData.supplierBillID}}
+      </h4>
+    </div>
+    <hr/>
+    <app-product-cart
+      [(addedProducts)]="addedProducts"
+      [introducedAmount]="initialData.introducedAmount"
+    ></app-product-cart>
+  </div>
+</main-content>

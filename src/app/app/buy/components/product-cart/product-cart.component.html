@@ -1,0 +1,60 @@
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Tipo</th>
+    <th>Descripción</th>
+    <th>Costo</th>
+    <th>Cantidad</th>
+    <th>Subtotal</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let productBuy of addedProducts">
+    <td>{{productBuy.product.id}}</td>
+    <td>{{productBuy.inventoryMovementType.text}}</td>
+    <td>{{productBuy.product.description}}</td>
+    <td class="align-right">
+      <input type="number" min="0" max="9999999999" step=".01"
+             [(ngModel)]="productBuy.cost"/>
+    </td>
+    <td>
+      <input type="number" min="1"
+             [(ngModel)]="productBuy.quantity"/>
+    </td>
+    <td class="align-right">
+      {{productBuy.quantity * productBuy.cost | currency:'USD':true:'1.2-2'}}
+      <span class="button-delete"
+            (click)="removeProduct(productBuy)">
+            <i class="fa fa-times"></i>
+        </span>
+    </td>
+  </tr>
+  </tbody>
+
+  <tfoot>
+  <tr>
+    <td colspan="4"></td>
+    <td>Total Calculado</td>
+    <td class="align-right">
+      {{total | myCurrency}}
+    </td>
+  </tr>
+
+  <tr>
+    <td colspan="4"></td>
+    <td>Total Introducido</td>
+    <td class="align-right">
+      {{ introducedAmount-0 | myCurrency}}
+    </td>
+  </tr>
+  <tr [class.error]="amountDiference !== 0">
+    <td colspan="4"></td>
+    <td>Diferencia</td>
+    <td class="align-right">
+      {{ amountDiference | myCurrency}}
+    </td>
+  </tr>
+  </tfoot>
+
+</table>
