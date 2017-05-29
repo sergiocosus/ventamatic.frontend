@@ -1,5 +1,7 @@
 <person-item deletePermission="supplier-delete"
+             [deleted]="supplier.deleted_at"
              (delete)="delete.emit(supplier)"
+             (restore)="restore.emit(supplier)"
              (update)="update.emit(supplier)">
   <picture>
     <img src="assets/images/user.png"/>

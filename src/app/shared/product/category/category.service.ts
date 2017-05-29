@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {ApiHttp} from "../../api-http";
 import {Category} from "./category";
 import {BasicEntityService} from "../../../components/basic-entity-modal/basic-entity-service";
+import {Supplier} from '../../../app/+proveedores/shared/supplier';
 
 @Injectable()
 export class CategoryService implements BasicEntityService{
@@ -9,8 +10,8 @@ export class CategoryService implements BasicEntityService{
 
   constructor(private apiHttp:ApiHttp) {}
 
-  getAll(){
-    return this.apiHttp.get(this.basePath)
+  getAll(params?: any){
+    return this.apiHttp.get(this.basePath, params)
       .map(this.mapCategorys)
       .map(this.parseCategories);
   }
@@ -21,17 +22,22 @@ export class CategoryService implements BasicEntityService{
       .map(this.parseCategory);
   }
 
-  post(product:Category) {
-    return this.apiHttp.post(this.basePath,product)
+  post(category: Category) {
+    return this.apiHttp.post(this.basePath,category)
       .map(this.mapCategory)
       .map(this.parseCategory);
   }
 
-  delete(product_id:number){
-    return this.apiHttp.delete(this.basePath + product_id);
+  delete(category_id:number){
+    return this.apiHttp.delete(this.basePath + category_id);
   }
 
-  put(product:Category){
+  restore(category_id: number) {
+    return this.apiHttp.patch(this.basePath + category_id + '/restore', {})
+      .map(data => new Category().parse(data.category));
+  }
+
+  put(product: Category){
     return this.apiHttp.put(this.basePath + product.id, product)
       .map(this.mapCategory)
       .map(this.parseCategory);

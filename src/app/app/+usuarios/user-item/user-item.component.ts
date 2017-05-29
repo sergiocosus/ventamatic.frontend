@@ -10,6 +10,7 @@ export class UserItemComponent implements OnInit {
   @Input() user:User;
 
   @Output() delete = new EventEmitter();
+  @Output() restore = new EventEmitter();
   @Output() update = new EventEmitter();
   @Output() roles = new EventEmitter();
 

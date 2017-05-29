@@ -41,6 +41,11 @@ export class ProductService {
     return this.apiHttp.delete(this.basePath + product_id);
   }
 
+  restore(product_id: number) {
+    return this.apiHttp.patch(this.basePath + product_id + '/restore', {})
+        .map(data => new Product().parse(data.product));
+  }
+
   put(product:Product){
     return this.apiHttp.put(this.basePath + product.id, product)
       .map(this.mapProduct)

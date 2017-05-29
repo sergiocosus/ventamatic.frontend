@@ -1,6 +1,5 @@
 @import 'src/app/vars';
 
-/* You can add global styles to this file, and also import other style files */
 .open {
   > .dropdown-menu {
       display: block;
@@ -8,6 +7,34 @@
   > a {
       outline: 0;
     }
+}
+
+
+.button-modify{
+  display: flex;
+  position: absolute;
+  right: -5px;
+  top: -5px;
+  z-index: 2;
+  background-color: #EB0;
+  width: 25px;
+  height: 25px;
+  border: 2px white solid;
+  color: white;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+  transition: .25s all;
+
+  &:hover{
+    background-color: darken(#EB0, .5);
+    transform: scale(1.5,1.5);
+  }
+
+  i{
+    font-size: 1.2em;
+  }
+
 }
 
 @import '~@angular/material/theming';

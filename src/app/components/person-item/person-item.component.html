@@ -1,9 +1,18 @@
 <template [ngIf]="canDelete">
-  <div *appUserCan="deletePermission"
-       class="button-delete"
-       (click)="clickDelete()">
-    <i class="fa fa-trash" ></i>
-  </div>
+  <ng-container *appUserCan="deletePermission">
+    <div class="button-modify" *ngIf="deleted; else notDeleted"
+         (click)="clickRestore()">
+      <i class="fa fa-recycle" aria-hidden="true"></i>
+    </div>
+    <ng-template #notDeleted>
+      <div class="button-delete"
+           (click)="clickDelete()">
+        <i class="fa fa-trash" ></i>
+      </div>
+    </ng-template>
+  </ng-container>
+
+
 </template>
 <div class="content-div" (click)="clickUpdate()">
   <ng-content></ng-content>

@@ -8,8 +8,10 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class PersonItemComponent implements OnInit {
   @Input() canDelete:boolean = true;
   @Input() deletePermission:string;
+  @Input() deleted: boolean;
 
   @Output() delete = new EventEmitter();
+  @Output() restore = new EventEmitter();
   @Output() update = new EventEmitter();
 
   constructor() {}
@@ -18,10 +20,14 @@ export class PersonItemComponent implements OnInit {
   }
 
   clickDelete(){
-    this.delete.emit('delete');
+    this.delete.emit();
+  }
+
+  clickRestore(){
+    this.restore.emit();
   }
 
   clickUpdate(){
-    this.update.emit('update');
+    this.update.emit();
   }
 }

@@ -10,6 +10,7 @@ export class ClientItemComponent implements OnInit {
   @Input() client:any;
 
   @Output() delete = new EventEmitter();
+  @Output() restore = new EventEmitter();
   @Output() update = new EventEmitter();
 
   constructor() {}

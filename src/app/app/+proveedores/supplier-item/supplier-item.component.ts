@@ -9,6 +9,7 @@ export class SupplierItemComponent implements OnInit {
   @Input() supplier:any;
 
   @Output() delete = new EventEmitter();
+  @Output() restore = new EventEmitter();
   @Output() update = new EventEmitter();
 
   constructor() {}

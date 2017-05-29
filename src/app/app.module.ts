@@ -5,7 +5,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HttpModule, Http } from '@angular/http';
 import 'rxjs/Rx';
-import { Ng2Bs3ModalModule } from "ng2-bs3-modal/ng2-bs3-modal";
 
 import {
   NotificationsService,
@@ -81,7 +80,6 @@ import { HistoricInventoryReportComponent } from './app/+reportes/historic-inven
 import { ScheduleReportComponent } from './app/+reportes/schedule-report/schedule-report.component';
 import { CsvService } from 'angular2-json2csv';
 import { MyAccountComponent } from './app/+my-account/my-account.component';
-import { MyCurrencyPipe } from './pipes/my-currency.pipe';
 import {PopoverModule} from "ng2-popover";
 import {ProductModule} from "./product/product.module";
 import {ClientModule} from "./client/client.module";
@@ -92,6 +90,7 @@ import {BranchModule} from './branch/branch.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MyDateRangePickerModule} from 'mydaterangepicker';
 import {InventoryModule} from './inventory/inventory.module';
+import {ModalModule} from 'ng2-bs4-modal/ng2-bs4-modal';
 
 @NgModule({
   declarations: [
@@ -157,7 +156,7 @@ import {InventoryModule} from './inventory/inventory.module';
     ButtonsModule,
     SimpleNotificationsModule,
     SelectModule,
-    Ng2Bs3ModalModule,
+    ModalModule,
     PopoverModule,
     MyDateRangePickerModule,
     ProductModule,

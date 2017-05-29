@@ -1,18 +1,15 @@
 <search-bar>
-  <div>
-    <input type="text" placeholder="ID"/>
-    <i class="fa fa-search" aria-hidden="true"></i>
-  </div>
-  <div>
-    <input type="text" placeholder="Nombre"/>
-    <i class="fa fa-search" aria-hidden="true"></i>
-  </div>
   <button md-raised-button color="accent"
           *appUserCan="'user-create'"
           (click)="create()">
     <i class="fa fa-user-plus" aria-hidden="true"></i>
     Agregar Usuario
   </button>
+
+  <md-checkbox [formControl]="deletedControl" *appUserCan="'user-delete'" class="dark-theme">
+    <i class="fa fa-trash"></i>
+    Ver eliminados
+  </md-checkbox>
 </search-bar>
 
 <main-content>
@@ -20,6 +17,7 @@
              [user]="user"
              (update)="update($event)"
              (delete)="delete($event)"
+             (restore)="restore($event)"
              (roles)="userRoleModal.open($event.id)"
   ></user-item>
 </main-content>

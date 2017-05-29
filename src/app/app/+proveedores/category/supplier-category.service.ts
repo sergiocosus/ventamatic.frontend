@@ -10,8 +10,8 @@ export class SupplierCategoryService implements BasicEntityService{
 
   constructor(private apiHttp:ApiHttp) {}
 
-  getAll(){
-    return this.apiHttp.get(this.basePath)
+  getAll(params?: any){
+    return this.apiHttp.get(this.basePath, params)
       .map(json => SupplierCategory.parseArray(json.supplier_categories));
   }
 
@@ -28,6 +28,11 @@ export class SupplierCategoryService implements BasicEntityService{
 
   delete(supplier_category_id:number){
     return this.apiHttp.delete(this.basePath + supplier_category_id);
+  }
+
+  restore(supplier_category_id: number) {
+    return this.apiHttp.patch(this.basePath + supplier_category_id + '/restore', {})
+      .map(data => new SupplierCategory().parse(data.supplier_category));
   }
 
   put(supplierCategory:SupplierCategory){

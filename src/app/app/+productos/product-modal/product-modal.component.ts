@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, Output } from '@angular/core';
-import { ModalComponent } from "ng2-bs3-modal/ng2-bs3-modal";
+import { ModalComponent } from "ng2-bs4-modal/ng2-bs4-modal";
 import {CrudModalComponent} from "../../../components/crud-modal/crud-modal.component";
 import {Product} from "../../../shared/product/product";
 import {ProductService} from "../../../shared/product/product.service";

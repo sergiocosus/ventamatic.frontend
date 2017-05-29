@@ -5,6 +5,7 @@ import {ProductService} from "../../shared/product/product.service";
 import {Product} from "../../shared/product/product";
 import {ProductModalComponent} from "./product-modal/product-modal.component";
 import {NotifyService} from "../../services/notify.service";
+import {FormControl} from '@angular/forms';
 
 
 @Component({
@@ -15,16 +16,27 @@ import {NotifyService} from "../../services/notify.service";
 export class ProductosComponent implements OnInit {
   @ViewChild(ProductModalComponent) public productModal:ProductModalComponent;
   public products:Product[];
+  public deletedControl = new FormControl();
 
   constructor(private productService:ProductService,
-              private notify:NotifyService) {}
+              private notify:NotifyService) {
+    this.deletedControl.valueChanges.subscribe(
+      showDeleted => this.loadProducts()
+    );
+  }
 
   ngOnInit() {
-    this.productService.getAll().subscribe(
-      products => {
-        console.log(products);
-        this.products = products;
-      },
+    this.loadProducts();
+  }
+
+  loadProducts() {
+    this.products = [];
+    const params = {
+      deleted: this.deletedControl.value
+    };
+
+    this.productService.getAll(params).subscribe(
+      products => this.products = products,
       error => this.notify.serviceError(error)
     );
   }
@@ -39,7 +51,24 @@ export class ProductosComponent implements OnInit {
     this.delete(product);
   }
 
-  clickCreate(product:Product){
+  clickRestore($event, product: Product) {
+    $event.preventDefault();
+    $event.stopPropagation();
+
+    this.productService.restore(product.id).subscribe(
+      productRestored => {
+        const index = this.products.indexOf(product);
+        if (index > -1) {
+          this.products[index] = productRestored;
+        }
+
+        this.notify.success('Producto restaurado');
+      },
+      error => this.notify.serviceError(error)
+    );
+  }
+
+  clickCreate(){
     this.create();
   }
 
@@ -68,11 +97,13 @@ export class ProductosComponent implements OnInit {
   }
 
   deleted(product:Product){
-    var index = this.products.indexOf(product);
+    let index = this.products.indexOf(product);
     if (index > -1) {
-      this.products.splice(index, 1);
+      if (this.deletedControl.value) {
+        this.products[index].deleted_at = ' ';
+      } else {
+        this.products.splice(index, 1);
+      }
     }
   }
-
-
 }

@@ -5,12 +5,12 @@ import {BasicEntityService} from "../../../components/basic-entity-modal/basic-e
 
 @Injectable()
 export class BrandService implements BasicEntityService{
-  private basePath= 'product/brand/';
+  private basePath = 'product/brand/';
 
   constructor(private apiHttp:ApiHttp) {}
 
-  getAll(){
-    return this.apiHttp.get(this.basePath)
+  getAll(params?: any){
+    return this.apiHttp.get(this.basePath, params)
       .map(this.mapBrands)
       .map(this.parseBrands);
   }
@@ -29,6 +29,11 @@ export class BrandService implements BasicEntityService{
 
   delete(brand_id:number){
     return this.apiHttp.delete(this.basePath + brand_id);
+  }
+
+  restore(brandh_id: number) {
+    return this.apiHttp.patch(this.basePath + brandh_id + '/restore', {})
+      .map(data => new Brand().parse(data.brand));
   }
 
   put(brand:Brand){

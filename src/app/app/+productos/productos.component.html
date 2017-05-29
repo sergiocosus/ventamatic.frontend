@@ -1,15 +1,7 @@
 <search-bar>
-  <div>
-    <input type="text" placeholder="ID"/>
-    <i class="fa fa-search" aria-hidden="true"></i>
-  </div>
-  <div>
-    <input type="text" placeholder="Descripción"/>
-    <i class="fa fa-search" aria-hidden="true"></i>
-  </div>
   <button *appUserCan="'product-create'"
           md-raised-button color="accent"
-          (click)="clickCreate(inventory)">
+          (click)="clickCreate()">
     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
     Agregar Producto
   </button>
@@ -23,7 +15,12 @@
           (click)="brandModal.open()">
     Marcas
   </button>
+  <md-checkbox [formControl]="deletedControl" *appUserCan="'product-delete'" class="dark-theme">
+    <i class="fa fa-trash"></i>
+    Ver eliminados
+  </md-checkbox>
 </search-bar>
+
 <main-content>
   <table>
     <thead>
@@ -60,16 +57,24 @@
         <span *ngIf="product.unit">
           {{product.unit.name}}
         </span>
-        <div *appUserCan="'product-delete'"
-             class="button-delete"
-             (click)="clickDelete($event, product)">
-          <i class="fa fa-trash" ></i>
-        </div>
+        <ng-container *appUserCan="'product-delete'">
+          <div class="button-modify" *ngIf="product.deleted_at; else notDeleted"
+               (click)="clickRestore($event, product)">
+            <i class="fa fa-recycle" aria-hidden="true"></i>
+          </div>
+          <ng-template #notDeleted>
+            <div class="button-delete"
+                 (click)="clickDelete($event, product)">
+              <i class="fa fa-trash" ></i>
+            </div>
+          </ng-template>
+        </ng-container>
       </td>
     </tr>
     </tbody>
   </table>
 </main-content>
+
 <product-modal (updated)="updated($event)"
                (created)="created($event)"
                 (deleted)="deleted($event)"></product-modal>

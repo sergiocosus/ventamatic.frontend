@@ -13,12 +13,17 @@
           (click)="brandModal.open()">
     Marcas
   </button>
+  <md-checkbox [formControl]="deletedControl" *appUserCan="'product-delete'" class="dark-theme">
+    <i class="fa fa-trash"></i>
+    Ver eliminados
+  </md-checkbox>
 </search-bar>
 
 <main-content>
   <supplier-item *ngFor="let supplier of suppliers"
                [supplier]="supplier"
                (update)="update($event)"
+               (restore)="restore($event)"
                (delete)="delete($event)"
   ></supplier-item>
 </main-content>

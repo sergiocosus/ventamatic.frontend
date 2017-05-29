@@ -9,8 +9,8 @@ export class UserService {
 
   constructor(private apiHttp:ApiHttp) {}
 
-  getAll() {
-    return this.apiHttp.get(this.basePath)
+  getAll(params?: any) {
+    return this.apiHttp.get(this.basePath, params)
         .map(res => User.parseArray(res.users));
   }
 
@@ -36,6 +36,11 @@ export class UserService {
 
   delete(userId:number){
     return this.apiHttp.delete(this.basePath + userId);
+  }
+
+  restore(user_id: number) {
+    return this.apiHttp.patch(this.basePath + user_id + '/restore', {})
+      .map(data => new User().parse(data.user));
   }
 
   put(user:User){

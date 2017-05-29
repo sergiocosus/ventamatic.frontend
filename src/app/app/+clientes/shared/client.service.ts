@@ -8,8 +8,8 @@ export class ClientService {
 
   constructor(private apiHttp:ApiHttp) {}
 
-  getAll() {
-    return this.apiHttp.get(this.basePath)
+  getAll(params?:any) {
+    return this.apiHttp.get(this.basePath, params)
       .map(res =>  <Client[]>res.clients);
   }
 
@@ -30,6 +30,11 @@ export class ClientService {
 
   delete(client_id:number){
     return this.apiHttp.delete(this.basePath + client_id);
+  }
+
+  restore(client_id: number) {
+    return this.apiHttp.patch(this.basePath + client_id + '/restore', {})
+      .map(data => new Client().parse(data.client));
   }
 
   put(client:Client){

@@ -8,8 +8,8 @@ export class SupplierService {
 
   constructor(private apiHttp:ApiHttp) {}
 
-  getAll() {
-    return this.apiHttp.get(this.basePath)
+  getAll(params?:any) {
+    return this.apiHttp.get(this.basePath, params)
       .map(res => {console.log(res);return <Supplier[]>res.suppliers});
   }
 
@@ -30,6 +30,11 @@ export class SupplierService {
 
   delete(supplier_id:number){
     return this.apiHttp.delete(this.basePath + supplier_id);
+  }
+
+  restore(supplier_id: number) {
+    return this.apiHttp.patch(this.basePath + supplier_id + '/restore', {})
+      .map(data => new Supplier().parse(data.supplier));
   }
 
   put(supplier:Supplier){

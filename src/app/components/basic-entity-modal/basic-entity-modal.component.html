@@ -3,6 +3,11 @@
     <h4>{{title}}</h4>
   </modal-header>
   <modal-body>
+    <md-checkbox [formControl]="deletedControl" *appUserCan="'user-delete'" >
+      <i class="fa fa-trash"></i>
+      Ver eliminados
+    </md-checkbox>
+
     <form (ngSubmit)="create()" ngNativeValidate>
       <input-label name="id" type="text" [(ngModel)]="entity.name">
         Ingrese una nueva {{title}}
@@ -28,11 +33,18 @@
 
           </div>
           <div *appUserCan="mode+'-delete'">
-            <button type="button"
-                    class="btn btn-danger"
-                    (click)="delete(entity)">
-              <i class="fa fa-times" aria-hidden="true"></i>
+            <button *ngIf="entity.deleted_at; else notDeleted" type="button"
+                    class="btn btn-warning"
+                    (click)="restore(entity)">
+              <i class="fa fa-recycle" aria-hidden="true"></i>
             </button>
+            <ng-template #notDeleted>
+              <button type="button"
+                      class="btn btn-danger"
+                      (click)="delete(entity)">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </button>
+            </ng-template>
           </div>
       </li>
     </ul>

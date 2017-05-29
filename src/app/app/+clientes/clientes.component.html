@@ -5,6 +5,11 @@
     <i class="fa fa-user-plus" aria-hidden="true"></i>
     Agregar Cliente
   </button>
+
+  <md-checkbox [formControl]="deletedControl" *appUserCan="'client-delete'" class="dark-theme">
+    <i class="fa fa-trash"></i>
+    Ver eliminados
+  </md-checkbox>
 </search-bar>
 
 <main-content>
@@ -12,6 +17,7 @@
                [client]="client"
                (update)="update($event)"
                (delete)="delete($event)"
+               (restore)="restore($event)"
   ></client-item>
 </main-content>
 

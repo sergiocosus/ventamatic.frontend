@@ -1,10 +1,11 @@
 import {Component, OnInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import {BrandService} from "../../shared/product/brand/brand.service";
-import {ModalComponent} from "ng2-bs3-modal/components/modal";
+import {ModalComponent} from "ng2-bs4-modal/components/modal";
 import {NotifyService} from "../../services/notify.service";
 import {BasicEntityService} from "./basic-entity-service";
 import {SupplierCategoryService} from "../../app/+proveedores/category/supplier-category.service";
 import {CategoryService} from "../../shared/product/category/category.service";
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-basic-entity-modal',
@@ -30,12 +31,23 @@ export class BasicEntityModalComponent implements OnInit {
     successDelete: 'Eliminado exitosamente'
   };
 
+  public deletedControl = new FormControl();
+
+
   constructor(private brandService:BrandService,
               protected categoryService: CategoryService,
               protected supplierCategoryService: SupplierCategoryService,
-              private noty:NotifyService) { }
+              private notify: NotifyService) {
+    this.deletedControl.valueChanges.subscribe(
+      showDeleted => this.loadFromService()
+    );
+  }
 
   ngOnInit() {
+    this.loadFromService();
+  }
+
+  loadFromService() {
     switch (this.mode) {
       case 'brand':
         this.service = this.brandService;
@@ -51,7 +63,11 @@ export class BasicEntityModalComponent implements OnInit {
         break;
     }
 
-    this.service.getAll().subscribe(
+    const params = {
+      deleted: this.deletedControl.value
+    };
+
+    this.service.getAll(params).subscribe(
       entities => {
         this.entities = entities;
       }
@@ -63,10 +79,10 @@ export class BasicEntityModalComponent implements OnInit {
       entity => {
         this.entities.push(entity);
         this.entity = { name : null };
-        this.noty.success(this.messages.successCreate);
+        this.notify.success(this.messages.successCreate);
       },
       error => {
-        this.noty.serviceError(error)
+        this.notify.serviceError(error)
       }
     );
   }
@@ -79,10 +95,10 @@ export class BasicEntityModalComponent implements OnInit {
             this.entities[i] = brand;
           }
         }
-        this.noty.success(this.messages.successUpdate)
+        this.notify.success(this.messages.successUpdate)
       },
       error => {
-        this.noty.serviceError(error)
+        this.notify.serviceError(error)
       }
     );
   }
@@ -90,16 +106,35 @@ export class BasicEntityModalComponent implements OnInit {
   delete(entity){
     this.service.delete(entity.id).subscribe(
       success => {
-        var index = this.entities.indexOf(entity);
+        const index = this.entities.indexOf(entity);
         if (index > -1) {
-          this.entities.splice(index, 1);
+          if (this.deletedControl.value) {
+            this.entities[index].deleted_at = ' ';
+          } else {
+            this.entities.splice(index, 1);
+          }
         }
-        this.noty.success(this.messages.successDelete);
+
+        this.notify.success(this.messages.successDelete);
       },
       error => {
-        this.noty.serviceError(error)
+        this.notify.serviceError(error)
       }
     )
+  }
+
+  restore(entity) {
+    this.service.restore(entity.id).subscribe(
+      entityRestored => {
+        const index = this.entities.indexOf(entity);
+        if (index > -1) {
+          this.entities[index] = entityRestored;
+        }
+
+        this.notify.success(this.title + ' restaurado');
+      },
+      error => this.notify.serviceError(error)
+    );
   }
 
   open(){
