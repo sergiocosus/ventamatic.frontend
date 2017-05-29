@@ -82,6 +82,8 @@ export class BuyReportComponent implements OnInit {
           usuario_apellido_materno: buy.user.last_name_2,
           id_proveedor: buy.supplier.id,
           proveedor_nombre: buy.supplier.name,
+          sucursal_id: buy.branch_id,
+          sucursal_nombre: buy.branch.name,
           tipo_de_pago_id: buy.payment_type_id,
           pago_de_tarjeta_id: buy.card_payment_id,
           iva: buy.iva,

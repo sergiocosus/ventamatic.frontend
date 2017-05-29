@@ -90,6 +90,8 @@ export class SaleReportComponent implements OnInit {
           cliente_nombre: sale.client.name,
           cliente_apellido_paterno: sale.client.last_name,
           cliente_apellido_materno: sale.client.last_name_2,
+          sucursal_id: sale.branch_id,
+          sucursal_nombre: sale.branch.name,
           tipo_de_pago_id: sale.payment_type_id,
           pago_de_tarjeta_id: sale.card_payment_id,
         };

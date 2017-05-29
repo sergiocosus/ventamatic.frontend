@@ -77,16 +77,21 @@ export class InventoryMovementReportComponent implements OnInit {
   downloadCSV(){
     this.reportService.downloadCSV(this.inventory_movements.map(
       inventoryMovement => ({
+        fecha_hora: this.reportService.formatDateTime(inventoryMovement.created_at),
+        fecha: this.reportService.formatDate(inventoryMovement.created_at),
+        hora: this.reportService.formatTime(inventoryMovement.created_at),
         id: inventoryMovement.id,
-        usuario_id: inventoryMovement.user_id,
         sucursal_id: inventoryMovement.branch_id,
+        sucursal_nombre: inventoryMovement.branch.name,
+        usuario_id: inventoryMovement.user_id,
+        usuario_nombre: inventoryMovement.user.name,
+        usuario_apellido_paterno: inventoryMovement.user.last_name,
+        usuario_apellido_materno: inventoryMovement.user.last_name_2,
         producto_id: inventoryMovement.product_id,
-        tipo_de_movimiento_de_inventario_id: inventoryMovement.inventory_movement_type_id,
-        lote: inventoryMovement.batch,
+        producto_nombre: inventoryMovement.product.description,
         cantidad: inventoryMovement.quantity,
-        creado: this.reportService.formatDateTime(inventoryMovement.created_at),
-        actualizado: this.reportService.formatDateTime(inventoryMovement.updated_at),
-        borrado: this.reportService.formatDateTime(inventoryMovement.deleted_at)
+        tipo_movimiento_inventario_id: inventoryMovement.inventory_movement_type.name,
+        lote: inventoryMovement.batch,
       })
     ), `entradas-salidas-${new Date().toISOString()}`);
   }
