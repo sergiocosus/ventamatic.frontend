@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ReportService } from '../../../shared/report/report.service';
 import {NotifyService} from "../../../services/notify.service";
 import {messages} from "../../../shared/messages";
+import {Category} from '../../../shared/product/category/category';
 
 @Component({
   selector: 'app-inventory-report',
@@ -39,6 +40,11 @@ export class InventoryReportComponent implements OnInit {
     };
   }
 
+  implode(categories: Category[]) {
+    return categories.map(category => category.name)
+      .join(', ');
+  }
+
   submit(){
     this.reportService.getInventory(this.request).subscribe(
       inventories => {
@@ -68,14 +74,16 @@ export class InventoryReportComponent implements OnInit {
   downloadCSV(){
     this.reportService.downloadCSV(this.inventories.map(
       inventory => ({
-        id: inventory.id,
         sucursal_id: inventory.branch_id,
+        sucursal_nombre: inventory.branch.name,
         producto_id: inventory.product_id,
+        codigo_barras: inventory.product.bar_code,
+        producto_descripcion: inventory.product.description,
+        minimo: inventory.minimum,
         cantidad: inventory.quantity,
         precio: inventory.price,
-        minimo: inventory.minimum,
-        creado: this.reportService.formatDateTime(inventory.created_at),
-        actualizado: this.reportService.formatDateTime(inventory.updated_at)
+        precio_total: inventory.price * inventory.quantity,
+        costo: 'Pendiente',
       })
     ), `inventario-${new Date().toISOString()}`);
   }

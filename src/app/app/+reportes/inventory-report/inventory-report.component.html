@@ -37,7 +37,7 @@
 <main-content>
   <h2>Reporte de inventario</h2>
   <ul>
-    <li *ngIf="inventories">Registros de inventario: {{inventories.length}}</li>
+    <li *ngIf="inventories"> Registros de inventario: {{inventories.length}}</li>
     <li>Registros de inventario con existencias {{productsWithExistences}}</li>
     <li>Productos diferentes registrados: {{registeredProducts}}</li>
   </ul>
@@ -47,10 +47,12 @@
       <th>Sucursal</th>
       <th>ID</th>
       <th>Producto</th>
-      <th>Marca</th>
       <th>Categorias</th>
+      <th>Marca</th>
       <th>Cantidad</th>
       <th>Precio</th>
+      <th>Precio Total</th>
+      <th>Costo</th>
       <th>Minimo</th>
     </tr>
     </thead>
@@ -59,14 +61,12 @@
         <td>{{inventory.branch.name}}</td>
         <td>{{inventory.id}}</td>
         <td>{{inventory.product.description}}</td>
+        <td>{{implode(inventory.product.categories)}}</td>
         <td>{{inventory.product.brand ? inventory.product.brand.name : ''}}</td>
-        <td>
-          <span *ngFor="let category of inventory.product.categories">
-            {{category.name}},
-          </span>
-        </td>
         <td>{{inventory.quantity}}</td>
-        <td>{{inventory.price}}</td>
+        <td>{{inventory.price | myCurrency}}</td>
+        <td>{{inventory.quantity * inventory.price | myCurrency}}</td>
+        <td>/* pendiente */</td>
         <td>{{inventory.minimum}}</td>
       </tr>
     </template>
