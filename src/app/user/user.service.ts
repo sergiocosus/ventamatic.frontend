@@ -54,7 +54,7 @@ export class UserService {
   }
 
   putBranchRoles(user:User, branch_roles:any[]){
-    return this.apiHttp.put(this.basePath + user.id +'/inventory-roles', {branch_roles:branch_roles})
+    return this.apiHttp.put(this.basePath + user.id +'/branch-roles', {branch_roles:branch_roles})
       .map(res => {return Role.parseArray(res.branch_roles)});
   }
 }

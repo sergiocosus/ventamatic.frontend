@@ -74,8 +74,8 @@ export class InventoryReportComponent implements OnInit {
         cantidad: inventory.quantity,
         precio: inventory.price,
         minimo: inventory.minimum,
-        creado: this.reportService.formatDate(inventory.created_at),
-        actualizado: this.reportService.formatDate(inventory.updated_at)
+        creado: this.reportService.formatDateTime(inventory.created_at),
+        actualizado: this.reportService.formatDateTime(inventory.updated_at)
       })
     ), `inventario-${new Date().toISOString()}`);
   }

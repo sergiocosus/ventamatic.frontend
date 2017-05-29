@@ -76,9 +76,9 @@ export class BuyReportComponent implements OnInit {
         iva: buy.iva,
         ieps: buy.ieps,
         total: buy.total,
-        creado: this.reportService.formatDate(buy.created_at),
-        actualizado: this.reportService.formatDate(buy.updated_at),
-        borrado: this.reportService.formatDate(buy.deleted_at)
+        creado: this.reportService.formatDateTime(buy.created_at),
+        actualizado: this.reportService.formatDateTime(buy.updated_at),
+        borrado: this.reportService.formatDateTime(buy.deleted_at)
       })
     ), `compras-${new Date().toISOString()}`);
   }

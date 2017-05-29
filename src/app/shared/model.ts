@@ -11,6 +11,11 @@ export class Model{
   }
 
   public static parseDateTime(date) {
-    return moment.utc(date).toDate();
+    return Model.parseDateTimeMoment(date).toDate();
+  }
+
+  public static parseDateTimeMoment(date) {
+    console.log(moment);
+    return moment.utc(date);
   }
 }

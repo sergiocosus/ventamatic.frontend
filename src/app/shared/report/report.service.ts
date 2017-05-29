@@ -81,9 +81,24 @@ export class ReportService {
     }
   }
 
-  formatDate(date) {
+  formatDateTime(date) {
     if (date) {
       return Model.parseDateTime(date).toISOString()
+    } else {
+      return '';
+    }
+  }
+
+  formatDate(date) {
+    if (date) {
+      return moment(Model.parseDateTime(date)).format('YYYY-MM-DD');
+    } else {
+      return '';
+    }
+  }
+  formatTime(date) {
+    if (date) {
+      return moment(Model.parseDateTime(date)).format('HH:MM:SS');
     } else {
       return '';
     }

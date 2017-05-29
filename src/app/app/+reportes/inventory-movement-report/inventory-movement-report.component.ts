@@ -84,9 +84,9 @@ export class InventoryMovementReportComponent implements OnInit {
         tipo_de_movimiento_de_inventario_id: inventoryMovement.inventory_movement_type_id,
         lote: inventoryMovement.batch,
         cantidad: inventoryMovement.quantity,
-        creado: this.reportService.formatDate(inventoryMovement.created_at),
-        actualizado: this.reportService.formatDate(inventoryMovement.updated_at),
-        borrado: this.reportService.formatDate(inventoryMovement.deleted_at)
+        creado: this.reportService.formatDateTime(inventoryMovement.created_at),
+        actualizado: this.reportService.formatDateTime(inventoryMovement.updated_at),
+        borrado: this.reportService.formatDateTime(inventoryMovement.deleted_at)
       })
     ), `entradas-salidas-${new Date().toISOString()}`);
   }

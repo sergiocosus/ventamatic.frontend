@@ -68,8 +68,8 @@ export class ScheduleReportComponent implements OnInit {
         monto_inicial: schedule.initial_amount,
         monto_del_sistema: schedule.system_amount,
         monto_final: schedule.final_amount,
-        creado: this.reportService.formatDate(schedule.created_at),
-        terminado: this.reportService.formatDate(schedule.updated_at)
+        creado: this.reportService.formatDateTime(schedule.created_at),
+        terminado: this.reportService.formatDateTime(schedule.updated_at)
       })
     ), `turnos-${new Date().toISOString()}`);
   }

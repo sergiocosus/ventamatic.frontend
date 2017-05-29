@@ -74,16 +74,38 @@ export class SaleReportComponent implements OnInit {
   }
 
   downloadCSV(){
-    this.reportService.downloadCSV(this.sales.map(
-      sale => ({
-        id: sale.id,
-        tipo_de_pago_id: sale.payment_type_id,
-        pago_de_tarjeta_id: sale.card_payment_id,
-        total: sale.total,
-        creado: this.reportService.formatDate(sale.created_at),
-        actualizado: this.reportService.formatDate(sale.updated_at),
-        borrado: this.reportService.formatDate(sale.deleted_at)
-      })
-    ), `ventas-${new Date().toISOString()}`);
+    let rows = [];
+    this.sales.forEach(
+      sale => {
+        const saleData = {
+          id_venta: sale.id,
+          fecha_hora: this.reportService.formatDateTime(sale.created_at),
+          fecha: this.reportService.formatDate(sale.created_at),
+          hora: this.reportService.formatTime(sale.created_at),
+          id_usuario: sale.user_id,
+          usuario_nombre: sale.user.name,
+          usuario_apellido_paterno: sale.user.last_name,
+          usuario_apellido_materno: sale.user.last_name_2,
+          id_cliente: sale.client_id,
+          cliente_nombre: sale.client.name,
+          cliente_apellido_paterno: sale.client.last_name,
+          cliente_apellido_materno: sale.client.last_name_2,
+          tipo_de_pago_id: sale.payment_type_id,
+          pago_de_tarjeta_id: sale.card_payment_id,
+        };
+
+        sale.products.forEach(product => {
+          rows.push(Object.assign({}, saleData, {
+            id_producto: product.id,
+            producto_nombre: product.description,
+            cantidad: product.pivot.quantity,
+            precio: product.pivot.price,
+            total: product.pivot.price * product.pivot.quantity,
+          }));
+        });
+      }
+    );
+
+    this.reportService.downloadCSV(rows,`ventas-${new Date().toISOString()}`);
   }
 }
