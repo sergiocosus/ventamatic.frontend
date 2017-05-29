@@ -68,18 +68,39 @@ export class BuyReportComponent implements OnInit {
 
 
   downloadCSV(){
-    this.reportService.downloadCSV(this.buys.map(
-      buy => ({
-        id: buy.id,
-        tipo_de_pago_id: buy.payment_type_id,
-        pago_de_tarjeta_id: buy.card_payment_id,
-        iva: buy.iva,
-        ieps: buy.ieps,
-        total: buy.total,
-        creado: this.reportService.formatDateTime(buy.created_at),
-        actualizado: this.reportService.formatDateTime(buy.updated_at),
-        borrado: this.reportService.formatDateTime(buy.deleted_at)
-      })
-    ), `compras-${new Date().toISOString()}`);
+    let rows = [];
+    this.buys.forEach(
+      buy => {
+        const saleData = {
+          id_compra: buy.id,
+          fecha_hora: this.reportService.formatDateTime(buy.created_at),
+          fecha: this.reportService.formatDate(buy.created_at),
+          hora: this.reportService.formatTime(buy.created_at),
+          id_usuario: buy.user_id,
+          usuario_nombre: buy.user.name,
+          usuario_apellido_paterno: buy.user.last_name,
+          usuario_apellido_materno: buy.user.last_name_2,
+          id_proveedor: buy.supplier.id,
+          proveedor_nombre: buy.supplier.name,
+          tipo_de_pago_id: buy.payment_type_id,
+          pago_de_tarjeta_id: buy.card_payment_id,
+          iva: buy.iva,
+          ieps: buy.ieps,
+        };
+
+        buy.products.forEach(product => {
+          rows.push(Object.assign({}, saleData, {
+            id_producto: product.id,
+            producto_nombre: product.description,
+            cantidad: product.pivot.quantity,
+            costo: product.pivot.cost,
+            total: product.pivot.cost * product.pivot.quantity,
+            id_tipo_movimiento_inventario: product.pivot.inventory_movement_type_id
+          }));
+        });
+      }
+    );
+
+    this.reportService.downloadCSV(rows,`compras-${new Date().toISOString()}`);
   }
 }
