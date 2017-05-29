@@ -69,3 +69,8 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 .simple-notification-wrapper{
   z-index: 1000000 !important;
 }
+.modal-header{
+  .close {
+    order: 2;
+  }
+}

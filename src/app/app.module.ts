@@ -90,7 +90,7 @@ import {BranchModule} from './branch/branch.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MyDateRangePickerModule} from 'mydaterangepicker';
 import {InventoryModule} from './inventory/inventory.module';
-import {ModalModule} from 'ng2-bs4-modal/ng2-bs4-modal';
+import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
 
 @NgModule({
   declarations: [
@@ -156,7 +156,7 @@ import {ModalModule} from 'ng2-bs4-modal/ng2-bs4-modal';
     ButtonsModule,
     SimpleNotificationsModule,
     SelectModule,
-    ModalModule,
+    Ng2Bs3ModalModule,
     PopoverModule,
     MyDateRangePickerModule,
     ProductModule,

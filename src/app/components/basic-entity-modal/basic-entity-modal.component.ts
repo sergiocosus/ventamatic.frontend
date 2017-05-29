@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import {BrandService} from "../../shared/product/brand/brand.service";
-import {ModalComponent} from "ng2-bs4-modal/components/modal";
+import {ModalComponent} from "ng2-bs3-modal/ng2-bs3-modal";
 import {NotifyService} from "../../services/notify.service";
 import {BasicEntityService} from "./basic-entity-service";
 import {SupplierCategoryService} from "../../app/+proveedores/category/supplier-category.service";
