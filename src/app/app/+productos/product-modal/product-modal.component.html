@@ -5,7 +5,7 @@
     <h4 *ngIf="deleteMode"> Eliminar Producto </h4>
   </modal-header>
   <form (ngSubmit)="submit()" ngNativeValidate>
-    <modal-body *ngIf="!deleteMode && product">
+    <modal-body *ngIf="!deleteMode && !!product">
       <input-label type="text" *ngIf="updateMode"
                    required [(ngModel)]="product.id"  name="id"
                    [disabled]="updateMode">
@@ -65,14 +65,14 @@
       </input-label>
     </modal-body>
     <modal-footer>
-      <template appUserCan="product-edit">
+      <ng-template appUserCan="product-edit">
         <button *ngIf="locked"
                 type="submit" class="btn btn-danger pull-xs-left"
                 (click)="unlock()" >
           <i class="fa fa-unlock-alt" aria-hidden="true"></i>
           Editar Producto
         </button>
-      </template>
+      </ng-template>
       <button *ngIf="createMode"
               type="submit"
               class="btn btn-success">

@@ -52,7 +52,7 @@
       <th>Total</th>
     </tr>
     </thead>
-    <template ngFor let-sale [ngForOf]="sales">
+    <ng-template ngFor let-sale [ngForOf]="sales">
       <tr>
         <td>{{sale.id}}</td>
         <td>{{sale.created_at | date:'short'}}</td>
@@ -87,6 +87,6 @@
         </table>
         </td>
       </tr>
-    </template>
+    </ng-template>
   </table>
 </main-content>

@@ -2,12 +2,12 @@
   <li *ngFor="let item of items; let i=index"
       [class.selected]="selectedIndex == i"
       (click)="selected.emit(item)">
-    <template
+    <ng-template
       [ngTemplateOutlet]="template"
       [ngOutletContext]="{
         item: item
       }">
-    </template>
+    </ng-template>
   </li>
 </ul>
 <div *ngIf="items && !items.length && !loading">

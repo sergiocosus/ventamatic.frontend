@@ -103,7 +103,7 @@
       <th>Tipo de movimiento</th>
     </tr>
     </thead>
-    <template ngFor let-inventoryMovement [ngForOf]="inventory_movements">
+    <ng-template ngFor let-inventoryMovement [ngForOf]="inventory_movements">
       <tr>
         <td>{{inventoryMovement.id}}</td>
         <td>{{inventoryMovement.created_at | date:'short'}}</td>
@@ -113,6 +113,6 @@
         <td>{{inventoryMovement.quantity}}</td>
         <td>{{inventoryMovement.inventory_movement_type.name}}</td>
       </tr>
-    </template>
+    </ng-template>
   </table>
 </main-content>

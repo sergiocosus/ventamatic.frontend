@@ -16,8 +16,8 @@ export class RolesComponent implements OnInit {
   @ViewChild(RoleModalComponent) roleModal:RoleModalComponent;
   @ViewChild(BranchRoleModalComponent) branchRoleModal:BranchRoleModalComponent;
 
-  private roles:Role[];
-  private branchRoles:BranchRole[];
+  roles:Role[];
+  branchRoles:BranchRole[];
 
   constructor(private roleService:RoleService,
               private branchRoleService:BranchRoleService,

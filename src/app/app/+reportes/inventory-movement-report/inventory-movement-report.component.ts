@@ -12,7 +12,7 @@ import {InventoryMovementType} from '../../../inventory/classes/inventory-moveme
   styleUrls: ['./inventory-movement-report.component.scss']
 })
 export class InventoryMovementReportComponent implements OnInit {
-  private inventory_movements = [];
+  inventory_movements = [];
   inventoryMovementTypes: InventoryMovementType[];
 
   request:{

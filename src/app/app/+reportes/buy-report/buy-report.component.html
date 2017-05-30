@@ -54,7 +54,7 @@
       <th>Total</th>
     </tr>
     </thead>
-    <template ngFor let-buy [ngForOf]="buys">
+    <ng-template ngFor let-buy [ngForOf]="buys">
       <tr>
         <td>{{buy.id}}</td>
         <td>{{buy.created_at | date:'short'}}</td>
@@ -88,6 +88,6 @@
         </table>
         </td>
       </tr>
-    </template>
+    </ng-template>
   </table>
 </main-content>

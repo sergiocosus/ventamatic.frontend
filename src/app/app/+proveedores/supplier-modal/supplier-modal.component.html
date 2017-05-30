@@ -5,7 +5,7 @@
     <h4 *ngIf="deleteMode"> Eliminar Proveedor </h4>
   </modal-header>
   <form (ngSubmit)="submit()" ngNativeValidate>
-    <modal-body *ngIf="!deleteMode && supplier">
+    <modal-body *ngIf="!deleteMode && !!supplier">
       <input-label *ngIf="updateMode" name="id"
                    type="text" [(ngModel)]="supplier.id" disabled="disabled">
         Id
@@ -61,14 +61,14 @@
       </ng-select>
     </modal-body>
     <modal-footer>
-      <template [appUserCan]="'supplier-edit'">
+      <ng-template [appUserCan]="'supplier-edit'">
         <button *ngIf="locked"
                 type="submit" class="btn btn-danger pull-xs-left"
                 (click)="unlock()" >
           <i class="fa fa-unlock-alt" aria-hidden="true"></i>
           Editar Proveedor
         </button>
-      </template>
+      </ng-template>
       <button *ngIf="createMode"
               type="submit"
               class="btn btn-success">

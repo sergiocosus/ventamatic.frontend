@@ -12,6 +12,7 @@ export class SelectableComponent implements OnInit {
   @Input() loading: boolean = false;
   @Output() selected = new EventEmitter();
 
+  searching = false;
   selectedIndex = 0;
   constructor() { }
 

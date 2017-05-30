@@ -16,7 +16,7 @@ import {BranchService} from "../../+sucursales/shared/branch.service";
   styleUrls: ['./user-role-modal.component.scss']
 })
 export class UserRoleModalComponent implements OnInit {
-  @ViewChild(ModalComponent) protected modal:ModalComponent;
+  @ViewChild(ModalComponent) modal:ModalComponent;
 
   user: User;
   branches:Branch[];

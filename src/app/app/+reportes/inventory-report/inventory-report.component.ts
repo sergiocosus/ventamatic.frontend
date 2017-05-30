@@ -10,7 +10,7 @@ import {Category} from '../../../shared/product/category/category';
   styleUrls: ['./inventory-report.component.scss']
 })
 export class InventoryReportComponent implements OnInit {
-  private inventories = [];
+  inventories = [];
 
   request: {
     branch_id:number,

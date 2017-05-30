@@ -47,7 +47,7 @@
       <th>Cantidad final</th>
     </tr>
     </thead>
-    <template ngFor let-schedule [ngForOf]="schedules">
+    <ng-template ngFor let-schedule [ngForOf]="schedules">
       <tr>
         <td>{{schedule.id}}</td>
         <td>{{schedule.created_at | date:'short'}}</td>
@@ -60,6 +60,6 @@
         <td>{{schedule.system_amount}}</td>
         <td>{{schedule.final_amount}}</td>
       </tr>
-    </template>
+    </ng-template>
   </table>
 </main-content>

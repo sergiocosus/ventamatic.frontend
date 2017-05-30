@@ -10,7 +10,8 @@ import {IMyDateRangeModel} from 'mydaterangepicker';
   styleUrls: ['./buy-report.component.scss']
 })
 export class BuyReportComponent implements OnInit {
-  private buys = [];
+  buys = [];
+
   request:{
     id:number,
     branch_id:number,

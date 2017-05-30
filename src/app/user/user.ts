@@ -17,6 +17,7 @@ export class User extends Model{
   public address:string;
   public rfc:string;
   public deleted_at:string;
+  public protected:boolean;
 
   public password;
 

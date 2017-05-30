@@ -5,7 +5,7 @@
     <h4 *ngIf="deleteMode"> Eliminar Usuario </h4>
   </modal-header>
   <form (ngSubmit)="submit()" ngNativeValidate>
-    <modal-body *ngIf="!deleteMode && user">
+    <modal-body *ngIf="!deleteMode && !!user">
       <input-label type="text" required="required"  name="username"
                    [(ngModel)]="user.username" [disabled]="updateMode">
         Código de usuario
@@ -51,14 +51,14 @@
       </input-label>
     </modal-body>
     <modal-footer>
-      <template [appUserCan]="'user-edit'">
+      <ng-template [appUserCan]="'user-edit'">
         <button *ngIf="locked"
                 type="submit" class="btn btn-danger pull-xs-left"
                 (click)="unlock()" >
           <i class="fa fa-unlock-alt" aria-hidden="true"></i>
           Editar Usuario
         </button>
-      </template>
+      </ng-template>
       <button *ngIf="createMode"
               type="submit"
               class="btn btn-success">

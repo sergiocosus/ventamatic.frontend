@@ -11,7 +11,7 @@ import {IMyDateRangeModel} from 'mydaterangepicker';
   styleUrls: ['./sale-report.component.scss']
 })
 export class SaleReportComponent implements OnInit {
-  private sales = [];
+  sales = [];
 
   request:{
     id:number,

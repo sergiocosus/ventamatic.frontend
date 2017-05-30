@@ -1,4 +1,4 @@
-<template [ngIf]="canDelete">
+<ng-template [ngIf]="canDelete">
   <ng-container *appUserCan="deletePermission">
     <div class="button-modify" *ngIf="deleted; else notDeleted"
          (click)="clickRestore()">
@@ -13,7 +13,7 @@
   </ng-container>
 
 
-</template>
+</ng-template>
 <div class="content-div" (click)="clickUpdate()">
   <ng-content></ng-content>
 </div>

@@ -10,7 +10,7 @@ import {IMyDateRangeModel} from "mydaterangepicker";
   styleUrls: ['./schedule-report.component.scss']
 })
 export class ScheduleReportComponent implements OnInit {
-  private schedules = [];
+  schedules = [];
 
   request:{
     id:number,

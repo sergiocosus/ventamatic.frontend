@@ -9,8 +9,8 @@
                   [loading]="loading"
                   (selected)="select($event)"
                   (keydown)="selectable.keydown($event)">
-    <template let-item="item">
+    <ng-template let-item="item">
       {{item.id}} - {{item.name}}
-    </template>
+    </ng-template>
   </app-selectable>
 </app-popover>

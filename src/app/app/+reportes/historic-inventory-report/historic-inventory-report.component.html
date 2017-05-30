@@ -55,7 +55,7 @@
       <th>Minimo</th>
     </tr>
     </thead>
-    <template ngFor let-inventory [ngForOf]="inventories">
+    <ng-template ngFor let-inventory [ngForOf]="inventories">
       <tr>
         <td>{{inventory.branch.name}}</td>
         <td>{{inventory.id}}</td>
@@ -68,6 +68,6 @@
         <td>/* pendiente */</td>
         <td>{{inventory.minimum}}</td>
       </tr>
-    </template>
+    </ng-template>
   </table>
 </main-content>

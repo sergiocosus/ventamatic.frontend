@@ -5,7 +5,7 @@
     <h4 *ngIf="deleteMode"> Eliminar Cliente </h4>
   </modal-header>
   <form (ngSubmit)="submit()" ngNativeValidate>
-    <modal-body *ngIf="!deleteMode && client">
+    <modal-body *ngIf="!deleteMode && !!client">
       <input-label *ngIf="updateMode" name="id"
                    type="text" [(ngModel)]="client.id" disabled="disabled">
         Id
@@ -44,14 +44,14 @@
       </input-label>
     </modal-body>
     <modal-footer>
-      <template appUserCan="client-edit">
+      <ng-template appUserCan="client-edit">
         <button *ngIf="locked"
                 type="submit" class="btn btn-danger pull-xs-left"
                 (click)="unlock()" >
           <i class="fa fa-unlock-alt" aria-hidden="true"></i>
           Editar Cliente
         </button>
-      </template>
+      </ng-template>
       <button *ngIf="createMode"
               type="submit"
               class="btn btn-success" >

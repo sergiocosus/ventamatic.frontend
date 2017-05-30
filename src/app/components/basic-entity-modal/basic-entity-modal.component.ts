@@ -13,7 +13,7 @@ import {FormControl} from '@angular/forms';
   styleUrls: ['./basic-entity-modal.component.scss']
 })
 export class BasicEntityModalComponent implements OnInit {
-  @ViewChild(ModalComponent) protected modal:ModalComponent;
+  @ViewChild(ModalComponent) public modal:ModalComponent;
   @Input() mode;
   @Output() closed = new EventEmitter();
   service: BasicEntityService;

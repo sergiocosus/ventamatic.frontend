@@ -1,4 +1,4 @@
-<template [ngIf]="sale">
+<ng-template [ngIf]="sale">
   <header>
     <h5>{{sale.branch.name}}</h5>
     <h6>{{sale.branch.title_ticket}}</h6>
@@ -68,4 +68,4 @@
     <p>Artículos: {{sale.products.length}}</p>
     <div>{{sale.branch.footer_ticket}}</div>
   </footer>
-</template>
+</ng-template>
