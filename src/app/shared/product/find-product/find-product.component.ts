@@ -16,6 +16,7 @@ export class FindProductComponent implements OnInit {
   @ViewChild('barCodeInput') barCodeInput:InputLabelComponent;
   @Output('selected-product') selectedProduct = new EventEmitter();
 
+  @Input() tab_index: number;
   @Input() branch_id: number;
   @Input() mode: string = 'inventory';
 

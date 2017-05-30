@@ -14,9 +14,9 @@ import { apiHttpServiceProvider } from "./shared/api-http";
 import {VentamaticFrontendAppComponent} from "./ventamatic-frontend.component";
 import {LoginComponent} from "./login/login.component";
 import {UsuariosComponent} from "./app/+usuarios/usuarios.component";
-import {VentaComponent} from "./app/+venta/venta.component";
-import {SelectBranchComponent} from "./app/+venta/select-branch/select-branch.component";
-import {SaleComponent} from "./app/+venta/sale/sale.component";
+import {VentaComponent} from "./app/sale/venta.component";
+import {SelectBranchComponent} from "./app/sale/select-branch/select-branch.component";
+import {SaleComponent} from "./app/sale/sale/sale.component";
 import {InventarioComponent} from "./app/+inventario/inventario.component";
 import {InventorySelectBranch} from "./app/+inventario/select-branch/select-branch.component";
 import {InventoryComponent} from "./app/+inventario/inventory/inventory.component";
@@ -31,7 +31,7 @@ import {AsideNavComponent} from "./app/shared/aside-nav/aside-nav.component";
 import {TopBarComponent} from "./app/shared/top-bar/top-bar.component";
 import {routing, appRoutingProviders} from "./ventamatic-frontend.routing";
 import {AppComponent} from "./app/app.component";
-import {TicketComponent} from "./app/+venta/ticket/ticket.component";
+import {TicketComponent} from "./app/sale/ticket/ticket.component";
 import {SearchBarComponent} from "./app/shared/search-bar/search-bar.component";
 import {ClientItemComponent} from "./app/+clientes/client-item/client-item.component";
 import {ClientModalComponent} from "./app/+clientes/client-modal/client-modal.component";
@@ -45,7 +45,7 @@ import { ButtonsModule } from "ng2-bootstrap";
 import {UserModalComponent} from "./app/+usuarios/user-modal/user-modal.component";
 import {UserItemComponent} from "./app/+usuarios/user-item/user-item.component";
 import {EndScheduleModalComponent} from "./user/schedule/end-schedule-modal/end-schedule-modal.component";
-import {SaleConfirmModalComponent} from "./app/+venta/sale-confirm-modal/sale-confirm-modal.component";
+import {SaleConfirmModalComponent} from "./app/sale/sale-confirm-modal/sale-confirm-modal.component";
 import {InventoryCartComponent} from "./shared/product/inventory-cart/inventory-cart.component";
 import {BrandService} from "./shared/product/brand/brand.service";
 import {SupplierCategoryService} from "./app/+proveedores/category/supplier-category.service";
@@ -62,7 +62,7 @@ import { UserRoleModalComponent } from './app/+usuarios/user-role-modal/user-rol
 import {AuthGuardService} from "./services/auth-guard.service";
 import {AuthService} from "./services/auth.service";
 import {NoAuthGuardService} from "./services/no-auth-guard.service";
-import {TicketService} from "./app/+venta/ticket/ticket.service";
+import {TicketService} from "./app/sale/ticket/ticket.service";
 import {ProductService} from "./shared/product/product.service";
 import {ClientService} from "./app/+clientes/shared/client.service";
 import {CategoryService} from "./shared/product/category/category.service";
@@ -91,6 +91,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MyDateRangePickerModule} from 'mydaterangepicker';
 import {InventoryModule} from './inventory/inventory.module';
 import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
+import { ProductCartRowComponent } from './app/sale/product-cart-row/product-cart-row.component';
 
 @NgModule({
   declarations: [
@@ -143,6 +144,7 @@ import {Ng2Bs3ModalModule} from 'ng2-bs3-modal/ng2-bs3-modal';
     HistoricInventoryReportComponent,
     ScheduleReportComponent,
     MyAccountComponent,
+    ProductCartRowComponent,
   ],
   imports: [
     SharedModule,

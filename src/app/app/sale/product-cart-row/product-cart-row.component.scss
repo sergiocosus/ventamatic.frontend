@@ -1,0 +1,48 @@
+:host{
+  display: table-row;
+  position: relative;
+
+  td:last-child{
+    position: relative;
+  }
+
+  td{
+    border-top: 1px white solid;
+    padding-left: 3px;
+
+    md-input-container{
+      width: 100%;
+      background-color: transparentize(white, .9);
+      color: white;
+      /deep/ .mat-input-wrapper{
+        margin: 0;
+      }
+    }
+  }
+
+  .button-delete {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    right: -.5em;
+    top: -.5em;
+
+    height: 1.3em;
+    width: 1.3em;
+
+    border: 2px white solid;
+    border-radius: 50%;
+    transition: all .25s;
+    background-color: #DF0101;
+    &:hover{
+      transform: scale(1.75, 1.75);
+      background-color: red;
+    }
+
+    i{
+      margin-bottom: 0.1em;
+    }
+  }
+}

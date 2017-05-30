@@ -3,7 +3,8 @@
   [(ngModel)]="search_words"
   [formControl]="searchControl"
   (keydown)="searchEntered($event)"
-  (focus)="showSearch()">
+  (focus)="showSearch()"
+  [tab_index]="tab_index">
   Buscar por descripción
 </input-label>
 

@@ -10,6 +10,7 @@ import {InputLabelComponent} from '../input-label/input-label.component';
 })
 export class AutocompleteInputComponent implements OnInit {
   @Output() selected = new EventEmitter();
+  @Input() tab_index;
   @Input() searchMethod;
   @Input() search_words:string = "";
   elementSuggestions:any[] = [];

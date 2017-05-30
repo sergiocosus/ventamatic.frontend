@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import {Component, OnInit, Input, ViewChild, ViewChildren, QueryList, ElementRef} from '@angular/core';
 import {Inventory} from '../../../inventory/classes/inventory.model';
 
 @Component({
@@ -6,13 +6,14 @@ import {Inventory} from '../../../inventory/classes/inventory.model';
   templateUrl: 'inventory-cart.component.html',
   styleUrls: ['inventory-cart.component.scss']
 })
-export class InventoryCartComponent implements OnInit {
+export class InventoryCartComponent implements OnInit{
   @Input() addedProducts:ProductSale[] = [];
   @Input() payment:number = null;
 
   constructor() {}
 
   ngOnInit() {
+
   }
 
   get total(){
@@ -36,7 +37,7 @@ export class InventoryCartComponent implements OnInit {
 
 }
 
-interface ProductSale {
+export interface ProductSale {
   inventory: Inventory;
   quantity: number;
 }

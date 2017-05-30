@@ -4,6 +4,7 @@
     <div class="searchable-input">
       <input-label [(ngModel)]="client_id" name="client_id" type="number" [min]="1"
                    [formControl]="clientIdControl" class="dark"
+                   tab_index="5"
                    [required]="true">
         ID de cliente
       </input-label>
@@ -14,6 +15,7 @@
 
   <div class="search">
     <app-find-product (selected-product)="addProduct($event)"
+                      tab_index="6"
                       [branch_id]="branch_id">
     </app-find-product>
     <hr/>
@@ -21,6 +23,7 @@
 
   <div class="finish">
     <input-label [(ngModel)]="payment" name="clientPayment" class="dark"
+                 tab_index="7"
                  [type]="'number'" [min]="total" [max]="99999999999" [required]="true">
       Pago
     </input-label>

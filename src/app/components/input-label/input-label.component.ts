@@ -30,6 +30,7 @@ export class InputLabelComponent  implements ControlValueAccessor {
   @Input() class:string = null;
   @Input() id:string = null;
   @Input() ngControl:string = null;
+  @Input() tab_index:string = null;
 
   @Output() focus:EventEmitter<any> = new EventEmitter();
 

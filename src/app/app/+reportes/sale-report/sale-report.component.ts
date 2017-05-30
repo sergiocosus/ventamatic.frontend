@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ReportService} from "../../../shared/report/report.service";
 import {NotifyService} from "../../../services/notify.service";
-import {TicketService} from "../../+venta/ticket/ticket.service";
+import {TicketService} from "../../sale/ticket/ticket.service";
 import {messages} from "../../../shared/messages";
 import {IMyDateRangeModel} from 'mydaterangepicker';
 

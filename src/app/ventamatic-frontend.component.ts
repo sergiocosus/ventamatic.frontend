@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import {AuthService} from "./services/auth.service";
-import {TicketService} from "./app/+venta/ticket/ticket.service";
+import {TicketService} from "./app/sale/ticket/ticket.service";
 
 @Component({
   selector: 'app-root',
