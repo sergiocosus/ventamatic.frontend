@@ -11,7 +11,6 @@ import {IMyDateRangeModel} from 'mydaterangepicker';
 })
 export class BuyReportComponent implements OnInit {
   private buys = [];
-
   request:{
     id:number,
     branch_id:number,
@@ -26,6 +25,7 @@ export class BuyReportComponent implements OnInit {
   };
 
   totalCostBuy = 0;
+  totalProducts: number;
 
   constructor(private reportService:ReportService,
               private notify:NotifyService) { }
@@ -55,9 +55,16 @@ export class BuyReportComponent implements OnInit {
         this.buys = buys;
 
         this.totalCostBuy = 0;
+        this.totalProducts = 0;
         buys.forEach(buy => {
           this.totalCostBuy += buy.total;
-        })
+          buy.products.forEach(
+            product => {
+              this.totalProducts += product.pivot.quantity;
+            }
+          )
+        });
+
         if (!this.buys.length) {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle)
         }

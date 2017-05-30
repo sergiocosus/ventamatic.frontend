@@ -27,6 +27,7 @@ export class SaleReportComponent implements OnInit {
   };
 
   totalPriceSale;
+  totalProducts = 0;
 
   constructor(private reportService:ReportService,
               private notify:NotifyService,
@@ -57,8 +58,15 @@ export class SaleReportComponent implements OnInit {
         this.sales = sales;
 
         this.totalPriceSale = 0;
+        this.totalProducts = 0;
+
         sales.forEach(sale => {
           this.totalPriceSale += sale.total;
+          sale.products.forEach(
+            product => {
+              this.totalProducts += product.pivot.quantity;
+            }
+          )
         });
 
         if (!this.sales.length) {

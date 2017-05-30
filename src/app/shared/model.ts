@@ -15,7 +15,6 @@ export class Model{
   }
 
   public static parseDateTimeMoment(date) {
-    console.log(moment);
     return moment.utc(date);
   }
 }

@@ -37,9 +37,10 @@
 <main-content>
   <h2>Reporte de compra</h2>
 
-  <ul *ngIf="buys">
+  <ul *ngIf="buys.length">
     <li>Número de compras: {{buys.length}}</li>
     <li>Total de compras: {{totalCostBuy | myCurrency}}</li>
+    <li>Total de productos: {{totalProducts}}</li>
   </ul>
 
   <table>
