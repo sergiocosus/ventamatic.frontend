@@ -3,6 +3,8 @@ import {ReportService} from "../../../shared/report/report.service";
 import {NotifyService} from "../../../services/notify.service";
 import {messages} from "../../../shared/messages";
 import {IMyDateRangeModel} from 'mydaterangepicker';
+import {InventoryMovementTypeService} from '../../../inventory/services/inventory-movement-type.service';
+import {InventoryMovementType} from '../../../inventory/classes/inventory-movement-type.model';
 
 @Component({
   selector: 'app-inventory-movement-report',
@@ -11,6 +13,7 @@ import {IMyDateRangeModel} from 'mydaterangepicker';
 })
 export class InventoryMovementReportComponent implements OnInit {
   private inventory_movements = [];
+  inventoryMovementTypes: InventoryMovementType[];
 
   request:{
     product_id:number,
@@ -28,22 +31,50 @@ export class InventoryMovementReportComponent implements OnInit {
   totalUp = 0;
   totalDown = 0;
 
-  constructor(private reportService:ReportService,
-              private notify:NotifyService) { }
+  statsByType = [];
+
+  constructor(private reportService: ReportService,
+              private notify: NotifyService,
+              private inventoryMovementTypeService: InventoryMovementTypeService) { }
 
   ngOnInit() {
     this.resetRequest();
+    this.loadInventoryMovementTypes();
   }
 
-  resetRequest(){
+  resetRequest() {
     this.request = {
-      product_id:null,
-      branch_id:null,
-      user_id:null,
-      inventory_movement_type_id:null,
-      begin_at:null,
-      end_at:null
+      product_id: null,
+      branch_id: null,
+      user_id: null,
+      inventory_movement_type_id: null,
+      begin_at: null,
+      end_at: null
     };
+  }
+
+  loadInventoryMovementTypes() {
+    this.inventoryMovementTypeService.getAll().subscribe(
+      inventoryMovementTypes => {
+        this.inventoryMovementTypes = inventoryMovementTypes;
+
+        this.inventoryMovementTypes.forEach(
+          movementType => {
+            this.statsByType.push({
+              id: movementType.id,
+              name: movementType.name,
+              totalUp: 0,
+              totalDown: 0,
+              totalMovements: 0
+            });
+          }
+        );
+
+        this.inventoryMovementTypes.unshift(
+          {id:null, name: 'Todos'} as InventoryMovementType
+        );
+      }
+    )
   }
 
   onDateRangeChanged($event: IMyDateRangeModel) {
@@ -55,6 +86,15 @@ export class InventoryMovementReportComponent implements OnInit {
       inventoryMovements => {
         this.inventory_movements = inventoryMovements;
 
+
+        this.statsByType.forEach(
+          stat => {
+            stat.totalMovements = 0;
+            stat.totalUp = 0;
+            stat.totalDown = 0;
+          }
+        );
+
         this.totalUp = 0;
         this.totalDown = 0;
         inventoryMovements.forEach(inventoryMovement => {
@@ -63,6 +103,20 @@ export class InventoryMovementReportComponent implements OnInit {
           } else {
             this.totalDown -= inventoryMovement.quantity;
           }
+
+          this.statsByType.forEach(
+            stats => {
+              if (inventoryMovement.inventory_movement_type_id == stats.id) {
+                stats.totalMovements++;
+
+                if (inventoryMovement.quantity > 0) {
+                  stats.totalUp += inventoryMovement.quantity;
+                } else {
+                  stats.totalDown -= inventoryMovement.quantity;
+                }
+              }
+            }
+          );
         });
 
         if (!this.inventory_movements.length) {

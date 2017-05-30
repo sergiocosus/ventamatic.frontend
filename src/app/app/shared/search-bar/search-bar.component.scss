@@ -1,9 +1,11 @@
+@import '~app/vars';
+
 :host{
-  background-color: #556A70;
+  background-color: $backgroundDark;
   flex: 0 0 auto;
   align-items: center;
   margin: 5px;
-  padding: 2.5px;
+  padding: 1em;
   display: flex;
   border-radius: 4px;
   flex-wrap: wrap;
