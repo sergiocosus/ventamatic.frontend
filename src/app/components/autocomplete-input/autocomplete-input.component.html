@@ -1,13 +1,13 @@
-<input-label class="dark"
-  (window:click)="hideSearch($event)"
-  [(ngModel)]="search_words"
-  [formControl]="searchControl"
-  (keydown)="searchEntered($event)"
-  (focus)="showSearch()"
-  [tab_index]="tab_index">
-  Buscar por descripción
-</input-label>
-
+<md-input-container>
+  <input mdInput class="dark" placeholder="Buscar por descripción"
+         (window:click)="hideSearch($event)"
+         [(ngModel)]="search_words"
+         [formControl]="searchControl"
+         (keydown)="searchEntered($event)"
+         (focus)="showSearch()"
+         autocomplete="off"
+         [tabindex]="tab_index"/>
+</md-input-container>
 <div class="search-list"
      [hidden]="searchHidden || !search_words.length">
   <table>

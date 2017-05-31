@@ -6,8 +6,10 @@
   </md-radio-button>
 </md-radio-group>
 
-
-<input-label *ngIf="selectedPaymentType.payment_type_id == 2" class="dark"
-             [(ngModel)]="selectedPaymentType.card_payment_id" name="card_payment_id" [required]="true">
-  Folio de la transacción electrónica
-</input-label>
+<md-input-container *ngIf="selectedPaymentType.payment_type_id == 2" >
+  <input mdInput placeholder="Folio de la transacción electrónica"
+         class="dark"
+         [(ngModel)]="selectedPaymentType.card_payment_id"
+         name="card_payment_id"
+         required>
+</md-input-container>

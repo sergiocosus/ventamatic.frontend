@@ -2,8 +2,12 @@
 
 :host{
   position:relative;
-  display: inline-block;
-  width: 100%;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+md-input-container{
+  flex: 1 0 0;
 }
 
 .search-list{

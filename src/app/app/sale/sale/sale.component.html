@@ -1,85 +1,89 @@
-<div class="left dark-theme">
-  <div class="client">
-    <h5>Cliente</h5>
-    <div class="searchable-input">
-      <input-label [(ngModel)]="client_id" name="client_id" type="number" [min]="1"
-                   [formControl]="clientIdControl" class="dark"
-                   tab_index="5"
-                   [required]="true">
-        ID de cliente
-      </input-label>
-      <app-client-search (selected)="client_id = $event.id"></app-client-search>
+<form (ngSubmit)="confirm()" ngNativeValidate
+      (keydown.enter)="$event.preventDefault()">
+  <div class="left dark-theme">
+    <div class="client">
+      <h5>Cliente</h5>
+      <div class="searchable-input">
+        <md-input-container>
+          <input mdInput [(ngModel)]="client_id"
+                 name="client_id" type="number"
+                 [min]="1" [formControl]="clientIdControl" class="dark"
+                 tabindex="5" autocomplete="off"
+                 placeholder="ID de cliente" required />
+        </md-input-container>
+        <app-client-search (selected)="client_id = $event.id"></app-client-search>
+      </div>
+     <hr/>
     </div>
-   <hr/>
+
+    <div class="search">
+      <app-find-product (selected-product)="addProduct($event)"
+                        tab_index="6"
+                        [branch_id]="branch_id">
+      </app-find-product>
+      <hr/>
+    </div>
+
+    <div class="finish">
+      <md-input-container>
+        <input mdInput placeholder="Pago"
+               [(ngModel)]="payment" name="clientPayment" class="dark"
+               tab_index="7" step=".01"
+               [type]="'number'" [min]="total"
+               required >
+      </md-input-container>
+      <hr>
+
+      <app-payment-type
+        [selectedPaymentType]="selectedPaymentType"
+      ></app-payment-type>
+      <hr>
+
+      <h5>Imprimir ticket</h5>
+      <div class="btn-group">
+        <label class="btn btn-primary" [(ngModel)]="print"  name="payment_type_id"
+               [btnRadio]="true">
+          Si
+        </label>
+        <label class="btn btn-primary" [(ngModel)]="print"  name="payment_type_id"
+               [btnRadio]="false">
+          No
+        </label>
+      </div>
+      <hr>
+
+      <div class="btn-group">
+        <button accesskey="o"
+          class="btn btn-success btn-block">Finalizar Venta
+        </button>
+
+        <button
+          class="btn btn-danger btn-block"
+          (click)="cancel()">Cancelar Venta
+        </button>
+      </div>
+    </div>
   </div>
 
-  <div class="search">
-    <app-find-product (selected-product)="addProduct($event)"
-                      tab_index="6"
-                      [branch_id]="branch_id">
-    </app-find-product>
+
+  <div class="right">
+    <div class="branch-view" *ngIf="branch">
+      <h6>Sucursal</h6>
+      <h4>
+        {{branch.name}}
+      </h4>
+    </div>
+    <hr>
+    <div class="client-view">
+      Cliente: <span class="error" *ngIf="client_status">{{client_status}}</span>
+      <span *ngIf="!client_status">{{client && client.fullName}}</span>
+    </div>
     <hr/>
+    <app-inventory-cart
+      [(addedProducts)]="addedProducts"
+      [(payment)]="payment"
+    ></app-inventory-cart>
   </div>
-
-  <div class="finish">
-    <input-label [(ngModel)]="payment" name="clientPayment" class="dark"
-                 tab_index="7"
-                 [type]="'number'" [min]="total" [max]="99999999999" [required]="true">
-      Pago
-    </input-label>
-    <hr>
-
-    <app-payment-type
-      [selectedPaymentType]="selectedPaymentType"
-    ></app-payment-type>
-    <hr>
-
-    <h5>Imprimir ticket</h5>
-    <div class="btn-group">
-      <label class="btn btn-primary" [(ngModel)]="print"  name="payment_type_id"
-             [btnRadio]="true">
-        Si
-      </label>
-      <label class="btn btn-primary" [(ngModel)]="print"  name="payment_type_id"
-             [btnRadio]="false">
-        No
-      </label>
-    </div>
-    <hr>
-
-    <div class="btn-group">
-      <button
-        class="btn btn-success btn-block"
-        (click)="confirm()">Finalizar Venta
-      </button>
-
-      <button
-        class="btn btn-danger btn-block"
-        (click)="cancel()">Cancelar Venta
-      </button>
-    </div>
-  </div>
-</div>
-
-
-<div class="right">
-  <div class="branch-view" *ngIf="branch">
-    <h6>Sucursal</h6>
-    <h4>
-      {{branch.name}}
-    </h4>
-  </div>
-  <hr>
-  <div class="client-view">
-    Cliente: <span class="error" *ngIf="client_status">{{client_status}}</span>
-    <span *ngIf="!client_status">{{client && client.fullName}}</span>
-  </div>
-  <hr/>
-  <app-inventory-cart
-    [(addedProducts)]="addedProducts"
-    [(payment)]="payment"
-  ></app-inventory-cart>
-</div>
-
+</form>
 
 <sale-confirm-modal (confirmed)="finish()"></sale-confirm-modal>

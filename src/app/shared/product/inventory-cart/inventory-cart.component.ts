@@ -1,4 +1,4 @@
-import {Component, OnInit, Input, ViewChild, ViewChildren, QueryList, ElementRef} from '@angular/core';
+import {Component, OnInit, Input } from '@angular/core';
 import {Inventory} from '../../../inventory/classes/inventory.model';
 
 @Component({
@@ -19,7 +19,7 @@ export class InventoryCartComponent implements OnInit{
   get total(){
     let total = 0;
     this.addedProducts.forEach(addedProduct => {
-      total += addedProduct.inventory.correctPrice * addedProduct.quantity;
+      total += addedProduct.inventory.current_price * addedProduct.quantity;
     });
     return total;
   }

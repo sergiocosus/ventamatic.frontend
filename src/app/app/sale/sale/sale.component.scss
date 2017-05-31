@@ -1,10 +1,17 @@
 @import "~app/vars";
 
 
-:host{
+:host, form{
   display: flex;
   max-width: 100%;
   overflow: hidden;
+  background-color: $backgroundDark;
+  md-input-container{
+    width: 100%;
+  }
+  input{
+    color: white;
+  }
 }
 
 .left{

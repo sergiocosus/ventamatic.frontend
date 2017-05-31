@@ -17,9 +17,9 @@ export class Buy extends Model{
   deleted_at:string;
   user:User;
   user_id:number;
-  supplier:Supplier;
+  supplier: Supplier;
   supplier_id:number;
-  branch:Branch;
+  branch: Branch;
   branch_id:number;
   supplier_bill_id:number;
   products: Product[];

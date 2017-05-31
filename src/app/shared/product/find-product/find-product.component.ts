@@ -61,18 +61,16 @@ export class FindProductComponent implements OnInit {
     this.productIdMethod = (product_id) => this.productService.get(product_id);
   }
 
-  barCodeEntered($event) {
-    if ($event.keyIdentifier == 'Enter') {
-      if (this.bar_code && this.bar_code.length) {
-        this.barCodeMethod(this.bar_code).subscribe(
-          inventory => {
-            this.selectedProduct.emit(inventory)
-          },
-          error => this.notifyError(error)
-        );
-      } else {
-        this.notificationService.alert('Alerta', this.messages.emptyBarCode);
-      }
+  barCodeEntered() {
+    if (this.bar_code && this.bar_code.length) {
+      this.barCodeMethod(this.bar_code).subscribe(
+        inventory => {
+          this.selectedProduct.emit(inventory)
+        },
+        error => this.notifyError(error)
+      );
+    } else {
+      this.notificationService.alert('Alerta', this.messages.emptyBarCode);
     }
   }
 

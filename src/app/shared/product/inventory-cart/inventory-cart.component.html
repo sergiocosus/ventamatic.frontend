@@ -9,7 +9,8 @@
   </tr>
   </thead>
   <tbody>
-    <app-product-cart-row [productSale]="productSale" (remove)="removeProduct($event)"
+    <app-product-cart-row [productSale]="productSale"
+                          (remove)="removeProduct($event)"
                           *ngFor="let productSale of addedProducts"></app-product-cart-row>
   </tbody>
 
@@ -21,15 +22,15 @@
       {{total | currency:'USD':true:'1.2-2'}}
     </td>
   </tr>
-  <tr [ngClass]="{ error: payment - total < 0 }">
+  <tr [ngClass]="{ error: paymentChange < 0 }">
     <td colspan="3"></td>
     <td>Pago</td>
     <td class="align-right">{{ payment-0 | currency:'USD':true:'1.2-2'}}</td>
   </tr>
-  <tr [ngClass]="{ error: payment - total < 0 }">
+  <tr [ngClass]="{ error: paymentChange < 0 }">
     <td colspan="3"></td>
     <td>Cambio</td>
-    <td class="align-right">{{payment - total | currency:'USD':true:'1.2-2'}}</td>
+    <td class="align-right">{{paymentChange | currency:'USD':true:'1.2-2'}}</td>
   </tr>
   </tfoot>
 

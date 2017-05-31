@@ -1,15 +1,15 @@
 <td>{{productSale.inventory.product.id}}</td>
 <td>{{productSale.inventory.product.description}}</td>
-<td class="align-right">{{productSale.inventory.correctPrice | currency:'USD':true:'1.2-2'}}</td>
+<td class="align-right">{{productSale.inventory.current_price | currency:'USD':true:'1.2-2'}}</td>
 <td>
   <md-input-container class="dark-theme">
-    <input #input class="quantity" mdInput tabindex="5"
+    <input #input class="quantity" mdInput tabindex="5" required
            type="number" min="1" [max]="productSale.inventory.quantity"
            [(ngModel)]="productSale.quantity"/>
   </md-input-container>
 </td>
 <td class="align-right">
-  {{productSale.quantity * productSale.inventory.correctPrice
+  {{productSale.quantity * productSale.inventory.current_price
   | currency:'USD':true:'1.2-2'}}
   <span class="button-delete"
         (click)="remove.emit(productSale)">
