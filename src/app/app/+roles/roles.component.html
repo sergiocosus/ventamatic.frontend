@@ -1,8 +1,9 @@
 <search-bar>
   <h2>Roles del sistema</h2>
-  <button md-raised-button color="accent"
+  <button md-raised-button color="primary"
           *appUserCan="'role-edit'"
           (click)="create()">
+    <i class="fa fa-plus" aria-hidden="true"></i>
     Agregar rol de sistema
   </button>
 </search-bar>
@@ -26,9 +27,10 @@
 
 <search-bar>
   <h2>Roles de sucursal</h2>
-  <button md-raised-button color="accent"
+  <button md-raised-button color="primary"
           *appUserCan="'branch-role-edit'"
           (click)="createBranchPermission()">
+    <i class="fa fa-plus" aria-hidden="true"></i>
     Agregar rol de sucursal
   </button>
 </search-bar>

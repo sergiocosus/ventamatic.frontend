@@ -48,11 +48,11 @@
       <hr>
 
       <div class="btn-group">
-        <button md-raised-button color="primary" accesskey="f">
-          Finalizar Venta
-        </button>
         <button md-raised-button color="warn" (click)="cancel()">
           Cancelar Venta
+        </button>
+        <button md-raised-button color="accent" accesskey="f">
+          Finalizar Venta
         </button>
       </div>
     </div>
@@ -78,5 +78,3 @@
     ></app-inventory-cart>
   </div>
 </form>
-
-<sale-confirm-modal (confirmed)="finish()"></sale-confirm-modal>

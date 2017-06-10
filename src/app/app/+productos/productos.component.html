@@ -1,17 +1,17 @@
 <search-bar>
   <button *appUserCan="'product-create'"
-          md-raised-button color="accent"
+          md-raised-button color="primary"
           (click)="clickCreate()">
     <i class="fa fa-shopping-bag" aria-hidden="true"></i>
     Agregar Producto
   </button>
   <button *appUserCan="'category-create'"
-          md-raised-button color="accent"
+          md-raised-button color="primary"
           (click)="categoryModal.open()">
     Categorias de produtos
   </button>
   <button *appUserCan="'brand-create'"
-          md-raised-button color="accent"
+          md-raised-button color="primary"
           (click)="brandModal.open()">
     Marcas
   </button>

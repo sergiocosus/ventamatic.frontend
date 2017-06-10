@@ -15,14 +15,18 @@
     <td>{{productBuy.inventoryMovementType.text}}</td>
     <td>{{productBuy.product.description}}</td>
     <td class="align-right">
-      <input type="number" min="0" max="9999999999" step=".01"
-             [(ngModel)]="productBuy.cost"/>
+      <md-input-container>
+        <input mdInput type="number" min="0" max="9999999999" step=".01"
+               [(ngModel)]="productBuy.cost" />
+      </md-input-container>
     </td>
     <td>
-      <input type="number"
-             [min]="productBuy.product.unitData.step"
-             [step]="productBuy.product.unitData.step"
-             [(ngModel)]="productBuy.quantity"/>
+      <md-input-container>
+        <input mdInput type="number"
+               [min]="productBuy.product.unitData.step"
+               [step]="productBuy.product.unitData.step"
+               [(ngModel)]="productBuy.quantity"/>
+      </md-input-container>
     </td>
     <td class="align-right">
       {{productBuy.quantity * productBuy.cost | currency:'USD':true:'1.2-2'}}

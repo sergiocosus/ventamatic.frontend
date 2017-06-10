@@ -1,4 +1,4 @@
-<main-content>
+<main-content class="dark-theme">
   <app-begin-buy-modal
     [hidden]="initialData"
     (buy-started)="startBuy($event)">
@@ -17,23 +17,27 @@
     </app-payment-type>
     <form (submit)="openBuyConfirm()" ngNativeValidate>
       <div class="finish">
-        <input-label [(ngModel)]="iva" name="iva" class="dark"
-                     [type]="'number'"  [max]="99999999999" [required]="true">
-          IVA
-        </input-label>
-        <input-label [(ngModel)]="ieps" name="ieps" class="dark"
-                     [type]="'number'"  [max]="99999999999" [required]="true">
-          IEPS
-        </input-label>
-        <div class="btn-group">
-          <button type="submit" class="btn btn-success btn-block">
-            Finalizar Compra
-          </button>
 
+        <h5>Impuestos</h5>
+        <md-input-container>
+          <input mdInput [(ngModel)]="iva"
+                 placeholder="IVA" name="iva" class="dark"
+                 [type]="'number'"  [max]="99999999999" [required]="true" />
+        </md-input-container>
+        <md-input-container>
+          <input mdInput [(ngModel)]="ieps" name="ieps"
+                 placeholder="IEPS" class="dark"
+                 [type]="'number'"  [max]="99999999999" [required]="true" />
+        </md-input-container>
+
+        <div>
           <button type="button"
-                  class="btn btn-danger btn-block"
-                  (click)="confirmCancelModal.open()">
+                  md-raised-button color="warn"
+                  (click)="openCancelDialog()">
             Cancelar Compra
+          </button>
+          <button type="submit" md-raised-button color="accent">
+            Finalizar Compra
           </button>
         </div>
       </div>

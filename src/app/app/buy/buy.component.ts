@@ -153,13 +153,11 @@ export class BuyComponent implements OnInit {
     dialog.componentInstance.init(this.messages.cancel,
       undefined, 'Cancelar Compra', 'No cancelar compra');
     dialog.afterClosed().subscribe(
-      accepted => {
-        if (accepted) { this.cancel(); }
-      }
+      accepted => accepted ? this.cancel() : undefined
     );
   }
 
-  cancel(){
+  cancel() {
     this.findProduct.clear();
     this.iva = null;
     this.ieps = null;

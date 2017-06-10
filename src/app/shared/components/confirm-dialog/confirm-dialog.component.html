@@ -7,10 +7,10 @@
 </md-dialog-content>
 
 <md-dialog-actions>
+  <button md-raised-button color="warn" (click)="cancel()">
+    {{cancelText}}
+  </button>
   <button md-raised-button color="accent" (click)="accept()">
     {{acceptText}}
-  </button>
-  <button md-raised-button color="accent" (click)="cancel()">
-    {{cancelText}}
   </button>
 </md-dialog-actions>
