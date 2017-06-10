@@ -37,29 +37,22 @@
       <app-payment-type
         [selectedPaymentType]="selectedPaymentType"
       ></app-payment-type>
+
       <hr>
 
-      <h5>Imprimir ticket</h5>
-      <div class="btn-group">
-        <label class="btn btn-primary" [(ngModel)]="print"  name="payment_type_id"
-               [btnRadio]="true">
-          Si
-        </label>
-        <label class="btn btn-primary" [(ngModel)]="print"  name="payment_type_id"
-               [btnRadio]="false">
-          No
-        </label>
-      </div>
+      <md-checkbox [(ngModel)]="print" name="print">
+        <i class="fa fa-print" aria-hidden="true"></i>
+        Imprimir ticket
+      </md-checkbox>
+
       <hr>
 
       <div class="btn-group">
-        <button accesskey="o"
-          class="btn btn-success btn-block">Finalizar Venta
+        <button md-raised-button color="primary" accesskey="f">
+          Finalizar Venta
         </button>
-
-        <button
-          class="btn btn-danger btn-block"
-          (click)="cancel()">Cancelar Venta
+        <button md-raised-button color="warn" (click)="cancel()">
+          Cancelar Venta
         </button>
       </div>
     </div>

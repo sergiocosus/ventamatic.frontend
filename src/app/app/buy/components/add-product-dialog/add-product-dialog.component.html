@@ -16,9 +16,10 @@
 
       <md-input-container>
         <input name="quantity" mdInput [(ngModel)]="productBuy.quantity"
-               placeholder="Cantidad"
+               [placeholder]="'Cantidad ' + productBuy.product.unitData.name"
                required="required" type="number"
-               [min]="0.001" [step]="0.001"/>
+               [step]="productBuy.product.unitData.step"
+               [min]="productBuy.product.unitData.step"/>
       </md-input-container>
     </section>
 

@@ -8,7 +8,7 @@ import {ProductBuy} from '../../../../buy/classes/product-buy.model';
 })
 export class ProductCartComponent implements OnInit {
   @Input() addedProducts: ProductBuy[] = [];
-  @Input() introducedAmount:number = null;
+  @Input() introducedAmount: number = null;
 
   constructor() {}
 
@@ -20,7 +20,7 @@ export class ProductCartComponent implements OnInit {
     this.addedProducts.forEach(addedProduct => {
       total += addedProduct.cost * addedProduct.quantity;
     });
-    return total;
+    return Math.trunc(total * 100) / 100;
   }
 
   get amountDiference(){
@@ -28,12 +28,10 @@ export class ProductCartComponent implements OnInit {
   }
 
   removeProduct(producBuy){
-    let index = this.addedProducts.indexOf(producBuy);
+    const index = this.addedProducts.indexOf(producBuy);
     if (index > -1) {
       this.addedProducts.splice(index, 1);
     }
   }
-
-
 }
 

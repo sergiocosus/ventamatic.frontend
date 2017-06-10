@@ -19,7 +19,9 @@
              [(ngModel)]="productBuy.cost"/>
     </td>
     <td>
-      <input type="number" min="1"
+      <input type="number"
+             [min]="productBuy.product.unitData.step"
+             [step]="productBuy.product.unitData.step"
              [(ngModel)]="productBuy.quantity"/>
     </td>
     <td class="align-right">

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {NotifyService} from "../../../services/notify.service";
+import {NotifyService} from '../../../services/notify.service';
 import {MdDialogRef} from '@angular/material';
 import {Inventory} from '../../classes/inventory.model';
 import {Branch} from '../../../app/+sucursales/shared/branch';
@@ -17,12 +17,12 @@ export class InventoryQuantityDialogComponent  {
   name = 'Inventario';
 
   inventoryMovementTypes = [
-    { id:InventoryMovementTypeId.Promocion, text: 'Promoción' },
-    { id:InventoryMovementTypeId.Traslado, text: 'Traslado' },
-    { id:InventoryMovementTypeId.Conversion, text: 'Conversión' },
-    { id:InventoryMovementTypeId.Consesion, text: 'Concesión' },
-    { id:InventoryMovementTypeId.Caducado, text: 'Caducado' },
-    { id:InventoryMovementTypeId.Ajuste, text: 'Ajuste' },
+    { id: InventoryMovementTypeId.Promocion, text: 'Promoción' },
+    { id: InventoryMovementTypeId.Traslado, text: 'Traslado' },
+    { id: InventoryMovementTypeId.Conversion, text: 'Conversión' },
+    { id: InventoryMovementTypeId.Consesion, text: 'Concesión' },
+    { id: InventoryMovementTypeId.Caducado, text: 'Caducado' },
+    { id: InventoryMovementTypeId.Ajuste, text: 'Ajuste' },
    /* { id:InventoryMovementTypeId.Compra, text: 'Compra' },
     { id:InventoryMovementTypeId.Venta, text: 'Venta' },*/
   ];
@@ -49,17 +49,17 @@ export class InventoryQuantityDialogComponent  {
   ngOnInit() {
   }
 
-  init(inventory:Inventory){
+  init(inventory: Inventory){
     this.inventory = inventory;
 
     this.loadBranches();
-    this.loadInventories()
+    this.loadInventories();
   }
 
   loadBranches() {
     this.branchService.getAll().subscribe(
       branches => this.branches = branches
-    )
+    );
   }
 
   loadInventories() {
@@ -131,22 +131,22 @@ export class InventoryQuantityDialogComponent  {
   }
 
   min() {
-    if (this.willAdjust()){
+    if (this.willAdjust()) {
       return -this.inventory.quantity;
-    } else if(this.willConvert()) {
-      return 1;
+    } else if (this.willConvert()) {
+      return this.inventory.product.unitData.step;
     } else {
-      return 0;
+      return this.inventory.product.unitData.step;
     }
   }
 
 
   get afterMovementQuantity() {
     if (this.willDecrease() || this.willTranslate() || this.willConvert()) {
-      return this.inventory.quantity - (this.quantity-0);
+      return this.inventory.quantity - (this.quantity - 0);
     }
     if (this.willIncrease() || this.willAdjust()) {
-      return this.inventory.quantity + (this.quantity-0);
+      return this.inventory.quantity + (this.quantity - 0);
     }
   }
 

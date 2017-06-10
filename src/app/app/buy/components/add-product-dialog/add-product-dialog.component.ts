@@ -1,6 +1,6 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
-import {ProductBuy} from "app/buy/classes/product-buy.model";
+import {ProductBuy} from 'app/buy/classes/product-buy.model';
 import {InventoryMovementTypeId} from '../../../../inventory/classes/inventory-movement-type-id.enum';
 
 @Component({
@@ -12,29 +12,30 @@ export class AddProductDialogComponent implements OnInit {
   @Output() completed = new EventEmitter<ProductBuy>();
 
   inventoryMovementTypes = [
-    { id:InventoryMovementTypeId.Compra, text: 'Compra' },
-    { id:InventoryMovementTypeId.Promocion, text: 'Promoción' },
-    { id:InventoryMovementTypeId.Consinacion, text: 'Consignación' }
+    {id: InventoryMovementTypeId.Compra, text: 'Compra'},
+    {id: InventoryMovementTypeId.Promocion, text: 'Promoción'},
+    {id: InventoryMovementTypeId.Consinacion, text: 'Consignación'}
   ];
 
   productBuy: ProductBuy = {
-    product:null,
-    quantity:null,
-    cost:null,
+    product: null,
+    quantity: null,
+    cost: null,
     inventoryMovementType: null
   };
 
-  constructor(private dialogRef: MdDialogRef<AddProductDialogComponent>) { }
+  constructor(private dialogRef: MdDialogRef<AddProductDialogComponent>) {
+  }
 
   ngOnInit() {
   }
 
-  init(productBuy:ProductBuy){
+  init(productBuy: ProductBuy) {
     this.productBuy = productBuy;
     this.productBuy.inventoryMovementType = this.inventoryMovementTypes[0];
   }
 
-  submit(){
+  submit() {
     this.completed.emit(this.productBuy);
     this.dialogRef.close();
   }

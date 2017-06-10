@@ -41,6 +41,7 @@
         <input mdInput type="number" [(ngModel)]="quantity"
                name="quantity" [required]="true"
                [min]="min()" [max]="max()"
+               [step]="inventory.product.unitData.step"
                [placeholder]="placeholderText"
         />
         <md-hint>
@@ -69,10 +70,11 @@
 
         </md-select>
 
-        <md-input-container>
+        <md-input-container *ngIf="inventoryConverted">
           <input mdInput type="number" [(ngModel)]="quantity_converted"
                  name="quantity_converted" required
-                 [min]="1"
+                 [step]="inventoryConverted.product.unitData.step"
+                 [min]="inventoryConverted.product.unitData.step"
                  placeholder="Cantidad convertida"
           />
           <md-hint *ngIf="inventoryConverted">

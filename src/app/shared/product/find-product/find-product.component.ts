@@ -1,8 +1,8 @@
 import {Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef} from '@angular/core';
-import {ProductService} from "../product.service";
-import { Observable } from "rxjs";
-import {Product} from "../product";
-import {InputLabelComponent} from "../../../components/input-label/input-label.component";
+import {ProductService} from '../product.service';
+import { Observable } from 'rxjs';
+import {Product} from '../product';
+import {InputLabelComponent} from '../../../components/input-label/input-label.component';
 import {NotificationsService} from 'angular2-notifications';
 import {Inventory} from '../../../inventory/classes/inventory.model';
 import {InventoryService} from '../../../inventory/services/inventory.service';
@@ -13,12 +13,12 @@ import {InventoryService} from '../../../inventory/services/inventory.service';
   styleUrls: ['find-product.component.scss']
 })
 export class FindProductComponent implements OnInit {
-  @ViewChild('barCodeInput') barCodeInput:InputLabelComponent;
+  @ViewChild('barCodeInput') barCodeInput: ElementRef;
   @Output('selected-product') selectedProduct = new EventEmitter();
 
   @Input() tab_index: number;
   @Input() branch_id: number;
-  @Input() mode: string = 'inventory';
+  @Input() mode = 'inventory';
 
   bar_code: string;
   product_id: number;
@@ -26,7 +26,7 @@ export class FindProductComponent implements OnInit {
   barCodeMethod: (string) => Observable<Product|Inventory>;
   productIdMethod: (number) => Observable<Product|Inventory>;
 
-  search_words: string = "";
+  search_words = '';
 
   private messages = {
     emptyBarCode: 'El código de barras se encuentra vacío',
@@ -65,7 +65,7 @@ export class FindProductComponent implements OnInit {
     if (this.bar_code && this.bar_code.length) {
       this.barCodeMethod(this.bar_code).subscribe(
         inventory => {
-          this.selectedProduct.emit(inventory)
+          this.selectedProduct.emit(inventory);
         },
         error => this.notifyError(error)
       );
@@ -80,7 +80,7 @@ export class FindProductComponent implements OnInit {
         this.productIdMethod(this.product_id).subscribe(
           inventory => {
             console.log(inventory);
-            this.selectedProduct.emit(inventory)
+            this.selectedProduct.emit(inventory);
           },
           error => this.notifyError(error)
         );
@@ -99,12 +99,12 @@ export class FindProductComponent implements OnInit {
   }
 
   clear() {
-    this.bar_code = "";
-    this.search_words = "";
+    this.bar_code = '';
+    this.search_words = '';
     this.product_id = null;
   }
 
-  setFocus(){
-    this.barCodeInput.setFocus();
+  setFocus() {
+    this.barCodeInput.nativeElement.focus();
   }
 }

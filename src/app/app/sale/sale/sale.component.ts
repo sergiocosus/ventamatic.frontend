@@ -176,7 +176,7 @@ export class SaleComponent implements OnInit, OnDestroy {
     this.addedProducts.forEach(addedProduct => {
       total += addedProduct.inventory.current_price * addedProduct.quantity;
     });
-    return total;
+    return Math.trunc(total * 100) / 100;
   }
 
 

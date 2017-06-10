@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Product} from "../../shared/product/product";
-import {FindProductComponent} from "../../shared/product/find-product/find-product.component";
-import {NotifyService} from "../../services/notify.service";
+import {Product} from '../../shared/product/product';
+import {FindProductComponent} from '../../shared/product/find-product/find-product.component';
+import {NotifyService} from '../../services/notify.service';
 import {MdDialog} from '@angular/material';
-import {BeginBuyDataInterface} from "app/buy/components/begin-buy-modal";
-import {BuyService} from "app/buy/services/buy.service";
+import {BeginBuyDataInterface} from 'app/buy/components/begin-buy-modal';
+import {BuyService} from 'app/buy/services/buy.service';
 import {ProductBuy} from '../../buy/classes/product-buy.model';
 import {BeginBuyModalComponent} from '../../buy/components/begin-buy-modal/begin-buy-modal.component';
 import {AddProductDialogComponent} from './components/add-product-dialog/add-product-dialog.component';
@@ -16,7 +16,7 @@ import {ConfirmDialogComponent} from '../../shared/components/confirm-dialog/con
   styleUrls: ['buy.component.scss'],
 })
 export class BuyComponent implements OnInit {
-  @ViewChild(FindProductComponent) findProduct:FindProductComponent;
+  @ViewChild(FindProductComponent) findProduct: FindProductComponent;
   @ViewChild(BeginBuyModalComponent) beginBuyModal: BeginBuyModalComponent;
 
   initialData: BeginBuyDataInterface;
@@ -37,14 +37,14 @@ export class BuyComponent implements OnInit {
     alreadyAddedProduct: 'El producto ya ha sido agregado'
   };
 
-  constructor(private buyService:BuyService,
-              private notify:NotifyService,
+  constructor(private buyService: BuyService,
+              private notify: NotifyService,
               private dialog: MdDialog) {}
 
   ngOnInit() {
   }
 
-  startBuy(initialData:BeginBuyDataInterface){
+  startBuy(initialData: BeginBuyDataInterface){
     if (initialData && initialData.branch && initialData.supplier
         && initialData.introducedAmount && initialData.supplierBillID) {
       this.initialData = initialData;
@@ -52,7 +52,7 @@ export class BuyComponent implements OnInit {
   }
 
   addProduct(product){
-    let dialog = this.dialog.open(AddProductDialogComponent);
+    const dialog = this.dialog.open(AddProductDialogComponent);
 
     dialog.componentInstance.init({
       product: product,
@@ -67,7 +67,7 @@ export class BuyComponent implements OnInit {
   }
 
   findProductBuyInCart(productBuy: ProductBuy) {
-    let existProduct:ProductBuy = null;
+    let existProduct: ProductBuy = null;
 
     this.addedProducts.some(addedProduct => {
       console.log(addedProduct, productBuy);
@@ -82,23 +82,23 @@ export class BuyComponent implements OnInit {
   }
 
   openBuyConfirm(){
-    if(this.initialData.introducedAmount != this.getTotal()) {
+    if (this.initialData.introducedAmount != this.getTotal()) {
       this.notify.error(this.messages.totalMismatch);
     } else {
-      let dialog = this.dialog.open(ConfirmDialogComponent);
+      const dialog = this.dialog.open(ConfirmDialogComponent);
       dialog.componentInstance.init(this.messages.confirm,
         undefined, 'Completar Compra', 'Cerrar');
       dialog.afterClosed().subscribe(
         accepted => {
-          if (accepted) { this.buy();}
+          if (accepted) { this.buy(); }
         }
       );
     }
   }
 
   buy(){
-    this.buyService.post(this.initialData.branch.id,{
-      iva:this.iva,
+    this.buyService.post(this.initialData.branch.id, {
+      iva: this.iva,
       ieps: this.ieps,
       supplier_id: this.initialData.supplier.id,
       supplier_bill_id: this.initialData.supplierBillID,
@@ -112,11 +112,11 @@ export class BuyComponent implements OnInit {
         this.cancel();
       },
       error => this.notify.serviceError(error)
-    )
+    );
   }
 
-  addProductToCart(productBuy:ProductBuy){
-    if(!this.findProductBuyInCart(productBuy)) {
+  addProductToCart(productBuy: ProductBuy){
+    if (!this.findProductBuyInCart(productBuy)) {
       this.addedProducts.push(productBuy);
       this.findProduct.setFocus();
     } else {
@@ -126,34 +126,35 @@ export class BuyComponent implements OnInit {
 
   private getProductsForRequest() {
     return this.addedProducts.map(
-      (productBuy:ProductBuy) => {
+      (productBuy: ProductBuy) => {
         return {
           product_id: productBuy.product.id,
           cost: productBuy.cost,
           quantity: productBuy.quantity,
           inventory_movement_type_id: productBuy.inventoryMovementType.id
-        }
+        };
       }
-    )
+    );
   }
 
   private getTotal(){
     let total = 0;
     this.addedProducts.forEach(
-      (productBuy:ProductBuy) => {
+      (productBuy: ProductBuy) => {
         total += productBuy.quantity * productBuy.cost;
       }
     );
-    return total;
+
+    return Math.trunc(total * 100) / 100;
   }
 
   openCancelDialog() {
-    let dialog = this.dialog.open(ConfirmDialogComponent);
+    const dialog = this.dialog.open(ConfirmDialogComponent);
     dialog.componentInstance.init(this.messages.cancel,
       undefined, 'Cancelar Compra', 'No cancelar compra');
     dialog.afterClosed().subscribe(
       accepted => {
-        if (accepted) { this.cancel();}
+        if (accepted) { this.cancel(); }
       }
     );
   }
