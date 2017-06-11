@@ -1,0 +1,92 @@
+<h4 *ngIf="createMode" md-dialog-title> Añadir Producto </h4>
+<h4 *ngIf="updateMode" md-dialog-title> Editar Producto </h4>
+<h4 *ngIf="deleteMode" md-dialog-title> Eliminar Producto </h4>
+<form (ngSubmit)="submit()" ngNativeValidate>
+  <ng-container *ngIf="!deleteMode && !!product">
+    <input-label type="text" *ngIf="updateMode"
+                 required [(ngModel)]="product.id"  name="id"
+                 [disabled]="updateMode">
+      ID
+    </input-label>
+    <!--
+    <md-input-container>
+      <input mdInput type="text" placeholder="Descripción"
+             [(ngModel)]="product.description" name="descripcion"
+             [disabled]="locked" required maxlength="255">
+    </md-input-container>
+    -->
+    <input-label type="text" [(ngModel)]="product.description" name="descripcion"
+                 [disabled]="locked" required maxlength="255">
+      Descripción
+    </input-label>
+
+    <div class="barcode">
+      <md-checkbox [(ngModel)]="haveBarCode" [disabled]="locked"
+                   name="haverBarCode"></md-checkbox>
+      <input-label type="text" [(ngModel)]="product.bar_code" name="bar_code"
+                   [disabled]="locked || !haveBarCode" required [minlength]="1">
+        Código de barras
+      </input-label>
+    </div>
+
+    <ng-select [items]="unitItems"
+               [active]="selectedUnitItem"
+               (data)="selectedUnitItem = [$event]"
+               [disabled]="locked"
+               required
+               placeholder="Unidad">
+    </ng-select>
+
+    <ng-select [items]="categoryItems"
+               [active]="selectedCategoryItems"
+               (data)="selectedCategoryItems = $event"
+               [multiple]="true"
+               [disabled]="locked"
+               placeholder="Categorias">
+    </ng-select>
+
+    <ng-select [items]="brandItems"
+               [active]="selectedBrandItem"
+               (data)="selectedBrandItem = [$event]"
+               [disabled]="locked"
+               placeholder="Marca">
+    </ng-select>
+
+    <input-label type="text" [(ngModel)]="product.global_price" name="global_price"
+                 [disabled]="locked">
+      Precio Global
+    </input-label>
+    <input-label type="text" [(ngModel)]="product.global_minimum" name="global_minimum"
+                 [disabled]="locked">
+      Mínimo global
+    </input-label>
+  </ng-container>
+  <ng-container *appUserCan="'product-edit'">
+    <button *ngIf="locked"
+            type="submit" class="btn btn-danger pull-xs-left"
+            (click)="unlock()" >
+      <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+      Editar Producto
+    </button>
+  </ng-container>
+  <button *ngIf="createMode"
+          type="submit"
+          class="btn btn-success">
+    Crear Producto
+  </button>
+  <button *ngIf="updateMode && !locked"
+          type="submit"
+          class="btn btn-success">
+    Actualizar Producto
+  </button>
+  <button *ngIf="deleteMode && !locked"
+          type="submit"
+          class="btn btn-danger">
+    Eliminar Producto
+  </button>
+  <button type="button"
+          class="btn btn-primary"
+          (click)="close()">
+    Cerrar
+  </button>
+</form>

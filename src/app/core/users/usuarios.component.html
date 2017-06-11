@@ -1,0 +1,23 @@
+<app-search-bar>
+  <button md-raised-button color="primary"
+          *appUserCan="'user-create'"
+          (click)="create()">
+    <i class="fa fa-user-plus" aria-hidden="true"></i>
+    Agregar Usuario
+  </button>
+
+  <md-checkbox [formControl]="deletedControl" *appUserCan="'user-delete'" class="dark-theme">
+    <i class="fa fa-trash"></i>
+    Ver eliminados
+  </md-checkbox>
+</app-search-bar>
+
+<app-main-content>
+  <app-user-item *ngFor="let user of users"
+                 [user]="user"
+                 (update)="update($event)"
+                 (delete)="delete($event)"
+                 (restore)="restore($event)"
+                 (roles)="openRolesDialog($event.id)"
+  ></app-user-item>
+</app-main-content>

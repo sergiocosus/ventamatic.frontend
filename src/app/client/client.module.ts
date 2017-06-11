@@ -1,20 +1,39 @@
-import { NgModule } from '@angular/core';
-import { ClientSearchComponent } from './client-search/client-search.component';
-import {ClientService} from "../app/+clientes/shared/client.service";
-import {SharedModule} from "../shared/shared.module";
+import {ModuleWithProviders, NgModule} from '@angular/core';
+import {ClientDialogComponent} from './components/client-dialog/client-dialog.component';
+import {ClientItemComponent} from './components/client-item/client-item.component';
+import {SharedModule} from '../shared/shared.module';
+import {ClientSearchComponent} from './components/client-search/client-search.component';
+import {ClientService} from './services/client.service';
+import {VariousModule} from '../various/various.module';
+import {AuthModule} from '../auth/auth.module';
 
 @NgModule({
   imports: [
-    SharedModule
+    SharedModule,
+    VariousModule,
+    AuthModule,
   ],
   declarations: [
     ClientSearchComponent,
+    ClientDialogComponent,
+    ClientItemComponent,
   ],
-  providers: [
-    ClientService,
+  entryComponents: [
+    ClientDialogComponent,
   ],
   exports: [
-    ClientSearchComponent
+    ClientSearchComponent,
+    ClientDialogComponent,
+    ClientItemComponent,
   ]
 })
-export class ClientModule { }
+export class ClientModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: ClientModule,
+      providers: [
+        ClientService,
+      ],
+    };
+  }
+}

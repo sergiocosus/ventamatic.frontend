@@ -2,8 +2,8 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {InventoryService} from '../../services/inventory.service';
 import {MdDialogRef} from '@angular/material';
 import {Inventory} from '../../classes/inventory.model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {NotifyService} from '../../../services/notify.service';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {NotifyService} from '../../../shared/services/notify.service';
 
 @Component({
   selector: 'app-inventory-edit-dialog',
@@ -41,11 +41,11 @@ export class InventoryEditDialogComponent implements OnInit {
     });
   }
 
-  setGlobalPrice(){
+  setGlobalPrice() {
     this.form.patchValue({price: this.inventory.product.price});
   }
 
-  setGlobalMinimum(){
+  setGlobalMinimum() {
     this.form.patchValue({minimum: this.inventory.product.global_minimum});
   }
 
@@ -60,7 +60,7 @@ export class InventoryEditDialogComponent implements OnInit {
       error => {
         this.noty.serviceError(error);
       }
-    )
+    );
   }
 
 }

@@ -1,0 +1,29 @@
+<app-search-bar>
+  <button *appUserCan="'supplier-create'"
+          md-raised-button color="primary"
+          (click)="create()">
+    <i class="fa fa-user-secret"></i>
+    Agregar Proveedor
+  </button>
+  <button md-raised-button color="primary"
+          (click)="openSupplierCategoryDialog()">
+    Categorias de proveedores
+  </button>
+  <button md-raised-button color="primary"
+          (click)="openBrandDialog()">
+    Marcas
+  </button>
+  <md-checkbox [formControl]="deletedControl" *appUserCan="'product-delete'" class="dark-theme">
+    <i class="fa fa-trash"></i>
+    Ver eliminados
+  </md-checkbox>
+</app-search-bar>
+
+<app-main-content>
+  <app-supplier-item *ngFor="let supplier of suppliers"
+                     [supplier]="supplier"
+                     (update)="update($event)"
+                     (restore)="restore($event)"
+                     (delete)="delete($event)"
+  ></app-supplier-item>
+</app-main-content>

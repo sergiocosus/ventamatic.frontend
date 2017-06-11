@@ -1,0 +1,118 @@
+<app-search-bar class="dark-theme">
+  <form (submit)="submit()" ngNativeValidate>
+    <input-label [(ngModel)]="request.product_id"  class="dark id-field"
+                 name="product_id" type="number">
+      ID de producto
+    </input-label>
+    <app-product-search (selected)="request.product_id = $event.id"></app-product-search>
+
+    <input-label [(ngModel)]="request.branch_id" class="dark id-field"
+                 name="branch_id" type="number">
+      ID de sucursal
+    </input-label>
+    <app-branch-search (selected)="request.branch_id = $event.id"></app-branch-search>
+
+    <input-label [(ngModel)]="request.user_id" class="dark id-field"
+                 name="user_id" type="number">
+      ID de usuario
+    </input-label>
+    <app-user-search (selected)="request.user_id = $event.id"></app-user-search>
+
+    <md-select [(ngModel)]="request.inventory_movement_type_id"
+               placeholder="Tipo de movimiento"
+               name="inventory_movement_type_id">
+      <md-option *ngFor="let inventoryMovementType of inventoryMovementTypes"
+                 [value]="inventoryMovementType.id">
+        {{inventoryMovementType.name}}
+      </md-option>
+    </md-select>
+    <my-date-range-picker placeholder="Rango de fechas"
+                          (dateRangeChanged)="onDateRangeChanged($event)"
+                          [options]="rangeOptions" ></my-date-range-picker>
+
+    <button md-raised-button color="accent" type="submit">
+      <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+      Consultar
+    </button>
+    <button md-raised-button color="accent" type="button" (click)="downloadCSV()">
+      <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+      CSV
+    </button>
+  </form>
+</app-search-bar>
+<app-main-content>
+  <h2>Reporte de entradas/salidas</h2>
+
+  <table *ngIf="inventory_movements.length">
+    <thead>
+    <tr>
+      <th>Estadísticas</th>
+      <th>Total</th>
+      <th *ngFor="let stat of statsByType">{{stat.name}}</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        Total de movimientos
+      </td>
+      <td>
+        {{inventory_movements.length}}
+      </td>
+      <td *ngFor="let stat of statsByType">
+        {{stat.totalMovements}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Total de entradas
+      </td>
+      <td>
+        {{totalUp}}
+      </td>
+      <td *ngFor="let stat of statsByType">
+        {{stat.totalUp}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Total de salidas
+      </td>
+      <td>
+        {{totalDown}}
+      </td>
+      <td *ngFor="let stat of statsByType">
+        {{stat.totalDown}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <br/>
+
+  <table>
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Fecha</th>
+      <th>Sucursal</th>
+      <th>Usuario</th>
+      <th>Producto</th>
+      <th>Cantidad</th>
+      <th>Tipo de movimiento</th>
+    </tr>
+    </thead>
+    <ng-template ngFor let-inventoryMovement [ngForOf]="inventory_movements">
+      <tr>
+        <td>{{inventoryMovement.id}}</td>
+        <td>{{inventoryMovement.created_at | date:'short'}}</td>
+        <td>{{inventoryMovement.branch.name}}</td>
+        <td>{{inventoryMovement.user.name}}</td>
+        <td>{{inventoryMovement.product.description}}</td>
+        <td>{{inventoryMovement.quantity}}</td>
+        <td>{{inventoryMovement.inventory_movement_type.name}}</td>
+      </tr>
+    </ng-template>
+  </table>
+</app-main-content>

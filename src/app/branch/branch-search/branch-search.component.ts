@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild, HostListener, Output, EventEmitter} from '@angular/core';
-import {SelectableComponent} from '../../shared/selectable/selectable.component';
-import {PopoverComponent} from '../../shared/popover/popover.component';
 import {FormControl} from '@angular/forms';
-import {BranchService} from '../../app/+sucursales/shared/branch.service';
-import {Branch} from '../../app/+sucursales/shared/branch';
-import {NotifyService} from '../../services/notify.service';
+import {Branch} from '../models/branch';
+import {BranchService} from '../services/branch.service';
+import {SelectableComponent} from '../../shared/components/selectable/selectable.component';
+import {PopoverComponent} from '../../shared/components/popover/popover.component';
+import {NotifyService} from '../../shared/services/notify.service';
 
 @Component({
   selector: 'app-branch-search',
@@ -12,23 +12,19 @@ import {NotifyService} from '../../services/notify.service';
   styleUrls: ['./branch-search.component.scss']
 })
 export class BranchSearchComponent implements OnInit {
-  @ViewChild(SelectableComponent) selectable:SelectableComponent;
-  @ViewChild(PopoverComponent) popover:PopoverComponent;
+  @ViewChild(SelectableComponent) selectable: SelectableComponent;
+  @ViewChild(PopoverComponent) popover: PopoverComponent;
   @Output() selected = new EventEmitter();
+
+  loading = false;
+  id: number;
+  name: string;
+  nameControl = new FormControl();
+  branches: Branch[] = null;
 
   @HostListener('keydown', ['$event']) onKeyDown($event) {
     return this.selectable.keydown($event);
   }
-
-  loading = false;
-
-  id: number;
-  name: string;
-
-  nameControl = new FormControl();
-
-  branches: Branch[] = null;
-
 
   constructor(private branchService: BranchService,
               private notify: NotifyService) {

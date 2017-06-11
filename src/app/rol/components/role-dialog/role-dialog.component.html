@@ -1,0 +1,59 @@
+<h4 *ngIf="createMode" md-dialog-title> Añadir rol </h4>
+<h4 *ngIf="updateMode" md-dialog-title> Editar rol </h4>
+<h4 *ngIf="deleteMode" md-dialog-title> Eliminar rol </h4>
+
+<form (ngSubmit)="submit()" ngNativeValidate>
+  <ng-container *ngIf="!deleteMode && !!role">
+    <input-label type="text" [(ngModel)]="role.name" name="name"
+                 [disabled]="locked" required maxlength="255">
+      Código
+    </input-label>
+    <input-label type="text" [(ngModel)]="role.display_name" name="display_name"
+                 [disabled]="locked" required maxlength="255">
+      Nombre
+    </input-label>
+
+    <input-label type="text" [(ngModel)]="role.description" name="description"
+                 [disabled]="locked" required>
+      Descripción
+    </input-label>
+    <div class="permissions" *ngIf="permissionList">
+      <div *ngFor="let permission of permissionList"  class="checkbox abc-checkbox">
+        <input type="checkbox" [(ngModel)]="permission.checked" [disabled]="locked"
+               [ngModelOptions]="{standalone: true}" [id]="'checked'+permission.id"/>
+        <label [attr.for]="'checked'+permission.id">
+          {{permission.name}}
+        </label>
+      </div>
+    </div>
+  </ng-container>
+  <ng-template [appUserCan]="'role-edit'">
+    <button *ngIf="locked"
+            type="submit" class="btn btn-danger pull-xs-left"
+            (click)="unlock()" >
+      <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+      Editar rol
+    </button>
+  </ng-template>
+  <button *ngIf="createMode"
+          type="submit"
+          class="btn btn-success">
+    Crear rol
+  </button>
+  <button *ngIf="updateMode && !locked"
+          type="submit"
+          class="btn btn-success">
+    Actualizar rol
+  </button>
+  <button *ngIf="deleteMode && !locked"
+          type="submit"
+          class="btn btn-danger">
+    Eliminar rol
+  </button>
+  <button type="button"
+          class="btn btn-primary"
+          (click)="close()">
+    Cerrar
+  </button>
+</form>
+

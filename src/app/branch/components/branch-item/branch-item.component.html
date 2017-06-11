@@ -1,0 +1,15 @@
+<app-person-item
+  [canDelete]="false"
+  (update)="update.emit(branch)">
+  <picture>
+    <i class="fa fa-industry fa-3x"></i>
+  </picture>
+  <div class="data">
+    <div>
+      <span>{{branch.id}}</span>
+    </div>
+    <div>
+      <span>{{branch.name}}</span>
+    </div>
+  </div>
+</app-person-item>

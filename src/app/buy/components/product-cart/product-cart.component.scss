@@ -1,0 +1,36 @@
+table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 5px;
+
+  td,th{
+    padding: .5em;
+    &.align-right{
+      text-align: right;
+    }
+  }
+
+  /deep/ tr{
+    td{
+      background-color: #082B36;
+    }
+    &:hover td{
+      background-color: #06495E ;
+    }
+  }
+
+  thead{
+    tr{
+      color: #fff;
+      td{
+        border: 2px #082B36 solid;
+        text-align: center;
+      }
+    }
+  }
+}
+
+
+.error{
+  color: firebrick;
+}

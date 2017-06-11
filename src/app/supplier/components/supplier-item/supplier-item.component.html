@@ -1,0 +1,20 @@
+<app-person-item deletePermission="supplier-delete"
+                 [deleted]="supplier.deleted_at"
+                 (delete)="delete.emit(supplier)"
+                 (restore)="restore.emit(supplier)"
+                 (update)="update.emit(supplier)">
+  <picture>
+    <img src="assets/images/user.png"/>
+  </picture>
+  <div class="data">
+    <div>
+      <span>{{supplier.id}}</span>
+    </div>
+    <div>
+      <span>{{supplier.name}}</span>
+      <!--
+        <span>{{supplier.last_name}} {{supplier.last_name_2}}</span>
+      -->
+    </div>
+  </div>
+</app-person-item>

@@ -1,0 +1,79 @@
+<h4 md-dialog-title *ngIf="createMode"> Añadir Usuario </h4>
+<h4 md-dialog-title *ngIf="updateMode"> Editar Usuario </h4>
+<h4 md-dialog-title *ngIf="deleteMode"> Eliminar Usuario </h4>
+<form (ngSubmit)="submit()" ngNativeValidate>
+  <ng-container *ngIf="!deleteMode && !!user">
+    <input-label type="text" required="required"  name="username"
+                 [(ngModel)]="user.username" [disabled]="updateMode">
+      Código de usuario
+    </input-label>
+    <input-label type="text" [(ngModel)]="user.name" name="name"
+                 required [disabled]="locked">
+      Nombre
+    </input-label>
+    <input-label type="text" [(ngModel)]="user.last_name"  name="last_name" [disabled]="locked" >
+      Apellido Paterno
+    </input-label>
+    <input-label type="text" [(ngModel)]="user.last_name_2"  name="last_name_2"
+                 [disabled]="locked">
+      Apellido Materno
+    </input-label>
+    <input-label type="email" [(ngModel)]="user.email"  name="email"
+                 [disabled]="locked">
+      Email
+    </input-label>
+    <input-label type="text" [(ngModel)]="user.phone" name="phone"
+                 [disabled]="locked">
+      Teléfono
+    </input-label>
+    <input-label type="text" [(ngModel)]="user.cellphone" name="cellphone"
+                 [disabled]="locked">
+      Celular
+    </input-label>
+    <input-label type="text" [(ngModel)]="user.address" name="address"
+                 [disabled]="locked">
+      Dirección
+    </input-label>
+    <input-label type="text" [(ngModel)]="user.rfc" name="rfc"
+                 [disabled]="locked">
+      RFC
+    </input-label>
+    <input-label *ngIf="createMode" type="password" name="password"
+                 [(ngModel)]="user.password" required>
+      Contraseña
+    </input-label>
+    <input-label *ngIf="createMode" type="password" name="password_confirm"
+                 [(ngModel)]="password_confirm" required>
+      Confirmar contraseña
+    </input-label>
+  </ng-container>
+  <ng-template [appUserCan]="'user-edit'">
+    <button *ngIf="locked"
+            type="submit" class="btn btn-danger pull-xs-left"
+            (click)="unlock()" >
+      <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+      Editar Usuario
+    </button>
+  </ng-template>
+  <button *ngIf="createMode"
+          type="submit"
+          class="btn btn-success">
+    Crear Usuario
+  </button>
+  <button *ngIf="updateMode && !locked"
+          type="submit"
+          class="btn btn-success">
+    Actualizar Usuario
+  </button>
+  <button *ngIf="deleteMode && !locked"
+          type="submit"
+          class="btn btn-danger">
+    Eliminar Usuario
+  </button>
+  <button type="button"
+          class="btn btn-primary"
+          (click)="close()">
+    Cerrar
+  </button>
+</form>
+

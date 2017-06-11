@@ -1,20 +1,35 @@
-import { NgModule } from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
-import {BeginBuyModalComponent} from './components/begin-buy-modal/begin-buy-modal.component';
+import {BeginBuyComponent} from './components/begin-buy/begin-buy.component';
 import {BuyService} from './services/buy.service';
+import {AddProductDialogComponent} from './components/add-product-dialog/add-product-dialog.component';
+import {ProductCartComponent} from './components/product-cart/product-cart.component';
 
 @NgModule({
   imports: [
     SharedModule,
   ],
   declarations: [
-    BeginBuyModalComponent,
+    BeginBuyComponent,
+    AddProductDialogComponent,
+    ProductCartComponent,
   ],
-  providers: [
-    BuyService,
+  entryComponents: [
+    AddProductDialogComponent,
   ],
   exports: [
-    BeginBuyModalComponent,
+    BeginBuyComponent,
+    AddProductDialogComponent,
+    ProductCartComponent,
   ]
 })
-export class BuyModule { }
+export class BuyModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: BuyModule,
+      providers: [
+        BuyService,
+      ],
+    };
+  }
+}

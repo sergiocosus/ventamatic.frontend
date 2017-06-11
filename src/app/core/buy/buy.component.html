@@ -1,0 +1,73 @@
+<app-main-content class="dark-theme">
+  <app-begin-buy
+    [hidden]="initialData"
+    (buyStarted)="startBuy($event)">
+  </app-begin-buy>
+
+
+  <div class="left" *ngIf="initialData">
+    <div class="search">
+      <app-find-product (selectedProduct)="addProduct($event)"
+                        mode="product">
+      </app-find-product>
+      <hr/>
+    </div>
+
+    <app-payment-type [(selectedPaymentType)]="selectedPaymentType">
+    </app-payment-type>
+    <form (submit)="openBuyConfirm()" ngNativeValidate>
+      <div class="finish">
+
+        <h5>Impuestos</h5>
+        <md-input-container>
+          <input mdInput [(ngModel)]="iva"
+                 placeholder="IVA" name="iva" class="dark"
+                 [type]="'number'"  [max]="99999999999" [required]="true" />
+        </md-input-container>
+        <md-input-container>
+          <input mdInput [(ngModel)]="ieps" name="ieps"
+                 placeholder="IEPS" class="dark"
+                 [type]="'number'"  [max]="99999999999" [required]="true" />
+        </md-input-container>
+
+        <div>
+          <button type="button"
+                  md-raised-button color="warn"
+                  (click)="openCancelDialog()">
+            Cancelar Compra
+          </button>
+          <button type="submit" md-raised-button color="accent">
+            Finalizar Compra
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+
+  <div class="right" *ngIf="initialData">
+    <div class="branch-view" *ngIf="initialData.branch">
+      <h6>Sucursal</h6>
+      <h4>
+        {{initialData.branch.name}}
+      </h4>
+    </div>
+    <div class="branch-view" *ngIf="initialData.supplier">
+      <h6>Proveedor</h6>
+      <h4>
+        {{initialData.supplier.name}}
+      </h4>
+    </div>
+    <div class="branch-view" *ngIf="initialData.supplier">
+      <h6>Id de factura</h6>
+      <h4>
+        {{initialData.supplierBillID}}
+      </h4>
+    </div>
+    <hr/>
+    <app-product-cart
+      [(addedProducts)]="addedProducts"
+      [introducedAmount]="initialData.introducedAmount"
+    ></app-product-cart>
+  </div>
+</app-main-content>

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {ApiHttp} from '../../shared/api-http';
 import {InventoryMovementType} from '../classes/inventory-movement-type.model';
+import {ApiHttp} from '../../shared/services/api-http';
 
 @Injectable()
 export class InventoryMovementTypeService {

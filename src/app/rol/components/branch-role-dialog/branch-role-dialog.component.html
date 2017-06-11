@@ -1,0 +1,60 @@
+<h4 *ngIf="createMode" md-dialog-title> Añadir rol de sucursal </h4>
+<h4 *ngIf="updateMode" mt-dialog-title> Editar rol de sucursal </h4>
+<h4 *ngIf="deleteMode" md-dialog-title> Eliminar rol de sucursal </h4>
+
+<form (ngSubmit)="submit()" ngNativeValidate>
+  <ng-container *ngIf="!deleteMode && !!branchRole">
+    <input-label type="text" [(ngModel)]="branchRole.name" name="name"
+                 [disabled]="locked" required maxlength="255">
+      Código
+    </input-label>
+    <input-label type="text" [(ngModel)]="branchRole.display_name" name="display_name"
+                 [disabled]="locked" required maxlength="255">
+      Nombre
+    </input-label>
+
+    <input-label type="text" [(ngModel)]="branchRole.description" name="description"
+                 [disabled]="locked" required>
+      Descripción
+    </input-label>
+    <div class="permissions" *ngIf="branchPermissionList">
+      <div *ngFor="let branchPermission of branchPermissionList" class="checkbox abc-checkbox">
+        <input type="checkbox" [(ngModel)]="branchPermission.checked" [disabled]="locked"
+               [ngModelOptions]="{standalone: true}" [id]="'checked'+branchPermission.id"/>
+        <label [attr.for]="'checked'+branchPermission.id">
+          {{branchPermission.name}}
+        </label>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template [appUserCan]="'branch-role-edit'">
+    <button *ngIf="locked"
+            type="submit" class="btn btn-danger pull-xs-left"
+            (click)="unlock()" >
+      <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+      Editar rol de sucursal
+    </button>
+  </ng-template>
+  <button *ngIf="createMode"
+          type="submit"
+          class="btn btn-success">
+    Crear rol de sucursal
+  </button>
+  <button *ngIf="updateMode && !locked"
+          type="submit"
+          class="btn btn-success">
+    Actualizar rol
+  </button>
+  <button *ngIf="deleteMode && !locked"
+          type="submit"
+          class="btn btn-danger">
+    Eliminar rol de sucursal
+  </button>
+  <button type="button"
+          class="btn btn-primary"
+          (click)="close()">
+    Cerrar
+  </button>
+</form>
+

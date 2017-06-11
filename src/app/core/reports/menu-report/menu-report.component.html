@@ -1,0 +1,34 @@
+<app-main-content>
+  <ul>
+    <li *appUserCanInBranch="'report-schedule'">
+      <a routerLink="/reportes/turno">
+        Reporte de turnos
+      </a>
+    </li>
+    <li *appUserCanInBranch="'report-sale'">
+      <a routerLink="/reportes/venta">
+        Reportes de venta
+      </a>
+    </li>
+    <li *appUserCanInBranch="'report-buy'">
+      <a routerLink="/reportes/compra">
+        Reportes de compra
+      </a>
+    </li>
+    <li *appUserCanInBranch="'report-inventory-movement'">
+      <a routerLink="/reportes/entradas-salidas">
+        Reporte de entradas y salidas
+      </a>
+    </li>
+    <li *appUserCanInBranch="'report-inventory'">
+      <a routerLink="/reportes/inventario">
+        Reporte de inventario
+      </a>
+    </li>
+    <li *appUserCanInBranch="'report-historic-inventory'">
+      <a routerLink="/reportes/inventario-historico">
+        Reporte de inventario historico
+      </a>
+    </li>
+  </ul>
+</app-main-content>

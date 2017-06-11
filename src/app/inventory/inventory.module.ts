@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {ModuleWithProviders, NgModule} from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
 import {MdCardModule, MdDialogModule} from '@angular/material';
 import {InventoryService} from './services/inventory.service';
@@ -20,13 +20,20 @@ import { InventoryMovementTypeService } from './services/inventory-movement-type
     InventoryEditDialogComponent,
     InventoryQuantityDialogComponent,
   ],
-  providers: [
-    InventoryService,
-    InventoryMovementTypeService,
-  ],
+
   exports: [
     InventoryEditDialogComponent,
     InventoryQuantityDialogComponent,
   ]
 })
-export class InventoryModule { }
+export class InventoryModule {
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: InventoryModule,
+      providers: [
+        InventoryService,
+        InventoryMovementTypeService,
+      ],
+    };
+  }
+}

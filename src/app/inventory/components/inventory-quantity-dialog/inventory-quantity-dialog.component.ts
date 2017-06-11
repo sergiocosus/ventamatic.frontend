@@ -1,14 +1,14 @@
 import {Component, EventEmitter, Output} from '@angular/core';
-import {NotifyService} from '../../../services/notify.service';
 import {MdDialogRef} from '@angular/material';
 import {Inventory} from '../../classes/inventory.model';
-import {Branch} from '../../../app/+sucursales/shared/branch';
 import {InventoryService} from '../../services/inventory.service';
-import {BranchService} from '../../../app/+sucursales/shared/branch.service';
 import {InventoryMovementTypeId} from '../../classes/inventory-movement-type-id.enum';
+import {NotifyService} from '../../../shared/services/notify.service';
+import {Branch} from '../../../branch/models/branch';
+import {BranchService} from '../../../branch/services/branch.service';
 
 @Component({
-  selector: 'inventory-quantity-dialog',
+  selector: 'app-inventory-quantity-dialog',
   templateUrl: 'inventory-quantity-dialog.component.html',
   styleUrls: ['inventory-quantity-dialog.component.scss'],
 })
@@ -49,7 +49,7 @@ export class InventoryQuantityDialogComponent  {
   ngOnInit() {
   }
 
-  init(inventory: Inventory){
+  init(inventory: Inventory) {
     this.inventory = inventory;
 
     this.loadBranches();
@@ -70,7 +70,7 @@ export class InventoryQuantityDialogComponent  {
     );
   }
 
-  willIncrease(){
+  willIncrease() {
     if (!this.inventoryMovementType) return false;
 
     switch (this.inventoryMovementType.id) {
@@ -92,19 +92,19 @@ export class InventoryQuantityDialogComponent  {
   willAdjust(){
     if (!this.inventoryMovementType) return false;
 
-    return this.inventoryMovementType.id == InventoryMovementTypeId.Ajuste;
+    return this.inventoryMovementType.id === InventoryMovementTypeId.Ajuste;
   }
 
-  willTranslate(){
+  willTranslate() {
     if (!this.inventoryMovementType) return false;
 
-    return this.inventoryMovementType.id == InventoryMovementTypeId.Traslado;
+    return this.inventoryMovementType.id === InventoryMovementTypeId.Traslado;
   }
 
-  willConvert(){
+  willConvert() {
     if (!this.inventoryMovementType) return false;
 
-    return this.inventoryMovementType.id == InventoryMovementTypeId.Conversion;
+    return this.inventoryMovementType.id === InventoryMovementTypeId.Conversion;
   }
 
   get placeholderText() {
@@ -150,7 +150,7 @@ export class InventoryQuantityDialogComponent  {
     }
   }
 
-  submit(){
+  submit() {
     this.inventoryService.post(
       this.inventory.branch_id,
       this.inventory.product_id,

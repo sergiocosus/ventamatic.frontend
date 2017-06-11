@@ -1,0 +1,20 @@
+<app-person-item (delete)="delete.emit(client)"
+                 (update)="update.emit(client)"
+                 (restore)="restore.emit(client)"
+                 [deleted]="client.deleted_at"
+                 deletePermission="client-delete"
+
+>
+  <picture>
+    <img src="assets/images/user.png"/>
+  </picture>
+  <div class="data">
+    <div>
+      <span>{{client.id}}</span>
+    </div>
+    <div>
+      <span>{{client.name}}</span>
+      <span>{{client.last_name}} {{client.last_name_2}}</span>
+    </div>
+  </div>
+</app-person-item>

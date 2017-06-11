@@ -1,0 +1,53 @@
+<app-search-bar>
+  <h2>Roles del sistema</h2>
+  <button md-raised-button color="primary"
+          *appUserCan="'role-edit'"
+          (click)="create()">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    Agregar rol de sistema
+  </button>
+</app-search-bar>
+
+<app-main-content>
+  <ul>
+    <app-person-item *ngFor="let role of roles"
+                     deletePermission="role-delete"
+                     (click)="clickUpdate(role)">
+      <picture>
+        <i class="fa fa-lock"></i>
+      </picture>
+      <div class="data">
+        <div>
+          <span>{{role.display_name}}</span>
+        </div>
+      </div>
+    </app-person-item>
+  </ul>
+</app-main-content>
+
+<app-search-bar>
+  <h2>Roles de sucursal</h2>
+  <button md-raised-button color="primary"
+          *appUserCan="'branch-role-edit'"
+          (click)="createBranchPermission()">
+    <i class="fa fa-plus" aria-hidden="true"></i>
+    Agregar rol de sucursal
+  </button>
+</app-search-bar>
+
+<app-main-content>
+  <ul>
+    <app-person-item *ngFor="let branchRole of branchRoles"
+                     deletePermission="branch-role-delete"
+                     (click)="updateBranchPermission(branchRole)">
+      <picture>
+        <i class="fa fa-lock"></i>
+      </picture>
+      <div class="data">
+        <div>
+          <span>{{branchRole.display_name}}</span>
+        </div>
+      </div>
+    </app-person-item>
+  </ul>
+</app-main-content>

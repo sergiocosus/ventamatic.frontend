@@ -1,6 +1,7 @@
-import {Branch} from "../../app/+sucursales/shared/branch";
-import {Model} from '../../shared/model';
-import {Product} from '../../shared/product/product';
+import {Model} from '../../shared/classes/model';
+import {Branch} from '../../branch/models/branch';
+import {Product} from '../../product/classes/product';
+
 /**
  * Created by alx on 16/06/16.
  */
@@ -15,8 +16,8 @@ export class Inventory extends Model {
   created_at: string;
   updated_at: string;
 
-  product:Product;
-  branch:Branch;
+  product: Product;
+  branch: Branch;
 
   parse(obj) {
     super.parse(obj);
@@ -25,8 +26,8 @@ export class Inventory extends Model {
     return this;
   }
 
-  public static parseArray(objs:any){
-    return objs.map(obj => {return new Inventory().parse(obj)})
+  public static parseArray(objs: any) {
+    return objs.map(obj => {return new Inventory().parse(obj); });
   }
 
   get searchFields(){

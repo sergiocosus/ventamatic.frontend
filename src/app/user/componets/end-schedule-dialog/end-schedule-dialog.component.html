@@ -1,0 +1,64 @@
+<h4 *ngIf="!finished_schedule" md-dialog-title>Terminar Turno </h4>
+<h4 *ngIf="finished_schedule" md-dialog-title>Turno terminado </h4>
+
+<md-dialog-content>
+  <form (ngSubmit)="submit()" ngNativeValidate>
+    <input-label *ngIf="!finished_schedule"
+                 [(ngModel)]="final_amount" name="final_amount"
+                 [disabled]="locked" type="number">
+      Cantidad Final
+    </input-label>
+    <table *ngIf="finished_schedule">
+      <tr>
+        <td>Inicio de turno</td>
+        <td>{{finished_schedule.created_at | date:'medium'}}</td>
+      </tr>
+      <tr>
+        <td>Fin de turno</td>
+        <td>{{finished_schedule.updated_at | date:'medium'}}</td>
+      </tr>
+      <tr>
+        <td>Cantidad inicial</td>
+        <td>{{finished_schedule.initial_amount  | currency:'USD':true:'.2-2'}} </td>
+      </tr>
+      <tr>
+        <td>Venta calculada</td>
+        <td>{{finished_schedule.system_amount  | currency:'USD':true:'.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>Venta registrada</td>
+        <td>{{finished_schedule.final_amount | currency:'USD':true:'.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>Diferencia</td>
+        <td>{{finished_schedule.system_amount -
+          finished_schedule.final_amount  | currency:'USD':true:'.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>Estado</td>
+        <td>{{finished_schedule.schedule_status.name }}</td>
+      </tr>
+      <tr>
+        <td>Nota</td>
+        <td class="note">
+          <md-input-container>
+          <textarea mdInput placeholder="Nota de aclaración"
+                    [(ngModel)]="finished_schedule.note" name="note"></textarea>
+          </md-input-container>
+          <button md-raised-button color="accent"
+                  type="button" (click)="submitNote()">
+            Guardar Nota
+          </button>
+        </td>
+      </tr>
+    </table>
+
+    <button *ngIf="!finished_schedule"
+      type="submit" md-raised-button color="accent">
+      Terminar turno
+    </button>
+    <button md-raised-button type="button" (click)="close()">
+      Cerrar
+    </button>
+  </form>
+</md-dialog-content>

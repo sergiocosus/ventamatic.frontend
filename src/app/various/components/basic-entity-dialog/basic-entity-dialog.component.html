@@ -1,0 +1,54 @@
+
+    <h4 md-dialog-title>{{title}}</h4>
+<md-dialog-content>
+  <md-checkbox [formControl]="deletedControl" *appUserCan="'user-delete'" >
+    <i class="fa fa-trash"></i>
+    Ver eliminados
+  </md-checkbox>
+
+  <form (ngSubmit)="create()" ngNativeValidate>
+    <input-label name="id" type="text" [(ngModel)]="entity.name">
+      Ingrese una nueva {{title}}
+    </input-label>
+    <div>
+      <button type="submit" class="btn btn-success">
+        Agregar
+      </button>
+    </div>
+  </form>
+  <hr/>
+  <ul>
+    <li *ngFor="let entity of entities">
+      <input-label name="id" type="text" [(ngModel)]="entity.name">
+        {{title}}
+      </input-label>
+      <div *appUserCan="mode+'-edit'">
+        <button type="submit"
+                class="btn btn-success"
+                (click)="update(entity)">
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </button>
+
+      </div>
+      <div *appUserCan="mode+'-delete'">
+        <button *ngIf="entity.deleted_at; else notDeleted" type="button"
+                class="btn btn-warning"
+                (click)="restore(entity)">
+          <i class="fa fa-recycle" aria-hidden="true"></i>
+        </button>
+        <ng-template #notDeleted>
+          <button type="button"
+                  class="btn btn-danger"
+                  (click)="delete(entity)">
+            <i class="fa fa-times" aria-hidden="true"></i>
+          </button>
+        </ng-template>
+      </div>
+    </li>
+  </ul>
+</md-dialog-content>
+<md-dialog-actions>
+  <button type="button" md-raised-button (click)="close()" >
+    Cerrar
+  </button>
+</md-dialog-actions>

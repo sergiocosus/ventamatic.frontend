@@ -1,4 +1,4 @@
-import {Product} from '../../shared/product/product';
+import {Product} from '../../product/classes/product';
 
 export interface ProductBuy {
   product: Product;

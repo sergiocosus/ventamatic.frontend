@@ -1,0 +1,22 @@
+<app-search-bar>
+  <button *appUserCan="'client-create'"
+          md-raised-button color="primary"
+          (click)="create()">
+    <i class="fa fa-user-plus" aria-hidden="true"></i>
+    Agregar Cliente
+  </button>
+
+  <md-checkbox [formControl]="deletedControl" *appUserCan="'client-delete'" class="dark-theme">
+    <i class="fa fa-trash"></i>
+    Ver eliminados
+  </md-checkbox>
+</app-search-bar>
+
+<app-main-content>
+  <app-client-item *ngFor="let client of clients"
+                   [client]="client"
+                   (update)="update($event)"
+                   (delete)="delete($event)"
+                   (restore)="restore($event)"
+  ></app-client-item>
+</app-main-content>
