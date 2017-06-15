@@ -2,10 +2,15 @@ import { Injectable } from '@angular/core';
 import {Category} from './category';
 import {ApiHttp} from '../shared/services/api-http';
 import {BasicEntityService} from '../various/components/basic-entity-dialog/basic-entity-service';
+import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class CategoryService implements BasicEntityService {
   private basePath= 'product/category/';
+
+  private categoriesSubject: ReplaySubject<Category[]> = new ReplaySubject(1);
+  private categoriesRequest: Observable<Category[]>;
 
   constructor(private apiHttp: ApiHttp) {}
 
@@ -13,6 +18,22 @@ export class CategoryService implements BasicEntityService {
     return this.apiHttp.get(this.basePath, params)
       .map(this.mapCategorys)
       .map(this.parseCategories);
+  }
+
+  getAllCached(params?, refresh = false) {
+    if (refresh || !this.categoriesRequest) {
+      this.categoriesRequest = this.getAll(params);
+
+      this.categoriesRequest.subscribe(
+        result => {
+          console.log(result);
+          this.categoriesSubject.next(result);
+        },
+        err => this.categoriesSubject.error(err)
+      );
+    }
+
+    return this.categoriesSubject.asObservable();
   }
 
   get(product_id: number) {

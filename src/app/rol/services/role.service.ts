@@ -1,16 +1,34 @@
 import { Injectable } from '@angular/core';
 import {ApiHttp} from '../../shared/services/api-http';
 import {Role} from '../classes/role';
+import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class RoleService {
   private basePath = 'security/system/role/';
+
+  private rolesSubject: ReplaySubject<Role[]> = new ReplaySubject(1);
+  private rolesRequest: Observable<Role[]>;
 
   constructor(private apiHttp: ApiHttp) {}
 
   getAll() {
     return this.apiHttp.get(this.basePath)
       .map(json => Role.parseArray(json.roles));
+  }
+
+  getAllCached(refresh = false) {
+    if (refresh || !this.rolesRequest) {
+      this.rolesRequest = this.getAll();
+
+      this.rolesRequest.subscribe(
+        result => this.rolesSubject.next(result),
+        err => this.rolesSubject.error(err)
+      );
+    }
+
+    return this.rolesSubject.asObservable();
   }
 
   get(role_id) {

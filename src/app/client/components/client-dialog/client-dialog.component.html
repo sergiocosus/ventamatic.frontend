@@ -3,73 +3,79 @@
 <h4 md-dialog-title *ngIf="deleteMode"> Eliminar Cliente </h4>
 
 <form (ngSubmit)="submit()" ngNativeValidate>
-  <ng-container *ngIf="!deleteMode && !!client">
-    <input-label *ngIf="updateMode" name="id"
-                 type="text" [(ngModel)]="client.id" disabled="disabled">
-      Id
-    </input-label>
-    <input-label type="text" [(ngModel)]="client.name" name="name"
-                 [disabled]="locked" required>
-      Nombre
-    </input-label>
-    <input-label  type="text" [(ngModel)]="client.last_name" name="last_name"
-                  [disabled]="locked">
-      Apellido Paterno
-    </input-label>
-    <input-label type="text" [(ngModel)]="client.last_name_2" name="last_name_2"
-                 [disabled]="locked">
-      Apellido Materno
-    </input-label>
-    <input-label type="email" [(ngModel)]="client.email" name="email"
-                 [disabled]="locked">
-      Email
-    </input-label>
-    <input-label type="text" [(ngModel)]="client.phone" name="phone"
-                 [disabled]="locked">
-      Teléfono
-    </input-label>
-    <input-label type="text" [(ngModel)]="client.cellphone" name="cellphone"
-                 [disabled]="locked">
-      Celular
-    </input-label>
-    <input-label type="text" [(ngModel)]="client.address" name="address"
-                 [disabled]="locked">
-      Dirección
-    </input-label>
-    <input-label type="text" [(ngModel)]="client.rfc" name="rfc"
-                 [disabled]="locked">
-       RFC
-    </input-label>
-  </ng-container>
+  <md-dialog-content *ngIf="!deleteMode && !!client">
 
-  <ng-template appUserCan="client-edit">
-    <button *ngIf="locked"
-            type="submit" class="btn btn-danger pull-xs-left"
-            (click)="unlock()" >
-      <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-      Editar Cliente
+    <md-input-container *ngIf="updateMode" >
+      <input mdInput placeholder="Id"  name="id"
+             type="text" [(ngModel)]="client.id" disabled="disabled">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Nombre"
+             type="text" [(ngModel)]="client.name" name="name"
+             [disabled]="locked" required>
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Apellido Paterno"
+             type="text" [(ngModel)]="client.last_name" name="last_name"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Apellido Materno"
+             type="text" [(ngModel)]="client.last_name_2" name="last_name_2"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Email"
+             type="email" [(ngModel)]="client.email" name="email"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Teléfono"
+             type="text" [(ngModel)]="client.phone" name="phone"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Celular"
+             type="text" [(ngModel)]="client.cellphone" name="cellphone"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Dirección"
+             type="text" [(ngModel)]="client.address" name="address"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="RFC"
+             type="text" [(ngModel)]="client.rfc" name="rfc"
+             [disabled]="locked">
+    </md-input-container>
+  </md-dialog-content>
+
+  <md-dialog-actions>
+    <ng-template appUserCan="client-edit">
+      <button *ngIf="locked"
+              type="submit" class="btn btn-danger pull-xs-left"
+              (click)="unlock()" >
+        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+        Editar Cliente
+      </button>
+    </ng-template>
+
+    <button *ngIf="createMode"
+            type="submit" md-raised-button color="accent">
+      Crear Cliente
     </button>
-  </ng-template>
-
-  <button *ngIf="createMode"
-          type="submit"
-          class="btn btn-success" >
-    Crear Cliente
-  </button>
-  <button *ngIf="updateMode && !locked"
-          type="submit"
-          class="btn btn-success" >
-    Actualizar Cliente
-  </button>
-  <button *ngIf="deleteMode && !locked"
-          type="submit"
-          class="btn btn-danger" >
-    Eliminar Cliente
-  </button>
-  <button type="button"
-          class="btn btn-primary"
-          (click)="close()" >
-    Cerrar
-  </button>
+    <button *ngIf="updateMode && !locked"
+            type="submit" md-raised-button color="accent" >
+      Actualizar Cliente
+    </button>
+    <button *ngIf="deleteMode && !locked"
+            type="submit" md-raised-button color="warn">
+      Eliminar Cliente
+    </button>
+    <button type="button" md-raised-button md-dialog-close>
+      Cerrar
+    </button>
+  </md-dialog-actions>
 </form>
 

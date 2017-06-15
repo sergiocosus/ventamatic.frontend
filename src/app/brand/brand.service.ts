@@ -2,10 +2,15 @@ import { Injectable } from '@angular/core';
 import {Brand} from './brand';
 import {ApiHttp} from '../shared/services/api-http';
 import {BasicEntityService} from '../various/components/basic-entity-dialog/basic-entity-service';
+import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class BrandService implements BasicEntityService {
   private basePath = 'product/brand/';
+
+  private brandsSubject: ReplaySubject<Brand[]> = new ReplaySubject(1);
+  private brandsRequest: Observable<Brand[]>;
 
   constructor(private apiHttp: ApiHttp) {}
 
@@ -13,6 +18,20 @@ export class BrandService implements BasicEntityService {
     return this.apiHttp.get(this.basePath, params)
       .map(this.mapBrands)
       .map(this.parseBrands);
+  }
+
+
+  getAllCached(params?, refresh = false) {
+    if (refresh || !this.brandsRequest) {
+      this.brandsRequest = this.getAll(params);
+
+      this.brandsRequest.subscribe(
+        result => this.brandsSubject.next(result),
+        err => this.brandsSubject.error(err)
+      );
+    }
+
+    return this.brandsSubject.asObservable();
   }
 
   get(brand_id: number) {

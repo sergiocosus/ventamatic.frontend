@@ -23,14 +23,12 @@ export class RolesComponent implements OnInit {
               private dialog: MdDialog) {}
 
   ngOnInit() {
-    this.roleService.getAll().subscribe(
-      roles => {
-        this.roles = roles;
-      },
+    this.roleService.getAllCached().subscribe(
+      roles => this.roles = roles,
       error => this.notify.serviceError(error)
     );
 
-    this.branchRoleService.getAll().subscribe(
+    this.branchRoleService.getAllCached().subscribe(
       branchRoles => this.branchRoles = branchRoles,
       error => this.notify.serviceError(error)
     );

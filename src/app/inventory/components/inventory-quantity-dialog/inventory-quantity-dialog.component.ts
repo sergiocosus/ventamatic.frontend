@@ -57,7 +57,7 @@ export class InventoryQuantityDialogComponent  {
   }
 
   loadBranches() {
-    this.branchService.getAll().subscribe(
+    this.branchService.getAllCached().subscribe(
       branches => this.branches = branches
     );
   }

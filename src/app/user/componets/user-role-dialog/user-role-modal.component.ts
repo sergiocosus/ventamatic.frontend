@@ -20,17 +20,15 @@ export class UserRoleDialogComponent implements OnInit {
   branches: Branch[];
 
   roles: Role[] = [];
-  roleItems: any[] = [];
-  selectedRoleItems: any[] = [];
+  selectedRoles: any[] = [];
 
-  branchRoleItems: any[] = [];
-  selectedBranchRoleItems: any[][] = [];
+  branchRoles: BranchRole[];
+  selectedBranchRoles: any[][] = [];
 
   messages = {
     rolesSaved: 'Los roles han sido actualizados para el usuario'
   };
 
-  branchRoles: BranchRole[];
 
   constructor(protected userService: UserService,
               protected notify: NotifyService,
@@ -40,26 +38,16 @@ export class UserRoleDialogComponent implements OnInit {
               private dialogRef: MdDialogRef<UserRoleDialogComponent>) { }
 
   ngOnInit() {
-    this.roleService.getAll().subscribe(
-      roles => {
-        this.roles = roles;
-        this.roleItems = this.roles.map(
-          (role: Role) => ({text: role.display_name, id: role.id})
-        );
-      }
+    this.roleService.getAllCached().subscribe(
+      roles => this.roles = roles
     );
 
-    this.branchService.getAll().subscribe(
+    this.branchService.getAllCached().subscribe(
       branches => this.branches = branches
     );
 
-    this.branchRoleService.getAll().subscribe(
-      branchRoles => {
-        this.branchRoles = branchRoles;
-        this.branchRoleItems = this.branchRoles.map(
-          (branchRole: BranchRole) => ({text: branchRole.display_name, id: branchRole.id})
-        );
-      }
+    this.branchRoleService.getAllCached().subscribe(
+      branchRoles => this.branchRoles = branchRoles
     );
   }
 
@@ -68,8 +56,10 @@ export class UserRoleDialogComponent implements OnInit {
       user => {
         this.user = user;
 
-        this.selectedRoleItems = user.roles.map(
-          (role: Role) => ({text: role.display_name, id: role.id})
+        this.selectedRoles = user.roles.map(
+          rolesOfUser => this.roles.find(
+            role => role.id === rolesOfUser.id
+          )
         );
 
         this.branches.forEach(
@@ -77,9 +67,11 @@ export class UserRoleDialogComponent implements OnInit {
             const filteredBranchRoles = this.user.branch_roles.filter(
               branchRole => branchRole.pivot.branch_id === branch.id
             );
-            this.selectedBranchRoleItems.push(
+            this.selectedBranchRoles.push(
               filteredBranchRoles.map(
-                (branchRole: BranchRole) => ({text: branchRole.display_name, id: branchRole.id})
+                branchRolesOfUser => this.branchRoles.find(
+                  branchRole => branchRole.id === branchRolesOfUser.id
+                )
               )
             );
           }
@@ -90,7 +82,7 @@ export class UserRoleDialogComponent implements OnInit {
   }
 
   updateSystemRoles() {
-    const roles = this.selectedRoleItems.map(
+    const roles = this.selectedRoles.map(
       item => item.id
     );
 
@@ -110,7 +102,9 @@ export class UserRoleDialogComponent implements OnInit {
         branch_id : this.branches[i].id,
         branch_roles: []
       };
-      branches.branch_roles = this.selectedBranchRoleItems[i].map(
+
+      console.log(this.selectedBranchRoles);
+      branches.branch_roles = this.selectedBranchRoles[i].map(
         item => item.id
       );
       branchRoles.push(branches);
@@ -128,8 +122,8 @@ export class UserRoleDialogComponent implements OnInit {
 
   clear() {
     this.user = null;
-    this.selectedRoleItems = [];
-    this.selectedBranchRoleItems = [];
+    this.selectedRoles = [];
+    this.selectedBranchRoles = [];
   }
 
   close() {

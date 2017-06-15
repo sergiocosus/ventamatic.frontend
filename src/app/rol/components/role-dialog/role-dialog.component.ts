@@ -7,8 +7,6 @@ import {NotifyService} from '../../../shared/services/notify.service';
 import {Permission} from '../../../auth/classes/permission';
 import {PermissionService} from '../../../auth/services/permission.service';
 
-
-
 @Component({
   selector: 'app-role-dialog',
   templateUrl: './role-dialog.component.html',
@@ -106,10 +104,4 @@ export class RoleDialogComponent extends CrudModalComponent implements OnInit {
       }
     );
   }
-
-  closed() {
-    this.role = null;
-    this.permissionList = null;
-  }
-
 }

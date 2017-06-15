@@ -2,88 +2,86 @@
 <h4 *ngIf="updateMode" md-dialog-title> Editar Proveedor </h4>
 <h4 *ngIf="deleteMode" md-dialog-title> Eliminar Proveedor </h4>
 <form (ngSubmit)="submit()" ngNativeValidate>
-  <ng-container *ngIf="!deleteMode && !!supplier">
-    <input-label *ngIf="updateMode" name="id"
-                 type="text" [(ngModel)]="supplier.id" disabled="disabled">
-      Id
-    </input-label>
-    <input-label type="text" [(ngModel)]="supplier.name" name="name"
-                 [disabled]="locked" required>
-      Nombre
-    </input-label>
-    <!--
-    <input-label type="text" [(ngModel)]="supplier.last_name" name="last_name"
-                    [disabled]="locked">
-      Apellido Paterno
-    </input-label>
-    <input-label type="text" [(ngModel)]="supplier.last_name_2" name="last_name_2"
-                    [disabled]="locked">
-      Apellido Materno
-    </input-label>
-    -->
-    <input-label type="email" [(ngModel)]="supplier.email" name="email"
-                    [disabled]="locked">
-      Email
-    </input-label>
-    <input-label type="text" [(ngModel)]="supplier.phone" name="phone"
-                    [disabled]="locked">
-      Teléfono
-    </input-label>
-    <input-label type="text" [(ngModel)]="supplier.cellphone" name="cellphone"
-                    [disabled]="locked">
-      Celular
-    </input-label>
-    <input-label type="text" [(ngModel)]="supplier.address" name="address"
-                    [disabled]="locked">
-      Dirección
-    </input-label>
-    <input-label type="text" [(ngModel)]="supplier.rfc"  name="rfc"
-                    [disabled]="locked">
-      RFC
-    </input-label>
-
-    <ng-select [items]="supplierCategoryItems"
-               [active]="selectedSupplierCategoryItem"
-               (data)="supplier.supplier_category_id = $event.id"
+  <md-dialog-content *ngIf="!deleteMode && !!supplier">
+    <md-input-container *ngIf="updateMode">
+      <input mdInput placeholder="Id" name="id"
+             type="text" [(ngModel)]="supplier.id" disabled="disabled">
+    </md-input-container>
+    <md-input-container >
+      <input mdInput placeholder="Nombre"
+             type="text" [(ngModel)]="supplier.name" name="name"
+             [disabled]="locked" required>
+    </md-input-container>
+    <md-input-container >
+      <input mdInput placeholder="Email"
+             type="email" [(ngModel)]="supplier.email" name="email"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container >
+      <input mdInput placeholder="Teléfono"
+             type="text" [(ngModel)]="supplier.phone" name="phone"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container >
+      <input mdInput placeholder="Celular"
+             type="text" [(ngModel)]="supplier.cellphone" name="cellphone"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container >
+      <input mdInput placeholder="Dirección"
+             type="text" [(ngModel)]="supplier.address" name="address"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container >
+      <input mdInput placeholder="RFC"
+             type="text" [(ngModel)]="supplier.rfc"  name="rfc"
+             [disabled]="locked">
+    </md-input-container>
+    <md-select [(ngModel)]="selectedSupplierCategory"
                [disabled]="locked"
+               name="selectedCategoryItems"
                placeholder="Categoría del proveedor">
-    </ng-select>
+      <md-option *ngFor="let supplierCategory of supplierCategories" [value]="supplierCategory">
+        {{supplierCategory.name}}
+      </md-option>
+    </md-select>
 
-    <ng-select [items]="brandItems"
-               [active]="selectedBrandItems"
-               (data)="mapBrands($event)"
+    <md-select [(ngModel)]="selectedBrands"
                [multiple]="true"
                [disabled]="locked"
+               name="selectedBrands"
                placeholder="Marcas">
-    </ng-select>
-  </ng-container>
-  <ng-template [appUserCan]="'supplier-edit'">
-    <button *ngIf="locked"
-            type="submit" class="btn btn-danger pull-xs-left"
-            (click)="unlock()" >
-      <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-      Editar Proveedor
+      <md-option *ngFor="let brand of brands" [value]="brand">
+        {{brand.name}}
+      </md-option>
+    </md-select>
+  </md-dialog-content>
+
+  <md-dialog-actions>
+    <ng-template [appUserCan]="'supplier-edit'">
+      <button *ngIf="locked"
+              type="submit" md-raised-button color="warn"
+              (click)="unlock()" >
+        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+        Editar Proveedor
+      </button>
+    </ng-template>
+    <button *ngIf="createMode"
+            type="submit" md-raised-button color="accent">
+      Crear Proveedor
     </button>
-  </ng-template>
-  <button *ngIf="createMode"
-          type="submit"
-          class="btn btn-success">
-    Crear Proveedor
-  </button>
-  <button *ngIf="updateMode && !locked"
-          type="submit"
-          class="btn btn-success">
-    Actualizar Proveedor
-  </button>
-  <button *ngIf="deleteMode && !locked"
-          type="submit"
-          class="btn btn-danger">
-    Eliminar Proveedor
-  </button>
-  <button type="button"
-          class="btn btn-primary"
-          (click)="close()" >
-    Cerrar
-  </button>
+    <button *ngIf="updateMode && !locked"
+            type="submit" md-raised-button color="accent">
+      Actualizar Proveedor
+    </button>
+    <button *ngIf="deleteMode && !locked"
+            type="submit" md-raised-button color="accent">
+      Eliminar Proveedor
+    </button>
+    <button type="button" md-raised-button=""
+            (click)="close()" >
+      Cerrar
+    </button>
+  </md-dialog-actions>
 </form>
 

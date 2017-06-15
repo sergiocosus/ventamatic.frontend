@@ -20,12 +20,10 @@ export class SupplierDialogComponent extends CrudModalComponent implements OnIni
   supplier: Supplier;
 
   supplierCategories: SupplierCategory[] = [];
-  supplierCategoryItems: any[] = [];
-  selectedSupplierCategoryItem: any;
+  selectedSupplierCategory: any;
 
   brands: Brand[] = [];
-  brandItems: any[] = [];
-  selectedBrandItems: any[] = [];
+  selectedBrands: Brand[];
 
   constructor(protected supplierService: SupplierService,
               protected notify: NotifyService,
@@ -41,27 +39,15 @@ export class SupplierDialogComponent extends CrudModalComponent implements OnIni
   }
 
   loadSupplierCategories() {
-    this.supplierCategoryService.getAll().subscribe(
-      supplierCategories => {
-        this.supplierCategories = supplierCategories;
-        this.supplierCategoryItems = this.supplierCategories.map(
-          (supplierCategory: SupplierCategory) => {
-            return {text: supplierCategory.name, id: supplierCategory.id};
-          }
-        );
-      },
+    this.supplierCategoryService.getAllCached().subscribe(
+      supplierCategories => this.supplierCategories = supplierCategories,
       error => this.notify.serviceError(error)
     );
   }
 
   private loadBrands() {
-    this.brandService.getAll().subscribe(
-      brands => {
-        this.brands = brands;
-        this.brandItems = this.brands.map(
-          brand => { return {text: brand.name, id: brand.id}; }
-        );
-      },
+    this.brandService.getAllCached().subscribe(
+      brands => this.brands = brands,
       error => this.notify.serviceError(error)
     );
   }
@@ -76,17 +62,16 @@ export class SupplierDialogComponent extends CrudModalComponent implements OnIni
       obtainedSupplier => {
         this.supplier = obtainedSupplier;
 
-        this.selectedBrandItems = obtainedSupplier.brands.map(
-          brand => ({ id: brand.id, text: brand.name })
+        this.selectedBrands = obtainedSupplier.brands.map(
+          brandsOfSuppliers => this.brands.find(
+            brand => brand.id === brandsOfSuppliers.id
+          )
         );
 
-        this.mapBrands(this.selectedBrandItems);
-
         if (obtainedSupplier.supplier_category) {
-          this.selectedSupplierCategoryItem = [{
-            text: obtainedSupplier.supplier_category.name,
-            id: obtainedSupplier.supplier_category.id
-          }];
+          this.selectedSupplierCategory = this.supplierCategories.find(
+            (supplierCategory) => obtainedSupplier.supplier_category.id === supplierCategory.id
+          );
         }
       },
       error => {
@@ -103,6 +88,8 @@ export class SupplierDialogComponent extends CrudModalComponent implements OnIni
   }
 
   create() {
+    this.appendData();
+
     this.supplierService.post(this.supplier).subscribe(
       supplier => this.createdSuccess(supplier),
       error => this.notify.serviceError(error)
@@ -110,6 +97,8 @@ export class SupplierDialogComponent extends CrudModalComponent implements OnIni
   }
 
   update() {
+    this.appendData();
+
     this.supplierService.put(this.supplier).subscribe(
       supplier => this.updatedSuccess(supplier),
       error => this.notify.serviceError(error)
@@ -125,11 +114,14 @@ export class SupplierDialogComponent extends CrudModalComponent implements OnIni
 
   closed() {
     this.supplier = null;
-    this.selectedSupplierCategoryItem = null;
+    this.selectedSupplierCategory = null;
   }
 
+  appendData() {
+    this.supplier.brands = this.selectedBrands.map(
+      item => item.id
+    ) as any[];
 
-  mapBrands(items) {
-    this.supplier.brands = items.map( item => item.id );
+    this.supplier.supplier_category_id = this.selectedSupplierCategory && this.selectedSupplierCategory.id;
   }
 }

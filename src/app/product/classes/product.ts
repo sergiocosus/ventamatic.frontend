@@ -38,6 +38,8 @@ export class Product extends Model {
   parse(obj) {
     for (const prop in obj) this[prop] = obj[prop];
 
+    this.categories = Category.parseArray(this.categories);
+
     return this;
   }
 

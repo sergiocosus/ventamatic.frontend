@@ -47,6 +47,10 @@ export class BasicEntityDialogComponent implements OnInit {
   init(mode) {
     this.mode = mode;
     this.loadFromService();
+
+    this.dialogRef.afterClosed().subscribe(
+      () => this.onClose()
+    );
   }
 
   loadFromService() {
@@ -141,5 +145,9 @@ export class BasicEntityDialogComponent implements OnInit {
 
   close() {
     this.dialogRef.close();
+  }
+
+  onClose() {
+    this.service.getAllCached(undefined, true);
   }
 }

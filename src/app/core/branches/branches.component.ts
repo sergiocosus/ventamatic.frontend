@@ -18,7 +18,7 @@ export class BranchesComponent implements OnInit {
               private dialog: MdDialog) {}
 
   ngOnInit(): any {
-    this.branchService.getAll().subscribe(
+    this.branchService.getAllCached().subscribe(
       branches => this.branches = branches,
       error => this.notify.serviceError(error)
     );

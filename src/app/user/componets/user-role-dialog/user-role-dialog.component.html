@@ -1,13 +1,15 @@
 <h4 md-dialog-title>Roles</h4>
 
 <md-dialog-content>
-  <ng-select [items]="roleItems"
-             [active]="selectedRoleItems"
-             (data)="selectedRoleItems = $event"
-             [multiple]="true"
-
-             placeholder="Roles">
-  </ng-select>
+  <md-select [(ngModel)]="selectedRoles"
+              [multiple]="true"
+              [disabled]="locked"
+              name="selectedRoles"
+              placeholder="Roles">
+  <md-option *ngFor="let role of roles" [value]="role">
+    {{role.name}}
+  </md-option>
+</md-select>
   <button (click)="updateSystemRoles()"
           *appUserCan="'user-role-assign'"
           md-raised-button color="accent">
@@ -23,14 +25,18 @@
     Roles de sucursal
   </h4>
 
-  <div *ngFor="let branch of branches; let i=index">
-    {{branch.name}}
-    <ng-select [items]="branchRoleItems"
-               [active]="selectedBranchRoleItems[i]"
-               (data)="selectedBranchRoleItems[i] = $event"
+
+
+  <div *ngFor="let branch of branches; let i=index" class="branch-roles">
+    <md-select [(ngModel)]="selectedBranchRoles[i]"
                [multiple]="true"
-               [placeholder]="'Roles de sucursal:' + branch.name ">
-    </ng-select>
+               [disabled]="locked"
+               name="selectedRoles"
+               [placeholder]="branch.name ">
+      <md-option *ngFor="let branchRole of branchRoles" [value]="branchRole">
+        {{branchRole.name}}
+      </md-option>
+    </md-select>
   </div>
 
   <button (click)="updateBranchRoles()" md-raised-button color="accent">

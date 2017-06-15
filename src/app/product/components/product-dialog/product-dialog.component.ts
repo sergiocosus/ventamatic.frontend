@@ -22,15 +22,13 @@ export class ProductDialogComponent extends CrudModalComponent implements OnInit
   product: Product;
 
   categories: Category[] = [];
-  categoryItems: any[] = [];
-  selectedCategoryItems: any[] = [];
+  selectedCategories: any[] = [];
 
   brands: Brand[] = [];
-  brandItems: any[] = [];
-  selectedBrandItem: any;
+  selectedBrands: any;
 
-  unitItems: any[] = [];
-  selectedUnitItem: any = [];
+  units: any[] = [];
+  unit: any;
 
   haveBarCode = true;
 
@@ -41,22 +39,22 @@ export class ProductDialogComponent extends CrudModalComponent implements OnInit
               protected dialogRef: MdDialogRef<ProductDialogComponent>) {
     super(notify, dialogRef);
 
-    this.unitItems = [
+    this.units = [
       {
-        'id' : 1,
-        'text' : 'Pieza'
+        id : 1,
+        name : 'Pieza'
       },
       {
-        'id' : 2,
-        'text' : 'Kilogramo'
+        id : 2,
+        name : 'Kilogramo'
       },
       {
-        'id' : 3,
-        'text' : 'Litro'
+        id : 3,
+        name : 'Litro'
       },
       {
-        'id' : 4,
-        'text' : 'Metro'
+        id : 4,
+        name : 'Metro'
       }
     ];
   }
@@ -67,29 +65,15 @@ export class ProductDialogComponent extends CrudModalComponent implements OnInit
   }
 
   initCategoriesData() {
-    this.categoryService.getAll().subscribe(
-      categories => {
-        this.categories = categories;
-        this.categoryItems = this.categories.map(
-          (category: Category) => {
-            return {text: category.name, id: category.id};
-          }
-        );
-      },
+    this.categoryService.getAllCached().subscribe(
+      categories => this.categories = categories,
       error => this.notify.serviceError(error)
     );
   }
 
   initBrandsData() {
-    this.brandService.getAll().subscribe(
-      brands => {
-        this.brands = brands;
-        this.brandItems = this.brands.map(
-          brand => {
-            return {text: brand.name, id: brand.id};
-          }
-        );
-      },
+    this.brandService.getAllCached().subscribe(
+      brands => this.brands = brands,
       error => this.notify.serviceError(error)
     );
   }
@@ -103,23 +87,22 @@ export class ProductDialogComponent extends CrudModalComponent implements OnInit
     this.productService.get(product.id).subscribe(
       updatedProduct => {
         this.product = updatedProduct;
-        this.selectedCategoryItems = updatedProduct.categories.map(
-          category => {
-            return {id: category.id, text: category.name};
-          }
+        console.log(updatedProduct);
+        this.selectedCategories = updatedProduct.categories.map(
+          categoryOfProduct => this.categories.find(
+            category => category.id === categoryOfProduct.id
+          )
         );
 
         if (updatedProduct.brand) {
-          this.selectedBrandItem = [{
-            text: updatedProduct.brand.name,
-            id: updatedProduct.brand.id
-          }];
+          this.selectedBrands = this.brands.find(
+            (brand) => updatedProduct.brand.id === brand.id
+          );
         }
 
-        this.selectedUnitItem = [{
-          text: updatedProduct.unit.name,
-          id: updatedProduct.unit.id
-        }];
+        this.unit = this.units.find(
+          unit => unit.id === updatedProduct.unit.id
+        );
       },
       error => {
         this.notify.serviceError(error);
@@ -163,7 +146,8 @@ export class ProductDialogComponent extends CrudModalComponent implements OnInit
   }
 
   appendData() {
-    this.product.categories = this.selectedCategoryItems.map(
+    console.log(this.selectedCategories);
+    this.product.categories = this.selectedCategories.map(
       item => item.id
     );
 
@@ -171,17 +155,7 @@ export class ProductDialogComponent extends CrudModalComponent implements OnInit
       this.product.bar_code = null;
     }
 
-    this.product.brand_id = this.selectedBrandItem ?
-      this.selectedBrandItem[0].id : null;
-    this.product.unit_id = this.selectedUnitItem ?
-      this.selectedUnitItem[0].id : null;
+    this.product.brand_id = this.selectedBrands && this.selectedBrands.id;
+    this.product.unit_id = this.unit && this.unit.id;
   }
-
-  closed() {
-    this.product = null;
-    this.selectedBrandItem = null;
-    this.selectedUnitItem = null;
-    this.selectedCategoryItems = [];
-  }
-
 }

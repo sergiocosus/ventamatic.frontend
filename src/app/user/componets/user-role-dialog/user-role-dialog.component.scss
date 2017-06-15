@@ -1,0 +1,10 @@
+@import '~app/vars';
+
+:host{
+  @extend .form-dialog;
+}
+
+.branch-roles{
+  display: flex;
+  flex-direction: column;
+}
