@@ -7,9 +7,13 @@
         <md-input-container>
           <input mdInput [(ngModel)]="client_id"
                  name="client_id" type="number"
-                 [min]="1" [formControl]="clientIdControl" class="dark"
+                 [min]="1" [formControl]="clientIdControl"
                  tabindex="5" autocomplete="off"
                  placeholder="ID de cliente" required />
+          <md-hint>
+            <span class="error" *ngIf="client_status">{{client_status}}</span>
+            <span *ngIf="!client_status">{{client && client.fullName}}</span>
+          </md-hint>
         </md-input-container>
         <app-client-search (selected)="client_id = $event.id"></app-client-search>
       </div>
@@ -65,11 +69,6 @@
       <h4>
         {{branch.name}}
       </h4>
-    </div>
-    <hr>
-    <div class="client-view">
-      Cliente: <span class="error" *ngIf="client_status">{{client_status}}</span>
-      <span *ngIf="!client_status">{{client && client.fullName}}</span>
     </div>
     <hr/>
     <app-inventory-cart

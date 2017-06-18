@@ -18,11 +18,7 @@
       <td>{{inventory.id}}</td>
       <td>{{inventory.product.description}}</td>
       <td>
-        <ul>
-          <li *ngFor="let category of inventory.product.categories; let last=last">
-            {{category.name}}<span *ngIf="!last">, </span>
-          </li>
-        </ul>
+        {{inventory.product.toStringCategories()}}
       </td>
       <td>{{inventory.product.brand ? inventory.product.brand.name  : '' }}</td>
       <td>{{inventory.minimum}}</td>

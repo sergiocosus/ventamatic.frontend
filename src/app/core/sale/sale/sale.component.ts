@@ -15,8 +15,8 @@ import {TicketService} from '../../../sale/services/ticket.service';
 
 @Component({
   selector: 'app-sale',
-  templateUrl: 'sale.component.html',
-  styleUrls: ['sale.component.scss'],
+  templateUrl: './sale.component.html',
+  styleUrls: ['./sale.component.scss'],
 })
 export class SaleComponent implements OnInit, OnDestroy {
   @ViewChild(FindProductComponent) protected findProduct: FindProductComponent;

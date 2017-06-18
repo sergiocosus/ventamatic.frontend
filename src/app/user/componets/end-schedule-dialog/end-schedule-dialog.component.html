@@ -3,11 +3,12 @@
 
 <md-dialog-content>
   <form (ngSubmit)="submit()" ngNativeValidate>
-    <input-label *ngIf="!finished_schedule"
-                 [(ngModel)]="final_amount" name="final_amount"
-                 [disabled]="locked" type="number">
-      Cantidad Final
-    </input-label>
+    <md-input-container *ngIf="!finished_schedule">
+      <input mdInput placeholder="Cantidad"
+             [(ngModel)]="final_amount" name="final_amount"
+             [disabled]="locked" type="number">
+    </md-input-container>
+
     <table *ngIf="finished_schedule">
       <tr>
         <td>Inicio de turno</td>

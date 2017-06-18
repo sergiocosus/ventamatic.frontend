@@ -1,5 +1,8 @@
 <app-main-content>
-  <h2>Seleccione<br/>Sucursal</h2>
+  <h2>
+    <i class="fa fa-list-ul"></i>
+    Seleccione Sucursal
+  </h2>
   <ul>
     <li *ngFor="let branch of branches">
       <a [routerLink]="['/inventario/'+branch.id]">

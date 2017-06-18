@@ -7,6 +7,14 @@
   justify-content: center;
 }
 
+md-input-container{
+  color: white;
+}
+
+md-select{
+  margin: 1em 0;
+}
+
 :host /deep/{
   .ui-dropdown{
     width: 100% !important;

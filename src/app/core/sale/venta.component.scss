@@ -1,3 +1,6 @@
+@import "~app/vars";
+
 app-main-content{
   display: flex;
+  background-color: $darkBlue;
 }

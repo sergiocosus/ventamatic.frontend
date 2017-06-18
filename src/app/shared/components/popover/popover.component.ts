@@ -2,7 +2,6 @@ import {
   Component, OnInit, HostListener, ElementRef, style, animate, transition, trigger, state,
   Input
 } from '@angular/core';
-import {InputLabelComponent} from '../input-label/input-label.component';
 
 @Component({
   selector: 'app-popover',

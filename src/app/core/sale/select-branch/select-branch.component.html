@@ -1,15 +1,20 @@
 <form (ngSubmit)="submit()" ngNativeValidate>
-  <h2>Iniciar Turno</h2>
-  <ng-select class="dark"
-              [items]="branchesItems"
-             (data)="selectedBranch = $event.id"
+  <h2>
+    <i class="fa fa-clock-o fa" aria-hidden="true"></i>
+    Iniciar Turno
+  </h2>
+  <md-select [(ngModel)]="selectedBranch" name="selectedBranch"
              placeholder="Sucursal">
-  </ng-select>
-  <input-label class="dark" required="required"
-               type="number" name="initial_amount"
-               [(ngModel)]="initial_amount">
-    Monto inicial
-  </input-label>
+    <md-option *ngFor="let branch of branches" [value]="branch">
+      {{branch.name}}
+    </md-option>
+  </md-select>
+  <md-input-container>
+    <input mdInput required="required"
+           placeholder="Monto inicial"
+           type="number" name="initial_amount"
+           [(ngModel)]="initial_amount">
+  </md-input-container>
   <button class="btn btn-primary" type="submit">
     Iniciar turno
   </button>

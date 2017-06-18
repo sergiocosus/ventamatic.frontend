@@ -47,7 +47,6 @@ export class UserCanInBranchDirective implements OnDestroy, OnInit {
       return;
     }
 
-    console.log(permission, this.branch_id);
     if (!permission || this.user.canInBranch(permission, this.branch_id)) {
       this.viewContainer.createEmbeddedView(this.templateRef);
     }

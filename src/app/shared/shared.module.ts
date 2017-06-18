@@ -7,7 +7,6 @@ import {
   MdButtonModule, MdCheckboxModule, MdDialogModule, MdInputModule, MdRadioModule,
   MdSelectModule
 } from '@angular/material';
-import {InputLabelComponent} from './components/input-label/input-label.component';
 import {SelectableComponent} from './components/selectable/selectable.component';
 import {AutocompleteInputComponent} from './components/autocomplete-input/autocomplete-input.component';
 import {PaymentTypeComponent} from './components/payment-type/payment-type.component';
@@ -39,7 +38,6 @@ import {SimpleNotificationsModule} from 'angular2-notifications';
     SimpleNotificationsModule,
   ],
   declarations: [
-    InputLabelComponent,
     SelectableComponent,
     PopoverComponent,
     AutocompleteInputComponent,
@@ -62,7 +60,6 @@ import {SimpleNotificationsModule} from 'angular2-notifications';
     FormsModule,
     ReactiveFormsModule,
 
-    InputLabelComponent,
     SelectableComponent,
     PopoverComponent,
     MdCheckboxModule,

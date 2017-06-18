@@ -45,6 +45,10 @@ export class Product extends Model {
     return this;
   }
 
+  toStringCategories() {
+    return this.categories.map(category => category.name).join(',');
+  }
+
   get searchFields() {
     return [
       this.description,

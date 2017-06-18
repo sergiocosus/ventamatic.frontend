@@ -6,12 +6,15 @@
   max-width: 100%;
   overflow: hidden;
   background-color: $backgroundDark;
-  md-input-container{
-    width: 100%;
-  }
-  input{
-    color: white;
-  }
+  color: white ;
+
+
+
+}
+
+md-input-container {
+  width: 100%;
+  color: white;
 }
 
 .left{
@@ -36,9 +39,7 @@
     position: relative;
     .searchable-input{
       display: flex;
-      input-label{
-        flex: 1 0 0;
-      }
+      color: white;
       app-client-search{
         flex: 0 0 auto;
       }
@@ -61,10 +62,6 @@
   color: white;
   padding: 1em;
   border-radius: 1em;
-}
-
-input{
-  color: #2b2d2f;
 }
 
 .error{
