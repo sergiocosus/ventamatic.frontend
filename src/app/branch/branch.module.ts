@@ -6,12 +6,14 @@ import {AuthModule} from '../auth/auth.module';
 import {BranchService} from './services/branch.service';
 import {BranchItemComponent} from './components/branch-item/branch-item.component';
 import {VariousModule} from '../various/various.module';
+import {ImageUploadModule} from 'ng2-imageupload';
 
 @NgModule({
   imports: [
     SharedModule,
     AuthModule,
     VariousModule,
+    ImageUploadModule,
   ],
   declarations: [
     BranchSearchComponent,

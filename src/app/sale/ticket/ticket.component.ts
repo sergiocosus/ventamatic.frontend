@@ -4,8 +4,8 @@ import {TicketService} from '../services/ticket.service';
 
 @Component({
   selector: 'app-ticket',
-  templateUrl: 'ticket.component.html',
-  styleUrls: ['ticket.component.scss']
+  templateUrl: './ticket.component.html',
+  styleUrls: ['./ticket.component.scss']
 })
 export class TicketComponent implements OnInit {
   sale: Sale;

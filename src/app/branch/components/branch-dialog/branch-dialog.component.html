@@ -37,9 +37,17 @@
              [(ngModel)]="branch.footer_ticket" name="footer_ticket"
              [disabled]="locked">
     </md-input-container>
-      <input  placeholder="Imagen"
-             [(ngModel)]="branch.image_hash" [type]="'file'" name="image_hash"
-             [disabled]="locked">
+
+    <input class="input-picture"  placeholder="Imagen"
+           imageUpload (imageSelected)="selected($event)"
+           accept="image/*" name="picture" type="file"
+           [disabled]="locked">
+
+      <section *ngIf="src" class="picture-container">
+        <picture [ngStyle]="{
+                      'background-image' : 'url('+src+')'
+                    }"></picture>
+      </section>
   </md-dialog-content>
 
   <md-dialog-actions>

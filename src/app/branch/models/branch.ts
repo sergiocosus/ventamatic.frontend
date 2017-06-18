@@ -10,11 +10,16 @@ export class Branch extends Model {
   header_ticket: string;
   footer_ticket: string;
   image_hash: string;
+  image_url: string;
   created_at: string;
   updated_at: string;
   deleted_at: string;
 
   branch_roles: BranchRole[];
+  /**
+   * Temporal
+   */
+  image_base64: string;
 
 
   parse(obj): any {

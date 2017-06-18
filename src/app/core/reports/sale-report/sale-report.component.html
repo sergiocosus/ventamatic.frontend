@@ -73,7 +73,9 @@
         <td>{{sale.client.name}}</td>
         <td>{{sale.total}}</td>
         <td>
-          <button (click)="print(sale)">Imprimir Ticket</button>
+          <button (click)="print(sale)" md-raised-button>
+            Imprimir Ticket
+          </button>
         </td>
       </tr>
       <tr>

@@ -1,6 +1,8 @@
 <ng-template [ngIf]="sale">
   <header>
     <h5>{{sale.branch.name}}</h5>
+    <img [src]="sale.branch.image_url">
+
     <h6>{{sale.branch.title_ticket}}</h6>
     <p>{{sale.branch.header_ticket}}</p>
     <p>{{sale.branch.address}}</p>

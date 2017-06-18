@@ -4,6 +4,7 @@ import {Branch} from '../../models/branch';
 import {BranchService} from '../../services/branch.service';
 import {CrudModalComponent} from '../../../shared/components/crud-modal/crud-modal.component';
 import {NotifyService} from '../../../shared/services/notify.service';
+import {ImageResult} from 'ng2-imageupload';
 
 @Component({
   selector: 'app-branch-dialog',
@@ -13,6 +14,8 @@ import {NotifyService} from '../../../shared/services/notify.service';
 export class BranchDialogComponent extends CrudModalComponent {
   branch: Branch;
   name = 'Sucursal';
+  src: string;
+  image: string;
 
   constructor(protected notify: NotifyService,
               protected branchService: BranchService,
@@ -22,12 +25,17 @@ export class BranchDialogComponent extends CrudModalComponent {
 
   initUpdate(branch: Branch) {
     this.branch = branch;
+    this.src = this.branch.image_url;
     super.initUpdate(branch);
   }
 
   update() {
+    this.beforeUpdate();
     this.branchService.put(this.branch).subscribe(
-      user => this.updatedSuccess(user),
+      branch => {
+        this.updatedSuccess(branch);
+        this.branchService.getAllCached(undefined, true);
+      },
       error => this.notify.serviceError(error)
     );
   }
@@ -36,5 +44,16 @@ export class BranchDialogComponent extends CrudModalComponent {
   }
 
   delete() {
+  }
+
+  beforeUpdate() {
+    if (this.image) {
+      this.branch.image_base64 = this.image;
+    }
+  }
+
+  selected(imageResult: ImageResult) {
+    this.src = imageResult.dataURL;
+    this.image = this.src ? this.src.split(',')[1] : null;
   }
 }

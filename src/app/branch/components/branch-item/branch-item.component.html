@@ -2,7 +2,10 @@
   [canDelete]="false"
   (update)="update.emit(branch)">
   <picture>
-    <i class="fa fa-industry fa-3x"></i>
+    <img *ngIf="branch.image_url; else defaultIcon" [src]="branch.image_url">
+    <ng-template #defaultIcon>
+      <i class="fa fa-industry fa-3x"></i>
+    </ng-template>
   </picture>
   <div class="data">
     <div>
