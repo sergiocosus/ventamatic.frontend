@@ -1,0 +1,5 @@
+@import '~app/vars';
+
+:host{
+  @extend .form-dialog;
+}

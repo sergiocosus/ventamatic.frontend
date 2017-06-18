@@ -17,13 +17,14 @@
     md-select{
       margin: 0 .25em;
     }
-    input-label{
-      width:auto;
-      margin: 0 0 0 0.3em;
 
-      &.id-field{
-        width: 8em;
-      }
+    md-input-container.id-field{
+      width: 7em;
+    }
+
+    .search-button{
+      margin-bottom: 1em;
+      margin-right: 1em;
     }
 
     time{
@@ -50,10 +51,21 @@
   }
 
   table{
+    line-height: 1em;
+    background-color: #D3D3D3;
+    color: #333;
+    border-radius: .5em;
+    overflow: hidden;
+
+    tr:nth-child(even){
+      background-color: rgba(100,100,100,.2);
+    }
+
     th{
       border: thin solid white;
       padding-left: 2px;
       padding-right: 2px;
+      background-color: #EEE;
     }
     td{
       border: thin solid white;

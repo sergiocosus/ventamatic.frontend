@@ -8,9 +8,15 @@ import {SubscriptionManager} from '../../shared/classes/subscription-manager';
   selector: '[appUserCanInBranch]'
 })
 export class UserCanInBranchDirective implements OnDestroy, OnInit {
+  private branch_id: any;
   @Input() set appUserCanInBranch(permission){
     this.permission = permission;
-  };
+  }
+
+  @Input() set appUserCanInBranchBranchId(branch_id){
+    this.branch_id = branch_id;
+  }
+
   private permission: string;
   private user: User;
   private sub = new SubscriptionManager();
@@ -41,7 +47,8 @@ export class UserCanInBranchDirective implements OnDestroy, OnInit {
       return;
     }
 
-    if (!permission || this.user.canInAnyBranch(permission)) {
+    console.log(permission, this.branch_id);
+    if (!permission || this.user.canInBranch(permission, this.branch_id)) {
       this.viewContainer.createEmbeddedView(this.templateRef);
     }
   }

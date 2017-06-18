@@ -7,15 +7,17 @@
     </div>
 
     <form class="form-signin" (ngSubmit)="onSubmit()" ngNativeValidate>
-      <input-label [(ngModel)]="username" name="username"
-                   [autofocus]="true" required="required">
-        Usuario
-      </input-label>
-      <input-label [(ngModel)]="password" name="password"
-                  required="required" type="password">
-       Contraseña
-      </input-label>
-      <button class="btn btn-primary b<tn-block"
+      <md-input-container>
+        <input mdInput placeholder="Usuario"
+               [(ngModel)]="username" name="username"
+               [autofocus]="true" required="required">
+      </md-input-container>
+      <md-input-container>
+        <input mdInput placeholder="Contraseña"
+               [(ngModel)]="password" name="password"
+               required="required" type="password">
+      </md-input-container>
+      <button md-raised-button color="primary"
               type="submit">Iniciar Sesión</button>
     </form>
   </div>

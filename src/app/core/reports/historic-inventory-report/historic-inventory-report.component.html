@@ -1,38 +1,53 @@
-<app-search-bar>
+<app-search-bar class="dark-theme">
   <form (submit)="submit()" ngNativeValidate>
-    <input-label [(ngModel)]="request.branch_id" class="dark id-field"
-                 name="branch_id" type="number">
-      ID de sucursal
-    </input-label>
-    <app-branch-search (selected)="request.branch_id = $event.id"></app-branch-search>
 
-    <input-label [(ngModel)]="request.product_id"  class="dark id-field"
-                 name="product_id" type="number">
-      ID de producto
-    </input-label>
-    <app-product-search (selected)="request.product_id = $event.id"></app-product-search>
+    <md-input-container class="id-field">
+      <input mdInput placeholder="ID de sucursal"
+             [(ngModel)]="request.branch_id"
+             name="branch_id" type="number">
+    </md-input-container>
 
-    <input-label [(ngModel)]="request.quantity" class="dark id-field"
-                 name="quantity" type="number">
-      Cantidad
-    </input-label>
-    <input-label [(ngModel)]="request.price" class="dark id-field"
-                 name="price" type="number">
-      Precio
-    </input-label>
-    <input-label [(ngModel)]="request.minimum" class="dark id-field"
-                 name="minimum" type="number">
-      Mínimo
-    </input-label>
-    <input-label [(ngModel)]="request.date" class="dark id-field"
-                 name="date" type="text">
-      Fecha
-    </input-label>
-    <button md-raised-button color="accent" type="submit">
+    <app-branch-search class="search-button"
+      (selected)="request.branch_id = $event.id"></app-branch-search>
+
+    <md-input-container class="id-field">
+      <input mdInput placeholder="ID de producto"
+             [(ngModel)]="request.product_id"
+             name="product_id" type="number">
+    </md-input-container>
+
+    <app-product-search class="search-button"
+                        (selected)="request.product_id = $event.id"></app-product-search>
+
+    <md-input-container class="id-field">
+      <input mdInput placeholder="Cantidad"
+             [(ngModel)]="request.quantity"
+             name="quantity" type="number">
+    </md-input-container>
+
+    <md-input-container class="id-field">
+      <input mdInput placeholder="Precio"
+             [(ngModel)]="request.price"
+             name="price" type="number">
+    </md-input-container>
+
+    <md-input-container class="id-field">
+      <input mdInput placeholder="Mínimo"
+             [(ngModel)]="request.minimum"
+             name="minimum" type="number">
+    </md-input-container>
+
+    <md-input-container class="id-field">
+      <input mdInput placeholder="Fecha"
+             [(ngModel)]="request.date"
+             name="date" type="text">
+    </md-input-container>
+
+    <button md-raised-button color="primary" type="submit">
       <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
       Consultar
     </button>
-    <button md-raised-button color="accent" type="button" (click)="downloadCSV()">
+    <button md-raised-button color="primary" type="button" (click)="downloadCSV()">
       <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
       CSV
     </button>

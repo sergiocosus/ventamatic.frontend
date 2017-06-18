@@ -1,9 +1,9 @@
 <app-popover [focusable]="focusable">
   <form>
-    <input-label [(ngModel)]="name" class="dark" type="text"
-                 [formControl]="nameControl" #focusable>
-      Nombre
-    </input-label>
+    <md-input-container class="dark-theme">
+      <input mdInput placeholder="Nombre" [(ngModel)]="name" class="dark" type="text" autocomplete="off"
+             [formControl]="nameControl" #focusable>
+    </md-input-container>
   </form>
 
   <app-selectable [items]="users"

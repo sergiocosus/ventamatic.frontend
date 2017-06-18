@@ -6,7 +6,7 @@ import {CrudModalComponent} from '../../../shared/components/crud-modal/crud-mod
 import {NotifyService} from '../../../shared/services/notify.service';
 
 @Component({
-  selector: 'app-branch-modal',
+  selector: 'app-branch-dialog',
   templateUrl: './branch-dialog.component.html',
   styleUrls: ['./branch-dialog.component.scss'],
 })
@@ -26,9 +26,10 @@ export class BranchDialogComponent extends CrudModalComponent {
   }
 
   update() {
-    this.branchService.put(this.branch).subscribe( user => {
-      this.updatedSuccess(user);
-    });
+    this.branchService.put(this.branch).subscribe(
+      user => this.updatedSuccess(user),
+      error => this.notify.serviceError(error)
+    );
   }
 
   create() {

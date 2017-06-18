@@ -21,7 +21,7 @@ import {InputLabelComponent} from '../input-label/input-label.component';
   ],
 })
 export class PopoverComponent implements OnInit {
-  @Input() focusable: InputLabelComponent;
+  @Input() focusable;
   hidden = true;
 
   @HostListener('window:click', ['$event.srcElement']) onClick(element) {
@@ -44,7 +44,11 @@ export class PopoverComponent implements OnInit {
 
     if (!this.hidden) {
       if (this.focusable) {
-        this.focusable.setFocus(0);
+        setTimeout(() => {
+          console.log('focus');
+          console.log(this.focusable);
+          this.focusable.focus();
+        }, 100);
       }
     }
   }

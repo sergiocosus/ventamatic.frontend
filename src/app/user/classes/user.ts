@@ -67,11 +67,16 @@ export class User extends Model {
     );
   }
 
-  canInAnyBranch(branch_permission_name) {
-    if (this.getBranchesWithPermission(branch_permission_name).length) {
-      return true;
+  canInBranch(branch_permission_name, branch_id?: number) {
+    const branches = this.getBranchesWithPermission(branch_permission_name);
+
+    if (branch_id) {
+      return !!branches.find(
+        branch => branch.id === branch_id
+      );
     } else {
-      return false;
+      console.log(branch_permission_name, branches);
+      return !!branches.length;
     }
   }
 

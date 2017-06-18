@@ -1,59 +1,64 @@
 <h4 *ngIf="updateMode" md-dialog-title>
   Editar Sucursal
 </h4>
-<md-dialog-content>
-  <form (ngSubmit)="submit()" ngNativeValidate>
-    <input-label *ngIf="updateMode" type="number" [(ngModel)]="branch.id" name="id"
-                 disabled="disabled">
-      Id
-    </input-label>
-    <input-label [(ngModel)]="branch.name" name="name"
-                 [disabled]="locked" [required]="true">
-      Nombre</input-label>
-    <input-label [(ngModel)]="branch.description" name="description"
-                 [disabled]="locked">
-      Descripción
-    </input-label>
-    <input-label [(ngModel)]="branch.address" name="address"
-                 [disabled]="locked">
-      Dirección
-    </input-label>
-    <input-label [(ngModel)]="branch.title_ticket" name="title_ticket"
-                 [disabled]="locked">
-      Título del ticket
-    </input-label>
-    <input-label [(ngModel)]="branch.header_ticket" name="header_ticket"
-                 [disabled]="locked">
-      Encabezado de ticket
-    </input-label>
-    <input-label [(ngModel)]="branch.footer_ticket" name="footer_ticket"
-                 [disabled]="locked">
-      Pie de ticket
-    </input-label>
-    <input-label [(ngModel)]="branch.image_hash" [type]="'file'" name="image_hash"
-                 [disabled]="locked">
-      Imagen
-    </input-label>
+<form (ngSubmit)="submit()" ngNativeValidate>
+  <md-dialog-content>
+    <md-input-container *ngIf="updateMode">
+      <input mdInput placeholder="Id" type="number" [(ngModel)]="branch.id" name="id"
+             disabled="disabled">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Nombre"
+             [(ngModel)]="branch.name" name="name"
+             [disabled]="locked" [required]="true">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Descripción"
+             [(ngModel)]="branch.description" name="description"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Dirección"
+             [(ngModel)]="branch.address" name="address"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Título del ticket"
+             [(ngModel)]="branch.title_ticket" name="title_ticket"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Encabezado de ticket"
+             [(ngModel)]="branch.header_ticket" name="header_ticket"
+             [disabled]="locked">
+    </md-input-container>
+    <md-input-container>
+      <input mdInput placeholder="Pie de ticket"
+             [(ngModel)]="branch.footer_ticket" name="footer_ticket"
+             [disabled]="locked">
+    </md-input-container>
+      <input  placeholder="Imagen"
+             [(ngModel)]="branch.image_hash" [type]="'file'" name="image_hash"
+             [disabled]="locked">
+  </md-dialog-content>
 
-    <ng-template [appUserCan]="'branch-edit'">
+  <md-dialog-actions>
+    <ng-container *appUserCanInBranch="'branch-edit'; branchId: branch.id">
       <button *ngIf="locked"
-              type="submit" class="btn btn-danger pull-xs-left"
+              type="submit" md-raised-button color="warn"
               (click)="unlock()" >
         <i class="fa fa-unlock-alt" aria-hidden="true"></i>
         Editar Sucursal
       </button>
-    </ng-template>
+    </ng-container>
     <button *ngIf="updateMode && !locked"
-            type="submit"
-            class="btn btn-success" >
+            type="submit" md-raised-button color="accent" >
       Actualizar Sucursal
     </button>
-    <button type="button"
-            class="btn btn-primary"
-            (click)="close()" >
+    <button type="button" md-raised-button md-dialog-close>
       Cerrar
     </button>
-  </form>
-</md-dialog-content>
+  </md-dialog-actions>
+</form>
 
 

@@ -8,3 +8,15 @@
   display: flex;
   flex-direction: column;
 }
+
+md-dialog-content{
+  display: flex;
+  flex-direction: row !important;
+  flex-wrap: wrap;
+
+  md-card{
+    display: flex;
+    flex-direction: column;
+    padding: .5em;
+  }
+}

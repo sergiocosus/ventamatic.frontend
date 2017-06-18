@@ -1,34 +1,45 @@
-<app-search-bar>
+<app-search-bar class="dark-theme">
   <form (submit)="submit()" ngNativeValidate>
-    <input-label [(ngModel)]="request.id"  class="dark id-field"
-                 name="id" type="number">
-      ID de compra
-    </input-label>
-    <input-label [(ngModel)]="request.branch_id" class="dark id-field"
-                 name="branch_id" type="number">
-      ID de sucursal
-    </input-label>
-    <app-branch-search (selected)="request.branch_id = $event.id"></app-branch-search>
+    <md-input-container  class="id-field">
+      <input mdInput placeholder="ID de compra"
+             [(ngModel)]="request.id"
+             name="id" type="number">
+    </md-input-container>
 
-    <input-label [(ngModel)]="request.user_id" class="dark id-field"
-                 name="user_id" type="number">
-      ID de usuario
-    </input-label>
-    <app-user-search (selected)="request.user_id = $event.id"></app-user-search>
-    <input-label [(ngModel)]="request.supplier_id" class="dark id-field"
-                 name="client_id" type="number">
-      ID de proveedor
-    </input-label>
-    <app-supplier-search (selected)="request.supplier_id = $event.id"></app-supplier-search>
+    <md-input-container class="id-field">
+      <input mdInput placeholder="ID de sucursal"
+             [(ngModel)]="request.branch_id"
+             name="branch_id" type="number">
+    </md-input-container>
+
+    <app-branch-search class="search-button"
+                       (selected)="request.branch_id = $event.id"></app-branch-search>
+
+    <md-input-container class="id-field">
+      <input mdInput placeholder="ID de usuario"
+             [(ngModel)]="request.user_id"
+             name="user_id" type="number">
+    </md-input-container>
+
+    <app-user-search class="search-button"
+                     (selected)="request.user_id = $event.id"></app-user-search>
+    <md-input-container class="id-field">
+      <input mdInput placeholder="ID de proveedor"
+             [(ngModel)]="request.supplier_id"
+             name="client_id" type="number">
+    </md-input-container>
+
+    <app-supplier-search class="search-button"
+                         (selected)="request.supplier_id = $event.id"></app-supplier-search>
     <my-date-range-picker placeholder="Rango de fechas"
                           (dateRangeChanged)="onDateRangeChanged($event)"
                           [options]="rangeOptions" ></my-date-range-picker>
 
-    <button md-raised-button color="accent" type="submit" >
+    <button md-raised-button color="primary" type="submit" >
       <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
       Consultar
     </button>
-    <button md-raised-button color="accent" type="button" (click)="downloadCSV()">
+    <button md-raised-button color="primary" type="button" (click)="downloadCSV()">
       <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
       CSV
     </button>
