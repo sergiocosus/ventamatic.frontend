@@ -3,6 +3,7 @@ import {IMyDateRangeModel} from 'mydaterangepicker';
 import {ReportService} from '../../../report/report.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {messages} from '../../../shared/classes/messages';
+import {InventoryMovementTypeId} from '../../../inventory/classes/inventory-movement-type-id.enum';
 
 @Component({
   selector: 'app-buy-report',
@@ -25,8 +26,11 @@ export class BuyReportComponent implements OnInit {
     editableDateRangeField: true
   };
 
+  totalCost = 0;
+  totalCostPromotion = 0;
   totalCostBuy = 0;
-  totalProducts: number;
+  totalCostConsignment = 0;
+  totalProducts = 0;
 
   constructor(private reportService: ReportService,
               private notify: NotifyService) { }
@@ -50,18 +54,37 @@ export class BuyReportComponent implements OnInit {
     this.reportService.formatRange(this.request, $event);
   }
 
+  resetStats() {
+    this.totalCostBuy = 0;
+    this.totalProducts = 0;
+    this.totalCost = 0;
+    this.totalCostPromotion = 0;
+    this.totalCostConsignment = 0;
+  }
+
   submit() {
     this.reportService.getBuy(this.request).subscribe(
       buys => {
         this.buys = buys;
+        this.resetStats();
 
-        this.totalCostBuy = 0;
-        this.totalProducts = 0;
         buys.forEach(buy => {
-          this.totalCostBuy += buy.total;
+          this.totalCost += buy.total;
           buy.products.forEach(
             product => {
               this.totalProducts += product.pivot.quantity;
+              switch (product.pivot.inventory_movement_type_id) {
+                case InventoryMovementTypeId.Consignacion:
+                  console.log(product.pivot);
+                  this.totalCostConsignment += product.pivot.quantity * product.pivot.cost;
+                  break;
+                case InventoryMovementTypeId.Promocion:
+                  this.totalCostPromotion += product.pivot.quantity * product.pivot.cost;
+                  break;
+                case InventoryMovementTypeId.Compra:
+                  this.totalCostBuy += product.pivot.quantity * product.pivot.cost;
+                  break;
+              }
             }
           );
         });

@@ -22,10 +22,6 @@ export class SaleReportComponent implements OnInit {
     end_at: string
   };
 
-  rangeOptions = {
-    editableDateRangeField: true
-  };
-
   totalPriceSale;
   totalProducts = 0;
 
@@ -52,13 +48,16 @@ export class SaleReportComponent implements OnInit {
     this.reportService.formatRange(this.request, $event);
   }
 
+  resetStats() {
+    this.totalPriceSale = 0;
+    this.totalProducts = 0;
+  }
+
   submit() {
     this.reportService.getSale(this.request).subscribe(
       sales => {
         this.sales = sales;
-
-        this.totalPriceSale = 0;
-        this.totalProducts = 0;
+        this.resetStats();
 
         sales.forEach(sale => {
           this.totalPriceSale += sale.total;

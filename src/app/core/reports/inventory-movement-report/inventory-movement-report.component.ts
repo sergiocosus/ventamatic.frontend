@@ -81,22 +81,24 @@ export class InventoryMovementReportComponent implements OnInit {
     this.reportService.formatRange(this.request, $event);
   }
 
+  resetStats() {
+    this.totalUp = 0;
+    this.totalDown = 0;
+    this.statsByType.forEach(
+      stat => {
+        stat.totalMovements = 0;
+        stat.totalUp = 0;
+        stat.totalDown = 0;
+      }
+    );
+  }
+
   submit() {
     this.reportService.getInventoryMovements(this.request).subscribe(
       inventoryMovements => {
         this.inventory_movements = inventoryMovements;
+        this.resetStats();
 
-
-        this.statsByType.forEach(
-          stat => {
-            stat.totalMovements = 0;
-            stat.totalUp = 0;
-            stat.totalDown = 0;
-          }
-        );
-
-        this.totalUp = 0;
-        this.totalDown = 0;
         inventoryMovements.forEach(inventoryMovement => {
           if (inventoryMovement.quantity > 0) {
             this.totalUp += inventoryMovement.quantity;

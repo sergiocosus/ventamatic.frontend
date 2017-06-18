@@ -31,6 +31,7 @@
 
     <app-supplier-search class="search-button"
                          (selected)="request.supplier_id = $event.id"></app-supplier-search>
+
     <my-date-range-picker placeholder="Rango de fechas"
                           (dateRangeChanged)="onDateRangeChanged($event)"
                           [options]="rangeOptions" ></my-date-range-picker>
@@ -50,8 +51,11 @@
 
   <ul *ngIf="buys.length">
     <li>Número de compras: {{buys.length}}</li>
-    <li>Total de compras: {{totalCostBuy | myCurrency}}</li>
     <li>Total de productos: {{totalProducts}}</li>
+    <li>Total: {{totalCost | myCurrency}}</li>
+    <li>Total (Promoción): {{totalCostPromotion | myCurrency}}</li>
+    <li>Total (Consignación): {{totalCostConsignment | myCurrency}}</li>
+    <li>Total (Compra): {{totalCostBuy | myCurrency}}</li>
   </ul>
 
   <table>

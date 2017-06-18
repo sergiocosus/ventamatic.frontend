@@ -7,5 +7,5 @@ export enum InventoryMovementTypeId {
   Ajuste,
   Compra,
   Venta,
-  Consinacion
+  Consignacion
 };

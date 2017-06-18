@@ -14,7 +14,7 @@ export class AddProductDialogComponent implements OnInit {
   inventoryMovementTypes = [
     {id: InventoryMovementTypeId.Compra, text: 'Compra'},
     {id: InventoryMovementTypeId.Promocion, text: 'Promoción'},
-    {id: InventoryMovementTypeId.Consinacion, text: 'Consignación'}
+    {id: InventoryMovementTypeId.Consignacion, text: 'Consignación'}
   ];
 
   productBuy: ProductBuy = {
