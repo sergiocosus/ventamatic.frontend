@@ -52,6 +52,8 @@
     <li *ngIf="inventories"> Registros de inventario: {{inventories.length}}</li>
     <li>Registros de inventario con existencias {{productsWithExistences}}</li>
     <li>Productos diferentes registrados: {{registeredProducts}}</li>
+    <li>Valor al costo del inventario: {{costValue | myCurrency}}</li>
+    <li>Valor al precio del inventario: {{priceValue | myCurrency}}</li>
   </ul>
   <table>
     <thead>
@@ -78,7 +80,7 @@
         <td>{{inventory.quantity}}</td>
         <td>{{inventory.price | myCurrency}}</td>
         <td>{{inventory.quantity * inventory.price | myCurrency}}</td>
-        <td>/* pendiente */</td>
+        <td>{{inventory.current_total_cost | myCurrency}}</td>
         <td>{{inventory.minimum}}</td>
       </tr>
     </ng-template>

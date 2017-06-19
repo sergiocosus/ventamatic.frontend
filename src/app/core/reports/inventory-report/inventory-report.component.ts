@@ -22,6 +22,8 @@ export class InventoryReportComponent implements OnInit {
 
   registeredProducts = null;
   productsWithExistences = null;
+  priceValue = 0;
+  costValue = 0;
 
   constructor(private reportService: ReportService,
               private notify: NotifyService) { }
@@ -46,16 +48,23 @@ export class InventoryReportComponent implements OnInit {
       .join(', ');
   }
 
+  resetStats() {
+    this.registeredProducts = 0;
+    this.productsWithExistences = 0;
+    this.priceValue = 0;
+    this.costValue = 0;
+  }
+
   submit() {
     this.reportService.getInventory(this.request).subscribe(
       inventories => {
         this.inventories = inventories;
+        this.resetStats();
         if (!this.inventories.length) {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle);
         }
 
         const inventoryIds = [];
-        this.productsWithExistences = 0;
         inventories.forEach( inventory => {
           if (inventoryIds.indexOf(inventory.product_id) === -1) {
             inventoryIds.push(inventory.product_id);
@@ -64,6 +73,9 @@ export class InventoryReportComponent implements OnInit {
           if (inventory.quantity > 0) {
             this.productsWithExistences++;
           }
+
+          this.priceValue += inventory.current_price * inventory.quantity;
+          this.costValue += inventory.current_total_cost;
         });
 
         this.registeredProducts = inventoryIds.length;

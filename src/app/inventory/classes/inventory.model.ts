@@ -12,7 +12,8 @@ export class Inventory extends Model {
   quantity: number;
   price: number;
   minimum: number;
-  current_price: number;
+  current_price?: number;
+  current_total_cost?: number;
   created_at: string;
   updated_at: string;
 
