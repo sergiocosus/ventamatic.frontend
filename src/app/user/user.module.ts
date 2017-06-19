@@ -9,6 +9,7 @@ import {UserRoleDialogComponent} from './componets/user-role-dialog/user-role-mo
 import {VariousModule} from '../various/various.module';
 import {AuthModule} from '../auth/auth.module';
 import {ScheduleService} from './services/schedule.service';
+import { PasswordDialogComponent } from './components/password-dialog/password-dialog.component';
 
 @NgModule({
   imports: [
@@ -23,11 +24,13 @@ import {ScheduleService} from './services/schedule.service';
     UserItemComponent,
     UserRoleDialogComponent,
     UserSearchComponent,
+    PasswordDialogComponent,
   ],
   entryComponents: [
     EndScheduleDialogComponent,
     UserRoleDialogComponent,
     UserDialogComponent,
+    PasswordDialogComponent,
   ],
   exports: [
     UserSearchComponent,
@@ -36,6 +39,7 @@ import {ScheduleService} from './services/schedule.service';
     UserItemComponent,
     UserRoleDialogComponent,
     UserSearchComponent,
+    PasswordDialogComponent,
   ]
 })
 export class UserModule {

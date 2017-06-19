@@ -5,12 +5,14 @@
     <i class="fa fa-user-secret"></i>
     Agregar Proveedor
   </button>
-  <button md-raised-button color="primary"
+  <button *appUserCan="'supplier-category-create'"
+          md-raised-button color="primary"
           (click)="openSupplierCategoryDialog()">
     <i class="fa fa-list" aria-hidden="true"></i>
     Categorias de proveedores
   </button>
-  <button md-raised-button color="primary"
+  <button *appUserCan="'brand-create'"
+          md-raised-button color="primary"
           (click)="openBrandDialog()">
     <i class="fa fa-list" aria-hidden="true"></i>
     Marcas

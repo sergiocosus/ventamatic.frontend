@@ -35,16 +35,9 @@ export class User extends Model {
   }
 
   can(permission_name) {
-    let foundPermission;
-    this.permissions.forEach(
-      permission => {
-        if (permission.name === permission_name) {
-          foundPermission = permission;
-        }
-      }
+    return this.permissions.find(
+      permission => permission.name === permission_name
     );
-
-    return foundPermission;
   }
 
   getBranchesWithPermission(branch_permission_name) {

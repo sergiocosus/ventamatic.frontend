@@ -49,6 +49,13 @@ export class UserService {
       .map(res => new User().parse(res.user));
   }
 
+  putPassword(current_password, password) {
+    return this.apiHttp.put(this.basePath + 'me/password', {
+        current_password: current_password,
+        password: password
+      });
+  }
+
   putRoles(user: User, roles: number[]) {
     return this.apiHttp.put(this.basePath + user.id + '/roles', {roles: roles})
       .map(res => {return Role.parseArray(res.roles); });
