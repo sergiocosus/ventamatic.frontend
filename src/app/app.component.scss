@@ -31,3 +31,14 @@ body {
     background-color: $darkBlue;
   }
 }
+
+.hide-on-small {
+  @media (max-width: $smScreen) {
+    display: none
+  }
+}
+.show-on-small {
+  @media (min-width: $smScreen) {
+    display: none
+  }
+}

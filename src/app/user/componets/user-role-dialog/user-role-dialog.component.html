@@ -5,7 +5,6 @@
     </h4>
     <md-select [(ngModel)]="selectedRoles"
                [multiple]="true"
-               [disabled]="locked"
                name="selectedRoles"
                placeholder="Roles">
       <md-option *ngFor="let role of roles" [value]="role">
@@ -29,7 +28,6 @@
     <div *ngFor="let branch of branches; let i=index" class="branch-roles">
       <md-select [(ngModel)]="selectedBranchRoles[i]"
                  [multiple]="true"
-                 [disabled]="locked"
                  name="selectedRoles"
                  [placeholder]="branch.name ">
         <md-option *ngFor="let branchRole of branchRoles" [value]="branchRole">

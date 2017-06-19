@@ -14,6 +14,13 @@ export class CoreComponent implements OnInit, OnDestroy {
   public user: User;
   private sub = new SubscriptionManager();
 
+
+  private _opened = true;
+
+  toggleSidebar() {
+    this._opened = !this._opened;
+  }
+
   constructor(private authService: AuthService,
               private router: Router) {}
 
@@ -28,5 +35,7 @@ export class CoreComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.sub.clear();
   }
+
+
 
 }

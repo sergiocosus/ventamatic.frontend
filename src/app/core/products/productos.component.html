@@ -2,17 +2,19 @@
   <button *appUserCan="'product-create'"
           md-raised-button color="primary"
           (click)="clickCreate()">
-    <i class="fa fa-shopping-bag" aria-hidden="true"></i>
+    <i class="fa fa-plus-circle" aria-hidden="true"></i>
     Agregar Producto
   </button>
   <button *appUserCan="'category-create'"
           md-raised-button color="primary"
           (click)="openCategoryDialog()">
-    Categorias de produtos
+    <i class="fa fa-list" aria-hidden="true"></i>
+    Categorias
   </button>
   <button *appUserCan="'brand-create'"
           md-raised-button color="primary"
           (click)="openBrandDialog()">
+    <i class="fa fa-list" aria-hidden="true"></i>
     Marcas
   </button>
   <md-checkbox [formControl]="deletedControl" *appUserCan="'product-delete'" class="dark-theme">
@@ -27,11 +29,11 @@
     <tr>
       <th>ID</th>
       <th>Descripción</th>
-      <th>Categorías</th>
-      <th>Marca</th>
-      <th>Mínimo Global</th>
-      <th>Precio Global</th>
-      <th>Unidad</th>
+      <th class="hide-on-small">Categorías</th>
+      <th class="hide-on-small">Marca</th>
+      <th class="hide-on-small">Mínimo Global</th>
+      <th>Precio</th>
+      <th class="hide-on-small">Unidad</th>
       <th></th>
     </tr>
     </thead>
@@ -39,36 +41,36 @@
     <tr *ngFor="let product of products" (click)="clickUpdate(product)">
       <td>{{product.id}}</td>
       <td>{{product.description}}</td>
-      <td>
-        <ul>
-          <li *ngFor="let category of product.categories; let last=last">
-            {{category.name}}<span *ngIf="!last">, </span>
-          </li>
-        </ul>
+      <td class="hide-on-small">
+        {{product.toStringCategories()}}
       </td>
-      <td>
+      <td class="hide-on-small">
         <span *ngIf="product.brand">
           {{product.brand.name}}
         </span>
       </td>
-      <td>{{product.global_minimum}}</td>
-      <td>{{product.global_price}}</td>
-      <td >
+      <td class="hide-on-small">
+        {{product.global_minimum | myCurrency}}
+      </td>
+      <td>
+        {{product.global_price | myCurrency}}
+      </td>
+      <td class="hide-on-small">
         <span *ngIf="product.unit">
           {{product.unit.name}}
         </span>
-        <ng-container *appUserCan="'product-delete'">
-          <div class="button-modify" *ngIf="product.deleted_at; else notDeleted"
-               (click)="clickRestore($event, product)">
-            <i class="fa fa-recycle" aria-hidden="true"></i>
+      </td>
+      <td *appUserCan="'product-delete'">
+        <div class="button-modify" *ngIf="product.deleted_at; else notDeleted"
+             (click)="clickRestore($event, product)">
+          <i class="fa fa-recycle" aria-hidden="true"></i>
+        </div>
+        <ng-template #notDeleted>
+          <div class="button-delete"
+               (click)="clickDelete($event, product)">
+            <i class="fa fa-trash" ></i>
           </div>
-          <ng-template #notDeleted>
-            <div class="button-delete"
-                 (click)="clickDelete($event, product)">
-              <i class="fa fa-trash" ></i>
-            </div>
-          </ng-template>
-        </ng-container>
+        </ng-template>
       </td>
     </tr>
     </tbody>

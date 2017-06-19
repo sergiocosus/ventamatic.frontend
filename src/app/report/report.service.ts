@@ -5,6 +5,7 @@ import * as moment from 'moment';
 import {ApiHttp} from '../shared/services/api-http';
 import {NotifyService} from '../shared/services/notify.service';
 import {Model} from '../shared/classes/model';
+import {Inventory} from '../inventory/classes/inventory.model';
 
 @Injectable()
 export class ReportService {
@@ -65,7 +66,7 @@ export class ReportService {
 
   getInventory(params?: any) {
     return this.apiHttp.get(this.basePath + 'inventory', params)
-      .map(res => res.inventories);
+      .map(res => Inventory.parseArray(res.inventories));
   }
 
   getHistoricInventory(params?: any) {

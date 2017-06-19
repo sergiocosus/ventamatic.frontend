@@ -6,6 +6,7 @@ import {Component, OnInit, Input} from '@angular/core';
   styleUrls: ['payment-type.component.scss']
 })
 export class PaymentTypeComponent implements OnInit {
+  @Input() tab_index;
   @Input() selectedPaymentType = {
     payment_type_id: 1,
     card_payment_id: null,

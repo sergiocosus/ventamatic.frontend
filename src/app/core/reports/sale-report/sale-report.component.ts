@@ -13,6 +13,10 @@ import {messages} from '../../../shared/classes/messages';
 export class SaleReportComponent implements OnInit {
   sales = [];
 
+  rangeOptions = {
+    editableDateRangeField: true
+  };
+
   request: {
     id: number,
     branch_id: number,

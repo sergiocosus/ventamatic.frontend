@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import {LocalStorageService} from './services/local-storage.service';
 import {
   MdButtonModule, MdCheckboxModule, MdDialogModule, MdInputModule, MdRadioModule,
-  MdSelectModule
+  MdSelectModule, MdTooltipModule
 } from '@angular/material';
 import {SelectableComponent} from './components/selectable/selectable.component';
 import {AutocompleteInputComponent} from './components/autocomplete-input/autocomplete-input.component';
@@ -20,6 +20,7 @@ import {SelectModule} from 'ng2-select';
 import {SearchBarComponent} from './components/search-bar/search-bar.component';
 import {MyDateRangePickerModule} from 'mydaterangepicker';
 import {SimpleNotificationsModule} from 'angular2-notifications';
+import {ResponsiveModule} from 'ng2-responsive';
 
 
 @NgModule({
@@ -34,8 +35,10 @@ import {SimpleNotificationsModule} from 'angular2-notifications';
     MdRadioModule,
     MdDialogModule,
     MyDateRangePickerModule,
+    MdTooltipModule,
     SelectModule,
     SimpleNotificationsModule,
+    ResponsiveModule,
   ],
   declarations: [
     SelectableComponent,
@@ -68,6 +71,7 @@ import {SimpleNotificationsModule} from 'angular2-notifications';
     MdSelectModule,
     MdRadioModule,
     MdDialogModule,
+    MdTooltipModule,
     MyDateRangePickerModule,
 
     AutocompleteInputComponent,
@@ -78,6 +82,7 @@ import {SimpleNotificationsModule} from 'angular2-notifications';
     SearchBarComponent,
 
     SelectModule,
+    ResponsiveModule,
   ]
 })
 export class SharedModule { }

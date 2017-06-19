@@ -13,12 +13,17 @@ import {NotifyService} from '../../../shared/services/notify.service';
 export class EndScheduleDialogComponent implements OnInit {
   final_amount = 0;
   finished_schedule: Schedule = null;
+  schedule: Schedule;
 
   constructor(private scheduleService: ScheduleService,
               private notify: NotifyService,
               private dialogRef: MdDialogRef<EndScheduleDialogComponent>) {}
 
   ngOnInit() {
+  }
+
+  init(schedule: Schedule) {
+    this.schedule = schedule;
   }
 
   close() {

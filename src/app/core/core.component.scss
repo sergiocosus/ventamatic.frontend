@@ -2,6 +2,7 @@
 
 :host /deep/{
   font-size: 14px;
+
   .btn-default{
     color: #ffffff;
     background-color: #556A70;
@@ -11,7 +12,6 @@
       color: #333;
     }
   }
-
 
   ng-select.dark{
     .btn-default{
@@ -26,6 +26,13 @@
   }
 }
 
+ng-sidebar{
+  position: relative;
+
+  /deep/ aside{
+    display: flex;
+  }
+}
 
 
 #body-content{
@@ -33,9 +40,8 @@
   height: 100%;
   box-sizing:border-box;
   display: flex;
-  :host /deep/{
+  flex-direction: column;
 
-}
   align-items:stretch;
 }
 
@@ -43,17 +49,16 @@ main{
   flex:1 1 120px;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(100vh - 50px);
+  max-width: 100%;
+  height: 100%;
 }
 
 .searchBar{
   background-color: #556A70;
   flex: 1;
-  margin: 5px;
-}
-
-.mainContent{
-  flex: 10;
-  background-color: #556A70;
   margin: 5px;
 }
 

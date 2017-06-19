@@ -7,10 +7,12 @@
   </button>
   <button md-raised-button color="primary"
           (click)="openSupplierCategoryDialog()">
+    <i class="fa fa-list" aria-hidden="true"></i>
     Categorias de proveedores
   </button>
   <button md-raised-button color="primary"
           (click)="openBrandDialog()">
+    <i class="fa fa-list" aria-hidden="true"></i>
     Marcas
   </button>
   <md-checkbox [formControl]="deletedControl" *appUserCan="'product-delete'" class="dark-theme">

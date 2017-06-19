@@ -9,8 +9,10 @@
   margin: 5px;
   min-height: 170px;
   overflow-y: visible;
+  overflow-x: hidden;
   border-radius: 4px;
   justify-content: space-around;
   align-content: flex-start;
   padding: 1em;
+  max-width: 100%;
 }

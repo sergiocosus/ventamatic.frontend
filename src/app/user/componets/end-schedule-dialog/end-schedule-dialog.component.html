@@ -3,11 +3,23 @@
 
 <md-dialog-content>
   <form (ngSubmit)="submit()" ngNativeValidate>
-    <md-input-container *ngIf="!finished_schedule">
-      <input mdInput placeholder="Cantidad"
-             [(ngModel)]="final_amount" name="final_amount"
-             [disabled]="locked" type="number">
-    </md-input-container>
+    <ng-container *ngIf="!finished_schedule">
+      <div *ngIf="schedule">
+        Inicio: {{schedule.created_at | date:'medium'}}
+        <br>
+        Sucursal: {{schedule.branch.name}}
+      </div>
+      <md-input-container>
+        <input mdInput placeholder="Cantidad"
+               [(ngModel)]="final_amount" name="final_amount"
+               [disabled]="locked" type="number">
+      </md-input-container>
+
+      <button type="submit" md-raised-button color="accent">
+        Terminar turno
+      </button>
+    </ng-container>
+
 
     <table *ngIf="finished_schedule">
       <tr>
@@ -54,10 +66,7 @@
       </tr>
     </table>
 
-    <button *ngIf="!finished_schedule"
-      type="submit" md-raised-button color="accent">
-      Terminar turno
-    </button>
+
     <button md-raised-button type="button" (click)="close()">
       Cerrar
     </button>

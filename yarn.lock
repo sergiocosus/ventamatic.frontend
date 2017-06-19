@@ -3146,6 +3146,10 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
+ng-sidebar@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/ng-sidebar/-/ng-sidebar-5.1.0.tgz#418eb330659fee4872c0bb0b649e2f88414e3ae9"
+
 ng2-bootstrap@^1.1.5:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/ng2-bootstrap/-/ng2-bootstrap-1.6.3.tgz#8bef6179d7436ba547901447f18fee8fff4355c2"
@@ -3159,6 +3163,10 @@ ng2-imageupload@^1.4.2:
 ng2-popover@^0.0.14:
   version "0.0.14"
   resolved "https://registry.yarnpkg.com/ng2-popover/-/ng2-popover-0.0.14.tgz#6cad6a6555fd2b81759f3d85b4cb8c3e3731f296"
+
+ng2-responsive@^0.8.4:
+  version "0.8.4"
+  resolved "https://registry.yarnpkg.com/ng2-responsive/-/ng2-responsive-0.8.4.tgz#b99151258a981a1a41a3ec8673df0291005578cf"
 
 ng2-select@^1.2.0:
   version "1.2.0"

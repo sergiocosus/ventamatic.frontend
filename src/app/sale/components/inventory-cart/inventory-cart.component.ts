@@ -3,8 +3,8 @@ import {ProductSale} from '../../classes/product-sale';
 
 @Component({
   selector: 'app-inventory-cart',
-  templateUrl: 'inventory-cart.component.html',
-  styleUrls: ['inventory-cart.component.scss']
+  templateUrl: './inventory-cart.component.html',
+  styleUrls: ['./inventory-cart.component.scss']
 })
 export class InventoryCartComponent implements OnInit {
   @Input() addedProducts: ProductSale[] = [];

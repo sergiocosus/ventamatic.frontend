@@ -1,4 +1,4 @@
-<ng-template [ngIf]="sale">
+<ng-container *ngIf="sale">
   <header>
     <h5>{{sale.branch.name}}</h5>
     <img [src]="sale.branch.image_url">
@@ -70,4 +70,4 @@
     <p>Artículos: {{sale.products.length}}</p>
     <div>{{sale.branch.footer_ticket}}</div>
   </footer>
-</ng-template>
+</ng-container>

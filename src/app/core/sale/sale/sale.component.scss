@@ -7,9 +7,8 @@
   overflow: hidden;
   background-color: $backgroundDark;
   color: white ;
-
-
-
+  width: 100%;
+  flex-wrap: wrap;
 }
 
 md-input-container {
@@ -22,14 +21,16 @@ md-input-container {
   flex-direction: column;
   flex: 1 0 0;
   color: white;
-  margin: 1em;
-  padding: 1em;
-
-  border-right: white 2px dashed;
   line-height: 1em;
   text-align: center;
 
-  h5{
+  @media (min-width: $smScreen) {
+    border-right: white 2px dashed;
+    margin: 1em;
+    padding: 1em;
+  }
+
+  /deep/ h5{
     margin: 0;
     font-size: 1em;
     text-align: center;
@@ -58,10 +59,11 @@ md-input-container {
 
 .right{
   flex: 2 0 0;
-
   color: white;
-  padding: 1em;
-  border-radius: 1em;
+
+  @media (min-width: $smScreen) {
+    padding: 1em;
+  }
 }
 
 .error{
@@ -86,4 +88,9 @@ md-input-container {
 
 hr{
   border-color: lighten($mainContentBackgroundColor, 10%);
+  margin: 1em 0;
+
+  @media (min-width: $smScreen) {
+    margin: .25em 0;
+  }
 }

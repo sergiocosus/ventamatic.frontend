@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import {MdDialog} from '@angular/material';
 import {AuthService} from '../../../auth/services/auth.service';
 import {ScheduleService} from '../../../user/services/schedule.service';
@@ -7,14 +7,15 @@ import {SubscriptionManager} from '../../../shared/classes/subscription-manager'
 import {User} from '../../../user/classes/user';
 import {Schedule} from '../../../user/classes/schedule';
 import {EndScheduleDialogComponent} from '../../../user/componets/end-schedule-dialog/end-schedule-dialog.component';
-;
+import {Sidebar} from 'ng-sidebar';
 
 @Component({
   selector: 'app-top-bar',
-  templateUrl: 'top-bar.component.html',
-  styleUrls: ['top-bar.component.scss'],
+  templateUrl: './top-bar.component.html',
+  styleUrls: ['./top-bar.component.scss'],
 })
 export class TopBarComponent implements OnInit, OnDestroy {
+  @Input() sideBar: Sidebar;
   public schedule: Schedule;
   public user: User;
 
@@ -51,7 +52,16 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
   openEndScheduleModal() {
     if (this.schedule) {
-      this.dialog.open(EndScheduleDialogComponent);
+      this.dialog.open(EndScheduleDialogComponent)
+        .componentInstance.init(this.schedule);
+    }
+  }
+
+  toggleSideBar() {
+    if (this.sideBar.opened) {
+      this.sideBar.close();
+    } else {
+      this.sideBar.open();
     }
   }
 

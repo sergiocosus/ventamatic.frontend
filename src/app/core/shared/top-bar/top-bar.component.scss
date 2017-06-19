@@ -45,7 +45,7 @@
 
   .header-texts{
     display: flex;
-    background-color: #556A70;
+   // background-color: #556A70;
     align-self: stretch;
     align-items: center;
     margin: 5px;
@@ -54,14 +54,34 @@
     border-right: 1px solid black;
     border-radius: 5px;
   }
+}
 
-  .my-account{
-    color: white;
-    text-decoration: none;
+.nav-button{
+  color: white;
+  text-decoration: none;
+  display: flex;
+  background: transparent;
+  border: 0;
+
+  &:not(.disabled){
     &.active, &:hover{
       background-color: #e6e6e6;
       color: #333;
     }
   }
+
 }
 
+.nav-toggle{
+  font-size: 2em;
+  min-width: 2em;
+  background: transparent;
+}
+
+[md-raised-button]{
+  line-height: 1em;
+}
+
+.disabled{
+  color: gray;
+}

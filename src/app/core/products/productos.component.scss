@@ -1,3 +1,5 @@
+@import '~app/vars';
+
 :host /deep/ {
   app-search-bar{
     >div{
@@ -21,6 +23,9 @@
       border-collapse: separate;
       border-spacing: 0px 5px;
 
+      th, td{
+        word-wrap: break-word;
+      }
       tr{
         td{
           background-color: #082B36;

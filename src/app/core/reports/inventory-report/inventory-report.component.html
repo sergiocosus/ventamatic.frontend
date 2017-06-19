@@ -70,12 +70,12 @@
       <th>Minimo</th>
     </tr>
     </thead>
-    <ng-template ngFor let-inventory [ngForOf]="inventories">
+    <ng-container *ngFor="let inventory of inventories">
       <tr>
         <td>{{inventory.branch.name}}</td>
         <td>{{inventory.id}}</td>
         <td>{{inventory.product.description}}</td>
-        <td>{{implode(inventory.product.categories)}}</td>
+        <td>{{inventory.product.toStringCategories()}}</td>
         <td>{{inventory.product.brand ? inventory.product.brand.name : ''}}</td>
         <td>{{inventory.quantity}}</td>
         <td>{{inventory.price | myCurrency}}</td>
@@ -83,6 +83,6 @@
         <td>{{inventory.current_total_cost | myCurrency}}</td>
         <td>{{inventory.minimum}}</td>
       </tr>
-    </ng-template>
+    </ng-container>
   </table>
 </app-main-content>

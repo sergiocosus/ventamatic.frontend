@@ -51,18 +51,26 @@
     }
   }
 
-  button.sb{
-    margin: 2.5px;
-    color: white;
-    background-color: #082B36;
-    &:hover{
-      background-color: #06495E;
+
+  button {
+    font-weight: bold;
+    line-height: 2.5em;
+    i{
+      font-size: 1em;
     }
-    img{
-      margin: -5px 0;
-      height: 25px;
-      width: 25px;
+    @media (min-width: $smScreen) {
+      line-height: 3em;
+
+      i{
+        font-size {
+          font-size: 1.5em;
+        }
+      }
     }
+  }
+
+  md-checkbox{
+    margin: .5em;
   }
 
 }
