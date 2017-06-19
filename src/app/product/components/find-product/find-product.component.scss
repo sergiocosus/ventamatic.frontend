@@ -1,3 +1,5 @@
+@import '~app/vars';
+
 :host{
   display: flex;
   flex-direction: column;
@@ -5,4 +7,12 @@
 
 md-input-container{
   flex: 1 0 0;
+
+  /deep/ .mat-input-wrapper {
+    margin: .5em 0;
+
+    @media (min-width: $smScreen) {
+      margin: 1em 0;
+    }
+  }
 }

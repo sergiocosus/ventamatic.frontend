@@ -13,8 +13,8 @@ import {ProductService} from '../../services/product.service';
 })
 export class FindProductComponent implements OnInit {
   @ViewChild('barCodeInput') barCodeInput: ElementRef;
-  @Output() selectedProduct = new EventEmitter();
 
+  @Output() selectedProduct = new EventEmitter();
   @Input() tab_index: number;
   @Input() branch_id: number;
   @Input() mode = 'inventory';

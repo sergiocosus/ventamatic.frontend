@@ -60,9 +60,11 @@ md-input-container {
 .right{
   flex: 2 0 0;
   color: white;
+  font-size: .75em;
 
   @media (min-width: $smScreen) {
     padding: 1em;
+    font-size: 1em;
   }
 }
 

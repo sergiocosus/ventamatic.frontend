@@ -8,10 +8,10 @@ import {FindProductComponent} from '../../../product/components/find-product/fin
 import {Branch} from '../../../branch/models/branch';
 import {Client} from '../../../client/classes/client';
 import {ClientService} from '../../../client/services/client.service';
-import {NotificationsService} from 'angular2-notifications/dist';
 import {SaleService} from '../../../sale/services/sale.service';
 import {ScheduleService} from '../../../user/services/schedule.service';
 import {TicketService} from '../../../sale/services/ticket.service';
+import {NotifyService} from '../../../shared/services/notify.service';
 
 @Component({
   selector: 'app-sale',
@@ -60,7 +60,7 @@ export class SaleComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute,
               private clientService: ClientService,
-              private notificationService: NotificationsService,
+              private notify: NotifyService,
               private saleService: SaleService,
               private router: Router,
               private scheduleService: ScheduleService,
@@ -123,7 +123,7 @@ export class SaleComponent implements OnInit, OnDestroy {
       if (inventory.quantity > exist[0].quantity) {
         exist[0].quantity++;
       } else {
-        this.notificationService.error(
+        this.notify.error(
           'Error', this.messages.lowInventory
         );
       }
@@ -134,7 +134,7 @@ export class SaleComponent implements OnInit, OnDestroy {
           quantity: 1
         });
       }else {
-        this.notificationService.error(
+        this.notify.error(
           'Error', this.messages.lowInventory
         );
       }
@@ -151,18 +151,18 @@ export class SaleComponent implements OnInit, OnDestroy {
 
   confirm() {
     if (!this.client) {
-      this.notificationService.error(
+      this.notify.error(
         'Error', this.messages.clientInvalid
       );
       return;
     }
     if (!this.addedProducts.length) {
-      this.notificationService.error(
+      this.notify.error(
         'Error', this.messages.noProductsAdded);
       return;
     }
     if (this.payment - this.total < 0) {
-      this.notificationService.error(
+      this.notify.error(
         'Error', this.messages.paymentInvalid);
       return;
     }
@@ -209,7 +209,7 @@ export class SaleComponent implements OnInit, OnDestroy {
         if (this.print) {
           this.ticketService.putSale(sale);
         }
-        this.notificationService.success('Éxito', this.messages.saleSuccess);
+        this.notify.success('Éxito', this.messages.saleSuccess);
       },
       error => this.notifyError(error),
       () => this.clear()
@@ -237,9 +237,9 @@ export class SaleComponent implements OnInit, OnDestroy {
 
   notifyError(error) {
     if (error.code == 10) {
-      this.notificationService.alert('Alerta', error.message);
+      this.notify.alert('Alerta', error.message);
     } else {
-      this.notificationService.error('Error', error.message);
+      this.notify.error('Error', error.message);
     }
   }
 }
