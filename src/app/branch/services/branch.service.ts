@@ -31,6 +31,10 @@ export class BranchService {
     return this.branchesSubject.asObservable();
   }
 
+  clearCache() {
+    this.branchesRequest = null;
+  }
+
 
   get(branch_id: number): Observable<Branch>  {
     return this.apiHttp.get(this.basePath + branch_id)

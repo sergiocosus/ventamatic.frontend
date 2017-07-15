@@ -5,13 +5,13 @@ import {Observable} from 'rxjs/Observable';
 
 
 export class ApiHttp {
-  private apiUrl = environment.apiUrl + environment.apiVersionPath;
+  private apiUrl = environment.apiUrl;
 
   constructor(private http: Http,
               private localStorage: LocalStorageService){}
 
   setGlobalHeaders(headers: Array<Object>, request: Request|RequestOptionsArgs): void {
-    //this.http.setGlobalHeaders(headers, request);
+    // this.http.setGlobalHeaders(headers, request);
   }
 
   get(url: string, data?: any, options?: RequestOptionsArgs): Observable<any> {

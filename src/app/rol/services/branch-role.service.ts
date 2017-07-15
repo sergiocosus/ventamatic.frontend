@@ -31,6 +31,10 @@ export class BranchRoleService {
     return this.branchRolesSubject.asObservable();
   }
 
+  clearCache() {
+    this.branchRolesRequest = null;
+  }
+
   get(branch_role_id) {
     return this.apiHttp.get(this.basePath + branch_role_id)
       .map(json => new BranchRole().parse(json.branch_role));

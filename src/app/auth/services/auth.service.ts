@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {Headers, Http, Response} from '@angular/http';
 import {Router} from '@angular/router';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
@@ -13,6 +13,7 @@ import {User} from '../../user/classes/user';
 export class AuthService {
   private loggedUserReplaySubject = new ReplaySubject<User>(1);
   private loggedUser: User = null;
+  private hasLogoutEvent = new EventEmitter;
 
   constructor(private apiHttp: ApiHttp,
               private http: Http,
@@ -34,7 +35,7 @@ export class AuthService {
       urlSearchParams.append('password', password);
       const body = urlSearchParams.toString();
 
-      this.http.post(environment.apiUrl + environment.apiAuthPath, body, {headers: headers}).subscribe(
+      this.http.post(environment.apiUrl + 'oauth/token', body, {headers: headers}).subscribe(
         data => {
           const json = data.json();
           this.localStorage.set('access_token', json.access_token);
@@ -60,7 +61,8 @@ export class AuthService {
 
   logout() {
     this.localStorage.remove('access_token');
-    this.updateLoggedUserObservable({logout: true}).subscribe(() => {});
+    this.updateLoggedUserObservable({logout: true}).subscribe(() => { });
+    this.hasLogoutEvent.emit();
   }
 
   getLoggedUser() {
@@ -69,6 +71,10 @@ export class AuthService {
       this.updateLoggedUserObservable();
     }
     return this.loggedUserReplaySubject;
+  }
+
+  hasLogout() {
+    return this.hasLogoutEvent.asObservable();
   }
 
   updateLoggedUserObservable(data = {logout: false}) {

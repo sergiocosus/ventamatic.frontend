@@ -36,6 +36,10 @@ export class SupplierCategoryService implements BasicEntityService {
     return this.supplierCategorySubject.asObservable();
   }
 
+  clearCache() {
+    this.supplierCategoriesRequest = null;
+  }
+
   get(supplier_category_id: number) {
     return this.apiHttp.get(this.basePath + supplier_category_id)
       .map(json => new SupplierCategory().parse(json.supplier_category));

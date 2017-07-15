@@ -23,6 +23,7 @@ import {ProductModule} from './product/product.module';
 import {ReportModule} from './report/report.module';
 import {RolModule} from './rol/rol.module';
 import {SupplierModule} from './supplier/supplier.module';
+import {CacheManagerService} from './shared/services/cache-manager.service';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {SupplierModule} from './supplier/supplier.module';
     appRoutingProviders,
     CsvService,
     DecimalPipe,
+    CacheManagerService,
   ],
   entryComponents: [AppComponent],
   bootstrap: [AppComponent]

@@ -31,6 +31,10 @@ export class RoleService {
     return this.rolesSubject.asObservable();
   }
 
+  clearCache() {
+    this.rolesRequest = null;
+  }
+
   get(role_id) {
     return this.apiHttp.get(this.basePath + role_id)
       .map(json => new Role().parse(json.role));

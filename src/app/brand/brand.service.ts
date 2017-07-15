@@ -34,6 +34,10 @@ export class BrandService implements BasicEntityService {
     return this.brandsSubject.asObservable();
   }
 
+  clearCache() {
+    this.brandsRequest = null;
+  }
+
   get(brand_id: number) {
     return this.apiHttp.get(this.basePath + brand_id)
       .map(this.mapBrand)

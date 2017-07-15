@@ -1,6 +1,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
 import {AuthService} from './auth/services/auth.service';
+import {CacheManagerService} from './shared/services/cache-manager.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,8 @@ export class AppComponent implements OnInit {
   };
 
   constructor(private router: Router,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private cacheManager: CacheManagerService) {
 
   }
 

@@ -36,6 +36,10 @@ export class CategoryService implements BasicEntityService {
     return this.categoriesSubject.asObservable();
   }
 
+  clearCache() {
+    this.categoriesRequest = null;
+  }
+
   get(product_id: number) {
     return this.apiHttp.get(this.basePath + product_id)
       .map(this.mapCategory)
