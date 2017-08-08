@@ -3,13 +3,13 @@ import {ApiHttp} from '../../shared/services/api-http';
 import {Observable} from 'rxjs/Observable';
 import {Branch} from '../models/branch';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {CacheableRequest} from '../../shared/classes/cacheable-request';
 
 @Injectable()
 export class BranchService {
   private basePath = 'branch/';
 
-  private branchesSubject: ReplaySubject<Branch[]> = new ReplaySubject(1);
-  private branchesRequest: Observable<Branch[]>;
+  private allCache = new CacheableRequest<Branch[]>();
 
   constructor(private apiHttp: ApiHttp) {}
 
@@ -19,22 +19,12 @@ export class BranchService {
   }
 
   getAllCached(params?, refresh = false) {
-    if (refresh || !this.branchesRequest) {
-      this.branchesRequest = this.getAll();
-
-      this.branchesRequest.subscribe(
-        result => this.branchesSubject.next(result),
-        err => this.branchesSubject.error(err)
-      );
-    }
-
-    return this.branchesSubject.asObservable();
+    return this.allCache.getCache(this.getAll(), refresh);
   }
 
   clearCache() {
-    this.branchesRequest = null;
+    this.allCache.clear();
   }
-
 
   get(branch_id: number): Observable<Branch>  {
     return this.apiHttp.get(this.basePath + branch_id)

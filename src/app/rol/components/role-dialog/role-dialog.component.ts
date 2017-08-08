@@ -26,21 +26,14 @@ export class RoleDialogComponent extends CrudModalComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.permissionService.getAll().subscribe(
-      permissions =>  this.permissions = permissions
-    );
+
   }
 
   initCreate() {
     this.role = new Role();
-    this.permissionList = this.permissions.map(
-      permission => ({
-        id: permission.id,
-        name: permission.display_name,
-        checked: false
-      })
+    this.permissionService.getAllCached().subscribe(
+        permissions => this.fillCreatePermissionList(permissions)
     );
-
     super.initCreate();
   }
 
@@ -48,20 +41,36 @@ export class RoleDialogComponent extends CrudModalComponent implements OnInit {
     this.roleService.get(role.id).subscribe(
       obtaniedRole => {
         this.role = obtaniedRole;
-        this.permissionList = this.permissions.map(
-          permission => ({
-            id: permission.id,
-            name: permission.display_name,
-            checked: !!obtaniedRole.permissions.find(
-              rolePermission => permission.id === rolePermission.id
-            )
-          })
+        this.permissionService.getAllCached().subscribe(
+            permissions => this.fillUpdatePermissionList(obtaniedRole, permissions)
         );
       },
       error => this.notify.serviceError(error)
     );
 
     super.initUpdate();
+  }
+
+  fillCreatePermissionList(permissions: Permission[]) {
+    this.permissionList = permissions.map(
+        permission => ({
+          id: permission.id,
+          name: permission.display_name,
+          checked: false
+        })
+    );
+  }
+
+  fillUpdatePermissionList(role: Role, permissions: Permission[]) {
+    this.permissionList = permissions.map(
+        permission => ({
+          id: permission.id,
+          name: permission.display_name,
+          checked: !!role.permissions.find(
+              (rolePermission: Permission) => permission.id === rolePermission.id
+          )
+        })
+    );
   }
 
   initDelete(role: Role) {

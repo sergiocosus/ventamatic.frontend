@@ -16,7 +16,6 @@ export class BranchRoleDialogComponent extends CrudModalComponent implements OnI
   name = 'Rol de sucursal';
 
   branchRole: BranchRole;
-  branchPermissions: BranchPermission[] = [];
   branchPermissionList: {id: number; name: string, checked: boolean}[] = [];
 
   constructor(protected notify: NotifyService,
@@ -27,19 +26,12 @@ export class BranchRoleDialogComponent extends CrudModalComponent implements OnI
   }
 
   ngOnInit() {
-    this.branchPermissionService.getAll().subscribe(
-      permissions =>  this.branchPermissions = permissions
-    );
   }
 
   initCreate() {
     this.branchRole = new BranchRole();
-    this.branchPermissionList = this.branchPermissions.map(
-      permission => ({
-        id: permission.id,
-        name: permission.display_name,
-        checked: false
-      })
+    this.branchPermissionService.getAllCached().subscribe(
+        permissions => this.fillCreateList(permissions)
     );
 
     super.initCreate();
@@ -49,24 +41,40 @@ export class BranchRoleDialogComponent extends CrudModalComponent implements OnI
     this.branchRoleService.get(branchRole.id).subscribe(
       updatedBranchRole => {
         this.branchRole = updatedBranchRole;
-        this.branchPermissionList = this.branchPermissions.map(
-          permission => {
-            return {
-              id: permission.id,
-              name: permission.display_name,
-              checked: updatedBranchRole.branch_permissions.find(
-                rolePermission => permission.id === rolePermission.id
-              ) ? true : false
-            };
-
-          }
+        this.branchPermissionService.getAllCached().subscribe(
+            permissions =>  this.fillUpdateList(updatedBranchRole, permissions)
         );
-        console.log(this.branchPermissionList);
       }
     );
 
     super.initUpdate();
   }
+
+  fillCreateList(branchPermissions: BranchPermission[]) {
+    this.branchPermissionList = branchPermissions.map(
+        permission => ({
+          id: permission.id,
+          name: permission.display_name,
+          checked: false
+        })
+    );
+  }
+
+  fillUpdateList(branchRole, branchPermissions: BranchPermission[]) {
+    this.branchPermissionList = branchPermissions.map(
+        permission => {
+          return {
+            id: permission.id,
+            name: permission.display_name,
+            checked: branchRole.branch_permissions.find(
+                rolePermission => permission.id === rolePermission.id
+            ) ? true : false
+          };
+
+        }
+    );
+  }
+
 
   initDelete(branchRole: BranchRole) {
     this.branchRole = branchRole;
@@ -107,10 +115,5 @@ export class BranchRoleDialogComponent extends CrudModalComponent implements OnI
         }
       }
     );
-  }
-
-  closed() {
-    this.branchRole = null;
-    this.branchPermissionList = null;
   }
 }
