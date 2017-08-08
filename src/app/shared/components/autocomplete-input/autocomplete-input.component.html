@@ -11,6 +11,9 @@
 <div class="search-list"
      [hidden]="searchHidden || !search_words.length">
   <table>
+    <tr *ngIf="elementSuggestions.length">
+      <th *ngFor="let field of elementSuggestions[0].searchFieldsHeader">{{field}}</th>
+    </tr>
     <tr *ngFor="let element of elementSuggestions; let i=index"
         (mousedown)="emitElement(element)"
         [ngClass]="{selected:searchIndexSelection == i}"

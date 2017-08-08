@@ -4,6 +4,12 @@
       <input mdInput placeholder="ID de compra"
              [(ngModel)]="request.id"
              name="id" type="number">
+    </md-input-container>    
+    
+    <md-input-container  class="id-field">
+      <input mdInput placeholder="ID de factura"
+             [(ngModel)]="request.supplier_bill_id"
+             name="supplier_bill_id" type="text">
     </md-input-container>
 
     <md-input-container class="id-field">
@@ -62,6 +68,7 @@
     <thead>
     <tr>
       <th>ID</th>
+      <th>ID Factura</th>
       <th>Fecha</th>
       <th>Sucursal</th>
       <th>Usuario</th>
@@ -72,6 +79,7 @@
     <ng-template ngFor let-buy [ngForOf]="buys">
       <tr>
         <td>{{buy.id}}</td>
+        <td>{{buy.supplier_bill_id}}</td>
         <td>{{buy.created_at | date:'short'}}</td>
         <td>{{buy.branch.name}}</td>
         <td>{{buy.user.name}}</td>

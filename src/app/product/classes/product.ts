@@ -12,6 +12,7 @@ export class Product extends Model {
   number;
   global_minimum: number;
   global_price: number;
+  last_cost: number;
   created_at: string;
   updated_at: string;
   deleted_at: string;
@@ -47,6 +48,13 @@ export class Product extends Model {
 
   toStringCategories() {
     return this.categories.map(category => category.name).join(',');
+  }
+
+  get searchFieldsHeader() {
+    return [
+        'Descripción',
+        'Precio',
+    ];
   }
 
   get searchFields() {

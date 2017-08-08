@@ -31,7 +31,13 @@ export class Inventory extends Model {
     return this;
   }
 
-
+  get searchFieldsHeader() {
+    return [
+      'Descripción',
+      'Precio',
+      'Cantidad',
+    ];
+  }
 
   get searchFields(){
     return [

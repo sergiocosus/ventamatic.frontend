@@ -12,6 +12,7 @@
         <input name="price" mdInput [(ngModel)]="productBuy.cost" placeholder="Costo"
                required="required" type="number"
                [min]="0.01" [step]="0.01"/>
+        <md-hint>Último costo: {{productBuy.product.last_cost || 'N/A'}}</md-hint>
       </md-input-container>
 
       <md-input-container>
