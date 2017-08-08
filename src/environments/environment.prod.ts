@@ -3,4 +3,7 @@ export const environment = {
   apiUrl: '',
   apiClientID: '',
   apiClientSecret: '',
+  buy: {
+    invoiceTotalRestriction: false
+  },
 };

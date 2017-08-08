@@ -5,6 +5,7 @@ import {SupplierService} from '../../../supplier/services/supplier.service';
 import {BranchService} from '../../../branch/services/branch.service';
 import {AuthService} from '../../../auth/services/auth.service';
 import {User} from '../../../user/classes/user';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-begin-buy',
@@ -14,10 +15,13 @@ import {User} from '../../../user/classes/user';
 export class BeginBuyComponent implements OnInit {
   @Output() buyStarted = new EventEmitter<BeginBuyDataInterface>();
 
+  buyEnvironment = environment.buy;
+
   branches: Branch[];
   suppliers: Supplier[];
   formData: BeginBuyDataInterface;
   private user: User;
+
 
   constructor(private supplierService: SupplierService,
               private branchService: BranchService,

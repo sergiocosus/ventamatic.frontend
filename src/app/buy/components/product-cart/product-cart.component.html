@@ -47,14 +47,15 @@
     </td>
   </tr>
 
-  <tr>
+  <tr *ngIf="buyEnvironment.invoiceTotalRestriction">
     <td colspan="4"></td>
     <td>Total Introducido</td>
     <td class="align-right">
       {{ introducedAmount-0 | myCurrency}}
     </td>
   </tr>
-  <tr [class.error]="amountDiference !== 0">
+  <tr *ngIf="buyEnvironment.invoiceTotalRestriction"
+      [class.error]="amountDiference !== 0">
     <td colspan="4"></td>
     <td>Diferencia</td>
     <td class="align-right">

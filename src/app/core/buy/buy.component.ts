@@ -7,6 +7,7 @@ import {ConfirmDialogComponent} from '../../shared/components/confirm-dialog/con
 import {FindProductComponent} from '../../product/components/find-product/find-product.component';
 import {NotifyService} from '../../shared/services/notify.service';
 import {AddProductDialogComponent} from '../../buy/components/add-product-dialog/add-product-dialog.component';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-compra',
@@ -16,6 +17,8 @@ import {AddProductDialogComponent} from '../../buy/components/add-product-dialog
 export class BuyComponent implements OnInit {
   @ViewChild(FindProductComponent) findProduct: FindProductComponent;
   @ViewChild(BeginBuyComponent) beginBuyModal: BeginBuyComponent;
+
+  buyEnvironment = environment.buy;
 
   initialData: BeginBuyDataInterface;
   addedProducts: ProductBuy[] = [];
@@ -43,8 +46,11 @@ export class BuyComponent implements OnInit {
   }
 
   startBuy(initialData: BeginBuyDataInterface) {
-    if (initialData && initialData.branch && initialData.supplier
-        && initialData.introducedAmount && initialData.supplierBillID) {
+    if (initialData &&
+        initialData.branch &&
+        initialData.supplier &&
+        (initialData.introducedAmount  || !this.buyEnvironment.invoiceTotalRestriction) &&
+        initialData.supplierBillID) {
       this.initialData = initialData;
     }
   }
@@ -80,7 +86,8 @@ export class BuyComponent implements OnInit {
   }
 
   openBuyConfirm() {
-    if (this.initialData.introducedAmount != this.getTotal()) {
+    if (this.initialData.introducedAmount != this.getTotal()
+        && this.buyEnvironment.invoiceTotalRestriction) {
       this.notify.error(this.messages.totalMismatch);
     } else {
       const dialog = this.dialog.open(ConfirmDialogComponent);

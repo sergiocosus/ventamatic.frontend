@@ -18,7 +18,7 @@
     </md-option>
   </md-select>
 
-  <md-input-container>
+  <md-input-container *ngIf="buyEnvironment.invoiceTotalRestriction">
     <input [(ngModel)]="formData.introducedAmount" name="amount"
            mdInput
            placeholder="Total"

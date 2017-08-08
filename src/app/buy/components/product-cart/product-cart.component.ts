@@ -1,5 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {ProductBuy} from '../../classes/product-buy.model';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-product-cart',
@@ -9,6 +10,8 @@ import {ProductBuy} from '../../classes/product-buy.model';
 export class ProductCartComponent implements OnInit {
   @Input() addedProducts: ProductBuy[] = [];
   @Input() introducedAmount: number = null;
+
+  buyEnvironment = environment.buy;
 
   constructor() {}
 
