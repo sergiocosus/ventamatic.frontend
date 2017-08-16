@@ -31,7 +31,7 @@
         <td>{{finished_schedule.updated_at | date:'medium'}}</td>
       </tr>
       <tr>
-        <td>Cantidad inicial</td>
+        <td>Cantidad inicial registrada en caja</td>
         <td>{{finished_schedule.initial_amount  | currency:'USD':true:'.2-2'}} </td>
       </tr>
       <tr>
@@ -39,13 +39,19 @@
         <td>{{finished_schedule.system_amount  | currency:'USD':true:'.2-2'}}</td>
       </tr>
       <tr>
-        <td>Venta registrada</td>
+        <td>Cantidad inicial en caja + Venta calculada</td>
+        <td>{{finished_schedule.initial_amount + finished_schedule.system_amount  | currency:'USD':true:'.2-2'}}</td>
+      </tr>
+      <tr>
+        <td>Cantidad final registrada en caja</td>
         <td>{{finished_schedule.final_amount | currency:'USD':true:'.2-2'}}</td>
       </tr>
       <tr>
         <td>Diferencia</td>
-        <td>{{finished_schedule.system_amount -
-          finished_schedule.final_amount  | currency:'USD':true:'.2-2'}}</td>
+        <td>{{
+          finished_schedule.final_amount -
+          (finished_schedule.system_amount + finished_schedule.initial_amount)
+            | currency:'USD':true:'.2-2'}}</td>
       </tr>
       <tr>
         <td>Estado</td>
