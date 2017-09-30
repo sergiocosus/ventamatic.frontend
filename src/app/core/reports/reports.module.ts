@@ -17,6 +17,7 @@ import {UserModule} from '../../user/user.module';
 import {SupplierModule} from '../../supplier/supplier.module';
 import {ProductModule} from '../../product/product.module';
 import {ClientModule} from '../../client/client.module';
+import {MdPaginatorModule, MdTableModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -28,6 +29,8 @@ import {ClientModule} from '../../client/client.module';
     SupplierModule,
     ProductModule,
     ClientModule,
+    MdTableModule,
+    MdPaginatorModule,
   ],
   declarations: [
     ReportesComponent,
