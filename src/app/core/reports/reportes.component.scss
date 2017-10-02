@@ -50,12 +50,22 @@
     align-items: center;
   }
 
+  .table-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    width: 100%;
+    align-items: stretch;
+  }
+
+
   table{
     line-height: 1em;
     background-color: #D3D3D3;
     color: #333;
-    border-radius: .5em;
     overflow: hidden;
+    width: 100%;
+
 
     table{
       background-color: rgba(white, .5);

@@ -41,34 +41,42 @@
 </app-search-bar>
 <app-main-content>
   <h2>Reporte de turnos</h2>
-  <table>
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Inicio</th>
-      <th>Fin</th>
-      <th>Sucursal</th>
-      <th>Usuario</th>
-      <th>Estatus</th>
-      <th>Nota</th>
-      <th>Cantidad inicial</th>
-      <th>Total en ventas</th>
-      <th>Cantidad final</th>
-    </tr>
-    </thead>
-    <ng-template ngFor let-schedule [ngForOf]="schedules">
+  <div class="table-container mat-elevation-z8">
+    <md-paginator #paginator
+                  [length]="dataSource ? dataSource.data.length : []"
+                  [pageIndex]="0"
+                  [pageSize]="50"
+                  [pageSizeOptions]="[50, 100, 200, 1000, 10000]">
+    </md-paginator>
+    <table>
+      <thead>
       <tr>
-        <td>{{schedule.id}}</td>
-        <td>{{schedule.created_at | date:'short'}}</td>
-        <td>{{schedule.updated_at | date:'short'}}</td>
-        <td>{{schedule.branch.name}}</td>
-        <td>{{schedule.user.name}}</td>
-        <td>{{schedule.schedule_status.name}}</td>
-        <td>{{schedule.note}}</td>
-        <td>{{schedule.initial_amount}}</td>
-        <td>{{schedule.system_amount}}</td>
-        <td>{{schedule.final_amount}}</td>
+        <th>ID</th>
+        <th>Inicio</th>
+        <th>Fin</th>
+        <th>Sucursal</th>
+        <th>Usuario</th>
+        <th>Estatus</th>
+        <th>Nota</th>
+        <th>Cantidad inicial</th>
+        <th>Total en ventas</th>
+        <th>Cantidad final</th>
       </tr>
-    </ng-template>
-  </table>
+      </thead>
+      <ng-container *ngFor="let schedule of dataSource.connect() | async">
+        <tr>
+          <td>{{schedule.id}}</td>
+          <td>{{schedule.created_at | date:'short'}}</td>
+          <td>{{schedule.updated_at | date:'short'}}</td>
+          <td>{{schedule.branch.name}}</td>
+          <td>{{schedule.user.name}}</td>
+          <td>{{schedule.schedule_status.name}}</td>
+          <td>{{schedule.note}}</td>
+          <td>{{schedule.initial_amount}}</td>
+          <td>{{schedule.system_amount}}</td>
+          <td>{{schedule.final_amount}}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
 </app-main-content>

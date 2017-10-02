@@ -57,81 +57,42 @@
   </ul>
 
 
-  <div class="example-container mat-elevation-z8">
-
+  <div class="table-container mat-elevation-z8">
     <md-paginator #paginator
-                  [length]="exampleDatabase.data.length"
+                  [length]="dataSource ? dataSource.data.length : []"
                   [pageIndex]="0"
-                  [pageSize]="25"
-                  [pageSizeOptions]="[5, 10, 25, 100]">
+                  [pageSize]="50"
+                  [pageSizeOptions]="[50, 100, 200, 1000, 10000]">
     </md-paginator>
-    <md-table #table [dataSource]="dataSource">
-
-      <ng-container mdColumnDef="branch">
-        <md-header-cell *mdHeaderCellDef> Sucursal </md-header-cell>
-        <md-cell *mdCellDef="let row"> {{row.branch.name}} </md-cell>
+    <table>
+      <thead>
+      <tr>
+        <th>Sucursal</th>
+        <th>ID</th>
+        <th>Producto</th>
+        <th>Categorias</th>
+        <th>Marca</th>
+        <th>Cantidad</th>
+        <th>Precio</th>
+        <th>Precio Total</th>
+        <th>Costo</th>
+        <th>Minimo</th>
+      </tr>
+      </thead>
+      <ng-container *ngFor="let inventory of dataSource.connect() | async">
+        <tr>
+          <td>{{inventory.branch.name}}</td>
+          <td>{{inventory.id}}</td>
+          <td>{{inventory.product.description}}</td>
+          <td>{{inventory.product.toStringCategories()}}</td>
+          <td>{{inventory.product.brand ? inventory.product.brand.name : ''}}</td>
+          <td>{{inventory.quantity}}</td>
+          <td>{{inventory.price | myCurrency}}</td>
+          <td>{{inventory.quantity * inventory.price | myCurrency}}</td>
+          <td>{{inventory.current_total_cost | myCurrency}}</td>
+          <td>{{inventory.minimum}}</td>
+        </tr>
       </ng-container>
-
-      <ng-container mdColumnDef="id">
-        <md-header-cell *mdHeaderCellDef> ID </md-header-cell>
-        <md-cell *mdCellDef="let row"> {{row.id}} </md-cell>
-      </ng-container>
-
-      <ng-container mdColumnDef="product">
-        <md-header-cell *mdHeaderCellDef> Producto </md-header-cell>
-        <md-cell *mdCellDef="let row"> {{row.product.description}} </md-cell>
-      </ng-container>
-
-      <ng-container mdColumnDef="categories">
-        <md-header-cell *mdHeaderCellDef> Categorias </md-header-cell>
-        <md-cell *mdCellDef="let row"> {{row.product.toStringCategories()}} </md-cell>
-      </ng-container>
-
-      <ng-container mdColumnDef="brand">
-        <md-header-cell *mdHeaderCellDef> Marca </md-header-cell>
-        <md-cell *mdCellDef="let row"> {{row.product.brand ? row.product.brand.name : ''}} </md-cell>
-      </ng-container>
-
-      <ng-container mdColumnDef="quantity">
-        <md-header-cell *mdHeaderCellDef> Cantidad </md-header-cell>
-        <md-cell *mdCellDef="let row"> {{row.quantity}} </md-cell>
-      </ng-container>
-
-      <ng-container mdColumnDef="price">
-        <md-header-cell *mdHeaderCellDef> Precio </md-header-cell>
-        <md-cell *mdCellDef="let row"> {{row.current_price | myCurrency}} </md-cell>
-      </ng-container>
-
-      <ng-container mdColumnDef="total_price">
-        <md-header-cell *mdHeaderCellDef> Precio Subtotal </md-header-cell>
-        <md-cell *mdCellDef="let row"> {{row.subtotalPrice | myCurrency}} </md-cell>
-      </ng-container>
-
-      <ng-container mdColumnDef="cost">
-        <md-header-cell *mdHeaderCellDef> Costo </md-header-cell>
-        <md-cell *mdCellDef="let row"> {{row.current_total_cost | myCurrency}} </md-cell>
-      </ng-container>
-
-      <ng-container mdColumnDef="margin">
-        <md-header-cell *mdHeaderCellDef> Margen </md-header-cell>
-        <md-cell *mdCellDef="let row"> {{row.margin | percent}} </md-cell>
-      </ng-container>
-
-      <ng-container mdColumnDef="minimum">
-        <md-header-cell *mdHeaderCellDef> Minimo </md-header-cell>
-        <md-cell *mdCellDef="let row"> {{row.minimum}} </md-cell>
-      </ng-container>
-
-
-      <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-      <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
-    </md-table>
-
-    <md-paginator #paginator
-                  [length]="exampleDatabase.data.length"
-                  [pageIndex]="0"
-                  [pageSize]="25"
-                  [pageSizeOptions]="[5, 10, 25, 100]">
-    </md-paginator>
+    </table>
   </div>
 </app-main-content>

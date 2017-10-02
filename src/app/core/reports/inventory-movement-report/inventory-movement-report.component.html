@@ -100,28 +100,36 @@
 
   <br/>
 
-  <table>
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Fecha</th>
-      <th>Sucursal</th>
-      <th>Usuario</th>
-      <th>Producto</th>
-      <th>Cantidad</th>
-      <th>Tipo de movimiento</th>
-    </tr>
-    </thead>
-    <ng-template ngFor let-inventoryMovement [ngForOf]="inventory_movements">
+  <div class="table-container mat-elevation-z8">
+    <md-paginator #paginator
+                  [length]="dataSource ? dataSource.data.length : []"
+                  [pageIndex]="0"
+                  [pageSize]="50"
+                  [pageSizeOptions]="[50, 100, 200, 1000, 10000]">
+    </md-paginator>
+    <table>
+      <thead>
       <tr>
-        <td>{{inventoryMovement.id}}</td>
-        <td>{{inventoryMovement.created_at | date:'short'}}</td>
-        <td>{{inventoryMovement.branch.name}}</td>
-        <td>{{inventoryMovement.user.name}}</td>
-        <td>{{inventoryMovement.product.description}}</td>
-        <td>{{inventoryMovement.quantity}}</td>
-        <td>{{inventoryMovement.inventory_movement_type.name}}</td>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Sucursal</th>
+        <th>Usuario</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Tipo de movimiento</th>
       </tr>
-    </ng-template>
-  </table>
+      </thead>
+      <ng-container *ngFor="let inventoryMovement of dataSource.connect() | async">
+        <tr>
+          <td>{{inventoryMovement.id}}</td>
+          <td>{{inventoryMovement.created_at | date:'short'}}</td>
+          <td>{{inventoryMovement.branch.name}}</td>
+          <td>{{inventoryMovement.user.name}}</td>
+          <td>{{inventoryMovement.product.description}}</td>
+          <td>{{inventoryMovement.quantity}}</td>
+          <td>{{inventoryMovement.inventory_movement_type.name}}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
 </app-main-content>

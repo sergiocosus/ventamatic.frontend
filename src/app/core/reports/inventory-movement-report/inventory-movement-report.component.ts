@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {IMyDateRangeModel} from 'mydaterangepicker';
 import {InventoryMovementTypeService} from '../../../inventory/services/inventory-movement-type.service';
 import {InventoryMovementType} from '../../../inventory/classes/inventory-movement-type.model';
 import {ReportService} from '../../../report/report.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {messages} from '../../../shared/classes/messages';
+import {MdPaginator} from '@angular/material';
+import {ReportDataSource} from '../../../report/classes/report-data-source';
 
 @Component({
   selector: 'app-inventory-movement-report',
@@ -12,6 +14,8 @@ import {messages} from '../../../shared/classes/messages';
   styleUrls: ['./inventory-movement-report.component.scss']
 })
 export class InventoryMovementReportComponent implements OnInit {
+  @ViewChild(MdPaginator) paginator: MdPaginator;
+
   inventory_movements = [];
   inventoryMovementTypes: InventoryMovementType[];
 
@@ -33,11 +37,14 @@ export class InventoryMovementReportComponent implements OnInit {
 
   statsByType = [];
 
+  dataSource: ReportDataSource | null;
+
   constructor(private reportService: ReportService,
               private notify: NotifyService,
               private inventoryMovementTypeService: InventoryMovementTypeService) { }
 
   ngOnInit() {
+    this.dataSource = new ReportDataSource(this.paginator);
     this.resetRequest();
     this.loadInventoryMovementTypes();
   }
@@ -124,6 +131,8 @@ export class InventoryMovementReportComponent implements OnInit {
         if (!this.inventory_movements.length) {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle);
         }
+
+        this.dataSource.setData(inventoryMovements);
       },
       error => this.notify.serviceError(error)
     );

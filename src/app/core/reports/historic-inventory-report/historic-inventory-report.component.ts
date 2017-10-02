@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ReportService} from '../../../report/report.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {messages} from '../../../shared/classes/messages';
 import {Category} from '../../../category/category';
+import {MdPaginator} from '@angular/material';
+import {ReportDataSource} from '../../../report/classes/report-data-source';
 
 @Component({
   selector: 'app-historic-inventory-report',
@@ -10,6 +12,8 @@ import {Category} from '../../../category/category';
   styleUrls: ['./historic-inventory-report.component.scss']
 })
 export class HistoricInventoryReportComponent implements OnInit {
+  @ViewChild(MdPaginator) paginator: MdPaginator;
+
   inventories = [];
 
   request: {
@@ -21,10 +25,13 @@ export class HistoricInventoryReportComponent implements OnInit {
     date: string
   };
 
+  dataSource: ReportDataSource | null;
+
   constructor(private reportService: ReportService,
               private notify: NotifyService) { }
 
   ngOnInit() {
+    this.dataSource = new ReportDataSource(this.paginator);
     this.resetRequest();
   }
 
@@ -46,6 +53,7 @@ export class HistoricInventoryReportComponent implements OnInit {
         if (!this.inventories.length) {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle);
         }
+        this.dataSource.setData(inventories);
       },
       error => this.notify.serviceError(error)
     );

@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {IMyDateRangeModel} from 'mydaterangepicker';
 import {ReportService} from '../../../report/report.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {TicketService} from '../../../sale/services/ticket.service';
 import {messages} from '../../../shared/classes/messages';
+import {ReportDataSource} from '../../../report/classes/report-data-source';
+import {MdPaginator} from '@angular/material';
 
 @Component({
   selector: 'app-sale-report',
@@ -11,6 +13,8 @@ import {messages} from '../../../shared/classes/messages';
   styleUrls: ['./sale-report.component.scss']
 })
 export class SaleReportComponent implements OnInit {
+  @ViewChild(MdPaginator) paginator: MdPaginator;
+
   sales = [];
 
   rangeOptions = {
@@ -29,11 +33,14 @@ export class SaleReportComponent implements OnInit {
   totalPriceSale;
   totalProducts = 0;
 
+  dataSource: ReportDataSource | null;
+
   constructor(private reportService: ReportService,
               private notify: NotifyService,
               private ticketService: TicketService) { }
 
   ngOnInit() {
+    this.dataSource = new ReportDataSource(this.paginator);
     this.resetRequest();
   }
 
@@ -75,6 +82,8 @@ export class SaleReportComponent implements OnInit {
         if (!this.sales.length) {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle);
         }
+
+        this.dataSource.setData(sales);
       },
       error => this.notify.serviceError(error)
     );

@@ -71,7 +71,7 @@ export class ReportService {
 
   getHistoricInventory(params?: any) {
     return this.apiHttp.get(this.basePath + 'historic-inventory', params)
-      .map(res => res.inventories);
+      .map(res => Inventory.parseArray(res.inventories));
   }
 
   downloadCSV(data, filename) {

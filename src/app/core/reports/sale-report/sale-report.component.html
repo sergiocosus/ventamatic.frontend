@@ -54,53 +54,68 @@
     <li>Total de productos: {{totalProducts}}</li>
   </ul>
   <table>
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Fecha</th>
-      <th>Sucursal</th>
-      <th>Usuario</th>
-      <th>Cliente</th>
-      <th>Total</th>
-    </tr>
-    </thead>
+
     <ng-template ngFor let-sale [ngForOf]="sales">
-      <tr>
-        <td>{{sale.id}}</td>
-        <td>{{sale.created_at | date:'short'}}</td>
-        <td>{{sale.branch.name}}</td>
-        <td>{{sale.user.name}}</td>
-        <td>{{sale.client.name}}</td>
-        <td>{{sale.total}}</td>
-        <td>
-          <button (click)="print(sale)" md-raised-button>
-            Imprimir Ticket
-          </button>
-        </td>
-      </tr>
-      <tr>
-        <td class="no-border"></td>
-        <td class="no-border" colspan="6">
-        <table>
-          <thead>
-          <tr>
-            <th>ID de Producto</th>
-            <th>Descripción</th>
-            <th>Cantidad</th>
-            <th>Precio</th>
-            <th>Subtotal</th>
-          </tr>
-          </thead>
-          <tr *ngFor="let product of sale.products">
-            <td>{{product.id}}</td>
-            <td>{{product.description}}</td>
-            <td>{{product.pivot.quantity}}</td>
-            <td>{{product.pivot.price | currency:'USD':true:'1.2-2'}}</td>
-            <td>{{product.pivot.price * product.pivot.quantity | currency:'USD':true:'1.2-2'}}</td>
-          </tr>
-        </table>
-        </td>
-      </tr>
+
     </ng-template>
   </table>
+
+  <div class="table-container mat-elevation-z8">
+    <md-paginator #paginator
+                  [length]="dataSource ? dataSource.data.length : []"
+                  [pageIndex]="0"
+                  [pageSize]="50"
+                  [pageSizeOptions]="[50, 100, 200, 1000, 10000]">
+    </md-paginator>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Sucursal</th>
+        <th>Usuario</th>
+        <th>Cliente</th>
+        <th>Total</th>
+      </tr>
+      </thead>
+      <ng-container *ngFor="let sale of dataSource.connect() | async">
+        <tr>
+          <td>{{sale.id}}</td>
+          <td>{{sale.created_at | date:'short'}}</td>
+          <td>{{sale.branch.name}}</td>
+          <td>{{sale.user.name}}</td>
+          <td>{{sale.client.name}}</td>
+          <td>{{sale.total}}</td>
+          <td>
+            <button (click)="print(sale)" md-raised-button>
+              Imprimir Ticket
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td class="no-border"></td>
+          <td class="no-border" colspan="6">
+            <table>
+              <thead>
+              <tr>
+                <th>ID de Producto</th>
+                <th>Descripción</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Subtotal</th>
+              </tr>
+              </thead>
+              <tr *ngFor="let product of sale.products">
+                <td>{{product.id}}</td>
+                <td>{{product.description}}</td>
+                <td>{{product.pivot.quantity}}</td>
+                <td>{{product.pivot.price | currency:'USD':true:'1.2-2'}}</td>
+                <td>{{product.pivot.price * product.pivot.quantity | currency:'USD':true:'1.2-2'}}</td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
 </app-main-content>

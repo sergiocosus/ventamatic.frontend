@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {IMyDateRangeModel} from 'mydaterangepicker';
 import {ReportService} from '../../../report/report.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {messages} from '../../../shared/classes/messages';
 import {InventoryMovementTypeId} from '../../../inventory/classes/inventory-movement-type-id.enum';
+import {MdPaginator} from '@angular/material';
+import {ReportDataSource} from '../../../report/classes/report-data-source';
 
 @Component({
   selector: 'app-buy-report',
@@ -11,6 +13,8 @@ import {InventoryMovementTypeId} from '../../../inventory/classes/inventory-move
   styleUrls: ['./buy-report.component.scss']
 })
 export class BuyReportComponent implements OnInit {
+  @ViewChild(MdPaginator) paginator: MdPaginator;
+
   buys = [];
 
   request: {
@@ -33,10 +37,13 @@ export class BuyReportComponent implements OnInit {
   totalCostConsignment = 0;
   totalProducts = 0;
 
+  dataSource: ReportDataSource | null;
+
   constructor(private reportService: ReportService,
               private notify: NotifyService) { }
 
   ngOnInit() {
+    this.dataSource = new ReportDataSource(this.paginator);
     this.resetRequest();
   }
 
@@ -94,6 +101,8 @@ export class BuyReportComponent implements OnInit {
         if (!this.buys.length) {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle);
         }
+
+        this.dataSource.setData(buys);
       },
       error => this.notify.serviceError(error)
     );

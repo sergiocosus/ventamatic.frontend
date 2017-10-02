@@ -68,7 +68,6 @@ export class User extends Model {
         branch => branch.id === branch_id
       );
     } else {
-      console.log(branch_permission_name, branches);
       return !!branches.length;
     }
   }

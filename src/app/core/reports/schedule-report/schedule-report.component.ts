@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {ReportService} from '../../../report/report.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {IMyDateRangeModel} from 'mydaterangepicker';
 import {messages} from '../../../shared/classes/messages';
+import {MdPaginator} from '@angular/material';
+import {ReportDataSource} from '../../../report/classes/report-data-source';
 
 @Component({
   selector: 'app-schedule-report',
@@ -10,6 +12,8 @@ import {messages} from '../../../shared/classes/messages';
   styleUrls: ['./schedule-report.component.scss']
 })
 export class ScheduleReportComponent implements OnInit {
+  @ViewChild(MdPaginator) paginator: MdPaginator;
+
   schedules = [];
 
   request: {
@@ -24,10 +28,13 @@ export class ScheduleReportComponent implements OnInit {
     editableDateRangeField: true
   };
 
+  dataSource: ReportDataSource | null;
+
   constructor(private reportService: ReportService,
               private notify: NotifyService) { }
 
   ngOnInit() {
+    this.dataSource = new ReportDataSource(this.paginator);
     this.resetRequest();
   }
 
@@ -52,6 +59,7 @@ export class ScheduleReportComponent implements OnInit {
         if (!this.schedules.length) {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle);
         }
+        this.dataSource.setData(schedules);
       },
       error => this.notify.serviceError(error)
     );
