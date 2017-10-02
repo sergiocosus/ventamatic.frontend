@@ -1,11 +1,12 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Product} from '../../product/classes/product';
 import {ProductService} from '../../product/services/product.service';
 import {NotifyService} from '../../shared/services/notify.service';
-import {MdDialog} from '@angular/material';
+import {MdDialog, MdPaginator} from '@angular/material';
 import {ProductDialogComponent} from '../../product/components/product-dialog/product-dialog.component';
 import {BasicEntityDialogComponent} from '../../various/components/basic-entity-dialog/basic-entity-dialog.component';
+import {ReportDataSource} from '../../report/classes/report-data-source';
 
 
 @Component({
@@ -14,8 +15,11 @@ import {BasicEntityDialogComponent} from '../../various/components/basic-entity-
   styleUrls: ['productos.component.scss']
 })
 export class ProductosComponent implements OnInit {
+  @ViewChild(MdPaginator) paginator: MdPaginator;
+
   public products: Product[];
   public deletedControl = new FormControl();
+  dataSource: ReportDataSource | null;
 
   constructor(private productService: ProductService,
               private notify: NotifyService,
@@ -26,6 +30,7 @@ export class ProductosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataSource = new ReportDataSource(this.paginator);
     this.loadProducts();
   }
 
@@ -36,8 +41,11 @@ export class ProductosComponent implements OnInit {
     };
 
     this.productService.getAll(params).subscribe(
-      products => this.products = products,
-      error => this.notify.serviceError(error)
+      products => {
+          this.products = products;
+          this.dataSource.setData(products);
+        },
+        error => this.notify.serviceError(error)
     );
   }
 

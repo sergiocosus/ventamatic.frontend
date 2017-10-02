@@ -1,41 +1,49 @@
 <app-main-content>
-  <table>
-    <thead>
-    <tr>
-      <th>ID</th>
-      <th>Descripción</th>
-      <th>Categoría</th>
-      <th>Marca</th>
-      <th>Mínimo de unidades</th>
-      <th>Cantidad actual</th>
-      <th>Precio de sucursal</th>
-      <th>Precio Global</th>
-      <th>Tipo de unidad</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let inventory of inventories"  (click)="openUpdateDialog(inventory)">
-      <td>{{inventory.id}}</td>
-      <td>{{inventory.product.description}}</td>
-      <td>
-        {{inventory.product.toStringCategories()}}
-      </td>
-      <td>{{inventory.product.brand ? inventory.product.brand.name  : '' }}</td>
-      <td>{{inventory.minimum}}</td>
-      <td>{{inventory.quantity}}</td>
-      <td>{{inventory.price | myCurrency}}</td>
-      <td>{{inventory.product.price | myCurrency}}</td>
-      <td>
-        {{inventory.product.unit.name}}
-        <div *appUserCanInBranch="'inventory-edit'"
-             class="button-modify"
-             (click)="clickUpdate($event, inventory)">
-          <i class="fa fa-exchange" ></i>
-        </div>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+    <div class="table-container mat-elevation-z8">
+    <md-paginator #paginator
+                  [length]="dataSource ? dataSource.data.length : []"
+                  [pageIndex]="0"
+                  [pageSize]="50"
+                  [pageSizeOptions]="[50, 100, 200, 1000, 10000]">
+    </md-paginator>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Descripción</th>
+        <th>Categoría</th>
+        <th>Marca</th>
+        <th>Mínimo de unidades</th>
+        <th>Cantidad actual</th>
+        <th>Precio de sucursal</th>
+        <th>Precio Global</th>
+        <th>Tipo de unidad</th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let inventory of dataSource.connect() | async"  (click)="openUpdateDialog(inventory)">
+          <td>{{inventory.id}}</td>
+          <td>{{inventory.product.description}}</td>
+          <td>
+            {{inventory.product.toStringCategories()}}
+          </td>
+          <td>{{inventory.product.brand ? inventory.product.brand.name  : '' }}</td>
+          <td>{{inventory.minimum}}</td>
+          <td>{{inventory.quantity}}</td>
+          <td>{{inventory.price | myCurrency}}</td>
+          <td>{{inventory.product.price | myCurrency}}</td>
+          <td>
+            {{inventory.product.unit.name}}
+            <div *appUserCanInBranch="'inventory-edit'"
+                 class="button-modify"
+                 (click)="clickUpdate($event, inventory)">
+              <i class="fa fa-exchange" ></i>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </app-main-content>
 
 

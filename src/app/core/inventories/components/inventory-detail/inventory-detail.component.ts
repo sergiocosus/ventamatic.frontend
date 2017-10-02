@@ -1,11 +1,12 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {Inventory} from '../../../../inventory/classes/inventory.model';
 import {InventoryService} from '../../../../inventory/services/inventory.service';
 import {NotifyService} from '../../../../shared/services/notify.service';
-import {MdDialog} from '@angular/material';
+import {MdDialog, MdPaginator} from '@angular/material';
 import {InventoryQuantityDialogComponent} from '../../../../inventory/components/inventory-quantity-dialog/inventory-quantity-dialog.component';
 import {InventoryEditDialogComponent} from '../../../../inventory/components/inventory-edit-dialog/inventory-edit-dialog.component';
+import {ReportDataSource} from '../../../../report/classes/report-data-source';
 
 @Component({
   selector: 'app-inventory-detail',
@@ -13,8 +14,12 @@ import {InventoryEditDialogComponent} from '../../../../inventory/components/inv
   styleUrls: ['./inventory-detail.component.scss'],
 })
 export class InventoryDetailComponent implements OnInit, OnDestroy {
+  @ViewChild(MdPaginator) paginator: MdPaginator;
+
   branch_id: number;
   inventories: Inventory[];
+
+  dataSource: ReportDataSource | null;
 
   private sub;
   constructor(private route: ActivatedRoute,
@@ -23,11 +28,14 @@ export class InventoryDetailComponent implements OnInit, OnDestroy {
               private dialog: MdDialog) {}
 
   ngOnInit() {
+    this.dataSource = new ReportDataSource(this.paginator);
+
     this.sub = this.route.params.subscribe(params => {
       this.branch_id = params['branch_id'];
       this.inventoryService.getAll(this.branch_id).subscribe(
         inventories => {
           this.inventories = inventories;
+          this.dataSource.setData(inventories);
         },
         error => this.notify.serviceError(error)
       );
