@@ -4,9 +4,7 @@ import {CommonModule, DecimalPipe} from '@angular/common';
 import { HttpModule } from '@angular/http';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {routing, appRoutingProviders} from './app.routing';
-import { ButtonsModule } from 'ng2-bootstrap';
 import { CsvService } from 'angular2-json2csv';
-import {PopoverModule} from 'ng2-popover';
 import {SharedModule} from './shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthModule} from './auth/auth.module';
@@ -36,8 +34,6 @@ import {CacheManagerService} from './shared/services/cache-manager.service';
     BrowserAnimationsModule,
     CommonModule,
     HttpModule,
-    ButtonsModule,
-    PopoverModule,
     SimpleNotificationsModule.forRoot(),
     AuthModule.forRoot(),
     UserModule.forRoot(),

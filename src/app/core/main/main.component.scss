@@ -42,6 +42,10 @@ ul{
     font-weight: bolder;
   }
 
+  a{
+    text-decoration: none;
+  }
+
   @media (min-width: $smScreen) {
     font-size: 3em;
   }

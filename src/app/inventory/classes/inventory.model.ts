@@ -36,6 +36,7 @@ export class Inventory extends Model {
       'Descripción',
       'Precio',
       'Cantidad',
+      '',
     ];
   }
 
@@ -44,6 +45,7 @@ export class Inventory extends Model {
       this.product.description,
       this.current_price,
       this.quantity,
+      this.product.unitData.abbreviation,
     ];
   }
 }

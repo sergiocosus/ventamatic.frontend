@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {CrudModalComponent} from '../../../shared/components/crud-modal/crud-modal.component';
-import {SelectComponent} from 'ng2-select';
 import {Product} from '../../classes/product';
 import {MdDialogRef} from '@angular/material';
 import {Category} from '../../../category/category';
@@ -16,8 +15,6 @@ import {BrandService} from '../../../brand/brand.service';
   styleUrls: ['./product-dialog.component.scss'],
 })
 export class ProductDialogComponent extends CrudModalComponent implements OnInit {
-  @ViewChild(SelectComponent) protected select: SelectComponent;
-
   name = 'Producto';
   product: Product;
 

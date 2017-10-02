@@ -1,4 +1,19 @@
+@import "../node_modules/font-face-mixin/_fontface.scss";
 @import 'src/app/vars';
+
+
+
+@include font-face(QuickSand,
+  "~connect-fonts-quicksand/fonts/latin/quicksand-regular",
+  normal, normal, eot woff ttf svg);
+
+@include font-face(QuickSand,
+  "~connect-fonts-quicksand/fonts/latin/quicksand-bold",
+  bold, normal, eot woff ttf svg);
+
+*{
+  font-family: Verdana, sans-serif;
+}
 
 .open {
   > .dropdown-menu {
@@ -37,6 +52,12 @@
 
 }
 
+
+table{
+  border-collapse: collapse;
+}
+
+
 @import '~@angular/material/theming';
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -64,6 +85,10 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 // `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
 .dark-theme {
   @include angular-material-theme($dark-theme);
+  .mat-form-field{
+    width: auto;
+  }
+
 }
 
 .simple-notification-wrapper{
@@ -78,4 +103,7 @@ $dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 md-hint.error{
   color: #d9534f;
   font-weight: bolder;
+}
+.mat-form-field{
+  width: auto;
 }

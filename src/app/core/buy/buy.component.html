@@ -46,25 +46,20 @@
 
 
   <div class="right" *ngIf="initialData">
-    <div class="branch-view" *ngIf="initialData.branch">
-      <h6>Sucursal</h6>
-      <h4>
+    <header>
+      <div class="buy-header" *ngIf="initialData.branch">
+        <span class="bold">Sucursal:</span>
         {{initialData.branch.name}}
-      </h4>
-    </div>
-    <div class="branch-view" *ngIf="initialData.supplier">
-      <h6>Proveedor</h6>
-      <h4>
+      </div>
+      <div class="buy-header" *ngIf="initialData.supplier">
+        <span class="bold">Proveedor:</span>
         {{initialData.supplier.name}}
-      </h4>
-    </div>
-    <div class="branch-view" *ngIf="initialData.supplier">
-      <h6>Id de factura</h6>
-      <h4>
+      </div>
+      <div class="buy-header" *ngIf="initialData.supplier">
+        <span class="bold">ID de la factura:</span>
         {{initialData.supplierBillID}}
-      </h4>
-    </div>
-    <hr/>
+      </div>
+    </header>
     <app-product-cart
       [(addedProducts)]="addedProducts"
       [introducedAmount]="initialData.introducedAmount"

@@ -19,4 +19,9 @@ export let units = {
     abbreviation: 'm',
     step: .005,
   },
+  5:  {
+    name: 'Paquete',
+    abbreviation: 'paq',
+    step: 1,
+  },
 };

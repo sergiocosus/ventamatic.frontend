@@ -202,6 +202,10 @@ acorn@^5.0.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.1.1.tgz#53fe161111f912ab999ee887a90a0bc52822fd75"
 
+add@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
+
 adm-zip@0.4.4:
   version "0.4.4"
   resolved "https://registry.yarnpkg.com/adm-zip/-/adm-zip-0.4.4.tgz#a61ed5ae6905c3aea58b3a657d25033091052736"
@@ -456,10 +460,6 @@ autoprefixer@^6.3.1, autoprefixer@^6.5.3:
     postcss "^5.2.16"
     postcss-value-parser "^3.2.3"
 
-awesome-bootstrap-checkbox@^1.0.0-alpha.4:
-  version "1.0.0-alpha.5"
-  resolved "https://registry.yarnpkg.com/awesome-bootstrap-checkbox/-/awesome-bootstrap-checkbox-1.0.0-alpha.5.tgz#359db3d5ab1da7c1dffde6f90ab19ca6bc4ae14f"
-
 aws-sign2@~0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/aws-sign2/-/aws-sign2-0.6.0.tgz#14342dd38dbcc94d0e5b87d763cd63612c0e794f"
@@ -642,13 +642,6 @@ boom@2.x.x:
   resolved "https://registry.yarnpkg.com/boom/-/boom-2.10.1.tgz#39c8918ceff5799f83f9492a848f625add0c766f"
   dependencies:
     hoek "2.x.x"
-
-bootstrap@^4.0.0-alpha.3:
-  version "4.0.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0-alpha.6.tgz#4f54dd33ac0deac3b28407bc2df7ec608869c9c8"
-  dependencies:
-    jquery ">=1.9.1"
-    tether "^1.4.0"
 
 boxen@^1.0.0:
   version "1.1.0"
@@ -1078,6 +1071,10 @@ configstore@^3.0.0:
     unique-string "^1.0.0"
     write-file-atomic "^2.0.0"
     xdg-basedir "^3.0.0"
+
+connect-fonts-quicksand@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/connect-fonts-quicksand/-/connect-fonts-quicksand-0.0.1.tgz#704ac6b6e5d70054a3ef757a734efe3eff85455f"
 
 connect-history-api-fallback@^1.3.0:
   version "1.3.0"
@@ -2029,6 +2026,10 @@ font-awesome@^4.7.0:
   version "4.7.0"
   resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
 
+font-face-mixin@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/font-face-mixin/-/font-face-mixin-1.1.0.tgz#cb741acc5a149eb4a64d3a25bcdd5e19092fe97e"
+
 for-in@^0.1.3:
   version "0.1.8"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
@@ -2899,10 +2900,6 @@ jodid25519@^1.0.0:
   dependencies:
     jsbn "~0.1.0"
 
-jquery@>=1.9.1, jquery@^3.2.1:
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
-
 js-base64@^2.1.5, js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.1.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.1.9.tgz#f0e80ae039a4bd654b5f281fc93f04a914a7fcce"
@@ -3401,7 +3398,7 @@ mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkd
   dependencies:
     minimist "0.0.8"
 
-moment@2.18.1, moment@^2.18.1:
+moment@^2.18.1:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
@@ -3458,27 +3455,13 @@ ng-sidebar@^5.1.0:
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/ng-sidebar/-/ng-sidebar-5.1.0.tgz#418eb330659fee4872c0bb0b649e2f88414e3ae9"
 
-ng2-bootstrap@^1.1.5:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/ng2-bootstrap/-/ng2-bootstrap-1.6.3.tgz#8bef6179d7436ba547901447f18fee8fff4355c2"
-  dependencies:
-    moment "2.18.1"
-
 ng2-imageupload@^1.4.2:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/ng2-imageupload/-/ng2-imageupload-1.4.2.tgz#eece669cb94317181d6676f65eeee6c01a33b50d"
 
-ng2-popover@^0.0.14:
-  version "0.0.14"
-  resolved "https://registry.yarnpkg.com/ng2-popover/-/ng2-popover-0.0.14.tgz#6cad6a6555fd2b81759f3d85b4cb8c3e3731f296"
-
 ng2-responsive@^0.8.4:
   version "0.8.4"
   resolved "https://registry.yarnpkg.com/ng2-responsive/-/ng2-responsive-0.8.4.tgz#b99151258a981a1a41a3ec8673df0291005578cf"
-
-ng2-select@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/ng2-select/-/ng2-select-1.2.0.tgz#5c90618bffbe32acc5ee1c128c88547059b4f11c"
 
 no-case@^2.2.0:
   version "2.3.1"
@@ -3617,6 +3600,10 @@ normalize-url@^1.4.0:
     prepend-http "^1.0.0"
     query-string "^4.1.0"
     sort-keys "^1.0.0"
+
+normalize.css@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-7.0.0.tgz#abfb1dd82470674e0322b53ceb1aaf412938e4bf"
 
 npm-run-path@^1.0.0:
   version "1.0.0"
@@ -5912,6 +5899,10 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
+
+yarn@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.1.0.tgz#f2da9340490236b6c56de305b1c21a8a19c433c3"
 
 yeast@0.1.2:
   version "0.1.2"

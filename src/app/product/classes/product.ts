@@ -54,6 +54,7 @@ export class Product extends Model {
     return [
         'Descripción',
         'Precio',
+        '',
     ];
   }
 
@@ -61,6 +62,7 @@ export class Product extends Model {
     return [
       this.description,
       this.price,
+      this.unitData.abbreviation,
     ];
   }
 }

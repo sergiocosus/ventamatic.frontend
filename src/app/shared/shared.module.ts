@@ -16,7 +16,6 @@ import {MyCurrencyPipe} from './pipes/my-currency.pipe';
 import {NotifyService} from './services/notify.service';
 import {PopoverComponent} from './components/popover/popover.component';
 import {apiHttpServiceProvider} from './services/api-http';
-import {SelectModule} from 'ng2-select';
 import {SearchBarComponent} from './components/search-bar/search-bar.component';
 import {MyDateRangePickerModule} from 'mydaterangepicker';
 import {SimpleNotificationsModule} from 'angular2-notifications';
@@ -36,7 +35,6 @@ import {ResponsiveModule} from 'ng2-responsive';
     MdDialogModule,
     MyDateRangePickerModule,
     MdTooltipModule,
-    SelectModule,
     SimpleNotificationsModule,
     ResponsiveModule,
   ],
@@ -80,8 +78,6 @@ import {ResponsiveModule} from 'ng2-responsive';
     ConfirmDialogComponent,
     MyCurrencyPipe,
     SearchBarComponent,
-
-    SelectModule,
     ResponsiveModule,
   ]
 })

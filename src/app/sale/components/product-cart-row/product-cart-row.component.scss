@@ -12,10 +12,10 @@
 
     md-input-container{
       width: 100%;
-      background-color: transparentize(white, .9);
       color: white;
-      /deep/ .mat-input-wrapper{
-        margin: 0;
+      margin-bottom: -1em;
+      /deep/ .mat-input-flex {
+        background-color: transparentize(white, .9);
       }
     }
   }
