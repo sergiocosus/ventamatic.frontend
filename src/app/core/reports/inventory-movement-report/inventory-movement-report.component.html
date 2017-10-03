@@ -117,6 +117,7 @@
         <th>Producto</th>
         <th>Cantidad</th>
         <th>Tipo de movimiento</th>
+        <th>Valor</th>
       </tr>
       </thead>
       <ng-container *ngFor="let inventoryMovement of dataSource.connect() | async">
@@ -128,6 +129,7 @@
           <td>{{inventoryMovement.product.description}}</td>
           <td>{{inventoryMovement.quantity}}</td>
           <td>{{inventoryMovement.inventory_movement_type.name}}</td>
+          <td>{{inventoryMovement.value | myCurrency}}</td>
         </tr>
       </ng-container>
     </table>
