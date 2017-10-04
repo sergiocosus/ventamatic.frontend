@@ -81,7 +81,7 @@
       <ng-container *ngFor="let inventory of dataSource.connect() | async">
         <tr>
           <td>{{inventory.branch.name}}</td>
-          <td>{{inventory.id}}</td>
+          <td>{{inventory.product.id}}</td>
           <td>{{inventory.product.description}}</td>
           <td>{{inventory.product.toStringCategories()}}</td>
           <td>{{inventory.product.brand ? inventory.product.brand.name : ''}}</td>

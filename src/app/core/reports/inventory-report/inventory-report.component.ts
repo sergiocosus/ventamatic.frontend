@@ -99,9 +99,10 @@ export class InventoryReportComponent implements OnInit {
   calculateInventory(inventory: any) {
     inventory.categoryString = inventory.product.toStringCategories();
     inventory.subtotalPrice = inventory.quantity * inventory.current_price;
+    inventory.averageCost = inventory.current_total_cost / inventory.quantity;
 
-    const margin = (inventory.current_price - inventory.current_total_cost) / inventory.current_total_cost;
-    if (Number.isSafeInteger(margin)) {
+    const margin = (inventory.current_price - inventory.averageCost) / inventory.averageCost;
+    if (Number.isFinite(margin) && !Number.isNaN(margin)) {
       inventory.margin = margin;
     }
   }

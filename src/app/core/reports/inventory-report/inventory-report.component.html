@@ -77,13 +77,15 @@
         <th>Precio Total</th>
         <th>Costo Promedio</th>
         <th>Costo Total</th>
+        <th>Último costo</th>
+        <th>Margen</th>
         <th>Minimo</th>
       </tr>
       </thead>
       <ng-container *ngFor="let inventory of dataSource.connect() | async">
         <tr>
           <td>{{inventory.branch.name}}</td>
-          <td>{{inventory.id}}</td>
+          <td>{{inventory.product.id}}</td>
           <td>{{inventory.product.description}}</td>
           <td>{{inventory.product.toStringCategories()}}</td>
           <td>{{inventory.product.brand ? inventory.product.brand.name : ''}}</td>
@@ -92,10 +94,16 @@
           <td>{{inventory.quantity * inventory.current_price | myCurrency}}</td>
           <td>
             <ng-container *ngIf="inventory.quantity">
-              {{inventory.current_total_cost/inventory.quantity | myCurrency}}
+              {{inventory.averageCost | myCurrency}}
             </ng-container>
           </td>
           <td>{{inventory.current_total_cost | myCurrency}}</td>
+          <td>
+            <ng-container *ngIf="inventory.last_cost">
+              {{inventory.last_cost | myCurrency}}
+            </ng-container>
+          </td>
+          <td>{{inventory.margin | percent}}</td>
           <td>{{inventory.minimum}}</td>
         </tr>
       </ng-container>
