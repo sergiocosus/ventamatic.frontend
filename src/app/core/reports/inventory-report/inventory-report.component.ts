@@ -48,6 +48,7 @@ export class InventoryReportComponent implements OnInit {
         switch (this.sort.active) {
           case 'branch': return [a.branch.name, b.branch.name, 'string'];
           case 'id': return [a.product.id, b.product.id, 'number'];
+          case 'bar_code': return [a.product.bar_code, b.product.bar_code, 'string'];
           case 'product': return [a.product.description, b.product.description, 'string'];
           case 'category': return [a.product.toStringCategories(), b.product.toStringCategories(), 'string'];
           case 'brand': return [

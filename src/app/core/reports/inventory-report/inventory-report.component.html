@@ -70,6 +70,7 @@
         <th mat-sort-header="branch">Sucursal</th>
         <th mat-sort-header="id">ID</th>
         <th mat-sort-header="product">Producto</th>
+        <th mat-sort-header="bar_code">Código de barras</th>
         <th mat-sort-header="category">Categorias</th>
         <th mat-sort-header="brand">Marca</th>
         <th mat-sort-header="quantity">Cantidad</th>
@@ -87,6 +88,7 @@
           <td>{{inventory.branch.name}}</td>
           <td>{{inventory.product.id}}</td>
           <td>{{inventory.product.description}}</td>
+          <td>{{inventory.product.bar_code}}</td>
           <td>{{inventory.product.toStringCategories()}}</td>
           <td>{{inventory.product.brand ? inventory.product.brand.name : ''}}</td>
           <td>{{inventory.quantity}}</td>

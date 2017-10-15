@@ -11,6 +11,7 @@
       <tr>
         <th mat-sort-header="id">ID</th>
         <th mat-sort-header="product">Descripción</th>
+        <th mat-sort-header="bar_code">Código de barras</th>
         <th mat-sort-header="categories">Categoría</th>
         <th mat-sort-header="brand">Marca</th>
         <th mat-sort-header="minimum">Mínimo de unidades</th>
@@ -25,6 +26,7 @@
             (click)="openUpdateDialog(inventory)">
           <td>{{inventory.product.id}}</td>
           <td>{{inventory.product.description}}</td>
+          <td>{{inventory.product.bar_code}}</td>
           <td>
             {{inventory.product.toStringCategories()}}
           </td>

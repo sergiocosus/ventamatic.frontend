@@ -38,6 +38,7 @@ export class InventoryDetailComponent implements OnInit, OnDestroy {
         switch (this.sort.active) {
           case 'id': return [a.product.id, b.product.id, 'number'];
           case 'product': return [a.product.description, b.product.description, 'string'];
+          case 'bar_code': return [a.product.bar_code, b.product.bar_code, 'string'];
           case 'categories': return [a.product.toStringCategories(), b.product.toStringCategories(), 'string'];
           case 'brand': return [
             (a.product.brand ? a.product.brand.name : ''),

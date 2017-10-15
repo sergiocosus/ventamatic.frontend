@@ -40,6 +40,7 @@ export class ProductosComponent implements OnInit {
         switch (this.sort.active) {
           case 'id': return [a.id, b.id, 'number'];
           case 'description': return [a.description, b.description, 'string'];
+          case 'bar_code': return [a.bar_code, b.bar_code, 'string'];
           case 'categories': return [a.product.toStringCategories(), b.product.toStringCategories(), 'string'];
           case 'brand': return [
             (a.brand ? a.brand.name : ''),

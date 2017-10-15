@@ -37,6 +37,7 @@
       <tr>
         <th mat-sort-header="id">ID</th>
         <th mat-sort-header="description">Descripción</th>
+        <th mat-sort-header="bar_code">Código de barras</th>
         <th mat-sort-header="categories" class="hide-on-small">Categorías</th>
         <th mat-sort-header="brand" class="hide-on-small">Marca</th>
         <th mat-sort-header="global_minimum" class="hide-on-small">Mínimo Global</th>
@@ -49,6 +50,7 @@
       <tr *ngFor="let product of dataSourceObservable | async"  (click)="clickUpdate(product)">
         <td>{{product.id}}</td>
         <td>{{product.description}}</td>
+        <td>{{product.bar_code}}</td>
         <td class="hide-on-small">
           {{product.toStringCategories()}}
         </td>
