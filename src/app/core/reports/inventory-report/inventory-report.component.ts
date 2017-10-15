@@ -3,8 +3,9 @@ import {ReportService} from '../../../report/report.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {Category} from '../../../category/category';
 import {messages} from '../../../shared/classes/messages';
-import {MdPaginator} from '@angular/material';
+import {MdPaginator, MdSort} from '@angular/material';
 import {ReportDataSource} from '../../../report/classes/report-data-source';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-inventory-report',
@@ -13,6 +14,9 @@ import {ReportDataSource} from '../../../report/classes/report-data-source';
 })
 export class InventoryReportComponent implements OnInit {
   @ViewChild(MdPaginator) paginator: MdPaginator;
+  @ViewChild(MdSort) sort: MdSort;
+
+  dataSourceObservable: Observable<any[]>;
 
   inventories = [];
 
@@ -37,7 +41,32 @@ export class InventoryReportComponent implements OnInit {
 
   ngOnInit() {
     this.resetRequest();
-    this.dataSource = new ReportDataSource(this.paginator);
+    this.dataSource = new ReportDataSource(
+      this.paginator,
+      this.sort,
+      (a, b) => {
+        switch (this.sort.active) {
+          case 'branch': return [a.branch.name, b.branch.name, 'string'];
+          case 'id': return [a.product.id, b.product.id, 'number'];
+          case 'product': return [a.product.description, b.product.description, 'string'];
+          case 'category': return [a.product.toStringCategories(), b.product.toStringCategories(), 'string'];
+          case 'brand': return [
+            (a.product.brand ? a.product.brand.name: ''),
+            (b.product.brand ? b.product.brand.name: ''),
+            'string'
+          ];
+          case 'quantity': return [a.quantity, b.quantity, 'number'];
+          case 'price': return [a.current_price, b.current_price, 'number'];
+          case 'total_price': return [a.totalPrice, b.totalPrice, 'number'];
+          case 'averageCost': return [a.averageCost, b.averageCost, 'number'];
+          case 'total_cost': return [a.current_total_cost, b.current_total_cost, 'number'];
+          case 'last_cost': return [a.last_cost, b.last_cost, 'number'];
+          case 'margin': return [a.margin, b.margin, 'number'];
+          case 'minimum': return [a.current_minimum, b.current_minimum, 'number'];
+        }
+      });
+
+    this.dataSourceObservable = this.dataSource.connect();
 
   }
 
@@ -84,7 +113,9 @@ export class InventoryReportComponent implements OnInit {
             this.productsWithExistences++;
           }
 
-          this.priceValue += inventory.current_price * inventory.quantity;
+          inventory.totalPrice = inventory.current_price * inventory.quantity;
+
+          this.priceValue += inventory.totalPrice;
           this.costValue += inventory.current_total_cost;
         });
 

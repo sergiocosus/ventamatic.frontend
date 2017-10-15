@@ -5,7 +5,7 @@ import 'rxjs/Rx';
 import {LocalStorageService} from './services/local-storage.service';
 import {
   MdButtonModule, MdCheckboxModule, MdDialogModule, MdInputModule, MdPaginatorModule, MdRadioModule,
-  MdSelectModule, MdTooltipModule
+  MdSelectModule, MdSortModule, MdTooltipModule
 } from '@angular/material';
 import {SelectableComponent} from './components/selectable/selectable.component';
 import {AutocompleteInputComponent} from './components/autocomplete-input/autocomplete-input.component';
@@ -38,6 +38,7 @@ import {ResponsiveModule} from 'ng2-responsive';
     SimpleNotificationsModule,
     ResponsiveModule,
     MdPaginatorModule,
+    MdSortModule,
   ],
   declarations: [
     SelectableComponent,
@@ -72,6 +73,7 @@ import {ResponsiveModule} from 'ng2-responsive';
     MdDialogModule,
     MdTooltipModule,
     MdPaginatorModule,
+    MdSortModule,
     MyDateRangePickerModule,
 
     AutocompleteInputComponent,

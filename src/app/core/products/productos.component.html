@@ -32,21 +32,21 @@
                   [pageSize]="50"
                   [pageSizeOptions]="[50, 100, 200, 1000, 10000]">
     </md-paginator>
-    <table>
+    <table matSort>
       <thead>
       <tr>
-        <th>ID</th>
-        <th>Descripción</th>
-        <th class="hide-on-small">Categorías</th>
-        <th class="hide-on-small">Marca</th>
-        <th class="hide-on-small">Mínimo Global</th>
-        <th>Precio</th>
-        <th class="hide-on-small">Unidad</th>
+        <th mat-sort-header="id">ID</th>
+        <th mat-sort-header="description">Descripción</th>
+        <th mat-sort-header="categories" class="hide-on-small">Categorías</th>
+        <th mat-sort-header="brand" class="hide-on-small">Marca</th>
+        <th mat-sort-header="global_minimum" class="hide-on-small">Mínimo Global</th>
+        <th mat-sort-header="price">Precio</th>
+        <th mat-sort-header="unit" class="hide-on-small">Unidad</th>
         <th></th>
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let product of dataSource.connect() | async"  (click)="clickUpdate(product)">
+      <tr *ngFor="let product of dataSourceObservable | async"  (click)="clickUpdate(product)">
         <td>{{product.id}}</td>
         <td>{{product.description}}</td>
         <td class="hide-on-small">

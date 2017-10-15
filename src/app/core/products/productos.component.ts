@@ -3,10 +3,11 @@ import {FormControl} from '@angular/forms';
 import {Product} from '../../product/classes/product';
 import {ProductService} from '../../product/services/product.service';
 import {NotifyService} from '../../shared/services/notify.service';
-import {MdDialog, MdPaginator} from '@angular/material';
+import {MdDialog, MdPaginator, MdSort} from '@angular/material';
 import {ProductDialogComponent} from '../../product/components/product-dialog/product-dialog.component';
 import {BasicEntityDialogComponent} from '../../various/components/basic-entity-dialog/basic-entity-dialog.component';
 import {ReportDataSource} from '../../report/classes/report-data-source';
+import {Observable} from 'rxjs/Observable';
 
 
 @Component({
@@ -16,10 +17,12 @@ import {ReportDataSource} from '../../report/classes/report-data-source';
 })
 export class ProductosComponent implements OnInit {
   @ViewChild(MdPaginator) paginator: MdPaginator;
+  @ViewChild(MdSort) sort: MdSort;
 
   public products: Product[];
   public deletedControl = new FormControl();
   dataSource: ReportDataSource | null;
+  dataSourceObservable: Observable<any[]>;
 
   constructor(private productService: ProductService,
               private notify: NotifyService,
@@ -30,7 +33,26 @@ export class ProductosComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.dataSource = new ReportDataSource(this.paginator);
+    this.dataSource = new ReportDataSource(
+      this.paginator,
+      this.sort,
+      (a, b) => {
+        switch (this.sort.active) {
+          case 'id': return [a.id, b.id, 'number'];
+          case 'description': return [a.description, b.description, 'string'];
+          case 'categories': return [a.product.toStringCategories(), b.product.toStringCategories(), 'string'];
+          case 'brand': return [
+            (a.brand ? a.brand.name : ''),
+            (b.brand ? b.brand.name : ''),
+            'string'
+          ];
+          case 'global_minimum': return [a.global_minimum, b.global_minimum, 'number'];
+          case 'price': return [a.global_price, b.global_price, 'number'];
+          case 'unit': return [a.unit.name, b.unit.name, 'number'];
+        }
+      });
+
+    this.dataSourceObservable = this.dataSource.connect();
     this.loadProducts();
   }
 
