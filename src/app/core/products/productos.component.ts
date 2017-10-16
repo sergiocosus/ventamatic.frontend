@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Product} from '../../product/classes/product';
 import {ProductService} from '../../product/services/product.service';
 import {NotifyService} from '../../shared/services/notify.service';
@@ -8,6 +8,11 @@ import {ProductDialogComponent} from '../../product/components/product-dialog/pr
 import {BasicEntityDialogComponent} from '../../various/components/basic-entity-dialog/basic-entity-dialog.component';
 import {ReportDataSource} from '../../report/classes/report-data-source';
 import {Observable} from 'rxjs/Observable';
+import {Brand} from '../../brand/brand';
+import {Category} from '../../category/category';
+import {units} from 'app/shared/unit/units.data';
+import {CategoryService} from '../../category/category.service';
+import {BrandService} from '../../brand/brand.service';
 
 
 @Component({
@@ -24,12 +29,22 @@ export class ProductosComponent implements OnInit {
   dataSource: ReportDataSource | null;
   dataSourceObservable: Observable<any[]>;
 
+  form: FormGroup;
+  brands: Observable<Brand[]>;
+  categories: Observable<Category[]>;
+  units = [];
+
   constructor(private productService: ProductService,
               private notify: NotifyService,
-              private dialog: MdDialog) {
+              private dialog: MdDialog,
+              private fb: FormBuilder,
+              private categoryService: CategoryService,
+              private brandService: BrandService) {
     this.deletedControl.valueChanges.subscribe(
       showDeleted => this.loadProducts()
     );
+
+    this.initForm();
   }
 
   ngOnInit() {
@@ -51,11 +66,43 @@ export class ProductosComponent implements OnInit {
           case 'price': return [a.global_price, b.global_price, 'number'];
           case 'unit': return [a.unit.name, b.unit.name, 'number'];
         }
-      });
+      },
+      this.form.valueChanges.map(formData => {
+          return {
+            formData: formData,
+            filter: this.fieldIsOk.bind(this)
+          };
+        }
+      )
+    );
 
     this.dataSourceObservable = this.dataSource.connect();
     this.loadProducts();
+    this.initFormData();
   }
+
+  initForm() {
+    this.form = this.fb.group({
+      'id': [''],
+      'description': [''],
+      'bar_code': [''],
+      'categories': [''],
+      'brand': [''],
+      'minimum': [''],
+      'price': [''],
+      'unit': [''],
+    });
+  }
+
+  initFormData() {
+    this.categories = this.categoryService.getAllCached();
+    this.brands = this.brandService.getAllCached();
+    Object.keys(units).forEach(key => {
+      this.units.push(Object.assign({id: key}, units[key] ));
+    });
+
+  }
+
 
   loadProducts() {
     this.products = [];
@@ -146,5 +193,19 @@ export class ProductosComponent implements OnInit {
   openBrandDialog() {
     const dialog = this.dialog.open(BasicEntityDialogComponent);
     dialog.componentInstance.init('brand');
+  }
+
+  fieldIsOk(object, key, value) {
+    switch (key) {
+      case 'id': return object.id == value;
+      case 'description': return object.description.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
+      case 'bar_code': return object.bar_code == value;
+      case 'categories': return object.categories.find(category => category.id == value);
+      case 'brand': return object.brand_id == value;
+      case 'minimum': return object.global_minimum == value;
+      case 'price': return object.global_price == value;
+      case 'unit': return object.unit_id == value;
+    }
+    return true;
   }
 }

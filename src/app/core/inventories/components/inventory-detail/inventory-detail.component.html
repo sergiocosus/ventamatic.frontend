@@ -1,5 +1,7 @@
 <app-search-bar class="dark-theme">
   <form [formGroup]="form">
+    <i class="fa fa-filter" aria-hidden="true"></i>
+
     <md-form-field>
       <input mdInput formControlName="id" placeholder="ID">
     </md-form-field>
@@ -36,7 +38,7 @@
     </md-form-field>
 
     <md-form-field>
-      <input mdInput formControlName="branchPrice" placeholder="Costo">
+      <input mdInput formControlName="branchPrice" placeholder="Precio de sucursal">
     </md-form-field>
 
     <md-form-field>

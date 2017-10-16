@@ -122,24 +122,6 @@ export class InventoryDetailComponent implements OnInit, OnDestroy {
     this.dataSourceObservable = this.dataSource.connect();
   }
 
-  fieldIsOk(object, key, value) {
-    switch (key) {
-      case 'id': return object.product.id == value;
-      case 'product': return object.product.description.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
-      case 'bar_code': return object.product.bar_code == value;
-      case 'categories': return object.product.categories.find(category => category.id == value);
-      case 'brand': return object.product.brand_id == value;
-      case 'minimum': return object.minimum == value;
-      case 'quantity': return object.quantity == value;
-      case 'branchPrice': return object.price == value;
-      case 'globalPrice': return object.product.price == value;
-      case 'lastCost': return object.last_cost == value;
-      case 'unit': return object.product.unit_id == value;
-      case 'minimum_filter': return value ? object.quantity <= object.current_minimum : true;
-    }
-    return true;
-  }
-
   loadData () {
     this.inventoryService.getAll(this.branch_id).subscribe(
       inventories => {
@@ -149,7 +131,6 @@ export class InventoryDetailComponent implements OnInit, OnDestroy {
       error => this.notify.serviceError(error)
     );
   }
-
 
   clickUpdate($event, inventory: Inventory) {
     $event.stopPropagation();
@@ -177,5 +158,23 @@ export class InventoryDetailComponent implements OnInit, OnDestroy {
     dialog.componentInstance.updated.subscribe(
       updatedInventory => this.updated(updatedInventory)
     );
+  }
+
+  fieldIsOk(object, key, value) {
+    switch (key) {
+      case 'id': return object.product.id == value;
+      case 'product': return object.product.description.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
+      case 'bar_code': return object.product.bar_code == value;
+      case 'categories': return object.product.categories.find(category => category.id == value);
+      case 'brand': return object.product.brand_id == value;
+      case 'minimum': return object.minimum == value;
+      case 'quantity': return object.quantity == value;
+      case 'branchPrice': return object.price == value;
+      case 'globalPrice': return object.product.price == value;
+      case 'lastCost': return object.last_cost == value;
+      case 'unit': return object.product.unit_id == value;
+      case 'minimum_filter': return value ? object.quantity <= object.current_minimum : true;
+    }
+    return true;
   }
 }
