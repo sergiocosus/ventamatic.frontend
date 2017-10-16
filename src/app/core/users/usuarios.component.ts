@@ -1,11 +1,13 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {UserService} from '../../user/services/user.service';
 import {NotifyService} from '../../shared/services/notify.service';
 import {User} from '../../user/classes/user';
 import {UserDialogComponent} from '../../user/componets/user-dialog/user-dialog.component';
 import {MdDialog} from '@angular/material';
 import {UserRoleDialogComponent} from '../../user/componets/user-role-dialog/user-role-modal.component';
+import {ReportDataSource} from '../../report/classes/report-data-source';
+import {Observable} from 'rxjs/Observable';
 
 
 @Component({
@@ -17,15 +19,22 @@ export class UsuariosComponent implements OnInit {
   users: User[];
   public deletedControl = new FormControl();
 
+  form: FormGroup;
+  dataSource: ReportDataSource | null;
+  dataSourceObservable: Observable<any[]>;
+
   constructor(private userService: UserService,
               private notify: NotifyService,
-              private dialog: MdDialog) {
+              private dialog: MdDialog,
+              private fb: FormBuilder) {
     this.deletedControl.valueChanges.subscribe(
       showDeleted => this.loadUsers()
     );
+    this.initForm();
   }
 
   ngOnInit() {
+    this.initDataSource();
     this.loadUsers();
   }
 
@@ -35,15 +44,20 @@ export class UsuariosComponent implements OnInit {
     };
 
     this.userService.getAll(params).subscribe(
-      users => this.users = users,
+      users => {
+        this.users = users;
+        this.updateDataSource();
+      },
       error => this.notify.serviceError(error)
     );
   }
+
   create() {
     const dialog = this.dialog.open(UserDialogComponent);
     dialog.componentInstance.initCreate();
     dialog.componentInstance.created.subscribe(createdUser => {
       this.users.unshift(createdUser);
+      this.updateDataSource();
     });
   }
 
@@ -51,6 +65,7 @@ export class UsuariosComponent implements OnInit {
     const dialog = this.dialog.open(UserDialogComponent);
     dialog.componentInstance.initUpdate(user);
     dialog.componentInstance.updated.subscribe(clientUpdated => {
+      this.updateDataSource();
     });
   }
 
@@ -66,6 +81,7 @@ export class UsuariosComponent implements OnInit {
           this.users.splice(index, 1);
         }
       }
+      this.updateDataSource();
     });
   }
 
@@ -78,6 +94,7 @@ export class UsuariosComponent implements OnInit {
         }
 
         this.notify.success('Usuario restaurado');
+        this.updateDataSource();
       },
       error => this.notify.serviceError(error)
     );
@@ -86,5 +103,42 @@ export class UsuariosComponent implements OnInit {
   openRolesDialog(user_id: number) {
     const dialog = this.dialog.open(UserRoleDialogComponent);
     dialog.componentInstance.init(user_id);
+  }
+
+  protected initDataSource() {
+    this.dataSource = new ReportDataSource(
+      undefined,
+      undefined, undefined,
+      this.form.valueChanges.map(formData => {
+          return {
+            formData: formData,
+            filter: this.fieldIsOk.bind(this)
+          };
+        }
+      )
+    );
+
+    this.dataSourceObservable = this.dataSource.connect();
+  }
+
+  protected fieldIsOk(object, key, value) {
+    switch (key) {
+      case 'username': return object.username == value;
+      case 'address': return object.address.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
+      case 'name': return object.name.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
+    }
+    return true;
+  }
+
+  protected initForm() {
+    this.form = this.fb.group({
+      'username': [''],
+      'name': [''],
+      'address': [''],
+    });
+  }
+
+  private updateDataSource() {
+    this.dataSource.setData(this.users);
   }
 }
