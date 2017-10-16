@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {SupplierService} from '../../supplier/services/supplier.service';
 import {Supplier} from '../../supplier/classes/supplier';
 import {NotifyService} from '../../shared/services/notify.service';
 import {MdDialog} from '@angular/material';
 import {SupplierDialogComponent} from '../../supplier/components/supplier-dialog/supplier-dialog.component';
 import {BasicEntityDialogComponent} from '../../various/components/basic-entity-dialog/basic-entity-dialog.component';
+import {SupplierCategoryService} from '../../supplier/services/supplier-category.service';
+import {BrandService} from '../../brand/brand.service';
+import {Observable} from 'rxjs/Observable';
+import {SupplierCategory} from '../../supplier/classes/supplier-category';
+import {Brand} from '../../brand/brand';
+import {ReportDataSource} from '../../report/classes/report-data-source';
 
 @Component({
   selector: 'app-proveedores',
@@ -14,18 +20,30 @@ import {BasicEntityDialogComponent} from '../../various/components/basic-entity-
 })
 export class ProveedoresComponent implements OnInit {
   suppliers: Supplier[];
-  public deletedControl = new FormControl();
+  deletedControl = new FormControl();
+  categories: Observable<SupplierCategory[]>;
+  brands: Observable<Brand[]>;
+
+  form: FormGroup;
+  dataSource: ReportDataSource | null;
+  dataSourceObservable: Observable<any[]>;
 
   constructor(private supplierService: SupplierService,
               private notify: NotifyService,
-              private dialog: MdDialog) {
+              private dialog: MdDialog,
+              private fb: FormBuilder,
+              private supplierCategoryService: SupplierCategoryService,
+              private brandService: BrandService) {
     this.deletedControl.valueChanges.subscribe(
       showDeleted => this.loadSuppliers()
     );
+    this.initForm();
   }
 
   ngOnInit() {
+    this.initDataSource();
     this.loadSuppliers();
+    this.initFormData();
   }
 
   loadSuppliers() {
@@ -34,7 +52,10 @@ export class ProveedoresComponent implements OnInit {
     };
 
     this.supplierService.getAll(params).subscribe(
-      suppliers => this.suppliers = suppliers,
+      suppliers => {
+        this.suppliers = suppliers;
+        this.updateDataSource();
+      },
       error => this.notify.serviceError(error)
     );
   }
@@ -56,13 +77,14 @@ export class ProveedoresComponent implements OnInit {
           this.suppliers[i] = updatedSupplier;
         }
       }
+      this.updateDataSource();
     });
   }
 
   delete(supplier: Supplier) {
     const dialog = this.dialog.open(SupplierDialogComponent);
-    dialog.componentInstance.initUpdate(supplier);
-    dialog.componentInstance.created.subscribe(deletedSupplier => {
+    dialog.componentInstance.initDelete(supplier);
+    dialog.componentInstance.deleted.subscribe(deletedSupplier => {
       const index = this.suppliers.indexOf(deletedSupplier);
       if (index > -1) {
         if (this.deletedControl.value) {
@@ -71,6 +93,7 @@ export class ProveedoresComponent implements OnInit {
           this.suppliers.splice(index, 1);
         }
       }
+      this.updateDataSource();
     });
   }
 
@@ -81,7 +104,7 @@ export class ProveedoresComponent implements OnInit {
         if (index > -1) {
           this.suppliers[index] = clientRestored;
         }
-
+        this.updateDataSource();
         this.notify.success('Proveedor restaurado');
       },
       error => this.notify.serviceError(error)
@@ -97,5 +120,55 @@ export class ProveedoresComponent implements OnInit {
   openBrandDialog() {
     const dialog = this.dialog.open(BasicEntityDialogComponent);
     dialog.componentInstance.init('brand');
+  }
+
+  private initFormData() {
+    this.categories = this.supplierCategoryService.getAllCached();
+    this.brands = this.brandService.getAllCached();
+  }
+
+  protected updateDataSource() {
+    this.dataSource.setData(this.suppliers);
+  }
+
+
+  protected initDataSource() {
+    this.dataSource = new ReportDataSource(
+      undefined,
+      undefined, undefined,
+      this.form.valueChanges.map(formData => {
+          return {
+            formData: formData,
+            filter: this.fieldIsOk.bind(this)
+          };
+        }
+      )
+    );
+
+    this.dataSourceObservable = this.dataSource.connect();
+  }
+
+  protected fieldIsOk(object, key, value) {
+    switch (key) {
+      case 'id': return object.id == value;
+      case 'address': return object.address.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
+      case 'name': return object.name.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
+      case 'brands': return object.brands.find(brand => brand.id == value);
+      case 'supplier_category_id': return object.supplier_category_id == value;
+      case 'phone': return object.phone == value;
+
+    }
+    return true;
+  }
+
+  protected initForm() {
+    this.form = this.fb.group({
+      'id': [''],
+      'name': [''],
+      'address': [''],
+      'brands': [''],
+      'supplier_category_id': [''],
+      'phone': [''],
+    });
   }
 }

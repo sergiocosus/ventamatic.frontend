@@ -23,7 +23,7 @@ export class SupplierDialogComponent extends CrudModalComponent implements OnIni
   selectedSupplierCategory: any;
 
   brands: Brand[] = [];
-  selectedBrands: Brand[];
+  selectedBrands: Brand[] = [];
 
   constructor(protected supplierService: SupplierService,
               protected notify: NotifyService,

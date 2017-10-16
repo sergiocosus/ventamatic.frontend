@@ -12,8 +12,27 @@
   </md-checkbox>
 </app-search-bar>
 
+<app-search-bar class="dark-theme">
+  <form [formGroup]="form">
+    <i class="fa fa-filter" aria-hidden="true"></i>
+
+    <md-form-field>
+      <input mdInput formControlName="id" placeholder="ID">
+    </md-form-field>
+
+    <md-form-field>
+      <input mdInput formControlName="name" placeholder="Nombre">
+    </md-form-field>
+
+    <md-form-field>
+      <input mdInput formControlName="address" placeholder="Dirección">
+    </md-form-field>
+  </form>
+</app-search-bar>
+
+
 <app-main-content>
-  <app-client-item *ngFor="let client of clients"
+  <app-client-item *ngFor="let client of dataSourceObservable | async"
                    [client]="client"
                    (update)="update($event)"
                    (delete)="delete($event)"

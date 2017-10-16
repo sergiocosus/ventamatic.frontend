@@ -23,8 +23,44 @@
   </md-checkbox>
 </app-search-bar>
 
+<app-search-bar class="dark-theme">
+  <form [formGroup]="form">
+    <i class="fa fa-filter" aria-hidden="true"></i>
+
+    <md-form-field>
+      <input mdInput formControlName="id" placeholder="ID">
+    </md-form-field>
+
+    <md-form-field>
+      <input mdInput formControlName="name" placeholder="Nombre">
+    </md-form-field>
+
+    <md-form-field>
+      <input mdInput formControlName="address" placeholder="Dirección">
+    </md-form-field>
+
+    <md-select formControlName="supplier_category_id" placeholder="Categoría de proveedor">
+      <md-option [value]="null"> Todas </md-option>
+      <md-option *ngFor="let category of categories | async" [value]="category.id">
+        {{category.name}}
+      </md-option>
+    </md-select>
+
+    <md-select formControlName="brands" placeholder="Marca">
+      <md-option [value]="null"> Todas </md-option>
+      <md-option *ngFor="let brand of brands | async" [value]="brand.id">
+        {{brand.name}}
+      </md-option>
+    </md-select>
+
+    <md-form-field>
+      <input mdInput formControlName="phone" placeholder="Teléfono">
+    </md-form-field>
+  </form>
+</app-search-bar>
+
 <app-main-content>
-  <app-supplier-item *ngFor="let supplier of suppliers"
+  <app-supplier-item *ngFor="let supplier of dataSourceObservable | async"
                      [supplier]="supplier"
                      (update)="update($event)"
                      (restore)="restore($event)"

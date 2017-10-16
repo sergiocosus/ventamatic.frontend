@@ -12,7 +12,7 @@ export class ReportDataSource extends DataSource<any> {
 
   filteredData = [];
 
-  constructor( private paginator: MdPaginator,
+  constructor( private paginator: MdPaginator = null,
                private sort: MdSort = null,
                private sortFunction = null,
                private filter: Observable<any> = null) {
@@ -20,7 +20,10 @@ export class ReportDataSource extends DataSource<any> {
   }
 
   setData (data) {
-    this.paginator.pageIndex = 0;
+    if (this.paginator) {
+      this.paginator.pageIndex = 0;
+    }
+
     this.dataChange.next(data);
   }
 
@@ -31,7 +34,7 @@ export class ReportDataSource extends DataSource<any> {
   connect(): Observable<any[]> {
     const displayDataChanges = [
       this.dataChange,
-      this.paginator.page,
+      ...(this.paginator ? [this.paginator.page] : []),
       ...(this.sort ? [this.sort._matSortChange] : []),
       ...(this.filter ? [this.filter] : []),
     ];
@@ -55,8 +58,12 @@ export class ReportDataSource extends DataSource<any> {
 
       this.filteredData = data;
 
-      const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
-      return data.splice(startIndex, this.paginator.pageSize);
+      if (this.paginator) {
+        const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
+        data = data.splice(startIndex, this.paginator.pageSize);
+      }
+
+      return data;
     });
   }
 

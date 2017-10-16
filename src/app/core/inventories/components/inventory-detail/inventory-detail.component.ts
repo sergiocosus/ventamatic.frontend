@@ -122,7 +122,7 @@ export class InventoryDetailComponent implements OnInit, OnDestroy {
     this.dataSourceObservable = this.dataSource.connect();
   }
 
-  loadData () {
+  protected loadData () {
     this.inventoryService.getAll(this.branch_id).subscribe(
       inventories => {
         this.inventories = inventories;
