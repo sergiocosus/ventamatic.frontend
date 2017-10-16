@@ -100,6 +100,44 @@
 
   <br/>
 
+
+  <table *ngIf="inventory_movements.length">
+    <thead>
+    <tr>
+      <th>Estadísticas por valor</th>
+      <th>Total</th>
+      <th *ngFor="let stat of statsByTypePrice">{{stat.name}}</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        Total de entradas
+      </td>
+      <td>
+        {{totalUpPrice | myCurrency}}
+      </td>
+      <td *ngFor="let stat of statsByTypePrice">
+        {{stat.totalUp | myCurrency}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Total de salidas
+      </td>
+      <td>
+        {{totalDownPrice | myCurrency}}
+      </td>
+      <td *ngFor="let stat of statsByTypePrice">
+        {{stat.totalDown | myCurrency}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <br/>
+
   <div class="table-container mat-elevation-z8">
     <md-paginator #paginator
                   [length]="dataSource ? dataSource.data.length : []"

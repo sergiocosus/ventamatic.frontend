@@ -37,6 +37,11 @@ export class InventoryMovementReportComponent implements OnInit {
 
   statsByType = [];
 
+  totalUpPrice = 0;
+  totalDownPrice = 0;
+
+  statsByTypePrice = [];
+
   dataSource: ReportDataSource | null;
 
   constructor(private reportService: ReportService,
@@ -74,6 +79,13 @@ export class InventoryMovementReportComponent implements OnInit {
               totalDown: 0,
               totalMovements: 0
             });
+            this.statsByTypePrice.push({
+              id: movementType.id,
+              name: movementType.name,
+              totalUp: 0,
+              totalDown: 0,
+              totalMovements: 0
+            });
           }
         );
 
@@ -98,6 +110,16 @@ export class InventoryMovementReportComponent implements OnInit {
         stat.totalDown = 0;
       }
     );
+
+    this.totalUpPrice = 0;
+    this.totalDownPrice = 0;
+    this.statsByTypePrice.forEach(
+      stat => {
+        stat.totalMovements = 0;
+        stat.totalUp = 0;
+        stat.totalDown = 0;
+      }
+    );
   }
 
   submit() {
@@ -109,8 +131,10 @@ export class InventoryMovementReportComponent implements OnInit {
         inventoryMovements.forEach(inventoryMovement => {
           if (inventoryMovement.quantity > 0) {
             this.totalUp += inventoryMovement.quantity;
+            this.totalUpPrice += inventoryMovement.quantity * inventoryMovement.value;
           } else {
             this.totalDown -= inventoryMovement.quantity;
+            this.totalDownPrice -= inventoryMovement.quantity * inventoryMovement.value;
           }
 
           this.statsByType.forEach(
@@ -122,6 +146,21 @@ export class InventoryMovementReportComponent implements OnInit {
                   stats.totalUp += inventoryMovement.quantity;
                 } else {
                   stats.totalDown -= inventoryMovement.quantity;
+                }
+              }
+            }
+          );
+
+
+          this.statsByTypePrice.forEach(
+            stats => {
+              if (inventoryMovement.inventory_movement_type_id === stats.id) {
+                stats.totalMovements++;
+
+                if (inventoryMovement.quantity > 0) {
+                  stats.totalUp += inventoryMovement.quantity * inventoryMovement.value;
+                } else {
+                  stats.totalDown -= inventoryMovement.quantity * inventoryMovement.value;
                 }
               }
             }
