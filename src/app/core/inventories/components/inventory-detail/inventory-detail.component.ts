@@ -161,7 +161,7 @@ export class InventoryDetailComponent implements OnInit, OnDestroy {
     );
   }
 
-  fieldIsOk(object, key, value) {
+  protected fieldIsOk(object, key, value) {
     switch (key) {
       case 'id': return object.product.id == value;
       case 'product': return object.product.description.toLocaleLowerCase().search(value.toLowerCase()) >= 0;

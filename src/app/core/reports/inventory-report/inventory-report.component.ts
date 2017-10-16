@@ -6,6 +6,7 @@ import {messages} from '../../../shared/classes/messages';
 import {MdPaginator, MdSort} from '@angular/material';
 import {ReportDataSource} from '../../../report/classes/report-data-source';
 import {Observable} from 'rxjs/Observable';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
   selector: 'app-inventory-report',
@@ -34,9 +35,13 @@ export class InventoryReportComponent implements OnInit {
   costValue = 0;
 
   dataSource: ReportDataSource | null;
+  form: FormGroup;
 
   constructor(private reportService: ReportService,
-              private notify: NotifyService) { }
+              private notify: NotifyService,
+              private fb: FormBuilder) {
+    this.initForm();
+  }
 
 
   ngOnInit() {
@@ -52,8 +57,8 @@ export class InventoryReportComponent implements OnInit {
           case 'product': return [a.product.description, b.product.description, 'string'];
           case 'category': return [a.product.toStringCategories(), b.product.toStringCategories(), 'string'];
           case 'brand': return [
-            (a.product.brand ? a.product.brand.name: ''),
-            (b.product.brand ? b.product.brand.name: ''),
+            (a.product.brand ? a.product.brand.name : ''),
+            (b.product.brand ? b.product.brand.name : ''),
             'string'
           ];
           case 'quantity': return [a.quantity, b.quantity, 'number'];
@@ -65,7 +70,14 @@ export class InventoryReportComponent implements OnInit {
           case 'margin': return [a.margin, b.margin, 'number'];
           case 'minimum': return [a.current_minimum, b.current_minimum, 'number'];
         }
-      });
+      },
+      this.form.valueChanges.map(formData => {
+          return {
+            formData: formData,
+            filter: this.fieldIsOk.bind(this)
+          };
+        }
+      ));
 
     this.dataSourceObservable = this.dataSource.connect();
 
@@ -154,6 +166,32 @@ export class InventoryReportComponent implements OnInit {
         costo: inventory.current_total_cost,
       })
     ), `inventario-${new Date().toISOString()}`);
+  }
+
+
+
+  protected fieldIsOk(object, key, value) {
+    switch (key) {
+      case 'minimum_filter': return value ? object.quantity <= object.current_minimum : true;
+    }
+    return true;
+  }
+
+  private initForm() {
+    this.form = this.fb.group({
+      'id': [''],
+      'product': [''],
+      'bar_code': [''],
+      'categories': [''],
+      'brand': [''],
+      'minimum': [''],
+      'quantity': [''],
+      'branchPrice': [''],
+      'globalPrice': [''],
+      'lastCost': [''],
+      'unit': [''],
+      'minimum_filter': [''],
+    });
   }
 }
 
