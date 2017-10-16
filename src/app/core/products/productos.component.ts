@@ -159,6 +159,7 @@ export class ProductosComponent implements OnInit {
           this.products[i] = updatedProduct;
         }
       }
+      this.dataSource.setData(this.products);
     });
   }
 
@@ -167,6 +168,7 @@ export class ProductosComponent implements OnInit {
     dialog.componentInstance.initCreate();
     dialog.componentInstance.created.subscribe(product => {
       this.products.push(product);
+      this.dataSource.setData(this.products);
     });
   }
 
@@ -182,6 +184,8 @@ export class ProductosComponent implements OnInit {
           this.products.splice(index, 1);
         }
       }
+
+      this.dataSource.setData(this.products);
     });
   }
 

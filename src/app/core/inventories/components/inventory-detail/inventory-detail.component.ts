@@ -147,6 +147,7 @@ export class InventoryDetailComponent implements OnInit, OnDestroy {
     for ( const index in this.inventories ) {
       if (this.inventories[index].product_id === inventory.product_id) {
         this.inventories[index] = inventory;
+        this.dataSource.setData(this.inventories);
         return;
       }
     }
