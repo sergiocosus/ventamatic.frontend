@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/Rx';
 import {LocalStorageService} from './services/local-storage.service';
 import {
+  MdAutocompleteModule,
   MdButtonModule, MdCheckboxModule, MdDialogModule, MdInputModule, MdPaginatorModule, MdRadioModule,
   MdSelectModule, MdSortModule, MdTooltipModule
 } from '@angular/material';
@@ -39,6 +40,7 @@ import {ResponsiveModule} from 'ng2-responsive';
     ResponsiveModule,
     MdPaginatorModule,
     MdSortModule,
+    MdAutocompleteModule,
   ],
   declarations: [
     SelectableComponent,
@@ -74,6 +76,7 @@ import {ResponsiveModule} from 'ng2-responsive';
     MdTooltipModule,
     MdPaginatorModule,
     MdSortModule,
+    MdAutocompleteModule,
     MyDateRangePickerModule,
 
     AutocompleteInputComponent,

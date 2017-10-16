@@ -61,25 +61,29 @@
       </md-select>
 
       <ng-container *ngIf="willConvert()">
-        <md-select [(ngModel)]="inventoryConverted" required
-                   name="inventoryConverted"
+        <form>
+          <md-form-field>
+            <input type="text" aria-label="Number" mdInput name="product"
+                   [formControl]="inventoryControl" [mdAutocomplete]="auto"
                    placeholder="Producto a convertir">
-          <md-option *ngFor="let inventory of inventories" [value]="inventory">
-            {{inventory.product.description}}
-          </md-option>
+            <md-autocomplete #auto="mdAutocomplete" [displayWith]="showDescription">
+              <md-option *ngFor="let inventory of inventoriesFiltered | async" [value]="inventory">
+                {{inventory.product.description}}
+              </md-option>
+            </md-autocomplete>
+          </md-form-field>
+        </form>
 
-        </md-select>
-
-        <md-input-container *ngIf="inventoryConverted">
+        <md-input-container *ngIf="inventoryControl.value?.id">
           <input mdInput type="number" [(ngModel)]="quantity_converted"
                  name="quantity_converted" required
-                 [step]="inventoryConverted.product.unitData.step"
-                 [min]="inventoryConverted.product.unitData.step"
+                 [step]="inventoryControl.value.product.unitData.step"
+                 [min]="inventoryControl.value.product.unitData.step"
                  placeholder="Cantidad convertida"
           />
-          <md-hint *ngIf="inventoryConverted">
-            Cantidad antes {{inventoryConverted.quantity }}
-            después {{inventoryConverted.quantity + (quantity_converted-0)}}
+          <md-hint *ngIf="inventoryControl.value">
+            Cantidad antes {{inventoryControl.value.quantity }}
+            después {{inventoryControl.value.quantity + (quantity_converted-0)}}
           </md-hint>
         </md-input-container>
       </ng-container>

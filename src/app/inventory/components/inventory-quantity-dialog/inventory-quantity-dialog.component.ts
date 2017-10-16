@@ -6,25 +6,27 @@ import {InventoryMovementTypeId} from '../../classes/inventory-movement-type-id.
 import {NotifyService} from '../../../shared/services/notify.service';
 import {Branch} from '../../../branch/models/branch';
 import {BranchService} from '../../../branch/services/branch.service';
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-inventory-quantity-dialog',
   templateUrl: 'inventory-quantity-dialog.component.html',
   styleUrls: ['inventory-quantity-dialog.component.scss'],
 })
-export class InventoryQuantityDialogComponent  {
+export class InventoryQuantityDialogComponent {
   @Output() updated = new EventEmitter;
   name = 'Inventario';
 
   inventoryMovementTypes = [
-    { id: InventoryMovementTypeId.Promocion, text: 'Promoción' },
-    { id: InventoryMovementTypeId.Traslado, text: 'Traslado' },
-    { id: InventoryMovementTypeId.Conversion, text: 'Conversión' },
-    { id: InventoryMovementTypeId.Consesion, text: 'Concesión' },
-    { id: InventoryMovementTypeId.Caducado, text: 'Caducado' },
-    { id: InventoryMovementTypeId.Ajuste, text: 'Ajuste' },
-   /* { id:InventoryMovementTypeId.Compra, text: 'Compra' },
-    { id:InventoryMovementTypeId.Venta, text: 'Venta' },*/
+    {id: InventoryMovementTypeId.Promocion, text: 'Promoción'},
+    {id: InventoryMovementTypeId.Traslado, text: 'Traslado'},
+    {id: InventoryMovementTypeId.Conversion, text: 'Conversión'},
+    {id: InventoryMovementTypeId.Consesion, text: 'Concesión'},
+    {id: InventoryMovementTypeId.Caducado, text: 'Caducado'},
+    {id: InventoryMovementTypeId.Ajuste, text: 'Ajuste'},
+    /* { id:InventoryMovementTypeId.Compra, text: 'Compra' },
+     { id:InventoryMovementTypeId.Venta, text: 'Venta' },*/
   ];
 
   inventoryMovementType;
@@ -39,14 +41,20 @@ export class InventoryQuantityDialogComponent  {
   quantity_converted: number = null;
   destiny_branch_id: number;
 
-  constructor( protected notify: NotifyService,
-               protected inventoryService: InventoryService,
-               protected branchService: BranchService,
-               private dialogRef: MdDialogRef<InventoryQuantityDialogComponent>
-             ) {
+  inventoryControl: FormControl = new FormControl();
+  inventoriesFiltered: Observable<Inventory[]>;
+
+
+  constructor(protected notify: NotifyService,
+              protected inventoryService: InventoryService,
+              protected branchService: BranchService,
+              private dialogRef: MdDialogRef<InventoryQuantityDialogComponent>) {
   }
 
   ngOnInit() {
+    this.inventoriesFiltered = this.inventoryControl.valueChanges
+      .startWith(null)
+      .map(val => val ? this.filter(val) : (this.inventories || []).slice());
   }
 
   init(inventory: Inventory) {
@@ -89,7 +97,7 @@ export class InventoryQuantityDialogComponent  {
     }
   }
 
-  willAdjust(){
+  willAdjust() {
     if (!this.inventoryMovementType) return false;
 
     return this.inventoryMovementType.id === InventoryMovementTypeId.Ajuste;
@@ -122,8 +130,9 @@ export class InventoryQuantityDialogComponent  {
 
     return text;
   }
+
   max() {
-    if (this.willDecrease() || this.willTranslate() || this.willConvert() ) {
+    if (this.willDecrease() || this.willTranslate() || this.willConvert()) {
       return this.inventory.quantity;
     } else {
       return null;
@@ -159,8 +168,8 @@ export class InventoryQuantityDialogComponent  {
         inventory_movement_type_id: this.inventoryMovementType.id,
         destiny_branch_id: this.destiny_branch_id,
         quantity_converted: this.quantity_converted,
-        product_converted_id: this.inventoryConverted
-          ? this.inventoryConverted.product.id : undefined
+        product_converted_id: this.inventoryControl.value.id
+          ? this.inventoryControl.value.product.id : undefined
       }
     ).subscribe(
       inventories => {
@@ -169,6 +178,22 @@ export class InventoryQuantityDialogComponent  {
         this.dialogRef.close();
       }
     );
+  }
+
+
+  filter(val): Inventory[] {
+    return this.inventories.filter(option =>
+      option.product.description.toLocaleLowerCase()
+        .search((val.id ? val.product.description : val).toLowerCase()) >= 0
+    );
+  }
+
+  showDescription(inventory) {
+    if (inventory && inventory.id ) {
+      return inventory.product.description;
+    } else {
+      return inventory;
+    }
   }
 }
 

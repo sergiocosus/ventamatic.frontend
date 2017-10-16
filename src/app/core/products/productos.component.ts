@@ -48,7 +48,35 @@ export class ProductosComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.dataSource = new ReportDataSource(
+      this.paginator,
+      this.sort,
+      (a, b) => {
+        switch (this.sort.active) {
+          case 'id': return [a.id, b.id, 'number'];
+          case 'description': return [a.description, b.description, 'string'];
+          case 'bar_code': return [a.bar_code, b.bar_code, 'string'];
+          case 'categories': return [a.toStringCategories(), b.toStringCategories(), 'string'];
+          case 'brand': return [
+            (a.brand ? a.brand.name : ''),
+            (b.brand ? b.brand.name : ''),
+            'string'
+          ];
+          case 'global_minimum': return [a.global_minimum, b.global_minimum, 'number'];
+          case 'price': return [a.global_price, b.global_price, 'number'];
+          case 'unit': return [a.unit.name, b.unit.name, 'number'];
+        }
+      },
+      this.form.valueChanges.map(formData => {
+          return {
+            formData: formData,
+            filter: this.fieldIsOk.bind(this)
+          };
+        }
+      )
+    );
 
+    this.dataSourceObservable = this.dataSource.connect();
     this.loadProducts();
     this.initFormData();
   }
@@ -171,5 +199,17 @@ export class ProductosComponent implements OnInit {
     dialog.componentInstance.init('brand');
   }
 
-
+  private fieldIsOk(object, key, value) {
+    switch (key) {
+      case 'id': return object.id == value;
+      case 'description': return object.description.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
+      case 'bar_code': return object.bar_code == value;
+      case 'categories': return object.categories.find(category => category.id == value);
+      case 'brand': return object.brand_id == value;
+      case 'minimum': return object.global_minimum == value;
+      case 'price': return object.global_price == value;
+      case 'unit': return object.unit_id == value;
+    }
+    return true;
+  }
 }

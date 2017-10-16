@@ -42,7 +42,6 @@ export class ReportDataSource extends DataSource<any> {
     return Observable.merge(...displayDataChanges).map((a, b) => {
       let data = this.data.slice();
       // Grab the page's slice of data.
-      console.log(a, b);
       if (this.filter && a.formData) {
         this.formData = a.formData;
         this.filterFunction = a.filter;

@@ -11,8 +11,10 @@
     typescript "^2.3.3"
 
 "@angular/animations@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-4.1.2.tgz#3371596e736b7d240e200477d0dd8c5929352124"
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@angular/animations/-/animations-4.4.5.tgz#5a5a551d757e5a5560098f6f8535c102d93954d7"
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/cdk@^2.0.0-beta.11":
   version "2.0.0-beta.11"
@@ -90,8 +92,10 @@
     node-sass "^4.3.0"
 
 "@angular/common@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-4.1.2.tgz#8f6d0496c204210bfe255feb437a72253f06984d"
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-4.4.5.tgz#bd5179dc922adbf4c3ea6dfb19e73cb849ffdc37"
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/compiler-cli@^4.0.0":
   version "4.1.2"
@@ -102,20 +106,28 @@
     reflect-metadata "^0.1.2"
 
 "@angular/compiler@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-4.1.2.tgz#09542381162fd8dd962d84559498ce69a05071ea"
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-4.4.5.tgz#8721a5910f2bb52f09e2d404cad264f35ede5902"
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/core@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-4.1.2.tgz#37b5c040b9dd37003499aea04319d699e3870596"
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-4.4.5.tgz#54acbcbda11719f883c786a906974abeb132f1a0"
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/forms@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-4.1.2.tgz#82983e9ec5d0833e7ae14beb8e47dd357c88f490"
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-4.4.5.tgz#e9552086232aab2ce1d08ef198b62204ea13c43b"
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/http@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@angular/http/-/http-4.1.2.tgz#fc378c3330c0410e1fb8aac2546329a6887776e4"
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@angular/http/-/http-4.4.5.tgz#2c735ed842401fc2356419268e288dcf2396e84f"
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/material@^2.0.0-beta.11":
   version "2.0.0-beta.11"
@@ -124,16 +136,22 @@
     tslib "^1.7.1"
 
 "@angular/platform-browser-dynamic@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-4.1.2.tgz#d241c61792c794bec627ab64b31a66bea22abb9f"
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-4.4.5.tgz#774dbdc1d90f775dbf1e319f6ed42b260623b61f"
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/platform-browser@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-4.1.2.tgz#16e50a8f75b4d675c9e2903e499e0fe4c6a125ac"
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-4.4.5.tgz#74eb91c0b758126f26d53ee56c7cf4668bd9cac5"
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/router@^4.1.2":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@angular/router/-/router-4.1.2.tgz#31b1b126fec2e1c32f4557ef8eb605536adccb27"
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@angular/router/-/router-4.4.5.tgz#f73130cf487d9a32cc1988afda59665f44a28a89"
+  dependencies:
+    tslib "^1.7.1"
 
 "@angular/tsc-wrapped@4.1.2":
   version "4.1.2"
@@ -156,10 +174,6 @@
 "@types/jasmine@2.5.38":
   version "2.5.38"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.5.38.tgz#a4379124c4921d4e21de54ec74669c9e9b356717"
-
-"@types/jquery@^2.0.43":
-  version "2.0.43"
-  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-2.0.43.tgz#e30d971d56dce22bf0d62e02bd4b28a7ffdba076"
 
 "@types/js-base64@^2.1.5":
   version "2.1.5"
@@ -201,10 +215,6 @@ acorn@^4.0.3:
 acorn@^5.0.0:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-5.1.1.tgz#53fe161111f912ab999ee887a90a0bc52822fd75"
-
-add@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
 
 adm-zip@0.4.4:
   version "0.4.4"
@@ -3601,10 +3611,6 @@ normalize-url@^1.4.0:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
-normalize.css@^7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-7.0.0.tgz#abfb1dd82470674e0322b53ceb1aaf412938e4bf"
-
 npm-run-path@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/npm-run-path/-/npm-run-path-1.0.0.tgz#f5c32bf595fe81ae927daec52e82f8b000ac3c8f"
@@ -4638,8 +4644,8 @@ rx@^4.1.0:
   resolved "https://registry.yarnpkg.com/rx/-/rx-4.1.0.tgz#a5f13ff79ef3b740fe30aa803fb09f98805d4782"
 
 rxjs@^5.1.0:
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.4.0.tgz#a7db14ab157f9d7aac6a56e655e7a3860d39bf26"
+  version "5.4.3"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.4.3.tgz#0758cddee6033d68e0fd53676f0f3596ce3d483f"
   dependencies:
     symbol-observable "^1.0.1"
 
@@ -5899,10 +5905,6 @@ yargs@~3.10.0:
     cliui "^2.1.0"
     decamelize "^1.0.0"
     window-size "0.1.0"
-
-yarn@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.1.0.tgz#f2da9340490236b6c56de305b1c21a8a19c433c3"
 
 yeast@0.1.2:
   version "0.1.2"
