@@ -1,7 +1,70 @@
+<app-search-bar class="dark-theme">
+  <form [formGroup]="form">
+    <md-form-field>
+      <input mdInput formControlName="id" placeholder="ID">
+    </md-form-field>
+
+    <md-form-field>
+      <input mdInput formControlName="product" placeholder="Producto">
+    </md-form-field>
+
+    <md-form-field>
+      <input mdInput formControlName="bar_code" placeholder="Código de barras">
+    </md-form-field>
+
+    <md-select formControlName="categories" placeholder="Categoría">
+      <md-option [value]="null"> Todas </md-option>
+      <md-option *ngFor="let category of categories | async" [value]="category.id">
+        {{category.name}}
+      </md-option>
+    </md-select>
+
+    <md-select formControlName="brand" placeholder="Marca">
+      <md-option [value]="null"> Todas </md-option>
+      <md-option *ngFor="let brand of brands | async" [value]="brand.id">
+        {{brand.name}}
+      </md-option>
+    </md-select>
+
+    <md-form-field>
+      <input mdInput formControlName="minimum" placeholder="Mínimo">
+    </md-form-field>
+
+
+    <md-form-field>
+      <input mdInput formControlName="quantity" placeholder="Cantidad">
+    </md-form-field>
+
+    <md-form-field>
+      <input mdInput formControlName="branchPrice" placeholder="Costo">
+    </md-form-field>
+
+    <md-form-field>
+      <input mdInput formControlName="globalPrice" placeholder="Precio">
+    </md-form-field>
+
+    <md-form-field>
+      <input mdInput formControlName="lastCost" placeholder="Último costo">
+    </md-form-field>
+
+    <md-select formControlName="unit" placeholder="Unidad">
+      <md-option [value]="null"> Todas </md-option>
+      <md-option *ngFor="let unit of units" [value]="unit.id">
+        {{unit.name}}
+      </md-option>
+    </md-select>
+
+
+    <md-checkbox formControlName="minimum_filter">
+      Filtro de mínimos
+    </md-checkbox>
+  </form>
+
+</app-search-bar>
 <app-main-content>
     <div class="table-container mat-elevation-z8">
     <md-paginator #paginator
-                  [length]="dataSource ? dataSource.data.length : []"
+                  [length]="dataSource ? dataSource.filteredData.length : []"
                   [pageIndex]="0"
                   [pageSize]="50"
                   [pageSizeOptions]="[50, 100, 200, 1000, 10000]">
@@ -18,6 +81,7 @@
         <th mat-sort-header="quantity">Cantidad actual</th>
         <th mat-sort-header="branchPrice">Precio de sucursal</th>
         <th mat-sort-header="globalPrice">Precio Global</th>
+        <th mat-sort-header="lastCost">Último costo</th>
         <th mat-sort-header="unit">Tipo de unidad</th>
       </tr>
       </thead>
@@ -31,10 +95,15 @@
             {{inventory.product.toStringCategories()}}
           </td>
           <td>{{inventory.product.brand ? inventory.product.brand.name  : '' }}</td>
-          <td>{{inventory.minimum}}</td>
+          <td>{{inventory.current_minimum}}</td>
           <td>{{inventory.quantity}}</td>
           <td>{{inventory.price | myCurrency}}</td>
           <td>{{inventory.product.price | myCurrency}}</td>
+          <td>
+            <ng-container *ngIf="inventory_last_cost">
+              {{inventory.last_cost | myCurrency}}
+            </ng-container>
+          </td>
           <td>
             {{inventory.product.unit.name}}
             <div *appUserCanInBranch="'inventory-edit'"

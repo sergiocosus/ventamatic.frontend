@@ -5,9 +5,17 @@ import {BehaviorSubject} from 'rxjs/BehaviorSubject';
 
 export class ReportDataSource extends DataSource<any> {
   private dataChange = new BehaviorSubject<any>([]);
+
+  formData: any;
+  filterFunction: any;
+
+
+  filteredData = [];
+
   constructor( private paginator: MdPaginator,
                private sort: MdSort = null,
-               private sortFunction = null) {
+               private sortFunction = null,
+               private filter: Observable<any> = null) {
     super();
   }
 
@@ -25,14 +33,27 @@ export class ReportDataSource extends DataSource<any> {
       this.dataChange,
       this.paginator.page,
       ...(this.sort ? [this.sort._matSortChange] : []),
+      ...(this.filter ? [this.filter] : []),
     ];
 
     return Observable.merge(...displayDataChanges).map((a, b) => {
       let data = this.data.slice();
       // Grab the page's slice of data.
+      console.log(a, b);
+      if (this.filter && a.formData) {
+        this.formData = a.formData;
+        this.filterFunction = a.filter;
+      }
+
+      if ( this.formData ) {
+        data = data.filter(this.filterData(this.formData, this.filterFunction));
+      }
+
       if (this.sortFunction) {
         data = this.sortData(data);
       }
+
+      this.filteredData = data;
 
       const startIndex = this.paginator.pageIndex * this.paginator.pageSize;
       return data.splice(startIndex, this.paginator.pageSize);
@@ -40,6 +61,23 @@ export class ReportDataSource extends DataSource<any> {
   }
 
   disconnect() {}
+
+  filterData(formData, filterFunction) {
+    return (object) => {
+      for (const key in formData) {
+        const value = formData[key];
+        if (formData[key] === null || formData[key] === '') {
+          continue;
+        }
+        if (filterFunction(object, key , value)) {
+          continue;
+        } else {
+          return false;
+        }
+      }
+      return true;
+    };
+  }
 
   sortData(data: any[]): any[] {
     if (!this.sort.active || this.sort.direction === '') { return data; }

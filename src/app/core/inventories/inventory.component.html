@@ -1,9 +1,2 @@
-<app-search-bar class="dark-theme">
-  <md-select [(ngModel)]="branch" [formControl]="branchControl"
-             placeholder="Seleccione sucursal">
-    <md-option *ngFor="let branch of branches" [value]="branch">
-      {{branch.name}}
-    </md-option>
-  </md-select>
-</app-search-bar>
+
 <router-outlet></router-outlet>

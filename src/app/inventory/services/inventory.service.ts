@@ -6,8 +6,8 @@ import {ApiHttp} from '../../shared/services/api-http';
 export class InventoryService {
   constructor(private apiHttp: ApiHttp) {}
 
-  getAll(branch_id: number){
-    return this.apiHttp.get(`branch/${branch_id}/inventory`)
+  getAll(branch_id: number, params = undefined) {
+    return this.apiHttp.get(`branch/${branch_id}/inventory`, params)
       .map(json => Inventory.parseArray(json.inventories));
   }
 

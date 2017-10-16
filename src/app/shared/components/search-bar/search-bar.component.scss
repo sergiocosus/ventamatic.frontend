@@ -73,4 +73,9 @@
     margin: .5em;
   }
 
+  md-input-container, md-form-field{
+    &.dark-theme.mat-form-field{
+      width: 5em;
+    }
+  }
 }
