@@ -54,7 +54,14 @@
   </form>
 </app-search-bar>
 <app-main-content>
-  <h2>Reporte de inventario</h2>
+  <h2>Reporte de inventario histórico</h2>
+  <ul>
+    <li *ngIf="inventories"> Registros de inventario: {{inventories.length}}</li>
+    <li>Registros de inventario con existencias {{productsWithExistences}}</li>
+    <li>Productos diferentes registrados: {{registeredProducts}}</li>
+    <li>Valor al costo del inventario: {{costValue | myCurrency}}</li>
+    <li>Valor al precio del inventario: {{priceValue | myCurrency}}</li>
+  </ul>
 
   <div class="table-container mat-elevation-z8">
     <md-paginator #paginator

@@ -25,6 +25,12 @@ export class HistoricInventoryReportComponent implements OnInit {
     date: string
   };
 
+
+  registeredProducts = null;
+  productsWithExistences = null;
+  priceValue = 0;
+  costValue = 0;
+
   dataSource: ReportDataSource | null;
 
   constructor(private reportService: ReportService,
@@ -46,17 +52,60 @@ export class HistoricInventoryReportComponent implements OnInit {
     };
   }
 
+
+  resetStats() {
+    this.registeredProducts = 0;
+    this.productsWithExistences = 0;
+    this.priceValue = 0;
+    this.costValue = 0;
+  }
+
   submit() {
     this.reportService.getHistoricInventory(this.request).subscribe(
       inventories => {
         this.inventories = inventories;
+        this.resetStats();
+
         if (!this.inventories.length) {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle);
         }
+
+
+        const inventoryIds = [];
+        inventories.forEach( inventory => {
+          this.calculateInventory(inventory);
+
+          if (inventoryIds.indexOf(inventory.product_id) === -1) {
+            inventoryIds.push(inventory.product_id);
+          }
+
+          if (inventory.quantity > 0) {
+            this.productsWithExistences++;
+          }
+
+          inventory.totalPrice = inventory.current_price * inventory.quantity;
+
+          this.priceValue += inventory.totalPrice;
+          this.costValue += inventory.current_total_cost;
+        });
+
+        this.registeredProducts = inventoryIds.length;
+
         this.dataSource.setData(inventories);
       },
       error => this.notify.serviceError(error)
     );
+  }
+
+  calculateInventory(inventory: any) {
+    inventory.categoryString = inventory.product.toStringCategories();
+    inventory.subtotalPrice = inventory.quantity * inventory.current_price;
+    inventory.averageCost = inventory.current_total_cost / inventory.quantity;
+
+    const margin = (inventory.current_price - inventory.averageCost) / inventory.averageCost;
+    if (Number.isFinite(margin) && !Number.isNaN(margin)) {
+      inventory.margin = margin;
+    }
   }
 
   implode(categories: Category[]) {
