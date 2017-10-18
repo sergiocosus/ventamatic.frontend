@@ -8,6 +8,8 @@ import {ProductService} from '../../services/product.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {CategoryService} from '../../../category/category.service';
 import {BrandService} from '../../../brand/brand.service';
+import {Unit} from '../../classes/unit.model';
+import {units} from 'app/shared/unit/units.data';
 
 @Component({
   selector: 'app-product-dialog',
@@ -36,24 +38,8 @@ export class ProductDialogComponent extends CrudModalComponent implements OnInit
               protected dialogRef: MdDialogRef<ProductDialogComponent>) {
     super(notify, dialogRef);
 
-    this.units = [
-      {
-        id : 1,
-        name : 'Pieza'
-      },
-      {
-        id : 2,
-        name : 'Kilogramo'
-      },
-      {
-        id : 3,
-        name : 'Litro'
-      },
-      {
-        id : 4,
-        name : 'Metro'
-      }
-    ];
+    this.units = Unit.parseFromData(units);
+
   }
 
   ngOnInit() {

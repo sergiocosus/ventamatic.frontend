@@ -13,6 +13,7 @@ import {Category} from '../../category/category';
 import {units} from 'app/shared/unit/units.data';
 import {CategoryService} from '../../category/category.service';
 import {BrandService} from '../../brand/brand.service';
+import {Unit} from '../../product/classes/unit.model';
 
 
 @Component({
@@ -97,10 +98,7 @@ export class ProductosComponent implements OnInit {
   initFormData() {
     this.categories = this.categoryService.getAllCached();
     this.brands = this.brandService.getAllCached();
-    Object.keys(units).forEach(key => {
-      this.units.push(Object.assign({id: key}, units[key] ));
-    });
-
+    this.units = Unit.parseFromData(units);
   }
 
 
