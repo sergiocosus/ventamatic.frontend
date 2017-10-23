@@ -22,6 +22,7 @@ export class Buy extends Model {
   branch: Branch;
   branch_id: number;
   supplier_bill_id: number;
+  supplier_bill_total: number;
   products: Product[];
 
   parse(obj){

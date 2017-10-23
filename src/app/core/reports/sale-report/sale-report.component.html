@@ -51,6 +51,7 @@
   <ul *ngIf="sales.length">
     <li>Número de ventas: {{sales.length}}</li>
     <li>Total de ventas: {{totalPriceSale | myCurrency}}</li>
+    <li>Total de ventas canceladas: {{totalPriceSaleDeleted | myCurrency}}</li>
     <li>Total de productos: {{totalProducts}}</li>
   </ul>
   <table>
@@ -79,22 +80,29 @@
       </tr>
       </thead>
       <ng-container *ngFor="let sale of dataSource.connect() | async">
-        <tr>
+        <tr [class.deleted]="sale.deleted_at">
           <td>{{sale.id}}</td>
           <td>{{sale.created_at | date:'short'}}</td>
           <td>{{sale.branch.name}}</td>
           <td>{{sale.user.name}}</td>
           <td>{{sale.client.name}}</td>
-          <td>{{sale.total}}</td>
+          <td>{{sale.total | myCurrency}}</td>
           <td>
-            <button (click)="print(sale)" md-raised-button>
-              Imprimir Ticket
+            <button md-mini-fab (click)="print(sale)" md-raised-button>
+              <i class="fa fa-print" aria-hidden="true"></i>
             </button>
           </td>
+          <ng-container *appUserCanInBranch="'sale-delete'; branchId: sale.branch_id">
+            <td *ngIf="!sale.deleted_at">
+              <button md-mini-fab color="warn" (click)="deleteSale(sale.id)" md-raised-button>
+                <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </td>
+          </ng-container>
         </tr>
         <tr>
           <td class="no-border"></td>
-          <td class="no-border" colspan="6">
+          <td class="no-border" colspan="7">
             <table>
               <thead>
               <tr>

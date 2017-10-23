@@ -15,9 +15,6 @@ export class TicketComponent implements OnInit {
   ngOnInit() {
     this.ticketServise.getSale().subscribe(sale => {
       this.sale = sale;
-      if (sale) {
-        setTimeout(window.print, 500);
-      }
     });
   }
 

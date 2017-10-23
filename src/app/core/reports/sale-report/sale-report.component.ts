@@ -5,7 +5,9 @@ import {NotifyService} from '../../../shared/services/notify.service';
 import {TicketService} from '../../../sale/services/ticket.service';
 import {messages} from '../../../shared/classes/messages';
 import {ReportDataSource} from '../../../report/classes/report-data-source';
-import {MdPaginator} from '@angular/material';
+import {MdDialog, MdPaginator} from '@angular/material';
+import {SaleService} from '../../../sale/services/sale.service';
+import {ConfirmDialogComponent} from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-sale-report',
@@ -31,13 +33,16 @@ export class SaleReportComponent implements OnInit {
   };
 
   totalPriceSale;
+  totalPriceSaleDeleted;
   totalProducts = 0;
 
   dataSource: ReportDataSource | null;
 
   constructor(private reportService: ReportService,
               private notify: NotifyService,
-              private ticketService: TicketService) { }
+              private ticketService: TicketService,
+              private saleService: SaleService,
+              private dialog: MdDialog) { }
 
   ngOnInit() {
     this.dataSource = new ReportDataSource(this.paginator);
@@ -61,6 +66,7 @@ export class SaleReportComponent implements OnInit {
 
   resetStats() {
     this.totalPriceSale = 0;
+    this.totalPriceSaleDeleted = 0;
     this.totalProducts = 0;
   }
 
@@ -71,12 +77,16 @@ export class SaleReportComponent implements OnInit {
         this.resetStats();
 
         sales.forEach(sale => {
-          this.totalPriceSale += sale.total;
-          sale.products.forEach(
-            product => {
-              this.totalProducts += product.pivot.quantity;
-            }
-          );
+          if (sale.deleted_at) {
+            this.totalPriceSaleDeleted += sale.total;
+          } else {
+            this.totalPriceSale += sale.total;
+            sale.products.forEach(
+              product => {
+                this.totalProducts += product.pivot.quantity;
+              }
+            );
+          }
         });
 
         if (!this.sales.length) {
@@ -129,5 +139,27 @@ export class SaleReportComponent implements OnInit {
     );
 
     this.reportService.downloadCSV(rows, `ventas-${new Date().toISOString()}`);
+  }
+
+  deleteSale(sale_id) {
+    const confirmDialog = this.dialog.open(ConfirmDialogComponent);
+    confirmDialog.componentInstance.init('¿Desea eliminar la venta?');
+    confirmDialog.afterClosed().subscribe(
+      confirmed => {
+        if (confirmed) {
+          this.saleService.delete(sale_id).subscribe(
+            success => {
+              this.notify.success('Venta eliminada');
+              this.sales.forEach(sale => {
+                if (sale.id == sale_id) {
+                  sale.deleted_at = '1';
+                }
+              });
+            },
+                error => this.notify.serviceError(error)
+          );
+        }
+      }
+    );
   }
 }

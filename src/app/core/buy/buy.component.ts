@@ -88,17 +88,16 @@ export class BuyComponent implements OnInit {
   openBuyConfirm() {
     if (this.initialData.introducedAmount != this.getTotal()
         && this.buyEnvironment.invoiceTotalRestriction) {
-      this.notify.error(this.messages.totalMismatch);
-    } else {
-      const dialog = this.dialog.open(ConfirmDialogComponent);
-      dialog.componentInstance.init(this.messages.confirm,
-        undefined, 'Completar Compra', 'Cerrar');
-      dialog.afterClosed().subscribe(
-        accepted => {
-          if (accepted) { this.buy(); }
-        }
-      );
+      this.notify.alert(this.messages.totalMismatch);
     }
+    const dialog = this.dialog.open(ConfirmDialogComponent);
+    dialog.componentInstance.init(this.messages.confirm,
+      undefined, 'Completar Compra', 'Cerrar');
+    dialog.afterClosed().subscribe(
+      accepted => {
+        if (accepted) { this.buy(); }
+      }
+    );
   }
 
   buy() {
@@ -109,6 +108,7 @@ export class BuyComponent implements OnInit {
       supplier_bill_id: this.initialData.supplierBillID,
       payment_type_id: this.selectedPaymentType.payment_type_id,
       card_payment_id: this.selectedPaymentType.card_payment_id,
+      supplier_bill_total: this.initialData.introducedAmount,
       total: this.getTotal(),
       products: this.getProductsForRequest()
     }).subscribe(

@@ -2,6 +2,7 @@
   <thead>
   <tr>
     <th>ID</th>
+    <th>Código de barras</th>
     <th>Descripción</th>
     <th>Precio</th>
     <th>Cantidad</th>
@@ -16,19 +17,19 @@
 
   <tfoot>
   <tr>
-    <td colspan="3"></td>
+    <td colspan="4"></td>
     <td>Total</td>
     <td class="align-right">
       {{total | currency:'USD':true:'1.2-2'}}
     </td>
   </tr>
   <tr [ngClass]="{ error: paymentChange < 0 }">
-    <td colspan="3"></td>
+    <td colspan="4"></td>
     <td>Pago</td>
     <td class="align-right">{{ payment-0 | currency:'USD':true:'1.2-2'}}</td>
   </tr>
   <tr [ngClass]="{ error: paymentChange < 0 }">
-    <td colspan="3"></td>
+    <td colspan="4"></td>
     <td>Cambio</td>
     <td class="align-right">{{paymentChange | currency:'USD':true:'1.2-2'}}</td>
   </tr>

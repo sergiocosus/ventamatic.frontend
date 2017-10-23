@@ -21,11 +21,11 @@
         <h5>Impuestos</h5>
         <md-input-container>
           <input mdInput [(ngModel)]="iva"
-                 placeholder="IVA" name="iva" class="dark"
+                 placeholder="IVA" name="iva" class="dark" step=".01"
                  [type]="'number'"  [max]="99999999999" [required]="true" />
         </md-input-container>
         <md-input-container>
-          <input mdInput [(ngModel)]="ieps" name="ieps"
+          <input mdInput [(ngModel)]="ieps" name="ieps" step=".01"
                  placeholder="IEPS" class="dark"
                  [type]="'number'"  [max]="99999999999" [required]="true" />
         </md-input-container>

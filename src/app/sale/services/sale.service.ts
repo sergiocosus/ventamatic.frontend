@@ -11,6 +11,10 @@ export class SaleService {
     return this.apiHttp.post(`branch/${branch_id}/sale`, sale)
       .map(json => new Sale().parse(json.sale));
   }
+
+  delete(sale_id: number) {
+    return this.apiHttp.delete(`branch/sale/${sale_id}`);
+  }
 }
 
 export interface SaleRequest {

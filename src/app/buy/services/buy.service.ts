@@ -24,6 +24,7 @@ export interface BuyRequest {
   payment_type_id: number;
   card_payment_id: string;
   total: number;
+  supplier_bill_total: number;
   products: {
     product_id: number;
     quantity: number;

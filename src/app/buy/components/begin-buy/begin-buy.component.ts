@@ -43,6 +43,7 @@ export class BeginBuyComponent implements OnInit {
       user => {
         this.user = user;
         this.branches = user.getBranchesWithPermission('buy');
+        this.formData.branch = this.branches.length ? this.branches[0] : null;
       }
     );
   }
@@ -52,12 +53,18 @@ export class BeginBuyComponent implements OnInit {
   }
 
   clear() {
-    this.formData = {
-      branch: null,
-      supplier: null,
-      supplierBillID: null,
-      introducedAmount: null
-    };
+    if (!this.formData) {
+      this.formData = {
+        branch: null,
+        supplier: null,
+        supplierBillID: null,
+        introducedAmount: null
+      };
+    } else {
+      this.formData.supplier = null;
+      this.formData.supplierBillID = null;
+      this.formData.introducedAmount = null;
+    }
   }
 }
 
