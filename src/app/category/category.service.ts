@@ -26,7 +26,6 @@ export class CategoryService implements BasicEntityService {
 
       this.categoriesRequest.subscribe(
         result => {
-          console.log(result);
           this.categoriesSubject.next(result);
         },
         err => this.categoriesSubject.error(err)

@@ -24,10 +24,10 @@ export class ProductDialogComponent extends CrudModalComponent implements OnInit
   selectedCategories: any[] = [];
 
   brands: Brand[] = [];
-  selectedBrands: any;
+  brand_id: any;
 
   units: any[] = [];
-  unit: any;
+  unit_id: any;
 
   haveBarCode = true;
 
@@ -39,7 +39,6 @@ export class ProductDialogComponent extends CrudModalComponent implements OnInit
     super(notify, dialogRef);
 
     this.units = Unit.parseFromData(units);
-
   }
 
   ngOnInit() {
@@ -70,22 +69,17 @@ export class ProductDialogComponent extends CrudModalComponent implements OnInit
     this.productService.get(product.id).subscribe(
       updatedProduct => {
         this.product = updatedProduct;
-        console.log(updatedProduct);
-        this.selectedCategories = updatedProduct.categories.map(
-          categoryOfProduct => this.categories.find(
-            category => category.id === categoryOfProduct.id
-          )
-        );
-
-        if (updatedProduct.brand) {
-          this.selectedBrands = this.brands.find(
-            (brand) => updatedProduct.brand.id === brand.id
-          );
+        if (!this.product.bar_code) {
+          this.haveBarCode = false;
         }
-
-        this.unit = this.units.find(
-          unit => unit.id === updatedProduct.unit.id
+        this.selectedCategories = updatedProduct.categories.map(
+          categoryOfProduct => categoryOfProduct.id
         );
+
+        if (updatedProduct.brand_id) {
+          this.brand_id = updatedProduct.brand_id;
+        }
+        this.unit_id = updatedProduct.unit_id;
       },
       error => {
         this.notify.serviceError(error);
@@ -129,16 +123,13 @@ export class ProductDialogComponent extends CrudModalComponent implements OnInit
   }
 
   appendData() {
-    console.log(this.selectedCategories);
-    this.product.categories = this.selectedCategories.map(
-      item => item.id
-    );
+    this.product.categories = this.selectedCategories;
 
     if (!this.haveBarCode) {
       this.product.bar_code = null;
     }
 
-    this.product.brand_id = this.selectedBrands && this.selectedBrands.id;
-    this.product.unit_id = this.unit && this.unit.id;
+    this.product.brand_id = this.brand_id;
+    this.product.unit_id = this.unit_id;
   }
 }

@@ -25,11 +25,11 @@
       </md-input-container>
     </div>
 
-    <md-select [(ngModel)]="unit"
+    <md-select [(ngModel)]="unit_id"
                [disabled]="locked"
                name="selectedUnitItem"
                placeholder="Unidad">
-      <md-option *ngFor="let unit of units" [value]="unit">
+      <md-option *ngFor="let unit of units" [value]="unit.id">
         {{unit.name}}
       </md-option>
     </md-select>
@@ -39,16 +39,16 @@
                [disabled]="locked"
                name="selectedCategoryItems"
                placeholder="Categorias">
-      <md-option *ngFor="let category of categories" [value]="category">
+      <md-option *ngFor="let category of categories" [value]="category.id">
         {{category.name}}
       </md-option>
     </md-select>
 
-    <md-select [(ngModel)]="selectedBrands"
+    <md-select [(ngModel)]="brand_id"
                [disabled]="locked"
-               name="selectedCategoryItems"
+               name="brand"
                placeholder="Marca">
-      <md-option *ngFor="let brand of brands" [value]="brand">
+      <md-option *ngFor="let brand of brands" [value]="brand.id">
         {{brand.name}}
       </md-option>
     </md-select>

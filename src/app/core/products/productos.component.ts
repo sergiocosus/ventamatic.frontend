@@ -157,7 +157,7 @@ export class ProductosComponent implements OnInit {
           this.products[i] = updatedProduct;
         }
       }
-      this.dataSource.setData(this.products);
+      this.dataSource.updateData(this.products);
     });
   }
 

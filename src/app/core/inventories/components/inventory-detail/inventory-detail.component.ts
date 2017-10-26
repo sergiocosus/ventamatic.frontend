@@ -137,9 +137,9 @@ export class InventoryDetailComponent implements OnInit, OnDestroy {
     const inventoryQuantityDialog = this.dialog.open(InventoryQuantityDialogComponent);
     inventoryQuantityDialog.componentInstance.init(inventory);
     inventoryQuantityDialog.componentInstance.updated.subscribe(
-      inventories => inventories.forEach(
-        updatedInventory => this.updated(updatedInventory)
-      )
+      inventories => inventories
+        .filter(updatedInventory => inventory.branch_id === updatedInventory.branch_id)
+        .forEach(updatedInventory => this.updated(updatedInventory))
     );
   }
 
@@ -147,7 +147,7 @@ export class InventoryDetailComponent implements OnInit, OnDestroy {
     for ( const index in this.inventories ) {
       if (this.inventories[index].product_id === inventory.product_id) {
         this.inventories[index] = inventory;
-        this.dataSource.setData(this.inventories);
+        this.dataSource.updateData(this.inventories);
         return;
       }
     }

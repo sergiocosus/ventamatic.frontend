@@ -24,6 +24,10 @@ export class ReportDataSource extends DataSource<any> {
       this.paginator.pageIndex = 0;
     }
 
+    this.updateData(data);
+  }
+
+  updateData(data) {
     this.dataChange.next(data);
   }
 

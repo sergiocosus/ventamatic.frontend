@@ -31,6 +31,7 @@ export class InventoryReportComponent implements OnInit {
 
   registeredProducts = null;
   productsWithExistences = null;
+  existences = 0;
   priceValue = 0;
   costValue = 0;
 
@@ -101,6 +102,7 @@ export class InventoryReportComponent implements OnInit {
   resetStats() {
     this.registeredProducts = 0;
     this.productsWithExistences = 0;
+    this.existences = 0;
     this.priceValue = 0;
     this.costValue = 0;
   }
@@ -125,6 +127,8 @@ export class InventoryReportComponent implements OnInit {
           if (inventory.quantity > 0) {
             this.productsWithExistences++;
           }
+
+          this.existences += inventory.quantity;
 
           inventory.totalPrice = inventory.current_price * inventory.quantity;
 

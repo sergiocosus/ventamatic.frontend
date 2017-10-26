@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MdDialogRef} from '@angular/material';
 import {Inventory} from '../../classes/inventory.model';
 import {InventoryService} from '../../services/inventory.service';
@@ -14,7 +14,7 @@ import {Observable} from 'rxjs/Observable';
   templateUrl: 'inventory-quantity-dialog.component.html',
   styleUrls: ['inventory-quantity-dialog.component.scss'],
 })
-export class InventoryQuantityDialogComponent {
+export class InventoryQuantityDialogComponent implements OnInit {
   @Output() updated = new EventEmitter;
   name = 'Inventario';
 
@@ -53,7 +53,6 @@ export class InventoryQuantityDialogComponent {
 
   ngOnInit() {
     this.inventoriesFiltered = this.inventoryControl.valueChanges
-      .startWith(null)
       .map(val => val ? this.filter(val) : (this.inventories || []).slice());
   }
 
@@ -168,7 +167,7 @@ export class InventoryQuantityDialogComponent {
         inventory_movement_type_id: this.inventoryMovementType.id,
         destiny_branch_id: this.destiny_branch_id,
         quantity_converted: this.quantity_converted,
-        product_converted_id: this.inventoryControl.value.id
+        product_converted_id: this.inventoryControl.value
           ? this.inventoryControl.value.product.id : undefined
       }
     ).subscribe(
