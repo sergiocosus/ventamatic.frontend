@@ -60,6 +60,3 @@ import {CacheManagerService} from './shared/services/cache-manager.service';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-
-
