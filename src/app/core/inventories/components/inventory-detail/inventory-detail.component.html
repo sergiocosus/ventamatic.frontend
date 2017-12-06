@@ -102,7 +102,7 @@
           <td>{{inventory.price | myCurrency}}</td>
           <td>{{inventory.product.price | myCurrency}}</td>
           <td>
-            <ng-container *ngIf="inventory_last_cost">
+            <ng-container *ngIf="inventory.last_cost">
               {{inventory.last_cost | myCurrency}}
             </ng-container>
           </td>

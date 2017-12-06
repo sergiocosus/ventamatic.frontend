@@ -60,6 +60,7 @@
     <li>Existencias {{existences | number:'1.3'}}</li>
     <li>Productos diferentes registrados: {{registeredProducts}}</li>
     <li>Valor al costo del inventario: {{costValue | myCurrency}}</li>
+    <li>Valor al último costo del inventario: {{lastCostValue | myCurrency}}</li>
     <li>Valor al precio del inventario: {{priceValue | myCurrency}}</li>
   </ul>
 
@@ -86,6 +87,7 @@
         <th mat-sort-header="total_cost">Costo Total</th>
         <th mat-sort-header="last_cost">Último costo</th>
         <th mat-sort-header="margin">Margen</th>
+        <th mat-sort-header="last_cost_margin">Margen Último Costo</th>
         <th mat-sort-header="minimum">Minimo</th>
       </tr>
       </thead>
@@ -112,6 +114,7 @@
             </ng-container>
           </td>
           <td>{{inventory.margin | percent}}</td>
+          <td>{{inventory.last_cost_margin | percent}}</td>
           <td>{{inventory.current_minimum}}</td>
         </tr>
       </ng-container>

@@ -34,6 +34,7 @@ export class InventoryReportComponent implements OnInit {
   existences = 0;
   priceValue = 0;
   costValue = 0;
+  lastCostValue = 0;
 
   dataSource: ReportDataSource | null;
   form: FormGroup;
@@ -68,6 +69,7 @@ export class InventoryReportComponent implements OnInit {
           case 'averageCost': return [a.averageCost, b.averageCost, 'number'];
           case 'total_cost': return [a.current_total_cost, b.current_total_cost, 'number'];
           case 'last_cost': return [a.last_cost, b.last_cost, 'number'];
+          case 'last_cost_margin': return [a.last_cost_margin, b.last_cost_margin, 'number'];
           case 'margin': return [a.margin, b.margin, 'number'];
           case 'minimum': return [a.current_minimum, b.current_minimum, 'number'];
         }
@@ -105,6 +107,7 @@ export class InventoryReportComponent implements OnInit {
     this.existences = 0;
     this.priceValue = 0;
     this.costValue = 0;
+    this.lastCostValue = 0;
   }
 
   submit() {
@@ -134,6 +137,7 @@ export class InventoryReportComponent implements OnInit {
 
           this.priceValue += inventory.totalPrice;
           this.costValue += inventory.current_total_cost;
+          this.lastCostValue += inventory.last_cost * inventory.quantity;
         });
 
         this.registeredProducts = inventoryIds.length;
@@ -152,6 +156,10 @@ export class InventoryReportComponent implements OnInit {
     const margin = (inventory.current_price - inventory.averageCost) / inventory.averageCost;
     if (Number.isFinite(margin) && !Number.isNaN(margin)) {
       inventory.margin = margin;
+    }
+    const lastCostMargin = (inventory.current_price - inventory.last_cost) / inventory.last_cost;
+    if (Number.isFinite(lastCostMargin) && !Number.isNaN(lastCostMargin)) {
+      inventory.last_cost_margin = lastCostMargin;
     }
   }
 

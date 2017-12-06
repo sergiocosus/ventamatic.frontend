@@ -23,6 +23,7 @@ export class InventoryEditDialogComponent implements OnInit {
     this.form = this.fb.group({
       price: ['', []],
       minimum: [null, []],
+      last_cost: [null, []],
       branch_id: null,
       product_id: null,
     });
@@ -36,6 +37,7 @@ export class InventoryEditDialogComponent implements OnInit {
     this.form.patchValue({
       minimum: inventory.minimum,
       price: inventory.price,
+      last_cost: inventory.last_cost,
       branch_id: inventory.branch_id,
       product_id: inventory.product_id
     });
