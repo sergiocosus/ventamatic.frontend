@@ -165,8 +165,8 @@ export class ProductosComponent implements OnInit {
     const dialog = this.dialog.open(ProductDialogComponent);
     dialog.componentInstance.initCreate();
     dialog.componentInstance.created.subscribe(product => {
-      this.products.push(product);
-      this.dataSource.setData(this.products);
+      this.products.unshift(product);
+      this.dataSource.updateData(this.products);
     });
   }
 
@@ -183,7 +183,7 @@ export class ProductosComponent implements OnInit {
         }
       }
 
-      this.dataSource.setData(this.products);
+      this.dataSource.updateData(this.products);
     });
   }
 
