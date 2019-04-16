@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {Buy} from '../classes/buy.model';
 import {ApiHttp} from '../../shared/services/api-http';
@@ -8,8 +10,8 @@ export class BuyService {
   constructor(private apiHttp: ApiHttp) {}
 
   post(branch_id, buy: BuyRequest) {
-    return this.apiHttp.post(`branch/${branch_id}/buy`, buy)
-      .map(json => new Buy().parse(json.buy));
+    return this.apiHttp.post(`branch/${branch_id}/buy`, buy).pipe(
+      map(json => new Buy().parse(json.buy)));
   }
 
 }

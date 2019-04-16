@@ -1,60 +1,40 @@
-import {Http, Request, RequestOptionsArgs, Response, Headers} from '@angular/http';
-import {environment} from '../../../environments/environment';
-import {LocalStorageService} from './local-storage.service';
-import {Observable} from 'rxjs/Observable';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { LocalStorageService } from './local-storage.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 export class ApiHttp {
   private apiUrl = environment.apiUrl;
 
-  constructor(private http: Http,
-              private localStorage: LocalStorageService){}
-
-  setGlobalHeaders(headers: Array<Object>, request: Request|RequestOptionsArgs): void {
-    // this.http.setGlobalHeaders(headers, request);
+  constructor(private http: HttpClient,
+              private localStorage: LocalStorageService) {
   }
 
-  get(url: string, data?: any, options?: RequestOptionsArgs): Observable<any> {
+  get(url: string, data?: any, options?): Observable<any> {
     const params = this.serializeGetParams(data);
-    return this.http.get(this.apiUrl + url + params, this.appendHeaders(options))
-      .map(this.mapJson)
-      .catch(this.handleError);
+    return this.http.get(this.apiUrl + url + params, this.appendHeaders(options));
   }
 
-  post(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
-    return this.http.post(this.apiUrl + url, JSON.stringify(body), this.appendHeaders(options))
-      .map(this.mapJson)
-      .catch(this.handleError);
+  post(url: string, body: any, options?): Observable<any> {
+    return this.http.post(this.apiUrl + url, body, this.appendHeaders(options));
   }
 
-  put(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
-    return this.http.put(this.apiUrl + url, JSON.stringify(body), this.appendHeaders(options))
-      .map(this.mapJson)
-      .catch(this.handleError);
+  put(url: string, body: any, options?): Observable<any> {
+    return this.http.put(this.apiUrl + url, body, this.appendHeaders(options));
   }
 
-  delete(url: string, options?: RequestOptionsArgs): Observable<any> {
-    return this.http.delete(this.apiUrl + url, this.appendHeaders(options))
-      .map(this.mapJson)
-      .catch(this.handleError);
+  delete(url: string, options?): Observable<any> {
+    return this.http.delete(this.apiUrl + url, this.appendHeaders(options));
   }
 
-  patch(url: string, body: any, options?: RequestOptionsArgs): Observable<any> {
-    return this.http.patch(this.apiUrl + url, JSON.stringify(body), this.appendHeaders(options))
-      .map(this.mapJson)
-      .catch(this.handleError);
+  patch(url: string, body: any, options?): Observable<any> {
+    return this.http.patch(this.apiUrl + url, body, this.appendHeaders(options));
   }
 
-  head(url: string, options?: RequestOptionsArgs): Observable<any> {
-    return this.http.head(this.apiUrl + url, this.appendHeaders(options))
-      .map(this.mapJson)
-      .catch(this.handleError);
+  head(url: string, options?): Observable<any> {
+    return this.http.head(this.apiUrl + url, this.appendHeaders(options));
   }
-
-  private mapJson(res: Response): any{
-    return res.json().data;
-  }
-
 
   private serializeGetParams(object: any): string {
     if (!object) {
@@ -66,7 +46,7 @@ export class ApiHttp {
       if (str != '') {
         str += '&';
       }
-      if (Array.isArray(object[key])){
+      if (Array.isArray(object[key])) {
         object[key].forEach(value => {
           str += key + encodeURIComponent('[]') + '='
             + (value ? encodeURIComponent(value) : '') + '&';
@@ -78,46 +58,27 @@ export class ApiHttp {
     return str;
   }
 
-  private appendHeaders(options?: RequestOptionsArgs): RequestOptionsArgs {
+  private appendHeaders(options) {
     if (!options) {
       options = {};
     }
 
     if (!options.headers) {
-      options.headers = new Headers();
+      options['headers'] = new HttpHeaders();
     }
-    const headers = options.headers;
-    headers.append('Authorization', 'Bearer ' + this.localStorage.get('access_token'));
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
+    options.headers = options.headers.append('Authorization', 'Bearer ' + this.localStorage.get('access_token'));
+
     return options;
-  }
-
-  private handleError(error: any, observable: Observable<any>) {
-    let json;
-    if (error.json){
-      json = error.json();
-    }
-
-    if (json) {
-      console.error(json);
-      return Observable.throw(json);
-    } else {
-      console.log(error);
-      return error;
-    }
-
   }
 }
 
-export function apiHttpServiceFactory (http: Http, localStorage: LocalStorageService) {
+export function apiHttpServiceFactory(http: HttpClient, localStorage: LocalStorageService) {
   return new ApiHttp(http, localStorage);
-};
+}
 
-export let apiHttpServiceProvider =
-{
+export let apiHttpServiceProvider = {
   provide: ApiHttp,
   useFactory: apiHttpServiceFactory,
-  deps: [Http, LocalStorageService]
+  deps: [HttpClient, LocalStorageService]
 };
 

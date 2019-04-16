@@ -19,24 +19,24 @@
       <div class="finish">
 
         <h5>Impuestos</h5>
-        <md-input-container>
-          <input mdInput [(ngModel)]="iva"
+        <mat-form-field>
+          <input matInput [(ngModel)]="iva"
                  placeholder="IVA" name="iva" class="dark" step=".01"
                  [type]="'number'"  [max]="99999999999" [required]="true" />
-        </md-input-container>
-        <md-input-container>
-          <input mdInput [(ngModel)]="ieps" name="ieps" step=".01"
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput [(ngModel)]="ieps" name="ieps" step=".01"
                  placeholder="IEPS" class="dark"
                  [type]="'number'"  [max]="99999999999" [required]="true" />
-        </md-input-container>
+        </mat-form-field>
 
         <div>
           <button type="button"
-                  md-raised-button color="warn"
+                  mat-raised-button color="warn"
                   (click)="openCancelDialog()">
             Cancelar Compra
           </button>
-          <button type="submit" md-raised-button color="accent">
+          <button type="submit" mat-raised-button color="accent">
             Finalizar Compra
           </button>
         </div>

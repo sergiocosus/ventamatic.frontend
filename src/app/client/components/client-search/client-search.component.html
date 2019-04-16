@@ -1,10 +1,10 @@
 <app-popover [focusable]="focusable">
   <form ngNativeValidate>
-    <md-input-container>
-      <input mdInput [(ngModel)]="name" type="text"
+    <mat-form-field>
+      <input matInput [(ngModel)]="name" type="text"
              placeholder="Nombre"
              [formControl]="nameControl" #focusable>
-    </md-input-container>
+    </mat-form-field>
   </form>
 
   <app-selectable [items]="clients"

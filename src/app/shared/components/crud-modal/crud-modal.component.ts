@@ -1,7 +1,7 @@
 
 import {EventEmitter, Output} from '@angular/core';
 import {NotifyService} from '../../services/notify.service';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 
 export abstract class CrudModalComponent {
   @Output() created = new EventEmitter();
@@ -16,7 +16,7 @@ export abstract class CrudModalComponent {
   locked = false;
 
   constructor(protected notfiy: NotifyService,
-              protected dialogRef: MdDialogRef<CrudModalComponent>) {}
+              protected dialogRef: MatDialogRef<CrudModalComponent>) {}
 
   initCreate() {
     this.createMode = true;

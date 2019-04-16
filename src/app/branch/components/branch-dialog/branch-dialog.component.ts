@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {Branch} from '../../models/branch';
 import {BranchService} from '../../services/branch.service';
 import {CrudModalComponent} from '../../../shared/components/crud-modal/crud-modal.component';
@@ -19,7 +19,7 @@ export class BranchDialogComponent extends CrudModalComponent {
 
   constructor(protected notify: NotifyService,
               protected branchService: BranchService,
-              protected dialogRef: MdDialogRef<BranchDialogComponent>) {
+              protected dialogRef: MatDialogRef<BranchDialogComponent>) {
     super(notify, dialogRef);
   }
 

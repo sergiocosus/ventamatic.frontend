@@ -1,7 +1,9 @@
+
+import {take, map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {ActivatedRouteSnapshot, RouterStateSnapshot, Router} from '@angular/router';
 import {AuthService} from './auth.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 
 @Injectable()
@@ -13,7 +15,7 @@ export class AuthGuardService {
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>|boolean {
-    return this.authService.getLoggedUser().map(
+    return this.authService.getLoggedUser().pipe(map(
       account => {
         if (account) {
           this.isLogged = true;
@@ -24,6 +26,6 @@ export class AuthGuardService {
 
         return this.isLogged;
       }
-    ).take(1);
+    ),take(1),);
   }
 }

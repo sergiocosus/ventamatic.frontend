@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, Input} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {AuthService} from '../../../auth/services/auth.service';
 import {ScheduleService} from '../../../user/services/schedule.service';
 import {Router} from '@angular/router';
@@ -24,7 +24,7 @@ export class TopBarComponent implements OnInit, OnDestroy {
   constructor(private router: Router,
               private scheduleService: ScheduleService,
               private authService: AuthService,
-              private dialog: MdDialog) {}
+              private dialog: MatDialog) {}
 
   ngOnInit() {
     const subUser = this.authService.getLoggedUser().subscribe(

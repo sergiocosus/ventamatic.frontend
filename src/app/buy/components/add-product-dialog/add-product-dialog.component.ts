@@ -1,5 +1,5 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {ProductBuy} from 'app/buy/classes/product-buy.model';
 import {InventoryMovementTypeId} from '../../../inventory/classes/inventory-movement-type-id.enum';
 
@@ -24,7 +24,7 @@ export class AddProductDialogComponent implements OnInit {
     inventoryMovementType: null
   };
 
-  constructor(private dialogRef: MdDialogRef<AddProductDialogComponent>) {
+  constructor(private dialogRef: MatDialogRef<AddProductDialogComponent>) {
   }
 
   ngOnInit() {

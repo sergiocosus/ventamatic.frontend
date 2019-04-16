@@ -1,7 +1,9 @@
-import {Observable} from 'rxjs/Observable';
+
+import {merge as observableMerge, Observable, BehaviorSubject} from 'rxjs';
+
+import {map} from 'rxjs/operators';
 import {DataSource} from '@angular/cdk/collections';
-import {MdPaginator, MdSort} from '@angular/material';
-import {BehaviorSubject} from 'rxjs/BehaviorSubject';
+import {MatPaginator, MatSort} from '@angular/material';
 
 export class ReportDataSource extends DataSource<any> {
   private dataChange = new BehaviorSubject<any>([]);
@@ -12,8 +14,8 @@ export class ReportDataSource extends DataSource<any> {
 
   filteredData = [];
 
-  constructor( private paginator: MdPaginator = null,
-               private sort: MdSort = null,
+  constructor( private paginator: MatPaginator = null,
+               private sort: MatSort = null,
                private sortFunction = null,
                private filter: Observable<any> = null) {
     super();
@@ -39,16 +41,16 @@ export class ReportDataSource extends DataSource<any> {
     const displayDataChanges = [
       this.dataChange,
       ...(this.paginator ? [this.paginator.page] : []),
-      ...(this.sort ? [this.sort._matSortChange] : []),
+      ...(this.sort ? [this.sort.sortChange] : []),
       ...(this.filter ? [this.filter] : []),
     ];
 
-    return Observable.merge(...displayDataChanges).map((a, b) => {
+    return observableMerge(...displayDataChanges).pipe(map((a, b) => {
       let data = this.data.slice();
       // Grab the page's slice of data.
-      if (this.filter && a.formData) {
-        this.formData = a.formData;
-        this.filterFunction = a.filter;
+      if (this.filter && a['formData']) {
+        this.formData = a['formData'];
+        this.filterFunction = a['filter'];
       }
 
       if ( this.formData ) {
@@ -67,7 +69,7 @@ export class ReportDataSource extends DataSource<any> {
       }
 
       return data;
-    });
+    }));
   }
 
   disconnect() {}

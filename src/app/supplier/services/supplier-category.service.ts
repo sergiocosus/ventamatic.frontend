@@ -1,10 +1,11 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {SupplierCategory} from '../classes/supplier-category';
 import {ApiHttp} from '../../shared/services/api-http';
 import {BasicEntityService} from '../../various/components/basic-entity-dialog/basic-entity-service';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {ReplaySubject, Observable} from 'rxjs';
 import {Category} from '../../category/category';
-import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class SupplierCategoryService implements BasicEntityService {
@@ -17,8 +18,8 @@ export class SupplierCategoryService implements BasicEntityService {
   constructor(private apiHttp: ApiHttp) {}
 
   getAll(params?: any) {
-    return this.apiHttp.get(this.basePath, params)
-      .map(json => SupplierCategory.parseArray(json.supplier_categories));
+    return this.apiHttp.get(this.basePath, params).pipe(
+      map(json => SupplierCategory.parseArray(json.supplier_categories)));
   }
 
   getAllCached(params?, refresh = false) {
@@ -41,13 +42,13 @@ export class SupplierCategoryService implements BasicEntityService {
   }
 
   get(supplier_category_id: number) {
-    return this.apiHttp.get(this.basePath + supplier_category_id)
-      .map(json => new SupplierCategory().parse(json.supplier_category));
+    return this.apiHttp.get(this.basePath + supplier_category_id).pipe(
+      map(json => new SupplierCategory().parse(json.supplier_category)));
   }
 
   post(supplierCategory: SupplierCategory) {
-    return this.apiHttp.post(this.basePath, supplierCategory)
-      .map(json => new SupplierCategory().parse(json.supplier_category));
+    return this.apiHttp.post(this.basePath, supplierCategory).pipe(
+      map(json => new SupplierCategory().parse(json.supplier_category)));
   }
 
   delete(supplier_category_id: number) {
@@ -55,12 +56,12 @@ export class SupplierCategoryService implements BasicEntityService {
   }
 
   restore(supplier_category_id: number) {
-    return this.apiHttp.patch(this.basePath + supplier_category_id + '/restore', {})
-      .map(data => new SupplierCategory().parse(data.supplier_category));
+    return this.apiHttp.patch(this.basePath + supplier_category_id + '/restore', {}).pipe(
+      map(data => new SupplierCategory().parse(data.supplier_category)));
   }
 
   put(supplierCategory: SupplierCategory) {
-    return this.apiHttp.put(this.basePath + supplierCategory.id, supplierCategory)
-      .map(json => new SupplierCategory().parse(json.supplier_category));
+    return this.apiHttp.put(this.basePath + supplierCategory.id, supplierCategory).pipe(
+      map(json => new SupplierCategory().parse(json.supplier_category)));
   }
 }

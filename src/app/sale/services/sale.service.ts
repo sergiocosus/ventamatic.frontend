@@ -1,3 +1,5 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {Sale} from '../classes/sale';
 import {ApiHttp} from '../../shared/services/api-http';
@@ -8,8 +10,8 @@ export class SaleService {
   constructor(private apiHttp: ApiHttp) {}
 
   post(branch_id, sale: SaleRequest) {
-    return this.apiHttp.post(`branch/${branch_id}/sale`, sale)
-      .map(json => new Sale().parse(json.sale));
+    return this.apiHttp.post(`branch/${branch_id}/sale`, sale).pipe(
+      map(json => new Sale().parse(json.sale)));
   }
 
   delete(sale_id: number) {

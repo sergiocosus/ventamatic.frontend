@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BranchRoleService} from '../../services/branch-role.service';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {CrudModalComponent} from '../../../shared/components/crud-modal/crud-modal.component';
 import {BranchRole} from '../../classes/branch-role';
 import {NotifyService} from '../../../shared/services/notify.service';
@@ -21,7 +21,7 @@ export class BranchRoleDialogComponent extends CrudModalComponent implements OnI
   constructor(protected notify: NotifyService,
               private branchRoleService: BranchRoleService,
               private branchPermissionService: BranchPermissionService,
-              protected dialogRef: MdDialogRef<BranchRoleDialogComponent>) {
+              protected dialogRef: MatDialogRef<BranchRoleDialogComponent>) {
     super(notify, dialogRef);
   }
 

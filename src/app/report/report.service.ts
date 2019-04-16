@@ -1,11 +1,11 @@
+import { map } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { CsvService } from 'angular2-json2csv';
-import {IMyDateRangeModel} from 'mydaterangepicker';
+import { IMyDateRangeModel } from 'mydaterangepicker';
 import * as moment from 'moment';
-import {ApiHttp} from '../shared/services/api-http';
-import {NotifyService} from '../shared/services/notify.service';
-import {Model} from '../shared/classes/model';
-import {Inventory} from '../inventory/classes/inventory.model';
+import { ApiHttp } from '../shared/services/api-http';
+import { NotifyService } from '../shared/services/notify.service';
+import { Model } from '../shared/classes/model';
+import { Inventory } from '../inventory/classes/inventory.model';
 
 @Injectable()
 export class ReportService {
@@ -13,12 +13,12 @@ export class ReportService {
   private basePath= 'report/';
 
   constructor(private apiHttp: ApiHttp,
-              private csvService: CsvService,
+             // private csvService: CsvService,
               private noty: NotifyService) {}
 
   getSchedule(params?: any) {
-    return this.apiHttp.get(this.basePath + 'schedule', params)
-      .map(res => {
+    return this.apiHttp.get(this.basePath + 'schedule', params).pipe(
+      map(res => {
         res.schedules.forEach(
           schedule => {
             schedule.created_at = Model.parseDateTime(schedule.created_at);
@@ -26,57 +26,57 @@ export class ReportService {
           }
         );
         return res.schedules;
-      });
+      }));
   }
   getSale(params?: any) {
-    return this.apiHttp.get(this.basePath + 'sale', params)
-      .map(res => {
+    return this.apiHttp.get(this.basePath + 'sale', params).pipe(
+      map(res => {
         res.sales.forEach(
           sale => {
             sale.created_at = Model.parseDateTime(sale.created_at);
           }
         );
         return res.sales;
-      });
+      }));
   }
 
   getBuy(params?: any) {
-    return this.apiHttp.get(this.basePath + 'buy', params)
-      .map(res => {
+    return this.apiHttp.get(this.basePath + 'buy', params).pipe(
+      map(res => {
         res.buys.forEach(
           buy => {
             buy.created_at = Model.parseDateTime(buy.created_at);
           }
         );
         return res.buys;
-      });
+      }));
   }
 
   getInventoryMovements(params?: any) {
-    return this.apiHttp.get(this.basePath + 'inventory-movements', params)
-      .map(res => {
+    return this.apiHttp.get(this.basePath + 'inventory-movements', params).pipe(
+      map(res => {
         res.inventory_movements.forEach(
           inventory_movement => {
             inventory_movement.created_at = Model.parseDateTime(inventory_movement.created_at);
           }
         );
         return res.inventory_movements;
-      });
+      }));
   }
 
   getInventory(params?: any) {
-    return this.apiHttp.get(this.basePath + 'inventory', params)
-      .map(res => Inventory.parseArray(res.inventories));
+    return this.apiHttp.get(this.basePath + 'inventory', params).pipe(
+      map(res => Inventory.parseArray(res.inventories)));
   }
 
   getHistoricInventory(params?: any) {
-    return this.apiHttp.get(this.basePath + 'historic-inventory', params)
-      .map(res => Inventory.parseArray(res.inventories));
+    return this.apiHttp.get(this.basePath + 'historic-inventory', params).pipe(
+      map(res => Inventory.parseArray(res.inventories)));
   }
 
   downloadCSV(data, filename) {
     if (data && data.length) {
-      this.csvService.download(data, filename);
+     // this.csvService.download(data, filename);
     } else {
       this.noty.error('Reporte vacío, realice otra consulta para poder exportar a CSV');
     }

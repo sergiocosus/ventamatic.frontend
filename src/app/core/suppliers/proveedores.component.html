@@ -1,61 +1,61 @@
 <app-search-bar>
   <button *appUserCan="'supplier-create'"
-          md-raised-button color="primary"
+          mat-raised-button color="primary"
           (click)="create()">
     <i class="fa fa-user-secret"></i>
     Agregar Proveedor
   </button>
   <button *appUserCan="'supplier-category-create'"
-          md-raised-button color="primary"
+          mat-raised-button color="primary"
           (click)="openSupplierCategoryDialog()">
     <i class="fa fa-list" aria-hidden="true"></i>
     Categorias de proveedores
   </button>
   <button *appUserCan="'brand-create'"
-          md-raised-button color="primary"
+          mat-raised-button color="primary"
           (click)="openBrandDialog()">
     <i class="fa fa-list" aria-hidden="true"></i>
     Marcas
   </button>
-  <md-checkbox [formControl]="deletedControl" *appUserCan="'product-delete'" class="dark-theme">
+  <mat-checkbox [formControl]="deletedControl" *appUserCan="'product-delete'" class="dark-theme">
     <i class="fa fa-trash"></i>
     Ver eliminados
-  </md-checkbox>
+  </mat-checkbox>
 </app-search-bar>
 
 <app-search-bar class="dark-theme">
   <form [formGroup]="form">
     <i class="fa fa-filter" aria-hidden="true"></i>
 
-    <md-form-field>
-      <input mdInput formControlName="id" placeholder="ID">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="id" placeholder="ID">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="name" placeholder="Nombre">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Nombre">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="address" placeholder="Dirección">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="address" placeholder="Dirección">
+    </mat-form-field>
 
-    <md-select formControlName="supplier_category_id" placeholder="Categoría de proveedor">
-      <md-option [value]="null"> Todas </md-option>
-      <md-option *ngFor="let category of categories | async" [value]="category.id">
+    <mat-select formControlName="supplier_category_id" placeholder="Categoría de proveedor">
+      <mat-option [value]="null"> Todas </mat-option>
+      <mat-option *ngFor="let category of categories | async" [value]="category.id">
         {{category.name}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
 
-    <md-select formControlName="brands" placeholder="Marca">
-      <md-option [value]="null"> Todas </md-option>
-      <md-option *ngFor="let brand of brands | async" [value]="brand.id">
+    <mat-select formControlName="brands" placeholder="Marca">
+      <mat-option [value]="null"> Todas </mat-option>
+      <mat-option *ngFor="let brand of brands | async" [value]="brand.id">
         {{brand.name}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
 
-    <md-form-field>
-      <input mdInput formControlName="phone" placeholder="Teléfono">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="phone" placeholder="Teléfono">
+    </mat-form-field>
   </form>
 </app-search-bar>
 

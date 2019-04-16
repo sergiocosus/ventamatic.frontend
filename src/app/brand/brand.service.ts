@@ -1,9 +1,10 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {Brand} from './brand';
 import {ApiHttp} from '../shared/services/api-http';
 import {BasicEntityService} from '../various/components/basic-entity-dialog/basic-entity-service';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
-import {Observable} from 'rxjs/Observable';
+import {ReplaySubject, Observable} from 'rxjs';
 
 @Injectable()
 export class BrandService implements BasicEntityService {
@@ -15,9 +16,9 @@ export class BrandService implements BasicEntityService {
   constructor(private apiHttp: ApiHttp) {}
 
   getAll(params?: any) {
-    return this.apiHttp.get(this.basePath, params)
-      .map(this.mapBrands)
-      .map(this.parseBrands);
+    return this.apiHttp.get(this.basePath, params).pipe(
+      map(this.mapBrands),
+      map(this.parseBrands),);
   }
 
 
@@ -39,15 +40,15 @@ export class BrandService implements BasicEntityService {
   }
 
   get(brand_id: number) {
-    return this.apiHttp.get(this.basePath + brand_id)
-      .map(this.mapBrand)
-      .map(this.parseBrand);
+    return this.apiHttp.get(this.basePath + brand_id).pipe(
+      map(this.mapBrand),
+      map(this.parseBrand),);
   }
 
   post(brand: Brand) {
-    return this.apiHttp.post(this.basePath, brand)
-      .map(this.mapBrand)
-      .map(this.parseBrand);
+    return this.apiHttp.post(this.basePath, brand).pipe(
+      map(this.mapBrand),
+      map(this.parseBrand),);
   }
 
   delete(brand_id: number) {
@@ -55,14 +56,14 @@ export class BrandService implements BasicEntityService {
   }
 
   restore(brandh_id: number) {
-    return this.apiHttp.patch(this.basePath + brandh_id + '/restore', {})
-      .map(data => new Brand().parse(data.brand));
+    return this.apiHttp.patch(this.basePath + brandh_id + '/restore', {}).pipe(
+      map(data => new Brand().parse(data.brand)));
   }
 
   put(brand: Brand) {
-    return this.apiHttp.put(this.basePath + brand.id, brand)
-      .map(this.mapBrand)
-      .map(this.parseBrand);
+    return this.apiHttp.put(this.basePath + brand.id, brand).pipe(
+      map(this.mapBrand),
+      map(this.parseBrand),);
   }
 
   private mapBrands(json: any) {

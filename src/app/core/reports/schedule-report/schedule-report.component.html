@@ -1,26 +1,26 @@
 <app-search-bar class="dark-theme">
   <form (submit)="submit()" ngNativeValidate>
-    <md-input-container class="id-field">
-      <input mdInput placeholder="ID de compra"
+    <mat-form-field class="id-field">
+      <input matInput placeholder="ID de compra"
              [(ngModel)]="request.id"
              name="id" type="number">
-    </md-input-container>
+    </mat-form-field>
 
 
-    <md-input-container class="id-field">
-      <input mdInput placeholder="ID de sucursal"
+    <mat-form-field class="id-field">
+      <input matInput placeholder="ID de sucursal"
              [(ngModel)]="request.branch_id"
              name="branch_id" type="number">
-    </md-input-container>
+    </mat-form-field>
 
     <app-branch-search class="search-button"
                        (selected)="request.branch_id = $event.id"></app-branch-search>
 
-    <md-input-container class="id-field">
-      <input mdInput placeholder="ID de usuario"
+    <mat-form-field class="id-field">
+      <input matInput placeholder="ID de usuario"
              [(ngModel)]="request.user_id"
              name="user_id" type="number">
-    </md-input-container>
+    </mat-form-field>
 
     <app-user-search class="search-button"
                      (selected)="request.user_id = $event.id"></app-user-search>
@@ -29,11 +29,11 @@
                           (dateRangeChanged)="onDateRangeChanged($event)"
                           [options]="rangeOptions" ></my-date-range-picker>
 
-    <button md-raised-button color="primary" type="submit">
+    <button mat-raised-button color="primary" type="submit">
       <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
       Consultar
     </button>
-    <button md-raised-button color="primary" type="button" (click)="downloadCSV()">
+    <button mat-raised-button color="primary" type="button" (click)="downloadCSV()">
       <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
       CSV
     </button>
@@ -42,12 +42,12 @@
 <app-main-content>
   <h2>Reporte de turnos</h2>
   <div class="table-container mat-elevation-z8">
-    <md-paginator #paginator
+    <mat-paginator #paginator
                   [length]="dataSource ? dataSource.data.length : []"
                   [pageIndex]="0"
                   [pageSize]="50"
                   [pageSizeOptions]="[50, 100, 200, 500, 1000, 10000]">
-    </md-paginator>
+    </mat-paginator>
     <table>
       <thead>
       <tr>

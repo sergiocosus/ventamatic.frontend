@@ -1,15 +1,15 @@
 <app-search-bar>
-  <button md-raised-button color="primary"
+  <button mat-raised-button color="primary"
           *appUserCan="'user-create'"
           (click)="create()">
     <i class="fa fa-user-plus" aria-hidden="true"></i>
     Agregar Usuario
   </button>
 
-  <md-checkbox [formControl]="deletedControl" *appUserCan="'user-delete'" class="dark-theme">
+  <mat-checkbox [formControl]="deletedControl" *appUserCan="'user-delete'" class="dark-theme">
     <i class="fa fa-trash"></i>
     Ver eliminados
-  </md-checkbox>
+  </mat-checkbox>
 </app-search-bar>
 
 
@@ -17,17 +17,17 @@
   <form [formGroup]="form">
     <i class="fa fa-filter" aria-hidden="true"></i>
 
-    <md-form-field>
-      <input mdInput formControlName="username" placeholder="Código de usuario">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="username" placeholder="Código de usuario">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="name" placeholder="Nombre">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Nombre">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="address" placeholder="Dirección">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="address" placeholder="Dirección">
+    </mat-form-field>
   </form>
 </app-search-bar>
 

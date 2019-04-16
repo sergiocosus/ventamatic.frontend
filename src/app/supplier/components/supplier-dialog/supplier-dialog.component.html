@@ -1,87 +1,87 @@
-<h4 *ngIf="createMode" md-dialog-title> Añadir Proveedor </h4>
-<h4 *ngIf="updateMode" md-dialog-title> Editar Proveedor </h4>
-<h4 *ngIf="deleteMode" md-dialog-title> Eliminar Proveedor </h4>
+<h4 *ngIf="createMode" mat-dialog-title> Añadir Proveedor </h4>
+<h4 *ngIf="updateMode" mat-dialog-title> Editar Proveedor </h4>
+<h4 *ngIf="deleteMode" mat-dialog-title> Eliminar Proveedor </h4>
 <form (ngSubmit)="submit()" ngNativeValidate>
-  <md-dialog-content *ngIf="!deleteMode && !!supplier">
-    <md-input-container *ngIf="updateMode">
-      <input mdInput placeholder="Id" name="id"
+  <mat-dialog-content *ngIf="!deleteMode && !!supplier">
+    <mat-form-field *ngIf="updateMode">
+      <input matInput placeholder="Id" name="id"
              type="text" [(ngModel)]="supplier.id" disabled="disabled">
-    </md-input-container>
-    <md-input-container >
-      <input mdInput placeholder="Nombre"
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="Nombre"
              type="text" [(ngModel)]="supplier.name" name="name"
              [disabled]="locked" required>
-    </md-input-container>
-    <md-input-container >
-      <input mdInput placeholder="Email"
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="Email"
              type="email" [(ngModel)]="supplier.email" name="email"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container >
-      <input mdInput placeholder="Teléfono"
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="Teléfono"
              type="text" [(ngModel)]="supplier.phone" name="phone"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container >
-      <input mdInput placeholder="Celular"
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="Celular"
              type="text" [(ngModel)]="supplier.cellphone" name="cellphone"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container >
-      <input mdInput placeholder="Dirección"
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="Dirección"
              type="text" [(ngModel)]="supplier.address" name="address"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container >
-      <input mdInput placeholder="RFC"
+    </mat-form-field>
+    <mat-form-field >
+      <input matInput placeholder="RFC"
              type="text" [(ngModel)]="supplier.rfc"  name="rfc"
              [disabled]="locked">
-    </md-input-container>
-    <md-select [(ngModel)]="selectedSupplierCategory"
+    </mat-form-field>
+    <mat-select [(ngModel)]="selectedSupplierCategory"
                [disabled]="locked"
                name="selectedCategoryItems"
                placeholder="Categoría del proveedor">
-      <md-option *ngFor="let supplierCategory of supplierCategories" [value]="supplierCategory">
+      <mat-option *ngFor="let supplierCategory of supplierCategories" [value]="supplierCategory">
         {{supplierCategory.name}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
 
-    <md-select [(ngModel)]="selectedBrands"
+    <mat-select [(ngModel)]="selectedBrands"
                [multiple]="true"
                [disabled]="locked"
                name="selectedBrands"
                placeholder="Marcas">
-      <md-option *ngFor="let brand of brands" [value]="brand">
+      <mat-option *ngFor="let brand of brands" [value]="brand">
         {{brand.name}}
-      </md-option>
-    </md-select>
-  </md-dialog-content>
+      </mat-option>
+    </mat-select>
+  </mat-dialog-content>
 
-  <md-dialog-actions>
+  <mat-dialog-actions>
     <ng-template [appUserCan]="'supplier-edit'">
       <button *ngIf="locked"
-              type="submit" md-raised-button color="warn"
+              type="submit" mat-raised-button color="warn"
               (click)="unlock()" >
         <i class="fa fa-unlock-alt" aria-hidden="true"></i>
         Editar Proveedor
       </button>
     </ng-template>
     <button *ngIf="createMode"
-            type="submit" md-raised-button color="accent">
+            type="submit" mat-raised-button color="accent">
       Crear Proveedor
     </button>
     <button *ngIf="updateMode && !locked"
-            type="submit" md-raised-button color="accent">
+            type="submit" mat-raised-button color="accent">
       Actualizar Proveedor
     </button>
     <button *ngIf="deleteMode && !locked"
-            type="submit" md-raised-button color="accent">
+            type="submit" mat-raised-button color="accent">
       Eliminar Proveedor
     </button>
-    <button type="button" md-raised-button=""
+    <button type="button" mat-raised-button=""
             (click)="close()" >
       Cerrar
     </button>
-  </md-dialog-actions>
+  </mat-dialog-actions>
 </form>
 

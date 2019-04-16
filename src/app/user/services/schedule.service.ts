@@ -1,8 +1,9 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {ReplaySubject, Observable} from 'rxjs';
 import {Schedule} from '../classes/schedule';
 import {ApiHttp} from '../../shared/services/api-http';
-import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class ScheduleService {
@@ -16,23 +17,23 @@ export class ScheduleService {
   }
 
   getCurrent(): Observable<Schedule> {
-    return this.apiHttp.get(this.basePath + 'current')
-      .map( json => {return new Schedule().parse(json.schedule); });
+    return this.apiHttp.get(this.basePath + 'current').pipe(
+      map( json => {return new Schedule().parse(json.schedule); }));
   }
 
   post(branch_id, initial_amount) {
-    return this.apiHttp.post(this.basePath + branch_id , {initial_amount: initial_amount})
-      .map(json => new Schedule().parse(json.schedule));
+    return this.apiHttp.post(this.basePath + branch_id , {initial_amount: initial_amount}).pipe(
+      map(json => new Schedule().parse(json.schedule)));
   }
 
   putNote(schedule_id, note) {
-    return this.apiHttp.put(this.basePath + 'note/' + schedule_id, {note: note})
-      .map(json => new Schedule().parse(json.schedule));
+    return this.apiHttp.put(this.basePath + 'note/' + schedule_id, {note: note}).pipe(
+      map(json => new Schedule().parse(json.schedule)));
   }
 
   finish(final_amount: number) {
-    return this.apiHttp.put(this.basePath, {final_amount: final_amount})
-      .map(json => new Schedule().parse(json.schedule));
+    return this.apiHttp.put(this.basePath, {final_amount: final_amount}).pipe(
+      map(json => new Schedule().parse(json.schedule)));
   }
 
   getCurrentSchedule() {

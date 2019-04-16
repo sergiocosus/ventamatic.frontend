@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {BuyService} from 'app/buy/services/buy.service';
 import {ProductBuy} from '../../buy/classes/product-buy.model';
 import {BeginBuyComponent, BeginBuyDataInterface} from '../../buy/components/begin-buy/begin-buy.component';
@@ -40,7 +40,7 @@ export class BuyComponent implements OnInit {
 
   constructor(private buyService: BuyService,
               private notify: NotifyService,
-              private dialog: MdDialog) {}
+              private dialog: MatDialog) {}
 
   ngOnInit() {
   }

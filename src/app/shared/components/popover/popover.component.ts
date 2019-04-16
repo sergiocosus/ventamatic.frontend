@@ -1,7 +1,14 @@
 import {
-  Component, OnInit, HostListener, ElementRef, style, animate, transition, trigger, state,
+  Component, OnInit, HostListener, ElementRef,
   Input
 } from '@angular/core';
+import {
+  animate,
+  state,
+  style,
+  transition,
+  trigger
+} from '@angular/animations';
 
 @Component({
   selector: 'app-popover',

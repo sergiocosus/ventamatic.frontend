@@ -1,13 +1,15 @@
+
+import {map} from 'rxjs/operators';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Product} from '../../product/classes/product';
 import {ProductService} from '../../product/services/product.service';
 import {NotifyService} from '../../shared/services/notify.service';
-import {MdDialog, MdPaginator, MdSort} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort} from '@angular/material';
 import {ProductDialogComponent} from '../../product/components/product-dialog/product-dialog.component';
 import {BasicEntityDialogComponent} from '../../various/components/basic-entity-dialog/basic-entity-dialog.component';
 import {ReportDataSource} from '../../report/classes/report-data-source';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {Brand} from '../../brand/brand';
 import {Category} from '../../category/category';
 import {units} from 'app/shared/unit/units.data';
@@ -22,8 +24,8 @@ import {Unit} from '../../product/classes/unit.model';
   styleUrls: ['productos.component.scss']
 })
 export class ProductosComponent implements OnInit {
-  @ViewChild(MdPaginator) paginator: MdPaginator;
-  @ViewChild(MdSort) sort: MdSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   public products: Product[];
   public deletedControl = new FormControl();
@@ -37,7 +39,7 @@ export class ProductosComponent implements OnInit {
 
   constructor(private productService: ProductService,
               private notify: NotifyService,
-              private dialog: MdDialog,
+              private dialog: MatDialog,
               private fb: FormBuilder,
               private categoryService: CategoryService,
               private brandService: BrandService) {
@@ -68,13 +70,13 @@ export class ProductosComponent implements OnInit {
           case 'unit': return [a.unit.name, b.unit.name, 'number'];
         }
       },
-      this.form.valueChanges.map(formData => {
+      this.form.valueChanges.pipe(map(formData => {
           return {
             formData: formData,
             filter: this.fieldIsOk.bind(this)
           };
         }
-      )
+      ))
     );
 
     this.dataSourceObservable = this.dataSource.connect();

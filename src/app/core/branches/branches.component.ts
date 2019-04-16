@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {BranchDialogComponent} from '../../branch/components/branch-dialog/branch-dialog.component';
 import {Branch} from '../../branch/models/branch';
 import {BranchService} from '../../branch/services/branch.service';
@@ -15,7 +15,7 @@ export class BranchesComponent implements OnInit {
 
   constructor(private branchService: BranchService,
               private notify: NotifyService,
-              private dialog: MdDialog) {}
+              private dialog: MatDialog) {}
 
   ngOnInit(): any {
     this.branchService.getAllCached().subscribe(

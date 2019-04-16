@@ -1,13 +1,12 @@
-import {EventEmitter, Injectable} from '@angular/core';
-import {Headers, Http, Response} from '@angular/http';
-import {Router} from '@angular/router';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
-import {Observable} from 'rxjs/Observable';
-import {LocalStorageService} from '../../shared/services/local-storage.service';
-import {environment} from '../../../environments/environment';
-import {UserService} from '../../user/services/user.service';
-import {ApiHttp} from '../../shared/services/api-http';
-import {User} from '../../user/classes/user';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { Observable, ReplaySubject } from 'rxjs';
+import { LocalStorageService } from '../../shared/services/local-storage.service';
+import { environment } from '../../../environments/environment';
+import { UserService } from '../../user/services/user.service';
+import { ApiHttp } from '../../shared/services/api-http';
+import { User } from '../../user/classes/user';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class AuthService {
@@ -16,7 +15,7 @@ export class AuthService {
   private hasLogoutEvent = new EventEmitter;
 
   constructor(private apiHttp: ApiHttp,
-              private http: Http,
+              private http: HttpClient,
               private userService: UserService,
               private localStorage: LocalStorageService,
               private router: Router) {
@@ -24,21 +23,19 @@ export class AuthService {
 
   login(username, password) {
     return new Observable<User>((subscriber) => {
-      const headers = new Headers();
-      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+      const headers = new HttpHeaders().append('Content-Type', 'application/x-www-form-urlencoded');
 
-      const urlSearchParams = new URLSearchParams();
-      urlSearchParams.append('grant_type', 'password');
-      urlSearchParams.append('client_id', environment.apiClientID);
-      urlSearchParams.append('client_secret', environment.apiClientSecret);
-      urlSearchParams.append('username', username);
-      urlSearchParams.append('password', password);
+      const urlSearchParams = new HttpParams()
+        .append('grant_type', 'password')
+        .append('client_id', environment.apiClientID)
+        .append('client_secret', environment.apiClientSecret)
+        .append('username', username)
+        .append('password', password);
       const body = urlSearchParams.toString();
 
-      this.http.post(environment.apiUrl + 'oauth/token', body, {headers: headers}).subscribe(
+      this.http.post(environment.apiUrl + 'oauth/token', body, {headers}).subscribe(
         data => {
-          const json = data.json();
-          this.localStorage.set('access_token', json.access_token);
+          this.localStorage.set('access_token', data['access_token']);
 
           this.updateLoggedUserObservable().subscribe(
             user => {
@@ -61,7 +58,8 @@ export class AuthService {
 
   logout() {
     this.localStorage.remove('access_token');
-    this.updateLoggedUserObservable({logout: true}).subscribe(() => { });
+    this.updateLoggedUserObservable({logout: true}).subscribe(() => {
+    });
     this.hasLogoutEvent.emit();
   }
 
@@ -92,8 +90,8 @@ export class AuthService {
             obs.complete();
           },
           error => {
-            console.error(error);
-            if (error.code === 401) {
+            console.error(error.error);
+            if (error.error.code === 401) {
               this.loggedUser = null;
               this.loggedUserReplaySubject.next(this.loggedUser);
             }
@@ -102,7 +100,7 @@ export class AuthService {
             //  this.noty.alert(this.messages.sessionExpired);
             //  this.logout();
             // }
-            obs.error(error);
+            obs.error(error.error);
             obs.complete();
           }
         );

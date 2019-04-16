@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/Rx';
 import {LocalStorageService} from './services/local-storage.service';
 import {
-  MdAutocompleteModule,
-  MdButtonModule, MdCheckboxModule, MdDialogModule, MdInputModule, MdPaginatorModule, MdRadioModule,
-  MdSelectModule, MdSortModule, MdTooltipModule
+  MatAutocompleteModule,
+  MatButtonModule, MatCheckboxModule, MatDialogModule, MatInputModule, MatPaginatorModule, MatRadioModule,
+  MatSelectModule, MatSortModule, MatTooltipModule
 } from '@angular/material';
 import {SelectableComponent} from './components/selectable/selectable.component';
 import {AutocompleteInputComponent} from './components/autocomplete-input/autocomplete-input.component';
@@ -28,19 +28,19 @@ import {ResponsiveModule} from 'ng2-responsive';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MdCheckboxModule,
-    MdButtonModule,
-    MdInputModule,
-    MdSelectModule,
-    MdRadioModule,
-    MdDialogModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatDialogModule,
     MyDateRangePickerModule,
-    MdTooltipModule,
+    MatTooltipModule,
     SimpleNotificationsModule,
     ResponsiveModule,
-    MdPaginatorModule,
-    MdSortModule,
-    MdAutocompleteModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatAutocompleteModule,
   ],
   declarations: [
     SelectableComponent,
@@ -67,16 +67,16 @@ import {ResponsiveModule} from 'ng2-responsive';
 
     SelectableComponent,
     PopoverComponent,
-    MdCheckboxModule,
-    MdButtonModule,
-    MdInputModule,
-    MdSelectModule,
-    MdRadioModule,
-    MdDialogModule,
-    MdTooltipModule,
-    MdPaginatorModule,
-    MdSortModule,
-    MdAutocompleteModule,
+    MatCheckboxModule,
+    MatButtonModule,
+    MatInputModule,
+    MatSelectModule,
+    MatRadioModule,
+    MatDialogModule,
+    MatTooltipModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatAutocompleteModule,
     MyDateRangePickerModule,
 
     AutocompleteInputComponent,

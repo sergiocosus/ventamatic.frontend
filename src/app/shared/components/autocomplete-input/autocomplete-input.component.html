@@ -1,5 +1,5 @@
-<md-input-container>
-  <input mdInput class="dark" placeholder="Buscar por descripción"
+<mat-form-field>
+  <input matInput class="dark" placeholder="Buscar por descripción"
          (window:click)="hideSearch($event)"
          [(ngModel)]="search_words"
          [formControl]="searchControl"
@@ -7,7 +7,7 @@
          (focus)="showSearch()"
          autocomplete="off"
          [tabindex]="tab_index"/>
-</md-input-container>
+</mat-form-field>
 <div class="search-list"
      [hidden]="searchHidden || !search_words.length">
   <table>

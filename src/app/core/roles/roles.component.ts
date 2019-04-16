@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {RoleService} from '../../rol/services/role.service';
 import {BranchRoleService} from '../../rol/services/branch-role.service';
 import {NotifyService} from '../../shared/services/notify.service';
@@ -20,7 +20,7 @@ export class RolesComponent implements OnInit {
   constructor(private roleService: RoleService,
               private branchRoleService: BranchRoleService,
               private notify: NotifyService,
-              private dialog: MdDialog) {}
+              private dialog: MatDialog) {}
 
   ngOnInit() {
     this.roleService.getAllCached().subscribe(

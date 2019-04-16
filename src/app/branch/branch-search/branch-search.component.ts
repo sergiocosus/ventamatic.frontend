@@ -1,3 +1,5 @@
+
+import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import {Component, OnInit, ViewChild, HostListener, Output, EventEmitter} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Branch} from '../models/branch';
@@ -30,7 +32,7 @@ export class BranchSearchComponent implements OnInit {
               private notify: NotifyService) {
 
 
-    this.nameControl.valueChanges.debounceTime(250).distinctUntilChanged()
+    this.nameControl.valueChanges.pipe(debounceTime(250),distinctUntilChanged(),)
       .subscribe(value => {
         this.startLoading();
         if (!value  || value === '' ) { return; }

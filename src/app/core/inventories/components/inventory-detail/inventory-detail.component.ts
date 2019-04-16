@@ -1,13 +1,15 @@
+
+import {map} from 'rxjs/operators';
 import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Inventory} from '../../../../inventory/classes/inventory.model';
 import {InventoryService} from '../../../../inventory/services/inventory.service';
 import {NotifyService} from '../../../../shared/services/notify.service';
-import {MdDialog, MdPaginator, MdSort} from '@angular/material';
+import {MatDialog, MatPaginator, MatSort} from '@angular/material';
 import {InventoryQuantityDialogComponent} from '../../../../inventory/components/inventory-quantity-dialog/inventory-quantity-dialog.component';
 import {InventoryEditDialogComponent} from '../../../../inventory/components/inventory-edit-dialog/inventory-edit-dialog.component';
 import {ReportDataSource} from '../../../../report/classes/report-data-source';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {CategoryService} from '../../../../category/category.service';
 import {BrandService} from '../../../../brand/brand.service';
@@ -21,8 +23,8 @@ import {units} from '../../../../shared/unit/units.data';
   styleUrls: ['./inventory-detail.component.scss'],
 })
 export class InventoryDetailComponent implements OnInit, OnDestroy {
-  @ViewChild(MdPaginator) paginator: MdPaginator;
-  @ViewChild(MdSort) sort: MdSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   form: FormGroup;
 
@@ -42,7 +44,7 @@ export class InventoryDetailComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute,
               private inventoryService: InventoryService,
               private notify: NotifyService,
-              private dialog: MdDialog,
+              private dialog: MatDialog,
               private router: Router,
               private fb: FormBuilder,
               private categoryService: CategoryService,
@@ -110,13 +112,13 @@ export class InventoryDetailComponent implements OnInit, OnDestroy {
           case 'unit': return [a.product.unit.name, b.product.unit.name, 'string'];
         }
       },
-      this.form.valueChanges.map(formData => {
+      this.form.valueChanges.pipe(map(formData => {
           return {
             formData: formData,
             filter: this.fieldIsOk.bind(this)
           };
         }
-      )
+      ))
     );
 
     this.dataSourceObservable = this.dataSource.connect();

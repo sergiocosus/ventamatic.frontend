@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {User} from '../../user/classes/user';
 import {SubscriptionManager} from '../../shared/classes/subscription-manager';
 import {AuthService} from '../../auth/services/auth.service';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {PasswordDialogComponent} from '../../user/components/password-dialog/password-dialog.component';
 
 @Component({
@@ -16,7 +16,7 @@ export class MyAccountComponent implements OnInit, OnDestroy {
   private sub = new SubscriptionManager();
 
   constructor(private authService: AuthService,
-              private dialog: MdDialog) { }
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     const subUser = this.authService.getLoggedUser().subscribe(

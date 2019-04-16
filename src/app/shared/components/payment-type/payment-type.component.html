@@ -1,20 +1,20 @@
 <h5>Tipo de pago:</h5>
-<md-radio-group [(ngModel)]="selectedPaymentType.payment_type_id" required
+<mat-radio-group [(ngModel)]="selectedPaymentType.payment_type_id" required
                 name="payment_type_id" placeholder="Tipo de Pago">
-  <md-radio-button [value]="1">
+  <mat-radio-button [value]="1">
     <i class="fa fa-money" aria-hidden="true"></i>
     Efectivo
-  </md-radio-button>
-  <md-radio-button [value]="2">
+  </mat-radio-button>
+  <mat-radio-button [value]="2">
     <i class="fa fa-credit-card-alt" aria-hidden="true"></i>
     Tarjeta
-  </md-radio-button>
-</md-radio-group>
+  </mat-radio-button>
+</mat-radio-group>
 
-<md-input-container *ngIf="selectedPaymentType.payment_type_id == 2" >
-  <input mdInput placeholder="Folio de la transacción electrónica"
+<mat-form-field *ngIf="selectedPaymentType.payment_type_id == 2" >
+  <input matInput placeholder="Folio de la transacción electrónica"
          class="dark"
          [(ngModel)]="selectedPaymentType.card_payment_id"
          name="card_payment_id"
          required>
-</md-input-container>
+</mat-form-field>

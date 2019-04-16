@@ -1,11 +1,11 @@
 <h5>Producto</h5>
-<md-input-container>
-  <input mdInput [(ngModel)]="bar_code" name="bar_code" class="dark"
+<mat-form-field>
+  <input matInput [(ngModel)]="bar_code" name="bar_code" class="dark"
          placeholder="Código de barras"
           (keyup.enter)="barCodeEntered()"
          autocomplete="off"
          #barCodeInput [tabindex]="tab_index" />
-</md-input-container>
+</mat-form-field>
 <app-autocomplete-input
   (selected)="selectedProduct.emit($event)"
   [searchMethod]="searchMethod"
@@ -13,13 +13,13 @@
   [tab_index]="tab_index"
 >
 </app-autocomplete-input>
-<md-input-container>
-  <input mdInput [(ngModel)]="product_id"
+<mat-form-field>
+  <input matInput [(ngModel)]="product_id"
          placeholder="Id de producto"
          name="product_id" class="dark"
          [type]="'number'"
          autocomplete="off"
          [min]="1" [step]="1" [tabindex]="tab_index"
          (keyup)="idEntered($event)">
-</md-input-container>
+</mat-form-field>
 

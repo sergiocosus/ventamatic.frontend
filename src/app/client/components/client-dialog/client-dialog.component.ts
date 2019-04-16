@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {Client} from '../../classes/client';
 import {ClientService} from '../../services/client.service';
 import {CrudModalComponent} from '../../../shared/components/crud-modal/crud-modal.component';
@@ -16,7 +16,7 @@ export class ClientDialogComponent extends CrudModalComponent {
 
   constructor(protected clientService: ClientService,
               protected notify: NotifyService,
-              protected dialogRef: MdDialogRef<ClientDialogComponent>) {
+              protected dialogRef: MatDialogRef<ClientDialogComponent>) {
     super(notify, dialogRef);
   }
 

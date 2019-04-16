@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../../services/user.service';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NotifyService} from '../../../shared/services/notify.service';
 
@@ -13,7 +13,7 @@ export class PasswordDialogComponent implements OnInit {
   form: FormGroup;
 
   constructor(private userService: UserService,
-              private dialogRef: MdDialogRef<PasswordDialogComponent>,
+              private dialogRef: MatDialogRef<PasswordDialogComponent>,
               private fb: FormBuilder,
               private notify: NotifyService) {
     this.form = fb.group({

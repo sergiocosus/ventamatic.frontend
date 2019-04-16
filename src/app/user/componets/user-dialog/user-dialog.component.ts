@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {CrudModalComponent} from '../../../shared/components/crud-modal/crud-modal.component';
 import {NotifyService} from '../../../shared/services/notify.service';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {User} from '../../classes/user';
 import {UserService} from '../../services/user.service';
 
@@ -18,7 +18,7 @@ export class UserDialogComponent extends CrudModalComponent implements OnInit {
 
   constructor(protected userService: UserService,
               protected notify: NotifyService,
-              protected dialogRef: MdDialogRef<UserDialogComponent>) {
+              protected dialogRef: MatDialogRef<UserDialogComponent>) {
     super(notify, dialogRef);
   }
 

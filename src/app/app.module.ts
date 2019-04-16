@@ -1,10 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {CommonModule, DecimalPipe} from '@angular/common';
-import { HttpModule } from '@angular/http';
 import {SimpleNotificationsModule} from 'angular2-notifications';
 import {routing, appRoutingProviders} from './app.routing';
-import { CsvService } from 'angular2-json2csv';
 import {SharedModule} from './shared/shared.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {AuthModule} from './auth/auth.module';
@@ -22,6 +20,7 @@ import {ReportModule} from './report/report.module';
 import {RolModule} from './rol/rol.module';
 import {SupplierModule} from './supplier/supplier.module';
 import {CacheManagerService} from './shared/services/cache-manager.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -33,7 +32,7 @@ import {CacheManagerService} from './shared/services/cache-manager.service';
     BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
-    HttpModule,
+    HttpClientModule,
     SimpleNotificationsModule.forRoot(),
     AuthModule.forRoot(),
     UserModule.forRoot(),
@@ -52,7 +51,6 @@ import {CacheManagerService} from './shared/services/cache-manager.service';
   ],
   providers: [
     appRoutingProviders,
-    CsvService,
     DecimalPipe,
     CacheManagerService,
   ],

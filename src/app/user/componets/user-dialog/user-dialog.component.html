@@ -1,91 +1,91 @@
-<h4 md-dialog-title *ngIf="createMode"> Añadir Usuario </h4>
-<h4 md-dialog-title *ngIf="updateMode"> Editar Usuario </h4>
-<h4 md-dialog-title *ngIf="deleteMode"> Eliminar Usuario </h4>
+<h4 mat-dialog-title *ngIf="createMode"> Añadir Usuario </h4>
+<h4 mat-dialog-title *ngIf="updateMode"> Editar Usuario </h4>
+<h4 mat-dialog-title *ngIf="deleteMode"> Eliminar Usuario </h4>
 <form (ngSubmit)="submit()" ngNativeValidate>
-  <md-dialog-content *ngIf="!deleteMode && !!user">
-    <md-input-container>
-      <input mdInput placeholder="Código de usuario"
+  <mat-dialog-content *ngIf="!deleteMode && !!user">
+    <mat-form-field>
+      <input matInput placeholder="Código de usuario"
              type="text" required="required"  name="username"
              [(ngModel)]="user.username" [disabled]="updateMode">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Nombre"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Nombre"
              type="text" [(ngModel)]="user.name" name="name"
              required [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Apellido Paterno"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Apellido Paterno"
              type="text" [(ngModel)]="user.last_name"  name="last_name" [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Apellido Materno"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Apellido Materno"
              type="text" [(ngModel)]="user.last_name_2"  name="last_name_2"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Email"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email"
              type="email" [(ngModel)]="user.email"  name="email"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Teléfono"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Teléfono"
              type="text" [(ngModel)]="user.phone" name="phone"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Celular"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Celular"
              type="text" [(ngModel)]="user.cellphone" name="cellphone"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Dirección"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Dirección"
              type="text" [(ngModel)]="user.address" name="address"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="RFC"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="RFC"
              type="text" [(ngModel)]="user.rfc" name="rfc"
              [disabled]="locked">
-    </md-input-container>
+    </mat-form-field>
 
-    <md-input-container *ngIf="createMode">
-      <input mdInput placeholder="Contraseña"
+    <mat-form-field *ngIf="createMode">
+      <input matInput placeholder="Contraseña"
              type="password" name="password"
              [(ngModel)]="user.password" required>
-    </md-input-container>
-    <md-input-container *ngIf="createMode">
-      <input mdInput placeholder="Confirmar contraseña"
+    </mat-form-field>
+    <mat-form-field *ngIf="createMode">
+      <input matInput placeholder="Confirmar contraseña"
              type="password" name="password_confirm"
              [(ngModel)]="password_confirm" required>
-    </md-input-container>
+    </mat-form-field>
 
-  </md-dialog-content>
+  </mat-dialog-content>
 
-  <md-dialog-actions>
+  <mat-dialog-actions>
     <ng-template [appUserCan]="'user-edit'">
       <button *ngIf="locked"
-              type="submit" md-raised-button color="warn"
+              type="submit" mat-raised-button color="warn"
               (click)="unlock()" >
         <i class="fa fa-unlock-alt" aria-hidden="true"></i>
         Editar Usuario
       </button>
     </ng-template>
     <button *ngIf="createMode"
-            type="submit" md-raised-button color="accent">
+            type="submit" mat-raised-button color="accent">
       Crear Usuario
     </button>
     <button *ngIf="updateMode && !locked"
-            type="submit" md-raised-button color="accent">
+            type="submit" mat-raised-button color="accent">
       Actualizar Usuario
     </button>
     <button *ngIf="deleteMode && !locked"
-            type="submit" md-raised-button color="warn">
+            type="submit" mat-raised-button color="warn">
       Eliminar Usuario
     </button>
-    <button type="button" md-raised-button md-dialog-close>
+    <button type="button" mat-raised-button mat-dialog-close>
       <i class="fa fa-times" aria-hidden="true"></i>
       Cerrar
     </button>
-  </md-dialog-actions>
+  </mat-dialog-actions>
 </form>
 

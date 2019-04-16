@@ -1,53 +1,53 @@
 <app-search-bar class="dark-theme">
   <form (submit)="submit()" ngNativeValidate>
 
-    <md-input-container class="id-field">
-      <input mdInput placeholder="ID de sucursal"
+    <mat-form-field class="id-field">
+      <input matInput placeholder="ID de sucursal"
              [(ngModel)]="request.branch_id"
              name="branch_id" type="number">
-    </md-input-container>
+    </mat-form-field>
 
     <app-branch-search class="search-button"
       (selected)="request.branch_id = $event.id"></app-branch-search>
 
-    <md-input-container class="id-field">
-      <input mdInput placeholder="ID de producto"
+    <mat-form-field class="id-field">
+      <input matInput placeholder="ID de producto"
              [(ngModel)]="request.product_id"
              name="product_id" type="number">
-    </md-input-container>
+    </mat-form-field>
 
     <app-product-search class="search-button"
                         (selected)="request.product_id = $event.id"></app-product-search>
 
-    <md-input-container class="id-field">
-      <input mdInput placeholder="Cantidad"
+    <mat-form-field class="id-field">
+      <input matInput placeholder="Cantidad"
              [(ngModel)]="request.quantity"
              name="quantity" type="number">
-    </md-input-container>
+    </mat-form-field>
 
-    <md-input-container class="id-field">
-      <input mdInput placeholder="Precio"
+    <mat-form-field class="id-field">
+      <input matInput placeholder="Precio"
              [(ngModel)]="request.price"
              name="price" type="number">
-    </md-input-container>
+    </mat-form-field>
 
-    <md-input-container class="id-field">
-      <input mdInput placeholder="Mínimo"
+    <mat-form-field class="id-field">
+      <input matInput placeholder="Mínimo"
              [(ngModel)]="request.minimum"
              name="minimum" type="number">
-    </md-input-container>
+    </mat-form-field>
 
-    <md-input-container class="id-field">
-      <input mdInput placeholder="Fecha"
+    <mat-form-field class="id-field">
+      <input matInput placeholder="Fecha"
              [(ngModel)]="request.date"
              name="date" type="text">
-    </md-input-container>
+    </mat-form-field>
 
-    <button md-raised-button color="primary" type="submit">
+    <button mat-raised-button color="primary" type="submit">
       <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
       Consultar
     </button>
-    <button md-raised-button color="primary" type="button" (click)="downloadCSV()">
+    <button mat-raised-button color="primary" type="button" (click)="downloadCSV()">
       <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
       CSV
     </button>
@@ -64,12 +64,12 @@
   </ul>
 
   <div class="table-container mat-elevation-z8">
-    <md-paginator #paginator
+    <mat-paginator #paginator
                   [length]="dataSource ? dataSource.data.length : []"
                   [pageIndex]="0"
                   [pageSize]="50"
                   [pageSizeOptions]="[50, 100, 200, 500, 1000, 10000]">
-    </md-paginator>
+    </mat-paginator>
     <table>
       <thead>
       <tr>

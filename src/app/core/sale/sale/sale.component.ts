@@ -1,8 +1,10 @@
+
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { FormControl} from '@angular/forms';
 import {Inventory} from '../../../inventory/classes/inventory.model';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {ConfirmDialogComponent} from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import {FindProductComponent} from '../../../product/components/find-product/find-product.component';
 import {Branch} from '../../../branch/models/branch';
@@ -65,7 +67,7 @@ export class SaleComponent implements OnInit, OnDestroy {
               private router: Router,
               private scheduleService: ScheduleService,
               private ticketService: TicketService,
-              private dialog: MdDialog,
+              private dialog: MatDialog,
   ) {
     this.initClientIdControl();
   }
@@ -96,13 +98,13 @@ export class SaleComponent implements OnInit, OnDestroy {
   }
 
   private initClientIdControl() {
-    this.clientIdControl.valueChanges.distinctUntilChanged()
+    this.clientIdControl.valueChanges.pipe(distinctUntilChanged())
       .subscribe(value => {
         this.client = null;
         this.client_status = this.messages.searching;
       });
 
-    this.clientIdControl.valueChanges.debounceTime(250).distinctUntilChanged()
+    this.clientIdControl.valueChanges.pipe(debounceTime(250),distinctUntilChanged(),)
       .subscribe(value => {
         this.clientService.get(value).subscribe(
           client => {

@@ -2,7 +2,7 @@ import {Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef} f
 import {NotificationsService} from 'angular2-notifications';
 import {Inventory} from '../../../inventory/classes/inventory.model';
 import {InventoryService} from '../../../inventory/services/inventory.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {Product} from '../../classes/product';
 import {ProductService} from '../../services/product.service';
 

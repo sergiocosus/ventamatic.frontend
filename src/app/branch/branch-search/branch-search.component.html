@@ -1,10 +1,10 @@
 <app-popover [focusable]="focusable">
   <form ngNativeValidate>
-    <md-input-container class="dark-theme">
-      <input mdInput placeholder="Nombre" autocomplete="off"
+    <mat-form-field class="dark-theme">
+      <input matInput placeholder="Nombre" autocomplete="off"
              [(ngModel)]="name" class="dark" type="text"
              [formControl]="nameControl" #focusable>
-    </md-input-container>
+    </mat-form-field>
   </form>
   <app-selectable [items]="branches"
                   [loading]="loading"

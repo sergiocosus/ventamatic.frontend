@@ -5,14 +5,14 @@
   {{productSale.inventory.current_price | myCurrency}}
 </td>
 <td>
-  <md-input-container class="dark-theme">
-    <input #input class="quantity" mdInput tabindex="5" required
+  <mat-form-field class="dark-theme">
+    <input #input class="quantity" matInput tabindex="5" required
            type="number"
            [max]="productSale.inventory.quantity"
            [min]="productSale.inventory.product.unitData.step"
            [step]="productSale.inventory.product.unitData.step"
            [(ngModel)]="productSale.quantity"/>
-  </md-input-container>
+  </mat-form-field>
 </td>
 <td class="align-right">
   {{productSale.quantity * productSale.inventory.current_price

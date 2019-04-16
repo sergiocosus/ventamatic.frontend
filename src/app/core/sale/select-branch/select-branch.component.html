@@ -3,18 +3,18 @@
     <i class="fa fa-clock-o fa" aria-hidden="true"></i>
     Iniciar Turno
   </h2>
-  <md-select [(ngModel)]="selectedBranch" name="selectedBranch"
+  <mat-select [(ngModel)]="selectedBranch" name="selectedBranch"
              placeholder="Sucursal">
-    <md-option *ngFor="let branch of branches" [value]="branch">
+    <mat-option *ngFor="let branch of branches" [value]="branch">
       {{branch.name}}
-    </md-option>
-  </md-select>
-  <md-input-container>
-    <input mdInput required="required"
+    </mat-option>
+  </mat-select>
+  <mat-form-field>
+    <input matInput required="required"
            placeholder="Monto inicial"
            type="number" name="initial_amount"
            [(ngModel)]="initial_amount">
-  </md-input-container>
+  </mat-form-field>
   <button class="btn btn-primary" type="submit">
     Iniciar turno
   </button>

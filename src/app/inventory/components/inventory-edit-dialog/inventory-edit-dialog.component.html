@@ -1,44 +1,44 @@
-<h4 md-dialog-title>
+<h4 mat-dialog-title>
   Editar datos de producto por sucursal
 </h4>
 
-<md-dialog-content>
+<mat-dialog-content>
   <form (ngSubmit)="submit()" [formGroup]="form">
-    <md-card>
-      <md-input-container>
-        <input mdInput formControlName="price" placeholder="Precio en esta sucursal">
-        <md-hint>
+    <mat-card>
+      <mat-form-field>
+        <input matInput formControlName="price" placeholder="Precio en esta sucursal">
+        <mat-hint>
           Precio Global {{inventory.product.price}}
-        </md-hint>
-      </md-input-container>
-      <button md-raised-button color="primary" (click)="setGlobalPrice()" type="button">
+        </mat-hint>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="setGlobalPrice()" type="button">
         Usar precio global
       </button>
-    </md-card>
+    </mat-card>
 
-    <md-card>
-      <md-input-container>
-        <input mdInput formControlName="minimum"
+    <mat-card>
+      <mat-form-field>
+        <input matInput formControlName="minimum"
                placeholder="Mínimo en esta sucursal">
-        <md-hint>
+        <mat-hint>
           Mínimo Global {{inventory.product.global_minimum}}
-        </md-hint>
-      </md-input-container>
-      <button md-raised-button color="primary" (click)="setGlobalMinimum()" type="button">
+        </mat-hint>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="setGlobalMinimum()" type="button">
         Usar mínimo global
       </button>
-    </md-card>
+    </mat-card>
 
-    <md-card>
-      <md-form-field>
-        <span mdPrefix>$</span>
-        <input mdInput formControlName="last_cost"
+    <mat-card>
+      <mat-form-field>
+        <span matPrefix>$</span>
+        <input matInput formControlName="last_cost"
                placeholder="Último costo">
-      </md-form-field>
-    </md-card>
+      </mat-form-field>
+    </mat-card>
 
-    <button md-raised-button color="accent">
+    <button mat-raised-button color="accent">
       Actualzar
     </button>
   </form>
-</md-dialog-content>
+</mat-dialog-content>

@@ -1,3 +1,5 @@
+
+import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import {Component, OnInit, Output, EventEmitter, Input, ElementRef} from '@angular/core';
 import { FormControl } from '@angular/forms';
 
@@ -21,7 +23,7 @@ export class AutocompleteInputComponent implements OnInit {
   searching = false;
 
   constructor(private elementRef: ElementRef) {
-    this.searchControl.valueChanges.debounceTime(250).distinctUntilChanged()
+    this.searchControl.valueChanges.pipe(debounceTime(250),distinctUntilChanged(),)
       .subscribe(value => {
         this.search(value);
       });

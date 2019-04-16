@@ -1,57 +1,57 @@
-<h4 md-dialog-title *ngIf="createMode"> Añadir Cliente </h4>
-<h4 md-dialog-title *ngIf="updateMode"> Editar Cliente </h4>
-<h4 md-dialog-title *ngIf="deleteMode"> Eliminar Cliente </h4>
+<h4 mat-dialog-title *ngIf="createMode"> Añadir Cliente </h4>
+<h4 mat-dialog-title *ngIf="updateMode"> Editar Cliente </h4>
+<h4 mat-dialog-title *ngIf="deleteMode"> Eliminar Cliente </h4>
 
 <form (ngSubmit)="submit()" ngNativeValidate>
-  <md-dialog-content *ngIf="!deleteMode && !!client">
+  <mat-dialog-content *ngIf="!deleteMode && !!client">
 
-    <md-input-container *ngIf="updateMode" >
-      <input mdInput placeholder="Id"  name="id"
+    <mat-form-field *ngIf="updateMode" >
+      <input matInput placeholder="Id"  name="id"
              type="text" [(ngModel)]="client.id" disabled="disabled">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Nombre"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Nombre"
              type="text" [(ngModel)]="client.name" name="name"
              [disabled]="locked" required>
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Apellido Paterno"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Apellido Paterno"
              type="text" [(ngModel)]="client.last_name" name="last_name"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Apellido Materno"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Apellido Materno"
              type="text" [(ngModel)]="client.last_name_2" name="last_name_2"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Email"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email"
              type="email" [(ngModel)]="client.email" name="email"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Teléfono"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Teléfono"
              type="text" [(ngModel)]="client.phone" name="phone"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Celular"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Celular"
              type="text" [(ngModel)]="client.cellphone" name="cellphone"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Dirección"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Dirección"
              type="text" [(ngModel)]="client.address" name="address"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="RFC"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="RFC"
              type="text" [(ngModel)]="client.rfc" name="rfc"
              [disabled]="locked">
-    </md-input-container>
-  </md-dialog-content>
+    </mat-form-field>
+  </mat-dialog-content>
 
-  <md-dialog-actions>
+  <mat-dialog-actions>
     <ng-template appUserCan="client-edit">
       <button *ngIf="locked"
               type="submit" class="btn btn-danger pull-xs-left"
@@ -62,20 +62,20 @@
     </ng-template>
 
     <button *ngIf="createMode"
-            type="submit" md-raised-button color="accent">
+            type="submit" mat-raised-button color="accent">
       Crear Cliente
     </button>
     <button *ngIf="updateMode && !locked"
-            type="submit" md-raised-button color="accent" >
+            type="submit" mat-raised-button color="accent" >
       Actualizar Cliente
     </button>
     <button *ngIf="deleteMode && !locked"
-            type="submit" md-raised-button color="warn">
+            type="submit" mat-raised-button color="warn">
       Eliminar Cliente
     </button>
-    <button type="button" md-raised-button md-dialog-close>
+    <button type="button" mat-raised-button mat-dialog-close>
       Cerrar
     </button>
-  </md-dialog-actions>
+  </mat-dialog-actions>
 </form>
 

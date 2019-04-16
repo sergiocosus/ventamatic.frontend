@@ -1,61 +1,61 @@
-<h4 *ngIf="createMode" md-dialog-title> Añadir rol de sucursal </h4>
+<h4 *ngIf="createMode" mat-dialog-title> Añadir rol de sucursal </h4>
 <h4 *ngIf="updateMode" mt-dialog-title> Editar rol de sucursal </h4>
-<h4 *ngIf="deleteMode" md-dialog-title> Eliminar rol de sucursal </h4>
+<h4 *ngIf="deleteMode" mat-dialog-title> Eliminar rol de sucursal </h4>
 
 <form (ngSubmit)="submit()" ngNativeValidate>
-  <md-dialog-content *ngIf="!deleteMode && !!branchRole">
-    <md-input-container>
-      <input mdInput placeholder="Código"
+  <mat-dialog-content *ngIf="!deleteMode && !!branchRole">
+    <mat-form-field>
+      <input matInput placeholder="Código"
              type="text" [(ngModel)]="branchRole.name" name="name"
              [disabled]="locked" required maxlength="255">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Nombre"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Nombre"
              type="text" [(ngModel)]="branchRole.display_name" name="display_name"
              [disabled]="locked" required maxlength="255">
-    </md-input-container>
-    <md-input-container *ngIf="updateMode">
-      <input mdInput placeholder="Descripción"
+    </mat-form-field>
+    <mat-form-field *ngIf="updateMode">
+      <input matInput placeholder="Descripción"
              type="text" [(ngModel)]="branchRole.description" name="description"
              [disabled]="locked" required>
-    </md-input-container>
+    </mat-form-field>
 
 
     <div class="permissions">
-      <md-checkbox *ngFor="let branchPermission of branchPermissionList"
+      <mat-checkbox *ngFor="let branchPermission of branchPermissionList"
                    type="checkbox" [(ngModel)]="branchPermission.checked" [disabled]="locked"
                    [ngModelOptions]="{standalone: true}" [id]="'checked'+branchPermission.id">
         {{branchPermission.name}}
-      </md-checkbox>
+      </mat-checkbox>
     </div>
-  </md-dialog-content>
+  </mat-dialog-content>
 
-  <md-dialog-actions>
+  <mat-dialog-actions>
     <ng-template [appUserCan]="'branch-role-edit'">
       <button *ngIf="locked"
-              type="submit" md-raised-button color="warn"
+              type="submit" mat-raised-button color="warn"
               (click)="unlock()" >
         <i class="fa fa-unlock-alt" aria-hidden="true"></i>
         Editar rol de sucursal
       </button>
     </ng-template>
     <button *ngIf="createMode"
-            type="submit" md-raised-button color="accent">
+            type="submit" mat-raised-button color="accent">
       Crear rol de sucursal
     </button>
     <button *ngIf="updateMode && !locked"
-            type="submit" md-raised-button color="accent">
+            type="submit" mat-raised-button color="accent">
       Actualizar rol
     </button>
     <button *ngIf="deleteMode && !locked"
-            type="submit" md-raised-button color="warn">
+            type="submit" mat-raised-button color="warn">
       Eliminar rol de sucursal
     </button>
-    <button type="button" md-raised-button
-            md-dialog-close>
+    <button type="button" mat-raised-button
+            mat-dialog-close>
       Cerrar
     </button>
-  </md-dialog-actions>
+  </mat-dialog-actions>
 
 </form>
 

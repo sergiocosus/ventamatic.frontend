@@ -4,7 +4,7 @@ import {ReportService} from '../../../report/report.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {messages} from '../../../shared/classes/messages';
 import {InventoryMovementTypeId} from '../../../inventory/classes/inventory-movement-type-id.enum';
-import {MdPaginator} from '@angular/material';
+import {MatPaginator} from '@angular/material';
 import {ReportDataSource} from '../../../report/classes/report-data-source';
 
 @Component({
@@ -13,7 +13,7 @@ import {ReportDataSource} from '../../../report/classes/report-data-source';
   styleUrls: ['./buy-report.component.scss']
 })
 export class BuyReportComponent implements OnInit {
-  @ViewChild(MdPaginator) paginator: MdPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   buys = [];
 

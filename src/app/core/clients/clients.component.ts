@@ -1,12 +1,14 @@
+
+import {map} from 'rxjs/operators';
 import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {Client} from '../../client/classes/client';
 import {ClientService} from '../../client/services/client.service';
 import {NotifyService} from '../../shared/services/notify.service';
 import {ClientDialogComponent} from '../../client/components/client-dialog/client-dialog.component';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {ReportDataSource} from '../../report/classes/report-data-source';
 
 @Component({
@@ -25,7 +27,7 @@ export class ClientsComponent implements OnInit {
 
   constructor(private clientService: ClientService,
               private notify: NotifyService,
-              private dialog: MdDialog,
+              private dialog: MatDialog,
               private fb: FormBuilder) {
     this.deletedControl.valueChanges.subscribe(
       showDeleted => this.loadClients()
@@ -104,13 +106,13 @@ export class ClientsComponent implements OnInit {
     this.dataSource = new ReportDataSource(
       undefined,
       undefined, undefined,
-      this.form.valueChanges.map(formData => {
+      this.form.valueChanges.pipe(map(formData => {
           return {
             formData: formData,
             filter: this.fieldIsOk.bind(this)
           };
         }
-      )
+      ))
     );
 
     this.dataSourceObservable = this.dataSource.connect();

@@ -4,38 +4,38 @@
 </h3>
 
 <form (submit)="start()" ngNativeValidate class="dark-theme dark-background" >
-  <md-select [(ngModel)]="formData.branch" required
+  <mat-select [(ngModel)]="formatata.branch" required
              placeholder="Sucursal" name="branch">
-    <md-option *ngFor="let branch of branches" [value]="branch">
+    <mat-option *ngFor="let branch of branches" [value]="branch">
       {{branch.name}}
-    </md-option>
-  </md-select>
+    </mat-option>
+  </mat-select>
 
-  <md-select [(ngModel)]="formData.supplier" required
+  <mat-select [(ngModel)]="formatata.supplier" required
              placeholder="Proveedor" name="supplier">
-    <md-option *ngFor="let supplier of suppliers" [value]="supplier">
+    <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
       {{supplier.name}}
-    </md-option>
-  </md-select>
+    </mat-option>
+  </mat-select>
 
-  <md-input-container *ngIf="buyEnvironment.invoiceTotalRestriction">
-    <input [(ngModel)]="formData.introducedAmount" name="amount"
-           mdInput
+  <mat-form-field *ngIf="buyEnvironment.invoiceTotalRestriction">
+    <input [(ngModel)]="formatata.introducedAmount" name="amount"
+           matInput
            placeholder="Total"
            class="dark" type="number" min="0"
            [step]="0.01"  required="required" />
-  </md-input-container>
+  </mat-form-field>
 
-  <md-input-container>
-    <input [(ngModel)]="formData.supplierBillID" name="supplierBillID"
-           mdInput
+  <mat-form-field>
+    <input [(ngModel)]="formatata.supplierBillID" name="supplierBillID"
+           matInput
            placeholder="Número de factura"
            required="required" />
-  </md-input-container>
+  </mat-form-field>
 
 
 
-  <button type="submit"  md-raised-button color="accent">
+  <button type="submit"  mat-raised-button color="accent">
     Iniciar Compra
   </button>
 </form>

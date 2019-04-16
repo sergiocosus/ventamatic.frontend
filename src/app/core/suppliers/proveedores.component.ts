@@ -1,14 +1,16 @@
+
+import {map} from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {SupplierService} from '../../supplier/services/supplier.service';
 import {Supplier} from '../../supplier/classes/supplier';
 import {NotifyService} from '../../shared/services/notify.service';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {SupplierDialogComponent} from '../../supplier/components/supplier-dialog/supplier-dialog.component';
 import {BasicEntityDialogComponent} from '../../various/components/basic-entity-dialog/basic-entity-dialog.component';
 import {SupplierCategoryService} from '../../supplier/services/supplier-category.service';
 import {BrandService} from '../../brand/brand.service';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {SupplierCategory} from '../../supplier/classes/supplier-category';
 import {Brand} from '../../brand/brand';
 import {ReportDataSource} from '../../report/classes/report-data-source';
@@ -30,7 +32,7 @@ export class ProveedoresComponent implements OnInit {
 
   constructor(private supplierService: SupplierService,
               private notify: NotifyService,
-              private dialog: MdDialog,
+              private dialog: MatDialog,
               private fb: FormBuilder,
               private supplierCategoryService: SupplierCategoryService,
               private brandService: BrandService) {
@@ -136,13 +138,13 @@ export class ProveedoresComponent implements OnInit {
     this.dataSource = new ReportDataSource(
       undefined,
       undefined, undefined,
-      this.form.valueChanges.map(formData => {
+      this.form.valueChanges.pipe(map(formData => {
           return {
             formData: formData,
             filter: this.fieldIsOk.bind(this)
           };
         }
-      )
+      ))
     );
 
     this.dataSourceObservable = this.dataSource.connect();

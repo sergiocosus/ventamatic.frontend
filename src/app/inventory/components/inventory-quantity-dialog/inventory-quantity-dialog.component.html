@@ -1,15 +1,15 @@
-<h4 md-dialog-title> Modificar Inventario </h4>
+<h4 mat-dialog-title> Modificar Inventario </h4>
 
-<md-dialog-content>
+<mat-dialog-content>
   <form (ngSubmit)="submit()" ngNativeValidate *ngIf="inventory">
 
-    <md-select [(ngModel)]="inventoryMovementType"
+    <mat-select [(ngModel)]="inventoryMovementType"
                name="inventoryMovementType"
                placeholder="Tipo de movimiento">
-      <md-option *ngFor="let inventoryMovementType of inventoryMovementTypes" [value]="inventoryMovementType">
+      <mat-option *ngFor="let inventoryMovementType of inventoryMovementTypes" [value]="inventoryMovementType">
         {{inventoryMovementType.text}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
 
     <div *ngIf="willIncrease()" >
       Este tipo de movimiento aumentará el inventario,
@@ -36,65 +36,65 @@
       seleccione el producto y cantidad que desea aumentar
     </div>
 
-    <md-card *ngIf="inventoryMovementType">
-      <md-input-container>
-        <input mdInput type="number" [(ngModel)]="quantity"
+    <mat-card *ngIf="inventoryMovementType">
+      <mat-form-field>
+        <input matInput type="number" [(ngModel)]="quantity"
                name="quantity" [required]="true"
                [min]="min()" [max]="max()"
                [step]="inventory.product.unitData.step"
                [placeholder]="placeholderText"
         />
-        <md-hint>
+        <mat-hint>
           Cantidad antes: {{inventory.quantity}},
           después: {{afterMovementQuantity}}
-        </md-hint>
-      </md-input-container>
+        </mat-hint>
+      </mat-form-field>
       <br/>
 
-      <md-select *ngIf="willTranslate()"
+      <mat-select *ngIf="willTranslate()"
                  [(ngModel)]="destiny_branch_id" required
                  name="inventoryConverted"
                  placeholder="Seleccione la sucursal de destino">
-        <md-option *ngFor="let branch of branches" [value]="branch.id">
+        <mat-option *ngFor="let branch of branches" [value]="branch.id">
           {{branch.name}}
-        </md-option>
-      </md-select>
+        </mat-option>
+      </mat-select>
 
       <ng-container *ngIf="willConvert()">
         <form>
-          <md-form-field>
-            <input type="text" aria-label="Number" mdInput name="product"
-                   [formControl]="inventoryControl" [mdAutocomplete]="auto"
+          <mat-form-field>
+            <input type="text" aria-label="Number" matInput name="product"
+                   [formControl]="inventoryControl" [matAutocomplete]="auto"
                    placeholder="Producto a convertir">
-            <md-autocomplete #auto="mdAutocomplete" [displayWith]="showDescription">
-              <md-option *ngFor="let inventory of inventoriesFiltered | async" [value]="inventory">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="showDescription">
+              <mat-option *ngFor="let inventory of inventoriesFiltered | async" [value]="inventory">
                 {{inventory.product.description}}
-              </md-option>
-            </md-autocomplete>
-          </md-form-field>
+              </mat-option>
+            </mat-autocomplete>
+          </mat-form-field>
         </form>
 
-        <md-input-container *ngIf="inventoryControl.value?.id">
-          <input mdInput type="number" [(ngModel)]="quantity_converted"
+        <mat-form-field *ngIf="inventoryControl.value?.id">
+          <input matInput type="number" [(ngModel)]="quantity_converted"
                  name="quantity_converted" required
                  [step]="inventoryControl.value.product.unitData.step"
                  [min]="inventoryControl.value.product.unitData.step"
                  placeholder="Cantidad convertida"
           />
-          <md-hint *ngIf="inventoryControl.value">
+          <mat-hint *ngIf="inventoryControl.value">
             Cantidad antes {{inventoryControl.value.quantity }}
             después {{inventoryControl.value.quantity + (quantity_converted-0)}}
-          </md-hint>
-        </md-input-container>
+          </mat-hint>
+        </mat-form-field>
       </ng-container>
-    </md-card>
+    </mat-card>
 
     <div class="options" *ngIf="inventoryMovementType">
       <button *ngIf="inventoryMovementType" type="submit"
-              md-raised-button color="accent">
+              mat-raised-button color="accent">
         Actualizar Inventario
       </button>
     </div>
   </form>
-</md-dialog-content>
+</mat-dialog-content>
 

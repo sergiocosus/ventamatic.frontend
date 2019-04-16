@@ -1,6 +1,6 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {SharedModule} from '../shared/shared.module';
-import {MdCardModule, MdDialogModule, MdTableModule} from '@angular/material';
+import {MatCardModule, MatDialogModule, MatTableModule} from '@angular/material';
 import {InventoryService} from './services/inventory.service';
 import {InventoryEditDialogComponent} from './components/inventory-edit-dialog/inventory-edit-dialog.component';
 import {InventoryQuantityDialogComponent} from './components/inventory-quantity-dialog/inventory-quantity-dialog.component';
@@ -9,8 +9,8 @@ import { InventoryMovementTypeService } from './services/inventory-movement-type
 @NgModule({
   imports: [
     SharedModule,
-    MdDialogModule,
-    MdCardModule,
+    MatDialogModule,
+    MatCardModule,
   ],
   declarations: [
     InventoryEditDialogComponent,

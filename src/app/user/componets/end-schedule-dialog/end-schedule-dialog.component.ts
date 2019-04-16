@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {Schedule} from '../../classes/schedule';
 import {ScheduleService} from '../../services/schedule.service';
 import {NotifyService} from '../../../shared/services/notify.service';
@@ -17,7 +17,7 @@ export class EndScheduleDialogComponent implements OnInit {
 
   constructor(private scheduleService: ScheduleService,
               private notify: NotifyService,
-              private dialogRef: MdDialogRef<EndScheduleDialogComponent>) {}
+              private dialogRef: MatDialogRef<EndScheduleDialogComponent>) {}
 
   ngOnInit() {
   }

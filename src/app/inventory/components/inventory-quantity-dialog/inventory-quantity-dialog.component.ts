@@ -1,5 +1,7 @@
+
+import {map} from 'rxjs/operators';
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {Inventory} from '../../classes/inventory.model';
 import {InventoryService} from '../../services/inventory.service';
 import {InventoryMovementTypeId} from '../../classes/inventory-movement-type-id.enum';
@@ -7,7 +9,7 @@ import {NotifyService} from '../../../shared/services/notify.service';
 import {Branch} from '../../../branch/models/branch';
 import {BranchService} from '../../../branch/services/branch.service';
 import {FormControl} from '@angular/forms';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-inventory-quantity-dialog',
@@ -48,12 +50,12 @@ export class InventoryQuantityDialogComponent implements OnInit {
   constructor(protected notify: NotifyService,
               protected inventoryService: InventoryService,
               protected branchService: BranchService,
-              private dialogRef: MdDialogRef<InventoryQuantityDialogComponent>) {
+              private dialogRef: MatDialogRef<InventoryQuantityDialogComponent>) {
   }
 
   ngOnInit() {
-    this.inventoriesFiltered = this.inventoryControl.valueChanges
-      .map(val => val ? this.filter(val) : (this.inventories || []).slice());
+    this.inventoriesFiltered = this.inventoryControl.valueChanges.pipe(
+      map(val => val ? this.filter(val) : (this.inventories || []).slice()));
   }
 
   init(inventory: Inventory) {

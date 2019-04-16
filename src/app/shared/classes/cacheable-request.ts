@@ -1,5 +1,4 @@
-import {Observable} from 'rxjs/Observable';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {Observable, ReplaySubject} from 'rxjs';
 export class CacheableRequest <T> {
 
     private subject: ReplaySubject<T> = new ReplaySubject(1);

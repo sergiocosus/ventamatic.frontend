@@ -1,9 +1,10 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {Category} from './category';
 import {ApiHttp} from '../shared/services/api-http';
 import {BasicEntityService} from '../various/components/basic-entity-dialog/basic-entity-service';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
-import {Observable} from 'rxjs/Observable';
+import {ReplaySubject, Observable} from 'rxjs';
 
 @Injectable()
 export class CategoryService implements BasicEntityService {
@@ -15,9 +16,9 @@ export class CategoryService implements BasicEntityService {
   constructor(private apiHttp: ApiHttp) {}
 
   getAll(params?: any) {
-    return this.apiHttp.get(this.basePath, params)
-      .map(this.mapCategorys)
-      .map(this.parseCategories);
+    return this.apiHttp.get(this.basePath, params).pipe(
+      map(this.mapCategorys),
+      map(this.parseCategories),);
   }
 
   getAllCached(params?, refresh = false) {
@@ -40,15 +41,15 @@ export class CategoryService implements BasicEntityService {
   }
 
   get(product_id: number) {
-    return this.apiHttp.get(this.basePath + product_id)
-      .map(this.mapCategory)
-      .map(this.parseCategory);
+    return this.apiHttp.get(this.basePath + product_id).pipe(
+      map(this.mapCategory),
+      map(this.parseCategory),);
   }
 
   post(category: Category) {
-    return this.apiHttp.post(this.basePath, category)
-      .map(this.mapCategory)
-      .map(this.parseCategory);
+    return this.apiHttp.post(this.basePath, category).pipe(
+      map(this.mapCategory),
+      map(this.parseCategory),);
   }
 
   delete(category_id: number) {
@@ -56,14 +57,14 @@ export class CategoryService implements BasicEntityService {
   }
 
   restore(category_id: number) {
-    return this.apiHttp.patch(this.basePath + category_id + '/restore', {})
-      .map(data => new Category().parse(data.category));
+    return this.apiHttp.patch(this.basePath + category_id + '/restore', {}).pipe(
+      map(data => new Category().parse(data.category)));
   }
 
   put(product: Category) {
-    return this.apiHttp.put(this.basePath + product.id, product)
-      .map(this.mapCategory)
-      .map(this.parseCategory);
+    return this.apiHttp.put(this.basePath + product.id, product).pipe(
+      map(this.mapCategory),
+      map(this.parseCategory),);
   }
 
   private mapCategorys(json: any) {

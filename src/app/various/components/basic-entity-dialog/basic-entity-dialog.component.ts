@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {BasicEntityService} from './basic-entity-service';
 import {SupplierCategoryService} from '../../../supplier/services/supplier-category.service';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {CategoryService} from '../../../category/category.service';
 import {BrandService} from '../../../brand/brand.service';
 import {NotifyService} from '../../../shared/services/notify.service';
@@ -35,7 +35,7 @@ export class BasicEntityDialogComponent implements OnInit {
               protected categoryService: CategoryService,
               protected supplierCategoryService: SupplierCategoryService,
               private notify: NotifyService,
-              private dialogRef: MdDialogRef<BasicEntityDialogComponent>) {
+              private dialogRef: MatDialogRef<BasicEntityDialogComponent>) {
     this.deletedControl.valueChanges.subscribe(
       showDeleted => this.loadFromService()
     );

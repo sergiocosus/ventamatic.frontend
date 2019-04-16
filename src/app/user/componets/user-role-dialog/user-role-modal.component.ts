@@ -8,7 +8,7 @@ import {Branch} from '../../../branch/models/branch';
 import {User} from '../../classes/user';
 import {BranchRoleService} from '../../../rol/services/branch-role.service';
 import {BranchService} from '../../../branch/services/branch.service';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-user-role-dialog',
@@ -35,7 +35,7 @@ export class UserRoleDialogComponent implements OnInit {
               protected roleService: RoleService,
               protected branchRoleService: BranchRoleService,
               protected branchService: BranchService,
-              private dialogRef: MdDialogRef<UserRoleDialogComponent>) { }
+              private dialogRef: MatDialogRef<UserRoleDialogComponent>) { }
 
   ngOnInit() {
     this.roleService.getAllCached().subscribe(

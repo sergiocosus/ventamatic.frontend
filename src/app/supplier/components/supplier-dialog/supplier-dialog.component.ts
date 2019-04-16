@@ -5,7 +5,7 @@ import {SupplierCategory} from '../../classes/supplier-category';
 import {SupplierService} from '../../services/supplier.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {SupplierCategoryService} from '../../services/supplier-category.service';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {Brand} from '../../../brand/brand';
 import {BrandService} from '../../../brand/brand.service';
 
@@ -29,7 +29,7 @@ export class SupplierDialogComponent extends CrudModalComponent implements OnIni
               protected notify: NotifyService,
               protected supplierCategoryService: SupplierCategoryService,
               protected brandService: BrandService,
-              protected dialogRef: MdDialogRef<SupplierDialogComponent>) {
+              protected dialogRef: MatDialogRef<SupplierDialogComponent>) {
     super(notify, dialogRef);
   }
 

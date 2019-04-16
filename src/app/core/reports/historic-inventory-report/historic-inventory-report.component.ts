@@ -3,7 +3,7 @@ import {ReportService} from '../../../report/report.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {messages} from '../../../shared/classes/messages';
 import {Category} from '../../../category/category';
-import {MdPaginator} from '@angular/material';
+import {MatPaginator} from '@angular/material';
 import {ReportDataSource} from '../../../report/classes/report-data-source';
 
 @Component({
@@ -12,7 +12,7 @@ import {ReportDataSource} from '../../../report/classes/report-data-source';
   styleUrls: ['./historic-inventory-report.component.scss']
 })
 export class HistoricInventoryReportComponent implements OnInit {
-  @ViewChild(MdPaginator) paginator: MdPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   inventories = [];
 

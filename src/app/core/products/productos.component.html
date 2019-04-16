@@ -1,83 +1,83 @@
 <app-search-bar>
   <button *appUserCan="'product-create'"
-          md-raised-button color="primary"
+          mat-raised-button color="primary"
           (click)="clickCreate()">
     <i class="fa fa-plus-circle" aria-hidden="true"></i>
     Agregar Producto
   </button>
   <button *appUserCan="'category-create'"
-          md-raised-button color="primary"
+          mat-raised-button color="primary"
           (click)="openCategoryDialog()">
     <i class="fa fa-list" aria-hidden="true"></i>
     Categorias
   </button>
   <button *appUserCan="'brand-create'"
-          md-raised-button color="primary"
+          mat-raised-button color="primary"
           (click)="openBrandDialog()">
     <i class="fa fa-list" aria-hidden="true"></i>
     Marcas
   </button>
-  <md-checkbox [formControl]="deletedControl" *appUserCan="'product-delete'" class="dark-theme">
+  <mat-checkbox [formControl]="deletedControl" *appUserCan="'product-delete'" class="dark-theme">
     <i class="fa fa-trash"></i>
     Ver eliminados
-  </md-checkbox>
+  </mat-checkbox>
 </app-search-bar>
 <app-search-bar class="dark-theme">
   <form [formGroup]="form">
     <i class="fa fa-filter" aria-hidden="true"></i>
 
-    <md-form-field>
-      <input mdInput formControlName="id" placeholder="ID">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="id" placeholder="ID">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="description" placeholder="Descripción">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="description" placeholder="Descripción">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="bar_code" placeholder="Código de barras">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="bar_code" placeholder="Código de barras">
+    </mat-form-field>
 
-    <md-select formControlName="categories" placeholder="Categoría">
-      <md-option [value]="null"> Todas </md-option>
-      <md-option *ngFor="let category of categories | async" [value]="category.id">
+    <mat-select formControlName="categories" placeholder="Categoría">
+      <mat-option [value]="null"> Todas </mat-option>
+      <mat-option *ngFor="let category of categories | async" [value]="category.id">
         {{category.name}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
 
-    <md-select formControlName="brand" placeholder="Marca">
-      <md-option [value]="null"> Todas </md-option>
-      <md-option *ngFor="let brand of brands | async" [value]="brand.id">
+    <mat-select formControlName="brand" placeholder="Marca">
+      <mat-option [value]="null"> Todas </mat-option>
+      <mat-option *ngFor="let brand of brands | async" [value]="brand.id">
         {{brand.name}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
 
-    <md-form-field>
-      <input mdInput formControlName="minimum" placeholder="Mínimo">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="minimum" placeholder="Mínimo">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="price" placeholder="Precio">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="price" placeholder="Precio">
+    </mat-form-field>
 
-    <md-select formControlName="unit" placeholder="Unidad">
-      <md-option [value]="null"> Todas </md-option>
-      <md-option *ngFor="let unit of units" [value]="unit.id">
+    <mat-select formControlName="unit" placeholder="Unidad">
+      <mat-option [value]="null"> Todas </mat-option>
+      <mat-option *ngFor="let unit of units" [value]="unit.id">
         {{unit.name}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
   </form>
 </app-search-bar>
 
 <app-main-content>
 
   <div class="table-container mat-elevation-z8">
-    <md-paginator #paginator
+    <mat-paginator #paginator
                   [length]="dataSource ? dataSource.data.length : []"
                   [pageIndex]="0"
                   [pageSize]="50"
                   [pageSizeOptions]="[50, 100, 200, 500, 1000, 10000]">
-    </md-paginator>
+    </mat-paginator>
     <table matSort>
       <thead>
       <tr>

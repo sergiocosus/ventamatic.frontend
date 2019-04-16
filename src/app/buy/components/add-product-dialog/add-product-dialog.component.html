@@ -1,40 +1,40 @@
-<h2 md-dialog-title>
+<h2 mat-dialog-title>
   Ingrese precio y cantidad
 </h2>
 
-<md-dialog-content>
+<mat-dialog-content>
   <form (ngSubmit)="submit()" ngNativeValidate>
     <h3 *ngIf="productBuy.product">
       Producto: {{productBuy.product.description}}
     </h3>
     <section>
-      <md-input-container>
-        <input name="price" mdInput [(ngModel)]="productBuy.cost" placeholder="Costo"
+      <mat-form-field>
+        <input name="price" matInput [(ngModel)]="productBuy.cost" placeholder="Costo"
                required="required" type="number"
                [min]="0.01" [step]="0.01"/>
-        <md-hint>Último costo: {{productBuy.product.last_cost | myCurrency}}</md-hint>
-      </md-input-container>
+        <mat-hint>Último costo: {{productBuy.product.last_cost | myCurrency}}</mat-hint>
+      </mat-form-field>
 
-      <md-input-container>
-        <input name="quantity" mdInput [(ngModel)]="productBuy.quantity"
+      <mat-form-field>
+        <input name="quantity" matInput [(ngModel)]="productBuy.quantity"
                [placeholder]="'Cantidad ' + productBuy.product.unitData.name"
                required="required" type="number"
                [step]="productBuy.product.unitData.step"
                [min]="productBuy.product.unitData.step"/>
-      </md-input-container>
+      </mat-form-field>
     </section>
 
-    <md-select [(ngModel)]="productBuy.inventoryMovementType"
+    <mat-select [(ngModel)]="productBuy.inventoryMovementType"
                name="inventoryMovementType" required
                placeholder="Tipo de movimiento">
-      <md-option *ngFor="let inventoryMovementType of inventoryMovementTypes"
+      <mat-option *ngFor="let inventoryMovementType of inventoryMovementTypes"
                  [value]="inventoryMovementType">
         {{inventoryMovementType.text}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
 
-    <button type="submit" md-raised-button color="accent">
+    <button type="submit" mat-raised-button color="accent">
       Agregar Producto
     </button>
   </form>
-</md-dialog-content>
+</mat-dialog-content>

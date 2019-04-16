@@ -1,32 +1,32 @@
 <app-search-bar>
   <button *appUserCan="'client-create'"
-          md-raised-button color="primary"
+          mat-raised-button color="primary"
           (click)="create()">
     <i class="fa fa-user-plus" aria-hidden="true"></i>
     Agregar Cliente
   </button>
 
-  <md-checkbox [formControl]="deletedControl" *appUserCan="'client-delete'" class="dark-theme">
+  <mat-checkbox [formControl]="deletedControl" *appUserCan="'client-delete'" class="dark-theme">
     <i class="fa fa-trash"></i>
     Ver eliminados
-  </md-checkbox>
+  </mat-checkbox>
 </app-search-bar>
 
 <app-search-bar class="dark-theme">
   <form [formGroup]="form">
     <i class="fa fa-filter" aria-hidden="true"></i>
 
-    <md-form-field>
-      <input mdInput formControlName="id" placeholder="ID">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="id" placeholder="ID">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="name" placeholder="Nombre">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Nombre">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="address" placeholder="Dirección">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="address" placeholder="Dirección">
+    </mat-form-field>
   </form>
 </app-search-bar>
 

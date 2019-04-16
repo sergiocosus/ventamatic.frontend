@@ -1,10 +1,10 @@
 <app-popover [focusable]="focusable">
   <form>
-    <md-input-container>
-      <input mdInput [(ngModel)]="name" placeholder="Nombre"
+    <mat-form-field>
+      <input matInput [(ngModel)]="name" placeholder="Nombre"
              type="text"
              [formControl]="nameControl" #focusable>
-    </md-input-container>
+    </mat-form-field>
   </form>
 
   <app-selectable [items]="products"

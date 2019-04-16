@@ -1,42 +1,42 @@
-<h4 *ngIf="updateMode" md-dialog-title>
+<h4 *ngIf="updateMode" mat-dialog-title>
   Editar Sucursal
 </h4>
 <form (ngSubmit)="submit()" ngNativeValidate>
-  <md-dialog-content>
-    <md-input-container *ngIf="updateMode">
-      <input mdInput placeholder="Id" type="number" [(ngModel)]="branch.id" name="id"
+  <mat-dialog-content>
+    <mat-form-field *ngIf="updateMode">
+      <input matInput placeholder="Id" type="number" [(ngModel)]="branch.id" name="id"
              disabled="disabled">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Nombre"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Nombre"
              [(ngModel)]="branch.name" name="name"
              [disabled]="locked" [required]="true">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Descripción"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Descripción"
              [(ngModel)]="branch.description" name="description"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Dirección"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Dirección"
              [(ngModel)]="branch.address" name="address"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Título del ticket"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Título del ticket"
              [(ngModel)]="branch.title_ticket" name="title_ticket"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Encabezado de ticket"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Encabezado de ticket"
              [(ngModel)]="branch.header_ticket" name="header_ticket"
              [disabled]="locked">
-    </md-input-container>
-    <md-input-container>
-      <input mdInput placeholder="Pie de ticket"
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Pie de ticket"
              [(ngModel)]="branch.footer_ticket" name="footer_ticket"
              [disabled]="locked">
-    </md-input-container>
+    </mat-form-field>
 
     <input class="input-picture"  placeholder="Imagen"
            imageUpload (imageSelected)="selected($event)"
@@ -48,25 +48,25 @@
                       'background-image' : 'url('+src+')'
                     }"></picture>
       </section>
-  </md-dialog-content>
+  </mat-dialog-content>
 
-  <md-dialog-actions>
+  <mat-dialog-actions>
     <ng-container *appUserCanInBranch="'branch-edit'; branchId: branch.id">
       <button *ngIf="locked"
-              type="submit" md-raised-button color="warn"
+              type="submit" mat-raised-button color="warn"
               (click)="unlock()" >
         <i class="fa fa-unlock-alt" aria-hidden="true"></i>
         Editar Sucursal
       </button>
     </ng-container>
     <button *ngIf="updateMode && !locked"
-            type="submit" md-raised-button color="accent" >
+            type="submit" mat-raised-button color="accent" >
       Actualizar Sucursal
     </button>
-    <button type="button" md-raised-button md-dialog-close>
+    <button type="button" mat-raised-button mat-dialog-close>
       Cerrar
     </button>
-  </md-dialog-actions>
+  </mat-dialog-actions>
 </form>
 
 

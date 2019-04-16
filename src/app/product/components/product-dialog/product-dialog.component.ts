@@ -1,7 +1,7 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {CrudModalComponent} from '../../../shared/components/crud-modal/crud-modal.component';
 import {Product} from '../../classes/product';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {Category} from '../../../category/category';
 import {Brand} from '../../../brand/brand';
 import {ProductService} from '../../services/product.service';
@@ -35,7 +35,7 @@ export class ProductDialogComponent extends CrudModalComponent implements OnInit
               protected notify: NotifyService,
               protected categoryService: CategoryService,
               protected brandService: BrandService,
-              protected dialogRef: MdDialogRef<ProductDialogComponent>) {
+              protected dialogRef: MatDialogRef<ProductDialogComponent>) {
     super(notify, dialogRef);
 
     this.units = Unit.parseFromData(units);

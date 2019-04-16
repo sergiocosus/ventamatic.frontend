@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Role} from '../../classes/role';
 import {RoleService} from '../../services/role.service';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {CrudModalComponent} from '../../../shared/components/crud-modal/crud-modal.component';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {Permission} from '../../../auth/classes/permission';
@@ -21,7 +21,7 @@ export class RoleDialogComponent extends CrudModalComponent implements OnInit {
   constructor(protected notify: NotifyService,
               private roleService: RoleService,
               private permissionService: PermissionService,
-              protected dialogRef: MdDialogRef<RoleDialogComponent>) {
+              protected dialogRef: MatDialogRef<RoleDialogComponent>) {
     super(notify, dialogRef);
   }
 

@@ -2,75 +2,75 @@
   <form [formGroup]="form">
     <i class="fa fa-filter" aria-hidden="true"></i>
 
-    <md-form-field>
-      <input mdInput formControlName="id" placeholder="ID">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="id" placeholder="ID">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="product" placeholder="Producto">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="product" placeholder="Producto">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="bar_code" placeholder="Código de barras">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="bar_code" placeholder="Código de barras">
+    </mat-form-field>
 
-    <md-select formControlName="categories" placeholder="Categoría">
-      <md-option [value]="null"> Todas </md-option>
-      <md-option *ngFor="let category of categories | async" [value]="category.id">
+    <mat-select formControlName="categories" placeholder="Categoría">
+      <mat-option [value]="null"> Todas </mat-option>
+      <mat-option *ngFor="let category of categories | async" [value]="category.id">
         {{category.name}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
 
-    <md-select formControlName="brand" placeholder="Marca">
-      <md-option [value]="null"> Todas </md-option>
-      <md-option *ngFor="let brand of brands | async" [value]="brand.id">
+    <mat-select formControlName="brand" placeholder="Marca">
+      <mat-option [value]="null"> Todas </mat-option>
+      <mat-option *ngFor="let brand of brands | async" [value]="brand.id">
         {{brand.name}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
 
-    <md-form-field>
-      <input mdInput formControlName="minimum" placeholder="Mínimo">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="minimum" placeholder="Mínimo">
+    </mat-form-field>
 
 
-    <md-form-field>
-      <input mdInput formControlName="quantity" placeholder="Cantidad">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="quantity" placeholder="Cantidad">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="branchPrice" placeholder="Precio de sucursal">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="branchPrice" placeholder="Precio de sucursal">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="globalPrice" placeholder="Precio">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="globalPrice" placeholder="Precio">
+    </mat-form-field>
 
-    <md-form-field>
-      <input mdInput formControlName="lastCost" placeholder="Último costo">
-    </md-form-field>
+    <mat-form-field>
+      <input matInput formControlName="lastCost" placeholder="Último costo">
+    </mat-form-field>
 
-    <md-select formControlName="unit" placeholder="Unidad">
-      <md-option [value]="null"> Todas </md-option>
-      <md-option *ngFor="let unit of units" [value]="unit.id">
+    <mat-select formControlName="unit" placeholder="Unidad">
+      <mat-option [value]="null"> Todas </mat-option>
+      <mat-option *ngFor="let unit of units" [value]="unit.id">
         {{unit.name}}
-      </md-option>
-    </md-select>
+      </mat-option>
+    </mat-select>
 
 
-    <md-checkbox formControlName="minimum_filter">
+    <mat-checkbox formControlName="minimum_filter">
       Filtro de mínimos
-    </md-checkbox>
+    </mat-checkbox>
   </form>
 
 </app-search-bar>
 <app-main-content>
     <div class="table-container mat-elevation-z8">
-    <md-paginator #paginator
+    <mat-paginator #paginator
                   [length]="dataSource ? dataSource.filteredData.length : []"
                   [pageIndex]="0"
                   [pageSize]="50"
                   [pageSizeOptions]="[50, 100, 200, 500, 1000, 10000]">
-    </md-paginator>
+    </mat-paginator>
     <table matSort>
       <thead>
       <tr>

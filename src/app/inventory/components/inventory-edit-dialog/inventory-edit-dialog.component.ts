@@ -1,6 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {InventoryService} from '../../services/inventory.service';
-import {MdDialogRef} from '@angular/material';
+import {MatDialogRef} from '@angular/material';
 import {Inventory} from '../../classes/inventory.model';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {NotifyService} from '../../../shared/services/notify.service';
@@ -17,7 +17,7 @@ export class InventoryEditDialogComponent implements OnInit {
   public form: FormGroup;
 
   constructor(private inventoryService: InventoryService,
-              private dialogRef: MdDialogRef<InventoryEditDialogComponent>,
+              private dialogRef: MatDialogRef<InventoryEditDialogComponent>,
               private fb: FormBuilder,
               private noty: NotifyService) {
     this.form = this.fb.group({

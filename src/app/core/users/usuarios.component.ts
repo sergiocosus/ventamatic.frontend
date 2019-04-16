@@ -1,13 +1,15 @@
+
+import {map} from 'rxjs/operators';
 import { Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {UserService} from '../../user/services/user.service';
 import {NotifyService} from '../../shared/services/notify.service';
 import {User} from '../../user/classes/user';
 import {UserDialogComponent} from '../../user/componets/user-dialog/user-dialog.component';
-import {MdDialog} from '@angular/material';
+import {MatDialog} from '@angular/material';
 import {UserRoleDialogComponent} from '../../user/componets/user-role-dialog/user-role-modal.component';
 import {ReportDataSource} from '../../report/classes/report-data-source';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -25,7 +27,7 @@ export class UsuariosComponent implements OnInit {
 
   constructor(private userService: UserService,
               private notify: NotifyService,
-              private dialog: MdDialog,
+              private dialog: MatDialog,
               private fb: FormBuilder) {
     this.deletedControl.valueChanges.subscribe(
       showDeleted => this.loadUsers()
@@ -109,13 +111,13 @@ export class UsuariosComponent implements OnInit {
     this.dataSource = new ReportDataSource(
       undefined,
       undefined, undefined,
-      this.form.valueChanges.map(formData => {
+      this.form.valueChanges.pipe(map(formData => {
           return {
             formData: formData,
             filter: this.fieldIsOk.bind(this)
           };
         }
-      )
+      ))
     );
 
     this.dataSourceObservable = this.dataSource.connect();

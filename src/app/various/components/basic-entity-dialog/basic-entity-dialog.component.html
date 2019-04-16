@@ -1,18 +1,18 @@
 
-    <h4 md-dialog-title>{{title}}</h4>
-<md-dialog-content>
-  <md-checkbox [formControl]="deletedControl" *appUserCan="'user-delete'" >
+    <h4 mat-dialog-title>{{title}}</h4>
+<mat-dialog-content>
+  <mat-checkbox [formControl]="deletedControl" *appUserCan="'user-delete'" >
     <i class="fa fa-trash"></i>
     Ver eliminados
-  </md-checkbox>
+  </mat-checkbox>
 
   <form (ngSubmit)="create()" ngNativeValidate>
-    <md-input-container>
-      <input mdInput placeholder="Ingrese una nueva {{title}}"
+    <mat-form-field>
+      <input matInput placeholder="Ingrese una nueva {{title}}"
              name="id" type="text" [(ngModel)]="entity.name">
-    </md-input-container>
+    </mat-form-field>
     <div>
-      <button type="submit" md-raised-button color="primary">
+      <button type="submit" mat-raised-button color="primary">
         Agregar
       </button>
     </div>
@@ -20,36 +20,36 @@
   <hr/>
   <ul>
     <li *ngFor="let entity of entities">
-      <md-input-container>
-        <input mdInput [placeholder]="title"
+      <mat-form-field>
+        <input matInput [placeholder]="title"
                name="id" type="text" [(ngModel)]="entity.name">
-      </md-input-container>
+      </mat-form-field>
 
       <div *appUserCan="mode+'-edit'">
-        <button type="submit" md-mini-fab color="accent"
+        <button type="submit" mat-mini-fab color="accent"
                 (click)="update(entity)">
           <i class="fa fa-check" aria-hidden="true"></i>
         </button>
       </div>
       <div *appUserCan="mode+'-delete'">
         <button *ngIf="entity.deleted_at; else notDeleted" type="button"
-                md-mini-fab
+                mat-mini-fab
                 (click)="restore(entity)">
           <i class="fa fa-recycle" aria-hidden="true"></i>
         </button>
         <ng-template #notDeleted>
           <button type="button"
-                  md-mini-fab color="warn" (click)="delete(entity)">
+                  mat-mini-fab color="warn" (click)="delete(entity)">
             <i class="fa fa-times" aria-hidden="true"></i>
           </button>
         </ng-template>
       </div>
     </li>
   </ul>
-</md-dialog-content>
-<md-dialog-actions>
-  <button type="button" md-raised-button (click)="close()">
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button type="button" mat-raised-button (click)="close()">
     <i class="fa fa-times" aria-hidden="true"></i>
     Cerrar
   </button>
-</md-dialog-actions>
+</mat-dialog-actions>

@@ -1,8 +1,9 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {BranchRole} from '../classes/branch-role';
 import {ApiHttp} from '../../shared/services/api-http';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
-import {Observable} from "rxjs/Observable";
+import {ReplaySubject, Observable} from 'rxjs';
 
 @Injectable()
 export class BranchRoleService {
@@ -14,8 +15,8 @@ export class BranchRoleService {
   constructor(private apiHttp: ApiHttp) {}
 
   getAll() {
-    return this.apiHttp.get(this.basePath)
-      .map(json => BranchRole.parseArray(json.branch_roles));
+    return this.apiHttp.get(this.basePath).pipe(
+      map(json => BranchRole.parseArray(json.branch_roles)));
   }
 
   getAllCached(refresh = false) {
@@ -36,18 +37,18 @@ export class BranchRoleService {
   }
 
   get(branch_role_id) {
-    return this.apiHttp.get(this.basePath + branch_role_id)
-      .map(json => new BranchRole().parse(json.branch_role));
+    return this.apiHttp.get(this.basePath + branch_role_id).pipe(
+      map(json => new BranchRole().parse(json.branch_role)));
   }
 
   post(branchRole: BranchRole) {
-    return this.apiHttp.post(this.basePath, branchRole)
-      .map(json => new BranchRole().parse(json.branch_role));
+    return this.apiHttp.post(this.basePath, branchRole).pipe(
+      map(json => new BranchRole().parse(json.branch_role)));
   }
 
   put(branchRole: BranchRole) {
-    return this.apiHttp.put(this.basePath + branchRole.id, branchRole)
-      .map(json => new BranchRole().parse(json.branch_role));
+    return this.apiHttp.put(this.basePath + branchRole.id, branchRole).pipe(
+      map(json => new BranchRole().parse(json.branch_role)));
   }
 
   delete(branch_role_id: number) {

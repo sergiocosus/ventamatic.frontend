@@ -1,8 +1,9 @@
+
+import {map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import {ApiHttp} from '../../shared/services/api-http';
 import {Role} from '../classes/role';
-import {ReplaySubject} from 'rxjs/ReplaySubject';
-import {Observable} from 'rxjs/Observable';
+import {ReplaySubject, Observable} from 'rxjs';
 
 @Injectable()
 export class RoleService {
@@ -14,8 +15,8 @@ export class RoleService {
   constructor(private apiHttp: ApiHttp) {}
 
   getAll() {
-    return this.apiHttp.get(this.basePath)
-      .map(json => Role.parseArray(json.roles));
+    return this.apiHttp.get(this.basePath).pipe(
+      map(json => Role.parseArray(json.roles)));
   }
 
   getAllCached(refresh = false) {
@@ -36,18 +37,18 @@ export class RoleService {
   }
 
   get(role_id) {
-    return this.apiHttp.get(this.basePath + role_id)
-      .map(json => new Role().parse(json.role));
+    return this.apiHttp.get(this.basePath + role_id).pipe(
+      map(json => new Role().parse(json.role)));
   }
 
   post(role: Role) {
-    return this.apiHttp.post(this.basePath, role)
-      .map(json => new Role().parse(json.role));
+    return this.apiHttp.post(this.basePath, role).pipe(
+      map(json => new Role().parse(json.role)));
   }
 
   put(role: Role) {
-    return this.apiHttp.put(this.basePath + role.id, role)
-      .map(json => new Role().parse(json.role));
+    return this.apiHttp.put(this.basePath + role.id, role).pipe(
+      map(json => new Role().parse(json.role)));
   }
 
   delete(role_id: number) {

@@ -4,7 +4,7 @@
       (click)="selected.emit(item)">
     <ng-template
       [ngTemplateOutlet]="template"
-      [ngOutletContext]="{
+      [ngTemplateOutletContext]="{
         item: item
       }">
     </ng-template>

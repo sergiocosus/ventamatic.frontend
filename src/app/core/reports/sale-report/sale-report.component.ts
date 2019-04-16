@@ -5,7 +5,7 @@ import {NotifyService} from '../../../shared/services/notify.service';
 import {TicketService} from '../../../sale/services/ticket.service';
 import {messages} from '../../../shared/classes/messages';
 import {ReportDataSource} from '../../../report/classes/report-data-source';
-import {MdDialog, MdPaginator} from '@angular/material';
+import {MatDialog, MatPaginator} from '@angular/material';
 import {SaleService} from '../../../sale/services/sale.service';
 import {ConfirmDialogComponent} from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
@@ -15,7 +15,7 @@ import {ConfirmDialogComponent} from '../../../shared/components/confirm-dialog/
   styleUrls: ['./sale-report.component.scss']
 })
 export class SaleReportComponent implements OnInit {
-  @ViewChild(MdPaginator) paginator: MdPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   sales = [];
 
@@ -42,7 +42,7 @@ export class SaleReportComponent implements OnInit {
               private notify: NotifyService,
               private ticketService: TicketService,
               private saleService: SaleService,
-              private dialog: MdDialog) { }
+              private dialog: MatDialog) { }
 
   ngOnInit() {
     this.dataSource = new ReportDataSource(this.paginator);

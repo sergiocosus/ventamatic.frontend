@@ -1,11 +1,13 @@
+
+import {map} from 'rxjs/operators';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {ReportService} from '../../../report/report.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {Category} from '../../../category/category';
 import {messages} from '../../../shared/classes/messages';
-import {MdPaginator, MdSort} from '@angular/material';
+import {MatPaginator, MatSort} from '@angular/material';
 import {ReportDataSource} from '../../../report/classes/report-data-source';
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import {FormBuilder, FormGroup} from '@angular/forms';
 
 @Component({
@@ -14,8 +16,8 @@ import {FormBuilder, FormGroup} from '@angular/forms';
   styleUrls: ['./inventory-report.component.scss'],
 })
 export class InventoryReportComponent implements OnInit {
-  @ViewChild(MdPaginator) paginator: MdPaginator;
-  @ViewChild(MdSort) sort: MdSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   dataSourceObservable: Observable<any[]>;
 
@@ -74,13 +76,13 @@ export class InventoryReportComponent implements OnInit {
           case 'minimum': return [a.current_minimum, b.current_minimum, 'number'];
         }
       },
-      this.form.valueChanges.map(formData => {
+      this.form.valueChanges.pipe(map(formData => {
           return {
             formData: formData,
             filter: this.fieldIsOk.bind(this)
           };
         }
-      ));
+      )));
 
     this.dataSourceObservable = this.dataSource.connect();
 

@@ -1,3 +1,5 @@
+
+import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
 import {Component, OnInit, ViewChild, Output, EventEmitter, HostListener} from '@angular/core';
 import {FormControl} from '@angular/forms';
 import {Supplier} from '../../classes/supplier';
@@ -30,7 +32,7 @@ export class SupplierSearchComponent implements OnInit {
 
   constructor(private supplierService: SupplierService,
               private notify: NotifyService) {
-    this.idControl.valueChanges.debounceTime(250).distinctUntilChanged()
+    this.idControl.valueChanges.pipe(debounceTime(250),distinctUntilChanged(),)
       .subscribe(value => {
         this.startLoading();
         if (!value  || value === '' ) { return; }
@@ -43,7 +45,7 @@ export class SupplierSearchComponent implements OnInit {
         );
       });
 
-    this.nameControl.valueChanges.debounceTime(250).distinctUntilChanged()
+    this.nameControl.valueChanges.pipe(debounceTime(250),distinctUntilChanged(),)
       .subscribe(value => {
         this.startLoading();
         if (!value  || value === '' ) { return; }
