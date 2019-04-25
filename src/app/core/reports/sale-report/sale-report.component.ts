@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IMyDateRangeModel} from 'mydaterangepicker';
-import {ReportService} from '../../../report/report.service';
+import {ReportService} from '../../../modules/api/services/report.service';
 import {NotifyService} from '../../../shared/services/notify.service';
-import {TicketService} from '../../../sale/services/ticket.service';
+import {TicketService} from '../../../modules/api/services/ticket.service';
 import {messages} from '../../../shared/classes/messages';
-import {ReportDataSource} from '../../../report/classes/report-data-source';
+import {ReportDataSource} from '../../../modules/report/classes/report-data-source';
 import {MatDialog, MatPaginator} from '@angular/material';
-import {SaleService} from '../../../sale/services/sale.service';
+import {SaleService} from '../../../modules/api/services/sale.service';
 import {ConfirmDialogComponent} from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({

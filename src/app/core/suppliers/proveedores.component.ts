@@ -1,19 +1,18 @@
-
-import {map} from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {SupplierService} from '../../supplier/services/supplier.service';
-import {Supplier} from '../../supplier/classes/supplier';
-import {NotifyService} from '../../shared/services/notify.service';
-import {MatDialog} from '@angular/material';
-import {SupplierDialogComponent} from '../../supplier/components/supplier-dialog/supplier-dialog.component';
-import {BasicEntityDialogComponent} from '../../various/components/basic-entity-dialog/basic-entity-dialog.component';
-import {SupplierCategoryService} from '../../supplier/services/supplier-category.service';
-import {BrandService} from '../../brand/brand.service';
-import {Observable} from 'rxjs';
-import {SupplierCategory} from '../../supplier/classes/supplier-category';
-import {Brand} from '../../brand/brand';
-import {ReportDataSource} from '../../report/classes/report-data-source';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { SupplierService } from '@app/api/services/supplier.service';
+import { Supplier } from '@app/api/models/supplier';
+import { NotifyService } from '@app/shared/services/notify.service';
+import { MatDialog } from '@angular/material';
+import { SupplierDialogComponent } from '@app/supplier/components/supplier-dialog/supplier-dialog.component';
+import { BasicEntityDialogComponent } from '@app/various/components/basic-entity-dialog/basic-entity-dialog.component';
+import { SupplierCategoryService } from '@app/api/services/supplier-category.service';
+import { BrandService } from '@app/api/services/brand.service';
+import { Observable } from 'rxjs';
+import { SupplierCategory } from '@app/api/models/supplier-category';
+import { Brand } from '@app/api/models/brand';
+import { ReportDataSource } from '@app/report/classes/report-data-source';
 
 @Component({
   selector: 'app-proveedores',
@@ -152,12 +151,18 @@ export class ProveedoresComponent implements OnInit {
 
   protected fieldIsOk(object, key, value) {
     switch (key) {
-      case 'id': return object.id == value;
-      case 'address': return object.address.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
-      case 'name': return object.name.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
-      case 'brands': return object.brands.find(brand => brand.id == value);
-      case 'supplier_category_id': return object.supplier_category_id == value;
-      case 'phone': return object.phone == value;
+      case 'id':
+        return object.id == value;
+      case 'address':
+        return object.address.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
+      case 'name':
+        return object.name.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
+      case 'brands':
+        return object.brands.find(brand => brand.id === value);
+      case 'supplier_category_id':
+        return object.supplier_category_id === value;
+      case 'phone':
+        return object.phone === value;
 
     }
     return true;

@@ -1,0 +1,23 @@
+@import "~src/vars";
+
+:host{
+  background-color: $backgroundDark;
+  padding: 1em;
+  border-radius: 1em;
+}
+
+h3{
+  text-align: center;
+  color: white;
+  font-size: 2em;
+}
+
+form{
+  display: flex;
+  flex-direction: column;
+  color: white;
+
+  md-select{
+    margin: 1em 0;
+  }
+}

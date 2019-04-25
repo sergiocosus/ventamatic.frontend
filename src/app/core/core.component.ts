@@ -1,8 +1,8 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import { Router} from '@angular/router';
-import {AuthService} from '../auth/services/auth.service';
+import {AuthService} from '../modules/auth/services/auth.service';
 import {SubscriptionManager} from '../shared/classes/subscription-manager';
-import {User} from '../user/classes/user';
+import {User} from '../modules/api/models/user';
 
 @Component({
   selector: 'app-app',

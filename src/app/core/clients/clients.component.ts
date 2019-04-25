@@ -4,12 +4,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {MatDialog} from '@angular/material';
-import {Client} from '../../client/classes/client';
-import {ClientService} from '../../client/services/client.service';
+import {Client} from '../../modules/api/models/client';
+import {ClientService} from '../../modules/api/services/client.service';
 import {NotifyService} from '../../shared/services/notify.service';
-import {ClientDialogComponent} from '../../client/components/client-dialog/client-dialog.component';
+import {ClientDialogComponent} from '../../modules/client/components/client-dialog/client-dialog.component';
 import {Observable} from 'rxjs';
-import {ReportDataSource} from '../../report/classes/report-data-source';
+import {ReportDataSource} from '../../modules/report/classes/report-data-source';
 
 @Component({
   selector: 'app-clientes',

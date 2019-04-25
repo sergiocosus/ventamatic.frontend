@@ -1,11 +1,11 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {Subscription} from 'rxjs';
-import {User} from '../../../user/classes/user';
+import {User} from '../../../modules/api/models/user';
 import {Router} from '@angular/router';
-import {ScheduleService} from '../../../user/services/schedule.service';
+import {ScheduleService} from '../../../modules/api/services/schedule.service';
 import {NotifyService} from '../../../shared/services/notify.service';
-import {Branch} from '../../../branch/models/branch';
-import {AuthService} from '../../../auth/services/auth.service';
+import {Branch} from '../../../modules/api/models/branch';
+import {AuthService} from '../../../modules/auth/services/auth.service';
 
 
 @Component({

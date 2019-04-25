@@ -1,12 +1,12 @@
 
 import {map} from 'rxjs/operators';
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ReportService} from '../../../report/report.service';
+import {ReportService} from '../../../modules/api/services/report.service';
 import {NotifyService} from '../../../shared/services/notify.service';
-import {Category} from '../../../category/category';
+import {Category} from '../../../modules/api/models/category';
 import {messages} from '../../../shared/classes/messages';
 import {MatPaginator, MatSort} from '@angular/material';
-import {ReportDataSource} from '../../../report/classes/report-data-source';
+import {ReportDataSource} from '../../../modules/report/classes/report-data-source';
 import {Observable} from 'rxjs';
 import {FormBuilder, FormGroup} from '@angular/forms';
 

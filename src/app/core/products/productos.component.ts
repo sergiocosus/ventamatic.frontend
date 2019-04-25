@@ -1,21 +1,20 @@
-
 import {map} from 'rxjs/operators';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {Product} from '../../product/classes/product';
-import {ProductService} from '../../product/services/product.service';
-import {NotifyService} from '../../shared/services/notify.service';
+import {Product} from '../../modules/api/models/product';
+import {ProductService} from '../../modules/api/services/product.service';
+import {NotifyService} from '@app/shared/services/notify.service';
 import {MatDialog, MatPaginator, MatSort} from '@angular/material';
-import {ProductDialogComponent} from '../../product/components/product-dialog/product-dialog.component';
-import {BasicEntityDialogComponent} from '../../various/components/basic-entity-dialog/basic-entity-dialog.component';
-import {ReportDataSource} from '../../report/classes/report-data-source';
+import {ProductDialogComponent} from '../../modules/product/components/product-dialog/product-dialog.component';
+import {BasicEntityDialogComponent} from '../../modules/various/components/basic-entity-dialog/basic-entity-dialog.component';
+import {ReportDataSource} from '../../modules/report/classes/report-data-source';
 import {Observable} from 'rxjs';
-import {Brand} from '../../brand/brand';
-import {Category} from '../../category/category';
-import {units} from 'app/shared/unit/units.data';
-import {CategoryService} from '../../category/category.service';
-import {BrandService} from '../../brand/brand.service';
-import {Unit} from '../../product/classes/unit.model';
+import {Brand} from '../../modules/api/models/brand';
+import {Category} from '../../modules/api/models/category';
+import {CategoryService} from '../../modules/api/services/category.service';
+import {BrandService} from '../../modules/api/services/brand.service';
+import { units } from '@app/api/classes/units.data';
+import { Unit } from '../../modules/api/models/unit.model';
 
 
 @Component({
@@ -201,14 +200,14 @@ export class ProductosComponent implements OnInit {
 
   private fieldIsOk(object, key, value) {
     switch (key) {
-      case 'id': return object.id == value;
+      case 'id': return object.id === value;
       case 'description': return object.description.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
-      case 'bar_code': return object.bar_code == value;
-      case 'categories': return object.categories.find(category => category.id == value);
-      case 'brand': return object.brand_id == value;
-      case 'minimum': return object.global_minimum == value;
-      case 'price': return object.global_price == value;
-      case 'unit': return object.unit_id == value;
+      case 'bar_code': return object.bar_code === value;
+      case 'categories': return object.categories.find(category => category.id === value);
+      case 'brand': return object.brand_id === value;
+      case 'minimum': return object.global_minimum === value;
+      case 'price': return object.global_price === value;
+      case 'unit': return object.unit_id === value;
     }
     return true;
   }

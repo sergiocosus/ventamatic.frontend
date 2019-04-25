@@ -4,8 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ClientsRoutingModule } from './clients-routing.module';
 import {ClientsComponent} from './clients.component';
 import {SharedModule} from '../../shared/shared.module';
-import {ClientModule} from '../../client/client.module';
-import {AuthModule} from '../../auth/auth.module';
+import {ClientModule} from '../../modules/client/client.module';
+import {AuthModule} from '../../modules/auth/auth.module';
 
 @NgModule({
   imports: [

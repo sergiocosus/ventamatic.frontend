@@ -2,20 +2,20 @@
 import {map} from 'rxjs/operators';
 import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Inventory} from '../../../../inventory/classes/inventory.model';
-import {InventoryService} from '../../../../inventory/services/inventory.service';
+import {Inventory} from '../../../../modules/api/models/inventory.model';
+import {InventoryService} from '../../../../modules/api/services/inventory.service';
 import {NotifyService} from '../../../../shared/services/notify.service';
 import {MatDialog, MatPaginator, MatSort} from '@angular/material';
-import {InventoryQuantityDialogComponent} from '../../../../inventory/components/inventory-quantity-dialog/inventory-quantity-dialog.component';
-import {InventoryEditDialogComponent} from '../../../../inventory/components/inventory-edit-dialog/inventory-edit-dialog.component';
-import {ReportDataSource} from '../../../../report/classes/report-data-source';
+import {InventoryQuantityDialogComponent} from '../../../../modules/inventory/components/inventory-quantity-dialog/inventory-quantity-dialog.component';
+import {InventoryEditDialogComponent} from '../../../../modules/inventory/components/inventory-edit-dialog/inventory-edit-dialog.component';
+import {ReportDataSource} from '../../../../modules/report/classes/report-data-source';
 import {Observable} from 'rxjs';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {CategoryService} from '../../../../category/category.service';
-import {BrandService} from '../../../../brand/brand.service';
-import {Category} from '../../../../category/category';
-import {Brand} from '../../../../brand/brand';
-import {units} from '../../../../shared/unit/units.data';
+import {CategoryService} from '../../../../modules/api/services/category.service';
+import {BrandService} from '../../../../modules/api/services/brand.service';
+import {Category} from '../../../../modules/api/models/category';
+import {Brand} from '../../../../modules/api/models/brand';
+import {units} from '../../../../modules/api/classes/units.data';
 
 @Component({
   selector: 'app-inventory-detail',

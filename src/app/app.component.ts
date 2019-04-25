@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router} from '@angular/router';
-import {AuthService} from './auth/services/auth.service';
-import {CacheManagerService} from './shared/services/cache-manager.service';
+import {AuthService} from './modules/auth/services/auth.service';
+import {CacheManagerService} from './modules/api/services/cache-manager.service';
 
 @Component({
   selector: 'app-root',

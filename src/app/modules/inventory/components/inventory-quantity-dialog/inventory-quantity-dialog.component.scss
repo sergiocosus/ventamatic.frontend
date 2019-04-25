@@ -1,0 +1,21 @@
+@import "~src/vars";
+
+form{
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  padding-top: .5em;
+
+  md-select{
+    margin: .5em 0;
+  }
+
+  md-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .options{
+    text-align: right;
+  }
+}

@@ -1,6 +1,6 @@
 import {Component, OnInit } from '@angular/core';
-import {AuthService} from '../../auth/services/auth.service';
-import {Branch} from '../../branch/models/branch';
+import {AuthService} from '../../modules/auth/services/auth.service';
+import {Branch} from '../../modules/api/models/branch';
 import {FormControl} from '@angular/forms';
 
 @Component({

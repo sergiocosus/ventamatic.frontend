@@ -1,13 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {BuyService} from 'app/buy/services/buy.service';
-import {ProductBuy} from '../../buy/classes/product-buy.model';
-import {BeginBuyComponent, BeginBuyDataInterface} from '../../buy/components/begin-buy/begin-buy.component';
-import {ConfirmDialogComponent} from '../../shared/components/confirm-dialog/confirm-dialog.component';
-import {FindProductComponent} from '../../product/components/find-product/find-product.component';
-import {NotifyService} from '../../shared/services/notify.service';
-import {AddProductDialogComponent} from '../../buy/components/add-product-dialog/add-product-dialog.component';
+import {ProductBuy} from '../../modules/api/interfaces/product-buy.model';
+import {BeginBuyComponent, BeginBuyDataInterface} from '../../modules/buy/components/begin-buy/begin-buy.component';
+import {ConfirmDialogComponent} from '@app/shared/components/confirm-dialog/confirm-dialog.component';
+import {FindProductComponent} from '../../modules/product/components/find-product/find-product.component';
+import {NotifyService} from '@app/shared/services/notify.service';
+import {AddProductDialogComponent} from '../../modules/buy/components/add-product-dialog/add-product-dialog.component';
 import {environment} from '../../../environments/environment';
+import { BuyService } from '../../modules/api/services/buy.service';
 
 @Component({
   selector: 'app-compra',

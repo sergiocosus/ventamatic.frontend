@@ -1,12 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {RoleService} from '../../rol/services/role.service';
-import {BranchRoleService} from '../../rol/services/branch-role.service';
+import {RoleService} from '../../modules/api/services/role.service';
+import {BranchRoleService} from '../../modules/api/services/branch-role.service';
 import {NotifyService} from '../../shared/services/notify.service';
-import {BranchRole} from '../../rol/classes/branch-role';
-import {Role} from '../../rol/classes/role';
-import {RoleDialogComponent} from '../../rol/components/role-dialog/role-dialog.component';
-import {BranchRoleDialogComponent} from '../../rol/components/branch-role-dialog/branch-role-dialog.component';
+import {BranchRole} from '../../modules/api/models/branch-role';
+import {Role} from '../../modules/api/models/role';
+import {RoleDialogComponent} from '../../modules/rol/components/role-dialog/role-dialog.component';
+import {BranchRoleDialogComponent} from '../../modules/rol/components/branch-role-dialog/branch-role-dialog.component';
 
 @Component({
   selector: 'app-roles',

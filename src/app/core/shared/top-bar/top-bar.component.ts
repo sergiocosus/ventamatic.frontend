@@ -1,12 +1,12 @@
 import {Component, OnInit, OnDestroy, Input} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {AuthService} from '../../../auth/services/auth.service';
-import {ScheduleService} from '../../../user/services/schedule.service';
+import {AuthService} from '@app/auth/services/auth.service';
+import {ScheduleService} from '@app/api/services/schedule.service';
 import {Router} from '@angular/router';
-import {SubscriptionManager} from '../../../shared/classes/subscription-manager';
-import {User} from '../../../user/classes/user';
-import {Schedule} from '../../../user/classes/schedule';
-import {EndScheduleDialogComponent} from '../../../user/componets/end-schedule-dialog/end-schedule-dialog.component';
+import {SubscriptionManager} from '@app/shared/classes/subscription-manager';
+import {User} from '@app/api/models/user';
+import {Schedule} from '@app/api/models/schedule';
+import {EndScheduleDialogComponent} from '@app/user/components/end-schedule-dialog/end-schedule-dialog.component';
 import {Sidebar} from 'ng-sidebar';
 
 @Component({

@@ -1,0 +1,22 @@
+@import "~src/vars";
+
+:host{
+  @extend .form-dialog;
+}
+
+
+.picture-container{
+  flex: 1 0 200px;
+  position: relative;
+  padding: .25em;
+
+  picture{
+    height: 200px;
+    width: 100%;
+    display: inline-block;
+
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}

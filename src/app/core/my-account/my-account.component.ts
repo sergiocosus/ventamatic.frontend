@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {User} from '../../user/classes/user';
+import {User} from '../../modules/api/models/user';
 import {SubscriptionManager} from '../../shared/classes/subscription-manager';
-import {AuthService} from '../../auth/services/auth.service';
+import {AuthService} from '../../modules/auth/services/auth.service';
 import {MatDialog} from '@angular/material';
-import {PasswordDialogComponent} from '../../user/components/password-dialog/password-dialog.component';
+import {PasswordDialogComponent} from '../../modules/user/components/password-dialog/password-dialog.component';
 
 @Component({
   selector: 'app-my-account',

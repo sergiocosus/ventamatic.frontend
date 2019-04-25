@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/Rx';
-import {LocalStorageService} from './services/local-storage.service';
 import {
   MatAutocompleteModule,
   MatButtonModule, MatCheckboxModule, MatDialogModule, MatInputModule, MatPaginatorModule, MatRadioModule,
@@ -16,7 +15,6 @@ import {ConfirmDialogComponent} from './components/confirm-dialog/confirm-dialog
 import {MyCurrencyPipe} from './pipes/my-currency.pipe';
 import {NotifyService} from './services/notify.service';
 import {PopoverComponent} from './components/popover/popover.component';
-import {apiHttpServiceProvider} from './services/api-http';
 import {SearchBarComponent} from './components/search-bar/search-bar.component';
 import {MyDateRangePickerModule} from 'mydaterangepicker';
 import {SimpleNotificationsModule} from 'angular2-notifications';
@@ -54,8 +52,6 @@ import {ResponsiveModule} from 'ng2-responsive';
   ],
   providers: [
     NotifyService,
-    LocalStorageService,
-    apiHttpServiceProvider,
   ],
   entryComponents: [
     ConfirmDialogComponent,

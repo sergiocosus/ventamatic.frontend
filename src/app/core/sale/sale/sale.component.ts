@@ -3,16 +3,16 @@ import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router} from '@angular/router';
 import { FormControl} from '@angular/forms';
-import {Inventory} from '../../../inventory/classes/inventory.model';
+import {Inventory} from '../../../modules/api/models/inventory.model';
 import {MatDialog} from '@angular/material';
 import {ConfirmDialogComponent} from '../../../shared/components/confirm-dialog/confirm-dialog.component';
-import {FindProductComponent} from '../../../product/components/find-product/find-product.component';
-import {Branch} from '../../../branch/models/branch';
-import {Client} from '../../../client/classes/client';
-import {ClientService} from '../../../client/services/client.service';
-import {SaleService} from '../../../sale/services/sale.service';
-import {ScheduleService} from '../../../user/services/schedule.service';
-import {TicketService} from '../../../sale/services/ticket.service';
+import {FindProductComponent} from '../../../modules/product/components/find-product/find-product.component';
+import {Branch} from '../../../modules/api/models/branch';
+import {Client} from '../../../modules/api/models/client';
+import {ClientService} from '../../../modules/api/services/client.service';
+import {SaleService} from '../../../modules/api/services/sale.service';
+import {ScheduleService} from '../../../modules/api/services/schedule.service';
+import {TicketService} from '../../../modules/api/services/ticket.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 
 @Component({

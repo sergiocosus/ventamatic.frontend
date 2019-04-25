@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { UsersRoutingModule } from './users-routing.module';
 import {UsuariosComponent} from './usuarios.component';
-import {UserModule} from '../../user/user.module';
-import {AuthModule} from '../../auth/auth.module';
+import {UserModule} from '../../modules/user/user.module';
+import {AuthModule} from '../../modules/auth/auth.module';
 import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({

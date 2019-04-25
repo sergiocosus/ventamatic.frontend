@@ -9,51 +9,51 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: 'app/core/main/main.module#MainModule',
+        loadChildren: './main/main.module#MainModule',
       },
       {
         path: 'mi-cuenta',
-        loadChildren: 'app/core/my-account/my-account.module#MyAccountModule',
+        loadChildren: './my-account/my-account.module#MyAccountModule',
       },
       {
         path: 'usuarios',
-        loadChildren: 'app/core/users/users.module#UsersModule',
+        loadChildren: './users/users.module#UsersModule',
       },
       {
         path: 'venta',
-        loadChildren: 'app/core/sale/sale.module#SaleModule',
+        loadChildren: './sale/sale.module#SaleModule',
       },
       {
         path: 'compra',
-        loadChildren: 'app/core/buy/buy.module#BuyModule'
+        loadChildren: './buy/buy.module#BuyModule'
       },
       {
         path: 'inventario',
-        loadChildren: 'app/core/inventories/inventories.module#InventoriesModule',
+        loadChildren: './inventories/inventories.module#InventoriesModule',
       },
       {
         path: 'productos',
-        loadChildren: 'app/core/products/products.module#ProductsModule',
+        loadChildren: './products/products.module#ProductsModule',
       },
       {
         path: 'clientes',
-        loadChildren: 'app/core/clients/clients.module#ClientsModule',
+        loadChildren: './clients/clients.module#ClientsModule',
       },
       {
         path: 'proveedores',
-        loadChildren: 'app/core/suppliers/suppliers.module#SuppliersModule',
+        loadChildren: './suppliers/suppliers.module#SuppliersModule',
       },
       {
         path: 'reportes',
-        loadChildren: 'app/core/reports/reports.module#ReportsModule',
+        loadChildren: './reports/reports.module#ReportsModule',
       },
       {
         path: 'roles',
-        loadChildren: 'app/core/roles/roles.module#RolesModule',
+        loadChildren: './roles/roles.module#RolesModule',
       },
       {
         path: 'sucursales',
-        loadChildren: 'app/core/branches/branches.module#BranchesModule',
+        loadChildren: './branches/branches.module#BranchesModule',
       },
     ],
   }

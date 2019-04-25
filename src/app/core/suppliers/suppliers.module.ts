@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { SuppliersRoutingModule } from './suppliers-routing.module';
 import {ProveedoresComponent} from './proveedores.component';
-import {AuthModule} from '../../auth/auth.module';
-import {SupplierModule} from '../../supplier/supplier.module';
+import {AuthModule} from '../../modules/auth/auth.module';
+import {SupplierModule} from '../../modules/supplier/supplier.module';
 import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({

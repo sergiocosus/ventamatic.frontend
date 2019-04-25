@@ -2,13 +2,13 @@
 import {map} from 'rxjs/operators';
 import { Component, OnInit, ViewChild} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {UserService} from '../../user/services/user.service';
+import {UserService} from '../../modules/api/services/user.service';
 import {NotifyService} from '../../shared/services/notify.service';
-import {User} from '../../user/classes/user';
-import {UserDialogComponent} from '../../user/componets/user-dialog/user-dialog.component';
+import {User} from '../../modules/api/models/user';
+import {UserDialogComponent} from '../../modules/user/components/user-dialog/user-dialog.component';
 import {MatDialog} from '@angular/material';
-import {UserRoleDialogComponent} from '../../user/componets/user-role-dialog/user-role-modal.component';
-import {ReportDataSource} from '../../report/classes/report-data-source';
+import {UserRoleDialogComponent} from '../../modules/user/components/user-role-dialog/user-role-modal.component';
+import {ReportDataSource} from '../../modules/report/classes/report-data-source';
 import {Observable} from 'rxjs';
 
 

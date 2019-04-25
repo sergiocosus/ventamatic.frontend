@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {ReportService} from '../../../report/report.service';
+import {ReportService} from '../../../modules/api/services/report.service';
 import {NotifyService} from '../../../shared/services/notify.service';
 import {IMyDateRangeModel} from 'mydaterangepicker';
 import {messages} from '../../../shared/classes/messages';
 import {MatPaginator} from '@angular/material';
-import {ReportDataSource} from '../../../report/classes/report-data-source';
+import {ReportDataSource} from '../../../modules/report/classes/report-data-source';
 
 @Component({
   selector: 'app-schedule-report',

@@ -1,8 +1,8 @@
 import { Component, OnInit} from '@angular/core';
 import {MatDialog} from '@angular/material';
-import {BranchDialogComponent} from '../../branch/components/branch-dialog/branch-dialog.component';
-import {Branch} from '../../branch/models/branch';
-import {BranchService} from '../../branch/services/branch.service';
+import {BranchDialogComponent} from '../../modules/branch/components/branch-dialog/branch-dialog.component';
+import {Branch} from '../../modules/api/models/branch';
+import {BranchService} from '../../modules/api/services/branch.service';
 import {NotifyService} from '../../shared/services/notify.service';
 
 @Component({

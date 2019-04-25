@@ -1,19 +1,19 @@
 import {RouterModule, Routes} from '@angular/router';
-import {NoAuthGuardService} from './auth/services/no-auth-guard.service';
+import {NoAuthGuardService} from '@app/api/services/no-auth-guard.service';
 import {AppComponent} from './app.component';
-import {AuthGuardService} from './auth/services/auth-guard.service';
+import {AuthGuardService} from '@app/api/services/auth-guard.service';
 
 export const appRoutes: Routes = [
   {
     path: 'login',
-    loadChildren: 'app/core/login/login.module#LoginModule',
+    loadChildren: './core/login/login.module#LoginModule',
     canActivate : [NoAuthGuardService]
   },
   {
     path: '',
     component: AppComponent,
     canActivate : [AuthGuardService],
-    loadChildren: 'app/core/core.module#CoreModule',
+    loadChildren: './core/core.module#CoreModule',
   },
   // { path: '**', component: PageNotFoundComponent },
 ];

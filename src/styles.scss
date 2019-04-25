@@ -1,6 +1,5 @@
 @import "../node_modules/font-face-mixin/_fontface.scss";
-@import 'src/app/vars';
-
+@import '~src/vars';
 
 
 @include font-face(QuickSand,
@@ -11,21 +10,22 @@
   "~connect-fonts-quicksand/fonts/latin/quicksand-bold",
   bold, normal, eot woff ttf svg);
 
-*{
+* {
   font-family: Verdana, sans-serif;
 }
 
 .open {
   > .dropdown-menu {
-      display: block;
-    }
+    display: block;
+  }
+
   > a {
-      outline: 0;
-    }
+    outline: 0;
+  }
 }
 
 
-.button-modify{
+.button-modify {
   display: flex;
   position: absolute;
   right: -5px;
@@ -41,19 +41,19 @@
   justify-content: center;
   transition: .25s all;
 
-  &:hover{
+  &:hover {
     background-color: darken(#EB0, .5);
-    transform: scale(1.5,1.5);
+    transform: scale(1.5, 1.5);
   }
 
-  i{
+  i {
     font-size: 1.2em;
   }
 
 }
 
 
-table{
+table {
   border-collapse: collapse;
 }
 
@@ -67,8 +67,8 @@ table{
 
 // Define the default theme (same as the example above).
 $candy-app-primary: mat-palette($mat-light-blue, 900, 200, 700);
-$candy-app-accent:  mat-palette($mat-teal, 600, A100, A400);
-$candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
+$candy-app-accent: mat-palette($mat-teal, 600, A100, A400);
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent);
 
 // Include the default theme styles.
 @include angular-material-theme($candy-app-theme);
@@ -76,38 +76,40 @@ $candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
 
 // Define an alternate dark theme.
 $dark-primary: mat-palette($mat-light-blue, 600, 200, 700);
-$dark-accent:  mat-palette($mat-teal, 500, 200, 900);
-$dark-warn:  mat-palette($mat-red, 500, 300, A400);
-$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$dark-accent: mat-palette($mat-teal, 500, 200, 900);
+$dark-warn: mat-palette($mat-red, 500, 300, A400);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
 // Include the alternative theme styles inside of a block with a CSS class. You can make this
 // CSS class whatever you want. In this example, any component inside of an element with
 // `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
 .dark-theme {
   @include angular-material-theme($dark-theme);
-  .mat-form-field{
+
+  .mat-form-field {
     width: auto;
   }
 
 }
 
-.simple-notification-wrapper{
+.simple-notification-wrapper {
   z-index: 1000000 !important;
 }
-.modal-header{
+
+.modal-header {
   .close {
     order: 2;
   }
 }
 
-md-hint.error{
+mat-hint.error {
   color: #d9534f;
   font-weight: bolder;
 }
-.mat-form-field{
+
+.mat-form-field {
   width: auto;
 }
-
 
 
 .table-container {
@@ -116,7 +118,8 @@ md-hint.error{
   min-width: 300px;
   width: 100%;
   align-items: stretch;
-  table{
+
+  table {
     width: 100%;
   }
 }

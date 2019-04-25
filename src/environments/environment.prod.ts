@@ -1,8 +1,10 @@
 export const environment = {
   production: true,
-  apiUrl: '',
-  apiClientID: '',
-  apiClientSecret: '',
+  api: {
+    url: '',
+    clientID: '',
+    clientSecret: '',
+  },
   buy: {
     invoiceTotalRestriction: false
   },

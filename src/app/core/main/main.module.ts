@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { MainRoutingModule } from './main-routing.module';
 import {SharedModule} from '../../shared/shared.module';
 import {MainComponent} from './main.component';
-import {AuthModule} from '../../auth/auth.module';
+import {AuthModule} from '../../modules/auth/auth.module';
 
 @NgModule({
   imports: [
