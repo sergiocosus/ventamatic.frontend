@@ -9,12 +9,12 @@
   flex-direction: column;
 }
 
-md-dialog-content{
+mat-dialog-content{
   display: flex;
   flex-direction: row !important;
   flex-wrap: wrap;
 
-  md-card{
+  mat-card{
     display: flex;
     flex-direction: column;
     padding: .5em;

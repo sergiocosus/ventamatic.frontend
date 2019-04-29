@@ -6,14 +6,14 @@ import {AuthGuardService} from '@app/api/services/auth-guard.service';
 export const appRoutes: Routes = [
   {
     path: 'login',
-    loadChildren: './core/login/login.module#LoginModule',
+    loadChildren: './pages/login/login.module#LoginModule',
     canActivate : [NoAuthGuardService]
   },
   {
     path: '',
     component: AppComponent,
     canActivate : [AuthGuardService],
-    loadChildren: './core/core.module#CoreModule',
+    loadChildren: './pages/pages.module#PagesModule',
   },
   // { path: '**', component: PageNotFoundComponent },
 ];

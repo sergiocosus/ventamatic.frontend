@@ -1,0 +1,27 @@
+@import "~src/vars";
+
+:host /deep/{
+  font-size: 14px;
+
+  .btn-default{
+    color: #ffffff;
+    background-color: #556A70;
+    border-color: black;
+    &:hover{
+      background-color: #e6e6e6;
+      color: #333;
+    }
+  }
+
+  ng-select.dark{
+    .btn-default{
+      background-color: $darkBlue;
+      &:hover{
+        color: white;
+      }
+    }
+    input{
+      background-color: $darkBlue;
+    }
+  }
+}

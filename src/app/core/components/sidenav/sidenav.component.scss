@@ -1,0 +1,25 @@
+@import "~src/vars";
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 200px;
+  background-color: $backgroundDark;
+}
+
+.sidenav .mat-toolbar {
+  background: inherit;
+}
+
+.mat-toolbar.mat-primary {
+  background-color: $backgroundDark;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+mat-sidenav-content {
+  background-color: $backgroundLight;
+}

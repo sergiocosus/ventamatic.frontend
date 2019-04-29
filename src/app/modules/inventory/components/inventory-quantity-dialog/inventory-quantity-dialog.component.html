@@ -2,14 +2,16 @@
 
 <mat-dialog-content>
   <form (ngSubmit)="submit()" ngNativeValidate *ngIf="inventory">
+    <mat-form-field>
+      <mat-select [(ngModel)]="inventoryMovementType"
+                  name="inventoryMovementType"
+                  placeholder="Tipo de movimiento">
+        <mat-option *ngFor="let inventoryMovementType of inventoryMovementTypes" [value]="inventoryMovementType">
+          {{inventoryMovementType.text}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <mat-select [(ngModel)]="inventoryMovementType"
-               name="inventoryMovementType"
-               placeholder="Tipo de movimiento">
-      <mat-option *ngFor="let inventoryMovementType of inventoryMovementTypes" [value]="inventoryMovementType">
-        {{inventoryMovementType.text}}
-      </mat-option>
-    </mat-select>
 
     <div *ngIf="willIncrease()" >
       Este tipo de movimiento aumentará el inventario,
@@ -51,14 +53,16 @@
       </mat-form-field>
       <br/>
 
-      <mat-select *ngIf="willTranslate()"
-                 [(ngModel)]="destiny_branch_id" required
-                 name="inventoryConverted"
-                 placeholder="Seleccione la sucursal de destino">
-        <mat-option *ngFor="let branch of branches" [value]="branch.id">
-          {{branch.name}}
-        </mat-option>
-      </mat-select>
+      <mat-form-field>
+        <mat-select *ngIf="willTranslate()"
+                    [(ngModel)]="destiny_branch_id" required
+                    name="inventoryConverted"
+                    placeholder="Seleccione la sucursal de destino">
+          <mat-option *ngFor="let branch of branches" [value]="branch.id">
+            {{branch.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
       <ng-container *ngIf="willConvert()">
         <form>

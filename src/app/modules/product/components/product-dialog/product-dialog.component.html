@@ -25,33 +25,39 @@
       </mat-form-field>
     </div>
 
-    <mat-select [(ngModel)]="unit_id"
-               [disabled]="locked"
-               name="selectedUnitItem"
-               placeholder="Unidad">
-      <mat-option *ngFor="let unit of units" [value]="unit.id">
-        {{unit.name}}
-      </mat-option>
-    </mat-select>
+    <mat-form-field>
+      <mat-select [(ngModel)]="unit_id"
+                  [disabled]="locked"
+                  name="selectedUnitItem"
+                  placeholder="Unidad">
+        <mat-option *ngFor="let unit of units" [value]="unit.id">
+          {{unit.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <mat-select [(ngModel)]="selectedCategories"
-               [multiple]="true"
-               [disabled]="locked"
-               name="selectedCategoryItems"
-               placeholder="Categorias">
-      <mat-option *ngFor="let category of categories" [value]="category.id">
-        {{category.name}}
-      </mat-option>
-    </mat-select>
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedCategories"
+                  [multiple]="true"
+                  [disabled]="locked"
+                  name="selectedCategoryItems"
+                  placeholder="Categorias">
+        <mat-option *ngFor="let category of categories" [value]="category.id">
+          {{category.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <mat-select [(ngModel)]="brand_id"
-               [disabled]="locked"
-               name="brand"
-               placeholder="Marca">
-      <mat-option *ngFor="let brand of brands" [value]="brand.id">
-        {{brand.name}}
-      </mat-option>
-    </mat-select>
+    <mat-form-field>
+      <mat-select [(ngModel)]="brand_id"
+                  [disabled]="locked"
+                  name="brand"
+                  placeholder="Marca">
+        <mat-option *ngFor="let brand of brands" [value]="brand.id">
+          {{brand.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <mat-form-field>
       <input matInput placeholder="Precio Global"

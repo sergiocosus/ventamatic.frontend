@@ -1,19 +1,28 @@
-import {Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef} from '@angular/core';
-import {AuthService} from '../services/auth.service';
-import {User} from '../../api/models/user';
-import {SubscriptionManager} from '../../../shared/classes/subscription-manager';
+import {
+  Directive,
+  Input,
+  OnInit,
+  TemplateRef,
+  ViewContainerRef
+} from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { User } from '@app/api/models/user';
+import { SubscriptionManager } from '@app/shared/classes/subscription-manager';
+import { AutoUnsubscribe } from '@app/shared/decorators/auto-unsubscribe';
 
 
 @Directive({
   selector: '[appUserCanInBranch]'
 })
-export class UserCanInBranchDirective implements OnDestroy, OnInit {
+@AutoUnsubscribe()
+export class UserCanInBranchDirective implements OnInit {
   private branch_id: any;
-  @Input() set appUserCanInBranch(permission){
+
+  @Input() set appUserCanInBranch(permission) {
     this.permission = permission;
   }
 
-  @Input() set appUserCanInBranchBranchId(branch_id){
+  @Input() set appUserCanInBranchBranchId(branch_id) {
     this.branch_id = branch_id;
   }
 
@@ -23,21 +32,16 @@ export class UserCanInBranchDirective implements OnDestroy, OnInit {
 
   constructor(private templateRef: TemplateRef<UserCanInBranchDirective>,
               private viewContainer: ViewContainerRef,
-              private authService: AuthService) {}
+              private authService: AuthService) {
+  }
 
   ngOnInit(): void {
-    const sub = this.authService.getLoggedUser().subscribe(
+    this.sub.add = this.authService.getLoggedUser().subscribe(
       user => {
         this.user = user;
         this.checkPermission(this.permission);
       }
     );
-
-    this.sub.push(sub);
-  }
-
-  ngOnDestroy() {
-    this.sub.clear();
   }
 
   checkPermission(permission) {

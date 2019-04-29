@@ -1,0 +1,98 @@
+@import "~src/vars";
+
+
+:host, form{
+  display: flex;
+  max-width: 100%;
+  overflow: hidden;
+  background-color: $backgroundDark;
+  color: white;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+mat-form-field {
+  flex: 1 0 auto;
+  color: white;
+}
+
+.left{
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 0;
+  color: white;
+  line-height: 1em;
+  text-align: center;
+
+  @media (min-width: $smScreen) {
+    border-right: white 2px dashed;
+    margin: 1em;
+    padding: 1em;
+  }
+
+  /deep/ h5{
+    margin: 0;
+    font-size: 1em;
+    text-align: center;
+  }
+
+  .client {
+    position: relative;
+    .searchable-input{
+      display: flex;
+      color: white;
+      app-client-search{
+        flex: 0 0 auto;
+      }
+    }
+
+  }
+
+  .branch{
+    flex: 0 0 auto;
+  }
+
+  .product{
+    color: white;
+  }
+}
+
+.right{
+  flex: 2 0 0;
+  color: white;
+  font-size: .75em;
+
+  @media (min-width: $smScreen) {
+    padding: 1em;
+    font-size: 1em;
+  }
+}
+
+.error{
+  color: #d9534f;
+  font-weight: bolder;
+}
+
+.client-view{
+  background-color: $darkBlue;
+  font-weight: bolder;
+  border-radius: .5em;
+  padding: .5em;
+}
+
+.branch-view{
+  text-align: center;
+
+  h4, h6{
+    margin: 0;
+  }
+}
+
+hr{
+  border-color: lighten($mainContentBackgroundColor, 10%);
+  margin: 1em 0;
+
+  @media (min-width: $smScreen) {
+    margin: .25em 0;
+  }
+}

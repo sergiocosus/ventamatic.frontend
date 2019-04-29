@@ -1,0 +1,24 @@
+<form (ngSubmit)="submit()">
+  <h2>
+    <i class="fa fa-clock-o fa" aria-hidden="true"></i>
+    Iniciar Turno
+  </h2>
+  <mat-form-field>
+    <mat-select [(ngModel)]="selectedBranch" name="selectedBranch"
+                placeholder="Sucursal">
+      <mat-option *ngFor="let branch of branches" [value]="branch">
+        {{branch.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput required="required"
+           placeholder="Monto inicial"
+           type="number" name="initial_amount"
+           [(ngModel)]="initial_amount">
+  </mat-form-field>
+  <button mat-raised-button type="submit">
+    Iniciar turno
+  </button>
+</form>

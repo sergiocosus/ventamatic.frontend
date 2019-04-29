@@ -4,6 +4,7 @@ $hoverBlue : #06495E;
 $mainContentBackgroundColor : #556A70;
 
 $backgroundDark : $darkBlue;
+$backgroundLight: #AAB6BA;
 
 $smScreen: 576px;
 $mdScreen: 768px;
@@ -12,12 +13,12 @@ $xlgScreen: 1200px;
 
 
 .form-dialog{
-  md-select{
+  mat-select{
     margin-top: 1em;
     margin-bottom: 1em;
   }
 
-  md-dialog-content{
+  mat-dialog-content{
     display: flex;
     flex-direction: column;
   }

@@ -1,0 +1,73 @@
+<app-search-bar>
+  <button *appUserCan="'supplier-create'"
+          mat-raised-button color="primary"
+          (click)="create()">
+    <i class="fa fa-user-secret"></i>
+    Agregar Proveedor
+  </button>
+  <button *appUserCan="'supplier-category-create'"
+          mat-raised-button color="primary"
+          (click)="openSupplierCategoryDialog()">
+    <i class="fa fa-list" aria-hidden="true"></i>
+    Categorias de proveedores
+  </button>
+  <button *appUserCan="'brand-create'"
+          mat-raised-button color="primary"
+          (click)="openBrandDialog()">
+    <i class="fa fa-list" aria-hidden="true"></i>
+    Marcas
+  </button>
+  <mat-checkbox [formControl]="deletedControl" *appUserCan="'product-delete'" class="dark-theme">
+    <i class="fa fa-trash"></i>
+    Ver eliminados
+  </mat-checkbox>
+</app-search-bar>
+
+<app-search-bar class="dark-theme">
+  <form [formGroup]="form">
+    <i class="fa fa-filter" aria-hidden="true"></i>
+
+    <mat-form-field>
+      <input matInput formControlName="id" placeholder="ID">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="name" placeholder="Nombre">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="address" placeholder="Dirección">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select formControlName="supplier_category_id" placeholder="Categoría de proveedor">
+        <mat-option [value]="null"> Todas </mat-option>
+        <mat-option *ngFor="let category of categories | async" [value]="category.id">
+          {{category.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select formControlName="brands" placeholder="Marca">
+        <mat-option [value]="null"> Todas </mat-option>
+        <mat-option *ngFor="let brand of brands | async" [value]="brand.id">
+          {{brand.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="phone" placeholder="Teléfono">
+    </mat-form-field>
+  </form>
+</app-search-bar>
+
+<app-main-content>
+  <app-supplier-item *ngFor="let supplier of dataSourceObservable | async"
+                     [supplier]="supplier"
+                     (update)="update($event)"
+                     (restore)="restore($event)"
+                     (delete)="delete($event)"
+  ></app-supplier-item>
+</app-main-content>

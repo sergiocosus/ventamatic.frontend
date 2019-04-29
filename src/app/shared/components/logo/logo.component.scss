@@ -1,0 +1,12 @@
+@import "~src/vars";
+
+picture {
+  display: flex;
+  flex: 0 0 110px;
+  border: 1px solid $backgroundDark;
+  background-image: url(/assets/images/logo_white.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: 1em;
+  height: 4em;
+}

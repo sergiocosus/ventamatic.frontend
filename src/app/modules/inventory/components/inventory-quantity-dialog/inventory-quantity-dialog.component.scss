@@ -6,11 +6,11 @@ form{
   flex-direction: column;
   padding-top: .5em;
 
-  md-select{
+  mat-select{
     margin: .5em 0;
   }
 
-  md-card {
+  mat-card {
     display: flex;
     flex-direction: column;
   }

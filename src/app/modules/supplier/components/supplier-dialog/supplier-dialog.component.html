@@ -37,24 +37,29 @@
              type="text" [(ngModel)]="supplier.rfc"  name="rfc"
              [disabled]="locked">
     </mat-form-field>
-    <mat-select [(ngModel)]="selectedSupplierCategory"
-               [disabled]="locked"
-               name="selectedCategoryItems"
-               placeholder="Categoría del proveedor">
-      <mat-option *ngFor="let supplierCategory of supplierCategories" [value]="supplierCategory">
-        {{supplierCategory.name}}
-      </mat-option>
-    </mat-select>
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedSupplierCategory"
+                  [disabled]="locked"
+                  name="selectedCategoryItems"
+                  placeholder="Categoría del proveedor">
+        <mat-option *ngFor="let supplierCategory of supplierCategories" [value]="supplierCategory">
+          {{supplierCategory.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
-    <mat-select [(ngModel)]="selectedBrands"
-               [multiple]="true"
-               [disabled]="locked"
-               name="selectedBrands"
-               placeholder="Marcas">
-      <mat-option *ngFor="let brand of brands" [value]="brand">
-        {{brand.name}}
-      </mat-option>
-    </mat-select>
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedBrands"
+                  [multiple]="true"
+                  [disabled]="locked"
+                  name="selectedBrands"
+                  placeholder="Marcas">
+        <mat-option *ngFor="let brand of brands" [value]="brand">
+          {{brand.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
   </mat-dialog-content>
 
   <mat-dialog-actions>

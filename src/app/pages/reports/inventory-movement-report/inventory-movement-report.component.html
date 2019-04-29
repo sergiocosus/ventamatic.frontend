@@ -1,0 +1,177 @@
+<app-search-bar class="dark-theme">
+  <form (submit)="submit()" ngNativeValidate>
+    <mat-form-field class="id-field">
+      <input matInput placeholder="ID de producto"
+             [(ngModel)]="request.product_id"
+             name="product_id" type="number">
+    </mat-form-field>
+
+    <app-product-search class="search-button"
+                        (selected)="request.product_id = $event.id"></app-product-search>
+
+    <mat-form-field class="id-field">
+      <input matInput placeholder="ID de sucursal"
+             [(ngModel)]="request.branch_id"
+             name="branch_id" type="number">
+    </mat-form-field>
+
+    <app-branch-search class="search-button"
+                       (selected)="request.branch_id = $event.id"></app-branch-search>
+
+    <mat-form-field class="id-field">
+      <input matInput placeholder="ID de usuario"
+             [(ngModel)]="request.user_id"
+             name="user_id" type="number">
+    </mat-form-field>
+
+    <app-user-search class="search-button"
+                     (selected)="request.user_id = $event.id"></app-user-search>
+    <mat-form-field>
+      <mat-select [(ngModel)]="request.inventory_movement_type_id"
+                  placeholder="Tipo de movimiento"
+                  name="inventory_movement_type_id">
+        <mat-option *ngFor="let inventoryMovementType of inventoryMovementTypes"
+                    [value]="inventoryMovementType.id">
+          {{inventoryMovementType.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <my-date-range-picker placeholder="Rango de fechas"
+                          (dateRangeChanged)="onDateRangeChanged($event)"
+                          [options]="rangeOptions" ></my-date-range-picker>
+
+    <button mat-raised-button color="primary" type="submit">
+      <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+      Consultar
+    </button>
+    <button mat-raised-button color="primary" type="button" (click)="downloadCSV()">
+      <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+      CSV
+    </button>
+  </form>
+</app-search-bar>
+<app-main-content>
+  <h2>Reporte de entradas/salidas</h2>
+
+  <table *ngIf="inventory_movements.length">
+    <thead>
+    <tr>
+      <th>Estadísticas</th>
+      <th>Total</th>
+      <th *ngFor="let stat of statsByType">{{stat.name}}</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        Total de movimientos
+      </td>
+      <td>
+        {{inventory_movements.length}}
+      </td>
+      <td *ngFor="let stat of statsByType">
+        {{stat.totalMovements}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Total de entradas
+      </td>
+      <td>
+        {{totalUp}}
+      </td>
+      <td *ngFor="let stat of statsByType">
+        {{stat.totalUp}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Total de salidas
+      </td>
+      <td>
+        {{totalDown}}
+      </td>
+      <td *ngFor="let stat of statsByType">
+        {{stat.totalDown}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <br/>
+
+
+  <table *ngIf="inventory_movements.length">
+    <thead>
+    <tr>
+      <th>Estadísticas por valor</th>
+      <th>Total</th>
+      <th *ngFor="let stat of statsByTypePrice">{{stat.name}}</th>
+    </tr>
+
+    </thead>
+    <tbody>
+    <tr>
+      <td>
+        Total de entradas
+      </td>
+      <td>
+        {{totalUpPrice | myCurrency}}
+      </td>
+      <td *ngFor="let stat of statsByTypePrice">
+        {{stat.totalUp | myCurrency}}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        Total de salidas
+      </td>
+      <td>
+        {{totalDownPrice | myCurrency}}
+      </td>
+      <td *ngFor="let stat of statsByTypePrice">
+        {{stat.totalDown | myCurrency}}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <br/>
+
+  <div class="table-container mat-elevation-z8">
+    <mat-paginator #paginator
+                  [length]="dataSource ? dataSource.data.length : []"
+                  [pageIndex]="0"
+                  [pageSize]="50"
+                  [pageSizeOptions]="[50, 100, 200, 500, 1000, 10000]">
+    </mat-paginator>
+    <table>
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Fecha</th>
+        <th>Sucursal</th>
+        <th>Usuario</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Tipo de movimiento</th>
+        <th>Valor</th>
+      </tr>
+      </thead>
+      <ng-container *ngFor="let inventoryMovement of dataSource.connect() | async">
+        <tr>
+          <td>{{inventoryMovement.id}}</td>
+          <td>{{inventoryMovement.created_at | date:'short'}}</td>
+          <td>{{inventoryMovement.branch.name}}</td>
+          <td>{{inventoryMovement.user.name}}</td>
+          <td>{{inventoryMovement.product.description}}</td>
+          <td>{{inventoryMovement.quantity}}</td>
+          <td>{{inventoryMovement.inventory_movement_type.name}}</td>
+          <td>{{inventoryMovement.value | myCurrency}}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
+</app-main-content>

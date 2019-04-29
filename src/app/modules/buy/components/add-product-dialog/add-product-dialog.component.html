@@ -24,14 +24,16 @@
       </mat-form-field>
     </section>
 
-    <mat-select [(ngModel)]="productBuy.inventoryMovementType"
-               name="inventoryMovementType" required
-               placeholder="Tipo de movimiento">
-      <mat-option *ngFor="let inventoryMovementType of inventoryMovementTypes"
-                 [value]="inventoryMovementType">
-        {{inventoryMovementType.text}}
-      </mat-option>
-    </mat-select>
+    <mat-form-field>
+      <mat-select [(ngModel)]="productBuy.inventoryMovementType"
+                  name="inventoryMovementType" required
+                  placeholder="Tipo de movimiento">
+        <mat-option *ngFor="let inventoryMovementType of inventoryMovementTypes"
+                    [value]="inventoryMovementType">
+          {{inventoryMovementType.text}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
 
     <button type="submit" mat-raised-button color="accent">
       Agregar Producto

@@ -1,23 +1,35 @@
 import { NgModule } from '@angular/core';
-import { CoreRoutingModule } from './core-routing.module';
-import {AsideNavComponent} from './shared/aside-nav/aside-nav.component';
-import {TopBarComponent} from './shared/top-bar/top-bar.component';
-import {CoreComponent} from './core.component';
-import {SharedModule} from '../shared/shared.module';
-import {AuthModule} from '../modules/auth/auth.module';
-import {SidebarModule} from 'ng-sidebar';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatListModule,
+  MatSidenavModule,
+  MatToolbarModule
+} from '@angular/material';
+import { SharedModule } from '@app/shared/shared.module';
+import { RouterModule } from '@angular/router';
+import { AsideNavComponent } from './components/aside-nav/aside-nav.component';
+import { TopBarComponent } from './components/top-bar/top-bar.component';
+import { AuthModule } from '@app/auth/auth.module';
 
 @NgModule({
+  declarations: [SidenavComponent, AsideNavComponent, TopBarComponent],
   imports: [
     SharedModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    RouterModule,
     AuthModule,
-    CoreRoutingModule,
-    SidebarModule,
   ],
-  declarations: [
-    AsideNavComponent,
-    TopBarComponent,
-    CoreComponent,
+  exports: [
+    SidenavComponent,
   ]
 })
-export class CoreModule { }
+export class CoreModule {
+}

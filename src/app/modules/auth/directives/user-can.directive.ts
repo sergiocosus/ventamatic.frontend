@@ -1,36 +1,40 @@
-import {Directive, OnInit, OnDestroy, TemplateRef, ViewContainerRef, Input} from '@angular/core';
-import {AuthService} from '../services/auth.service';
-import {User} from '../../api/models/user';
-import {SubscriptionManager} from '../../../shared/classes/subscription-manager';
+import {
+  Directive,
+  Input,
+  OnInit,
+  TemplateRef,
+  ViewContainerRef
+} from '@angular/core';
+import { AuthService } from '../services/auth.service';
+import { User } from '@app/api/models/user';
+import { SubscriptionManager } from '@app/shared/classes/subscription-manager';
+import { AutoUnsubscribe } from '@app/shared/decorators/auto-unsubscribe';
 
 @Directive({
   selector: '[appUserCan]'
 })
-export class UserCanDirective implements OnInit, OnDestroy {
-  @Input() set appUserCan(permission){
+@AutoUnsubscribe()
+export class UserCanDirective implements OnInit {
+  @Input() set appUserCan(permission) {
     this.permission = permission;
   };
+
   private permission: string;
   private user: User;
   private sub = new SubscriptionManager();
 
   constructor(private templateRef: TemplateRef<UserCanDirective>,
               private viewContainer: ViewContainerRef,
-              private authService: AuthService) {}
+              private authService: AuthService) {
+  }
 
   ngOnInit(): void {
-    const sub = this.authService.getLoggedUser().subscribe(
+    this.sub.add = this.authService.getLoggedUser().subscribe(
       user => {
         this.user = user;
         this.checkPermission(this.permission);
       }
     );
-
-    this.sub.push(sub);
-  }
-
-  ngOnDestroy() {
-    this.sub.clear();
   }
 
   checkPermission(permission) {

@@ -3,14 +3,17 @@
     <h4 mat-dialog-title>
       Roles
     </h4>
-    <mat-select [(ngModel)]="selectedRoles"
-               [multiple]="true"
-               name="selectedRoles"
-               placeholder="Roles">
-      <mat-option *ngFor="let role of roles" [value]="role">
-        {{role.display_name}}
-      </mat-option>
-    </mat-select>
+    <mat-form-field>
+      <mat-select [(ngModel)]="selectedRoles"
+                  [multiple]="true"
+                  name="selectedRoles"
+                  placeholder="Roles">
+        <mat-option *ngFor="let role of roles" [value]="role">
+          {{role.display_name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
     <button (click)="updateSystemRoles()"
             *appUserCan="'user-role-assign'"
             mat-raised-button color="accent">
@@ -26,14 +29,16 @@
     </h4>
 
     <div *ngFor="let branch of branches; let i=index" class="branch-roles">
-      <mat-select [(ngModel)]="selectedBranchRoles[i]"
-                 [multiple]="true"
-                 name="selectedRoles"
-                 [placeholder]="branch.name ">
-        <mat-option *ngFor="let branchRole of branchRoles" [value]="branchRole">
-          {{branchRole.display_name}}
-        </mat-option>
-      </mat-select>
+      <mat-form-field>
+        <mat-select [(ngModel)]="selectedBranchRoles[i]"
+                    [multiple]="true"
+                    name="selectedRoles"
+                    [placeholder]="branch.name ">
+          <mat-option *ngFor="let branchRole of branchRoles" [value]="branchRole">
+            {{branchRole.display_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
 
     <button (click)="updateBranchRoles()" mat-raised-button color="accent">
