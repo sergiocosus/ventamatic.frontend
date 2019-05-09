@@ -1,4 +1,5 @@
-import {Component, OnInit, Input} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-payment-type',
@@ -7,23 +8,12 @@ import {Component, OnInit, Input} from '@angular/core';
 })
 export class PaymentTypeComponent implements OnInit {
   @Input() tab_index;
-  @Input() selectedPaymentType = {
-    payment_type_id: 1,
-    card_payment_id: null,
-  };
 
-  paymentTypes = [
-    {
-      label: 'Efectivo',
-      id: 1
-    },
-    {
-      label: 'Tarjeta',
-      id: 2
-    }
-  ];
+  @Input() paymentTypeIdControl: FormControl;
+  @Input() cardPaymentIdControl: FormControl;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

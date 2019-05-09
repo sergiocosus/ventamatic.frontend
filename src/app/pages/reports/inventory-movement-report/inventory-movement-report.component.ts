@@ -1,12 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {IMyDateRangeModel} from 'mydaterangepicker';
-import {InventoryMovementTypeService} from '../../../modules/api/services/inventory-movement-type.service';
-import {InventoryMovementType} from '../../../modules/api/models/inventory-movement-type.model';
-import {ReportService} from '../../../modules/api/services/report.service';
-import {NotifyService} from '../../../shared/services/notify.service';
-import {messages} from '../../../shared/classes/messages';
+import {InventoryMovementTypeService} from '@app/api/services/inventory-movement-type.service';
+import {InventoryMovementType} from '@app/api/models/inventory-movement-type.model';
+import {ReportService} from '@app/api/services/report.service';
+import {NotifyService} from '@app/shared/services/notify.service';
+import {messages} from '@app/shared/classes/messages';
 import {MatPaginator} from '@angular/material';
-import {ReportDataSource} from '../../../modules/report/classes/report-data-source';
+import {ReportDataSource} from '@app/report/classes/report-data-source';
 
 @Component({
   selector: 'app-inventory-movement-report',

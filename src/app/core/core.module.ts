@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { AsideNavComponent } from './components/aside-nav/aside-nav.component';
 import { TopBarComponent } from './components/top-bar/top-bar.component';
 import { AuthModule } from '@app/auth/auth.module';
+import { UserModule } from '@app/user/user.module';
 
 @NgModule({
   declarations: [SidenavComponent, AsideNavComponent, TopBarComponent],
@@ -26,6 +27,7 @@ import { AuthModule } from '@app/auth/auth.module';
     MatListModule,
     RouterModule,
     AuthModule,
+    UserModule,
   ],
   exports: [
     SidenavComponent,

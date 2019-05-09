@@ -7,7 +7,7 @@ import {NotifyService} from '../../shared/services/notify.service';
 import {User} from '../../modules/api/models/user';
 import {UserDialogComponent} from '../../modules/user/components/user-dialog/user-dialog.component';
 import {MatDialog} from '@angular/material';
-import {UserRoleDialogComponent} from '../../modules/user/components/user-role-dialog/user-role-modal.component';
+import {UserRoleDialogComponent} from '@app/user/components/user-role-dialog/user-role-dialog.component';
 import {ReportDataSource} from '../../modules/report/classes/report-data-source';
 import {Observable} from 'rxjs';
 

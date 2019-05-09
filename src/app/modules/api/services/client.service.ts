@@ -19,7 +19,7 @@ export class ClientService {
 
   get(client_id: number) {
     return this.httpClient.get(this.basePath + client_id)
-      .pipe(this.mapClients());
+      .pipe(this.mapClient());
   }
 
   getSearch(search: string) {

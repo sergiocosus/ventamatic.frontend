@@ -5,12 +5,16 @@ import { SharedModule } from '@app/shared/shared.module';
 import { ClientSearchComponent } from './components/client-search/client-search.component';
 import { VariousModule } from '../various/various.module';
 import { AuthModule } from '../auth/auth.module';
+import { MatIconModule, MatMenuModule, MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
   imports: [
     SharedModule,
     VariousModule,
     AuthModule,
+    MatIconModule,
+    MatMenuModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     ClientSearchComponent,

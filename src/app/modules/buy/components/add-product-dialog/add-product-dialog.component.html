@@ -3,30 +3,30 @@
 </h2>
 
 <mat-dialog-content>
-  <form (ngSubmit)="submit()" ngNativeValidate>
-    <h3 *ngIf="productBuy.product">
-      Producto: {{productBuy.product.description}}
+  <form (ngSubmit)="submit()" [formGroup]="form" autocomplete="off">
+    <h3 *ngIf="form.get('product').value">
+      Producto: {{form.get('product').value.description}}
     </h3>
     <section>
       <mat-form-field>
-        <input name="price" matInput [(ngModel)]="productBuy.cost" placeholder="Costo"
+        <input matInput formControlName="cost" placeholder="Costo"
                required="required" type="number"
                [min]="0.01" [step]="0.01"/>
-        <mat-hint>Último costo: {{productBuy.product.last_cost | myCurrency}}</mat-hint>
+        <mat-hint>Último costo: {{form.get('product').value.last_cost | myCurrency}}</mat-hint>
+        <mat-icon matPrefix>attach_money</mat-icon>
       </mat-form-field>
 
       <mat-form-field>
-        <input name="quantity" matInput [(ngModel)]="productBuy.quantity"
-               [placeholder]="'Cantidad ' + productBuy.product.unitData.name"
+        <input name="quantity" matInput formControlName="quantity"
+               [placeholder]="'Cantidad ' + form.get('product').value.unitData.name"
                required="required" type="number"
-               [step]="productBuy.product.unitData.step"
-               [min]="productBuy.product.unitData.step"/>
+               [step]="form.get('product').value.unitData.step"
+               [min]="form.get('product').value.unitData.step"/>
       </mat-form-field>
     </section>
 
     <mat-form-field>
-      <mat-select [(ngModel)]="productBuy.inventoryMovementType"
-                  name="inventoryMovementType" required
+      <mat-select formControlName="inventory_movement_type"
                   placeholder="Tipo de movimiento">
         <mat-option *ngFor="let inventoryMovementType of inventoryMovementTypes"
                     [value]="inventoryMovementType">

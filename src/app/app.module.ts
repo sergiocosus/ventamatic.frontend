@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { appRoutingProviders, routing } from './app.routing';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule, DecimalPipe } from '@angular/common';
-import { SimpleNotificationsModule } from 'angular2-notifications/dist';
+import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { SaleModule } from '@app/sale/sale.module';

@@ -1,18 +1,25 @@
-<app-popover [focusable]="focusable">
-  <form>
-    <mat-form-field>
-      <input matInput [(ngModel)]="name" placeholder="Nombre"
-             type="text"
-             [formControl]="nameControl" #focusable>
-    </mat-form-field>
-  </form>
+<mat-form-field class="search">
+  <input matInput [placeholder]="placeholder"
+         [tabindex]="tab_index" aria-label="State"
+         [matAutocomplete]="auto" [formControl]="fieldControl">
+  <span matSuffix>
+    <mat-icon>search</mat-icon>
+  </span>
 
-  <app-selectable [items]="products"
-                  [loading]="loading"
-                  (selected)="select($event)"
-                  (keydown)="selectable.keydown($event)">
-    <ng-template let-item="item">
-      {{item.id}} - {{item.description}}
-    </ng-template>
-  </app-selectable>
-</app-popover>
+  <mat-autocomplete #auto="matAutocomplete" class="dark"
+                    (optionSelected)="optionSelected.emit($event.option.value)"
+                    [displayWith]="displayWith">
+    <mat-option class="loading" disabled *ngIf="loading">
+      <mat-spinner diameter="20" class="dark-theme"></mat-spinner>
+    </mat-option>
+    <ng-container *ngIf="productsFound$ | async; let products">
+      <mat-option class="empty" *ngIf="!loading && !products.length">
+        No hay resultados
+      </mat-option>
+
+      <mat-option *ngFor="let product of products" [value]="product">
+        <span>{{ product.description }}</span>
+      </mat-option>
+    </ng-container>
+  </mat-autocomplete>
+</mat-form-field>

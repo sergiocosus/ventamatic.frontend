@@ -124,3 +124,49 @@ mat-hint.error {
   }
 }
 
+.mat-option.loading, .mat-option.empty {
+  .mat-option-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+form.dark-box {
+  padding: 1em;
+  border-radius: .5em;
+  margin: 1em;
+
+  @include mat-elevation(10, $backgroundLight);
+}
+
+.mat-autocomplete-panel.dark {
+  background-color: $darkBlue;
+  color: white;
+  border-radius: 0em 0em 1em 1em;
+  @include mat-elevation(10, $backgroundLight);
+
+
+  .mat-option {
+    color: white;
+    height: 2em;
+
+    .mat-progress-spinner circle, .mat-spinner circle {
+      stroke: $backgroundLight;
+    }
+
+    &.mat-active, &:hover {
+      background-color: rgba(white, .15);
+    }
+  }
+}
+
+.id-field {
+  max-width: 5em;
+}
+
+.mat-icon.fa {
+  width: 1em;
+  height: 1em;
+  margin-right: .5em;
+}

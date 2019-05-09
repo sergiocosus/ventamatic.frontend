@@ -531,9 +531,9 @@ angular2-json2csv@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/angular2-json2csv/-/angular2-json2csv-1.1.2.tgz#113456ca76c4c9988b538e230141c2c13e03c692"
 
-angular2-notifications@^0.7.3:
-  version "0.7.8"
-  resolved "https://registry.yarnpkg.com/angular2-notifications/-/angular2-notifications-0.7.8.tgz#ecbcb95a8d2d402af94a9a080d6664c70d33a029"
+angular2-notifications@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/angular2-notifications/-/angular2-notifications-2.0.0.tgz#29da8031ee4e44d3f30bbcd5b3809a6c8653feec"
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -4464,6 +4464,12 @@ ng2-imageupload@^1.4.2:
 ng2-responsive@^0.8.4:
   version "0.8.4"
   resolved "https://registry.yarnpkg.com/ng2-responsive/-/ng2-responsive-0.8.4.tgz#b99151258a981a1a41a3ec8673df0291005578cf"
+
+ngx-custom-validators@^7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-custom-validators/-/ngx-custom-validators-7.0.0.tgz#785d3c3a892ce3f24511333ffa28032d76b06c0f"
+  dependencies:
+    tslib "^1.9.0"
 
 nice-try@^1.0.4:
   version "1.0.5"

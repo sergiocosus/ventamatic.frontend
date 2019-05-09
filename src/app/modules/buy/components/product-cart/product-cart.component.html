@@ -9,29 +9,31 @@
     <th>Subtotal</th>
   </tr>
   </thead>
-  <tbody>
-  <tr *ngFor="let productBuy of addedProducts">
-    <td>{{productBuy.product.id}}</td>
-    <td>{{productBuy.inventoryMovementType.text}}</td>
-    <td>{{productBuy.product.description}}</td>
+  <tbody [formGroup]="addedProducts">
+  <tr *ngFor="let productBuy of addedProducts.controls; let i = index"
+      [formGroupName]="i" >
+    <td>{{productBuy.get('product').value.id}}</td>
+    <td>{{productBuy.get('inventory_movement_type').value.text}}</td>
+    <td>{{productBuy.get('product').value.description}}</td>
     <td class="align-right">
       <mat-form-field>
-        <input matInput type="number" min="0" max="9999999999" step=".01"
-               [(ngModel)]="productBuy.cost" />
+        <input matInput type="number"
+               min="0" max="9999999999" step=".01"
+               formControlName="cost" />
       </mat-form-field>
     </td>
     <td>
       <mat-form-field>
         <input matInput type="number"
-               [min]="productBuy.product.unitData.step"
-               [step]="productBuy.product.unitData.step"
-               [(ngModel)]="productBuy.quantity"/>
+               [min]="productBuy.get('product').value.unitData.step"
+               [step]="productBuy.get('product').value.unitData.step"
+               formControlName="quantity"/>
       </mat-form-field>
     </td>
     <td class="align-right">
-      {{productBuy.quantity * productBuy.cost | currency:'USD':true:'1.2-2'}}
+      {{productBuy.get('quantity').value * productBuy.get('cost').value | currency:'$'}}
       <span class="button-delete"
-            (click)="removeProduct(productBuy)">
+            (click)="removeProduct(i)">
             <i class="fa fa-times"></i>
         </span>
     </td>

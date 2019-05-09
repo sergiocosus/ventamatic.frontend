@@ -1,5 +1,6 @@
 <mat-form-field class="search">
-  <input matInput [placeholder]="placeholder" aria-label="State"
+  <input matInput [placeholder]="placeholder"
+         [tabindex]="tab_index"
          [matAutocomplete]="auto" [formControl]="fieldControl">
   <span matSuffix>
     <mat-icon>search</mat-icon>
@@ -11,16 +12,13 @@
     <mat-option class="loading" disabled *ngIf="loading">
       <mat-spinner diameter="20" class="dark-theme"></mat-spinner>
     </mat-option>
-    <ng-container *ngIf="companiesFound$ | async; let companies">
-      <mat-option class="empty" *ngIf="!loading && !companies.length">
+    <ng-container *ngIf="inventoriesFound$ | async; let inventories">
+      <mat-option class="empty" *ngIf="!loading && !inventories.length">
         No hay resultados
       </mat-option>
-
-      <mat-option *ngFor="let company of companies" [value]="company">
-        <span>{{ company.name }}</span>
+      <mat-option *ngFor="let inventory of inventories" [value]="inventory">
+        <span>{{ inventory.product.description }}</span>
       </mat-option>
     </ng-container>
-
-
   </mat-autocomplete>
 </mat-form-field>

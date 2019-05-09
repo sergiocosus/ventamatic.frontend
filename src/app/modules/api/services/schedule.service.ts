@@ -60,10 +60,10 @@ export class ScheduleService {
 
 
   private mapSchedule() {
-    return map(response => new Schedule().parse(response['supplier']));
+    return map(response => new Schedule().parse(response['schedule']));
   }
 
   private mapSheduless() {
-    return map(response => Schedule.parseArray(response['suppliers']));
+    return map(response => Schedule.parseArray(response['schedules']));
   }
 }

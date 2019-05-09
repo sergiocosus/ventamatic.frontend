@@ -9,10 +9,12 @@
     <th>Subtotal</th>
   </tr>
   </thead>
-  <tbody>
-    <app-product-cart-row [productSale]="productSale"
-                          (remove)="removeProduct($event)"
-                          *ngFor="let productSale of addedProducts"></app-product-cart-row>
+  <tbody [formGroup]="products_form">
+    <app-product-cart-row *ngFor="let product of products_form.controls; let i=index;"
+                          [formGroupName]="i"
+                          [inventory]="product.get('inventory').value"
+                          [quantityControl]="product.get('quantity')"
+                          (remove)="removeProduct(i)"></app-product-cart-row>
   </tbody>
 
   <tfoot>
@@ -20,19 +22,18 @@
     <td colspan="4"></td>
     <td>Total</td>
     <td class="align-right">
-      {{total | currency:'USD':true:'1.2-2'}}
+      {{total | currency:'$'}}
     </td>
   </tr>
-  <tr [ngClass]="{ error: paymentChange < 0 }">
+  <tr [class.error]="paymentChange < 0 ">
     <td colspan="4"></td>
     <td>Pago</td>
-    <td class="align-right">{{ payment-0 | currency:'USD':true:'1.2-2'}}</td>
+    <td class="align-right">{{ client_payment-0 | currency:'$'}}</td>
   </tr>
-  <tr [ngClass]="{ error: paymentChange < 0 }">
+  <tr [class.error]="paymentChange < 0">
     <td colspan="4"></td>
     <td>Cambio</td>
-    <td class="align-right">{{paymentChange | currency:'USD':true:'1.2-2'}}</td>
+    <td class="align-right">{{paymentChange | currency:'$'}}</td>
   </tr>
   </tfoot>
-
 </table>

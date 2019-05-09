@@ -1,11 +1,13 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {Branch} from '../../../api/models/branch';
-import {Supplier} from '../../../api/models/supplier';
-import {SupplierService} from '../../../api/services/supplier.service';
-import {BranchService} from '../../../api/services/branch.service';
-import {AuthService} from '../../../auth/services/auth.service';
-import {User} from '../../../api/models/user';
-import {environment} from '../../../../../environments/environment';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Branch } from '@app/api/models/branch';
+import { Supplier } from '@app/api/models/supplier';
+import { SupplierService } from '@app/api/services/supplier.service';
+import { BranchService } from '@app/api/services/branch.service';
+import { AuthService } from '@app/auth/services/auth.service';
+import { User } from '@app/api/models/user';
+import { environment } from '../../../../../environments/environment';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { NotifyService } from '@app/shared/services/notify.service';
 
 @Component({
   selector: 'app-begin-buy',
@@ -13,22 +15,20 @@ import {environment} from '../../../../../environments/environment';
   styleUrls: ['./begin-buy.component.scss'],
 })
 export class BeginBuyComponent implements OnInit {
-  @Output() buyStarted = new EventEmitter<BeginBuyDataInterface>();
+  @Input() form: FormGroup;
+  @Output() buyStarted = new EventEmitter();
 
   buyEnvironment = environment.buy;
-
   branches: Branch[];
   suppliers: Supplier[];
-  formData: BeginBuyDataInterface;
-  private user: User;
-
+  user: User;
 
   constructor(private supplierService: SupplierService,
               private branchService: BranchService,
-              private authService: AuthService) {
-    this.clear();
+              private authService: AuthService,
+              private fb: FormBuilder,
+              private notify: NotifyService) {
   }
-
 
   ngOnInit() {
     this.supplierService.getAll().subscribe(
@@ -43,35 +43,22 @@ export class BeginBuyComponent implements OnInit {
       user => {
         this.user = user;
         this.branches = user.getBranchesWithPermission('buy');
-        this.formData.branch = this.branches.length ? this.branches[0] : null;
+        if (this.branches.length) {
+          this.form.get('branch').setValue(this.branches[0]);
+        }
       }
     );
   }
 
   start() {
-    this.buyStarted.emit(this.formData);
-  }
-
-  clear() {
-    if (!this.formData) {
-      this.formData = {
-        branch: null,
-        supplier: null,
-        supplierBillID: null,
-        introducedAmount: null
-      };
-    } else {
-      this.formData.supplier = null;
-      this.formData.supplierBillID = null;
-      this.formData.introducedAmount = null;
+    if (this.form.get('branch').invalid ||
+      this.form.get('supplier').invalid ||
+      this.form.get('introduced_amount').invalid ||
+      this.form.get('supplier_bill_id').invalid) {
+      this.notify.alert('Faltan datos o son erróneos');
+      return;
     }
+
+    this.buyStarted.emit(true);
   }
-}
-
-
-export interface BeginBuyDataInterface {
-  branch: Branch;
-  supplier: Supplier;
-  supplierBillID: string;
-  introducedAmount: number;
 }

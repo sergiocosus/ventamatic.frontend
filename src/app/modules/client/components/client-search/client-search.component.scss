@@ -1,5 +1,6 @@
 @import "~src/vars";
 
-mat-form-field{
-  color: white;
+:host {
+  flex-direction: column;
+  display: flex;
 }

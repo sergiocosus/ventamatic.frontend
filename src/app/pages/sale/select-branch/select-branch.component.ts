@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { User } from '@app/api/models/user';
 import { Router } from '@angular/router';
@@ -37,7 +37,7 @@ export class SelectBranchComponent implements OnInit {
     this.sub.add = this.scheduleService.getCurrentSchedule().subscribe(
       schedule => {
         if (schedule) {
-          this.router.navigate(['/venta', schedule.branch_id]);
+          this.router.navigateByUrl('/venta/' + schedule.branch_id);
         } else {
           this.loadBranches();
         }

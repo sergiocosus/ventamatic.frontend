@@ -1,6 +1,6 @@
 @import "~src/vars";
 
-:host{
+form {
   display: flex;
   flex-direction: column;
 }
@@ -12,5 +12,19 @@ mat-form-field{
     @media (min-width: $smScreen) {
       margin: 1em 0;
     }
+  }
+}
+
+.row {
+  display: flex;
+
+  .product-id {
+    flex: 0 0 4em;
+    width: 4em;
+    margin-right: .2em;
+  }
+
+  app-product-search, app-inventory-search {
+    flex: 1;
   }
 }

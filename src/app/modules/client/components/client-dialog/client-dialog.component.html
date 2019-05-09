@@ -53,7 +53,7 @@
 
   <mat-dialog-actions>
     <ng-template appUserCan="client-edit">
-      <button *ngIf="locked"
+      <button *ngIf="locked" mat-button
               type="submit" class="btn btn-danger pull-xs-left"
               (click)="unlock()" >
         <i class="fa fa-unlock-alt" aria-hidden="true"></i>

@@ -6,7 +6,8 @@
     Agregar Cliente
   </button>
 
-  <mat-checkbox [formControl]="deletedControl" *appUserCan="'client-delete'" class="dark-theme">
+  <mat-checkbox [formControl]="deletedControl"
+                *appUserCan="'client-delete'" class="dark-theme">
     <i class="fa fa-trash"></i>
     Ver eliminados
   </mat-checkbox>
@@ -16,7 +17,7 @@
   <form [formGroup]="form">
     <i class="fa fa-filter" aria-hidden="true"></i>
 
-    <mat-form-field>
+    <mat-form-field class="small">
       <input matInput formControlName="id" placeholder="ID">
     </mat-form-field>
 

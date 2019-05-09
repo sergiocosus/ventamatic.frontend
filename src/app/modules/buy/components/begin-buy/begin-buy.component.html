@@ -3,10 +3,11 @@
   Iniciar Compra
 </h3>
 
-<form (submit)="start()" ngNativeValidate class="dark-theme dark-background" >
+<form (ngSubmit)="start()" autocomplete="off"
+      [formGroup]="form" class="dark-theme">
   <mat-form-field>
-    <mat-select [(ngModel)]="formData.branch" required
-                placeholder="Sucursal" name="branch">
+    <mat-select formControlName="branch"
+                placeholder="Sucursal">
       <mat-option *ngFor="let branch of branches" [value]="branch">
         {{branch.name}}
       </mat-option>
@@ -14,8 +15,8 @@
   </mat-form-field>
 
   <mat-form-field>
-    <mat-select [(ngModel)]="formData.supplier" required
-                placeholder="Proveedor" name="supplier">
+    <mat-select formControlName="supplier"
+                placeholder="Proveedor">
       <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
         {{supplier.name}}
       </mat-option>
@@ -23,23 +24,18 @@
   </mat-form-field>
 
   <mat-form-field *ngIf="buyEnvironment.invoiceTotalRestriction">
-    <input [(ngModel)]="formData.introducedAmount" name="amount"
-           matInput
-           placeholder="Total"
-           class="dark" type="number" min="0"
-           [step]="0.01"  required="required" />
+    <input formControlName="introduced_amount"
+           matInput placeholder="Total" type="number" min="0"
+           [step]="0.01"/>
+    <mat-icon matPrefix>attach_money</mat-icon>
   </mat-form-field>
 
   <mat-form-field>
-    <input [(ngModel)]="formData.supplierBillID" name="supplierBillID"
-           matInput
-           placeholder="Número de factura"
-           required="required" />
+    <input formControlName="supplier_bill_id"
+           matInput placeholder="Número de factura"/>
   </mat-form-field>
 
-
-
-  <button type="submit"  mat-raised-button color="accent">
+  <button type="submit" mat-raised-button color="accent">
     Iniciar Compra
   </button>
 </form>

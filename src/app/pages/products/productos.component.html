@@ -26,7 +26,7 @@
   <form [formGroup]="form">
     <i class="fa fa-filter" aria-hidden="true"></i>
 
-    <mat-form-field>
+    <mat-form-field class="small">
       <input matInput formControlName="id" placeholder="ID">
     </mat-form-field>
 
@@ -57,15 +57,15 @@
     </mat-form-field>
 
 
-    <mat-form-field>
+    <mat-form-field class="small">
       <input matInput formControlName="minimum" placeholder="Mínimo">
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field  class="small">
       <input matInput formControlName="price" placeholder="Precio">
     </mat-form-field>
 
-    <mat-form-field>
+    <mat-form-field class="medium">
       <mat-select formControlName="unit" placeholder="Unidad">
         <mat-option [value]="null"> Todas </mat-option>
         <mat-option *ngFor="let unit of units" [value]="unit.id">

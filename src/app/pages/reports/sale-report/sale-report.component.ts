@@ -1,13 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {IMyDateRangeModel} from 'mydaterangepicker';
-import {ReportService} from '../../../modules/api/services/report.service';
-import {NotifyService} from '../../../shared/services/notify.service';
-import {TicketService} from '../../../modules/api/services/ticket.service';
-import {messages} from '../../../shared/classes/messages';
-import {ReportDataSource} from '../../../modules/report/classes/report-data-source';
-import {MatDialog, MatPaginator} from '@angular/material';
-import {SaleService} from '../../../modules/api/services/sale.service';
-import {ConfirmDialogComponent} from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { IMyDateRangeModel } from 'mydaterangepicker';
+import { ReportService } from '../../../modules/api/services/report.service';
+import { NotifyService } from '../../../shared/services/notify.service';
+import { TicketService } from '../../../modules/api/services/ticket.service';
+import { messages } from '../../../shared/classes/messages';
+import { ReportDataSource } from '../../../modules/report/classes/report-data-source';
+import { MatDialog, MatPaginator } from '@angular/material';
+import { SaleService } from '../../../modules/api/services/sale.service';
+import { ConfirmDialogComponent, ConfirmDialogData } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { filter, mergeMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-sale-report',
@@ -42,7 +43,8 @@ export class SaleReportComponent implements OnInit {
               private notify: NotifyService,
               private ticketService: TicketService,
               private saleService: SaleService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.dataSource = new ReportDataSource(this.paginator);
@@ -142,24 +144,24 @@ export class SaleReportComponent implements OnInit {
   }
 
   deleteSale(sale_id) {
-    const confirmDialog = this.dialog.open(ConfirmDialogComponent);
-    confirmDialog.componentInstance.init('¿Desea eliminar la venta?');
-    confirmDialog.afterClosed().subscribe(
-      confirmed => {
-        if (confirmed) {
-          this.saleService.delete(sale_id).subscribe(
-            success => {
-              this.notify.success('Venta eliminada');
-              this.sales.forEach(sale => {
-                if (sale.id == sale_id) {
-                  sale.deleted_at = '1';
-                }
-              });
-            },
-                error => this.notify.serviceError(error)
-          );
-        }
-      }
+    this.dialog.open(ConfirmDialogComponent, {
+      data: {
+        title: '¿Desea eliminar la venta?',
+      } as ConfirmDialogData
+    }).afterClosed().pipe(
+      filter(Boolean),
+      mergeMap(() => this.saleService.delete(sale_id))
+    ).subscribe(
+      success => {
+        this.notify.success('Venta eliminada');
+        this.sales.forEach(sale => {
+          if (sale.id === sale_id) {
+            sale.deleted_at = '1';
+          }
+        });
+      },
+      error => this.notify.serviceError(error)
     );
   }
+
 }

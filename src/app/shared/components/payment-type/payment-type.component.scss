@@ -6,3 +6,16 @@
 mat-form-field{
   flex: 1 0 0;
 }
+
+.payment-type {
+  display: flex;
+  align-items: center;
+
+  h5 {
+    margin-right: 1em;
+  }
+
+  mat-radio-button {
+    margin-right: .5em;
+  }
+}

@@ -1,68 +1,64 @@
 <app-main-content class="dark-theme">
-  <app-begin-buy
-    [hidden]="initialData"
+  <app-begin-buy *ngIf="!firstStepDone"
+    [form]="form"
     (buyStarted)="startBuy($event)">
   </app-begin-buy>
 
+  <div class="left" *ngIf="firstStepDone">
+    <app-find-product (selectedProduct)="addProduct($event)"
+                      mode="product">
+    </app-find-product>
 
-  <div class="left" *ngIf="initialData">
-    <div class="search">
-      <app-find-product (selectedProduct)="addProduct($event)"
-                        mode="product">
-      </app-find-product>
-      <hr/>
-    </div>
-
-    <app-payment-type [(selectedPaymentType)]="selectedPaymentType">
+    <app-payment-type [paymentTypeIdControl]="form.get('payment_type_id')"
+                      [cardPaymentIdControl]="form.get('card_payment_id')">
     </app-payment-type>
-    <form (submit)="openBuyConfirm()" ngNativeValidate>
-      <div class="finish">
 
-        <h5>Impuestos</h5>
-        <mat-form-field>
-          <input matInput [(ngModel)]="iva"
-                 placeholder="IVA" name="iva" class="dark" step=".01"
-                 [type]="'number'"  [max]="99999999999" [required]="true" />
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput [(ngModel)]="ieps" name="ieps" step=".01"
-                 placeholder="IEPS" class="dark"
-                 [type]="'number'"  [max]="99999999999" [required]="true" />
-        </mat-form-field>
+    <form class="finish" (ngSubmit)="openBuyConfirm()" autocomplete="off"
+          [formGroup]="form" #myForm="ngForm">
+      <h5>Impuestos</h5>
+      <mat-form-field>
+        <input matInput formControlName="iva"
+               placeholder="IVA" step=".01"
+               type="number" [max]="99999999999"/>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="ieps" step=".01"
+               placeholder="IEPS"
+               type="number" [max]="99999999999"/>
+      </mat-form-field>
 
-        <div>
-          <button type="button"
-                  mat-raised-button color="warn"
-                  (click)="openCancelDialog()">
-            Cancelar Compra
-          </button>
-          <button type="submit" mat-raised-button color="accent">
-            Finalizar Compra
-          </button>
-        </div>
+      <div>
+        <button type="button"
+                mat-raised-button color="warn"
+                (click)="openCancelDialog()">
+          Cancelar Compra
+        </button>
+        <button type="submit" mat-raised-button color="accent">
+          Finalizar Compra
+        </button>
       </div>
     </form>
   </div>
 
 
-  <div class="right" *ngIf="initialData">
+  <div class="right" *ngIf="firstStepDone">
     <header>
-      <div class="buy-header" *ngIf="initialData.branch">
+      <div class="buy-header">
         <span class="bold">Sucursal:</span>
-        {{initialData.branch.name}}
+        {{form.get('branch').value?.name}}
       </div>
-      <div class="buy-header" *ngIf="initialData.supplier">
+      <div class="buy-header">
         <span class="bold">Proveedor:</span>
-        {{initialData.supplier.name}}
+        {{form.get('supplier').value?.name}}
       </div>
-      <div class="buy-header" *ngIf="initialData.supplier">
+      <div class="buy-header">
         <span class="bold">ID de la factura:</span>
-        {{initialData.supplierBillID}}
+        {{form.get('supplier_bill_id').value}}
       </div>
     </header>
     <app-product-cart
-      [(addedProducts)]="addedProducts"
-      [introducedAmount]="initialData.introducedAmount"
+      [addedProducts]="addedProducts"
+      [introducedAmount]="form.get('introduced_amount').value"
     ></app-product-cart>
   </div>
 </app-main-content>

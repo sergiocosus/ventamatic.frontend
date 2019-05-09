@@ -36,13 +36,24 @@ mat-form-field {
     text-align: center;
   }
 
+  section {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+    padding-bottom: .5em;
+    border-bottom: 1px solid rgba($backgroundLight, .25);
+  }
+
   .client {
-    position: relative;
     .searchable-input{
       display: flex;
-      color: white;
+
+      mat-form-field {
+        margin-right: .2em;
+      }
+
       app-client-search{
-        flex: 0 0 auto;
+        flex: 1;
       }
     }
 
@@ -94,5 +105,45 @@ hr{
 
   @media (min-width: $smScreen) {
     margin: .25em 0;
+  }
+}
+
+
+
+section.payment {
+  app-payment-type {
+    margin-bottom: .5em;
+  }
+
+  mat-checkbox {
+    margin-bottom: 1em;
+    display: inline-block;
+  }
+}
+
+
+section.footer {
+  mat-checkbox {
+    margin-bottom: 1em;
+    display: inline-block;
+  }
+}
+
+
+.mobile-actions {
+  justify-content: space-around;
+  display: flex;
+
+  button {
+    ::ng-deep .mat-button-wrapper{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 1em;
+
+      mat-icon {
+        font-size: 2em;
+      }
+    }
   }
 }

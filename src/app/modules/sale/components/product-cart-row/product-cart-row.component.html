@@ -1,24 +1,23 @@
-<td>{{productSale.inventory.product.id}}</td>
-<td>{{productSale.inventory.product.bar_code}}</td>
-<td>{{productSale.inventory.product.description}}</td>
+<td>{{inventory.product.id}}</td>
+<td>{{inventory.product.bar_code}}</td>
+<td>{{inventory.product.description}}</td>
 <td class="align-right">
-  {{productSale.inventory.current_price | myCurrency}}
+  {{inventory.current_price | myCurrency}}
 </td>
 <td>
   <mat-form-field class="dark-theme">
     <input #input class="quantity" matInput tabindex="5" required
            type="number"
-           [max]="productSale.inventory.quantity"
-           [min]="productSale.inventory.product.unitData.step"
-           [step]="productSale.inventory.product.unitData.step"
-           [(ngModel)]="productSale.quantity"/>
+           [max]="inventory.quantity"
+           [min]="inventory.product.unitData.step"
+           [step]="inventory.product.unitData.step"
+           [formControl]="quantityControl"/>
   </mat-form-field>
 </td>
 <td class="align-right">
-  {{productSale.quantity * productSale.inventory.current_price
-  | currency:'USD':true:'1.2-2'}}
+  {{quantityControl.value * inventory.current_price | currency:'$'}}
   <span class="button-delete"
-        (click)="remove.emit(productSale)">
+        (click)="remove.emit(inventory)">
       <i class="fa fa-times"></i>
   </span>
 </td>

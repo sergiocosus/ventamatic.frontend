@@ -1,16 +1,16 @@
 <h2 mat-dialog-title>
-  {{title}}
+  {{data.title}}
 </h2>
 
 <mat-dialog-content>
-  {{message}}
+  {{data.message}}
 </mat-dialog-content>
 
 <mat-dialog-actions>
   <button mat-raised-button color="warn" (click)="cancel()">
-    {{cancelText}}
+    {{data.cancelText || 'Cancelar'}}
   </button>
   <button mat-raised-button color="accent" (click)="accept()">
-    {{acceptText}}
+    {{data.acceptText || 'Aceptar'}}
   </button>
 </mat-dialog-actions>

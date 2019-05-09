@@ -1,25 +1,35 @@
-<h5>Producto</h5>
-<mat-form-field>
-  <input matInput [(ngModel)]="bar_code" name="bar_code" class="dark"
-         placeholder="Código de barras"
-          (keyup.enter)="barCodeEntered()"
-         autocomplete="off"
-         #barCodeInput [tabindex]="tab_index" />
-</mat-form-field>
-<app-autocomplete-input
-  (selected)="selectedProduct.emit($event)"
-  [searchMethod]="searchMethod"
-  [(search_words)]="search_words"
-  [tab_index]="tab_index"
->
-</app-autocomplete-input>
-<mat-form-field>
-  <input matInput [(ngModel)]="product_id"
-         placeholder="Id de producto"
-         name="product_id" class="dark"
-         [type]="'number'"
-         autocomplete="off"
-         [min]="1" [step]="1" [tabindex]="tab_index"
-         (keyup)="idEntered($event)">
-</mat-form-field>
+<form [formGroup]="form">
+  <h5>Producto</h5>
 
+
+  <mat-form-field>
+    <input matInput formControlName="bar_code" name="bar_code" class="dark"
+           placeholder="Código de barras"
+           (keyup.enter)="barCodeEntered()"
+           autocomplete="off"
+           #barCodeInput [tabindex]="tab_index" />
+    <span matSuffix>
+      <mat-icon class="fa fa-barcode"></mat-icon>
+    </span>
+  </mat-form-field>
+
+  <div class="row">
+    <mat-form-field class="product-id">
+      <input matInput formControlName="product_id"
+             placeholder="Id"
+             name="product_id" class="dark"
+             [type]="'number'"
+             autocomplete="off"
+             [min]="1" [step]="1" [tabindex]="tab_index"
+             (keyup.enter)="productIdEntered()">
+    </mat-form-field>
+
+    <app-product-search *ngIf="mode === 'product'"
+                        [tab_index]="tab_index"
+                        [fieldControl]="form.get('search')"></app-product-search>
+    <app-inventory-search *ngIf="mode === 'inventory'"
+                          [branch_id]="branch_id"
+                          [tab_index]="tab_index"
+                          [fieldControl]="form.get('search')"></app-inventory-search>
+  </div>
+</form>

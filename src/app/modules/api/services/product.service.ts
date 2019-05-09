@@ -19,7 +19,7 @@ export class ProductService {
 
   get(product_id: number) {
     return this.httpClient.get(this.basePath + product_id)
-      .pipe(this.mapProducts());
+      .pipe(this.mapProduct());
   }
 
   search(search: string) {
@@ -29,7 +29,7 @@ export class ProductService {
 
   getByBarCode(bar_code: string) {
     return this.httpClient.get(this.basePath + 'bar-code', {params: {bar_code}})
-      .pipe(this.mapProducts());
+      .pipe(this.mapProduct());
   }
 
   post(product: Product) {

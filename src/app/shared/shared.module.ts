@@ -8,7 +8,7 @@ import {
   MatCheckboxModule,
   MatDialogModule,
   MatInputModule,
-  MatPaginatorModule,
+  MatPaginatorModule, MatProgressSpinnerModule,
   MatRadioModule,
   MatSelectModule,
   MatSortModule,
@@ -47,6 +47,7 @@ import { LogoComponent } from './components/logo/logo.component';
     MatPaginatorModule,
     MatSortModule,
     MatAutocompleteModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     SelectableComponent,

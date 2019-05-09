@@ -4,7 +4,7 @@ import { EndScheduleDialogComponent } from './components/end-schedule-dialog/end
 import { UserSearchComponent } from './components/user-search/user-search.component';
 import { UserDialogComponent } from './components/user-dialog/user-dialog.component';
 import { UserItemComponent } from './components/user-item/user-item.component';
-import { UserRoleDialogComponent } from './components/user-role-dialog/user-role-modal.component';
+import { UserRoleDialogComponent } from './components/user-role-dialog/user-role-dialog.component';
 import { VariousModule } from '../various/various.module';
 import { AuthModule } from '../auth/auth.module';
 import { PasswordDialogComponent } from './components/password-dialog/password-dialog.component';

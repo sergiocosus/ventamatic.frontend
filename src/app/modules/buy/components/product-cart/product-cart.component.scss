@@ -8,6 +8,10 @@ table{
     &.align-right{
       text-align: right;
     }
+
+    .mat-form-field {
+      width: 6em;
+    }
   }
 
   /deep/ tr{
@@ -29,7 +33,6 @@ table{
     }
   }
 }
-
 
 .error{
   color: #f44336;

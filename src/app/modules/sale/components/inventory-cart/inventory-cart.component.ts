@@ -1,5 +1,5 @@
-import {Component, OnInit, Input } from '@angular/core';
-import {ProductSale} from '../../../api/interfaces/product-sale';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormArray } from '@angular/forms';
 
 @Component({
   selector: 'app-inventory-cart',
@@ -7,31 +7,29 @@ import {ProductSale} from '../../../api/interfaces/product-sale';
   styleUrls: ['./inventory-cart.component.scss']
 })
 export class InventoryCartComponent implements OnInit {
-  @Input() addedProducts: ProductSale[] = [];
-  @Input() payment: number = null;
+  @Input() products_form: FormArray;
+  @Input() client_payment: number;
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
 
   }
 
-  get total(){
-    let total = 0;
-    this.addedProducts.forEach(addedProduct => {
-      total += addedProduct.inventory.current_price * addedProduct.quantity;
-    });
-    return total;
+  get total() {
+    return this.products_form.controls
+      .map(productForm =>
+        productForm.get('inventory').value.current_price * productForm.get('quantity').value
+      )
+      .reduce((prev, current) => prev + current, 0);
   }
 
-  get paymentChange(){
-    return this.payment - this.total;
+  get paymentChange() {
+    return this.client_payment - this.total;
   }
 
-  removeProduct(productSale) {
-    const index = this.addedProducts.indexOf(productSale);
-    if (index > -1) {
-      this.addedProducts.splice(index, 1);
-    }
+  removeProduct(i) {
+    this.products_form.removeAt(i);
   }
 }

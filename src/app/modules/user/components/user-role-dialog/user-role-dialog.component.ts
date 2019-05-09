@@ -1,14 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {UserService} from '../../../api/services/user.service';
-import {NotifyService} from '../../../../shared/services/notify.service';
-import {RoleService} from '../../../api/services/role.service';
-import {BranchRole} from '../../../api/models/branch-role';
-import {Role} from '../../../api/models/role';
-import {Branch} from '../../../api/models/branch';
-import {User} from '../../../api/models/user';
-import {BranchRoleService} from '../../../api/services/branch-role.service';
-import {BranchService} from '../../../api/services/branch.service';
-import {MatDialogRef} from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { UserService } from '@app/api/services/user.service';
+import { NotifyService } from '@app/shared/services/notify.service';
+import { RoleService } from '@app/api/services/role.service';
+import { BranchRole } from '@app/api/models/branch-role';
+import { Role } from '@app/api/models/role';
+import { Branch } from '@app/api/models/branch';
+import { User } from '@app/api/models/user';
+import { BranchRoleService } from '@app/api/services/branch-role.service';
+import { BranchService } from '@app/api/services/branch.service';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-user-role-dialog',
@@ -35,7 +35,8 @@ export class UserRoleDialogComponent implements OnInit {
               protected roleService: RoleService,
               protected branchRoleService: BranchRoleService,
               protected branchService: BranchService,
-              private dialogRef: MatDialogRef<UserRoleDialogComponent>) { }
+              private dialogRef: MatDialogRef<UserRoleDialogComponent>) {
+  }
 
   ngOnInit() {
     this.roleService.getAllCached().subscribe(
@@ -99,7 +100,7 @@ export class UserRoleDialogComponent implements OnInit {
     const branchRoles = [];
     for (let i = 0; i < this.branches.length; i++) {
       const branches = {
-        branch_id : this.branches[i].id,
+        branch_id: this.branches[i].id,
         branch_roles: []
       };
 
