@@ -16,4 +16,8 @@ form{
   display: flex;
   flex-direction: column;
   color: white;
+
+  background-color: rgba(white, .1);
+  padding: 1em;
+  border-radius: .5em;
 }

@@ -52,7 +52,7 @@ export class ProductService {
   }
 
   protected mapProduct() {
-    return map(response => new Product().parse(response['product']));
+    return map(response => new Product().parse(response['supplier']));
   }
 
   protected mapProducts() {

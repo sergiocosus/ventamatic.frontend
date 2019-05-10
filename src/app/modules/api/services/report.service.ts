@@ -6,6 +6,7 @@ import { NotifyService } from '@app/shared/services/notify.service';
 import { Inventory } from '../models/inventory.model';
 import { HttpClient } from '@angular/common/http';
 import { Model } from '@app/api/models/model';
+import { PaginationService } from '@app/shared/services/pagination.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,11 +17,13 @@ export class ReportService {
 
   constructor(private httpClient: HttpClient,
               // private csvService: CsvService,
-              private noty: NotifyService) {
+              private noty: NotifyService,
+              private paginationService: PaginationService) {
   }
 
   getSchedule(params?: any) {
-    return this.httpClient.get(this.basePath + 'schedule', params).pipe(
+    params = this.paginationService.addFilterParams(params);
+    return this.httpClient.get(this.basePath + 'schedule', {params}).pipe(
       map(res => {
         res['schedules'].forEach(
           schedule => {
@@ -33,7 +36,9 @@ export class ReportService {
   }
 
   getSale(params?: any) {
-    return this.httpClient.get(this.basePath + 'sale', params).pipe(
+    params = this.paginationService.addFilterParams(params);
+
+    return this.httpClient.get(this.basePath + 'sale', {params}).pipe(
       map(res => {
         res['sales'].forEach(
           sale => {
@@ -45,7 +50,9 @@ export class ReportService {
   }
 
   getBuy(params?: any) {
-    return this.httpClient.get(this.basePath + 'buy', params).pipe(
+    params = this.paginationService.addFilterParams(params);
+
+    return this.httpClient.get(this.basePath + 'buy', {params}).pipe(
       map(res => {
         res['buys'].forEach(
           buy => {
@@ -57,7 +64,9 @@ export class ReportService {
   }
 
   getInventoryMovements(params?: any) {
-    return this.httpClient.get(this.basePath + 'inventory-movements', params).pipe(
+    params = this.paginationService.addFilterParams(params);
+
+    return this.httpClient.get(this.basePath + 'inventory-movements', {params}).pipe(
       map(res => {
         res['inventory_movements'].forEach(
           inventory_movement => {
@@ -69,12 +78,16 @@ export class ReportService {
   }
 
   getInventory(params?: any) {
-    return this.httpClient.get(this.basePath + 'inventory', params).pipe(
+    params = this.paginationService.addFilterParams(params);
+
+    return this.httpClient.get(this.basePath + 'inventory', {params}).pipe(
       map(res => Inventory.parseArray(res['inventories'])));
   }
 
   getHistoricInventory(params?: any) {
-    return this.httpClient.get(this.basePath + 'historic-inventory', params).pipe(
+    params = this.paginationService.addFilterParams(params);
+
+    return this.httpClient.get(this.basePath + 'historic-inventory', {params}).pipe(
       map(res => Inventory.parseArray(res['inventories'])));
   }
 

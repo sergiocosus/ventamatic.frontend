@@ -5,12 +5,15 @@ import { SupplierSearchComponent } from './components/supplier-search/supplier-s
 import { SupplierDialogComponent } from './components/supplier-dialog/supplier-dialog.component';
 import { VariousModule } from '../various/various.module';
 import { AuthModule } from '../auth/auth.module';
+import { MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
   imports: [
     SharedModule,
     VariousModule,
     AuthModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     SupplierSearchComponent,

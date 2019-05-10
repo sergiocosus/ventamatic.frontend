@@ -1,14 +1,15 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IMyDateRangeModel } from 'mydaterangepicker';
-import { ReportService } from '../../../modules/api/services/report.service';
-import { NotifyService } from '../../../shared/services/notify.service';
-import { TicketService } from '../../../modules/api/services/ticket.service';
-import { messages } from '../../../shared/classes/messages';
-import { ReportDataSource } from '../../../modules/report/classes/report-data-source';
+import { ReportService } from '@app/api/services/report.service';
+import { NotifyService } from '@app/shared/services/notify.service';
+import { TicketService } from '@app/api/services/ticket.service';
+import { messages } from '@app/shared/classes/messages';
+import { ReportDataSource } from '@app/report/classes/report-data-source';
 import { MatDialog, MatPaginator } from '@angular/material';
-import { SaleService } from '../../../modules/api/services/sale.service';
-import { ConfirmDialogComponent, ConfirmDialogData } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { SaleService } from '@app/api/services/sale.service';
+import { ConfirmDialogComponent, ConfirmDialogData } from '@app/shared/components/confirm-dialog/confirm-dialog.component';
 import { filter, mergeMap } from 'rxjs/operators';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-sale-report',
@@ -24,26 +25,27 @@ export class SaleReportComponent implements OnInit {
     editableDateRangeField: true
   };
 
-  request: {
-    id: number,
-    branch_id: number,
-    user_id: number,
-    client_id: number,
-    begin_at: string,
-    end_at: string
-  };
-
   totalPriceSale;
   totalPriceSaleDeleted;
   totalProducts = 0;
 
   dataSource: ReportDataSource | null;
+  form: FormGroup;
 
   constructor(private reportService: ReportService,
               private notify: NotifyService,
               private ticketService: TicketService,
               private saleService: SaleService,
-              private dialog: MatDialog) {
+              private dialog: MatDialog,
+              private fb: FormBuilder) {
+    this.form = this.fb.group({
+      id: [],
+      branch: [],
+      user: [],
+      client: [],
+      begin_at: [],
+      end_at: []
+    });
   }
 
   ngOnInit() {
@@ -52,18 +54,11 @@ export class SaleReportComponent implements OnInit {
   }
 
   resetRequest() {
-    this.request = {
-      id: null,
-      branch_id: null,
-      user_id: null,
-      client_id: null,
-      begin_at: null,
-      end_at: null
-    };
+    this.form.reset();
   }
 
   onDateRangeChanged($event: IMyDateRangeModel) {
-    this.reportService.formatRange(this.request, $event);
+    this.reportService.formatRange(this.form.getRawValue(), $event);
   }
 
   resetStats() {
@@ -73,7 +68,7 @@ export class SaleReportComponent implements OnInit {
   }
 
   submit() {
-    this.reportService.getSale(this.request).subscribe(
+    this.reportService.getSale(this.form.getRawValue()).subscribe(
       sales => {
         this.sales = sales;
         this.resetStats();
@@ -84,9 +79,7 @@ export class SaleReportComponent implements OnInit {
           } else {
             this.totalPriceSale += sale.total;
             sale.products.forEach(
-              product => {
-                this.totalProducts += product.pivot.quantity;
-              }
+              product => this.totalProducts += product.pivot.quantity
             );
           }
         });

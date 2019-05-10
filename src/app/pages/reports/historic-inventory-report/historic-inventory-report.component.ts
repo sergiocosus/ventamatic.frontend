@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ReportService} from '../../../modules/api/services/report.service';
-import {NotifyService} from '../../../shared/services/notify.service';
-import {messages} from '../../../shared/classes/messages';
-import {Category} from '../../../modules/api/models/category';
-import {MatPaginator} from '@angular/material';
-import {ReportDataSource} from '../../../modules/report/classes/report-data-source';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ReportService } from '@app/api/services/report.service';
+import { NotifyService } from '@app/shared/services/notify.service';
+import { messages } from '@app/shared/classes/messages';
+import { MatPaginator } from '@angular/material';
+import { ReportDataSource } from '@app/report/classes/report-data-source';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-historic-inventory-report',
@@ -16,42 +16,30 @@ export class HistoricInventoryReportComponent implements OnInit {
 
   inventories = [];
 
-  request: {
-    branch_id: number,
-    product_id: number,
-    quantity: number,
-    price: number,
-    minimum: number,
-    date: string
-  };
-
-
   registeredProducts = null;
   productsWithExistences = null;
   priceValue = 0;
   costValue = 0;
 
   dataSource: ReportDataSource | null;
+  form: FormGroup;
 
   constructor(private reportService: ReportService,
-              private notify: NotifyService) { }
+              private notify: NotifyService,
+              private fb: FormBuilder) {
+    this.form = this.fb.group({
+      branch: [],
+      product: [],
+      quantity: [],
+      price: [],
+      minimum: [],
+      date: []
+    });
+  }
 
   ngOnInit() {
     this.dataSource = new ReportDataSource(this.paginator);
-    this.resetRequest();
   }
-
-  resetRequest() {
-    this.request = {
-      branch_id: null,
-      product_id: null,
-      quantity: null,
-      price: null,
-      minimum: null,
-      date: null
-    };
-  }
-
 
   resetStats() {
     this.registeredProducts = 0;
@@ -61,7 +49,7 @@ export class HistoricInventoryReportComponent implements OnInit {
   }
 
   submit() {
-    this.reportService.getHistoricInventory(this.request).subscribe(
+    this.reportService.getHistoricInventory(this.form.getRawValue()).subscribe(
       inventories => {
         this.inventories = inventories;
         this.resetStats();
@@ -70,9 +58,8 @@ export class HistoricInventoryReportComponent implements OnInit {
           this.notify.alert(messages.report.voidBody, messages.report.voidTitle);
         }
 
-
         const inventoryIds = [];
-        inventories.forEach( inventory => {
+        inventories.forEach(inventory => {
           this.calculateInventory(inventory);
 
           if (inventoryIds.indexOf(inventory.product_id) === -1) {
@@ -106,11 +93,6 @@ export class HistoricInventoryReportComponent implements OnInit {
     if (Number.isFinite(margin) && !Number.isNaN(margin)) {
       inventory.margin = margin;
     }
-  }
-
-  implode(categories: Category[]) {
-    return categories.map(category => category.name)
-      .join(', ');
   }
 
   downloadCSV() {

@@ -1,6 +1,6 @@
 @import "~src/vars";
 
-:host /deep/{
+:host ::ng-deep{
   font-size: 14px;
 
   .btn-default{
@@ -13,7 +13,7 @@
     }
   }
 
-  ng-select.dark{
+  mat-select.dark{
     .btn-default{
       background-color: $darkBlue;
       &:hover{

@@ -6,6 +6,7 @@ import { AuthModule } from '../auth/auth.module';
 import { BranchItemComponent } from './components/branch-item';
 import { VariousModule } from '../various/various.module';
 import { ImageUploadModule } from 'ng2-imageupload';
+import { MatIconModule, MatProgressSpinnerModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -13,6 +14,8 @@ import { ImageUploadModule } from 'ng2-imageupload';
     AuthModule,
     VariousModule,
     ImageUploadModule,
+    MatIconModule,
+    MatProgressSpinnerModule,
   ],
   declarations: [
     BranchSearchComponent,

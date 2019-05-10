@@ -1,13 +1,12 @@
-import {Component, OnInit, OnDestroy, Input} from '@angular/core';
-import {MatDialog} from '@angular/material';
-import {AuthService} from '@app/auth/services/auth.service';
-import {ScheduleService} from '@app/api/services/schedule.service';
-import {Router} from '@angular/router';
-import {SubscriptionManager} from '@app/shared/classes/subscription-manager';
-import {User} from '@app/api/models/user';
-import {Schedule} from '@app/api/models/schedule';
-import {EndScheduleDialogComponent} from '@app/user/components/end-schedule-dialog/end-schedule-dialog.component';
-import {Sidebar} from 'ng-sidebar';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { AuthService } from '@app/auth/services/auth.service';
+import { ScheduleService } from '@app/api/services/schedule.service';
+import { Router } from '@angular/router';
+import { SubscriptionManager } from '@app/shared/classes/subscription-manager';
+import { User } from '@app/api/models/user';
+import { Schedule } from '@app/api/models/schedule';
+import { EndScheduleDialogComponent } from '@app/user/components/end-schedule-dialog/end-schedule-dialog.component';
 import { AutoUnsubscribe } from '@app/shared/decorators/auto-unsubscribe';
 
 @Component({
@@ -17,7 +16,6 @@ import { AutoUnsubscribe } from '@app/shared/decorators/auto-unsubscribe';
 })
 @AutoUnsubscribe()
 export class TopBarComponent implements OnInit {
-  @Input() sideBar: Sidebar;
   public schedule: Schedule;
   public user: User;
 
@@ -26,7 +24,8 @@ export class TopBarComponent implements OnInit {
   constructor(private router: Router,
               private scheduleService: ScheduleService,
               private authService: AuthService,
-              private dialog: MatDialog) {}
+              private dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.sub.add = this.authService.getLoggedUser().subscribe(
@@ -42,22 +41,11 @@ export class TopBarComponent implements OnInit {
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl('/login');
   }
 
   openEndScheduleModal() {
-    if (this.schedule) {
-      this.dialog.open(EndScheduleDialogComponent)
-        .componentInstance.init(this.schedule);
-    }
-  }
+    this.dialog.open(EndScheduleDialogComponent, {data: this.schedule});
 
-  toggleSideBar() {
-    if (this.sideBar.opened) {
-      this.sideBar.close();
-    } else {
-      this.sideBar.open();
-    }
   }
-
 }

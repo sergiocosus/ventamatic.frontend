@@ -1,35 +1,19 @@
 <app-search-bar class="dark-theme">
-  <form (submit)="submit()" ngNativeValidate>
+  <form (ngSubmit)="submit()" [formGroup]="form">
     <mat-form-field class="id-field">
-      <input matInput placeholder="ID de compra"
-             [(ngModel)]="request.id"
-             name="id" type="number">
+      <input matInput placeholder="ID de turno"
+             formControlName="id" type="number">
     </mat-form-field>
 
+    <app-branch-search formControlName="branch"></app-branch-search>
 
-    <mat-form-field class="id-field">
-      <input matInput placeholder="ID de sucursal"
-             [(ngModel)]="request.branch_id"
-             name="branch_id" type="number">
-    </mat-form-field>
-
-    <app-branch-search class="search-button"
-                       (selected)="request.branch_id = $event.id"></app-branch-search>
-
-    <mat-form-field class="id-field">
-      <input matInput placeholder="ID de usuario"
-             [(ngModel)]="request.user_id"
-             name="user_id" type="number">
-    </mat-form-field>
-
-    <app-user-search class="search-button"
-                     (selected)="request.user_id = $event.id"></app-user-search>
+    <app-user-search formControlName="user"></app-user-search>
 
     <my-date-range-picker placeholder="Rango de fechas"
                           (dateRangeChanged)="onDateRangeChanged($event)"
                           [options]="rangeOptions" ></my-date-range-picker>
 
-    <button mat-raised-button color="primary" type="submit">
+    <button mat-raised-button color="primary">
       <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
       Consultar
     </button>

@@ -1,77 +1,74 @@
-
-import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
-import {Component, OnInit, ViewChild, Output, HostListener, EventEmitter} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {SelectableComponent} from '../../../../shared/components/selectable/selectable.component';
-import {PopoverComponent} from '../../../../shared/components/popover/popover.component';
-import {User} from '../../../api/models/user';
-import {UserService} from '../../../api/services/user.service';
-import {NotifyService} from '../../../../shared/services/notify.service';
+import { catchError, debounceTime, distinctUntilChanged, filter, finalize, map, mergeMap, tap } from 'rxjs/operators';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { from, Observable } from 'rxjs';
+import { UserService } from '@app/api/services/user.service';
+import { User } from '@app/api/models/user';
+import { AutoUnsubscribe } from '@app/shared/decorators/auto-unsubscribe';
+import { BaseFormControlWrapperValueAccessor } from '@app/shared/classes/base-form-control-wrapper-value-accessor';
 
 
 @Component({
   selector: 'app-user-search',
   templateUrl: './user-search.component.html',
-  styleUrls: ['./user-search.component.scss']
+  styleUrls: ['./user-search.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => UserSearchComponent),
+    multi: true
+  }]
 })
-export class UserSearchComponent implements OnInit {
-  @ViewChild(SelectableComponent) selectable: SelectableComponent;
-  @ViewChild(PopoverComponent) popover: PopoverComponent;
-  @Output() selected = new EventEmitter();
+@AutoUnsubscribe()
+export class UserSearchComponent extends BaseFormControlWrapperValueAccessor implements OnInit {
+  @Input() placeholder = 'Nombre de usuario';
+  @Input() tab_index;
+  idFormControl = new FormControl();
 
+  usersFound$: Observable<User[]>;
   loading = false;
-  id: number;
-  name: string;
-  idControl = new FormControl();
-  nameControl = new FormControl();
-  users: User[] = null;
-
-  @HostListener('keydown', ['$event']) onKeyDown($event) {
-    return this.selectable.keydown($event);
-  }
-
-  constructor(private userService: UserService,
-              private notify: NotifyService) {
-    this.idControl.valueChanges.pipe(debounceTime(250),distinctUntilChanged(),)
-      .subscribe(value => {
-        this.startLoading();
-        if (!value  || value === '' ) { return; }
-        this.userService.get(value).subscribe(
-          user => this.setUsers([user]),
-          error => {
-            this.users = null;
-            this.loading = false;
-          }
-        );
-      });
-
-    this.nameControl.valueChanges.pipe(debounceTime(250),distinctUntilChanged(),)
-      .subscribe(value => {
-        this.startLoading();
-        if (!value  || value === '' ) { return; }
-        this.userService.getSearch(value).subscribe(
-          users => this.setUsers(users),
-          error => this.notify.serviceError(error)
-        );
-      });
-  }
 
 
-  startLoading() {
-    this.users = null;
-    this.loading = true;
-  }
+  constructor(private userService: UserService) {
+    super();
 
-  setUsers(users: User[]) {
-    this.users = users;
-    this.loading = false;
-  }
+    this.sub.add = this.idFormControl.valueChanges
+      .pipe(mergeMap(value => this.userService.get(value)
+        .pipe(catchError(() => from([null])))
+      )).subscribe(user => this.formControl.setValue(user, {emitEvent: false}));
 
-  select($event) {
-    this.selected.emit($event);
-    this.popover.hidden = true;
+    this.registerOnChange(user => this.idFormControl.setValue(
+      user ? user.id : null, {emitEvent: false}
+    ));
   }
 
   ngOnInit() {
+    this.initSearch();
+  }
+
+  /**
+   * Initialize the user field to search when there is changes
+   */
+  private initSearch() {
+    this.usersFound$ = this.formControl.valueChanges.pipe(
+      tap(() => this.loading = true),
+      debounceTime(250),
+      distinctUntilChanged(), mergeMap(
+        value => this.userService.getSearch(value).pipe(
+          catchError(err => from([])),
+          finalize(() => this.loading = false)
+        )
+      )
+    );
+  }
+
+  displayWith(user: User) {
+    return user ? user.name : '';
+  }
+
+  registerOnChange(fn: any): void {
+    this.sub.add = this.formControl.valueChanges.pipe(
+      map(value => typeof value === 'string' ? null : value),
+      filter(value => value instanceof User || !value)
+    ).subscribe(fn);
   }
 }

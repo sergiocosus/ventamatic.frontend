@@ -1,80 +1,28 @@
-<h4 *ngIf="!finished_schedule" mat-dialog-title>Terminar Turno </h4>
-<h4 *ngIf="finished_schedule" mat-dialog-title>Turno terminado </h4>
+<h4 mat-dialog-title>
+  Terminar Turno
+</h4>
+<form (ngSubmit)="submit()" [formGroup]="form">
+  <mat-dialog-content>
+    <div *ngIf="schedule">
+      Inicio: {{schedule.created_at | date:'medium'}}
+      <br>
+      Sucursal: {{schedule.branch.name}}
+    </div>
+    <mat-form-field>
+      <input matInput placeholder="Cantidad"
+             formControlName="final_amount" type="number">
+    </mat-form-field>
 
-<mat-dialog-content>
-  <form (ngSubmit)="submit()" ngNativeValidate>
-    <ng-container *ngIf="!finished_schedule">
-      <div *ngIf="schedule">
-        Inicio: {{schedule.created_at | date:'medium'}}
-        <br>
-        Sucursal: {{schedule.branch.name}}
-      </div>
-      <mat-form-field>
-        <input matInput placeholder="Cantidad"
-               [(ngModel)]="final_amount" name="final_amount"
-               [disabled]="locked" type="number">
-      </mat-form-field>
+  </mat-dialog-content>
 
-      <button type="submit" mat-raised-button color="accent">
-        Terminar turno
-      </button>
-    </ng-container>
-
-
-    <table *ngIf="finished_schedule">
-      <tr>
-        <td>Inicio de turno</td>
-        <td>{{finished_schedule.created_at | date:'medium'}}</td>
-      </tr>
-      <tr>
-        <td>Fin de turno</td>
-        <td>{{finished_schedule.updated_at | date:'medium'}}</td>
-      </tr>
-      <tr>
-        <td>Cantidad inicial registrada en caja</td>
-        <td>{{finished_schedule.initial_amount  | currency:'USD':true:'.2-2'}} </td>
-      </tr>
-      <tr>
-        <td>Venta calculada</td>
-        <td>{{finished_schedule.system_amount  | currency:'USD':true:'.2-2'}}</td>
-      </tr>
-      <tr>
-        <td>Cantidad inicial en caja + Venta calculada</td>
-        <td>{{finished_schedule.initial_amount + finished_schedule.system_amount  | currency:'USD':true:'.2-2'}}</td>
-      </tr>
-      <tr>
-        <td>Cantidad final registrada en caja</td>
-        <td>{{finished_schedule.final_amount | currency:'USD':true:'.2-2'}}</td>
-      </tr>
-      <tr>
-        <td>Diferencia</td>
-        <td>{{
-          finished_schedule.final_amount -
-          (finished_schedule.system_amount + finished_schedule.initial_amount)
-            | currency:'USD':true:'.2-2'}}</td>
-      </tr>
-      <tr>
-        <td>Estado</td>
-        <td>{{finished_schedule.schedule_status.name }}</td>
-      </tr>
-      <tr>
-        <td>Nota</td>
-        <td class="note">
-          <mat-form-field>
-          <textarea matInput placeholder="Nota de aclaración"
-                    [(ngModel)]="finished_schedule.note" name="note"></textarea>
-          </mat-form-field>
-          <button mat-raised-button color="accent"
-                  type="button" (click)="submitNote()">
-            Guardar Nota
-          </button>
-        </td>
-      </tr>
-    </table>
-
-
-    <button mat-raised-button type="button" (click)="close()">
+  <mat-dialog-actions>
+    <div class="spacer"></div>
+    <button mat-raised-button type="button" matDialogClose>
       Cerrar
     </button>
-  </form>
-</mat-dialog-content>
+
+    <button type="submit" mat-raised-button color="accent">
+      Terminar turno
+    </button>
+  </mat-dialog-actions>
+</form>

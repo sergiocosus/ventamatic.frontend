@@ -1,10 +1,11 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {ReportService} from '../../../modules/api/services/report.service';
-import {NotifyService} from '../../../shared/services/notify.service';
-import {IMyDateRangeModel} from 'mydaterangepicker';
-import {messages} from '../../../shared/classes/messages';
-import {MatPaginator} from '@angular/material';
-import {ReportDataSource} from '../../../modules/report/classes/report-data-source';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ReportService } from '@app/api/services/report.service';
+import { NotifyService } from '@app/shared/services/notify.service';
+import { IMyDateRangeModel } from 'mydaterangepicker';
+import { messages } from '@app/shared/classes/messages';
+import { MatPaginator } from '@angular/material';
+import { ReportDataSource } from '@app/report/classes/report-data-source';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-schedule-report',
@@ -16,22 +17,24 @@ export class ScheduleReportComponent implements OnInit {
 
   schedules = [];
 
-  request: {
-    id: number,
-    branch_id: number,
-    user_id: number,
-    begin_at: string,
-    end_at: string
-  };
-
   rangeOptions = {
     editableDateRangeField: true
   };
 
   dataSource: ReportDataSource | null;
+  form: FormGroup;
 
   constructor(private reportService: ReportService,
-              private notify: NotifyService) { }
+              private notify: NotifyService,
+              private fb: FormBuilder) {
+    this.form = this.fb.group({
+      id: [],
+      branch: [],
+      user: [],
+      begin_at: [],
+      end_at: [],
+    });
+  }
 
   ngOnInit() {
     this.dataSource = new ReportDataSource(this.paginator);
@@ -39,21 +42,16 @@ export class ScheduleReportComponent implements OnInit {
   }
 
   resetRequest() {
-    this.request = {
-      id: null,
-      branch_id: null,
-      user_id: null,
-      begin_at: null,
-      end_at: null,
-    };
+    this.form.reset();
   }
 
   onDateRangeChanged($event: IMyDateRangeModel) {
-    this.reportService.formatRange(this.request, $event);
+    this.reportService.formatRange(this.form.getRawValue(), $event);
   }
 
   submit() {
-    this.reportService.getSchedule(this.request).subscribe(
+    const data = this.form.getRawValue();
+    this.reportService.getSchedule(data).subscribe(
       schedules => {
         this.schedules = schedules;
         if (!this.schedules.length) {

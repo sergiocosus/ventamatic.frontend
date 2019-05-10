@@ -1,38 +1,17 @@
 <app-search-bar class="dark-theme">
-  <form (submit)="submit()" ngNativeValidate>
+  <form (ngSubmit)="submit()" [formGroup]="form">
 
     <mat-form-field class="id-field">
       <input matInput placeholder="ID de venta"
-             [(ngModel)]="request.id"
-             name="id" type="number">
+             formControlName="id" type="number">
     </mat-form-field>
 
-    <mat-form-field class="id-field">
-      <input matInput placeholder=" ID de sucursal"
-             [(ngModel)]="request.branch_id"
-             name="branch_id" type="number">
-    </mat-form-field>
+    <app-branch-search formControlName="branch"></app-branch-search>
 
-    <app-branch-search class="search-button"
-                       (selected)="request.branch_id = $event.id"></app-branch-search>
+    <app-user-search formControlName="user"></app-user-search>
 
-    <mat-form-field class="id-field">
-      <input matInput placeholder="ID de usuario"
-             [(ngModel)]="request.user_id"
-             name="user_id" type="number">
-    </mat-form-field>
+    <app-client-search formControlName="client"></app-client-search>
 
-    <app-user-search class="search-button"
-                     (selected)="request.user_id = $event.id"></app-user-search>
-
-    <mat-form-field class="id-field">
-      <input matInput placeholder="ID de cliente"
-             [(ngModel)]="request.client_id"
-             name="client_id" type="number">
-    </mat-form-field>
-
-    <app-client-search class="search-button"
-                       (selected)="request.client_id = $event.id"></app-client-search>
     <my-date-range-picker placeholder="Rango de fechas"
                           (dateRangeChanged)="onDateRangeChanged($event)"
                           [options]="rangeOptions" ></my-date-range-picker>
@@ -117,8 +96,8 @@
                 <td>{{product.id}}</td>
                 <td>{{product.description}}</td>
                 <td>{{product.pivot.quantity}}</td>
-                <td>{{product.pivot.price | currency:'USD':true:'1.2-2'}}</td>
-                <td>{{product.pivot.price * product.pivot.quantity | currency:'USD':true:'1.2-2'}}</td>
+                <td>{{product.pivot.price | currency:'$'}}</td>
+                <td>{{product.pivot.price * product.pivot.quantity | currency:'$'}}</td>
               </tr>
             </table>
           </td>

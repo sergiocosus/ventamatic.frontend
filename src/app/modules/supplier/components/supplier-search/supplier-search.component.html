@@ -1,18 +1,32 @@
-<app-popover [focusable]="focusable">
-  <form>
-    <mat-form-field class="dark-theme">
-      <input matInput placeholder="Nombre"
-             [(ngModel)]="name" class="dark" type="text"
-             [formControl]="nameControl" #focusable>
-    </mat-form-field>
-  </form>
+<mat-form-field class="id">
+  <input matInput [placeholder]="'id'"
+         type="number"
+         autocomplete="off"
+         [tabindex]="tab_index" aria-label="State"
+         [formControl]="idFormControl">
+</mat-form-field>
+<mat-form-field class="search">
+  <input matInput [placeholder]="placeholder"
+         autocomplete="off"
+         [tabindex]="tab_index" aria-label="State"
+         [matAutocomplete]="auto" [formControl]="formControl">
+  <span matSuffix>
+    <mat-icon>search</mat-icon>
+  </span>
 
-  <app-selectable [items]="suppliers"
-                  [loading]="loading"
-                  (selected)="select($event)"
-                  (keydown)="selectable.keydown($event)">
-    <ng-template let-item="item">
-      {{item.id}} - {{item.name}} {{item.last_name}} {{item.last_name_2}}
-    </ng-template>
-  </app-selectable>
-</app-popover>
+  <mat-autocomplete #auto="matAutocomplete" class="dark"
+                    [displayWith]="displayWith">
+    <mat-option class="loading" disabled *ngIf="loading">
+      <mat-spinner diameter="20" class="dark-theme"></mat-spinner>
+    </mat-option>
+    <ng-container *ngIf="suppliersFound$ | async; let suppliers">
+      <mat-option class="empty" *ngIf="!loading && !suppliers.length">
+        No hay resultados
+      </mat-option>
+
+      <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
+        <span>{{ supplier.name }}</span>
+      </mat-option>
+    </ng-container>
+  </mat-autocomplete>
+</mat-form-field>

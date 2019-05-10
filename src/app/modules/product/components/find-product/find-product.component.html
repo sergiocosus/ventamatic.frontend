@@ -1,7 +1,6 @@
 <form [formGroup]="form">
   <h5>Producto</h5>
 
-
   <mat-form-field>
     <input matInput formControlName="bar_code" name="bar_code" class="dark"
            placeholder="Código de barras"
@@ -26,10 +25,10 @@
 
     <app-product-search *ngIf="mode === 'product'"
                         [tab_index]="tab_index"
-                        [fieldControl]="form.get('search')"></app-product-search>
+                        formControlName="search"></app-product-search>
     <app-inventory-search *ngIf="mode === 'inventory'"
                           [branch_id]="branch_id"
                           [tab_index]="tab_index"
-                          [fieldControl]="form.get('search')"></app-inventory-search>
+                          formControlName="search"></app-inventory-search>
   </div>
 </form>

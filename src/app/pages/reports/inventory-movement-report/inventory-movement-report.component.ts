@@ -7,6 +7,7 @@ import {NotifyService} from '@app/shared/services/notify.service';
 import {messages} from '@app/shared/classes/messages';
 import {MatPaginator} from '@angular/material';
 import {ReportDataSource} from '@app/report/classes/report-data-source';
+import { Form, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-inventory-movement-report',
@@ -18,15 +19,6 @@ export class InventoryMovementReportComponent implements OnInit {
 
   inventory_movements = [];
   inventoryMovementTypes: InventoryMovementType[];
-
-  request: {
-    product_id: number,
-    branch_id: number,
-    user_id: number,
-    inventory_movement_type_id: number,
-    begin_at: string,
-    end_at: string
-  };
 
   rangeOptions = {
     editableDateRangeField: true
@@ -43,26 +35,26 @@ export class InventoryMovementReportComponent implements OnInit {
   statsByTypePrice = [];
 
   dataSource: ReportDataSource | null;
+  form: FormGroup;
 
   constructor(private reportService: ReportService,
               private notify: NotifyService,
-              private inventoryMovementTypeService: InventoryMovementTypeService) { }
-
-  ngOnInit() {
-    this.dataSource = new ReportDataSource(this.paginator);
-    this.resetRequest();
-    this.loadInventoryMovementTypes();
-  }
-
-  resetRequest() {
-    this.request = {
-      product_id: null,
-      branch_id: null,
-      user_id: null,
+              private inventoryMovementTypeService: InventoryMovementTypeService,
+              private fb: FormBuilder) {
+    this.form = this.fb.group({
+      product: null,
+      branch: null,
+      user: null,
       inventory_movement_type_id: null,
       begin_at: null,
       end_at: null
-    };
+    });
+  }
+
+  ngOnInit() {
+    this.dataSource = new ReportDataSource(this.paginator);
+    this.form.reset();
+    this.loadInventoryMovementTypes();
   }
 
   loadInventoryMovementTypes() {
@@ -97,7 +89,7 @@ export class InventoryMovementReportComponent implements OnInit {
   }
 
   onDateRangeChanged($event: IMyDateRangeModel) {
-    this.reportService.formatRange(this.request, $event);
+    this.reportService.formatRange(this.form.getRawValue(), $event);
   }
 
   resetStats() {
@@ -123,7 +115,7 @@ export class InventoryMovementReportComponent implements OnInit {
   }
 
   submit() {
-    this.reportService.getInventoryMovements(this.request).subscribe(
+    this.reportService.getInventoryMovements(this.form.getRawValue()).subscribe(
       inventoryMovements => {
         this.inventory_movements = inventoryMovements;
         this.resetStats();
@@ -150,7 +142,6 @@ export class InventoryMovementReportComponent implements OnInit {
               }
             }
           );
-
 
           this.statsByTypePrice.forEach(
             stats => {

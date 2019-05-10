@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-
-import {MatDialogRef} from '@angular/material';
-import {Schedule} from '../../../api/models/schedule';
-import {ScheduleService} from '../../../api/services/schedule.service';
-import {NotifyService} from '../../../../shared/services/notify.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material';
+import { Schedule } from '@app/api/models/schedule';
+import { ScheduleService } from '@app/api/services/schedule.service';
+import { NotifyService } from '@app/shared/services/notify.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FinishedScheduleDialogComponent } from '@app/user/components/finished-schedule-dialog/finished-schedule-dialog.component';
 
 @Component({
   selector: 'app-end-schedule-dialog',
@@ -11,46 +12,44 @@ import {NotifyService} from '../../../../shared/services/notify.service';
   styleUrls: ['./end-schedule-dialog.component.scss'],
 })
 export class EndScheduleDialogComponent implements OnInit {
-  final_amount = 0;
+  form: FormGroup;
   finished_schedule: Schedule = null;
-  schedule: Schedule;
 
   constructor(private scheduleService: ScheduleService,
               private notify: NotifyService,
-              private dialogRef: MatDialogRef<EndScheduleDialogComponent>) {}
+              private dialogRef: MatDialogRef<EndScheduleDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public schedule: Schedule,
+              private fb: FormBuilder,
+              private dialog: MatDialog) {
+    this.form = this.fb.group({
+      final_amount: [0, [Validators.required]]
+    });
+  }
 
   ngOnInit() {
   }
 
-  init(schedule: Schedule) {
-    this.schedule = schedule;
-  }
-
-  close() {
-    this.dialogRef.close();
-  }
-
   clear() {
+    this.form.reset({final_amount: 0});
     this.finished_schedule = null;
-    this.final_amount = 0;
   }
 
   submit() {
-    this.scheduleService.finish(this.final_amount).subscribe(
+    if (this.form.invalid) {
+      this.notify.error('Hay errores o faltan datos');
+      return;
+    }
+
+    this.scheduleService.finish(this.form.getRawValue()).subscribe(
       schedule => {
         this.finished_schedule = schedule;
         this.scheduleService.updateCurrentSchedule(null);
+        this.dialogRef.close();
+        this.dialog.open(FinishedScheduleDialogComponent, {data: schedule});
       },
       error => this.notify.serviceError(error)
     );
   }
 
-  submitNote() {
-    this.scheduleService.putNote(this.finished_schedule.id, this.finished_schedule.note)
-      .subscribe(
-        schedule => this.notify.success('Nota guardada'),
-        error => this.notify.serviceError(error)
-      );
-  }
 
 }

@@ -1,35 +1,14 @@
 <app-search-bar class="dark-theme">
-  <form (submit)="submit()" ngNativeValidate>
-    <mat-form-field class="id-field">
-      <input matInput placeholder="ID de producto"
-             [(ngModel)]="request.product_id"
-             name="product_id" type="number">
-    </mat-form-field>
+  <form (ngSubmit)="submit()" [formGroup]="form">
+    <app-product-search formControlName="product"></app-product-search>
 
-    <app-product-search class="search-button"
-                        (selected)="request.product_id = $event.id"></app-product-search>
+    <app-branch-search formControlName="branch"></app-branch-search>
 
-    <mat-form-field class="id-field">
-      <input matInput placeholder="ID de sucursal"
-             [(ngModel)]="request.branch_id"
-             name="branch_id" type="number">
-    </mat-form-field>
+    <app-user-search formControlName="user"></app-user-search>
 
-    <app-branch-search class="search-button"
-                       (selected)="request.branch_id = $event.id"></app-branch-search>
-
-    <mat-form-field class="id-field">
-      <input matInput placeholder="ID de usuario"
-             [(ngModel)]="request.user_id"
-             name="user_id" type="number">
-    </mat-form-field>
-
-    <app-user-search class="search-button"
-                     (selected)="request.user_id = $event.id"></app-user-search>
     <mat-form-field>
-      <mat-select [(ngModel)]="request.inventory_movement_type_id"
-                  placeholder="Tipo de movimiento"
-                  name="inventory_movement_type_id">
+      <mat-select formControlName="inventory_movement_type_id"
+                  placeholder="Tipo de movimiento">
         <mat-option *ngFor="let inventoryMovementType of inventoryMovementTypes"
                     [value]="inventoryMovementType.id">
           {{inventoryMovementType.name}}
@@ -45,7 +24,8 @@
       <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
       Consultar
     </button>
-    <button mat-raised-button color="primary" type="button" (click)="downloadCSV()">
+    <button mat-raised-button color="primary" type="button"
+            (click)="downloadCSV()">
       <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
       CSV
     </button>

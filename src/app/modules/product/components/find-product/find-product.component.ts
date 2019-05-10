@@ -51,7 +51,7 @@ export class FindProductComponent implements OnInit {
     this.clear();
   }
 
-  private productIdEntered() {
+  productIdEntered() {
     const product_id = this.form.get('product_id').value;
     if (!isNaN(product_id)) {
       this.productIdMethod(product_id).subscribe(

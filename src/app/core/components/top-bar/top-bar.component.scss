@@ -13,24 +13,6 @@
   z-index: 10;
 }
 
-:host /deep/ {
-  .btn {
-    flex-basis: 25px;
-    margin: 5px;
-
-    line-height: 1em;
-
-    i {
-      float: left;
-    }
-  }
-
-
-  i {
-    margin-right: .25em;
-  }
-}
-
 #session-menu-bar {
   display: flex;
   align-items: center;
@@ -56,12 +38,11 @@
   line-height: 1em;
 }
 
-.disabled {
-  color: gray;
+button[disabled] {
+  color: gray !important;
 }
 
 .mat-button {
-
   div, span {
     line-height: 1em;
     display: none;

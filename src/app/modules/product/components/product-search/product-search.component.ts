@@ -1,27 +1,32 @@
-import { catchError, debounceTime, distinctUntilChanged, finalize, mergeMap, tap } from 'rxjs/operators';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { catchError, debounceTime, distinctUntilChanged, filter, finalize, map, mergeMap, tap } from 'rxjs/operators';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { from, Observable } from 'rxjs';
 import { ProductService } from '@app/api/services/product.service';
 import { Product } from '@app/api/models/product';
+import { BaseFormControlWrapperValueAccessor } from '@app/shared/classes/base-form-control-wrapper-value-accessor';
 
 
 @Component({
   selector: 'app-product-search',
   templateUrl: './product-search.component.html',
-  styleUrls: ['./product-search.component.scss']
+  styleUrls: ['./product-search.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => ProductSearchComponent),
+    multi: true
+  }]
 })
-export class ProductSearchComponent implements OnInit {
-  @Output() optionSelected = new EventEmitter();
-  @Input() fieldControl: FormControl;
+export class ProductSearchComponent extends BaseFormControlWrapperValueAccessor implements OnInit {
   @Input() placeholder = 'Nombre de producto';
   @Input() tab_index;
 
+  formControl: FormControl;
   productsFound$: Observable<Product[]>;
   loading = false;
 
-
   constructor(private productService: ProductService) {
+    super();
   }
 
   ngOnInit() {
@@ -32,7 +37,7 @@ export class ProductSearchComponent implements OnInit {
    * Initialize the immediate boss person field to search when there is changes
    */
   private initSearch() {
-    this.productsFound$ = this.fieldControl.valueChanges.pipe(
+    this.productsFound$ = this.formControl.valueChanges.pipe(
       tap(() => this.loading = true),
       debounceTime(250),
       distinctUntilChanged(), mergeMap(
@@ -46,5 +51,12 @@ export class ProductSearchComponent implements OnInit {
 
   displayWith(product: Product) {
     return product ? product.description : '';
+  }
+
+  registerOnChange(fn: any): void {
+    this.sub.add = this.formControl.valueChanges.pipe(
+      map(value => typeof value === 'string' ? null : value),
+      filter(value => value instanceof Product || !value)
+    ).subscribe(fn);
   }
 }

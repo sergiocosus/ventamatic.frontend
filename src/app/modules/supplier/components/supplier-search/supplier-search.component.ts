@@ -1,78 +1,73 @@
-
-import {distinctUntilChanged, debounceTime} from 'rxjs/operators';
-import {Component, OnInit, ViewChild, Output, EventEmitter, HostListener} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {Supplier} from '../../../api/models/supplier';
-import {SupplierService} from '../../../api/services/supplier.service';
-import {NotifyService} from '../../../../shared/services/notify.service';
-import {SelectableComponent} from '../../../../shared/components/selectable/selectable.component';
-import {PopoverComponent} from '../../../../shared/components/popover/popover.component';
+import { catchError, debounceTime, distinctUntilChanged, filter, finalize, map, mergeMap, tap } from 'rxjs/operators';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Supplier } from '@app/api/models/supplier';
+import { SupplierService } from '@app/api/services/supplier.service';
+import { from, Observable } from 'rxjs';
+import { AutoUnsubscribe } from '@app/shared/decorators/auto-unsubscribe';
+import { BaseFormControlWrapperValueAccessor } from '@app/shared/classes/base-form-control-wrapper-value-accessor';
 
 @Component({
   selector: 'app-supplier-search',
   templateUrl: './supplier-search.component.html',
-  styleUrls: ['./supplier-search.component.scss']
+  styleUrls: ['./supplier-search.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => SupplierSearchComponent),
+    multi: true
+  }]
 })
-export class SupplierSearchComponent implements OnInit {
-  @ViewChild(SelectableComponent) selectable: SelectableComponent;
-  @ViewChild(PopoverComponent) popover: PopoverComponent;
-  @Output() selected = new EventEmitter();
+@AutoUnsubscribe()
+export class SupplierSearchComponent extends BaseFormControlWrapperValueAccessor implements OnInit {
+  @Input() placeholder = 'Nombre del proveedor';
+  @Input() tab_index;
+  idFormControl = new FormControl();
 
+  suppliersFound$: Observable<Supplier[]>;
   loading = false;
-  id: number;
-  name: string;
-  idControl = new FormControl();
-  nameControl = new FormControl();
-  suppliers: Supplier[] = null;
-
-  @HostListener('keydown', ['$event']) onKeyDown($event) {
-    return this.selectable.keydown($event);
-  }
 
 
-  constructor(private supplierService: SupplierService,
-              private notify: NotifyService) {
-    this.idControl.valueChanges.pipe(debounceTime(250),distinctUntilChanged(),)
-      .subscribe(value => {
-        this.startLoading();
-        if (!value  || value === '' ) { return; }
-        this.supplierService.get(value).subscribe(
-          supplier => this.setSuppliers([supplier]),
-          error => {
-            this.suppliers = null;
-            this.loading = false;
-          }
-        );
-      });
+  constructor(private userService: SupplierService) {
+    super();
 
-    this.nameControl.valueChanges.pipe(debounceTime(250),distinctUntilChanged(),)
-      .subscribe(value => {
-        this.startLoading();
-        if (!value  || value === '' ) { return; }
-        this.supplierService.getSearch(value).subscribe(
-          suppliers => this.setSuppliers(suppliers),
-          error => this.notify.serviceError(error)
-        );
-      });
-  }
+    this.sub.add = this.idFormControl.valueChanges
+      .pipe(mergeMap(value => this.userService.get(value)
+        .pipe(catchError(() => from([null])))
+      )).subscribe(user => this.formControl.setValue(user, {emitEvent: false}));
 
-
-  startLoading() {
-    this.suppliers = null;
-    this.loading = true;
-  }
-
-  setSuppliers(suppliers: Supplier[]) {
-    this.suppliers = suppliers;
-    this.loading = false;
-  }
-
-  select($event) {
-    this.selected.emit($event);
-    this.popover.hidden = true;
+    this.registerOnChange(user => this.idFormControl.setValue(
+      user ? user.id : null, {emitEvent: false}
+    ));
   }
 
   ngOnInit() {
+    this.initSearch();
   }
 
+  /**
+   * Initialize the user field to search when there is changes
+   */
+  private initSearch() {
+    this.suppliersFound$ = this.formControl.valueChanges.pipe(
+      tap(() => this.loading = true),
+      debounceTime(250),
+      distinctUntilChanged(), mergeMap(
+        value => this.userService.getSearch(value).pipe(
+          catchError(err => from([])),
+          finalize(() => this.loading = false)
+        )
+      )
+    );
+  }
+
+  displayWith(supplier: Supplier) {
+    return supplier ? supplier.name : '';
+  }
+
+  registerOnChange(fn: any): void {
+    this.sub.add = this.formControl.valueChanges.pipe(
+      map(value => typeof value === 'string' ? null : value),
+      filter(value => value instanceof Supplier || !value)
+    ).subscribe(fn);
+  }
 }

@@ -1,1 +1,9 @@
 @import "~src/vars";
+
+:host {
+  display: flex;
+}
+
+.id {
+  width: 4em;
+}

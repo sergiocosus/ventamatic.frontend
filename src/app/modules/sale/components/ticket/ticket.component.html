@@ -43,23 +43,23 @@
       <td>{{product.pivot.quantity}}</td>
       <td>{{product.id}}</td>
       <td>{{product.description}}</td>
-      <td class="right">{{product.pivot.price | currency:'USD':true:'1.2-2'}}</td>
-      <td class="right">{{product.pivot.price * product.pivot.quantity | currency:'USD':true:'1.2-2'}}</td>
+      <td class="right">{{product.pivot.price | currency:'$'}}</td>
+      <td class="right">{{product.pivot.price * product.pivot.quantity | currency:'$'}}</td>
     </tr>
     <tr>
       <td colspan="3"></td>
       <th>Total</th>
-      <td class="right">{{sale.total | currency:'USD':true:'1.2-2'}}</td>
+      <td class="right">{{sale.total | currency:'$'}}</td>
     </tr>
     <tr>
       <td colspan="3"></td>
       <th>Efectivo</th>
-      <td class="right">{{sale.client_payment | currency:'USD':true:'1.2-2'}}</td>
+      <td class="right">{{sale.client_payment | currency:'$'}}</td>
     </tr>
     <tr>
       <td colspan="3"></td>
       <th>Cambio</th>
-      <td class="right">{{sale.client_payment - sale.total | currency:'USD':true:'1.2-2'}}</td>
+      <td class="right">{{sale.client_payment - sale.total | currency:'$'}}</td>
     </tr>
     </tbody>
   </table>

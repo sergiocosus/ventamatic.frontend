@@ -12,20 +12,20 @@
       {{user.fullName}}
     </span>
   </a>
-  <div>
-    <button type="button" mat-button
-            [class.disabled]="!schedule"
-            (click)="openEndScheduleModal()"
-            [matTooltip]="schedule ? 'Turno en sucursal ' + schedule.branch.name
-                          : 'No se ha iniciado turno'">
-      <i class="fa fa-clock-o fa-2x" aria-hidden="true"></i>
-      <span class="hide-on-small" *ngIf="schedule">
-        Inicio: {{schedule.created_at | date:'medium'}}
-        <br>
-        Sucursal: {{schedule.branch.name}}
-      </span>
-    </button>
-  </div>
+
+  <button type="button" mat-button
+          [disabled]="!schedule"
+          (click)="openEndScheduleModal()">
+    <mat-icon class="fa fa-clock-o fa-2x"
+      [matTooltip]="schedule ? 'Turno en sucursal ' + schedule.branch.name
+                        : 'No se ha iniciado turno'"></mat-icon>
+    <span class="hide-on-small" *ngIf="schedule">
+      Inicio: {{schedule.created_at | date:'medium'}}
+      <br>
+      Sucursal: {{schedule.branch.name}}
+    </span>
+  </button>
+
   <div>
     <button type="button"
             mat-button

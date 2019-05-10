@@ -6,6 +6,7 @@ import {messages} from '@app/shared/classes/messages';
 import {InventoryMovementTypeId} from '@app/api/classes/inventory-movement-type-id.enum';
 import {MatPaginator} from '@angular/material';
 import {ReportDataSource} from '@app/report/classes/report-data-source';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-buy-report',
@@ -16,16 +17,6 @@ export class BuyReportComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   buys = [];
-
-  request: {
-    id: number,
-    supplier_bill_id: number,
-    branch_id: number,
-    user_id: number,
-    supplier_id: number,
-    begin_at: string,
-    end_at: string
-  };
 
   rangeOptions = {
     editableDateRangeField: true
@@ -38,29 +29,29 @@ export class BuyReportComponent implements OnInit {
   totalProducts = 0;
 
   dataSource: ReportDataSource | null;
+  form: FormGroup;
 
   constructor(private reportService: ReportService,
-              private notify: NotifyService) { }
+              private notify: NotifyService,
+              private fb: FormBuilder) {
+    this.form = this.fb.group({
+      id: [],
+      supplier_bill_id: [],
+      branch: [],
+      user: [],
+      supplier: [],
+      begin_at: [],
+      end_at: []
+    });
+  }
 
   ngOnInit() {
     this.dataSource = new ReportDataSource(this.paginator);
-    this.resetRequest();
-  }
-
-  resetRequest() {
-    this.request = {
-      id: null,
-      supplier_bill_id: null,
-      branch_id: null,
-      user_id: null,
-      supplier_id: null,
-      begin_at: null,
-      end_at: null
-    };
+    this.form.reset();
   }
 
   onDateRangeChanged($event: IMyDateRangeModel) {
-    this.reportService.formatRange(this.request, $event);
+    this.reportService.formatRange(this.form.getRawValue(), $event);
   }
 
   resetStats() {
@@ -72,7 +63,7 @@ export class BuyReportComponent implements OnInit {
   }
 
   submit() {
-    this.reportService.getBuy(this.request).subscribe(
+    this.reportService.getBuy(this.form.getRawValue()).subscribe(
       buys => {
         this.buys = buys;
         this.resetStats();

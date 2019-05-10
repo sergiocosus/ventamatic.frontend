@@ -32,8 +32,8 @@ export class ScheduleService {
       .pipe(this.mapSchedule());
   }
 
-  finish(final_amount: number) {
-    return this.apiHttp.put(this.basePath, {final_amount: final_amount})
+  finish(data: {final_amount: number}) {
+    return this.apiHttp.put(this.basePath, data)
       .pipe(this.mapSchedule());
   }
 
@@ -63,7 +63,7 @@ export class ScheduleService {
     return map(response => new Schedule().parse(response['schedule']));
   }
 
-  private mapSheduless() {
+  private mapSchedules() {
     return map(response => Schedule.parseArray(response['schedules']));
   }
 }

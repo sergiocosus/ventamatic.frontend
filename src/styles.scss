@@ -146,7 +146,6 @@ form.dark-box {
   border-radius: 0em 0em 1em 1em;
   @include mat-elevation(10, $backgroundLight);
 
-
   .mat-option {
     color: white;
     height: 2em;
@@ -169,4 +168,13 @@ form.dark-box {
   width: 1em;
   height: 1em;
   margin-right: .5em;
+}
+
+mat-dialog-actions {
+  display: flex;
+  align-items: center;
+}
+
+div.spacer {
+  flex: 1;
 }

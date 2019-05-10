@@ -1,0 +1,58 @@
+<h3 matDialogTitle>Turno terminado</h3>
+
+<form (ngSubmit)="submit()" [formGroup]="form">
+  <mat-dialog-content>
+    <table>
+      <tr>
+        <td>Inicio de turno</td>
+        <td>{{schedule.created_at | date:'medium'}}</td>
+      </tr>
+      <tr>
+        <td>Fin de turno</td>
+        <td>{{schedule.updated_at | date:'medium'}}</td>
+      </tr>
+      <tr>
+        <td>Cantidad inicial registrada en caja</td>
+        <td>{{schedule.initial_amount  | currency:'$'}} </td>
+      </tr>
+      <tr>
+        <td>Venta calculada</td>
+        <td>{{schedule.system_amount  | currency:'$'}}</td>
+      </tr>
+      <tr>
+        <td>Cantidad inicial en caja + Venta calculada</td>
+        <td>{{schedule.initial_amount + schedule.system_amount  | currency:'$'}}</td>
+      </tr>
+      <tr>
+        <td>Cantidad final registrada en caja</td>
+        <td>{{schedule.final_amount | currency:'$'}}</td>
+      </tr>
+      <tr>
+        <td>Diferencia</td>
+        <td>{{
+          schedule.final_amount -
+          (schedule.system_amount + schedule.initial_amount)
+            | currency:'$'}}</td>
+      </tr>
+      <tr>
+        <td>Estado</td>
+        <td>{{schedule.schedule_status.name }}</td>
+      </tr>
+    </table>
+
+    <mat-form-field>
+      <textarea matInput placeholder="Nota de aclaración"
+                formControlName="note"></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <div class="spacer"></div>
+    <button mat-raised-button type="button" matDialogClose>
+      Cerrar
+    </button>
+    <button mat-raised-button color="accent">
+      Guardar Nota
+    </button>
+  </mat-dialog-actions>
+</form>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { User } from '@app/api/models/user';
 import { Router } from '@angular/router';
 import { ScheduleService } from '@app/api/services/schedule.service';
@@ -8,6 +7,7 @@ import { Branch } from '@app/api/models/branch';
 import { AuthService } from '@app/auth/services/auth.service';
 import { AutoUnsubscribe } from '@app/shared/decorators/auto-unsubscribe';
 import { SubscriptionManager } from '@app/shared/classes/subscription-manager';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -17,20 +17,23 @@ import { SubscriptionManager } from '@app/shared/classes/subscription-manager';
 })
 @AutoUnsubscribe()
 export class SelectBranchComponent implements OnInit {
-  private scheduleSubscription: Subscription;
-
-  branches: Branch[] = [];
-  initial_amount: number;
-  selectedBranch: Branch;
+  branches: Branch[];
   private user: User;
 
   sub = new SubscriptionManager();
 
+  form: FormGroup;
+
   constructor(private router: Router,
               private scheduleService: ScheduleService,
               private notify: NotifyService,
-              private authService: AuthService
+              private authService: AuthService,
+              private fb: FormBuilder
   ) {
+    this.form = this.fb.group({
+      branch: [null, [Validators.required]],
+      initial_amount: [null, [Validators.required]],
+    });
   }
 
   ngOnInit() {
@@ -46,19 +49,22 @@ export class SelectBranchComponent implements OnInit {
   }
 
   loadBranches() {
-    this.sub.add = this.authService.getLoggedUser().subscribe(
-      user => {
-        this.user = user;
-        this.branches = user.getBranchesWithPermission('sale');
-      }
-    );
+    this.sub.add = this.authService.getLoggedUser().subscribe(user => {
+      this.user = user;
+      this.branches = user.getBranchesWithPermission('sale');
+    });
   }
 
   submit() {
-    this.scheduleService.post(this.selectedBranch.id, this.initial_amount).subscribe(
-      schedule => {
-        this.scheduleService.updateCurrentSchedule(schedule);
-      },
+    if (this.form.invalid) {
+      this.notify.alert('forms.error');
+      return;
+    }
+
+    const data = this.form.getRawValue();
+
+    this.scheduleService.post(data.branch.id, data.initial_amount).subscribe(
+      schedule => this.scheduleService.updateCurrentSchedule(schedule),
       error => this.notify.serviceError(error)
     );
   }
