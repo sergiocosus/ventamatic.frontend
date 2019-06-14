@@ -10,39 +10,16 @@
   </tr>
   </thead>
   <tbody [formGroup]="addedProducts">
-  <tr *ngFor="let productBuy of addedProducts.controls; let i = index"
-      [formGroupName]="i" >
-    <td>{{productBuy.get('product').value.id}}</td>
-    <td>{{productBuy.get('inventory_movement_type').value.text}}</td>
-    <td>{{productBuy.get('product').value.description}}</td>
-    <td class="align-right">
-      <mat-form-field>
-        <input matInput type="number"
-               min="0" max="9999999999" step=".01"
-               formControlName="cost" />
-      </mat-form-field>
-    </td>
-    <td>
-      <mat-form-field>
-        <input matInput type="number"
-               [min]="productBuy.get('product').value.unitData.step"
-               [step]="productBuy.get('product').value.unitData.step"
-               formControlName="quantity"/>
-      </mat-form-field>
-    </td>
-    <td class="align-right">
-      {{productBuy.get('quantity').value * productBuy.get('cost').value | currency:'$'}}
-      <span class="button-delete"
-            (click)="removeProduct(i)">
-            <i class="fa fa-times"></i>
-        </span>
-    </td>
-  </tr>
+  <app-product-cart-row
+    *ngFor="let productBuy of addedProducts.controls; let i = index"
+    [formGroupName]="i"
+    [productBuy]="productBuy"
+    (remove)="removeProduct(i)"></app-product-cart-row>
   </tbody>
 
   <tfoot>
   <tr>
-    <td colspan="4"></td>
+    <td class="empty" colspan="4"></td>
     <td>Total Calculado</td>
     <td class="align-right">
       {{total | myCurrency}}
@@ -50,15 +27,15 @@
   </tr>
 
   <tr *ngIf="buyEnvironment.invoiceTotalRestriction">
-    <td colspan="4"></td>
+    <td class="empty" class="empty" colspan="4"></td>
     <td>Total Introducido</td>
     <td class="align-right">
-      {{ introducedAmount-0 | myCurrency}}
+      {{ introducedAmount - 0 | myCurrency}}
     </td>
   </tr>
   <tr *ngIf="buyEnvironment.invoiceTotalRestriction"
       [class.error]="amountDiference !== 0">
-    <td colspan="4"></td>
+    <td class="empty" colspan="4"></td>
     <td>Diferencia</td>
     <td class="align-right">
       {{ amountDiference | myCurrency}}

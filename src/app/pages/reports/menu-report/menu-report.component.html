@@ -1,34 +1,29 @@
-<app-main-content class="dark-theme">
-  <ul>
-    <li *appUserCanInBranch="'report-schedule'">
-      <a routerLink="/reportes/turno">
-        Reporte de turnos
-      </a>
-    </li>
-    <li *appUserCanInBranch="'report-sale'">
-      <a routerLink="/reportes/venta">
-        Reportes de venta
-      </a>
-    </li>
-    <li *appUserCanInBranch="'report-buy'">
-      <a routerLink="/reportes/compra">
-        Reportes de compra
-      </a>
-    </li>
-    <li *appUserCanInBranch="'report-inventory-movement'">
-      <a routerLink="/reportes/entradas-salidas">
-        Reporte de entradas y salidas
-      </a>
-    </li>
-    <li *appUserCanInBranch="'report-inventory'">
-      <a routerLink="/reportes/inventario">
-        Reporte de inventario
-      </a>
-    </li>
-    <li *appUserCanInBranch="'report-historic-inventory'">
-      <a routerLink="/reportes/inventario-historico">
-        Reporte de inventario historico
-      </a>
-    </li>
-  </ul>
-</app-main-content>
+<mat-nav-list class="box">
+  <h2 mat-list-item>Reportes</h2>
+  <a mat-list-item *appUserCanInBranch="'report-schedule'" routerLink="/reportes/turno">
+    <mat-icon  matListIcon>description</mat-icon>
+    <span>Reporte de turnos</span>
+  </a>
+  <a mat-list-item  *appUserCanInBranch="'report-sale'" routerLink="/reportes/venta">
+    <mat-icon  matListIcon>description</mat-icon>
+    <span>Reportes de venta</span>
+  </a>
+  <a mat-list-item  *appUserCanInBranch="'report-buy'" routerLink="/reportes/compra">
+    <mat-icon  matListIcon>description</mat-icon>
+    <span>Reportes de compra</span>
+  </a>
+  <a mat-list-item  *appUserCanInBranch="'report-inventory-movement'"
+     routerLink="/reportes/entradas-salidas">
+    <mat-icon  matListIcon>description</mat-icon>
+    <span>Reporte de entradas y salidas</span>
+  </a>
+  <a mat-list-item *appUserCanInBranch="'report-inventory'" routerLink="/reportes/inventario">
+    <mat-icon  matListIcon>description</mat-icon>
+    <span>Reporte de inventario</span>
+  </a>
+  <a mat-list-item  *appUserCanInBranch="'report-historic-inventory'"
+     routerLink="/reportes/inventario-historico">
+    <mat-icon  matListIcon>description</mat-icon>
+    <span>Reporte de inventario historico</span>
+  </a>
+</mat-nav-list>

@@ -1,92 +1,100 @@
-<h4 *ngIf="createMode" mat-dialog-title> Añadir Proveedor </h4>
-<h4 *ngIf="updateMode" mat-dialog-title> Editar Proveedor </h4>
-<h4 *ngIf="deleteMode" mat-dialog-title> Eliminar Proveedor </h4>
-<form (ngSubmit)="submit()" ngNativeValidate>
-  <mat-dialog-content *ngIf="!deleteMode && !!supplier">
-    <mat-form-field *ngIf="updateMode">
-      <input matInput placeholder="Id" name="id"
-             type="text" [(ngModel)]="supplier.id" disabled="disabled">
-    </mat-form-field>
-    <mat-form-field >
-      <input matInput placeholder="Nombre"
-             type="text" [(ngModel)]="supplier.name" name="name"
-             [disabled]="locked" required>
-    </mat-form-field>
-    <mat-form-field >
-      <input matInput placeholder="Email"
-             type="email" [(ngModel)]="supplier.email" name="email"
-             [disabled]="locked">
-    </mat-form-field>
-    <mat-form-field >
-      <input matInput placeholder="Teléfono"
-             type="text" [(ngModel)]="supplier.phone" name="phone"
-             [disabled]="locked">
-    </mat-form-field>
-    <mat-form-field >
-      <input matInput placeholder="Celular"
-             type="text" [(ngModel)]="supplier.cellphone" name="cellphone"
-             [disabled]="locked">
-    </mat-form-field>
-    <mat-form-field >
-      <input matInput placeholder="Dirección"
-             type="text" [(ngModel)]="supplier.address" name="address"
-             [disabled]="locked">
-    </mat-form-field>
-    <mat-form-field >
-      <input matInput placeholder="RFC"
-             type="text" [(ngModel)]="supplier.rfc"  name="rfc"
-             [disabled]="locked">
-    </mat-form-field>
-    <mat-form-field>
-      <mat-select [(ngModel)]="selectedSupplierCategory"
-                  [disabled]="locked"
-                  name="selectedCategoryItems"
-                  placeholder="Categoría del proveedor">
-        <mat-option *ngFor="let supplierCategory of supplierCategories" [value]="supplierCategory">
-          {{supplierCategory.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+<h4 mat-dialog-title>
+  {{supplier ? ('common.edit' | translate) : ('common.create' | translate)}}
+  {{'supplier.supplier' | translate}}
+</h4>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div class="row">
+      <mat-form-field *ngIf="supplier">
+        <mat-label>{{'supplier.id' | translate}}</mat-label>
+        <input matInput [value]="supplier.id" disabled>
+      </mat-form-field>
 
-    <mat-form-field>
-      <mat-select [(ngModel)]="selectedBrands"
-                  [multiple]="true"
-                  [disabled]="locked"
-                  name="selectedBrands"
-                  placeholder="Marcas">
-        <mat-option *ngFor="let brand of brands" [value]="brand">
-          {{brand.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'supplier.name' | translate}}</mat-label>
+        <input matInput type="text" formControlName="name">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field>
+        <mat-label>{{'supplier.email' | translate}}</mat-label>
+        <input matInput
+               type="email" formControlName="email">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'supplier.phone' | translate}}</mat-label>
+        <input matInput
+               type="text" formControlName="phone">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field>
+        <mat-label>{{'supplier.cellphone' | translate}}</mat-label>
+        <input matInput
+               type="text" formControlName="cellphone">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'supplier.address' | translate}}</mat-label>
+        <input matInput
+               type="text" formControlName="address">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field>
+        <mat-label>{{'supplier.rfc' | translate}}</mat-label>
+        <input matInput
+               type="text" formControlName="rfc">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'supplier.supplierCategory' | translate}}</mat-label>
+        <mat-select formControlName="supplier_category_id">
+          <mat-option *ngFor="let supplierCategory of supplierCategories"
+                      [value]="supplierCategory.id">
+            {{supplierCategory.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <div class="row">
+      <mat-form-field>
+        <mat-label>{{'supplier.brands' | translate}}</mat-label>
+        <mat-select formControlName="brands" [multiple]="true">
+          <mat-option *ngFor="let brand of brands" [value]="brand.id">
+            {{brand.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
 
   </mat-dialog-content>
 
+
   <mat-dialog-actions>
-    <ng-template [appUserCan]="'supplier-edit'">
-      <button *ngIf="locked"
-              type="submit" mat-raised-button color="warn"
-              (click)="unlock()" >
-        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-        Editar Proveedor
-      </button>
+    <button type="button" mat-raised-button mat-dialog-close>
+      {{'common.close' | translate}}
+    </button>
+
+    <div class="spacer"></div>
+
+    <ng-template appUserCan="supplier-create">
+      <app-loading-button *ngIf="!supplier" [loading]="loading"
+                          mat-raised-button color="accent">
+        {{'common.create' | translate}} {{'supplier.supplier' | translate}}
+      </app-loading-button>
     </ng-template>
-    <button *ngIf="createMode"
-            type="submit" mat-raised-button color="accent">
-      Crear Proveedor
-    </button>
-    <button *ngIf="updateMode && !locked"
-            type="submit" mat-raised-button color="accent">
-      Actualizar Proveedor
-    </button>
-    <button *ngIf="deleteMode && !locked"
-            type="submit" mat-raised-button color="accent">
-      Eliminar Proveedor
-    </button>
-    <button type="button" mat-raised-button=""
-            (click)="close()" >
-      Cerrar
-    </button>
+
+    <ng-template appUserCan="supplier-edit">
+      <app-loading-button *ngIf="supplier" [loading]="loading"
+                          mat-raised-button color="accent">
+        {{'common.edit' | translate}} {{'supplier.supplier' | translate}}
+      </app-loading-button>
+    </ng-template>
   </mat-dialog-actions>
 </form>
 

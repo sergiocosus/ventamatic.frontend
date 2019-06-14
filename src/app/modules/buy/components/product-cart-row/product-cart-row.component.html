@@ -1,0 +1,27 @@
+<ng-container [formGroup]="productBuy">
+  <td>{{productBuy.get('product').value.id}}</td>
+  <td>{{productBuy.get('inventory_movement_type').value.text}}</td>
+  <td>{{productBuy.get('product').value.description}}</td>
+  <td class="align-right">
+    <mat-form-field>
+      <input matInput type="number"
+             min="0" max="9999999999" step=".01"
+             formControlName="cost"/>
+    </mat-form-field>
+  </td>
+  <td>
+    <mat-form-field>
+      <input matInput type="number"
+             [min]="productBuy.get('product').value.unitData.step"
+             [step]="productBuy.get('product').value.unitData.step"
+             formControlName="quantity"/>
+    </mat-form-field>
+  </td>
+  <td class="align-right">
+    {{productBuy.get('quantity').value * productBuy.get('cost').value | currency:'$'}}
+    <span class="button-delete"
+          (click)="remove.emit()">
+            <mat-icon class="fa fa-times"></mat-icon>
+        </span>
+  </td>
+</ng-container>

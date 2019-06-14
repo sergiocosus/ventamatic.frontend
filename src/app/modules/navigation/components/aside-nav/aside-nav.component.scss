@@ -1,0 +1,35 @@
+@import "~src/vars";
+
+a.mat-list-item {
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  align-items: center;
+  text-decoration: none;
+  background-color: $sideDarkColor;
+  font-weight: bolder;
+  border-bottom: 1px solid $sideDarkerColor;
+  height: 3em !important;
+  color: white;
+
+  @include animate();
+
+  &.active, &:focus {
+    color: $sideDarkerColor;
+    background-color: $sideLightColor !important;
+    border-color: $sideColor;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    margin-right: 0;
+  }
+
+  span {
+    padding-left: 5%;
+  }
+
+  mat-icon {
+    font-size: 1.5em;
+    margin-right: .1em;
+    text-align: center;
+  }
+}

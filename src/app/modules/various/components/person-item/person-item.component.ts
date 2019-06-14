@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostBinding } from '@angular/core';
 
 @Component({
   selector: 'app-person-item',
@@ -13,6 +13,8 @@ export class PersonItemComponent implements OnInit {
   @Output() delete = new EventEmitter();
   @Output() restore = new EventEmitter();
   @Output() update = new EventEmitter();
+
+  @HostBinding('class.box') box = true;
 
   constructor() {}
 

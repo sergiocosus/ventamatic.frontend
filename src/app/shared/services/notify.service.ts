@@ -1,26 +1,28 @@
 import { Injectable, SecurityContext } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { NotificationsService, NotificationType } from 'angular2-notifications';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Injectable()
 export class NotifyService {
 
   constructor(private notification: NotificationsService,
-              private satinizer: DomSanitizer) {
+              private satinizer: DomSanitizer,
+              private translateService: TranslateService) {
     console.log(this.notification);
   }
 
   success(content: string, title: string = 'Éxito', override?: any) {
-    return this.notification.success(title, content, override);
+    return this.notification.success(title, this.translateService.instant(content), override);
   }
 
   error(content: string, title: string = 'Error', override?: any ) {
-    return this.notification.error(title, content, override);
+    return this.notification.error(title, this.translateService.instant(content), override);
   }
 
   alert(content: string, title: string = 'Alerta', override?: any) {
-    return this.notification.alert(title, content, override);
+    return this.notification.alert(title, this.translateService.instant(content), override);
   }
 
   info(content: string, title: string = 'Información', override?: any) {
@@ -66,5 +68,4 @@ export class NotifyService {
 
     return this.html(html, NotificationType.Error);
   }
-
 }

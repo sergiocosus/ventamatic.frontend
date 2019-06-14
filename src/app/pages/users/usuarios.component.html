@@ -1,35 +1,37 @@
-<app-search-bar>
-  <button mat-raised-button color="primary"
-          *appUserCan="'user-create'"
-          (click)="create()">
-    <i class="fa fa-user-plus" aria-hidden="true"></i>
-    Agregar Usuario
-  </button>
+<mat-toolbar class="box">
+  <mat-toolbar-row>
+    <button mat-raised-button color="primary"
+            *appUserCan="'user-create'"
+            (click)="create()">
+      <mat-icon class="fa fa-user-plus" aria-hidden="true"></mat-icon>
+      Agregar Usuario
+    </button>
 
-  <mat-checkbox [formControl]="deletedControl" *appUserCan="'user-delete'" class="dark-theme">
-    <i class="fa fa-trash"></i>
-    Ver eliminados
-  </mat-checkbox>
-</app-search-bar>
+    <mat-checkbox [formControl]="deletedControl" *appUserCan="'user-delete'">
+      <mat-icon class="fa fa-trash"></mat-icon>
+      Ver eliminados
+    </mat-checkbox>
+  </mat-toolbar-row>
 
-
-<app-search-bar class="dark-theme">
-  <form [formGroup]="form">
-    <i class="fa fa-filter" aria-hidden="true"></i>
+  <mat-toolbar-row [formGroup]="form">
+    <mat-icon class="fa fa-filter" aria-hidden="true"></mat-icon>
 
     <mat-form-field class="medium">
-      <input matInput formControlName="username" placeholder="Código de usuario">
+      <mat-label>Código de usuario</mat-label>
+      <input matInput formControlName="username">
     </mat-form-field>
 
     <mat-form-field class="medium">
-      <input matInput formControlName="name" placeholder="Nombre">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="name">
     </mat-form-field>
 
     <mat-form-field class="medium">
-      <input matInput formControlName="address" placeholder="Dirección">
+      <mat-label>Dirección</mat-label>
+      <input matInput formControlName="address">
     </mat-form-field>
-  </form>
-</app-search-bar>
+  </mat-toolbar-row>
+</mat-toolbar>
 
 <app-main-content>
   <app-user-item *ngFor="let user of dataSourceObservable | async"
@@ -37,6 +39,6 @@
                  (update)="update($event)"
                  (delete)="delete($event)"
                  (restore)="restore($event)"
-                 (roles)="openRolesDialog($event.id)"
+                 (roles)="openRolesDialog($event)"
   ></app-user-item>
 </app-main-content>

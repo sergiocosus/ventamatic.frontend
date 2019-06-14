@@ -4,6 +4,7 @@ import { BeginBuyComponent } from './components/begin-buy/begin-buy.component';
 import { AddProductDialogComponent } from './components/add-product-dialog/add-product-dialog.component';
 import { ProductCartComponent } from './components/product-cart/product-cart.component';
 import { MatIconModule } from '@angular/material';
+import { ProductCartRowComponent } from './components/product-cart-row/product-cart-row.component';
 
 @NgModule({
   imports: [
@@ -14,6 +15,7 @@ import { MatIconModule } from '@angular/material';
     BeginBuyComponent,
     AddProductDialogComponent,
     ProductCartComponent,
+    ProductCartRowComponent,
   ],
   entryComponents: [
     AddProductDialogComponent,

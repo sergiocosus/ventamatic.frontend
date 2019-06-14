@@ -1,0 +1,9 @@
+<button mat-raised-button [color]="color"
+        [disabled]="loading || disabled"
+        [type]="type"
+        class="rounded-button">
+  <mat-progress-spinner [mode]="loading > true ? 'determinate' : 'indeterminate'"
+               [value]="loading" diameter="20"
+               *ngIf="loading"></mat-progress-spinner>
+  <ng-content></ng-content>
+</button>

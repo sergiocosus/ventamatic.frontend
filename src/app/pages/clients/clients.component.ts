@@ -1,15 +1,17 @@
+import { filter, map, mergeMap } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
 
-import {map} from 'rxjs/operators';
-import { Component, OnInit, ViewChild } from '@angular/core';
-
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {MatDialog} from '@angular/material';
-import {Client} from '../../modules/api/models/client';
-import {ClientService} from '../../modules/api/services/client.service';
-import {NotifyService} from '../../shared/services/notify.service';
-import {ClientDialogComponent} from '../../modules/client/components/client-dialog/client-dialog.component';
-import {Observable} from 'rxjs';
-import {ReportDataSource} from '../../modules/report/classes/report-data-source';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material';
+import { Client } from '@app/api/models/client';
+import { ClientService } from '@app/api/services/client.service';
+import { NotifyService } from '@app/shared/services/notify.service';
+import { ClientDialogComponent } from '@app/client/components/client-dialog';
+import { Observable } from 'rxjs';
+import { ReportDataSource } from '@app/report/classes/report-data-source';
+import { ConfirmDialogComponent, ConfirmDialogData } from '@app/shared/components/confirm-dialog/confirm-dialog.component';
+import * as _ from 'lodash';
+import { extract } from '@app/shared/services/i18n.service';
 
 @Component({
   selector: 'app-clientes',
@@ -56,47 +58,48 @@ export class ClientsComponent implements OnInit {
   }
 
   create() {
-    const dialog = this.dialog.open(ClientDialogComponent);
-    dialog.componentInstance.initCreate();
-    dialog.componentInstance.created.subscribe(createdClient => {
-      this.clients.unshift(createdClient);
+    this.dialog.open<ClientDialogComponent, null, Client>(ClientDialogComponent)
+      .afterClosed().pipe(filter(a => !!a)).subscribe(client => {
+      this.clients.unshift(client);
       this.dataSource.setData(this.clients);
     });
   }
 
   update(client: Client) {
-    const dialog = this.dialog.open(ClientDialogComponent);
-    dialog.componentInstance.initUpdate(client);
-    dialog.componentInstance.updated.subscribe(clientUpdated => {
-      this.dataSource.setData(this.clients);
-    });
+    this.dialog.open<ClientDialogComponent, Client, Client>(ClientDialogComponent, {data: client})
+      .afterClosed().pipe(filter(a => !!a))
+      .subscribe(updatedClient => {
+        client.replaceProperties(updatedClient);
+        this.dataSource.setData(this.clients);
+      });
   }
 
   delete(client: Client) {
-    const dialog = this.dialog.open(ClientDialogComponent);
-    dialog.componentInstance.initDelete(client);
-    dialog.componentInstance.deleted.subscribe(clientDeleted => {
-      const index = this.clients.indexOf(clientDeleted);
-      if (index > -1) {
-        if (this.deletedControl.value) {
-          this.clients[index].deleted_at = ' ';
-        } else {
-          this.clients.splice(index, 1);
-        }
+    this.dialog.open<ConfirmDialogComponent, ConfirmDialogData>(ConfirmDialogComponent, {
+      data: {
+        title: client.name,
+        message: extract('common.deleteConfirm'),
       }
-      this.dataSource.setData(this.clients);
-    });
+    }).afterClosed().pipe(
+      filter(Boolean),
+      mergeMap(() => this.clientService.delete(client.id))
+    ).subscribe(() => {
+        if (this.deletedControl.value) {
+          client.deleted_at = ' ';
+        } else {
+          _.remove(this.clients, client);
+          this.dataSource.setData(this.clients);
+        }
+      },
+      error => this.notify.serviceError(error)
+    );
   }
 
   restore(client: Client) {
     this.clientService.restore(client.id).subscribe(
       clientRestored => {
-        const index = this.clients.indexOf(client);
-        if (index > -1) {
-          this.clients[index] = clientRestored;
-        }
-
-        this.notify.success('Cliente restaurado');
+        client.replaceProperties(clientRestored);
+        this.notify.success(extract('common.restoredSuccess'));
       },
       error => this.notify.serviceError(error)
     );
@@ -120,9 +123,12 @@ export class ClientsComponent implements OnInit {
 
   protected fieldIsOk(object, key, value) {
     switch (key) {
-      case 'id': return object.id == value;
-      case 'address': return object.address.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
-      case 'name': return object.name.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
+      case 'id':
+        return object.id == value;
+      case 'address':
+        return object.address.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
+      case 'name':
+        return object.name.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
     }
     return true;
   }

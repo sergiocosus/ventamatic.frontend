@@ -1,11 +1,12 @@
-<form (ngSubmit)="submit()" [formGroup]="form">
+<form class="box" (ngSubmit)="submit()" [formGroup]="form">
   <h2>
-    <i class="fa fa-clock-o fa" aria-hidden="true"></i>
+    <mat-icon  class="fa fa-clock-o fa" aria-hidden="true"></mat-icon>
     Iniciar Turno
   </h2>
 
   <mat-form-field>
-    <mat-select formControlName="branch" placeholder="Sucursal">
+    <mat-label>Sucursal</mat-label>
+    <mat-select formControlName="branch">
       <mat-option *ngFor="let branch of branches" [value]="branch">
         {{branch.name}}
       </mat-option>
@@ -13,12 +14,13 @@
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Monto inicial"
+    <mat-label>Monto inicial</mat-label>
+    <input matInput
            type="number" formControlName="initial_amount">
-    <mat-icon matPrefix>attach_money</mat-icon>
+    <mat-icon  matPrefix>attach_money</mat-icon>
   </mat-form-field>
 
-  <button mat-raised-button color="primary">
+  <app-loading-button [loading]="loading">
     Iniciar turno
-  </button>
+  </app-loading-button>
 </form>

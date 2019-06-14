@@ -6,6 +6,7 @@ import {ClientsComponent} from './clients.component';
 import {SharedModule} from '../../shared/shared.module';
 import {ClientModule} from '../../modules/client/client.module';
 import {AuthModule} from '../../modules/auth/auth.module';
+import { MatToolbarModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import {AuthModule} from '../../modules/auth/auth.module';
     ClientsRoutingModule,
     ClientModule,
     AuthModule,
+    MatToolbarModule,
   ],
   declarations: [
     ClientsComponent,

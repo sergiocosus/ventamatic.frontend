@@ -3,13 +3,13 @@
          [tabindex]="tab_index"
          [matAutocomplete]="auto" [formControl]="formControl">
   <span matSuffix>
-    <mat-icon>search</mat-icon>
+    <mat-icon >search</mat-icon>
   </span>
 
   <mat-autocomplete #auto="matAutocomplete" class="dark"
                     [displayWith]="displayWith">
     <mat-option class="loading" disabled *ngIf="loading">
-      <mat-spinner diameter="20" class="dark-theme"></mat-spinner>
+      <mat-spinner diameter="20" ></mat-spinner>
     </mat-option>
     <ng-container *ngIf="inventoriesFound$ | async; let inventories">
       <mat-option class="empty" *ngIf="!loading && !inventories.length">

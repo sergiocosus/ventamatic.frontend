@@ -8,4 +8,5 @@ export const environment = {
   buy: {
     invoiceTotalRestriction: false
   },
+  defaultLanguage: 'es-MX'
 };

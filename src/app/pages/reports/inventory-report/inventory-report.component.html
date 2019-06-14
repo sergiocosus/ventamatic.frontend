@@ -1,22 +1,22 @@
-<app-search-bar class="dark-theme">
+<app-search-bar>
   <form (ngSubmit)="submit()" [formGroup]="form">
     <app-branch-search formControlName="branch"></app-branch-search>
 
     <app-product-search formControlName="product"></app-product-search>
 
     <mat-form-field class="id-field">
-      <input matInput placeholder="Cantidad"
-             formControlName="quantity" type="number">
+      <mat-label>Cantidad</mat-label>
+      <input matInput formControlName="quantity" type="number">
     </mat-form-field>
 
     <mat-form-field class="id-field">
-      <input matInput placeholder="Precio"
-             formControlName="price" type="number">
+      <mat-label>Precio</mat-label>
+      <input matInput formControlName="price" type="number">
     </mat-form-field>
 
     <mat-form-field class="id-field">
-      <input matInput placeholder="Mínimo"
-             formControlName="minimum" type="number">
+      <mat-label>Mínimo</mat-label>
+      <input matInput formControlName="minimum" type="number">
     </mat-form-field>
 
     <mat-checkbox formControlName="minimum_filter">
@@ -24,11 +24,11 @@
     </mat-checkbox>
 
     <button mat-raised-button color="primary" type="submit">
-      <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+      <mat-icon class="fa fa-arrow-circle-right" aria-hidden="true"></mat-icon>
       Consultar
     </button>
     <button mat-raised-button color="primary" type="button" (click)="downloadCSV()">
-      <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+      <mat-icon class="fa fa-arrow-circle-right" aria-hidden="true"></mat-icon>
       CSV
     </button>
   </form>

@@ -1,53 +1,49 @@
-<app-search-bar>
+<mat-toolbar class="box">
   <h2>Roles del sistema</h2>
   <button mat-raised-button color="primary"
           *appUserCan="'role-edit'"
           (click)="create()">
-    <i class="fa fa-plus" aria-hidden="true"></i>
+    <mat-icon class="fa fa-plus" aria-hidden="true"></mat-icon>
     Agregar rol de sistema
   </button>
-</app-search-bar>
+</mat-toolbar>
 
 <app-main-content>
-  <ul>
-    <app-person-item *ngFor="let role of roles"
-                     deletePermission="role-delete"
-                     (click)="clickUpdate(role)">
-      <picture>
-        <i class="fa fa-lock"></i>
-      </picture>
-      <div class="data">
-        <div>
-          <span>{{role.display_name}}</span>
-        </div>
+  <app-person-item *ngFor="let role of roles"
+                   deletePermission="role-delete"
+                   (click)="clickUpdate(role)">
+    <picture>
+      <mat-icon class="fa fa-lock"></mat-icon>
+    </picture>
+    <div class="data">
+      <div>
+        <span>{{role.display_name}}</span>
       </div>
-    </app-person-item>
-  </ul>
+    </div>
+  </app-person-item>
 </app-main-content>
 
-<app-search-bar>
+<mat-toolbar class="box">
   <h2>Roles de sucursal</h2>
   <button mat-raised-button color="primary"
           *appUserCan="'branch-role-edit'"
           (click)="createBranchPermission()">
-    <i class="fa fa-plus" aria-hidden="true"></i>
+    <mat-icon class="fa fa-plus" aria-hidden="true"></mat-icon>
     Agregar rol de sucursal
   </button>
-</app-search-bar>
+</mat-toolbar>
 
 <app-main-content>
-  <ul>
-    <app-person-item *ngFor="let branchRole of branchRoles"
-                     deletePermission="branch-role-delete"
-                     (click)="updateBranchPermission(branchRole)">
-      <picture>
-        <i class="fa fa-lock"></i>
-      </picture>
-      <div class="data">
-        <div>
-          <span>{{branchRole.display_name}}</span>
-        </div>
+  <app-person-item *ngFor="let branchRole of branchRoles"
+                   deletePermission="branch-role-delete"
+                   (click)="updateBranchPermission(branchRole)">
+    <picture>
+      <mat-icon class="fa fa-lock"></mat-icon>
+    </picture>
+    <div class="data">
+      <div>
+        <span>{{branchRole.display_name}}</span>
       </div>
-    </app-person-item>
-  </ul>
+    </div>
+  </app-person-item>
 </app-main-content>

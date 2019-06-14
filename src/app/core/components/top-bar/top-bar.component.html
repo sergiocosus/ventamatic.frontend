@@ -5,7 +5,7 @@
   <a mat-button
      matTooltip="Información de usuario"
      routerLink="/mi-cuenta" routerLinkActive="active">
-    <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+    <mat-icon class="fa fa-user fa-2x" aria-hidden="true"></mat-icon>
     <span *ngIf="user" class="hide-on-small">
       {{user.username}}
       <br>
@@ -16,7 +16,7 @@
   <button type="button" mat-button
           [disabled]="!schedule"
           (click)="openEndScheduleModal()">
-    <mat-icon class="fa fa-clock-o fa-2x"
+    <mat-icon  class="fa fa-clock-o fa-2x"
       [matTooltip]="schedule ? 'Turno en sucursal ' + schedule.branch.name
                         : 'No se ha iniciado turno'"></mat-icon>
     <span class="hide-on-small" *ngIf="schedule">
@@ -30,7 +30,7 @@
     <button type="button"
             mat-button
             matTooltip="Cerrar sesión" (click)="logout()">
-      <i class="fa fa-sign-out fa-2x" aria-hidden="true"></i>
+      <mat-icon class="fa fa-sign-out fa-2x" aria-hidden="true"></mat-icon>
       <span class="hide-on-small">
         Cerrar Sesión
       </span>

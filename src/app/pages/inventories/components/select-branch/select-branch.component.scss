@@ -5,60 +5,18 @@
   align-items: center;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+
 }
 
-main-content{
+.box {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 100%;
-}
+  align-items: stretch;
+  padding: 1em;
 
-h2{
-  display: flex;
-  align-items: center;
-  color: white;
-  padding-bottom: .5em;
-  margin-bottom: .5em;
-  text-align: center;
-
-  i{
-    margin-right: 0.5em;
-  }
-}
-
-ul{
-  display:flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-
-  li{
-    display: flex;
-    flex-direction: column;
-    background-color: $darkBlue;
-    min-width: 18em;
-    border-radius: 1em;
-    border: dashed 2px white;
-    text-align: center;
-    margin: .5em;
-    transition: all .25s;
-    max-width: 480px;
-    &:hover{
-      background-color: $hoverBlue;
-      cursor: pointer;
-    }
-
-    a{
-      flex: 1 0 auto;
-      color: white;
-      padding: .5em;
-      font-size: 1.5em;
-    }
+  a {
+    margin: .25em;
+    font-weight: bolder;
   }
 }

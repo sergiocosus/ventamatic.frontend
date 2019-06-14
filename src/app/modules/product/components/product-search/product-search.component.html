@@ -1,15 +1,16 @@
 <mat-form-field class="search">
-  <input matInput [placeholder]="placeholder"
+  <mat-label>{{placeholder}}</mat-label>
+  <input matInput
          [tabindex]="tab_index" aria-label="State"
          [matAutocomplete]="auto" [formControl]="formControl">
   <span matSuffix>
-    <mat-icon>search</mat-icon>
+    <mat-icon >search</mat-icon>
   </span>
 
   <mat-autocomplete #auto="matAutocomplete" class="dark"
                     [displayWith]="displayWith">
     <mat-option class="loading" disabled *ngIf="loading">
-      <mat-spinner diameter="20" class="dark-theme"></mat-spinner>
+      <mat-spinner diameter="20" ></mat-spinner>
     </mat-option>
     <ng-container *ngIf="productsFound$ | async; let products">
       <mat-option class="empty" *ngIf="!loading && !products.length">

@@ -1,102 +1,94 @@
-<h4 *ngIf="createMode" mat-dialog-title> Añadir Producto </h4>
-<h4 *ngIf="updateMode" mat-dialog-title> Editar Producto </h4>
-<h4 *ngIf="deleteMode" mat-dialog-title> Eliminar Producto </h4>
+<h4 mat-dialog-title>
+  {{product ? ('common.edit' | translate) : ('common.create' | translate)}}
+  {{'product.product' | translate}}
+</h4>
 
-<form (ngSubmit)="submit()" ngNativeValidate>
-  <mat-dialog-content *ngIf="!deleteMode && !!product">
-    <mat-form-field *ngIf="updateMode">
-      <input matInput placeholder="ID" type="text"
-             required [(ngModel)]="product.id"  name="id"
-             [disabled]="updateMode">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Descripción"
-             type="text" [(ngModel)]="product.description" name="descripcion"
-             [disabled]="locked" required maxlength="255">
-    </mat-form-field>
-
-    <div class="barcode">
-      <mat-checkbox [(ngModel)]="haveBarCode" [disabled]="locked"
-                   name="haverBarCode"></mat-checkbox>
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <mat-dialog-content>
+    <div class="row">
+      <mat-form-field *ngIf="product" class="id">
+        <mat-label>{{'product.id' | translate}}</mat-label>
+        <input matInput required [value]="product.id" disabled>
+      </mat-form-field>
       <mat-form-field>
-        <input matInput placeholder="Código de barras"
-               type="text" [(ngModel)]="product.bar_code" name="bar_code"
-               [disabled]="locked || !haveBarCode" required [minlength]="1">
+        <mat-label>{{'product.description' | translate}}</mat-label>
+        <input matInput type="text" formControlName="description"
+               required maxlength="255">
       </mat-form-field>
     </div>
 
-    <mat-form-field>
-      <mat-select [(ngModel)]="unit_id"
-                  [disabled]="locked"
-                  name="selectedUnitItem"
-                  placeholder="Unidad">
-        <mat-option *ngFor="let unit of units" [value]="unit.id">
-          {{unit.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="row">
+      <div class="barcode">
+        <mat-checkbox formControlName="haveBarCode"
+                      name="haverBarCode"></mat-checkbox>
+        <mat-form-field>
+          <mat-label>{{'product.barCode' | translate}}</mat-label>
+          <input matInput type="text" formControlName="bar_code" required>
+          <mat-icon matSuffix class="fa fa-barcode"></mat-icon>
+        </mat-form-field>
+      </div>
 
-    <mat-form-field>
-      <mat-select [(ngModel)]="selectedCategories"
-                  [multiple]="true"
-                  [disabled]="locked"
-                  name="selectedCategoryItems"
-                  placeholder="Categorias">
-        <mat-option *ngFor="let category of categories" [value]="category.id">
-          {{category.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'product.unit' | translate}}</mat-label>
+        <mat-select formControlName="unit_id">
+          <mat-option *ngFor="let unit of units" [value]="unit.id">
+            {{unit.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
 
-    <mat-form-field>
-      <mat-select [(ngModel)]="brand_id"
-                  [disabled]="locked"
-                  name="brand"
-                  placeholder="Marca">
-        <mat-option *ngFor="let brand of brands" [value]="brand.id">
-          {{brand.name}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
+    <div class="row">
+      <mat-form-field>
+        <mat-label>{{'product.categories' | translate}}</mat-label>
+        <mat-select formControlName="categories" [multiple]="true">
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{category.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field>
-      <input matInput placeholder="Precio Global"
-             type="number" step="0.01" [(ngModel)]="product.global_price" name="global_price"
-             [disabled]="locked">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Mínimo global"
-             type="number"
-             type="text" [(ngModel)]="product.global_minimum" name="global_minimum"
-             [disabled]="locked">
-    </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'product.brand' | translate}}</mat-label>
+        <mat-select formControlName="brand_id">
+          <mat-option *ngFor="let brand of brands" [value]="brand.id">
+            {{brand.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field>
+        <mat-label>{{'product.globalPrice' | translate}}</mat-label>
+        <input matInput type="number" step="0.01" formControlName="global_price">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'product.globalMinimum' | translate}}</mat-label>
+        <input matInput type="number" formControlName="global_minimum">
+      </mat-form-field>
+    </div>
   </mat-dialog-content>
 
   <mat-dialog-actions>
-    <ng-container *appUserCan="'product-edit'">
-      <button *ngIf="locked"
-              type="submit" mat-raised-button color="warn" class="pull-xs-left"
-              (click)="unlock()" >
-        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-        Editar Producto
-      </button>
-    </ng-container>
-    <button *ngIf="createMode" type="submit"
-            mat-raised-button color="accent" >
-      Crear Producto
-    </button>
-    <button *ngIf="updateMode && !locked"
-            type="submit"
-            mat-raised-button color="accent" >
-      Actualizar Producto
-    </button>
-    <button *ngIf="deleteMode && !locked" type="submit"
-            mat-raised-button color="warn" >
-      Eliminar Producto
-    </button>
     <button type="button" mat-raised-button mat-dialog-close>
-      <i class="fa fa-times" aria-hidden="true"></i>
-      Cerrar
+      {{'common.close' | translate}}
     </button>
+
+    <div class="spacer"></div>
+
+    <ng-template appUserCan="product-create">
+      <app-loading-button *ngIf="!product" [loading]="loading"
+                          mat-raised-button color="accent">
+        {{'common.create' | translate}} {{'product.product' | translate}}
+      </app-loading-button>
+    </ng-template>
+
+    <ng-template appUserCan="product-edit">
+      <app-loading-button *ngIf="product" [loading]="loading"
+                          mat-raised-button color="accent">
+        {{'common.edit' | translate}} {{'product.product' | translate}}
+      </app-loading-button>
+    </ng-template>
   </mat-dialog-actions>
 </form>

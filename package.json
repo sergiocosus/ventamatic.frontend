@@ -9,7 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "extract": "ngx-translate-extract -m 'extract' --input ./src --output ./src/assets/i18n/*.json --clean --sort --format namespaced-json --format-indentation '  '"
   },
   "private": true,
   "dependencies": {
@@ -24,7 +25,9 @@
     "@angular/platform-browser": "^7.2.13",
     "@angular/platform-browser-dynamic": "^7.2.13",
     "@angular/router": "^7.2.13",
+    "@ngx-translate/core": "^11.0.1",
     "@types/js-base64": "^2.1.5",
+    "@types/lodash": "^4.14.134",
     "angular2-json2csv": "^1.1.2",
     "angular2-notifications": "^2.0.0",
     "connect-fonts-quicksand": "^0.0.1",
@@ -33,6 +36,7 @@
     "font-face-mixin": "^1.1.0",
     "ionicons": "^3.0.0",
     "js-base64": "^2.1.9",
+    "lodash": "^4.17.11",
     "moment": "^2.18.1",
     "mydatepicker": "^2.0.3",
     "mydaterangepicker": "^4.2.1",
@@ -51,6 +55,7 @@
     "@angular-devkit/build-angular": "~0.13.0",
     "@angular/cli": "^7.3.8",
     "@angular/compiler-cli": "^7.2.13",
+    "@biesbjerg/ngx-translate-extract": "^2.3.4",
     "@types/jasmine": "2.5.38",
     "@types/node": "~6.0.60",
     "codelyzer": "~2.0.0",

@@ -1,4 +1,4 @@
-import { map } from 'rxjs/operators';
+import { filter, map, mergeMap } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { SupplierService } from '@app/api/services/supplier.service';
@@ -13,6 +13,9 @@ import { Observable } from 'rxjs';
 import { SupplierCategory } from '@app/api/models/supplier-category';
 import { Brand } from '@app/api/models/brand';
 import { ReportDataSource } from '@app/report/classes/report-data-source';
+import { ConfirmDialogComponent, ConfirmDialogData } from '@app/shared/components/confirm-dialog/confirm-dialog.component';
+import { extract } from '@app/shared/services/i18n.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-proveedores',
@@ -62,40 +65,39 @@ export class ProveedoresComponent implements OnInit {
   }
 
   create() {
-    const dialog = this.dialog.open(SupplierDialogComponent);
-    dialog.componentInstance.initCreate();
-    dialog.componentInstance.created.subscribe(createdSupplier => {
-      this.suppliers.push(createdSupplier);
-    });
+    this.dialog.open<SupplierDialogComponent, null, Supplier>(SupplierDialogComponent)
+      .afterClosed().pipe(filter(a => !!a))
+      .subscribe(supplier => this.suppliers.push(supplier));
   }
 
   update(supplier: Supplier) {
-    const dialog = this.dialog.open(SupplierDialogComponent);
-    dialog.componentInstance.initUpdate(supplier);
-    dialog.componentInstance.updated.subscribe(updatedSupplier => {
-      for (let i = 0; i < this.suppliers.length; i++) {
-        if (updatedSupplier.id === this.suppliers[i].id) {
-          this.suppliers[i] = updatedSupplier;
-        }
+    this.dialog.open<SupplierDialogComponent, Supplier, Supplier>(SupplierDialogComponent, {data: supplier})
+      .afterClosed().pipe(filter(a => !!a)).subscribe(updatedSupplier => {
+        supplier.replaceProperties(updatedSupplier);
+        this.updateDataSource();
       }
-      this.updateDataSource();
-    });
+    );
   }
 
   delete(supplier: Supplier) {
-    const dialog = this.dialog.open(SupplierDialogComponent);
-    dialog.componentInstance.initDelete(supplier);
-    dialog.componentInstance.deleted.subscribe(deletedSupplier => {
-      const index = this.suppliers.indexOf(deletedSupplier);
-      if (index > -1) {
-        if (this.deletedControl.value) {
-          this.suppliers[index].deleted_at = ' ';
-        } else {
-          this.suppliers.splice(index, 1);
-        }
+    this.dialog.open<ConfirmDialogComponent, ConfirmDialogData>(ConfirmDialogComponent, {
+      data: {
+        title: supplier.name,
+        message: extract('common.deleteConfirm'),
       }
-      this.updateDataSource();
-    });
+    }).afterClosed().pipe(
+      filter(Boolean),
+      mergeMap(() => this.supplierService.delete(supplier.id))
+    ).subscribe(() => {
+        if (this.deletedControl.value) {
+          supplier.deleted_at = ' ';
+        } else {
+          _.remove(this.suppliers, supplier);
+          this.dataSource.setData(this.suppliers);
+        }
+      },
+      error => this.notify.serviceError(error)
+    );
   }
 
   restore(supplier: Supplier) {

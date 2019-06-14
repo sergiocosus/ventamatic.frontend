@@ -15,7 +15,7 @@ export class UserService {
   }
 
   getAll(params?: any) {
-    return this.httpClient.get(this.basePath, params)
+    return this.httpClient.get(this.basePath, {params})
       .pipe(this.mapUsers());
   }
 
@@ -34,8 +34,8 @@ export class UserService {
       .pipe(this.mapUsers());
   }
 
-  post(user: User) {
-    return this.httpClient.post(this.basePath, user)
+  post(data) {
+    return this.httpClient.post(this.basePath, data)
       .pipe(this.mapUser());
   }
 
@@ -48,8 +48,8 @@ export class UserService {
       .pipe(this.mapUser());
   }
 
-  put(user: User) {
-    return this.httpClient.put(this.basePath + user.id, user)
+  put(user_id: number, data) {
+    return this.httpClient.put(this.basePath + user_id, data)
       .pipe(this.mapUser());
   }
 
@@ -60,8 +60,8 @@ export class UserService {
     });
   }
 
-  putRoles(user: User, roles: number[]) {
-    return this.httpClient.put(this.basePath + user.id + '/roles', {roles: roles})
+  putRoles(user: User, body) {
+    return this.httpClient.put(this.basePath + user.id + '/roles', body)
       .pipe(this.mapRole());
   }
 

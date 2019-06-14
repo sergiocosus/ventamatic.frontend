@@ -1,14 +1,11 @@
 @import "~src/vars";
 
-app-main-content{
-  flex: 1 0 0;
-  background-color: $backgroundDark;
-}
-
 :host{
   display: flex;
   max-width: 100%;
   overflow: hidden;
+  align-items: center;
+  justify-content: center;
 }
 
 h5{
@@ -21,24 +18,24 @@ h6 {
   margin: 0;
 }
 
+form {
+  display: flex;
+  align-self: flex-start;
+}
+
 .left{
   display: flex;
   flex-direction: column;
   flex: 1 0 0;
-  color: white;
   margin: 1em;
   padding: 1em;
 
-  border-right: white 2px dashed;
+  border-right: white 2px solid;
   line-height: 1em;
   text-align: center;
 
   .branch{
     flex: 0 0 auto;
-  }
-
-  .product{
-    color: white;
   }
 
   .finish{
@@ -51,10 +48,10 @@ h6 {
   flex: 2 0 0;
   display: flex;
   flex-direction: column;
-  color: white;
   padding: 1em;
   border-radius: 1em;
   text-align: center;
+  align-self: stretch;
 
   header{
     font-size: 1.1em;
@@ -73,4 +70,19 @@ h6 {
 
 app-begin-buy{
   max-width: 480px;
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+  padding: .5em;
+  background-color: $primaryLighterColor;
+  border-radius: .5em;
+  margin-bottom: .2em;
+
+  ::ng-deep h5 {
+    margin-top: .25em;
+    margin-bottom: .5em;
+    font-size: 1.25em;
+  }
 }

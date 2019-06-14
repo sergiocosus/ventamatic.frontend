@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostBinding, Input, OnInit, Output } from '@angular/core';
 import { Branch } from '@app/api/models/branch';
 import { Supplier } from '@app/api/models/supplier';
 import { SupplierService } from '@app/api/services/supplier.service';
@@ -17,6 +17,7 @@ import { NotifyService } from '@app/shared/services/notify.service';
 export class BeginBuyComponent implements OnInit {
   @Input() form: FormGroup;
   @Output() buyStarted = new EventEmitter();
+  @HostBinding('class.box') box = true;
 
   buyEnvironment = environment.buy;
   branches: Branch[];

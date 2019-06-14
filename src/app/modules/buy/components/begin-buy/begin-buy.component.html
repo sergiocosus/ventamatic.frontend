@@ -1,38 +1,38 @@
-<h3>
-  <i class="fa fa-shopping-cart"></i>
+<h2>
+  <mat-icon  class="fa fa-shopping-cart"></mat-icon>
   Iniciar Compra
-</h3>
+</h2>
 
-<form (ngSubmit)="start()" autocomplete="off"
-      [formGroup]="form" class="dark-theme">
-  <mat-form-field>
-    <mat-select formControlName="branch"
-                placeholder="Sucursal">
+<form (ngSubmit)="start()" autocomplete="off" [formGroup]="form">
+  <mat-form-field class="no-hint">
+    <mat-label>Sucursal</mat-label>
+    <mat-select formControlName="branch">
       <mat-option *ngFor="let branch of branches" [value]="branch">
         {{branch.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field>
-    <mat-select formControlName="supplier"
-                placeholder="Proveedor">
+  <mat-form-field class="no-hint">
+    <mat-label>Proveedor</mat-label>
+    <mat-select formControlName="supplier">
       <mat-option *ngFor="let supplier of suppliers" [value]="supplier">
         {{supplier.name}}
       </mat-option>
     </mat-select>
   </mat-form-field>
 
-  <mat-form-field *ngIf="buyEnvironment.invoiceTotalRestriction">
+  <mat-form-field *ngIf="buyEnvironment.invoiceTotalRestriction" class="no-hint">
+    <mat-label>Total</mat-label>
     <input formControlName="introduced_amount"
-           matInput placeholder="Total" type="number" min="0"
+           matInput type="number" min="0"
            [step]="0.01"/>
-    <mat-icon matPrefix>attach_money</mat-icon>
+    <mat-icon  matPrefix>attach_money</mat-icon>
   </mat-form-field>
 
-  <mat-form-field>
-    <input formControlName="supplier_bill_id"
-           matInput placeholder="Número de factura"/>
+  <mat-form-field  class="no-hint">
+    <mat-label>Número de factura</mat-label>
+    <input matInput formControlName="supplier_bill_id"/>
   </mat-form-field>
 
   <button type="submit" mat-raised-button color="accent">

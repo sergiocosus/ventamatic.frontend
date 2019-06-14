@@ -10,28 +10,28 @@
   </tr>
   </thead>
   <tbody [formGroup]="products_form">
-    <app-product-cart-row *ngFor="let product of products_form.controls; let i=index;"
-                          [formGroupName]="i"
-                          [inventory]="product.get('inventory').value"
-                          [quantityControl]="product.get('quantity')"
-                          (remove)="removeProduct(i)"></app-product-cart-row>
+    <app-inventory-cart-row *ngFor="let product of products_form.controls; let i=index;"
+                            [formGroupName]="i"
+                            [inventory]="product.get('inventory').value"
+                            [quantityControl]="product.get('quantity')"
+                            (remove)="removeProduct(i)"></app-inventory-cart-row>
   </tbody>
 
   <tfoot>
   <tr>
-    <td colspan="4"></td>
+    <td class="empty" colspan="4"></td>
     <td>Total</td>
     <td class="align-right">
       {{total | currency:'$'}}
     </td>
   </tr>
   <tr [class.error]="paymentChange < 0 ">
-    <td colspan="4"></td>
+    <td class="empty" colspan="4"></td>
     <td>Pago</td>
     <td class="align-right">{{ client_payment-0 | currency:'$'}}</td>
   </tr>
   <tr [class.error]="paymentChange < 0">
-    <td colspan="4"></td>
+    <td class="empty" colspan="4"></td>
     <td>Cambio</td>
     <td class="align-right">{{paymentChange | currency:'$'}}</td>
   </tr>

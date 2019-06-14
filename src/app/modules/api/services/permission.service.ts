@@ -17,7 +17,7 @@ export class PermissionService {
   }
 
   getAll(params?: any) {
-    return this.httpClient.get(this.basePath + 'permission', params).pipe(
+    return this.httpClient.get(this.basePath + 'permission', {params}).pipe(
       map(json => Permission.parseArray(json['permissions'])));
   }
 

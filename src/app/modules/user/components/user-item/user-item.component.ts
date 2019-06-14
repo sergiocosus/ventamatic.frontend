@@ -1,5 +1,5 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import {User} from '../../../api/models/user';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { User } from '@app/api/models/user';
 
 @Component({
   selector: 'app-user-item',
@@ -14,7 +14,8 @@ export class UserItemComponent implements OnInit {
   @Output() update = new EventEmitter();
   @Output() roles = new EventEmitter();
 
-  constructor() {}
+  constructor() {
+  }
 
   ngOnInit() {
   }

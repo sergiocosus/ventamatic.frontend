@@ -13,7 +13,7 @@ export class ProductService {
   }
 
   getAll(params?: any) {
-    return this.httpClient.get(this.basePath, params)
+    return this.httpClient.get(this.basePath, {params})
       .pipe(this.mapProducts());
   }
 
@@ -32,8 +32,8 @@ export class ProductService {
       .pipe(this.mapProduct());
   }
 
-  post(product: Product) {
-    return this.httpClient.post(this.basePath, product)
+  post(data) {
+    return this.httpClient.post(this.basePath, data)
       .pipe(this.mapProduct());
   }
 
@@ -46,13 +46,13 @@ export class ProductService {
       .pipe(this.mapProduct());
   }
 
-  put(product: Product) {
-    return this.httpClient.put(this.basePath + product.id, product)
+  put(product_id: number, data) {
+    return this.httpClient.put(this.basePath + product_id, data)
       .pipe(this.mapProduct());
   }
 
   protected mapProduct() {
-    return map(response => new Product().parse(response['supplier']));
+    return map(response => new Product().parse(response['product']));
   }
 
   protected mapProducts() {

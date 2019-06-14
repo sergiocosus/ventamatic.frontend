@@ -1,33 +1,25 @@
-:host{
+@import "~src/vars";
+
+:host {
   display: inline-flex;
   flex: 0 0 200px;
-  margin: 10px;
+  margin: .5em;
 }
 
-.roles{
-  display: flex;
+.roles {
   position: absolute;
-  right: -5px;
-  bottom: -5px;
-  z-index: 2;
-  background-color: #EB0;
-  width: 25px;
-  height: 25px;
-  border: 2px white solid;
-  border-radius: 50%;
+  right: -.5em;
+  bottom: -.5em;
+  background-color: $yellow;
+  color: white;
+  @include animate();
 
-  align-items: center;
-  justify-content: center;
-
-  transition: .25s all;
-
-  i{
-    color:white;
+  mat-icon {
     line-height: 1em;
-    font-size: 1.2em;
+    font-size: 1.4em;
   }
 
-  &:hover{
-    transform: scale(1.5,1.5);
+  &:hover {
+    transform: scale(1.5, 1.5);
   }
 }

@@ -6,7 +6,7 @@
 
 .sidenav {
   width: 200px;
-  background-color: $backgroundDark;
+  background-color: $sideDarkColor;
 }
 
 .sidenav .mat-toolbar {
@@ -14,7 +14,7 @@
 }
 
 .mat-toolbar.mat-primary {
-  background-color: $backgroundDark;
+  background-color: $primaryColor;
   position: sticky;
   top: 0;
   z-index: 1;
@@ -25,5 +25,5 @@
 }
 
 mat-sidenav-content {
-  background-color: $backgroundLight;
+  background-color: $primaryLightColor;
 }

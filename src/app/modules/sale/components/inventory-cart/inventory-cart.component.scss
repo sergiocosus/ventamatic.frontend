@@ -1,3 +1,5 @@
+@import "~src/vars";
+
 table{
   width: 100%;
   border-collapse: separate;
@@ -9,20 +11,20 @@ table{
     }
   }
 
-  /deep/ tr{
+  ::ng-deep tr{
     td{
-      background-color: #082B36;
-    }
-    &:hover td{
-      background-color: #06495E ;
+      background-color: $primaryLightColor;
+
+      &.empty {
+        background: transparent;
+      }
     }
   }
 
   thead{
     tr{
-      color: #fff;
       td{
-        border: 2px #082B36 solid;
+        border: 2px $primaryDarkColor solid;
         text-align: center;
       }
     }

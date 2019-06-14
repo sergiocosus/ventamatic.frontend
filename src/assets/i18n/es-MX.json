@@ -1,0 +1,65 @@
+{
+  "client": {
+    "address": "Dirección",
+    "cellphone": "Celular",
+    "client": "Cliente",
+    "email": "Email",
+    "id": "ID",
+    "lastName": "Apellido Paterno",
+    "lastName2": "Apellido Materno",
+    "name": "Nombre",
+    "phone": "Teléfono",
+    "rfc": "RFC"
+  },
+  "common": {
+    "close": "Cerrar",
+    "create": "Crear",
+    "created": "Creado",
+    "createdSuccess": "Creado exitosamente",
+    "deleteConfirm": "¿Desea eliminarlo?",
+    "edit": "Editar",
+    "restoredSuccess": "Restaurado exitosamente",
+    "updated": "Actualizado",
+    "updatedSuccess": "Actualizado exitosamente"
+  },
+  "forms": {
+    "error": "Hay errores o faltan datos en el formulario"
+  },
+  "product": {
+    "barCode": "Código de barras",
+    "brand": "Marca",
+    "categories": "Categorías",
+    "description": "Descripción",
+    "globalMinimum": "Mínimo global",
+    "globalPrice": "Precio global",
+    "id": "ID",
+    "product": "Producto",
+    "unit": "Unidad"
+  },
+  "supplier": {
+    "address": "Dirección",
+    "brands": "Marcas",
+    "cellphone": "Celular",
+    "email": "Email",
+    "id": "ID",
+    "name": "Nombre",
+    "phone": "Teléfono",
+    "rfc": "RFC",
+    "supplier": "Proveedor",
+    "supplierCategory": "Categoría de proveedor"
+  },
+  "user": {
+    "address": "Dirección",
+    "cellphone": "Celular",
+    "email": "Email",
+    "lastName": "Apellido Paterno",
+    "lastName2": "Apellido Materno",
+    "name": "Nombre",
+    "password": "Contraseña",
+    "passwordConfirm": "Confirmar contraseña",
+    "phone": "Teléfono",
+    "rfc": "RFC",
+    "user": "Usuario",
+    "userCode": "Código de usuario"
+  }
+}

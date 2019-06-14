@@ -8,6 +8,7 @@ import { AuthService } from '@app/auth/services/auth.service';
 import { AutoUnsubscribe } from '@app/shared/decorators/auto-unsubscribe';
 import { SubscriptionManager } from '@app/shared/classes/subscription-manager';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class SelectBranchComponent implements OnInit {
   sub = new SubscriptionManager();
 
   form: FormGroup;
+  loading: boolean;
 
   constructor(private router: Router,
               private scheduleService: ScheduleService,
@@ -63,7 +65,10 @@ export class SelectBranchComponent implements OnInit {
 
     const data = this.form.getRawValue();
 
-    this.scheduleService.post(data.branch.id, data.initial_amount).subscribe(
+    this.loading = true;
+    this.scheduleService.post(data.branch.id, data.initial_amount)
+      .pipe(finalize(() => this.loading = false))
+      .subscribe(
       schedule => this.scheduleService.updateCurrentSchedule(schedule),
       error => this.notify.serviceError(error)
     );

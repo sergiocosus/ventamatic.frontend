@@ -1,79 +1,70 @@
 @import "~src/vars";
 
-
 :host, form{
   display: flex;
   max-width: 100%;
   overflow: hidden;
-  background-color: $backgroundDark;
-  color: white;
   width: 100%;
   flex-wrap: wrap;
 }
 
 mat-form-field {
   flex: 1 0 auto;
-  color: white;
 }
 
-.left{
+.left {
   display: flex;
   flex-direction: column;
   flex: 1 0 0;
-  color: white;
   line-height: 1em;
   text-align: center;
 
-  @media (min-width: $smScreen) {
-    border-right: white 2px dashed;
-    margin: 1em;
-    padding: 1em;
+  @media (min-width: $smWidth) {
+    border-right: white 2px solid;
+    margin: .5em;
+    padding: .5em;
   }
 
-  /deep/ h5{
-    margin: 0;
-    font-size: 1em;
-    text-align: center;
-  }
 
   section {
     display: flex;
     flex-direction: column;
-    margin-bottom: 1em;
-    padding-bottom: .5em;
-    border-bottom: 1px solid rgba($backgroundLight, .25);
+    padding: .5em;
+    background-color: $primaryLighterColor;
+    border-radius: .5em;
+    margin-bottom: .2em;
+
+    ::ng-deep h5 {
+      margin-top: .25em;
+      margin-bottom: .5em;
+      font-size: 1.25em;
+    }
   }
 
   .client {
-    .searchable-input{
+    .searchable-input {
       display: flex;
 
       mat-form-field {
         margin-right: .2em;
       }
 
-      app-client-search{
+      app-client-search {
         flex: 1;
       }
     }
-
   }
 
-  .branch{
+  .branch {
     flex: 0 0 auto;
-  }
-
-  .product{
-    color: white;
   }
 }
 
 .right{
   flex: 2 0 0;
-  color: white;
   font-size: .75em;
 
-  @media (min-width: $smScreen) {
+  @media (min-width: $smWidth) {
     padding: 1em;
     font-size: 1em;
   }
@@ -85,7 +76,7 @@ mat-form-field {
 }
 
 .client-view{
-  background-color: $darkBlue;
+  background-color: $primaryColor;
   font-weight: bolder;
   border-radius: .5em;
   padding: .5em;
@@ -100,10 +91,10 @@ mat-form-field {
 }
 
 hr{
-  border-color: lighten($mainContentBackgroundColor, 10%);
+  border-color: lighten($primaryLightColor, 10%);
   margin: 1em 0;
 
-  @media (min-width: $smScreen) {
+  @media (min-width: $smWidth) {
     margin: .25em 0;
   }
 }

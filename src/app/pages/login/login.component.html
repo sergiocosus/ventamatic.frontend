@@ -1,25 +1,23 @@
-<div class="flex-container">
-  <div class="wrapper">
-    <div class="logo">
-      <span>
-        <img src="/assets/images/logo_white.png" />
-      </span>
-    </div>
+<div class="wrapper">
+  <form class="form-signin box" [formGroup]="form"
+        (ngSubmit)="onSubmit()" ngNativeValidate>
+    <img src="/assets/images/logo_white.png"/>
 
-    <form class="form-signin" (ngSubmit)="onSubmit()" ngNativeValidate>
-      <mat-form-field>
-        <input matInput placeholder="Usuario"
-               [(ngModel)]="username" name="username"
-               [autofocus]="true" required="required">
-      </mat-form-field>
-      <mat-form-field>
-        <input matInput placeholder="Contraseña"
-               [(ngModel)]="password" name="password"
-               required="required" type="password">
-      </mat-form-field>
-      <button mat-raised-button color="primary"
-              type="submit">Iniciar Sesión</button>
-    </form>
-  </div>
+    <mat-form-field>
+      <mat-label>Usuario</mat-label>
+      <input matInput
+             formControlName="username" name="username"
+             [autofocus]="true" required="required">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Contraseña</mat-label>
+      <input matInput
+             formControlName="password" name="password"
+             required="required" type="password">
+    </mat-form-field>
+    <app-loading-button [loading]="loading">
+      Iniciar Sesión
+    </app-loading-button>
+  </form>
 </div>
 

@@ -1,0 +1,58 @@
+<a *appUserCanInBranch="'sale'"
+   mat-list-item routerLink="/venta" routerLinkActive="active">
+  <mat-icon  matListIcon class="fa fa-cart-arrow-down"></mat-icon>
+  <span>Venta</span>
+</a>
+
+<a *appUserCanInBranch="'buy'" mat-list-item routerLink="/compra"
+   routerLinkActive="active">
+  <mat-icon  matListIcon class="fa fa-shopping-cart"></mat-icon>
+  <span>Compra</span>
+</a>
+
+<a *appUserCanInBranch="'inventory-get'" mat-list-item routerLink="/inventario"
+   routerLinkActive="active">
+  <mat-icon  matListIcon class="fa fa-list-ul"></mat-icon>
+  <span>Inventario</span>
+</a>
+
+<a *appUserCan="'product-get'" mat-list-item routerLink="/productos"
+   routerLinkActive="active">
+  <mat-icon  matListIcon class="fa fa-shopping-bag"></mat-icon>
+  <span>Productos</span>
+</a>
+
+<a *appUserCan="'client-get'" mat-list-item routerLink="/clientes"
+   routerLinkActive="active">
+  <mat-icon  matListIcon class="fa fa-user"></mat-icon>
+  <span>Clientes</span>
+</a>
+
+<a *appUserCan="'supplier-get'" mat-list-item routerLink="/proveedores"
+   routerLinkActive="active">
+  <mat-icon  matListIcon class="fa fa-user-secret"></mat-icon>
+  <span>Proveedores</span>
+</a>
+
+<a *appUserCan="'user-get'" mat-list-item routerLink="/usuarios"
+   routerLinkActive="active">
+  <mat-icon  matListIcon class="fa fa-users"></mat-icon>
+  <span>Usuarios</span>
+</a>
+
+<a *appUserCan="'role-get'" mat-list-item routerLink="/roles"
+   routerLinkActive="active">
+  <mat-icon  matListIcon class="fa fa-id-card" aria-hidden="true"></mat-icon>
+  <span>Roles</span>
+</a>
+
+<a *appUserCanInBranch="'branch-edit'" mat-list-item routerLink="/sucursales"
+   routerLinkActive="active">
+  <mat-icon  matListIcon class="fa fa-building" aria-hidden="true"></mat-icon>
+  <span>Sucursales</span>
+</a>
+
+<a routerLink="/reportes" mat-list-item routerLinkActive="active">
+  <mat-icon  matListIcon class="fa fa-line-chart"></mat-icon>
+  <span>Reportes</span>
+</a>

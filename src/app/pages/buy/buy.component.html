@@ -1,24 +1,31 @@
-<app-main-content class="dark-theme">
-  <app-begin-buy *ngIf="!firstStepDone"
-    [form]="form"
-    (buyStarted)="startBuy($event)">
-  </app-begin-buy>
+<app-begin-buy *ngIf="!firstStepDone"
+               [form]="form"
+               (buyStarted)="startBuy($event)">
+</app-begin-buy>
 
+
+<form [hidden]="!firstStepDone" class="box" (ngSubmit)="openBuyConfirm()" autocomplete="off"
+      [formGroup]="form" #myForm="ngForm">
   <div class="left" *ngIf="firstStepDone">
-    <app-find-product (selectedProduct)="addProduct($event)"
-                      mode="product">
-    </app-find-product>
+    <section>
+      <app-find-product (selectedProduct)="addProduct($event)"
+                        mode="product">
+      </app-find-product>
+    </section>
 
-    <app-payment-type [paymentTypeIdControl]="form.get('payment_type_id')"
-                      [cardPaymentIdControl]="form.get('card_payment_id')">
-    </app-payment-type>
+    <section>
+      <app-payment-type [paymentTypeIdControl]="form.get('payment_type_id')"
+                        [cardPaymentIdControl]="form.get('card_payment_id')">
+      </app-payment-type>
+    </section>
 
-    <form class="finish" (ngSubmit)="openBuyConfirm()" autocomplete="off"
-          [formGroup]="form" #myForm="ngForm">
+
+    <section>
       <h5>Impuestos</h5>
       <mat-form-field>
+        <mat-label>IVA</mat-label>
         <input matInput formControlName="iva"
-               placeholder="IVA" step=".01"
+               step=".01"
                type="number" [max]="99999999999"/>
       </mat-form-field>
       <mat-form-field>
@@ -26,20 +33,20 @@
                placeholder="IEPS"
                type="number" [max]="99999999999"/>
       </mat-form-field>
+    </section>
 
-      <div>
-        <button type="button"
-                mat-raised-button color="warn"
-                (click)="openCancelDialog()">
-          Cancelar Compra
-        </button>
-        <button type="submit" mat-raised-button color="accent">
-          Finalizar Compra
-        </button>
-      </div>
-    </form>
+
+    <section>
+      <button type="button"
+              mat-raised-button color="warn"
+              (click)="openCancelDialog()">
+        Cancelar Compra
+      </button>
+      <button type="submit" mat-raised-button color="accent">
+        Finalizar Compra
+      </button>
+    </section>
   </div>
-
 
   <div class="right" *ngIf="firstStepDone">
     <header>
@@ -61,4 +68,4 @@
       [introducedAmount]="form.get('introduced_amount').value"
     ></app-product-cart>
   </div>
-</app-main-content>
+</form>

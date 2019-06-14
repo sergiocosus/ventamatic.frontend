@@ -9,7 +9,7 @@ mat-form-field{
   /deep/ .mat-input-wrapper {
     margin: .5em 0;
 
-    @media (min-width: $smScreen) {
+    @media (min-width: $smWidth) {
       margin: 1em 0;
     }
   }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { UserService } from '@app/api/services/user.service';
 import { NotifyService } from '@app/shared/services/notify.service';
 import { RoleService } from '@app/api/services/role.service';
@@ -8,7 +8,9 @@ import { Branch } from '@app/api/models/branch';
 import { User } from '@app/api/models/user';
 import { BranchRoleService } from '@app/api/services/branch-role.service';
 import { BranchService } from '@app/api/services/branch.service';
-import { MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import * as _ from 'lodash';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-user-role-dialog',
@@ -16,18 +18,24 @@ import { MatDialogRef } from '@angular/material';
   styleUrls: ['./user-role-dialog.component.scss']
 })
 export class UserRoleDialogComponent implements OnInit {
-  user: User;
   branches: Branch[];
 
   roles: Role[] = [];
   selectedRoles: any[] = [];
 
   branchRoles: BranchRole[];
-  selectedBranchRoles: any[][] = [];
 
   messages = {
     rolesSaved: 'Los roles han sido actualizados para el usuario'
   };
+
+  branchPermissionSelected: {
+    branch_id: number;
+    branch_roles: number[]
+  }[];
+
+  systemForm: FormGroup;
+  branchForm: FormGroup;
 
 
   constructor(protected userService: UserService,
@@ -35,7 +43,15 @@ export class UserRoleDialogComponent implements OnInit {
               protected roleService: RoleService,
               protected branchRoleService: BranchRoleService,
               protected branchService: BranchService,
-              private dialogRef: MatDialogRef<UserRoleDialogComponent>) {
+              private dialogRef: MatDialogRef<UserRoleDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public user: User,
+              private fb: FormBuilder) {
+    this.branchForm = this.fb.group({
+      branchRoles: this.fb.array([])
+    });
+    this.systemForm = this.fb.group({
+      role_ids: [],
+    });
   }
 
   ngOnInit() {
@@ -50,44 +66,42 @@ export class UserRoleDialogComponent implements OnInit {
     this.branchRoleService.getAllCached().subscribe(
       branchRoles => this.branchRoles = branchRoles
     );
+
+    this.init(this.user.id);
+  }
+
+  rolesOfBranch(branch_id: number) {
+    return _.find(this.branchPermissionSelected, {branch_id}).branch_roles;
   }
 
   init(user_id: number) {
     this.userService.get(user_id).subscribe(
       user => {
         this.user = user;
+        this.systemForm.reset({
+          role_ids: _.map(user.roles, 'id')
+        });
 
-        this.selectedRoles = user.roles.map(
-          rolesOfUser => this.roles.find(
-            role => role.id === rolesOfUser.id
-          )
-        );
+        console.log(this.branches);
 
-        this.branches.forEach(
-          branch => {
-            const filteredBranchRoles = this.user.branch_roles.filter(
-              branchRole => branchRole.pivot.branch_id === branch.id
-            );
-            this.selectedBranchRoles.push(
-              filteredBranchRoles.map(
-                branchRolesOfUser => this.branchRoles.find(
-                  branchRole => branchRole.id === branchRolesOfUser.id
-                )
-              )
-            );
-          }
-        );
+
+        this.branches.forEach(branch => {
+          (this.branchForm.get('branchRoles') as FormArray).push(this.fb.group({
+            branch: [branch],
+            branch_role_ids: [
+              this.user.branch_roles.filter(
+                branchRole => branchRole.pivot.branch_id === branch.id
+              ).map(branchRole => branchRole.id)
+            ],
+          }));
+        });
       },
       error => this.notify.serviceError(error)
     );
   }
 
   updateSystemRoles() {
-    const roles = this.selectedRoles.map(
-      item => item.id
-    );
-
-    this.userService.putRoles(this.user, roles).subscribe(
+    this.userService.putRoles(this.user, this.systemForm.getRawValue()).subscribe(
       updatedRoles => {
         this.user.roles = updatedRoles;
         this.notify.success(this.messages.rolesSaved);
@@ -97,37 +111,12 @@ export class UserRoleDialogComponent implements OnInit {
   }
 
   updateBranchRoles() {
-    const branchRoles = [];
-    for (let i = 0; i < this.branches.length; i++) {
-      const branches = {
-        branch_id: this.branches[i].id,
-        branch_roles: []
-      };
-
-      console.log(this.selectedBranchRoles);
-      branches.branch_roles = this.selectedBranchRoles[i].map(
-        item => item.id
-      );
-      branchRoles.push(branches);
-    }
-
-
-    this.userService.putBranchRoles(this.user, branchRoles).subscribe(
+    this.userService.putBranchRoles(this.user, this.branchPermissionSelected).subscribe(
       updatedBranchRoles => {
         this.user.branch_roles = updatedBranchRoles;
         this.notify.success(this.messages.rolesSaved);
       },
       error => this.notify.serviceError(error)
     );
-  }
-
-  clear() {
-    this.user = null;
-    this.selectedRoles = [];
-    this.selectedBranchRoles = [];
-  }
-
-  close() {
-    this.dialogRef.close();
   }
 }

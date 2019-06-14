@@ -1,0 +1,14 @@
+button {
+  display: flex;
+  ::ng-deep {
+    .mat-button-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+  mat-spinner {
+    margin-right: 1em;
+  }
+}

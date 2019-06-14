@@ -9,7 +9,7 @@
 ul{
   width: 100%;
   list-style: none;
-  background-color: $darkBlue;
+  background-color: $primaryColor;
   border-radius: 1em;
   margin: 0;
   padding: 0;
@@ -19,7 +19,7 @@ ul{
     border-bottom: 1px solid steelblue;
 
     &:hover, &.selected{
-      background-color: $hoverBlue;;
+      background-color: $secondaryColor;;
       cursor: pointer;
     }
 

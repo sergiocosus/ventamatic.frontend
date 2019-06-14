@@ -4,6 +4,7 @@ import {UsuariosComponent} from './usuarios.component';
 import {UserModule} from '../../modules/user/user.module';
 import {AuthModule} from '../../modules/auth/auth.module';
 import {SharedModule} from '../../shared/shared.module';
+import { MatToolbarModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -11,6 +12,7 @@ import {SharedModule} from '../../shared/shared.module';
     UsersRoutingModule,
     UserModule,
     AuthModule,
+    MatToolbarModule,
   ],
   declarations: [
     UsuariosComponent,

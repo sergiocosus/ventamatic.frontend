@@ -9,7 +9,7 @@ import { InventoryQuantityDialogComponent } from '@app/inventory/components/inve
 import { InventoryEditDialogComponent } from '@app/inventory/components/inventory-edit-dialog/inventory-edit-dialog.component';
 import { ReportDataSource } from '@app/report/classes/report-data-source';
 import { Observable } from 'rxjs';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { CategoryService } from '@app/api/services/category.service';
 import { BrandService } from '@app/api/services/brand.service';
 import { Category } from '@app/api/models/category';
@@ -38,6 +38,20 @@ export class InventoryDetailComponent implements OnInit {
   units = [];
 
   private sub;
+  displayedColumns = [
+    'id',
+    'description',
+    'bar_code',
+    'categories',
+    'brand',
+    'minimum',
+    'quantity',
+    'branchPrice',
+    'globalPrice',
+    'lastCost',
+    'unit',
+    'actions',
+  ];
 
   constructor(private route: ActivatedRoute,
               private inventoryService: InventoryService,
@@ -81,7 +95,6 @@ export class InventoryDetailComponent implements OnInit {
     Object.keys(units).forEach(key => {
       this.units.push(Object.assign({id: key}, units[key]));
     });
-
   }
 
   initReportDataSource() {

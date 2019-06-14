@@ -4,7 +4,7 @@
   <picture>
     <img *ngIf="branch.image_url; else defaultIcon" [src]="branch.image_url">
     <ng-template #defaultIcon>
-      <i class="fa fa-industry fa-3x"></i>
+      <mat-icon class="fa fa-industry fa-3x"></mat-icon>
     </ng-template>
   </picture>
   <div class="data">

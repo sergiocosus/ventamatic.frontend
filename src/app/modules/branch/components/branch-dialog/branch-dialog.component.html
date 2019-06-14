@@ -1,39 +1,46 @@
 <h4 *ngIf="updateMode" mat-dialog-title>
   Editar Sucursal
 </h4>
-<form (ngSubmit)="submit()" ngNativeValidate>
+<form (ngSubmit)="submit()">
   <mat-dialog-content>
     <mat-form-field *ngIf="updateMode">
-      <input matInput placeholder="Id" type="number" [(ngModel)]="branch.id" name="id"
+      <mat-label>Id</mat-label>
+      <input matInput type="number" [(ngModel)]="branch.id" name="id"
              disabled="disabled">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Nombre"
+      <mat-label>Nombre</mat-label>
+      <input matInput
              [(ngModel)]="branch.name" name="name"
              [disabled]="locked" [required]="true">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Descripción"
+      <mat-label>Descripción</mat-label>
+      <input matInput
              [(ngModel)]="branch.description" name="description"
              [disabled]="locked">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Dirección"
+      <mat-label>Dirección</mat-label>
+      <input matInput
              [(ngModel)]="branch.address" name="address"
              [disabled]="locked">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Título del ticket"
+      <mat-label>Título del ticket</mat-label>
+      <input matInput
              [(ngModel)]="branch.title_ticket" name="title_ticket"
              [disabled]="locked">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Encabezado de ticket"
+      <mat-label>Encabezado de ticket</mat-label>
+      <input matInput
              [(ngModel)]="branch.header_ticket" name="header_ticket"
              [disabled]="locked">
     </mat-form-field>
     <mat-form-field>
-      <input matInput placeholder="Pie de ticket"
+      <mat-label>Pie de ticket</mat-label>
+      <input matInput
              [(ngModel)]="branch.footer_ticket" name="footer_ticket"
              [disabled]="locked">
     </mat-form-field>
@@ -55,7 +62,7 @@
       <button *ngIf="locked"
               type="submit" mat-raised-button color="warn"
               (click)="unlock()" >
-        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
+        <mat-icon class="fa fa-unlock-alt" aria-hidden="true"></mat-icon>
         Editar Sucursal
       </button>
     </ng-container>

@@ -1,0 +1,49 @@
+@import "~src/vars";
+
+:host {
+  display: table-row;
+  position: relative;
+  background-color: $primaryLighterColor;
+
+  td:last-child {
+    position: relative;
+  }
+
+  td {
+    border-top: 1px white solid;
+    padding-left: 3px;
+
+    mat-form-field {
+      width: 6em;
+      margin-bottom: -1em;
+
+      /deep/ .mat-input-flex {
+        background-color: transparentize($primaryLighterColor, .9);
+      }
+    }
+  }
+
+  td.empty {
+    background: transparent;
+  }
+
+  .delete {
+    position: absolute;
+    right: -.5em;
+    top: -.5em;
+    width: 1.25em;
+    height: 1.25em;
+    line-height: 1em;
+    @include animate();
+
+    mat-icon {
+      line-height: 1em;
+      margin: 0;
+    }
+
+    &:hover {
+      transform: scale(1.75, 1.75);
+    }
+
+  }
+}

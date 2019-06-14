@@ -2,13 +2,14 @@
     <h4 mat-dialog-title>{{title}}</h4>
 <mat-dialog-content>
   <mat-checkbox [formControl]="deletedControl" *appUserCan="'user-delete'" >
-    <i class="fa fa-trash"></i>
+    <mat-icon class="fa fa-trash"></mat-icon>
     Ver eliminados
   </mat-checkbox>
 
   <form (ngSubmit)="create()" ngNativeValidate>
     <mat-form-field>
-      <input matInput placeholder="Ingrese una nueva {{title}}"
+      <mat-label>Ingrese una nueva {{title}}</mat-label>
+      <input matInput
              name="id" type="text" [(ngModel)]="entity.name">
     </mat-form-field>
     <div>
@@ -21,26 +22,27 @@
   <ul>
     <li *ngFor="let entity of entities">
       <mat-form-field>
-        <input matInput [placeholder]="title"
+        <mat-label>{{title}}</mat-label>
+        <input matInput
                name="id" type="text" [(ngModel)]="entity.name">
       </mat-form-field>
 
       <div *appUserCan="mode+'-edit'">
         <button type="submit" mat-mini-fab color="accent"
                 (click)="update(entity)">
-          <i class="fa fa-check" aria-hidden="true"></i>
+          <mat-icon class="fa fa-check" aria-hidden="true"></mat-icon>
         </button>
       </div>
       <div *appUserCan="mode+'-delete'">
         <button *ngIf="entity.deleted_at; else notDeleted" type="button"
-                mat-mini-fab
+                mat-mini-fab color="accent"
                 (click)="restore(entity)">
-          <i class="fa fa-recycle" aria-hidden="true"></i>
+          <mat-icon class="fa fa-recycle" aria-hidden="true"></mat-icon>
         </button>
         <ng-template #notDeleted>
           <button type="button"
                   mat-mini-fab color="warn" (click)="delete(entity)">
-            <i class="fa fa-times" aria-hidden="true"></i>
+            <mat-icon class="fa fa-times" aria-hidden="true"></mat-icon>
           </button>
         </ng-template>
       </div>
@@ -49,7 +51,7 @@
 </mat-dialog-content>
 <mat-dialog-actions>
   <button type="button" mat-raised-button (click)="close()">
-    <i class="fa fa-times" aria-hidden="true"></i>
+    <mat-icon class="fa fa-times" aria-hidden="true"></mat-icon>
     Cerrar
   </button>
 </mat-dialog-actions>

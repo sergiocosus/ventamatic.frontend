@@ -1,17 +1,17 @@
-<form (ngSubmit)="confirm()"
+<form class="box" (ngSubmit)="confirm()"
       [formGroup]="form"
       autocomplete="off" #myForm="ngForm"
       (keydown.enter)="$event.preventDefault()">
-  <div class="left dark-theme">
+  <div class="left">
     <section class="client">
       <h5>Cliente</h5>
       <div class="searchable-input">
         <mat-form-field class="id-field">
+          <mat-label>ID</mat-label>
           <input matInput name="client_id" type="number"
                  [min]="1" [formControl]="clientIdControl"
-                 tabindex="5" autocomplete="off"
-                 placeholder="ID" />
-          <mat-icon matPrefix class="fa fa-user"></mat-icon>
+                 tabindex="5" autocomplete="off"/>
+          <mat-icon  matPrefix class="fa fa-user"></mat-icon>
           <mat-hint>
             <span class="error" *ngIf="client_status">{{client_status}}</span>
           </mat-hint>
@@ -37,29 +37,30 @@
       ></app-payment-type>
 
       <mat-form-field>
-        <input matInput placeholder="Pago"
+        <mat-label>Pago</mat-label>
+        <input matInput
                formControlName="client_payment"
                tabindex="8" step=".01"
                type="number" [min]="total">
-        <mat-icon matPrefix>attach_money</mat-icon>
+        <mat-icon  matPrefix>attach_money</mat-icon>
       </mat-form-field>
     </section>
 
     <section class="footer">
       <mat-checkbox [formControl]="printControl" name="print" tabindex="9">
-        <i class="fa fa-print" aria-hidden="true"></i>
+        <mat-icon class="fa fa-print" aria-hidden="true"></mat-icon>
         Imprimir ticket
       </mat-checkbox>
 
       <div class="hide-on-small">
         <button type="button" mat-raised-button
                 color="warn" (click)="cancel()">
-          <mat-icon class="fa fa-trash"></mat-icon>
+          <mat-icon  class="fa fa-trash"></mat-icon>
           <span>Cancelar Venta</span>
 
         </button>
         <button mat-raised-button color="accent" accesskey="f">
-          <mat-icon class="fa fa-check-circle"></mat-icon>
+          <mat-icon  class="fa fa-check-circle"></mat-icon>
           <span>Finalizar Venta</span>
         </button>
       </div>
@@ -80,11 +81,11 @@
 
     <div class="mobile-actions" *ngIf="isHandset$ | async">
       <button type="button" mat-raised-button color="warn" (click)="cancel()">
-        <mat-icon class="fa fa-trash"></mat-icon>
+        <mat-icon  class="fa fa-trash"></mat-icon>
         <span>Cancelar Venta</span>
       </button>
       <button mat-raised-button color="accent" accesskey="f">
-        <mat-icon class="fa fa-check-circle"></mat-icon>
+        <mat-icon  class="fa fa-check-circle"></mat-icon>
         <span>Finalizar Venta</span>
       </button>
     </div>

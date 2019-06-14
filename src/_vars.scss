@@ -1,25 +1,62 @@
-$darkBlue : #082B36;
-$hoverBlue : #06495E;
+@import "mixins";
+@import '~@angular/material/theming';
 
-$mainContentBackgroundColor : #556A70;
+$yellow: #EB0;
 
-$backgroundDark : $darkBlue;
-$backgroundLight: #AAB6BA;
-
-$smScreen: 576px;
-$mdScreen: 768px;
-$lgScreen: 992px;
-$xlgScreen: 1200px;
+$mat-primary: $mat-indigo;
+$mat-secondary: $mat-purple;
+$side-color: $mat-primary;
 
 
-.form-dialog{
-  mat-select{
-    margin-top: 1em;
-    margin-bottom: 1em;
-  }
+$primaryLighterColor: map-get($mat-primary, 50);
+$primaryLightColor: map-get($mat-primary, 100);
+$primaryColor: map-get($mat-primary, 500);
+$primaryDarkColor: map-get($mat-primary, 700);
+$primaryDarkerColor: map-get($mat-primary, 900);
 
-  mat-dialog-content{
+$secondaryLighterColor:map-get($mat-secondary, 50);
+$secondaryLightColor:map-get($mat-secondary, 200);
+$secondaryColor: map-get($mat-secondary, 500);
+$secondaryDarkColor: map-get($mat-secondary, 700);
+$secondaryDarkerColor: map-get($mat-secondary, 900);
+
+$sideLightColor:map-get($side-color, 200);
+$sideColor: map-get($side-color, 500);
+$sideDarkColor: map-get($side-color, 700);
+$sideDarkerColor: map-get($side-color, 900);
+
+$text-color: $primaryDarkerColor;
+
+$smWidth: 576px;
+$mdWidth: 768px;
+$lgWidth: 992px;
+$xlgWidth: 1200px;
+
+
+.form-dialog {
+  mat-dialog-content {
     display: flex;
     flex-direction: column;
   }
+
+  .row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 42em;
+    max-width: 100%;
+    flex: 0 0 auto;
+    align-items: center;
+
+    mat-form-field {
+      flex: 1 1 20em;
+      margin-right: .25em;
+
+      &.id {
+        flex: .25 1 5em;
+        width: 5em;
+      }
+    }
+  }
+
 }

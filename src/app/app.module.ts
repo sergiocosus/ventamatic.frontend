@@ -11,6 +11,7 @@ import { SimpleNotificationsModule } from 'angular2-notifications';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { SaleModule } from '@app/sale/sale.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SaleModule } from '@app/sale/sale.module';
       apiClientID: environment.api.clientID,
       apiClientSecret: environment.api.clientSecret,
     }),
+    TranslateModule.forRoot(),
     SimpleNotificationsModule.forRoot(),
     SaleModule,
   ],

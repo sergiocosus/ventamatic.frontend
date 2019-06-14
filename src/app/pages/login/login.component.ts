@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import {AuthService} from '../../modules/auth/services/auth.service';
-import {NotifyService} from '../../shared/services/notify.service';
+import { AuthService } from '@app/auth/services/auth.service';
+import { NotifyService } from '@app/shared/services/notify.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -9,32 +11,35 @@ import {NotifyService} from '../../shared/services/notify.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  username: string;
-  password: string;
+  loading: boolean;
+  form: FormGroup;
 
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-    private notify: NotifyService) {}
+  constructor(private router: Router,
+              private authService: AuthService,
+              private notify: NotifyService,
+              private fb: FormBuilder) {
+    this.form = this.fb.group({
+      username: [],
+      password: [],
+    });
+  }
 
   ngOnInit() {
   }
 
-  login(username: string , password: string) {
-    this.authService.login(username, password)
-      .subscribe(
-        user  => {
+
+  onSubmit() {
+    const data = this.form.getRawValue();
+
+    this.loading = true;
+    this.authService.login(data.username, data.password)
+      .pipe(finalize(() => this.loading = false))
+      .subscribe(user => {
           this.router.navigate(['/']);
           this.notify.info('Bienvenido', user.fullName);
         },
-        error => {
-          this.notify.error('Error', error);
-        }
+        error => this.notify.serviceError(error)
       );
-  }
-
-  onSubmit() {
-    this.login(this.username, this.password);
   }
 
 }

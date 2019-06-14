@@ -1,15 +1,17 @@
-
-import {map} from 'rxjs/operators';
-import { Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {UserService} from '../../modules/api/services/user.service';
-import {NotifyService} from '../../shared/services/notify.service';
-import {User} from '../../modules/api/models/user';
-import {UserDialogComponent} from '../../modules/user/components/user-dialog/user-dialog.component';
-import {MatDialog} from '@angular/material';
-import {UserRoleDialogComponent} from '@app/user/components/user-role-dialog/user-role-dialog.component';
-import {ReportDataSource} from '../../modules/report/classes/report-data-source';
-import {Observable} from 'rxjs';
+import { filter, map, mergeMap } from 'rxjs/operators';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { UserService } from '@app/api/services/user.service';
+import { NotifyService } from '@app/shared/services/notify.service';
+import { User } from '@app/api/models/user';
+import { UserDialogComponent } from '@app/user/components/user-dialog/user-dialog.component';
+import { MatDialog } from '@angular/material';
+import { UserRoleDialogComponent } from '@app/user/components/user-role-dialog/user-role-dialog.component';
+import { ReportDataSource } from '@app/report/classes/report-data-source';
+import { Observable } from 'rxjs';
+import { ConfirmDialogComponent, ConfirmDialogData } from '@app/shared/components/confirm-dialog/confirm-dialog.component';
+import { extract } from '@app/shared/services/i18n.service';
+import * as _ from 'lodash';
 
 
 @Component({
@@ -55,36 +57,41 @@ export class UsuariosComponent implements OnInit {
   }
 
   create() {
-    const dialog = this.dialog.open(UserDialogComponent);
-    dialog.componentInstance.initCreate();
-    dialog.componentInstance.created.subscribe(createdUser => {
-      this.users.unshift(createdUser);
+    this.dialog.open<UserDialogComponent, null, User>(UserDialogComponent).afterClosed()
+      .pipe(filter(Boolean)).subscribe(user => {
+      this.users.unshift(user);
       this.updateDataSource();
     });
   }
 
   update(user: User) {
-    const dialog = this.dialog.open(UserDialogComponent);
-    dialog.componentInstance.initUpdate(user);
-    dialog.componentInstance.updated.subscribe(clientUpdated => {
-      this.updateDataSource();
-    });
+    this.dialog.open<UserDialogComponent, User, User>(UserDialogComponent, {data: user})
+      .afterClosed().pipe(filter(Boolean)).subscribe(
+      userUpdated => {
+        user.replaceProperties(userUpdated);
+        this.updateDataSource();
+      });
   }
 
   delete(user: User) {
-    const dialog = this.dialog.open(UserDialogComponent);
-    dialog.componentInstance.initDelete(user);
-    dialog.componentInstance.deleted.subscribe(userDeleted => {
-      const index = this.users.indexOf(userDeleted);
-      if (index > -1) {
-        if (this.deletedControl.value) {
-          this.users[index].deleted_at = ' ';
-        } else {
-          this.users.splice(index, 1);
-        }
+    this.dialog.open<ConfirmDialogComponent, ConfirmDialogData>(ConfirmDialogComponent, {
+      data: {
+        title: user.name,
+        message: extract('common.deleteConfirm'),
       }
-      this.updateDataSource();
-    });
+    }).afterClosed().pipe(
+      filter(Boolean),
+      mergeMap(() => this.userService.delete(user.id))
+    ).subscribe(() => {
+        if (this.deletedControl.value) {
+          user.deleted_at = ' ';
+        } else {
+          _.remove(this.users, user);
+          this.dataSource.setData(this.users);
+        }
+      },
+      error => this.notify.serviceError(error)
+    );
   }
 
   restore(user: User) {
@@ -102,9 +109,8 @@ export class UsuariosComponent implements OnInit {
     );
   }
 
-  openRolesDialog(user_id: number) {
-    const dialog = this.dialog.open(UserRoleDialogComponent);
-    dialog.componentInstance.init(user_id);
+  openRolesDialog(user: User) {
+    this.dialog.open<UserRoleDialogComponent, User>(UserRoleDialogComponent, {data: user});
   }
 
   protected initDataSource() {
@@ -125,9 +131,12 @@ export class UsuariosComponent implements OnInit {
 
   protected fieldIsOk(object, key, value) {
     switch (key) {
-      case 'username': return object.username == value;
-      case 'address': return object.address.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
-      case 'name': return object.name.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
+      case 'username':
+        return object.username == value;
+      case 'address':
+        return object.address.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
+      case 'name':
+        return object.name.toLocaleLowerCase().search(value.toLowerCase()) >= 0;
     }
     return true;
   }

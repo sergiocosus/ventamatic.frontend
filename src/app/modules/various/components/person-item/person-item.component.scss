@@ -4,11 +4,11 @@
   display: inline-flex;
   flex: 0 0 200px;
   max-width: 200px;
-  height: 100px;
-  background-color: $darkBlue;
-  margin: 10px;
-  border-radius: 10px;
-  border: 1px white dashed;
+  height: 5em;
+  background-color: $primaryColor;
+  margin: .5em;
+  border-radius: .5em;
+  border: 1px white solid;
   justify-content: space-around;
   align-content: center;
   position: relative;
@@ -16,7 +16,7 @@
   cursor: pointer;
   line-height: 1em;
 
-  &:hover{
+  &:hover {
     background-color: #06495E;
   }
 }
@@ -33,58 +33,50 @@
     }
 
     picture {
-      width: 70px;
+      width: 3em;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-right: 1px white dashed;
+      border-right: 1px white solid;
+      margin-right: .5em;
 
       img {
-        width: 60px;
-        height: 60px;
+        width: 2em;
+        height: 2em;
       }
     }
   }
 
-  >picture{
+  > picture {
     flex: 0 0 auto;
   }
-  .data{
+
+  .data {
     display: flex;
     flex: 1 0 0;
     color: white;
     flex-direction: column;
     justify-content: space-around;
-    >div:first-child{
+
+    > div:first-child {
       font-weight: bolder;
     }
   }
 
-  .button-delete {
-    display: flex;
+  .button-delete, .button-modify {
     position: absolute;
-    right: -5px;
-    top: -5px;
-    z-index: 2;
-    background-color: #DF0101;
-    width: 25px;
-    height: 25px;
-    border: 2px white solid;
-    border-radius: 50%;
+    right: -.5em;
+    top: -.5em;
+    @include animate();
 
-    align-items: center;
-    justify-content: center;
-
-    transition: .25s all;
-
-    i{
-      color:white;
+    mat-icon {
       line-height: 1em;
-      font-size: 1.2em;
+      font-size: 1.4em;
     }
 
-    &:hover{
-      transform: scale(1.5,1.5);
+    &:hover {
+      transform: scale(1.5, 1.5);
     }
   }
+
 }

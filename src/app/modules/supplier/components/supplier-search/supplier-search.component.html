@@ -1,23 +1,22 @@
 <mat-form-field class="id">
-  <input matInput [placeholder]="'id'"
-         type="number"
+  <mat-label>Id</mat-label>
+  <input matInput type="number"
          autocomplete="off"
          [tabindex]="tab_index" aria-label="State"
          [formControl]="idFormControl">
 </mat-form-field>
 <mat-form-field class="search">
-  <input matInput [placeholder]="placeholder"
+  <mat-label>{{placeholder}}</mat-label>
+  <input matInput
          autocomplete="off"
          [tabindex]="tab_index" aria-label="State"
          [matAutocomplete]="auto" [formControl]="formControl">
-  <span matSuffix>
-    <mat-icon>search</mat-icon>
-  </span>
+  <mat-icon matSuffix>search</mat-icon>
 
   <mat-autocomplete #auto="matAutocomplete" class="dark"
                     [displayWith]="displayWith">
     <mat-option class="loading" disabled *ngIf="loading">
-      <mat-spinner diameter="20" class="dark-theme"></mat-spinner>
+      <mat-spinner diameter="20" ></mat-spinner>
     </mat-option>
     <ng-container *ngIf="suppliersFound$ | async; let suppliers">
       <mat-option class="empty" *ngIf="!loading && !suppliers.length">

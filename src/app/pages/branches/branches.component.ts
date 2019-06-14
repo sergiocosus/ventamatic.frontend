@@ -1,9 +1,9 @@
-import { Component, OnInit} from '@angular/core';
-import {MatDialog} from '@angular/material';
-import {BranchDialogComponent} from '../../modules/branch/components/branch-dialog/branch-dialog.component';
-import {Branch} from '../../modules/api/models/branch';
-import {BranchService} from '../../modules/api/services/branch.service';
-import {NotifyService} from '../../shared/services/notify.service';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { BranchDialogComponent } from '@app/branch/components/branch-dialog';
+import { Branch } from '@app/api/models/branch';
+import { BranchService } from '@app/api/services/branch.service';
+import { NotifyService } from '@app/shared/services/notify.service';
 
 @Component({
   selector: 'app-sucursales',
@@ -15,7 +15,8 @@ export class BranchesComponent implements OnInit {
 
   constructor(private branchService: BranchService,
               private notify: NotifyService,
-              private dialog: MatDialog) {}
+              private dialog: MatDialog) {
+  }
 
   ngOnInit(): any {
     this.branchService.getAllCached().subscribe(
@@ -25,8 +26,7 @@ export class BranchesComponent implements OnInit {
   }
 
   update(branch: Branch) {
-    const dialog = this.dialog.open(BranchDialogComponent);
-    dialog.componentInstance.initUpdate(branch);
+    this.dialog.open(BranchDialogComponent, {data: branch});
   }
 
   created(branch: Branch) {

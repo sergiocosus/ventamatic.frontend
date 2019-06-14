@@ -3,7 +3,6 @@
 :host {
   display: flex;
   height: 50px;
-  background-color: #082B36;
   color: white;
   margin: 0;
   align-items: stretch;
@@ -47,7 +46,7 @@ button[disabled] {
     line-height: 1em;
     display: none;
 
-    @media (min-width: $smScreen) {
+    @media (min-width: $smWidth) {
       display: inline-block;
     }
   }

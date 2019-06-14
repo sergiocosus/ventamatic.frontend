@@ -13,7 +13,7 @@ export class SupplierService {
   }
 
   getAll(params?: any) {
-    return this.httpClient.get(this.basePath, params)
+    return this.httpClient.get(this.basePath, {params})
       .pipe(this.mapSuppliers());
   }
 
@@ -27,8 +27,8 @@ export class SupplierService {
       .pipe(this.mapSuppliers());
   }
 
-  post(supplier: Supplier) {
-    return this.httpClient.post(this.basePath, supplier)
+  post(data) {
+    return this.httpClient.post(this.basePath, data)
       .pipe(this.mapSupplier());
   }
 
@@ -41,8 +41,8 @@ export class SupplierService {
       .pipe(this.mapSupplier());
   }
 
-  put(supplier: Supplier) {
-    return this.httpClient.put(this.basePath + supplier.id, supplier)
+  put(supplier_id: number, data) {
+    return this.httpClient.put(this.basePath + supplier_id, data)
       .pipe(this.mapSupplier());
   }
 

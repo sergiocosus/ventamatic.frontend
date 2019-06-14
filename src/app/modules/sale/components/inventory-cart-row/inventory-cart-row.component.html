@@ -5,7 +5,7 @@
   {{inventory.current_price | myCurrency}}
 </td>
 <td>
-  <mat-form-field class="dark-theme">
+  <mat-form-field >
     <input #input class="quantity" matInput tabindex="5" required
            type="number"
            [max]="inventory.quantity"
@@ -16,8 +16,8 @@
 </td>
 <td class="align-right">
   {{quantityControl.value * inventory.current_price | currency:'$'}}
-  <span class="button-delete"
-        (click)="remove.emit(inventory)">
-      <i class="fa fa-times"></i>
-  </span>
+  <button mat-icon-button mat-raised-button color="warn" type="button"
+          class="delete"  (click)="remove.emit(inventory)">
+    <mat-icon  class="fa fa-times"></mat-icon>
+  </button>
 </td>

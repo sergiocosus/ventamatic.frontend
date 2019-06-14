@@ -17,7 +17,7 @@ import {UserModule} from '../../modules/user/user.module';
 import {SupplierModule} from '../../modules/supplier/supplier.module';
 import {ProductModule} from '../../modules/product/product.module';
 import {ClientModule} from '../../modules/client/client.module';
-import {MatPaginatorModule, MatTableModule} from '@angular/material';
+import { MatListModule, MatPaginatorModule, MatTableModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -31,6 +31,7 @@ import {MatPaginatorModule, MatTableModule} from '@angular/material';
     ClientModule,
     MatTableModule,
     MatPaginatorModule,
+    MatListModule,
   ],
   declarations: [
     ReportesComponent,

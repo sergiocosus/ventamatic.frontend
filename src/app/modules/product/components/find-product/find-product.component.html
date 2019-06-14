@@ -1,23 +1,20 @@
 <form [formGroup]="form">
-  <h5>Producto</h5>
+  <h5>Añadir Producto</h5>
 
   <mat-form-field>
-    <input matInput formControlName="bar_code" name="bar_code" class="dark"
-           placeholder="Código de barras"
+    <mat-label>Código de barras</mat-label>
+    <input matInput formControlName="bar_code"
            (keyup.enter)="barCodeEntered()"
            autocomplete="off"
            #barCodeInput [tabindex]="tab_index" />
-    <span matSuffix>
-      <mat-icon class="fa fa-barcode"></mat-icon>
-    </span>
+    <mat-icon matSuffix class="fa fa-barcode"></mat-icon>
   </mat-form-field>
 
   <div class="row">
     <mat-form-field class="product-id">
+      <mat-label>Id</mat-label>
       <input matInput formControlName="product_id"
-             placeholder="Id"
-             name="product_id" class="dark"
-             [type]="'number'"
+             name="product_id" type="number"
              autocomplete="off"
              [min]="1" [step]="1" [tabindex]="tab_index"
              (keyup.enter)="productIdEntered()">

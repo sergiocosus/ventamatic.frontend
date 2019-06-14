@@ -1,4 +1,4 @@
-<app-search-bar class="dark-theme">
+<app-search-bar >
   <form (ngSubmit)="submit()" [formGroup]="form">
 
     <mat-form-field class="id-field">
@@ -16,11 +16,11 @@
                           (dateRangeChanged)="onDateRangeChanged($event)"
                           [options]="rangeOptions" ></my-date-range-picker>
     <button type="submit" mat-raised-button	color="primary" >
-      <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+      <mat-icon class="fa fa-arrow-circle-right" aria-hidden="true"></mat-icon>
       Consultar
     </button>
     <button type="button" mat-raised-button	color="primary" (click)="downloadCSV()">
-      <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+      <mat-icon class="fa fa-arrow-circle-down" aria-hidden="true"></mat-icon>
       CSV
     </button>
   </form>
@@ -68,13 +68,13 @@
           <td>{{sale.total | myCurrency}}</td>
           <td>
             <button mat-mini-fab (click)="print(sale)" mat-raised-button>
-              <i class="fa fa-print" aria-hidden="true"></i>
+              <mat-icon class="fa fa-print" aria-hidden="true"></mat-icon>
             </button>
           </td>
           <ng-container *appUserCanInBranch="'sale-delete'; branchId: sale.branch_id">
             <td *ngIf="!sale.deleted_at">
               <button mat-mini-fab color="warn" (click)="deleteSale(sale.id)" mat-raised-button>
-                <i class="fa fa-trash" aria-hidden="true"></i>
+                <mat-icon class="fa fa-trash" aria-hidden="true"></mat-icon>
               </button>
             </td>
           </ng-container>

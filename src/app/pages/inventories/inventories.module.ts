@@ -6,6 +6,7 @@ import {InventoryDetailComponent} from './components/inventory-detail/inventory-
 import {InventoryModule} from '../../modules/inventory/inventory.module';
 import {SelectBranchComponent} from './components/select-branch/select-branch.component';
 import {AuthModule} from '../../modules/auth/auth.module';
+import { MatIconModule, MatTableModule, MatToolbarModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -13,6 +14,9 @@ import {AuthModule} from '../../modules/auth/auth.module';
     InventoriesRoutingModule,
     InventoryModule,
     AuthModule,
+    MatIconModule,
+    MatTableModule,
+    MatToolbarModule,
   ],
   declarations: [
     InventoryComponent,

@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import 'rxjs/Rx';
 import {
+  MAT_FORM_FIELD_DEFAULT_OPTIONS,
   MatAutocompleteModule,
   MatButtonModule,
   MatCheckboxModule,
-  MatDialogModule,
+  MatDialogModule, MatIconModule,
   MatInputModule,
   MatPaginatorModule, MatProgressSpinnerModule,
   MatRadioModule,
@@ -15,7 +16,6 @@ import {
   MatTooltipModule
 } from '@angular/material';
 import { SelectableComponent } from './components/selectable/selectable.component';
-import { AutocompleteInputComponent } from './components/autocomplete-input/autocomplete-input.component';
 import { PaymentTypeComponent } from './components/payment-type/payment-type.component';
 import { MainContentComponent } from './components/main-content/main-content.component';
 import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
@@ -27,6 +27,9 @@ import { MyDateRangePickerModule } from 'mydaterangepicker';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { ResponsiveModule } from 'ng2-responsive';
 import { LogoComponent } from './components/logo/logo.component';
+import { LoadingButtonComponent } from '@app/shared/components/loading-button/loading-button.component';
+import { RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -48,20 +51,27 @@ import { LogoComponent } from './components/logo/logo.component';
     MatSortModule,
     MatAutocompleteModule,
     MatProgressSpinnerModule,
+    MatIconModule,
   ],
   declarations: [
     SelectableComponent,
     PopoverComponent,
-    AutocompleteInputComponent,
     PaymentTypeComponent,
     MainContentComponent,
     ConfirmDialogComponent,
     MyCurrencyPipe,
     SearchBarComponent,
     LogoComponent,
+    LoadingButtonComponent,
   ],
   providers: [
     NotifyService,
+    {
+      provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
+      useValue: {
+        appearance: 'outline'
+      }
+    }
   ],
   entryComponents: [
     ConfirmDialogComponent,
@@ -70,6 +80,7 @@ import { LogoComponent } from './components/logo/logo.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
 
     SelectableComponent,
     PopoverComponent,
@@ -84,8 +95,9 @@ import { LogoComponent } from './components/logo/logo.component';
     MatSortModule,
     MatAutocompleteModule,
     MyDateRangePickerModule,
+    MatIconModule,
+    TranslateModule,
 
-    AutocompleteInputComponent,
     PaymentTypeComponent,
     MainContentComponent,
     ConfirmDialogComponent,
@@ -93,6 +105,7 @@ import { LogoComponent } from './components/logo/logo.component';
     SearchBarComponent,
     ResponsiveModule,
     LogoComponent,
+    LoadingButtonComponent,
   ]
 })
 export class SharedModule {

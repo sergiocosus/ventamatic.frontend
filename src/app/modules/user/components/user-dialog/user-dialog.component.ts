@@ -1,9 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {CrudModalComponent} from '../../../../shared/components/crud-modal/crud-modal.component';
-import {NotifyService} from '../../../../shared/services/notify.service';
-import {MatDialogRef} from '@angular/material';
-import {User} from '../../../api/models/user';
-import {UserService} from '../../../api/services/user.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { NotifyService } from '@app/shared/services/notify.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { User } from '@app/api/models/user';
+import { UserService } from '@app/api/services/user.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
+import { extract } from '@app/shared/services/i18n.service';
+import { AppValidators } from '@app/shared/validators/app-validators';
 
 
 @Component({
@@ -11,71 +14,67 @@ import {UserService} from '../../../api/services/user.service';
   templateUrl: './user-dialog.component.html',
   styleUrls: ['./user-dialog.component.scss'],
 })
-export class UserDialogComponent extends CrudModalComponent implements OnInit {
-  name = 'Usuario';
-  user: User;
-  password_confirm: string;
+export class UserDialogComponent implements OnInit {
+  loading: boolean;
+  form: FormGroup;
 
   constructor(protected userService: UserService,
               protected notify: NotifyService,
-              protected dialogRef: MatDialogRef<UserDialogComponent>) {
-    super(notify, dialogRef);
-  }
+              protected dialogRef: MatDialogRef<UserDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public user: User,
+              private fb: FormBuilder) {
+    this.form = this.fb.group({
+      username: [null, [Validators.required]],
+      name: [true, []],
+      last_name: [[], []],
+      last_name_2: [null, []],
+      email: [null, []],
+      phone: [null, []],
+      cellphone: [null, []],
+      address: [[], []],
+      rfc: [[], []],
+      password: [[], []],
+      password_confirmation: [[], []],
+    }, {
+      validator: AppValidators.passwordConfirm
+    });
 
-  ngOnInit() {
-
-  }
-
-  initCreate() {
-    this.user = new User();
-    super.initCreate();
-  }
-
-  initUpdate(user: User) {
-    this.userService.get(user.id).subscribe(
-      gettedUser => this.user = gettedUser,
-      error => {
-        this.notify.serviceError(error);
-        this.delayClose();
-      }
-    );
-    super.initUpdate();
-  }
-
-  initDelete(user: User) {
-    this.user = user;
-    super.initDelete(user);
-  }
-
-
-  create() {
-    if (this.user.password === this.password_confirm) {
-      this.userService.post(this.user).subscribe(
-        user => this.createdSuccess(user),
-        error => this.notify.serviceError(error)
-      );
-    } else {
-      this.notify.error('Las contraseñas no coinciden');
+    if (this.user) {
+      this.form.reset(this.user);
+      this.form.get('username').disable();
     }
   }
 
-  update() {
-    this.userService.put(this.user).subscribe(
-      user => this.updatedSuccess(user),
-      error => this.notify.serviceError(error)
-    );
+  ngOnInit() {
   }
 
-  delete() {
-    this.userService.delete(this.user.id).subscribe(
-      response => {
-        this.deletedSuccess(this.user);
-      },
-      error => this.notify.serviceError(error)
-    );
-  }
+  submit() {
+    if (this.form.invalid) {
+      this.notify.alert('forms.error');
+      return;
+    }
 
-  clear() {
-    this.user = null;
+    this.loading = true;
+    const data = this.form.getRawValue();
+
+    if (this.user) {
+      this.userService.put(this.user.id, data)
+        .pipe(finalize(() => this.loading = false)).subscribe(
+        product => {
+          this.notify.success(extract('common.updated'));
+          this.dialogRef.close(product);
+        },
+        error => this.notify.serviceError(error)
+      );
+    } else {
+      this.userService.post(data)
+        .pipe(finalize(() => this.loading = false)).subscribe(
+        product => {
+          this.notify.success(extract('common.created'));
+          this.dialogRef.close(product);
+        },
+        error => this.notify.serviceError(error)
+      );
+    }
   }
 }

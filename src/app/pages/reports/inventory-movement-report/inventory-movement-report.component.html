@@ -1,4 +1,4 @@
-<app-search-bar class="dark-theme">
+<app-search-bar >
   <form (ngSubmit)="submit()" [formGroup]="form">
     <app-product-search formControlName="product"></app-product-search>
 
@@ -7,8 +7,8 @@
     <app-user-search formControlName="user"></app-user-search>
 
     <mat-form-field>
-      <mat-select formControlName="inventory_movement_type_id"
-                  placeholder="Tipo de movimiento">
+      <mat-label>Tipo de movimiento</mat-label>
+      <mat-select formControlName="inventory_movement_type_id">
         <mat-option *ngFor="let inventoryMovementType of inventoryMovementTypes"
                     [value]="inventoryMovementType.id">
           {{inventoryMovementType.name}}
@@ -21,12 +21,12 @@
                           [options]="rangeOptions" ></my-date-range-picker>
 
     <button mat-raised-button color="primary" type="submit">
-      <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+      <mat-icon class="fa fa-arrow-circle-right" aria-hidden="true"></mat-icon>
       Consultar
     </button>
     <button mat-raised-button color="primary" type="button"
             (click)="downloadCSV()">
-      <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+      <mat-icon class="fa fa-arrow-circle-down" aria-hidden="true"></mat-icon>
       CSV
     </button>
   </form>

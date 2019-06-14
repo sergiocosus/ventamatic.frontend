@@ -13,7 +13,7 @@ export class ClientService {
   }
 
   getAll(params?: any) {
-    return this.httpClient.get(this.basePath, params)
+    return this.httpClient.get(this.basePath, {params})
       .pipe(this.mapClients());
   }
 
@@ -27,8 +27,8 @@ export class ClientService {
       .pipe(this.mapClients());
   }
 
-  post(clie: Client) {
-    return this.httpClient.post(this.basePath, clie)
+  post(data) {
+    return this.httpClient.post(this.basePath, data)
       .pipe(this.mapClient());
   }
 
@@ -41,8 +41,8 @@ export class ClientService {
       .pipe(this.mapClient());
   }
 
-  put(client: Client) {
-    return this.httpClient.put(this.basePath + client.id, client)
+  put(client_id: number, data) {
+    return this.httpClient.put(this.basePath + client_id, data)
       .pipe(this.mapClient());
   }
 

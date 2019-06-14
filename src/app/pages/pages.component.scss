@@ -15,13 +15,13 @@
 
   mat-select.dark{
     .btn-default{
-      background-color: $darkBlue;
+      background-color: $primaryColor;
       &:hover{
         color: white;
       }
     }
     input{
-      background-color: $darkBlue;
+      background-color: $primaryColor;
     }
   }
 }

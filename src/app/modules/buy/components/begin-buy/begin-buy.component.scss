@@ -1,23 +1,15 @@
 @import "~src/vars";
 
 :host{
-  background-color: $backgroundDark;
   padding: 1em;
   border-radius: 1em;
 }
 
-h3{
+h2{
   text-align: center;
-  color: white;
-  font-size: 2em;
 }
 
 form{
   display: flex;
   flex-direction: column;
-  color: white;
-
-  background-color: rgba(white, .1);
-  padding: 1em;
-  border-radius: .5em;
 }

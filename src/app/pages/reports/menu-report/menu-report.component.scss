@@ -1,30 +1,21 @@
 @import "~src/vars";
 
-ul{
-  list-style: none;
-  margin: 0;
-  padding: 0;
+:host {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-  li{
-    display: flex;
-    flex-direction: column;
-    background-color: $darkBlue;
-    border-radius: 1em;
-    border: dashed 2px white;
-    text-align: center;
-    margin: .5em;
-    transition: all .25s;
+mat-nav-list {
+  width: 100%;
+  max-width: $smWidth;
 
-    &:hover{
-      background-color: $hoverBlue;
-      cursor: pointer;
-    }
+  h2 {
+    padding-left: .5em;
+    margin: .5em 0;
+  }
 
-    a{
-      flex: 1 0 auto;
-      color: white;
-      padding: .5em;
-      font-size: 1.5em;
-    }
+  a {
+    font-weight: bolder;
   }
 }

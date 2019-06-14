@@ -1,66 +1,66 @@
-import { Component } from '@angular/core';
-import {MatDialogRef} from '@angular/material';
-import {Client} from '../../../api/models/client';
-import {ClientService} from '../../../api/services/client.service';
-import {CrudModalComponent} from '../../../../shared/components/crud-modal/crud-modal.component';
-import {NotifyService} from '../../../../shared/services/notify.service';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Client } from '@app/api/models/client';
+import { ClientService } from '@app/api/services/client.service';
+import { NotifyService } from '@app/shared/services/notify.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { finalize } from 'rxjs/operators';
+import { extract } from '@app/shared/services/i18n.service';
 
 @Component({
   selector: 'app-client-modal',
   templateUrl: './client-dialog.component.html',
   styleUrls: ['./client-dialog.component.scss'],
 })
-export class ClientDialogComponent extends CrudModalComponent {
-  client: Client;
-  name = 'Cliente';
+export class ClientDialogComponent {
+  form: FormGroup;
+  loading = false;
 
   constructor(protected clientService: ClientService,
               protected notify: NotifyService,
-              protected dialogRef: MatDialogRef<ClientDialogComponent>) {
-    super(notify, dialogRef);
+              protected dialogRef: MatDialogRef<ClientDialogComponent>,
+              @Inject(MAT_DIALOG_DATA) public client: Client,
+              private fb: FormBuilder) {
+    this.form = this.fb.group({
+      name: [null, [Validators.required]],
+      last_name: [null, []],
+      last_name_2: [null, []],
+      email: [null, []],
+      phone: [null, []],
+      cellphone: [null, []],
+      address: [null, []],
+      rfc: [null, []],
+    });
+
+    if (this.client) {
+      this.form.reset(this.client);
+    }
   }
+  submit() {
+    if (this.form.invalid) {
+      this.notify.alert(extract('forms.error'));
+      return;
+    }
 
-  initCreate() {
-    this.client = new Client();
-    super.initCreate();
+    this.loading = true;
+    if (this.client) {
+      this.clientService.put(this.client.id, this.form.getRawValue())
+        .pipe(finalize(() => this.loading = false)).subscribe(
+        client => {
+          this.notify.success(extract('common.updatedSuccess'));
+          this.dialogRef.close(client);
+        },
+        error => this.notify.serviceError(error)
+      );
+    } else {
+      this.clientService.post(this.form.getRawValue())
+        .pipe(finalize(() => this.loading = false)).subscribe(
+        client => {
+          this.notify.success(extract('common.createdSuccess'));
+          this.dialogRef.close(client);
+        },
+        error => this.notify.serviceError(error)
+      );
+    }
   }
-
-  initUpdate(client: Client) {
-    this.clientService.get(client.id).subscribe(
-      loadedClient => this.client = loadedClient,
-      error => {
-        this.notify.serviceError(error);
-        this.delayClose();
-      }
-    );
-
-    super.initUpdate(client);
-  }
-
-  initDelete(client: Client) {
-    this.client = client;
-    super.initDelete(client);
-  }
-
-  create() {
-    this.clientService.post(this.client).subscribe(
-      client => this.createdSuccess(client),
-      error => this.notify.serviceError(error)
-    );
-  }
-
-  update() {
-    this.clientService.put(this.client).subscribe(
-      user => this.updatedSuccess(user),
-      error => this.notify.serviceError(error)
-    );
-  }
-
-  delete() {
-    this.clientService.delete(this.client.id).subscribe(
-      response => this.deletedSuccess(this.client),
-      error => this.notify.serviceError(error)
-    );
-  }
-
 }

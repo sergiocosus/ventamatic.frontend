@@ -1,13 +1,14 @@
-<app-search-bar class="dark-theme">
+<app-search-bar>
   <form (ngSubmit)="submit()" [formGroup]="form">
     <mat-form-field  class="id-field">
-      <input matInput placeholder="ID de compra"
+      <mat-label><ID de compra/mat-label>
+      <input matInput
              formControlName="id" type="number">
     </mat-form-field>
 
     <mat-form-field  class="id-field">
-      <input matInput placeholder="ID de factura"
-             formControlName="supplier_bill_id" type="text">
+      <mat-label>ID de factura</mat-label>
+      <input matInput formControlName="supplier_bill_id">
     </mat-form-field>
 
     <app-branch-search formControlName="branch"></app-branch-search>
@@ -21,11 +22,11 @@
                           [options]="rangeOptions" ></my-date-range-picker>
 
     <button mat-raised-button color="primary" type="submit" >
-      <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+      <mat-icon class="fa fa-arrow-circle-right" aria-hidden="true"></mat-icon>
       Consultar
     </button>
     <button mat-raised-button color="primary" type="button" (click)="downloadCSV()">
-      <i class="fa fa-arrow-circle-down" aria-hidden="true"></i>
+      <mat-icon class="fa fa-arrow-circle-down" aria-hidden="true"></mat-icon>
       CSV
     </button>
   </form>

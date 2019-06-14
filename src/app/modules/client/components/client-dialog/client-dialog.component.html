@@ -1,81 +1,85 @@
-<h4 mat-dialog-title *ngIf="createMode"> Añadir Cliente </h4>
-<h4 mat-dialog-title *ngIf="updateMode"> Editar Cliente </h4>
-<h4 mat-dialog-title *ngIf="deleteMode"> Eliminar Cliente </h4>
+<h4 mat-dialog-title>
+  {{client ? ('common.edit' | translate) : ('common.create' | translate)}}
+  {{'client.client' | translate}}
+</h4>
 
-<form (ngSubmit)="submit()" ngNativeValidate>
-  <mat-dialog-content *ngIf="!deleteMode && !!client">
+<form [formGroup]="form" (ngSubmit)="submit()" autocomplete="off">
+  <mat-dialog-content>
+    <div class="row">
+      <mat-form-field *ngIf="client" class="id">
+        <mat-label>{{'client.id' | translate}}</mat-label>
+        <input matInput [value]="client.id" disabled>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'client.name' | translate}}</mat-label>
+        <input matInput type="text" formControlName="name">
+      </mat-form-field>
+    </div>
 
-    <mat-form-field *ngIf="updateMode" >
-      <input matInput placeholder="Id"  name="id"
-             type="text" [(ngModel)]="client.id" disabled="disabled">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Nombre"
-             type="text" [(ngModel)]="client.name" name="name"
-             [disabled]="locked" required>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Apellido Paterno"
-             type="text" [(ngModel)]="client.last_name" name="last_name"
-             [disabled]="locked">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Apellido Materno"
-             type="text" [(ngModel)]="client.last_name_2" name="last_name_2"
-             [disabled]="locked">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Email"
-             type="email" [(ngModel)]="client.email" name="email"
-             [disabled]="locked">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Teléfono"
-             type="text" [(ngModel)]="client.phone" name="phone"
-             [disabled]="locked">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Celular"
-             type="text" [(ngModel)]="client.cellphone" name="cellphone"
-             [disabled]="locked">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Dirección"
-             type="text" [(ngModel)]="client.address" name="address"
-             [disabled]="locked">
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="RFC"
-             type="text" [(ngModel)]="client.rfc" name="rfc"
-             [disabled]="locked">
-    </mat-form-field>
+    <div class="row">
+      <mat-form-field>
+        <mat-label>{{'client.lastName' | translate}}</mat-label>
+        <input matInput type="text" formControlName="last_name">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'client.lastName2' | translate}}</mat-label>
+        <input matInput type="text" formControlName="last_name_2">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field>
+        <mat-label>{{'client.email' | translate}}</mat-label>
+        <input matInput type="email" formControlName="email">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'client.phone' | translate}}</mat-label>
+        <input matInput
+               type="text" formControlName="phone">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field>
+        <mat-label>{{'client.cellphone' | translate}}</mat-label>
+        <input matInput type="text" formControlName="cellphone">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>{{'client.address' | translate}}</mat-label>
+        <input matInput
+               type="text" formControlName="address">
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field>
+        <mat-label>{{'client.rfc' | translate}}</mat-label>
+        <input matInput type="text" formControlName="rfc">
+      </mat-form-field>
+    </div>
+
   </mat-dialog-content>
 
   <mat-dialog-actions>
-    <ng-template appUserCan="client-edit">
-      <button *ngIf="locked" mat-button
-              type="submit" class="btn btn-danger pull-xs-left"
-              (click)="unlock()" >
-        <i class="fa fa-unlock-alt" aria-hidden="true"></i>
-        Editar Cliente
-      </button>
+    <button type="button" mat-raised-button mat-dialog-close>
+      {{'common.close' | translate}}
+    </button>
+
+    <div class="spacer"></div>
+
+    <ng-template appUserCan="client-create">
+      <app-loading-button *ngIf="!client" [loading]="loading"
+              mat-raised-button color="accent">
+        {{'common.create' | translate}} {{'client.client' | translate}}
+      </app-loading-button>
     </ng-template>
 
-    <button *ngIf="createMode"
-            type="submit" mat-raised-button color="accent">
-      Crear Cliente
-    </button>
-    <button *ngIf="updateMode && !locked"
-            type="submit" mat-raised-button color="accent" >
-      Actualizar Cliente
-    </button>
-    <button *ngIf="deleteMode && !locked"
-            type="submit" mat-raised-button color="warn">
-      Eliminar Cliente
-    </button>
-    <button type="button" mat-raised-button mat-dialog-close>
-      Cerrar
-    </button>
+    <ng-template appUserCan="client-edit">
+      <app-loading-button *ngIf="client" [loading]="loading"
+              mat-raised-button color="accent">
+        {{'common.edit' | translate}} {{'client.client' | translate}}
+      </app-loading-button>
+    </ng-template>
   </mat-dialog-actions>
 </form>
 

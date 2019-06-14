@@ -8,7 +8,7 @@ html{
 
 
 body {
-  background: #AAB6BA;
+  background: $primaryLightColor;
   margin: 0;
   height: 100%;
   min-height: 100% !important;
@@ -28,17 +28,17 @@ body {
   height: 500px;
   input{
     z-index: 0 !important;
-    background-color: $darkBlue;
+    background-color: $primaryColor;
   }
 }
 
 .hide-on-small {
-  @media (max-width: $smScreen) {
+  @media (max-width: $smWidth) {
     display: none
   }
 }
 .show-on-small {
-  @media (min-width: $smScreen) {
+  @media (min-width: $smWidth) {
     display: none
   }
 }

@@ -4,7 +4,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  background-color: $backgroundDark;
+  background-color: $primaryColor;
   flex: 0 0 auto;
   align-items: center;
   margin: 5px;
@@ -43,12 +43,6 @@
       }
     }
 
-    &.small {
-      width: 5em;
-    }
 
-    &.medium {
-      width: 8em;
-    }
   }
 }

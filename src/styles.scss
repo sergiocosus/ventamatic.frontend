@@ -14,44 +14,13 @@
   font-family: Verdana, sans-serif;
 }
 
-.open {
-  > .dropdown-menu {
-    display: block;
-  }
-
-  > a {
-    outline: 0;
-  }
+body {
+  color: $text-color;
 }
 
-
-.button-modify {
-  display: flex;
-  position: absolute;
-  right: -5px;
-  top: -5px;
-  z-index: 2;
-  background-color: #EB0;
-  width: 25px;
-  height: 25px;
-  border: 2px white solid;
-  color: white;
-  border-radius: 50%;
-  align-items: center;
-  justify-content: center;
-  transition: .25s all;
-
-  &:hover {
-    background-color: darken(#EB0, .5);
-    transform: scale(1.5, 1.5);
-  }
-
-  i {
-    font-size: 1.2em;
-  }
-
+h1, h2, h3, h4, h5, h6 {
+  color: darken($text-color, 10%);
 }
-
 
 table {
   border-collapse: collapse;
@@ -66,8 +35,8 @@ table {
 @include mat-core();
 
 // Define the default theme (same as the example above).
-$candy-app-primary: mat-palette($mat-light-blue, 900, 200, 700);
-$candy-app-accent: mat-palette($mat-teal, 600, A100, A400);
+$candy-app-primary: mat-palette($mat-primary, 500, 200, 700);
+$candy-app-accent: mat-palette($mat-secondary, 500, A100, A400);
 $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent);
 
 // Include the default theme styles.
@@ -75,21 +44,12 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent);
 
 
 // Define an alternate dark theme.
-$dark-primary: mat-palette($mat-light-blue, 600, 200, 700);
-$dark-accent: mat-palette($mat-teal, 500, 200, 900);
-$dark-warn: mat-palette($mat-red, 500, 300, A400);
-$dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+$dark-primary: mat-palette($mat-primary, 500, 50, 700);
+$dark-accent: mat-palette($mat-secondary, 500, 50, 900);
+$dark-theme: mat-dark-theme($dark-primary, $dark-accent);
 
-// Include the alternative theme styles inside of a block with a CSS class. You can make this
-// CSS class whatever you want. In this example, any component inside of an element with
-// `.unicorn-dark-theme` will be affected by this alternate dark theme instead of the default theme.
 .dark-theme {
   @include angular-material-theme($dark-theme);
-
-  .mat-form-field {
-    width: auto;
-  }
-
 }
 
 .simple-notification-wrapper {
@@ -137,21 +97,21 @@ form.dark-box {
   border-radius: .5em;
   margin: 1em;
 
-  @include mat-elevation(10, $backgroundLight);
+  @include mat-elevation(10, $primaryLightColor);
 }
 
 .mat-autocomplete-panel.dark {
-  background-color: $darkBlue;
+  background-color: $primaryColor;
   color: white;
   border-radius: 0em 0em 1em 1em;
-  @include mat-elevation(10, $backgroundLight);
+  @include mat-elevation(10, $primaryLightColor);
 
   .mat-option {
     color: white;
     height: 2em;
 
     .mat-progress-spinner circle, .mat-spinner circle {
-      stroke: $backgroundLight;
+      stroke: $primaryLightColor;
     }
 
     &.mat-active, &:hover {
@@ -164,10 +124,21 @@ form.dark-box {
   max-width: 5em;
 }
 
-.mat-icon.fa {
+mat-icon.mat-icon {
   width: 1em;
   height: 1em;
-  margin-right: .5em;
+}
+
+button:not(.mat-icon-button) {
+  .mat-checkbox-label, .mat-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .mat-icon {
+      margin-right: .5em;
+    }
+  }
 }
 
 mat-dialog-actions {
@@ -177,4 +148,89 @@ mat-dialog-actions {
 
 div.spacer {
   flex: 1;
+}
+
+.box {
+  @include mat-elevation(10, gray, 1);
+  background: white;
+  padding: .25em;
+  border-radius: .5em;
+
+  @media (min-width: $smWidth) {
+    padding: .5em;
+  }
+}
+
+table.responsive {
+  @media (max-width: $smWidth) {
+    tr {
+      display: flex;
+      flex-wrap: wrap;
+      padding: .5em;
+      height: auto !important;
+      border-bottom-color: rgba(0, 0, 0, 0.12);
+      border-bottom-width: 1px;
+      border-bottom-style: solid;
+      align-items: stretch;
+    }
+
+    td, th {
+      display: flex;
+      align-items: center;
+      flex: 1 0 1em;
+      padding: .25em !important;
+      border: none !important;
+    }
+  }
+
+}
+
+[hidden] {
+  display: none !important;
+}
+
+mat-toolbar.mat-toolbar {
+  font-size: 1em;
+
+  button {
+    margin: 0 .2em;
+  }
+
+  h2 {
+    margin-right: .5em;
+  }
+
+  mat-form-field {
+    margin-right: .5em;
+
+    .mat-form-field-wrapper {
+      padding-bottom: 0;
+    }
+  }
+
+  mat-toolbar-row.mat-toolbar-row {
+    flex-wrap: wrap;
+    min-height: 4em;
+    //    padding-top: .5em;
+    height: auto;
+  }
+
+  .small {
+    width: 5em;
+  }
+
+  .medium {
+    width: 8em;
+  }
+}
+
+.mat-form-field-flex {
+  .mat-form-field-infix {
+    padding-top: .5em;
+  }
+}
+.mat-form-field.no-hint {
+  .mat-form-field-wrapper{
+    padding-bottom: 0;
+  }
 }

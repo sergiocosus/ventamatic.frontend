@@ -1,40 +1,40 @@
 <mat-dialog-content>
-  <mat-card>
+  <mat-card [formGroup]="systemForm" >
     <h4 mat-dialog-title>
-      Roles
+      {{'role.roles' | translate}}
     </h4>
     <mat-form-field>
-      <mat-select [(ngModel)]="selectedRoles"
-                  [multiple]="true"
-                  name="selectedRoles"
-                  placeholder="Roles">
-        <mat-option *ngFor="let role of roles" [value]="role">
+      <mat-label>Roles</mat-label>
+      <mat-select formControlName="role_ids"
+                  [multiple]="true">
+        <mat-option *ngFor="let role of roles" [value]="role.id">
           {{role.display_name}}
         </mat-option>
       </mat-select>
     </mat-form-field>
 
-    <button (click)="updateSystemRoles()"
-            *appUserCan="'user-role-assign'"
+    <button *appUserCan="'user-role-assign'"
+            (click)="updateSystemRoles()"
             mat-raised-button color="accent">
-      Guardar cambios
+      {{'common.save' | translate}}
     </button>
-    <button type="button" mat-raised-button (click)="close()">
-      Cerrar
+    <button type="button" mat-raised-button mat-dialog-close>
+      {{'common.close' | translate}}
     </button>
   </mat-card>
-  <mat-card>
+
+  <mat-card [formGroup]="branchForm">
     <h4 mat-dialog-title>
-      Roles de sucursal
+      {{'branch.branchRoles' | translate}}
     </h4>
 
-    <div *ngFor="let branch of branches; let i=index" class="branch-roles">
-      <mat-form-field>
-        <mat-select [(ngModel)]="selectedBranchRoles[i]"
-                    [multiple]="true"
-                    name="selectedRoles"
-                    [placeholder]="branch.name ">
-          <mat-option *ngFor="let branchRole of branchRoles" [value]="branchRole">
+    <div *ngFor="let branch of branchForm.get('branchRoles'); let i=index" class="branch-roles"
+    [formArrayName]="i">
+      <mat-form-field [formGroup]="branch">
+        <mat-label>{{branch.get('branch').name}}</mat-label>
+        <mat-select formControlName="branch_role_ids" [multiple]="true">
+          <mat-option *ngFor="let branchRole of branchRoles"
+                      [value]="branchRole.id">
             {{branchRole.display_name}}
           </mat-option>
         </mat-select>
@@ -42,10 +42,11 @@
     </div>
 
     <button (click)="updateBranchRoles()" mat-raised-button color="accent">
-      Guardar cambios
+      {{'common.save' | translate}}
     </button>
-    <button type="button" mat-raised-button (click)="close()">
-      Cerrar
+    <button type="button" mat-raised-button mat-dialog-close>
+      {{'common.close' | translate}}
     </button>
   </mat-card>
+
 </mat-dialog-content>

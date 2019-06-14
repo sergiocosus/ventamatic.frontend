@@ -6,6 +6,7 @@ import {ProductosComponent} from './productos.component';
 import {SharedModule} from '../../shared/shared.module';
 import {ProductModule} from '../../modules/product/product.module';
 import {AuthModule} from '../../modules/auth/auth.module';
+import { MatTableModule, MatToolbarModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -13,6 +14,8 @@ import {AuthModule} from '../../modules/auth/auth.module';
     ProductsRoutingModule,
     ProductModule,
     AuthModule,
+    MatToolbarModule,
+    MatTableModule,
   ],
   declarations: [
     ProductosComponent
