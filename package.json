@@ -40,7 +40,7 @@
     "ng2-imageupload": "^1.4.2",
     "ng2-responsive": "^0.8.4",
     "ngx-custom-validators": "^7.0.0",
-    "node-sass": "^4.5.2",
+    "node-sass": "^4.13.1",
     "rxjs": "^6.4.0",
     "rxjs-compat": "^6.0.0-rc.0",
     "tether": "^1.4.0",
