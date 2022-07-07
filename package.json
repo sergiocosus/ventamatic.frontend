@@ -33,7 +33,7 @@
     "font-face-mixin": "^1.1.0",
     "ionicons": "^3.0.0",
     "js-base64": "^2.1.9",
-    "moment": "^2.18.1",
+    "moment": "^2.29.4",
     "mydatepicker": "^2.0.3",
     "mydaterangepicker": "^4.2.1",
     "ng-sidebar": "^5.1.0",
